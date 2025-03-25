@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import NiveauxIA from "./pages/NiveauxIA";
 import TypesIA from "./pages/TypesIA";
 import NotFound from "./pages/NotFound";
+import Index from "./pages/Index";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,11 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={
+            <MainLayout>
+              <Index />
+            </MainLayout>
+          } />
+          <Route path="/home" element={
             <MainLayout>
               <Home />
             </MainLayout>
