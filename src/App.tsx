@@ -46,6 +46,11 @@ const App = () => (
               <MachineLearning />
             </MainLayout>
           } />
+          <Route path="/cas-usage" element={
+            <MainLayout>
+              <NotFound />
+            </MainLayout>
+          } />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={
             <MainLayout>
