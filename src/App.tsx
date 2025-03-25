@@ -8,6 +8,7 @@ import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import NiveauxIA from "./pages/NiveauxIA";
 import TypesIA from "./pages/TypesIA";
+import MachineLearning from "./pages/MachineLearning";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
 
@@ -38,6 +39,11 @@ const App = () => (
           <Route path="/types-ia" element={
             <MainLayout>
               <TypesIA />
+            </MainLayout>
+          } />
+          <Route path="/machine-learning" element={
+            <MainLayout>
+              <MachineLearning />
             </MainLayout>
           } />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
