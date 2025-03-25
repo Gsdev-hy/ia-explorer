@@ -1,7 +1,6 @@
-
 import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
-import { Brain, Database, Robot, Workflow, BarChart3, Network, Share2 } from 'lucide-react';
+import { Brain, Database, Bot, Workflow, BarChart3, Network, Share2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -183,7 +182,7 @@ const MachineLearning = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div className="animate-slide-left">
                 <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10">
-                  <Robot size={32} className="text-primary" />
+                  <Bot size={32} className="text-primary" />
                 </div>
                 <h3 className="heading-lg mb-4">Apprentissage par renforcement</h3>
                 <p className="mb-4 text-muted-foreground">
@@ -415,4 +414,3 @@ const MachineLearning = () => {
 };
 
 export default MachineLearning;
-
