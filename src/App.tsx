@@ -11,6 +11,7 @@ import TypesIA from "./pages/TypesIA";
 import MachineLearning from "./pages/MachineLearning";
 import Ethique from "./pages/Ethique";
 import CasUsage from "./pages/CasUsage";
+import Glossaire from "./pages/Glossaire";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
 
@@ -56,6 +57,11 @@ const App = () => (
           <Route path="/ethique" element={
             <MainLayout>
               <Ethique />
+            </MainLayout>
+          } />
+          <Route path="/glossaire" element={
+            <MainLayout>
+              <Glossaire />
             </MainLayout>
           } />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

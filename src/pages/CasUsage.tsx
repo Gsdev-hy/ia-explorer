@@ -1,216 +1,107 @@
-
+import React from 'react';
 import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
-import { Card } from '@/components/Card';
-import { 
-  Code, Music, VideoIcon, Book, Stethoscope, 
-  ShoppingCart, BarChart3, Search, MessageSquare, 
-  Image, Car, Factory
-} from 'lucide-react';
+import Card from '@/components/Card';
+import { FeatureGrid } from '@/components';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { 
+  Factory, ShoppingBag, Building2, Stethoscope, 
+  Bus, Car, Shield, BadgeDollarSign, BookOpen, 
+  BrainCircuit, Robot
+} from 'lucide-react';
 
 /**
- * Page sur les cas d'usage de l'IA
+ * Page présentant des cas d'usage de l'IA dans différents secteurs
  * @returns {JSX.Element} Le composant de la page Cas d'Usage
  */
 const CasUsage = () => {
-  const useCases = [
+  const casUsages = [
     {
-      title: "Développement logiciel",
-      description: "Génération de code, détection de bugs, complétion intelligente et refactoring automatique.",
-      icon: <Code size={36} />,
-      delay: 0
+      title: "Industrie manufacturière",
+      description: "Optimisation de la chaîne de production, maintenance prédictive des équipements, contrôle qualité automatisé.",
+      icon: <Factory size={24} />,
+      link: "#"
     },
     {
-      title: "Création musicale",
-      description: "Composition assistée par IA, mastering automatique et génération de nouveaux instruments.",
-      icon: <Music size={36} />,
-      delay: 100
+      title: "Commerce de détail",
+      description: "Personnalisation de l'expérience client, gestion des stocks optimisée, prédiction des ventes.",
+      icon: <ShoppingBag size={24} />,
+      link: "#"
     },
     {
-      title: "Production vidéo",
-      description: "Édition automatisée, génération de sous-titres et amélioration de la résolution.",
-      icon: <VideoIcon size={36} />,
-      delay: 200
-    },
-    {
-      title: "Éducation",
-      description: "Tuteurs virtuels personnalisés, évaluation automatique et création de contenu pédagogique.",
-      icon: <Book size={36} />,
-      delay: 300
+      title: "Secteur public",
+      description: "Amélioration des services aux citoyens, optimisation des infrastructures urbaines, gestion des ressources.",
+      icon: <Building2 size={24} />,
+      link: "#"
     },
     {
       title: "Santé",
-      description: "Diagnostic assisté par IA, découverte de médicaments et imagerie médicale avancée.",
-      icon: <Stethoscope size={36} />,
-      delay: 400
+      description: "Diagnostic médical assisté, découverte de nouveaux médicaments, suivi personnalisé des patients.",
+      icon: <Stethoscope size={24} />,
+      link: "#"
     },
     {
-      title: "E-commerce",
-      description: "Recommandations personnalisées, prévisions de demande et service client automatisé.",
-      icon: <ShoppingCart size={36} />,
-      delay: 500
-    }
-  ];
-
-  const emergingUseCases = [
-    {
-      title: "Analyse prédictive",
-      description: "L'IA permet d'analyser de vastes ensembles de données pour prévoir des tendances et comportements futurs, optimisant la prise de décision dans les entreprises.",
-      icon: <BarChart3 size={36} />
+      title: "Transport",
+      description: "Véhicules autonomes, optimisation des itinéraires, gestion du trafic en temps réel.",
+      icon: <Bus size={24} />,
+      link: "#"
     },
     {
-      title: "Recherche sémantique",
-      description: "Les moteurs de recherche exploitent l'IA pour comprendre le contexte et l'intention derrière les requêtes, offrant des résultats plus pertinents et personnalisés.",
-      icon: <Search size={36} />
+      title: "Automobile",
+      description: "Aide à la conduite avancée, maintenance prédictive des véhicules, personnalisation de l'expérience de conduite.",
+      icon: <Car size={24} />,
+      link: "#"
     },
     {
-      title: "Assistants virtuels",
-      description: "Les agents conversationnels enrichis par l'IA peuvent désormais comprendre le langage naturel et effectuer des tâches complexes en interagissant naturellement avec les utilisateurs.",
-      icon: <MessageSquare size={36} />
+      title: "Sécurité",
+      description: "Surveillance intelligente, détection de fraudes, analyse prédictive des risques.",
+      icon: <Shield size={24} />,
+      link: "#"
     },
     {
-      title: "Génération d'images",
-      description: "Les modèles de diffusion permettent de créer des images hautement réalistes à partir de descriptions textuelles, révolutionnant les industries créatives.",
-      icon: <Image size={36} />
+      title: "Finance",
+      description: "Analyse des risques, détection de fraudes, conseil financier personnalisé.",
+      icon: <BadgeDollarSign size={24} />,
+      link: "#"
     },
     {
-      title: "Véhicules autonomes",
-      description: "L'IA alimente les systèmes de conduite autonome qui perçoivent leur environnement et prennent des décisions de navigation en temps réel.",
-      icon: <Car size={36} />
+      title: "Éducation",
+      description: "Personnalisation de l'apprentissage, tutorat intelligent, évaluation automatisée.",
+      icon: <BookOpen size={24} />,
+      link: "#"
     },
     {
-      title: "Industrie 4.0",
-      description: "L'intelligence artificielle transforme la production industrielle par la maintenance prédictive, l'optimisation des processus et l'automatisation avancée.",
-      icon: <Factory size={36} />
-    }
+      title: "Recherche",
+      description: "Analyse de données massives, simulation et modélisation, découverte de connaissances.",
+      icon: <BrainCircuit size={24} />,
+      link: "#"
+    },
+    {
+      title: "Robotique",
+      description: "Automatisation des tâches, assistance aux personnes, exploration de milieux hostiles.",
+      icon: <Robot size={24} />,
+      link: "#"
+    },
   ];
 
   return (
     <>
       <Hero
         title="Cas d'usage de l'IA"
-        subtitle="Découvrez comment l'intelligence artificielle transforme différents secteurs et applications à travers des cas d'usage concrets."
+        subtitle="Découvrez comment l'intelligence artificielle est appliquée dans divers secteurs pour résoudre des problèmes concrets et créer de la valeur."
       />
 
       <section className="section-container">
         <SectionHeading
-          pretitle="Applications concrètes"
-          title="L'IA en action"
-          description="L'intelligence artificielle révolutionne de nombreux domaines avec des applications concrètes qui transforment notre façon de travailler et de vivre."
+          pretitle="Secteurs"
+          title="Applications concrètes de l'IA"
+          description="L'IA transforme de nombreux domaines d'activité, de l'industrie à la santé en passant par le commerce et les services publics."
           center
         />
 
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {useCases.map((useCase, index) => (
-            <Card
-              key={index}
-              title={useCase.title}
-              description={useCase.description}
-              icon={useCase.icon}
-              delay={useCase.delay}
-              className="h-full"
-            />
-          ))}
-        </div>
-      </section>
-
-      <section className="section-container bg-primary/5 py-16 rounded-3xl">
-        <div className="max-w-4xl mx-auto">
-          <SectionHeading
-            pretitle="Études de cas"
-            title="Impact transformateur"
-            description="Explorons quelques exemples illustrant comment l'IA révolutionne différents secteurs avec des résultats concrets."
-            center
-          />
-
-          <div className="mt-12 space-y-8">
-            <div className="glass-card rounded-xl p-6 md:p-8 animate-fade-in">
-              <div className="grid md:grid-cols-5 gap-6">
-                <div className="md:col-span-2">
-                  <div className="aspect-video bg-[url('https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7')] bg-cover bg-center rounded-lg mb-4"></div>
-                  <h3 className="text-lg font-semibold">GitHub Copilot</h3>
-                  <p className="text-sm text-muted-foreground">Assistant de programmation basé sur l'IA</p>
-                </div>
-                <div className="md:col-span-3">
-                  <h4 className="text-xl font-medium mb-3">Révolution du développement logiciel</h4>
-                  <p className="text-muted-foreground mb-4">
-                    GitHub Copilot utilise un modèle d'IA avancé pour suggérer des lignes de code ou des fonctions entières 
-                    en temps réel, directement dans l'éditeur de code du développeur.
-                  </p>
-                  <div className="space-y-2">
-                    <div className="flex items-start gap-2">
-                      <div className="w-5 h-5 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs mt-0.5">✓</div>
-                      <p className="text-sm">Augmentation de la productivité des développeurs jusqu'à 55%</p>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <div className="w-5 h-5 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs mt-0.5">✓</div>
-                      <p className="text-sm">Réduction du temps consacré aux tâches répétitives</p>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <div className="w-5 h-5 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs mt-0.5">✓</div>
-                      <p className="text-sm">Démocratisation de la programmation pour les débutants</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="glass-card rounded-xl p-6 md:p-8 animate-fade-in" style={{ animationDelay: '100ms' }}>
-              <div className="grid md:grid-cols-5 gap-6">
-                <div className="md:col-span-2">
-                  <div className="aspect-video bg-[url('https://images.unsplash.com/photo-1498050108023-c5249f4df085')] bg-cover bg-center rounded-lg mb-4"></div>
-                  <h3 className="text-lg font-semibold">Watson for Oncology</h3>
-                  <p className="text-sm text-muted-foreground">IA d'IBM pour le diagnostic du cancer</p>
-                </div>
-                <div className="md:col-span-3">
-                  <h4 className="text-xl font-medium mb-3">Transformation des soins de santé</h4>
-                  <p className="text-muted-foreground mb-4">
-                    Watson for Oncology analyse les dossiers médicaux des patients et la littérature médicale mondiale pour 
-                    aider les oncologues à identifier les options de traitement personnalisées les plus pertinentes.
-                  </p>
-                  <div className="space-y-2">
-                    <div className="flex items-start gap-2">
-                      <div className="w-5 h-5 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs mt-0.5">✓</div>
-                      <p className="text-sm">Concordance de 93% avec les recommandations des experts</p>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <div className="w-5 h-5 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs mt-0.5">✓</div>
-                      <p className="text-sm">Réduction du temps de diagnostic et amélioration de la précision</p>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <div className="w-5 h-5 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs mt-0.5">✓</div>
-                      <p className="text-sm">Accès aux dernières recherches médicales pour les hôpitaux du monde entier</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-container">
-        <SectionHeading
-          pretitle="Tendances émergentes"
-          title="Nouveaux horizons"
-          description="Découvrez les applications émergentes de l'IA qui façonnent l'avenir de différents secteurs."
-          center
-        />
-
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-          {emergingUseCases.map((useCase, index) => (
-            <div key={index} className="flex gap-4 animate-slide-up" style={{ animationDelay: `${index * 100}ms` }}>
-              <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
-                {useCase.icon}
-              </div>
-              <div>
-                <h3 className="text-lg font-medium mb-1">{useCase.title}</h3>
-                <p className="text-muted-foreground">{useCase.description}</p>
-              </div>
-            </div>
-          ))}
+        <div className="mt-10">
+          <FeatureGrid features={casUsages} columns={3} />
         </div>
       </section>
 
@@ -218,15 +109,15 @@ const CasUsage = () => {
         <div className="max-w-3xl mx-auto text-center">
           <SectionHeading
             pretitle="Explorer"
-            title="Découvrez plus"
-            description="Approfondissez vos connaissances en explorant les autres sections du site."
+            title="Approfondir les connaissances"
+            description="Découvrez d'autres aspects de l'intelligence artificielle en explorant les sections suivantes."
             center
           />
 
           <div className="mt-8 flex flex-wrap gap-4 justify-center">
             <Button asChild size="lg" className="animate-fade-in">
-              <Link to="/machine-learning">
-                Machine Learning
+              <Link to="/niveaux-ia">
+                Niveaux d'IA
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="animate-fade-in" style={{ animationDelay: '100ms' }}>
@@ -236,7 +127,7 @@ const CasUsage = () => {
             </Button>
             <Button asChild size="lg" variant="secondary" className="animate-fade-in" style={{ animationDelay: '200ms' }}>
               <Link to="/ethique">
-                Éthique
+                Éthique de l'IA
               </Link>
             </Button>
           </div>

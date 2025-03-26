@@ -14,6 +14,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import Quiz from '@/components/ethics/Quiz';
 
 /**
  * Page sur l'éthique de l'IA
@@ -185,6 +186,22 @@ const Ethique = () => {
         </div>
       </section>
 
+      {/* Nouvelle section: Quiz interactif */}
+      <section className="section-container bg-muted/40 rounded-3xl py-16">
+        <div className="max-w-3xl mx-auto">
+          <SectionHeading
+            pretitle="Testez vos connaissances"
+            title="Quiz interactif sur l'éthique de l'IA"
+            description="Mettez à l'épreuve votre compréhension des principes éthiques et des enjeux liés à l'intelligence artificielle."
+            center
+          />
+          
+          <div className="mt-10">
+            <Quiz />
+          </div>
+        </div>
+      </section>
+
       <section className="section-container">
         <div className="max-w-3xl mx-auto text-center">
           <SectionHeading
@@ -206,8 +223,8 @@ const Ethique = () => {
               </Link>
             </Button>
             <Button asChild size="lg" variant="secondary" className="animate-fade-in" style={{ animationDelay: '200ms' }}>
-              <Link to="/cas-usage">
-                Cas d'usage
+              <Link to="/glossaire">
+                Glossaire des termes
               </Link>
             </Button>
           </div>

@@ -5,6 +5,8 @@ import Footer from './Footer';
 import Header from './Header';
 import Hero from './Hero';
 import SectionHeading from './SectionHeading';
+import Quiz from './ethics/Quiz';
+import TermsGlossary from './glossary/TermsGlossary';
 
 export {
   Card,
@@ -12,5 +14,7 @@ export {
   Footer,
   Header,
   Hero,
-  SectionHeading
+  SectionHeading,
+  Quiz,
+  TermsGlossary
 };
