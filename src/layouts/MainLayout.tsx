@@ -22,12 +22,12 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   }, [location.pathname]);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen transition-colors duration-300">
       <Header />
       <main className="flex-grow">
         {children}
       </main>
-      <Footer />
+      <Footer author="Geoffroy Streit" />
     </div>
   );
 };

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
@@ -126,8 +127,8 @@ const CasUsage = () => {
               </Link>
             </Button>
             <Button asChild size="lg" variant="secondary" className="animate-fade-in" style={{ animationDelay: '200ms' }}>
-              <Link to="/ethique">
-                Éthique de l'IA
+              <Link to="/ia-multimodale">
+                IA Multimodale
               </Link>
             </Button>
           </div>
