@@ -12,6 +12,8 @@ import MachineLearning from "./pages/MachineLearning";
 import Ethique from "./pages/Ethique";
 import CasUsage from "./pages/CasUsage";
 import Glossaire from "./pages/Glossaire";
+import HistoireIA from "./pages/HistoireIA";
+import Ressources from "./pages/Ressources";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
 
@@ -62,6 +64,16 @@ const App = () => (
           <Route path="/glossaire" element={
             <MainLayout>
               <Glossaire />
+            </MainLayout>
+          } />
+          <Route path="/histoire-ia" element={
+            <MainLayout>
+              <HistoireIA />
+            </MainLayout>
+          } />
+          <Route path="/ressources" element={
+            <MainLayout>
+              <Ressources />
             </MainLayout>
           } />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

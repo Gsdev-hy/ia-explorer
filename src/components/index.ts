@@ -7,6 +7,8 @@ import Hero from './Hero';
 import SectionHeading from './SectionHeading';
 import Quiz from './ethics/Quiz';
 import TermsGlossary from './glossary/TermsGlossary';
+import Timeline from './timeline/Timeline';
+import ExternalResources from './resources/ExternalResources';
 
 export {
   Card,
@@ -16,5 +18,7 @@ export {
   Hero,
   SectionHeading,
   Quiz,
-  TermsGlossary
+  TermsGlossary,
+  Timeline,
+  ExternalResources
 };

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { 
   Factory, ShoppingBag, Building2, Stethoscope, 
   Bus, Car, Shield, BadgeDollarSign, BookOpen, 
-  BrainCircuit, Robot
+  BrainCircuit, Bot
 } from 'lucide-react';
 
 /**
@@ -80,7 +80,7 @@ const CasUsage = () => {
     {
       title: "Robotique",
       description: "Automatisation des tâches, assistance aux personnes, exploration de milieux hostiles.",
-      icon: <Robot size={24} />,
+      icon: <Bot size={24} />,
       link: "#"
     },
   ];
