@@ -27,7 +27,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       <main className="flex-grow">
         {children}
       </main>
-      <Footer author="Geoffroy Streit" />
+      <Footer author="Geoffroy Streit" email="geoffroy.streit@gmail.com" />
     </div>
   );
 };

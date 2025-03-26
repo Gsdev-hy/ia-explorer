@@ -5,7 +5,8 @@ import SectionHeading from '../components/SectionHeading';
 import TermsGlossary from '@/components/glossary/TermsGlossary';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { BookOpen } from 'lucide-react';
+import { BookOpen, Brain, Mail } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 
 /**
  * Page du glossaire des termes liés à l'IA
@@ -24,9 +25,29 @@ const Glossaire = () => {
           <SectionHeading
             pretitle="Référence"
             title="Comprendre le vocabulaire de l'IA"
-            description="Ce glossaire rassemble les termes techniques, généraux et éthiques essentiels pour comprendre les discussions autour de l'intelligence artificielle."
+            description="Ce glossaire rassemble les termes techniques, généraux, éthiques et liés à la mémoire en intelligence artificielle."
             center
           />
+
+          <Card className="mb-8 border border-dashed">
+            <CardContent className="pt-6">
+              <div className="flex flex-col md:flex-row gap-4 items-center">
+                <div className="bg-primary/10 p-3 rounded-full">
+                  <Brain className="h-6 w-6 text-primary" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-medium mb-1">Les différents types de mémoire en IA</h3>
+                  <p className="text-muted-foreground text-sm mb-2">
+                    Comme dans la cognition humaine, les systèmes d'IA utilisent différents types de mémoire pour traiter l'information.
+                    Explorez les concepts de mémoire à court terme, mémoire à long terme, mémoire de contexte et bien plus.
+                  </p>
+                </div>
+                <Button variant="outline" asChild className="whitespace-nowrap">
+                  <Link to="/niveaux-ia">En savoir plus</Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
           
           <div className="mt-10">
             <TermsGlossary />
@@ -56,6 +77,14 @@ const Glossaire = () => {
             <Button asChild size="lg" variant="secondary">
               <Link to="/cas-usage">Cas d'usage</Link>
             </Button>
+          </div>
+          
+          <div className="mt-12 pt-8 border-t border-border flex justify-center items-center text-sm text-muted-foreground">
+            <Mail className="h-4 w-4 mr-2" />
+            <span>Pour contribuer au glossaire ou signaler une erreur : </span>
+            <a href="mailto:geoffroy.streit@gmail.com" className="ml-1 text-primary hover:underline">
+              geoffroy.streit@gmail.com
+            </a>
           </div>
         </div>
       </section>

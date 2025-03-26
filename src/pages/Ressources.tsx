@@ -5,7 +5,8 @@ import SectionHeading from '@/components/SectionHeading';
 import { ExternalResources } from '@/components';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { BookOpen, Lightbulb, BookMarked } from 'lucide-react';
+import { BookOpen, Lightbulb, BookMarked, Mail, Brain } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 
 /**
  * Page présentant des ressources externes pour approfondir les connaissances en IA
@@ -27,7 +28,32 @@ const Ressources = () => {
           center
         />
         
-        <div className="mt-10">
+        <Card className="mb-8 border border-dashed">
+          <CardContent className="pt-6">
+            <div className="flex flex-col md:flex-row gap-4 items-center">
+              <div className="bg-primary/10 p-3 rounded-full">
+                <Brain className="h-6 w-6 text-primary" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-medium mb-1">Nouveauté : Section mémoire en IA</h3>
+                <p className="text-muted-foreground text-sm mb-2">
+                  Nous avons enrichi notre collection avec des ressources spécifiques sur les différents types de mémoire 
+                  en intelligence artificielle. Utilisez les filtres par sujet pour les découvrir.
+                </p>
+              </div>
+              <Button variant="outline" asChild className="whitespace-nowrap">
+                <a href="#resources" onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('resources')?.scrollIntoView({ behavior: 'smooth' });
+                }}>
+                  Voir les ressources
+                </a>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <div id="resources" className="mt-10 scroll-mt-20">
           <ExternalResources />
         </div>
       </section>
@@ -62,6 +88,19 @@ const Ressources = () => {
                 <Link to="/glossaire">Consulter le glossaire</Link>
               </Button>
             </div>
+          </div>
+          
+          <div className="mt-12 pt-8 border-t border-border flex flex-col items-center text-sm text-muted-foreground">
+            <div className="flex items-center">
+              <Mail className="h-4 w-4 mr-2" />
+              <span>Pour suggérer une ressource : </span>
+              <a href="mailto:geoffroy.streit@gmail.com" className="ml-1 text-primary hover:underline">
+                geoffroy.streit@gmail.com
+              </a>
+            </div>
+            <p className="mt-2 text-xs text-muted-foreground/70">
+              Les ressources sont régulièrement mises à jour. Dernière mise à jour: {new Date().toLocaleDateString('fr-FR')}
+            </p>
           </div>
         </div>
       </section>

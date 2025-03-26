@@ -10,6 +10,7 @@ import Quiz from './ethics/Quiz';
 import TermsGlossary from './glossary/TermsGlossary';
 import Timeline from './timeline/Timeline';
 import ExternalResources from './resources/ExternalResources';
+import AIMemoryTypes from './memory/AIMemoryTypes';
 
 export {
   Card,
@@ -22,5 +23,6 @@ export {
   Quiz,
   TermsGlossary,
   Timeline,
-  ExternalResources
+  ExternalResources,
+  AIMemoryTypes
 };
