@@ -9,6 +9,8 @@ import Home from "./pages/Home";
 import NiveauxIA from "./pages/NiveauxIA";
 import TypesIA from "./pages/TypesIA";
 import MachineLearning from "./pages/MachineLearning";
+import Ethique from "./pages/Ethique";
+import CasUsage from "./pages/CasUsage";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
 
@@ -48,7 +50,12 @@ const App = () => (
           } />
           <Route path="/cas-usage" element={
             <MainLayout>
-              <NotFound />
+              <CasUsage />
+            </MainLayout>
+          } />
+          <Route path="/ethique" element={
+            <MainLayout>
+              <Ethique />
             </MainLayout>
           } />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
