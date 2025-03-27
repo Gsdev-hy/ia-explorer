@@ -1,18 +1,21 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Hero from '@/components/Hero';
 import SectionHeading from '@/components/SectionHeading';
 import { ExternalResources } from '@/components';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { BookOpen, Lightbulb, BookMarked, Mail, Brain } from 'lucide-react';
+import { BookOpen, Lightbulb, BookMarked, Mail, Brain, PlusCircle } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { AddResourceForm } from '@/components/resources/AddResourceForm';
 
 /**
  * Page présentant des ressources externes pour approfondir les connaissances en IA
  * @returns {JSX.Element} Le composant de la page Ressources
  */
 const Ressources = () => {
+  const [showAddResourceForm, setShowAddResourceForm] = useState(false);
+
   return (
     <>
       <Hero
@@ -102,8 +105,24 @@ const Ressources = () => {
               Les ressources sont régulièrement mises à jour. Dernière mise à jour: {new Date().toLocaleDateString('fr-FR')}
             </p>
           </div>
+          
+          <div className="mt-8">
+            <Button 
+              onClick={() => setShowAddResourceForm(true)}
+              variant="outline"
+              className="gap-2"
+            >
+              <PlusCircle className="h-4 w-4" />
+              Proposer une ressource
+            </Button>
+          </div>
         </div>
       </section>
+      
+      <AddResourceForm 
+        isOpen={showAddResourceForm} 
+        onClose={() => setShowAddResourceForm(false)} 
+      />
     </>
   );
 };
