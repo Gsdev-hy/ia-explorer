@@ -1,69 +1,89 @@
-# Welcome to your Lovable project
 
-## Project info
+# IA Explorer - Guide Éducatif sur l'Intelligence Artificielle
+
+## Présentation du Projet
+
+**IA Explorer** est une ressource éducative complète sur l'intelligence artificielle, conçue pour rendre ce domaine complexe accessible à tous les niveaux de connaissance. La plateforme offre une exploration détaillée de tous les aspects de l'IA, des concepts fondamentaux aux applications avancées.
 
 **URL**: https://lovable.dev/projects/ca21d6c5-36b0-4b33-bf3f-15c29fa6fead
 
-## How can I edit this code?
+**Auteur**: Geoffroy Streit (geoffroy.streit@gmail.com)
 
-There are several ways of editing your application.
+## Fonctionnalités principales
 
-**Use Lovable**
+- **Explorations thématiques complètes** : Types d'IA, niveaux d'intelligence artificielle, machine learning, IA multimodale...
+- **Resources pédagogiques** : Glossaire détaillé, études de cas, exemples pratiques
+- **Contenu multimédia** : Schémas explicatifs, timeline interactive de l'histoire de l'IA
+- **Actualités sur l'IA** : Flux RSS automatisé des dernières innovations dans le domaine
+- **Interface adaptative** : Support du mode clair/sombre, design responsive pour tous les appareils
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/ca21d6c5-36b0-4b33-bf3f-15c29fa6fead) and start prompting.
+## Sections du site
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Accueil** : Présentation générale et navigation intuitive
+- **Types d'IA** : IA faible vs IA forte, systèmes experts, etc.
+- **Niveaux d'IA** : ANI, AGI, ASI expliqués en détail
+- **Machine Learning** : Principes, types d'apprentissage, algorithmes courants
+- **IA Multimodale** : IA pour la création d'images, vidéos, musique et code
+- **Cas d'Usage** : Applications pratiques de l'IA dans divers secteurs
+- **Histoire de l'IA** : Chronologie interactive des événements clés
+- **Éthique de l'IA** : Enjeux, défis et considérations éthiques
+- **Glossaire** : Définitions détaillées des termes techniques
+- **Ressources** : Bibliographie, liens, outils et références complémentaires
+- **Actualités** : Dernières nouvelles du monde de l'IA via flux RSS
+- **À propos** : Information sur le projet et son auteur
 
-**Use your preferred IDE**
+## Technologies utilisées
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Cette application a été développée avec:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- **React** avec TypeScript pour un développement robuste et typé
+- **Vite** comme outil de build ultra-rapide
+- **React Router** pour la navigation entre les différentes sections
+- **Tailwind CSS** pour le styling efficace et responsive
+- **shadcn/ui** pour des composants UI réutilisables et accessibles
+- **Lucide React** pour les icônes vectorielles
+- **React Query** pour la gestion des données
+- **Mode sombre/clair** avec persistance des préférences utilisateur
 
-Follow these steps:
+## Comment utiliser ce projet
+
+### Installation et démarrage
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Cloner le dépôt
+git clone <URL_DU_DÉPÔT>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Accéder au répertoire du projet
+cd ia-explorer
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Installer les dépendances
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Lancer le serveur de développement
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Personnalisation
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Le contenu du site peut être facilement mis à jour en modifiant les fichiers dans les répertoires:
+- `src/pages/` pour les pages principales
+- `src/components/` pour les composants réutilisables
+- `src/data/` pour les données (termes du glossaire, ressources, etc.)
 
-**Use GitHub Codespaces**
+## Déploiement
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Pour déployer ce projet:
 
-## What technologies are used for this project?
+1. Ouvrez [Lovable](https://lovable.dev/projects/ca21d6c5-36b0-4b33-bf3f-15c29fa6fead)
+2. Cliquez sur Share -> Publish
 
-This project is built with .
+## Contribution
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Les contributions à ce projet sont les bienvenues. Pour contribuer:
 
-## How can I deploy this project?
+1. Contactez l'auteur: geoffroy.streit@gmail.com
+2. Proposez des améliorations ou signaler des problèmes
 
-Simply open [Lovable](https://lovable.dev/projects/ca21d6c5-36b0-4b33-bf3f-15c29fa6fead) and click on Share -> Publish.
+## Licence
 
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+Tous droits réservés. © 2023 Geoffroy Streit.

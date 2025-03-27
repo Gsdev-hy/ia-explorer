@@ -40,7 +40,9 @@ const Header = () => {
     { text: 'Histoire', href: '/histoire-ia' },
     { text: 'Éthique', href: '/ethique' },
     { text: 'Glossaire', href: '/glossaire' },
-    { text: 'Ressources', href: '/ressources' }
+    { text: 'Ressources', href: '/ressources' },
+    { text: 'Actualités', href: '/actualites' },
+    { text: 'À propos', href: '/about' }
   ];
 
   return (

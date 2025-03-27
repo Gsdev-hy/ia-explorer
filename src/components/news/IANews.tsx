@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -6,7 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Feed, Rss, ExternalLink, Calendar, Clock } from 'lucide-react';
+import { Rss, ExternalLink, Calendar, Clock } from 'lucide-react';
 import { toast } from "@/components/ui/use-toast";
 
 interface NewsItem {
@@ -153,7 +152,7 @@ const IANews = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-3 mb-2">
-        <Feed className="w-5 h-5 text-primary" />
+        <Rss className="w-5 h-5 text-primary" />
         <h2 className="text-2xl font-bold tracking-tight">Actualités de l'IA</h2>
       </div>
       
