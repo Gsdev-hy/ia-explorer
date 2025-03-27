@@ -17,14 +17,14 @@ const Ressources = () => {
     <>
       <Hero
         title="Ressources d'apprentissage"
-        subtitle="Une sélection de ressources de qualité pour approfondir vos connaissances sur l'intelligence artificielle."
+        subtitle="Une sélection de ressources francophones gratuites et accessibles en ligne pour approfondir vos connaissances sur l'intelligence artificielle."
       />
 
       <section className="section-container">
         <SectionHeading
           pretitle="Bibliothèque"
           title="Ressources Externes"
-          description="Explorez notre collection de livres, articles, vidéos, cours et sites web soigneusement sélectionnés pour enrichir votre compréhension de l'IA."
+          description="Explorez notre collection de ressources en français et gratuites: articles, vidéos, cours et sites web soigneusement sélectionnés pour enrichir votre compréhension de l'IA."
           center
         />
         
@@ -35,10 +35,10 @@ const Ressources = () => {
                 <Brain className="h-6 w-6 text-primary" />
               </div>
               <div className="flex-1">
-                <h3 className="text-lg font-medium mb-1">Nouveauté : Section mémoire en IA</h3>
+                <h3 className="text-lg font-medium mb-1">Contenu en français et accessible</h3>
                 <p className="text-muted-foreground text-sm mb-2">
-                  Nous avons enrichi notre collection avec des ressources spécifiques sur les différents types de mémoire 
-                  en intelligence artificielle. Utilisez les filtres par sujet pour les découvrir.
+                  Toutes les ressources présentées sont gratuites, accessibles en ligne et principalement en français.
+                  Utilisez les filtres par sujet, niveau ou type de contenu pour trouver les ressources qui vous intéressent.
                 </p>
               </div>
               <Button variant="outline" asChild className="whitespace-nowrap">

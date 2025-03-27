@@ -12,7 +12,7 @@
 ## Fonctionnalités principales
 
 - **Explorations thématiques complètes** : Types d'IA, niveaux d'intelligence artificielle, machine learning, IA multimodale...
-- **Resources pédagogiques** : Glossaire détaillé, études de cas, exemples pratiques principalement en français
+- **Resources pédagogiques** : Glossaire détaillé, études de cas, exemples pratiques en français
 - **Contenu multimédia** : Schémas explicatifs, timeline interactive de l'histoire de l'IA
 - **Actualités sur l'IA** : Flux RSS automatisé des dernières innovations dans le domaine avec des sources francophones de qualité
 - **Interface adaptative** : Support du mode clair/sombre, design responsive pour tous les appareils
@@ -28,7 +28,7 @@
 - **Histoire de l'IA** : Chronologie interactive des événements clés
 - **Éthique de l'IA** : Enjeux, défis et considérations éthiques
 - **Glossaire** : Définitions détaillées des termes techniques
-- **Ressources** : Bibliographie, liens, outils et références complémentaires, principalement en français
+- **Ressources** : Collection de ressources gratuites en français: articles, cours, vidéos et sites web
 - **Actualités** : Dernières nouvelles du monde de l'IA via flux RSS francophones
 - **À propos** : Information sur le projet et son auteur
 
@@ -73,7 +73,7 @@ Le contenu du site peut être facilement mis à jour en modifiant les fichiers d
 
 ### Sources d'actualités
 
-Les flux RSS utilisés pour la section Actualités incluent:
+Les flux RSS utilisés pour la section Actualités incluent des sources francophones de qualité comme:
 - Interstices (INRIA)
 - INRIA
 - Usbek & Rica

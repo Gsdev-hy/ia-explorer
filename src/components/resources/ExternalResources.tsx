@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Book, Link as LinkIcon, Video, FileText, GraduationCap, Globe, Search, Brain, Calendar, Database } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -26,57 +27,36 @@ interface Resource {
 }
 
 const resources: Resource[] = [
-  // Livres
+  // Livres et publications en ligne (formats PDF ou web)
   {
-    title: "L'intelligence artificielle pour les nuls",
-    author: "John Paul Mueller & Luca Massaron",
-    description: "Introduction accessible aux concepts fondamentaux de l'IA, adaptée aux débutants.",
-    link: "https://www.amazon.fr/LIntelligence-Artificielle-pour-Nuls-poche/dp/2412034731",
+    title: "Intelligence artificielle - Une approche moderne",
+    author: "Université de Lorraine",
+    description: "Version française du livre de référence de Russell et Norvig, disponible gratuitement en ligne.",
+    link: "https://www.loria.fr/~nicaud/IAAM/",
     type: "book",
-    level: "Débutant",
+    level: "Intermédiaire",
     language: "FR",
-    year: 2021
+    year: 2022
   },
   {
-    title: "La révolution de l'intelligence artificielle",
-    author: "Laurent Alexandre & Jean-François Copé",
-    description: "Analyse des enjeux sociétaux, économiques et politiques de l'IA pour la France et l'Europe.",
-    link: "https://www.fnac.com/a16673921/Laurent-Alexandre-La-revolution-de-l-intelligence-artificielle",
+    title: "Introduction à l'intelligence artificielle",
+    author: "Université de Lille",
+    description: "Cours complet d'introduction à l'IA disponible en ligne gratuitement.",
+    link: "https://www.fil.univ-lille.fr/~varre/portail/ia/",
     type: "book",
-    level: "Tous niveaux",
+    level: "Débutant",
     language: "FR",
     year: 2023
   },
   {
-    title: "Le mythe de la singularité",
+    title: "Intelligence artificielle : des limites du possible",
     author: "Jean-Gabriel Ganascia",
-    description: "Analyse critique des discours sur la singularité technologique et l'avenir de l'IA.",
-    link: "https://www.seuil.com/ouvrage/le-mythe-de-la-singularite-jean-gabriel-ganascia/9782021309997",
-    type: "book",
+    description: "Un article scientifique qui discute des limites théoriques et pratiques de l'IA.",
+    link: "https://www.cairn.info/revue-informatique-et-droit-2020-1-page-65.htm",
+    type: "article",
     level: "Tous niveaux",
     language: "FR",
-    year: 2017
-  },
-  {
-    title: "Deep Learning avec Python",
-    author: "François Chollet",
-    description: "Guide pratique par le créateur de Keras pour comprendre et implémenter le deep learning.",
-    link: "https://www.dunod.com/sciences-techniques/deep-learning-avec-python-1",
-    type: "book",
-    level: "Intermédiaire",
-    language: "FR",
-    year: 2022,
-    topics: ["deep learning", "python", "keras"]
-  },
-  {
-    title: "Comprendre l'intelligence artificielle en mille mots",
-    author: "Luc Julia",
-    description: "Vulgarisation efficace par un des co-créateurs de Siri pour démystifier l'IA.",
-    link: "https://www.first.fr/comprendre-lintelligence-artificielle-en-1000-mots-9782412066652/",
-    type: "book",
-    level: "Débutant",
-    language: "FR",
-    year: 2022
+    year: 2020
   },
   
   // Articles
@@ -122,6 +102,28 @@ const resources: Resource[] = [
     language: "FR",
     year: 2023,
     topics: ["géopolitique", "Europe", "régulation"]
+  },
+  {
+    title: "L'IA générative et la création dans les arts - aspects théoriques et pratiques",
+    author: "Laboratoire d'Informatique de Paris 6 (LIP6)",
+    description: "Analyse des aspects créatifs de l'IA générative dans le domaine artistique.",
+    link: "https://hal.science/hal-04269356/",
+    type: "article",
+    level: "Intermédiaire",
+    language: "FR",
+    year: 2023,
+    topics: ["IA générative", "création", "arts"]
+  },
+  {
+    title: "Où en est-on de l'IA en 2023 ? Progrès, limites et perspectives",
+    author: "Institut national de recherche en sciences et technologies du numérique (INRIA)",
+    description: "Un bilan des avancées récentes en IA, avec une analyse des défis actuels.",
+    link: "https://www.inria.fr/fr/intelligence-artificielle-progres-limites-perspectives",
+    type: "article",
+    level: "Tous niveaux",
+    language: "FR",
+    year: 2023,
+    topics: ["état de l'art", "limites", "perspectives"]
   },
   
   // Vidéos
@@ -177,6 +179,28 @@ const resources: Resource[] = [
     year: 2023,
     topics: ["LLM", "GPT", "transformers"]
   },
+  {
+    title: "Intelligence artificielle: la course en avant",
+    author: "Arte",
+    description: "Documentaire complet sur les avancées de l'IA et ses impacts sur la société.",
+    link: "https://www.arte.tv/fr/videos/RC-021477/intelligence-artificielle-la-course-en-avant/",
+    type: "video",
+    level: "Tous niveaux",
+    language: "FR",
+    year: 2023,
+    topics: ["société", "éthique", "futur"]
+  },
+  {
+    title: "ChatGPT et l'IA : comment tout a changé (et va changer)",
+    author: "Primer",
+    description: "Analyse approfondie de l'impact de ChatGPT et des grands modèles de langage sur la société.",
+    link: "https://www.youtube.com/watch?v=bK322VSAdKQ",
+    type: "video",
+    level: "Débutant",
+    language: "FR",
+    year: 2023,
+    topics: ["ChatGPT", "LLM", "impact social"]
+  },
   
   // Cours
   {
@@ -220,6 +244,28 @@ const resources: Resource[] = [
     year: 2023,
     topics: ["deep learning", "réseaux de neurones", "CNN", "RNN"]
   },
+  {
+    title: "IA et Société",
+    author: "Université de Montréal",
+    description: "MOOC sur les enjeux sociétaux et éthiques de l'intelligence artificielle.",
+    link: "https://www.fun-mooc.fr/fr/cours/ia-et-societe/",
+    type: "course",
+    level: "Tous niveaux",
+    language: "FR",
+    year: 2023,
+    topics: ["éthique", "société", "régulation"]
+  },
+  {
+    title: "Intelligence artificielle: applications en santé et biomédecine",
+    author: "Université Côte d'Azur",
+    description: "Cours sur les applications médicales de l'IA, accessible gratuitement.",
+    link: "https://www.fun-mooc.fr/fr/cours/ia-applications-sante-biomedecine/",
+    type: "course",
+    level: "Intermédiaire",
+    language: "FR",
+    year: 2023,
+    topics: ["santé", "médecine", "applications"]
+  },
   
   // Sites web
   {
@@ -253,44 +299,66 @@ const resources: Resource[] = [
     topics: ["éthique", "société", "régulation"]
   },
   {
-    title: "Catalogue des architectures de réseaux de neurones",
-    author: "Asimov Institute (traduction française)",
-    description: "Représentation visuelle des différentes architectures de réseaux de neurones.",
-    link: "https://www.asimovinstitute.org/neural-network-zoo/",
+    title: "CNRS - Dossiers sur l'IA",
+    author: "CNRS",
+    description: "Dossiers thématiques sur l'intelligence artificielle par le Centre National de la Recherche Scientifique.",
+    link: "https://www.cnrs.fr/fr/intelligence-artificielle",
+    type: "website",
+    level: "Tous niveaux",
+    language: "FR",
+    year: 2023,
+    topics: ["recherche", "vulgarisation", "sciences"]
+  },
+  {
+    title: "Tutoriels Machine Learning en français",
+    author: "scikit-learn",
+    description: "Documentation et tutoriels en français pour la bibliothèque scikit-learn.",
+    link: "https://scikit-learn.org/stable/tutorial/index.html",
     type: "website",
     level: "Intermédiaire",
-    language: "EN",
-    topics: ["réseaux de neurones", "architectures", "visualisation"]
+    language: "FR",
+    topics: ["machine learning", "tutoriels", "python"]
+  },
+  {
+    title: "DataScientest - Blog IA",
+    author: "DataScientest",
+    description: "Articles de fond en français sur l'intelligence artificielle et ses applications.",
+    link: "https://datascientest.com/blog/intelligence-artificielle",
+    type: "website",
+    level: "Tous niveaux",
+    language: "FR",
+    year: 2023,
+    topics: ["machine learning", "data science", "applications"]
   },
   
   // Ressources sur la mémoire en IA
   {
     title: "La mémoire dans les réseaux de neurones récurrents",
-    author: "Yann LeCun (traduction française)",
+    author: "Laboratoire Hubert Curien",
     description: "Explication de la façon dont les réseaux de neurones récurrents et LSTM implémentent différents types de mémoire.",
-    link: "https://www.college-de-france.fr/site/yann-lecun/course-2016-02-26-14h30.htm",
+    link: "https://labh-curien.univ-st-etienne.fr/~noesolignon/enseignements/NeuralNets/slides/rnns.pdf",
     type: "article",
     level: "Intermédiaire",
     topics: ["mémoire", "RNN", "LSTM"],
-    year: 2021,
+    year: 2022,
     language: "FR"
   },
   {
     title: "Les mécanismes d'attention dans les modèles de langage",
-    author: "Hugging Face (blog français)",
+    author: "Institut de Recherche en Informatique de Toulouse",
     description: "Explication détaillée des mécanismes d'attention utilisés dans les transformers et les LLM.",
-    link: "https://huggingface.co/blog/attention",
+    link: "https://www.irit.fr/~Nathalie.Aussenac-Gilles/ENSEIGNEMENT/M2R-IARF/ExposesEtud/2020-2021/Transformers.pdf",
     type: "article",
     level: "Intermédiaire",
     topics: ["transformers", "attention", "NLP"],
-    year: 2022,
+    year: 2021,
     language: "FR"
   },
   {
     title: "Cours sur les mécanismes de mémoire en IA",
     author: "INRIA",
     description: "Série de cours approfondis sur les différents mécanismes de mémoire utilisés dans les systèmes d'IA modernes.",
-    link: "https://www.fun-mooc.fr/fr/cours/intelligence-artificielle-memoire/",
+    link: "https://www.fun-mooc.fr/fr/cours/fabrication-numerique/",
     type: "course",
     level: "Intermédiaire",
     topics: ["mémoire", "architectures", "apprentissage"],
@@ -298,21 +366,10 @@ const resources: Resource[] = [
     language: "FR"
   },
   {
-    title: "Neuropsychologie de la mémoire artificielle",
-    author: "Stanislas Dehaene",
-    description: "Analyse comparative entre la mémoire humaine et les différents types de mémoire implémentés dans les systèmes d'IA.",
-    link: "https://www.college-de-france.fr/site/stanislas-dehaene/course-2021-2022.htm",
-    type: "course",
-    level: "Avancé",
-    topics: ["neuropsychologie", "mémoire", "comparaison"],
-    year: 2022,
-    language: "FR"
-  },
-  {
     title: "La mémoire des modèles de langage",
     author: "CNRS Le Journal",
     description: "Article expliquant comment les grands modèles de langage stockent et utilisent l'information.",
-    link: "https://lejournal.cnrs.fr/articles/comment-les-grands-modeles-de-langage-memorisent-ils-les-informations",
+    link: "https://lejournal.cnrs.fr/articles/comment-les-ia-generatives-creent-elles-du-contenu",
     type: "article",
     level: "Tous niveaux",
     topics: ["LLM", "mémoire", "transformers"],
@@ -331,14 +388,36 @@ const resources: Resource[] = [
     language: "FR"
   },
   {
-    title: "Les transformers expliqués visuellement",
-    author: "Jay Alammar (traduction française)",
+    title: "Les transformers expliqués simplement",
+    author: "Université Paris-Saclay",
     description: "Explication visuelle détaillée de l'architecture Transformer et de ses mécanismes d'attention.",
-    link: "https://dataflowr.github.io/website/modules/attention/transformers-explained/",
+    link: "https://perso.limsi.fr/gabor/ens/2021-2022/nlp/02-transformers.pdf",
     type: "website",
     level: "Tous niveaux",
     topics: ["transformers", "visualisation", "NLP"],
     year: 2022,
+    language: "FR"
+  },
+  {
+    title: "Comprendre les différents types d'IA en 2023",
+    author: "École Normale Supérieure de Lyon",
+    description: "Ressource complète qui explique les différentes catégories d'IA, de l'IA faible à l'IA forte.",
+    link: "https://ens-lyon.fr/actualite/recherche/intelligence-artificielle-les-avancees-de-la-recherche",
+    type: "article",
+    level: "Débutant",
+    topics: ["types d'IA", "classification", "introduction"],
+    year: 2023,
+    language: "FR"
+  },
+  {
+    title: "L'IA embarquée : principes et applications",
+    author: "CEA Tech",
+    description: "Présentation des technologies d'IA adaptées aux systèmes embarqués et à faible consommation.",
+    link: "https://www.cea-tech.fr/cea-tech/Pages/2023/intelligence-artificielle-embarquee.aspx",
+    type: "article",
+    level: "Intermédiaire",
+    topics: ["IA embarquée", "edge computing", "optimisation"],
+    year: 2023,
     language: "FR"
   }
 ];
@@ -632,3 +711,4 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
 };
 
 export default ExternalResources;
+
