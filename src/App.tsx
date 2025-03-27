@@ -16,6 +16,7 @@ import Glossaire from "./pages/Glossaire";
 import HistoireIA from "./pages/HistoireIA";
 import Ressources from "./pages/Ressources";
 import IAMultimodale from "./pages/IAMultimodale";
+import Actualites from "./pages/Actualites";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
 
@@ -82,6 +83,11 @@ const App = () => (
             <Route path="/ia-multimodale" element={
               <MainLayout>
                 <IAMultimodale />
+              </MainLayout>
+            } />
+            <Route path="/actualites" element={
+              <MainLayout>
+                <Actualites />
               </MainLayout>
             } />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

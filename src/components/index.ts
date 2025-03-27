@@ -11,6 +11,7 @@ import TermsGlossary from './glossary/TermsGlossary';
 import Timeline from './timeline/Timeline';
 import ExternalResources from './resources/ExternalResources';
 import AIMemoryTypes from './memory/AIMemoryTypes';
+import IANews from './news/IANews';
 
 export {
   Card,
@@ -24,5 +25,6 @@ export {
   TermsGlossary,
   Timeline,
   ExternalResources,
-  AIMemoryTypes
+  AIMemoryTypes,
+  IANews
 };

@@ -3,14 +3,16 @@ import { Link } from 'react-router-dom';
 
 interface FooterProps {
   author?: string;
+  email?: string;
 }
 
 /**
  * Composant de pied de page avec liens et informations légales
  * @param {string} author - Nom de l'auteur du site (optionnel)
+ * @param {string} email - Email de l'auteur du site (optionnel)
  * @returns {JSX.Element} Le composant Footer
  */
-const Footer = ({ author }: FooterProps) => {
+const Footer = ({ author, email }: FooterProps) => {
   const currentYear = new Date().getFullYear();
   
   return (
@@ -49,9 +51,15 @@ const Footer = ({ author }: FooterProps) => {
             <p className="text-muted-foreground mb-2">
               Questions ou suggestions? N'hésitez pas à nous contacter.
             </p>
-            <a href="mailto:contact@ia-explorer.fr" className="text-primary hover:underline">
-              contact@ia-explorer.fr
-            </a>
+            {email ? (
+              <a href={`mailto:${email}`} className="text-primary hover:underline">
+                {email}
+              </a>
+            ) : (
+              <a href="mailto:contact@ia-explorer.fr" className="text-primary hover:underline">
+                contact@ia-explorer.fr
+              </a>
+            )}
           </div>
         </div>
         
