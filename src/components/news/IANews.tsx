@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -36,22 +37,34 @@ const IANews = () => {
   // Liste des flux RSS à suivre
   const rssFeeds: RssFeed[] = [
     {
-      id: "ai-trends",
-      name: "AI Trends",
-      url: "https://cors-anywhere.herokuapp.com/https://www.aitrends.com/feed/",
-      logo: "https://www.aitrends.com/wp-content/uploads/2019/09/AITrends-new-logo-2.png"
+      id: "interstices",
+      name: "Interstices",
+      url: "https://api.rss2json.com/v1/api.json?rss_url=https://interstices.info/feed/",
+      logo: "https://interstices.info/wp-content/themes/int3/assets/images/logos/interstices-logo.svg"
     },
     {
-      id: "mit-tech",
-      name: "MIT Technology Review",
-      url: "https://cors-anywhere.herokuapp.com/https://www.technologyreview.com/c/artificial-intelligence/feed",
-      logo: "https://wp-cdn.technologyreview.com/uploads/2020/05/tr35logo.png"
+      id: "inria",
+      name: "INRIA",
+      url: "https://api.rss2json.com/v1/api.json?rss_url=https://www.inria.fr/fr/flux/rss.xml",
+      logo: "https://www.inria.fr/themes/custom/inria/logo.svg"
     },
     {
-      id: "google-ai",
-      name: "Google AI Blog",
-      url: "https://cors-anywhere.herokuapp.com/https://blog.research.google/feeds/posts/default?alt=rss",
-      logo: "https://blog.research.google/favicon.ico"
+      id: "usbeketrica",
+      name: "Usbek & Rica",
+      url: "https://api.rss2json.com/v1/api.json?rss_url=https://usbeketrica.com/fr/rss",
+      logo: "https://usbeketrica.com/img/logo.png"
+    },
+    {
+      id: "siècle-digital",
+      name: "Siècle Digital",
+      url: "https://api.rss2json.com/v1/api.json?rss_url=https://siecledigital.fr/feed/",
+      logo: "https://siecledigital.fr/wp-content/themes/siecledigital/assets/img/logo-siecle.svg"
+    },
+    {
+      id: "hal-science",
+      name: "HAL Science",
+      url: "https://api.rss2json.com/v1/api.json?rss_url=https://hal.science/INTELLIGENCE-ARTIFICIELLE/feed/?lang=fr",
+      logo: "https://hal.science/img/logo_HAL.png"
     }
   ];
 
@@ -65,39 +78,24 @@ const IANews = () => {
     });
   };
 
-  // Fonction pour parser un flux RSS
+  // Fonction pour parser un flux RSS via l'API rss2json
   const parseRSS = async (feed: RssFeed) => {
     try {
       const response = await fetch(feed.url);
-      const text = await response.text();
-      const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(text, "text/xml");
+      const data = await response.json();
       
-      const items = xmlDoc.querySelectorAll("item");
-      const parsedItems: NewsItem[] = [];
+      if (data.status !== 'ok') {
+        throw new Error(`Erreur de flux: ${data.message || 'Erreur inconnue'}`);
+      }
       
-      items.forEach(item => {
-        const title = item.querySelector("title")?.textContent || "Sans titre";
-        const link = item.querySelector("link")?.textContent || "#";
-        const pubDate = item.querySelector("pubDate")?.textContent || new Date().toUTCString();
-        const description = item.querySelector("description")?.textContent || "";
-        
-        // Extraction des catégories si disponibles
-        const categoriesElements = item.querySelectorAll("category");
-        const categories: string[] = [];
-        categoriesElements.forEach(cat => {
-          if (cat.textContent) categories.push(cat.textContent);
-        });
-        
-        parsedItems.push({
-          title,
-          link,
-          pubDate,
-          description,
-          source: feed.name,
-          categories: categories.length > 0 ? categories : undefined
-        });
-      });
+      const parsedItems: NewsItem[] = data.items.map((item: any) => ({
+        title: item.title || "Sans titre",
+        link: item.link || "#",
+        pubDate: item.pubDate || new Date().toUTCString(),
+        description: item.description || "",
+        source: feed.name,
+        categories: item.categories || undefined
+      }));
       
       return parsedItems;
     } catch (error) {

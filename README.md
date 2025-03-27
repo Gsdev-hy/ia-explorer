@@ -12,9 +12,9 @@
 ## Fonctionnalités principales
 
 - **Explorations thématiques complètes** : Types d'IA, niveaux d'intelligence artificielle, machine learning, IA multimodale...
-- **Resources pédagogiques** : Glossaire détaillé, études de cas, exemples pratiques
+- **Resources pédagogiques** : Glossaire détaillé, études de cas, exemples pratiques principalement en français
 - **Contenu multimédia** : Schémas explicatifs, timeline interactive de l'histoire de l'IA
-- **Actualités sur l'IA** : Flux RSS automatisé des dernières innovations dans le domaine
+- **Actualités sur l'IA** : Flux RSS automatisé des dernières innovations dans le domaine avec des sources francophones de qualité
 - **Interface adaptative** : Support du mode clair/sombre, design responsive pour tous les appareils
 
 ## Sections du site
@@ -28,8 +28,8 @@
 - **Histoire de l'IA** : Chronologie interactive des événements clés
 - **Éthique de l'IA** : Enjeux, défis et considérations éthiques
 - **Glossaire** : Définitions détaillées des termes techniques
-- **Ressources** : Bibliographie, liens, outils et références complémentaires
-- **Actualités** : Dernières nouvelles du monde de l'IA via flux RSS
+- **Ressources** : Bibliographie, liens, outils et références complémentaires, principalement en français
+- **Actualités** : Dernières nouvelles du monde de l'IA via flux RSS francophones
 - **À propos** : Information sur le projet et son auteur
 
 ## Technologies utilisées
@@ -43,6 +43,7 @@ Cette application a été développée avec:
 - **shadcn/ui** pour des composants UI réutilisables et accessibles
 - **Lucide React** pour les icônes vectorielles
 - **React Query** pour la gestion des données
+- **RSS2JSON API** pour l'intégration des flux RSS
 - **Mode sombre/clair** avec persistance des préférences utilisateur
 
 ## Comment utiliser ce projet
@@ -70,6 +71,17 @@ Le contenu du site peut être facilement mis à jour en modifiant les fichiers d
 - `src/components/` pour les composants réutilisables
 - `src/data/` pour les données (termes du glossaire, ressources, etc.)
 
+### Sources d'actualités
+
+Les flux RSS utilisés pour la section Actualités incluent:
+- Interstices (INRIA)
+- INRIA
+- Usbek & Rica
+- Siècle Digital
+- HAL Science
+
+Pour ajouter ou modifier des sources, consultez le fichier `src/components/news/IANews.tsx`.
+
 ## Déploiement
 
 Pour déployer ce projet:
@@ -86,4 +98,4 @@ Les contributions à ce projet sont les bienvenues. Pour contribuer:
 
 ## Licence
 
-Tous droits réservés. © 2023 Geoffroy Streit.
+Tous droits réservés. © 2023-2025 Geoffroy Streit.

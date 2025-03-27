@@ -5,7 +5,7 @@ import SectionHeading from '@/components/SectionHeading';
 import IANews from '@/components/news/IANews';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Rss, ExternalLink, Lightbulb, Newspaper } from 'lucide-react';
+import { Rss, ExternalLink, Lightbulb, Newspaper, AlertCircle } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
 /**
@@ -25,7 +25,7 @@ const Actualites = () => {
           <SectionHeading
             pretitle="Veille technologique"
             title="Les dernières nouvelles de l'IA"
-            description="Suivez l'évolution rapide des technologies d'intelligence artificielle à travers une sélection d'articles provenant des sources les plus pertinentes du domaine."
+            description="Suivez l'évolution rapide des technologies d'intelligence artificielle à travers une sélection d'articles provenant de sources francophones de référence."
             center
           />
 
@@ -39,7 +39,25 @@ const Actualites = () => {
                   <h3 className="text-lg font-medium mb-1">Actualisation automatique</h3>
                   <p className="text-muted-foreground text-sm mb-2">
                     Cette page se met à jour automatiquement via des flux RSS pour vous fournir les dernières informations.
-                    Les articles sont rafraîchis toutes les 30 minutes.
+                    Les articles sont rafraîchis toutes les 30 minutes avec des sources francophones de qualité.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card className="mb-8 border-yellow-200 bg-yellow-50 dark:bg-yellow-950/20 dark:border-yellow-900">
+            <CardContent className="pt-6">
+              <div className="flex flex-col md:flex-row gap-4 items-start">
+                <div className="bg-yellow-100 dark:bg-yellow-900/30 p-3 rounded-full">
+                  <AlertCircle className="h-6 w-6 text-yellow-600 dark:text-yellow-400" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-medium mb-1 text-yellow-700 dark:text-yellow-400">Mise à jour des sources</h3>
+                  <p className="text-yellow-600 dark:text-yellow-300/80 text-sm mb-2">
+                    Nous avons mis à jour nos sources d'actualités pour privilégier des flux en français et plus fiables. 
+                    Les nouvelles sources incluent Interstices, INRIA, Usbek & Rica, Siècle Digital et HAL Science, 
+                    qui offrent des informations de qualité sur l'IA et ses applications.
                   </p>
                 </div>
               </div>
@@ -68,7 +86,7 @@ const Actualites = () => {
             <div className="bg-card rounded-xl p-6 shadow-sm border">
               <Lightbulb className="h-10 w-10 text-primary mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">Ressources pédagogiques</h3>
-              <p className="text-muted-foreground mb-4">Consultez notre bibliothèque de ressources externes pour approfondir vos connaissances en IA.</p>
+              <p className="text-muted-foreground mb-4">Consultez notre bibliothèque de ressources francophones pour approfondir vos connaissances en IA.</p>
               <Button asChild variant="outline" className="w-full">
                 <Link to="/ressources">Explorer les ressources</Link>
               </Button>

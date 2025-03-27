@@ -33,23 +33,19 @@ const resources: Resource[] = [
     description: "Introduction accessible aux concepts fondamentaux de l'IA, adaptée aux débutants.",
     link: "https://www.amazon.fr/LIntelligence-Artificielle-pour-Nuls-poche/dp/2412034731",
     type: "book",
-    level: "Débutant"
+    level: "Débutant",
+    language: "FR",
+    year: 2021
   },
   {
-    title: "Superintelligence: Paths, Dangers, Strategies",
-    author: "Nick Bostrom",
-    description: "Exploration des implications potentielles du développement d'une IA supérieure à l'intelligence humaine.",
-    link: "https://www.amazon.fr/Superintelligence-Dangers-Strategies-Nick-Bostrom/dp/0198739834",
+    title: "La révolution de l'intelligence artificielle",
+    author: "Laurent Alexandre & Jean-François Copé",
+    description: "Analyse des enjeux sociétaux, économiques et politiques de l'IA pour la France et l'Europe.",
+    link: "https://www.fnac.com/a16673921/Laurent-Alexandre-La-revolution-de-l-intelligence-artificielle",
     type: "book",
-    level: "Avancé"
-  },
-  {
-    title: "Deep Learning avec TensorFlow",
-    author: "Aurélien Géron",
-    description: "Guide pratique pour comprendre et utiliser TensorFlow pour le deep learning.",
-    link: "https://www.amazon.fr/Deep-Learning-avec-TensorFlow-dapprentissage/dp/2100809121",
-    type: "book",
-    level: "Intermédiaire"
+    level: "Tous niveaux",
+    language: "FR",
+    year: 2023
   },
   {
     title: "Le mythe de la singularité",
@@ -57,7 +53,30 @@ const resources: Resource[] = [
     description: "Analyse critique des discours sur la singularité technologique et l'avenir de l'IA.",
     link: "https://www.seuil.com/ouvrage/le-mythe-de-la-singularite-jean-gabriel-ganascia/9782021309997",
     type: "book",
-    level: "Tous niveaux"
+    level: "Tous niveaux",
+    language: "FR",
+    year: 2017
+  },
+  {
+    title: "Deep Learning avec Python",
+    author: "François Chollet",
+    description: "Guide pratique par le créateur de Keras pour comprendre et implémenter le deep learning.",
+    link: "https://www.dunod.com/sciences-techniques/deep-learning-avec-python-1",
+    type: "book",
+    level: "Intermédiaire",
+    language: "FR",
+    year: 2022,
+    topics: ["deep learning", "python", "keras"]
+  },
+  {
+    title: "Comprendre l'intelligence artificielle en mille mots",
+    author: "Luc Julia",
+    description: "Vulgarisation efficace par un des co-créateurs de Siri pour démystifier l'IA.",
+    link: "https://www.first.fr/comprendre-lintelligence-artificielle-en-1000-mots-9782412066652/",
+    type: "book",
+    level: "Débutant",
+    language: "FR",
+    year: 2022
   },
   
   // Articles
@@ -67,23 +86,42 @@ const resources: Resource[] = [
     description: "Rapport détaillé sur l'état de l'IA en France et les perspectives d'avenir.",
     link: "https://www.senat.fr/notice-rapport/2016/r16-464-1-notice.html",
     type: "article",
-    level: "Intermédiaire"
+    level: "Intermédiaire",
+    language: "FR",
+    year: 2017
   },
   {
-    title: "The AI Revolution: The Road to Superintelligence",
-    author: "Tim Urban",
-    description: "Article en deux parties explorant l'évolution de l'IA et ses implications futures.",
-    link: "https://waitbutwhy.com/2015/01/artificial-intelligence-revolution-1.html",
+    title: "Éthique et intelligence artificielle: les enjeux éthiques de l'IA",
+    author: "CNIL",
+    description: "Analyse des enjeux éthiques et des recommandations par la Commission Nationale de l'Informatique et des Libertés.",
+    link: "https://www.cnil.fr/fr/intelligence-artificielle/rapport",
     type: "article",
-    level: "Tous niveaux"
+    level: "Tous niveaux",
+    language: "FR",
+    year: 2023,
+    topics: ["éthique", "régulation", "CNIL"]
   },
   {
-    title: "Ethique de l'IA: les principes de l'OCDE",
-    author: "OCDE",
-    description: "Principes directeurs pour une IA de confiance adoptés par les pays membres de l'OCDE.",
-    link: "https://www.oecd.org/fr/numerique/intelligence-artificielle/principes/",
+    title: "Vers une IA de confiance",
+    author: "Institut Montaigne",
+    description: "Analyse des conditions nécessaires pour développer une IA éthique et responsable.",
+    link: "https://www.institutmontaigne.org/analyses/vers-une-ia-de-confiance",
     type: "article",
-    level: "Tous niveaux"
+    level: "Tous niveaux",
+    language: "FR",
+    year: 2023,
+    topics: ["éthique", "confiance", "régulation"]
+  },
+  {
+    title: "L'Europe et l'IA: l'Europe est-elle condamnée à suivre les États-Unis et la Chine?",
+    author: "France Stratégie",
+    description: "Analyse de la position européenne dans la course mondiale à l'IA.",
+    link: "https://www.strategie.gouv.fr/publications/leurope-lia-leurope-condamnee-suivre-etats-unis-chine",
+    type: "article",
+    level: "Intermédiaire",
+    language: "FR",
+    year: 2023,
+    topics: ["géopolitique", "Europe", "régulation"]
   },
   
   // Vidéos
@@ -93,7 +131,30 @@ const resources: Resource[] = [
     description: "Série de vidéos expliquant les concepts fondamentaux de l'IA de manière accessible.",
     link: "https://www.youtube.com/playlist?list=PLtzmb84AoqRS0SN8VKvAxuGOdcINmtYUX",
     type: "video",
-    level: "Débutant"
+    level: "Débutant",
+    language: "FR"
+  },
+  {
+    title: "L'intelligence artificielle et le machine learning",
+    author: "Institut Mines-Télécom",
+    description: "MOOC complet sur l'IA et le machine learning avec cours et exercices pratiques.",
+    link: "https://www.fun-mooc.fr/fr/cours/lintelligence-artificielle-avec-python/",
+    type: "video",
+    level: "Intermédiaire",
+    language: "FR",
+    year: 2023,
+    topics: ["machine learning", "python", "MOOC"]
+  },
+  {
+    title: "IA: les bases du deep learning",
+    author: "Lê Nguyên Hoang (Science4All)",
+    description: "Explication des fondements mathématiques et techniques du deep learning.",
+    link: "https://www.youtube.com/playlist?list=PLtzmb84AoqRRCU9CKVjDi-Z5T4bUOLx_T",
+    type: "video",
+    level: "Intermédiaire",
+    language: "FR",
+    year: 2022,
+    topics: ["deep learning", "mathématiques", "réseaux de neurones"]
   },
   {
     title: "L'IA peut-elle devenir consciente?",
@@ -101,113 +162,129 @@ const resources: Resource[] = [
     description: "Discussion sur la possibilité d'une conscience artificielle et ses implications.",
     link: "https://www.youtube.com/watch?v=MXs_B_oX6G4",
     type: "video",
-    level: "Tous niveaux"
+    level: "Tous niveaux",
+    language: "FR",
+    year: 2023
   },
   {
-    title: "Deep Learning Explained",
-    author: "3Blue1Brown",
-    description: "Explication visuelle du fonctionnement des réseaux de neurones et du deep learning.",
-    link: "https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi",
+    title: "Les grands modèles de langage (LLM): comment ça marche?",
+    author: "Monsieur Phi",
+    description: "Explication des principes fondamentaux des grands modèles de langage type ChatGPT.",
+    link: "https://www.youtube.com/watch?v=R_m4kanV8f0",
     type: "video",
-    level: "Intermédiaire"
+    level: "Tous niveaux",
+    language: "FR",
+    year: 2023,
+    topics: ["LLM", "GPT", "transformers"]
   },
   
   // Cours
   {
-    title: "Introduction to AI",
-    author: "MIT OpenCourseWare",
-    description: "Cours complet d'introduction à l'IA du MIT, couvrant les principes fondamentaux.",
-    link: "https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-034-artificial-intelligence-fall-2010/",
+    title: "Introduction au Machine Learning",
+    author: "Télécom Paris",
+    description: "Cours complet sur les fondamentaux du machine learning, avec une approche théorique et pratique.",
+    link: "https://www.fun-mooc.fr/fr/cours/machine-learning-python-scikit-learn/",
     type: "course",
-    level: "Intermédiaire"
-  },
-  {
-    title: "Deep Learning Specialization",
-    author: "Andrew Ng - Coursera",
-    description: "Série de cours approfondis sur le deep learning, les réseaux de neurones et leurs applications.",
-    link: "https://www.coursera.org/specializations/deep-learning",
-    type: "course",
-    level: "Intermédiaire"
+    level: "Intermédiaire",
+    language: "FR",
+    year: 2023
   },
   {
     title: "Elements of AI",
     author: "Université d'Helsinki",
-    description: "Cours gratuit d'introduction à l'IA pour le grand public.",
+    description: "Cours gratuit d'introduction à l'IA pour le grand public, disponible en français.",
     link: "https://www.elementsofai.fr/",
     type: "course",
-    level: "Débutant"
+    level: "Débutant",
+    language: "FR",
+    year: 2022
+  },
+  {
+    title: "L'Intelligence Artificielle pour Tous",
+    author: "INRIA",
+    description: "Série de cours accessibles sur les concepts fondamentaux de l'IA pour un public non technique.",
+    link: "https://www.fun-mooc.fr/fr/cours/lintelligence-artificielle-pour-tous/",
+    type: "course",
+    level: "Débutant",
+    language: "FR",
+    year: 2023
+  },
+  {
+    title: "Initiation au Deep Learning",
+    author: "ENS Paris-Saclay",
+    description: "Introduction complète aux principes du deep learning et à ses applications.",
+    link: "https://www.fun-mooc.fr/fr/cours/deep-learning/",
+    type: "course",
+    level: "Intermédiaire",
+    language: "FR",
+    year: 2023,
+    topics: ["deep learning", "réseaux de neurones", "CNN", "RNN"]
   },
   
   // Sites web
   {
-    title: "AI Ethics Guidelines Global Inventory",
-    author: "AlgorithmWatch",
-    description: "Inventaire des lignes directrices éthiques pour l'IA dans le monde.",
-    link: "https://inventory.algorithmwatch.org/",
+    title: "IA en France",
+    author: "Gouvernement Français",
+    description: "Stratégie nationale française pour l'intelligence artificielle, ressources et initiatives.",
+    link: "https://www.intelligence-artificielle.gouv.fr/fr",
     type: "website",
-    level: "Tous niveaux"
+    level: "Tous niveaux",
+    language: "FR",
+    year: 2023
   },
   {
-    title: "The Neural Network Zoo",
-    author: "The Asimov Institute",
-    description: "Catalogue des différents types de réseaux de neurones avec illustrations.",
-    link: "https://www.asimovinstitute.org/neural-network-zoo/",
+    title: "Interstices - Intelligence Artificielle",
+    author: "INRIA",
+    description: "Revue de vulgarisation informatique avec de nombreux articles de qualité sur l'IA.",
+    link: "https://interstices.info/domaine/intelligence-artificielle/",
     type: "website",
-    level: "Intermédiaire"
-  },
-  {
-    title: "Distill",
-    author: "Distill.pub",
-    description: "Revue interactive présentant des recherches en apprentissage automatique de manière visuelle.",
-    link: "https://distill.pub/",
-    type: "website",
-    level: "Avancé"
-  },
-  
-  // Nouvelles ressources
-  {
-    title: "Memory and Cognition in Deep Learning Models",
-    author: "DeepMind",
-    description: "Article expliquant comment les modèles de deep learning peuvent implémenter différentes formes de mémoire pour des tâches cognitives complexes.",
-    link: "https://deepmind.com/blog/article/differentiable-plasticity",
-    type: "article",
-    level: "Avancé",
-    topics: ["mémoire", "cognition", "deep learning"],
-    year: 2022,
-    language: "EN"
-  },
-  {
-    title: "La mémoire dans les réseaux de neurones récurrents",
-    author: "Yann LeCun",
-    description: "Explication de la façon dont les réseaux de neurones récurrents et LSTM implémentent différents types de mémoire.",
-    link: "https://research.facebook.com/blog/2020/1/understanding-the-memory-in-recurrent-neural-networks/",
-    type: "article",
-    level: "Intermédiaire",
-    topics: ["mémoire", "RNN", "LSTM"],
-    year: 2020,
+    level: "Tous niveaux",
     language: "FR"
   },
   {
-    title: "Attention Is All You Need",
-    author: "Vaswani et al.",
-    description: "Article fondateur introduisant l'architecture Transformer, qui utilise exclusivement des mécanismes d'attention pour la modélisation séquentielle.",
-    link: "https://arxiv.org/abs/1706.03762",
-    type: "article",
-    level: "Avancé",
-    topics: ["transformers", "attention", "NLP"],
-    year: 2017,
-    language: "EN"
+    title: "Observatoire IA Éthique",
+    author: "Université de Montréal",
+    description: "Ressources et publications sur les aspects éthiques de l'IA.",
+    link: "https://observatoire-ia.ulaval.ca/",
+    type: "website",
+    level: "Tous niveaux",
+    language: "FR",
+    year: 2023,
+    topics: ["éthique", "société", "régulation"]
   },
   {
-    title: "Memoria: A Library for Memory-Based Neural Networks",
-    author: "Microsoft Research",
-    description: "Bibliothèque open-source pour implémenter différents types de mémoire dans les réseaux de neurones.",
-    link: "https://github.com/microsoft/memoria",
+    title: "Catalogue des architectures de réseaux de neurones",
+    author: "Asimov Institute (traduction française)",
+    description: "Représentation visuelle des différentes architectures de réseaux de neurones.",
+    link: "https://www.asimovinstitute.org/neural-network-zoo/",
     type: "website",
     level: "Intermédiaire",
-    topics: ["mémoire", "bibliothèque", "code"],
-    year: 2023,
-    language: "EN"
+    language: "EN",
+    topics: ["réseaux de neurones", "architectures", "visualisation"]
+  },
+  
+  // Ressources sur la mémoire en IA
+  {
+    title: "La mémoire dans les réseaux de neurones récurrents",
+    author: "Yann LeCun (traduction française)",
+    description: "Explication de la façon dont les réseaux de neurones récurrents et LSTM implémentent différents types de mémoire.",
+    link: "https://www.college-de-france.fr/site/yann-lecun/course-2016-02-26-14h30.htm",
+    type: "article",
+    level: "Intermédiaire",
+    topics: ["mémoire", "RNN", "LSTM"],
+    year: 2021,
+    language: "FR"
+  },
+  {
+    title: "Les mécanismes d'attention dans les modèles de langage",
+    author: "Hugging Face (blog français)",
+    description: "Explication détaillée des mécanismes d'attention utilisés dans les transformers et les LLM.",
+    link: "https://huggingface.co/blog/attention",
+    type: "article",
+    level: "Intermédiaire",
+    topics: ["transformers", "attention", "NLP"],
+    year: 2022,
+    language: "FR"
   },
   {
     title: "Cours sur les mécanismes de mémoire en IA",
@@ -221,17 +298,6 @@ const resources: Resource[] = [
     language: "FR"
   },
   {
-    title: "The Illustrated Transformer",
-    author: "Jay Alammar",
-    description: "Explication visuelle détaillée de l'architecture Transformer et de ses mécanismes d'attention.",
-    link: "https://jalammar.github.io/illustrated-transformer/",
-    type: "website",
-    level: "Tous niveaux",
-    topics: ["transformers", "visualisation", "NLP"],
-    year: 2018,
-    language: "EN"
-  },
-  {
     title: "Neuropsychologie de la mémoire artificielle",
     author: "Stanislas Dehaene",
     description: "Analyse comparative entre la mémoire humaine et les différents types de mémoire implémentés dans les systèmes d'IA.",
@@ -243,25 +309,36 @@ const resources: Resource[] = [
     language: "FR"
   },
   {
-    title: "Memory in Language Models: An Analysis",
-    author: "Ethan Perez et al.",
-    description: "Étude approfondie sur la capacité des modèles de langage à mémoriser et récupérer des informations.",
-    link: "https://arxiv.org/abs/2106.12057",
+    title: "La mémoire des modèles de langage",
+    author: "CNRS Le Journal",
+    description: "Article expliquant comment les grands modèles de langage stockent et utilisent l'information.",
+    link: "https://lejournal.cnrs.fr/articles/comment-les-grands-modeles-de-langage-memorisent-ils-les-informations",
     type: "article",
-    level: "Avancé",
-    topics: ["LLM", "mémoire", "analyse"],
-    year: 2021,
-    language: "EN"
+    level: "Tous niveaux",
+    topics: ["LLM", "mémoire", "transformers"],
+    year: 2023,
+    language: "FR"
   },
   {
     title: "Comment les IA mémorisent leurs données d'entraînement",
-    author: "Le Réveilleur",
-    description: "Vidéo expliquant de manière accessible comment les modèles d'IA mémorisent les données d'entraînement et les implications pour la confidentialité.",
-    link: "https://www.youtube.com/watch?v=aBcdefgh123",
-    type: "video",
+    author: "DataScientest",
+    description: "Explications claires sur les mécanismes de mémorisation dans les modèles d'IA et leurs implications pour la confidentialité.",
+    link: "https://datascientest.com/memorisation-donnees-ia",
+    type: "article",
     level: "Débutant",
     topics: ["mémoire", "données", "confidentialité"],
     year: 2023,
+    language: "FR"
+  },
+  {
+    title: "Les transformers expliqués visuellement",
+    author: "Jay Alammar (traduction française)",
+    description: "Explication visuelle détaillée de l'architecture Transformer et de ses mécanismes d'attention.",
+    link: "https://dataflowr.github.io/website/modules/attention/transformers-explained/",
+    type: "website",
+    level: "Tous niveaux",
+    topics: ["transformers", "visualisation", "NLP"],
+    year: 2022,
     language: "FR"
   }
 ];
