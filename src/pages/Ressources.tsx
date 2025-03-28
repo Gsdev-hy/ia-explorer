@@ -5,9 +5,10 @@ import SectionHeading from '@/components/SectionHeading';
 import { ExternalResources } from '@/components';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { BookOpen, Lightbulb, BookMarked, Mail, Brain, PlusCircle } from 'lucide-react';
+import { BookOpen, Lightbulb, BookMarked, Mail, Brain, PlusCircle, BookCheck } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { AddResourceForm } from '@/components/resources/AddResourceForm';
+import { QuizDialog } from '@/components/resources/QuizDialog';
 
 /**
  * Page présentant des ressources externes pour approfondir les connaissances en IA
@@ -15,6 +16,7 @@ import { AddResourceForm } from '@/components/resources/AddResourceForm';
  */
 const Ressources = () => {
   const [showAddResourceForm, setShowAddResourceForm] = useState(false);
+  const [showQuizDialog, setShowQuizDialog] = useState(false);
 
   return (
     <>
@@ -44,14 +46,23 @@ const Ressources = () => {
                   Utilisez les filtres par sujet, niveau ou type de contenu pour trouver les ressources qui vous intéressent.
                 </p>
               </div>
-              <Button variant="outline" asChild className="whitespace-nowrap">
-                <a href="#resources" onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('resources')?.scrollIntoView({ behavior: 'smooth' });
-                }}>
-                  Voir les ressources
-                </a>
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-2">
+                <Button variant="outline" asChild className="whitespace-nowrap">
+                  <a href="#resources" onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('resources')?.scrollIntoView({ behavior: 'smooth' });
+                  }}>
+                    Voir les ressources
+                  </a>
+                </Button>
+                <Button 
+                  onClick={() => setShowQuizDialog(true)}
+                  className="whitespace-nowrap gap-2"
+                >
+                  <BookCheck className="h-4 w-4" />
+                  Quiz IA
+                </Button>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -73,7 +84,7 @@ const Ressources = () => {
             Pour approfondir votre compréhension de l'IA, consultez également notre glossaire des termes techniques et explorez l'histoire des technologies d'intelligence artificielle.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto mb-8">
             <div className="bg-card rounded-xl p-6 shadow-sm border">
               <Lightbulb className="h-10 w-10 text-primary mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">Histoire de l'IA</h3>
@@ -91,6 +102,18 @@ const Ressources = () => {
                 <Link to="/glossaire">Consulter le glossaire</Link>
               </Button>
             </div>
+          </div>
+
+          <div className="bg-card rounded-xl p-6 shadow-sm border max-w-2xl mx-auto">
+            <BookCheck className="h-10 w-10 text-primary mx-auto mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Testez vos connaissances</h3>
+            <p className="text-muted-foreground mb-4">Mettez à l'épreuve vos connaissances sur l'intelligence artificielle avec notre quiz interactif.</p>
+            <Button 
+              onClick={() => setShowQuizDialog(true)}
+              className="w-full"
+            >
+              Lancer le quiz
+            </Button>
           </div>
           
           <div className="mt-12 pt-8 border-t border-border flex flex-col items-center text-sm text-muted-foreground">
@@ -122,6 +145,11 @@ const Ressources = () => {
       <AddResourceForm 
         isOpen={showAddResourceForm} 
         onClose={() => setShowAddResourceForm(false)} 
+      />
+
+      <QuizDialog
+        isOpen={showQuizDialog}
+        onClose={() => setShowQuizDialog(false)}
       />
     </>
   );

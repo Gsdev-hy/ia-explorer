@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { 
   Dialog, 
@@ -32,7 +31,7 @@ import {
   SelectValue
 } from "@/components/ui/select";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
-import { useMobile } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const PasswordForm = ({ onPasswordVerified }: { onPasswordVerified: () => void }) => {
   const [password, setPassword] = useState('');
@@ -98,7 +97,7 @@ export const AddResourceForm = ({
   onClose: () => void;
 }) => {
   const [isPasswordVerified, setIsPasswordVerified] = useState(false);
-  const isMobile = useMobile();
+  const isMobile = useIsMobile();
   
   const form = useForm<ResourceFormValues>({
     resolver: zodResolver(resourceSchema),
