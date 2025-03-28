@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import TypesOfML from '../components/ml/TypesOfML';
 import DeepLearning from '../components/ml/DeepLearning';
 import Algorithms from '../components/ml/Algorithms';
+import MLVisualizations from '../components/ml/MLVisualizations';
 
 /**
  * Page sur les différentes approches de Machine Learning
@@ -57,6 +58,10 @@ const MachineLearning = () => {
 
       {/* Intégration des nouveaux composants */}
       <TypesOfML />
+      
+      {/* Ajout des visualisations interactives */}
+      <MLVisualizations />
+      
       <DeepLearning />
       <Algorithms />
 
