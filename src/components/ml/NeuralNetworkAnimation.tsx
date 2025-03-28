@@ -1,5 +1,7 @@
 
 import { useEffect, useState } from 'react';
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 
 /**
  * Composant qui affiche une animation illustrant le processus d'apprentissage d'un réseau de neurones
@@ -9,9 +11,14 @@ const NeuralNetworkAnimation = () => {
   const [activeNeurons, setActiveNeurons] = useState<number[]>([]);
   const [activeConnections, setActiveConnections] = useState<string[]>([]);
   const [step, setStep] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(true);
+  const [speed, setSpeed] = useState(1000); // milliseconds
+  const { toast } = useToast();
 
   // Simulation d'un processus d'apprentissage
   useEffect(() => {
+    if (!isAnimating) return;
+    
     const interval = setInterval(() => {
       // Cycle d'animation en 4 étapes
       const newStep = (step + 1) % 4;
@@ -30,10 +37,10 @@ const NeuralNetworkAnimation = () => {
         connections.push(`${neurons[i]}-${neurons[i + 1]}`);
       }
       setActiveConnections(connections);
-    }, 1000);
+    }, speed);
     
     return () => clearInterval(interval);
-  }, [step]);
+  }, [step, isAnimating, speed]);
 
   // Construction des cercles représentant les neurones
   const renderNeuron = (id: number, x: number, y: number) => {
@@ -66,6 +73,15 @@ const NeuralNetworkAnimation = () => {
         opacity={isActive ? "0.8" : "0.3"}
       />
     );
+  };
+
+  // Fonction pour changer la vitesse de l'animation
+  const changeSpeed = (newSpeed: number) => {
+    setSpeed(newSpeed);
+    toast({
+      title: "Vitesse modifiée",
+      description: `Vitesse d'animation : ${newSpeed === 2000 ? "Lente" : newSpeed === 1000 ? "Normale" : "Rapide"}`,
+    });
   };
 
   // Layout du réseau de neurones
@@ -110,13 +126,94 @@ const NeuralNetworkAnimation = () => {
     }
   }
 
+  // Ajout de labels pour les couches du réseau
+  const layerLabels = [
+    "Couche d'entrée",
+    "Couche cachée",
+    "Couche de sortie"
+  ];
+
+  const renderLayerLabels = layerLabels.map((label, idx) => (
+    <text
+      key={`layer-label-${idx}`}
+      x={(idx + 1) * layerGap}
+      y={height - 5}
+      textAnchor="middle"
+      className="text-xs fill-muted-foreground"
+      fontSize="10"
+    >
+      {label}
+    </text>
+  ));
+
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div className="w-full max-w-md mx-auto bg-card/50 rounded-lg p-4 shadow-sm">
+      <div className="mb-3 text-center">
+        <h4 className="text-sm font-medium">Simulation d'un réseau de neurones en action</h4>
+      </div>
+      
       <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto">
         {connections}
         {neurons}
+        {renderLayerLabels}
       </svg>
-      <div className="flex justify-center mt-2 text-xs text-muted-foreground">
+      
+      <div className="flex justify-between items-center mt-4">
+        <div className="flex space-x-2">
+          <Button 
+            size="sm" 
+            variant="outline" 
+            onClick={() => setIsAnimating(!isAnimating)}
+            className="text-xs"
+          >
+            {isAnimating ? "Pause" : "Lecture"}
+          </Button>
+          
+          <Button 
+            size="sm" 
+            variant="outline" 
+            onClick={() => {
+              setActiveNeurons([]);
+              setActiveConnections([]);
+              setStep(0);
+            }}
+            className="text-xs"
+            disabled={!isAnimating}
+          >
+            Réinitialiser
+          </Button>
+        </div>
+        
+        <div className="flex items-center space-x-1">
+          <span className="text-xs text-muted-foreground mr-1">Vitesse:</span>
+          <Button 
+            size="sm" 
+            variant={speed === 2000 ? "default" : "outline"}
+            onClick={() => changeSpeed(2000)}
+            className="h-7 text-xs px-2"
+          >
+            Lente
+          </Button>
+          <Button 
+            size="sm" 
+            variant={speed === 1000 ? "default" : "outline"}
+            onClick={() => changeSpeed(1000)}
+            className="h-7 text-xs px-2"
+          >
+            Normale
+          </Button>
+          <Button 
+            size="sm" 
+            variant={speed === 500 ? "default" : "outline"}
+            onClick={() => changeSpeed(500)}
+            className="h-7 text-xs px-2"
+          >
+            Rapide
+          </Button>
+        </div>
+      </div>
+      
+      <div className="flex justify-center mt-3 text-xs text-muted-foreground">
         <div className="flex items-center mr-4">
           <span className="inline-block w-3 h-3 mr-1 bg-primary rounded-full opacity-50"></span>
           <span>Neurone inactif</span>
