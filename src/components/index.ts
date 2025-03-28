@@ -12,6 +12,7 @@ import Timeline from './timeline/Timeline';
 import ExternalResources from './resources/ExternalResources';
 import AIMemoryTypes from './memory/AIMemoryTypes';
 import IANews from './news/IANews';
+import NeuralNetworkAnimation from './ml/NeuralNetworkAnimation';
 
 export {
   Card,
@@ -26,5 +27,6 @@ export {
   Timeline,
   ExternalResources,
   AIMemoryTypes,
-  IANews
+  IANews,
+  NeuralNetworkAnimation
 };

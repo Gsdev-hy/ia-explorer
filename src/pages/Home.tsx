@@ -3,8 +3,9 @@ import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
 import Card from '../components/Card';
 import FeatureGrid from '../components/FeatureGrid';
-import { Brain, Layers, Code, Lightbulb, Laptop, Gauge, Server, EyeOff, Puzzle } from 'lucide-react';
+import { Brain, Layers, Code, Lightbulb, Laptop, Gauge, Server, EyeOff, Puzzle, ChevronRight, LineChart, Network, Robot } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 
 /**
  * Page d'accueil du site
@@ -74,6 +75,28 @@ const Home = () => {
       title: "Prédiction et recommandation",
       description: "Systèmes prédictifs et moteurs de recommandation personnalisés.",
       icon: <Gauge size={20} />
+    }
+  ];
+  
+  // Nouvelles sections sur les visualisations interactives
+  const interactiveFeatures = [
+    {
+      title: "Réseaux de neurones",
+      description: "Visualisez le fonctionnement d'un réseau neuronal en temps réel avec notre simulation interactive.",
+      icon: <Network size={24} />,
+      link: "/machine-learning"
+    },
+    {
+      title: "Graphiques d'apprentissage",
+      description: "Explorez des visualisations comparant les performances de différents algorithmes de machine learning.",
+      icon: <LineChart size={24} />,
+      link: "/machine-learning"
+    },
+    {
+      title: "Deep Learning illustré",
+      description: "Comprenez les architectures CNN, RNN, et Transformers à travers des schémas interactifs.",
+      icon: <Brain size={24} />,
+      link: "/machine-learning"
     }
   ];
 
@@ -156,6 +179,46 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Nouvelle section: Visualisations interactives */}
+      <section className="section-container py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="animate-slide-left">
+            <SectionHeading
+              pretitle="Nouveauté"
+              title="Visualisations interactives"
+              description="Explorez nos nouvelles visualisations et simulations interactives pour une compréhension plus intuitive des concepts d'intelligence artificielle."
+            />
+            <Link
+              to="/machine-learning"
+              className="inline-flex items-center mt-4 text-primary hover:underline"
+            >
+              Explorer les visualisations →
+            </Link>
+          </div>
+          
+          <div className="grid grid-cols-1 gap-6 animate-slide-right">
+            {interactiveFeatures.map((feature, index) => (
+              <div key={feature.title} className="glass-card p-6 rounded-xl border border-border/50 hover:border-primary/30 transition-all hover:shadow-md">
+                <div className="flex items-start gap-4">
+                  <div className="rounded-full bg-primary/10 p-3">
+                    {feature.icon}
+                  </div>
+                  <div>
+                    <h3 className="font-medium mb-1">{feature.title}</h3>
+                    <p className="text-sm text-muted-foreground mb-3">{feature.description}</p>
+                    <Button variant="link" size="sm" className="p-0 h-auto text-sm" asChild>
+                      <Link to={feature.link}>
+                        Découvrir <ChevronRight className="ml-1 h-3 w-3" />
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Section Applications */}
       <section className="section-container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -174,6 +237,65 @@ const Home = () => {
           </div>
           
           <FeatureGrid features={features} columns={2} />
+        </div>
+      </section>
+
+      {/* Section Actualités */}
+      <section className="section-container bg-secondary/20 rounded-3xl my-12 py-10">
+        <SectionHeading
+          pretitle="Actualités"
+          title="Dernières avancées en intelligence artificielle"
+          description="Restez informé des développements récents et des percées significatives dans le domaine de l'IA."
+          center
+        />
+
+        <div className="mt-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="glass-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all">
+              <div className="bg-primary/5 p-6">
+                <Robot className="w-10 h-10 text-primary mb-3" />
+                <h3 className="text-lg font-medium mb-2">L'essor de l'IA multimodale</h3>
+                <p className="text-sm text-muted-foreground">
+                  Les modèles d'IA multimodale révolutionnent l'analyse combinée de texte, d'images et de son.
+                </p>
+                <Button variant="link" size="sm" className="mt-3 p-0" asChild>
+                  <Link to="/ia-multimodale">
+                    En savoir plus
+                  </Link>
+                </Button>
+              </div>
+            </div>
+
+            <div className="glass-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all">
+              <div className="bg-primary/5 p-6">
+                <Network className="w-10 h-10 text-primary mb-3" />
+                <h3 className="text-lg font-medium mb-2">Réseaux de neurones avancés</h3>
+                <p className="text-sm text-muted-foreground">
+                  Les nouvelles architectures de réseaux de neurones améliorent drastiquement les performances.
+                </p>
+                <Button variant="link" size="sm" className="mt-3 p-0" asChild>
+                  <Link to="/machine-learning">
+                    En savoir plus
+                  </Link>
+                </Button>
+              </div>
+            </div>
+
+            <div className="glass-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all md:col-span-2 lg:col-span-1">
+              <div className="bg-primary/5 p-6">
+                <Lightbulb className="w-10 h-10 text-primary mb-3" />
+                <h3 className="text-lg font-medium mb-2">Éthique et gouvernance</h3>
+                <p className="text-sm text-muted-foreground">
+                  Les questions éthiques prennent de l'ampleur avec le déploiement massif des systèmes d'IA.
+                </p>
+                <Button variant="link" size="sm" className="mt-3 p-0" asChild>
+                  <Link to="/ethique">
+                    En savoir plus
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

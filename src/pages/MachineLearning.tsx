@@ -8,6 +8,7 @@ import TypesOfML from '../components/ml/TypesOfML';
 import DeepLearning from '../components/ml/DeepLearning';
 import Algorithms from '../components/ml/Algorithms';
 import MLVisualizations from '../components/ml/MLVisualizations';
+import NeuralNetworkAnimation from '../components/ml/NeuralNetworkAnimation';
 
 /**
  * Page sur les différentes approches de Machine Learning
@@ -58,6 +59,20 @@ const MachineLearning = () => {
 
       {/* Intégration des nouveaux composants */}
       <TypesOfML />
+      
+      {/* Section d'animation de réseau de neurones */}
+      <section className="section-container py-12 bg-secondary/10">
+        <SectionHeading
+          pretitle="Visualisation interactive"
+          title="Comment fonctionne un réseau de neurones"
+          description="Observez l'activation des neurones et le flux de données à travers les différentes couches du réseau."
+          center
+        />
+        
+        <div className="mt-8 flex justify-center">
+          <NeuralNetworkAnimation />
+        </div>
+      </section>
       
       {/* Ajout des visualisations interactives */}
       <MLVisualizations />
