@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -43,12 +42,6 @@ const IANews = () => {
       logo: "https://interstices.info/wp-content/themes/int3/assets/images/logos/interstices-logo.svg"
     },
     {
-      id: "inria",
-      name: "INRIA",
-      url: "https://api.rss2json.com/v1/api.json?rss_url=https://www.inria.fr/fr/flux/rss.xml",
-      logo: "https://www.inria.fr/themes/custom/inria/logo.svg"
-    },
-    {
       id: "usbeketrica",
       name: "Usbek & Rica",
       url: "https://api.rss2json.com/v1/api.json?rss_url=https://usbeketrica.com/fr/rss",
@@ -61,10 +54,10 @@ const IANews = () => {
       logo: "https://siecledigital.fr/wp-content/themes/siecledigital/assets/img/logo-siecle.svg"
     },
     {
-      id: "hal-science",
-      name: "HAL Science",
-      url: "https://api.rss2json.com/v1/api.json?rss_url=https://hal.science/INTELLIGENCE-ARTIFICIELLE/feed/?lang=fr",
-      logo: "https://hal.science/img/logo_HAL.png"
+      id: "tldr",
+      name: "TLDR Tech",
+      url: "https://api.rss2json.com/v1/api.json?rss_url=https://app.follow.is/share/feeds/57402409406376960",
+      logo: "https://tldr.tech/favicon.ico"
     }
   ];
 

@@ -1,4 +1,3 @@
-
 # Changelog - IA Explorer
 
 Ce fichier documente les changements et améliorations apportés au projet IA Explorer, une ressource éducative sur l'intelligence artificielle.
@@ -72,6 +71,13 @@ IA-Explorer/
 - **Correction du bug d'icône** dans Home.tsx (remplacement de Robot par Bot)
 - **Création du fichier CHANGELOG.md** pour documenter l'évolution du projet
 - **Clarification de la structure des routes**: l'application a actuellement deux pages d'accueil (Index.tsx et Home.tsx), avec Index.tsx étant la page par défaut
+
+### 01/10/2024 - Optimisations et corrections
+- **Mise à jour du routage**: Home.tsx est maintenant la page d'accueil par défaut
+- **Optimisation des flux RSS dans Actualités**:
+  - Suppression des flux INRIA et HAL Science (non fonctionnels)
+  - Ajout du flux TLDR Tech
+  - Conservation des flux Interstices, Usbek & Rica et Siècle Digital
 
 ## Note sur les pages d'accueil
 Actuellement, le projet comporte deux pages d'accueil:
