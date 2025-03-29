@@ -4,6 +4,8 @@ import SectionHeading from '../components/SectionHeading';
 import { MessageSquare, Eye, Network, Cpu, BrainCircuit, BarChart3, Code, Sparkles, Layers } from 'lucide-react';
 import AITypesVisualization from '../components/ml/AITypesVisualization';
 import AIComparisonTable from '../components/ml/AIComparisonTable';
+import MLApplications from '../components/ml/MLApplications';
+import AIArchitecturesVisualization from '../components/ml/AIArchitecturesVisualization';
 import { motion } from 'framer-motion';
 
 /**
@@ -27,6 +29,10 @@ const TypesIA = () => {
         />
 
         <AITypesVisualization />
+        
+        <AIArchitecturesVisualization />
+        
+        <MLApplications />
         
         <AIComparisonTable />
 

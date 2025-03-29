@@ -15,6 +15,8 @@ import IANews from './news/IANews';
 import NeuralNetworkAnimation from './ml/NeuralNetworkAnimation';
 import AITypesVisualization from './ml/AITypesVisualization';
 import AIComparisonTable from './ml/AIComparisonTable';
+import MLApplications from './ml/MLApplications';
+import AIArchitecturesVisualization from './ml/AIArchitecturesVisualization';
 
 export {
   Card,
@@ -32,5 +34,7 @@ export {
   IANews,
   NeuralNetworkAnimation,
   AITypesVisualization,
-  AIComparisonTable
+  AIComparisonTable,
+  MLApplications,
+  AIArchitecturesVisualization
 };
