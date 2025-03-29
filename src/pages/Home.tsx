@@ -3,7 +3,7 @@ import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
 import Card from '../components/Card';
 import FeatureGrid from '../components/FeatureGrid';
-import { Brain, Layers, Code, Lightbulb, Laptop, Gauge, Server, EyeOff, Puzzle, ChevronRight, LineChart, Network, Robot } from 'lucide-react';
+import { Brain, Layers, Code, Lightbulb, Laptop, Gauge, Server, EyeOff, Puzzle, ChevronRight, LineChart, Network, Bot } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
