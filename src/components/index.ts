@@ -13,6 +13,8 @@ import ExternalResources from './resources/ExternalResources';
 import AIMemoryTypes from './memory/AIMemoryTypes';
 import IANews from './news/IANews';
 import NeuralNetworkAnimation from './ml/NeuralNetworkAnimation';
+import AITypesVisualization from './ml/AITypesVisualization';
+import AIComparisonTable from './ml/AIComparisonTable';
 
 export {
   Card,
@@ -28,5 +30,7 @@ export {
   ExternalResources,
   AIMemoryTypes,
   IANews,
-  NeuralNetworkAnimation
+  NeuralNetworkAnimation,
+  AITypesVisualization,
+  AIComparisonTable
 };
