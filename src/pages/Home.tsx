@@ -1,4 +1,3 @@
-
 import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
 import Card from '../components/Card';
@@ -253,7 +252,7 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="glass-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all">
               <div className="bg-primary/5 p-6">
-                <Robot className="w-10 h-10 text-primary mb-3" />
+                <Bot className="w-10 h-10 text-primary mb-3" />
                 <h3 className="text-lg font-medium mb-2">L'essor de l'IA multimodale</h3>
                 <p className="text-sm text-muted-foreground">
                   Les modèles d'IA multimodale révolutionnent l'analyse combinée de texte, d'images et de son.

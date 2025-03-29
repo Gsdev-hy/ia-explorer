@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -24,10 +25,6 @@ interface RssFeed {
   logo?: string;
 }
 
-/**
- * Composant d'affichage des actualités IA via des flux RSS
- * @returns {JSX.Element} Le composant IANews
- */
 const IANews = () => {
   const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -36,28 +33,46 @@ const IANews = () => {
   // Liste des flux RSS à suivre
   const rssFeeds: RssFeed[] = [
     {
-      id: "interstices",
-      name: "Interstices",
-      url: "https://api.rss2json.com/v1/api.json?rss_url=https://interstices.info/feed/",
-      logo: "https://interstices.info/wp-content/themes/int3/assets/images/logos/interstices-logo.svg"
+      id: "mit",
+      name: "MIT News AI",
+      url: "https://api.rss2json.com/v1/api.json?rss_url=https://news.mit.edu/rss/topic/artificial-intelligence",
+      logo: "https://news.mit.edu/sites/default/files/favicon.ico"
     },
     {
-      id: "usbeketrica",
-      name: "Usbek & Rica",
-      url: "https://api.rss2json.com/v1/api.json?rss_url=https://usbeketrica.com/fr/rss",
-      logo: "https://usbeketrica.com/img/logo.png"
+      id: "deepmind",
+      name: "DeepMind Blog",
+      url: "https://api.rss2json.com/v1/api.json?rss_url=https://deepmind.com/blog/feed/basic",
+      logo: "https://deepmind.google/static/favicon.ico"
     },
     {
-      id: "siècle-digital",
-      name: "Siècle Digital",
-      url: "https://api.rss2json.com/v1/api.json?rss_url=https://siecledigital.fr/feed/",
-      logo: "https://siecledigital.fr/wp-content/themes/siecledigital/assets/img/logo-siecle.svg"
+      id: "openai",
+      name: "OpenAI Blog",
+      url: "https://api.rss2json.com/v1/api.json?rss_url=https://openai.com/blog/rss/",
+      logo: "https://openai.com/favicon.ico"
     },
     {
-      id: "tldr",
-      name: "TLDR Tech",
-      url: "https://api.rss2json.com/v1/api.json?rss_url=https://app.follow.is/share/feeds/57402409406376960",
-      logo: "https://tldr.tech/favicon.ico"
+      id: "google-ai",
+      name: "Google AI",
+      url: "https://api.rss2json.com/v1/api.json?rss_url=https://ai.googleblog.com/feeds/posts/default",
+      logo: "https://ai.google/static/images/favicon.ico"
+    },
+    {
+      id: "berkeley",
+      name: "BAIR Blog",
+      url: "https://api.rss2json.com/v1/api.json?rss_url=https://bair.berkeley.edu/blog/feed.xml",
+      logo: "https://bair.berkeley.edu/favicon.ico"
+    },
+    {
+      id: "marktechpost",
+      name: "MarkTechPost",
+      url: "https://api.rss2json.com/v1/api.json?rss_url=https://www.marktechpost.com/feed/",
+      logo: "https://www.marktechpost.com/favicon.ico"
+    },
+    {
+      id: "kdnuggets",
+      name: "KDNuggets",
+      url: "https://api.rss2json.com/v1/api.json?rss_url=https://www.kdnuggets.com/feed",
+      logo: "https://www.kdnuggets.com/favicon.ico"
     }
   ];
 
