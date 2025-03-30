@@ -1,8 +1,9 @@
 
 import React from 'react';
-import { MessageSquare, Cpu, Braces, Sparkles } from 'lucide-react';
+import { MessageSquare, Cpu, Braces, Sparkles, ArrowRight } from 'lucide-react';
 import IASection from './IASection';
 import { motion } from 'framer-motion';
+import { Button } from "@/components/ui/button";
 
 const LLMSection = () => {
   const detailsCard = (
@@ -58,7 +59,7 @@ const LLMSection = () => {
         <h5 className="font-medium mb-2 flex items-center gap-2">
           <Braces className="h-4 w-4 text-primary" /> Exemples d'usage
         </h5>
-        <div className="space-y-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           <div className="p-2 border border-border rounded-lg bg-secondary/20">
             <p className="text-sm font-medium">Génération de contenu</p>
             <p className="text-xs text-muted-foreground">Création d'articles, résumés, traductions, storytelling</p>
@@ -70,6 +71,10 @@ const LLMSection = () => {
           <div className="p-2 border border-border rounded-lg bg-secondary/20">
             <p className="text-sm font-medium">Analyse et compréhension</p>
             <p className="text-xs text-muted-foreground">Extraction d'informations, sentiment, classification</p>
+          </div>
+          <div className="p-2 border border-border rounded-lg bg-secondary/20">
+            <p className="text-sm font-medium">Codage assisté</p>
+            <p className="text-xs text-muted-foreground">Complétion, debugging, documentation de code</p>
           </div>
         </div>
       </div>
@@ -86,6 +91,13 @@ const LLMSection = () => {
         <p className="text-sm text-muted-foreground mt-2">
           Les modèles les plus récents démontrent des capacités émergentes : raisonnement complexe, résolution de problèmes et même une forme de "théorie de l'esprit".
         </p>
+        
+        <div className="mt-4 flex justify-end">
+          <Button size="sm" variant="outline" className="text-xs flex items-center gap-1">
+            <span>Approfondir le sujet</span>
+            <ArrowRight className="h-3 w-3" />
+          </Button>
+        </div>
       </div>
     </>
   );
@@ -95,11 +107,13 @@ const LLMSection = () => {
       icon={<MessageSquare size={32} className="text-primary" />}
       title="Modèles de Langage (LLM)"
       description="Les Large Language Models (LLM) sont des modèles d'IA entraînés sur d'immenses corpus de texte 
-      pour comprendre et générer du langage humain de manière cohérente et contextuelle."
+      pour comprendre et générer du langage humain de manière cohérente et contextuelle. Ils représentent l'état de l'art 
+      en traitement automatique du langage naturel."
       benefits={[
-        "Capable de générer du texte, traduire, résumer et répondre à des questions",
-        "Utilisés dans les chatbots, assistants virtuels et outils de création de contenu",
-        "Exemples : GPT-4, Claude, LLaMA, Mistral"
+        "Capable de générer du texte, traduire, résumer et répondre à des questions complexes",
+        "Utilisés dans les chatbots, assistants virtuels, outils de création de contenu et applications d'analyse textuelle",
+        "Intégration facilitée via des API permettant l'accès à des modèles comme GPT-4, Claude, LLaMA, Mistral",
+        "Évolution constante vers une meilleure compréhension du contexte et des intentions"
       ]}
       detailsCard={detailsCard}
       delay={0}

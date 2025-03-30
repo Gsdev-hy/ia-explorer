@@ -42,17 +42,20 @@ const IASection: React.FC<IASectionProps> = ({
           {icon}
         </div>
         <h3 className="heading-lg mb-4">{title}</h3>
-        <p className="mb-4 text-muted-foreground">
+        <p className="mb-6 text-muted-foreground">
           {description}
         </p>
-        <ul className="space-y-2">
-          {benefits.map((benefit, index) => (
-            <li key={index} className="flex items-start">
-              <span className="inline-flex items-center justify-center w-6 h-6 mt-0.5 mr-3 rounded-full bg-primary/10 text-primary text-xs font-bold">+</span>
-              <span>{benefit}</span>
-            </li>
-          ))}
-        </ul>
+        <div className="bg-secondary/10 p-5 rounded-xl mb-6">
+          <h4 className="font-medium text-base mb-3">Principaux avantages</h4>
+          <ul className="space-y-2">
+            {benefits.map((benefit, index) => (
+              <li key={index} className="flex items-start">
+                <span className="inline-flex items-center justify-center w-6 h-6 mt-0.5 mr-3 rounded-full bg-primary/10 text-primary text-xs font-bold">+</span>
+                <span>{benefit}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </motion.div>
       
       <motion.div 
