@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -78,7 +77,7 @@ const AIArchitecturesVisualization = () => {
   const selectedArchitecture = architectures.find(arch => arch.id === selectedArch) || architectures[0];
   
   return (
-    <div className="w-full mt-24 mb-16"> {/* Ajout de marges pour éviter la superposition */}
+    <div className="w-full mt-24 mb-24">
       <h3 className="heading-sm mb-6">Architectures d'IA : anatomie des modèles avancés</h3>
       
       <div className="mb-8">
@@ -134,8 +133,21 @@ const AIArchitecturesVisualization = () => {
               <div className="mb-8">
                 <h4 className="font-medium mb-4">Structure et composants</h4>
                 <div className="relative py-8">
-                  {/* Visualization of the architecture */}
-                  <div className="absolute w-full h-full left-0 top-0 flex items-center justify-center opacity-10">
+                  <div className="grid grid-cols-1 gap-4 mb-24 relative z-10">
+                    {selectedArchitecture.components.map((component, index) => (
+                      <div key={index} className="flex items-start gap-3 p-3 rounded-lg bg-secondary/40 border border-border">
+                        <div className="mt-1 inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold">
+                          {index + 1}
+                        </div>
+                        <div>
+                          <h5 className="font-medium">{component.name}</h5>
+                          <p className="text-sm text-muted-foreground">{component.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <div className="absolute w-full h-full left-0 top-[105%] flex items-center justify-center opacity-10">
                     {selectedArch === 'transformer' && (
                       <div className="w-full h-full flex items-center justify-center">
                         <svg viewBox="0 0 300 200" width="100%" height="100%">
@@ -264,26 +276,10 @@ const AIArchitecturesVisualization = () => {
                       </div>
                     )}
                   </div>
-                  
-                  <div className="relative z-10">
-                    <div className="grid grid-cols-1 gap-4">
-                      {selectedArchitecture.components.map((component, index) => (
-                        <div key={index} className="flex items-start gap-3 p-3 rounded-lg bg-secondary/40 border border-border">
-                          <div className="mt-1 inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold">
-                            {index + 1}
-                          </div>
-                          <div>
-                            <h5 className="font-medium">{component.name}</h5>
-                            <p className="text-sm text-muted-foreground">{component.description}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
                 </div>
               </div>
               
-              <div>
+              <div className="mt-32">
                 <Tabs defaultValue="applications">
                   <TabsList>
                     <TabsTrigger value="applications">Applications</TabsTrigger>

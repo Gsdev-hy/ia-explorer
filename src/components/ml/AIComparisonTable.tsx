@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Check, X, HelpCircle, AlertTriangle, BadgeCheck } from 'lucide-react';
 import {
@@ -164,9 +163,9 @@ const AIComparisonTable: React.FC = () => {
   };
   
   return (
-    <div className="w-full mt-12 animate-fade-in">
+    <div className="w-full mt-12 mb-24 animate-fade-in">
       <Tabs defaultValue="capacités" className="w-full">
-        <TabsList className="grid w-full max-w-md mx-auto grid-cols-2">
+        <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 z-10 relative">
           <TabsTrigger value="capacités">Capacités techniques</TabsTrigger>
           <TabsTrigger value="applications">Applications par domaine</TabsTrigger>
         </TabsList>
