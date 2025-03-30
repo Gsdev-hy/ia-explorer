@@ -30,7 +30,7 @@ const IASection: React.FC<IASectionProps> = ({
     : "glass-card p-6 rounded-2xl animate-slide-right";
     
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
       <motion.div 
         className={animationClass}
         initial={{ opacity: 0, x: isReversed ? 20 : -20 }}
