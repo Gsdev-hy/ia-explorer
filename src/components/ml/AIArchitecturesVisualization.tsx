@@ -78,7 +78,7 @@ const AIArchitecturesVisualization = () => {
   const selectedArchitecture = architectures.find(arch => arch.id === selectedArch) || architectures[0];
   
   return (
-    <div className="w-full mt-16">
+    <div className="w-full mt-24 mb-16"> {/* Ajout de marges pour éviter la superposition */}
       <h3 className="heading-sm mb-6">Architectures d'IA : anatomie des modèles avancés</h3>
       
       <div className="mb-8">
@@ -91,8 +91,9 @@ const AIArchitecturesVisualization = () => {
           {architectures.map((arch) => (
             <motion.button
               key={arch.id}
+              type="button" 
               onClick={() => setSelectedArch(arch.id)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all cursor-pointer ${
                 selectedArch === arch.id 
                 ? "bg-primary text-primary-foreground border-primary" 
                 : "bg-secondary/40 border-border hover:bg-secondary"

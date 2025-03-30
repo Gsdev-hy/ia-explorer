@@ -1,4 +1,3 @@
-
 import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
 import { MessageSquare, Eye, Network, Cpu, BrainCircuit, BarChart3, Code, Sparkles, Layers } from 'lucide-react';
@@ -30,11 +29,13 @@ const TypesIA = () => {
 
         <AITypesVisualization />
         
+        <div className="mb-16">
+          <AIComparisonTable />
+        </div>
+        
         <AIArchitecturesVisualization />
         
         <MLApplications />
-        
-        <AIComparisonTable />
 
         <div className="mt-24 space-y-24">
           {/* LLM */}
