@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Brain, Database, Shield, HeartPulse, Building, Robot, Car, VideoIcon, ShoppingBag, School } from 'lucide-react';
+import { Brain, Database, Shield, HeartPulse, Building, Bot, Car, VideoIcon, ShoppingBag, School } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
