@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -132,161 +133,29 @@ const AIArchitecturesVisualization = () => {
               
               <div className="mb-8">
                 <h4 className="font-medium mb-4">Structure et composants</h4>
-                <div className="relative py-8">
-                  <div className="grid grid-cols-1 gap-4 mb-24 relative z-10">
-                    {selectedArchitecture.components.map((component, index) => (
-                      <div key={index} className="flex items-start gap-3 p-3 rounded-lg bg-secondary/40 border border-border">
-                        <div className="mt-1 inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold">
-                          {index + 1}
-                        </div>
-                        <div>
-                          <h5 className="font-medium">{component.name}</h5>
-                          <p className="text-sm text-muted-foreground">{component.description}</p>
-                        </div>
+                <div className="grid grid-cols-1 gap-4 mb-32">
+                  {selectedArchitecture.components.map((component, index) => (
+                    <div key={index} className="flex items-start gap-3 p-3 rounded-lg bg-secondary/40 border border-border">
+                      <div className="mt-1 inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold">
+                        {index + 1}
                       </div>
-                    ))}
-                  </div>
-                  
-                  <div className="absolute w-full h-full left-0 top-[105%] flex items-center justify-center opacity-10">
-                    {selectedArch === 'transformer' && (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <svg viewBox="0 0 300 200" width="100%" height="100%">
-                          <rect x="100" y="20" width="100" height="160" rx="5" fill="rgb(var(--primary))" fillOpacity="0.2" />
-                          <text x="150" y="15" textAnchor="middle" fill="currentColor" fontSize="12">Transformer</text>
-                          
-                          <rect x="110" y="40" width="80" height="60" rx="3" fill="rgb(var(--primary))" fillOpacity="0.3" />
-                          <text x="150" y="55" textAnchor="middle" fill="currentColor" fontSize="10">Encodeur</text>
-                          
-                          <rect x="110" y="110" width="80" height="60" rx="3" fill="rgb(var(--primary))" fillOpacity="0.3" />
-                          <text x="150" y="125" textAnchor="middle" fill="currentColor" fontSize="10">Décodeur</text>
-                          
-                          <line x1="150" y1="100" x2="150" y2="110" stroke="rgb(var(--primary))" strokeWidth="2" />
-                          
-                          <rect x="30" y="90" width="60" height="20" rx="3" fill="rgb(var(--primary))" fillOpacity="0.2" />
-                          <text x="60" y="103" textAnchor="middle" fill="currentColor" fontSize="8">Entrée</text>
-                          
-                          <rect x="210" y="90" width="60" height="20" rx="3" fill="rgb(var(--primary))" fillOpacity="0.2" />
-                          <text x="240" y="103" textAnchor="middle" fill="currentColor" fontSize="8">Sortie</text>
-                          
-                          <line x1="90" y1="100" x2="110" y2="70" stroke="rgb(var(--primary))" strokeWidth="2" />
-                          <line x1="190" y1="140" x2="210" y2="100" stroke="rgb(var(--primary))" strokeWidth="2" />
-                        </svg>
+                      <div>
+                        <h5 className="font-medium">{component.name}</h5>
+                        <p className="text-sm text-muted-foreground">{component.description}</p>
                       </div>
-                    )}
-                    
-                    {selectedArch === 'cnn' && (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <svg viewBox="0 0 400 150" width="100%" height="100%">
-                          <text x="200" y="15" textAnchor="middle" fill="currentColor" fontSize="12">Architecture CNN</text>
-                          
-                          <rect x="30" y="40" width="60" height="60" rx="3" fill="rgb(var(--primary))" fillOpacity="0.2" />
-                          <text x="60" y="75" textAnchor="middle" fill="currentColor" fontSize="10">Image</text>
-                          
-                          <rect x="110" y="45" width="50" height="50" rx="3" fill="rgb(var(--primary))" fillOpacity="0.3" />
-                          <text x="135" y="75" textAnchor="middle" fill="currentColor" fontSize="8">Conv1</text>
-                          
-                          <rect x="180" y="50" width="40" height="40" rx="3" fill="rgb(var(--primary))" fillOpacity="0.3" />
-                          <text x="200" y="75" textAnchor="middle" fill="currentColor" fontSize="8">Conv2</text>
-                          
-                          <rect x="240" y="55" width="30" height="30" rx="3" fill="rgb(var(--primary))" fillOpacity="0.3" />
-                          <text x="255" y="75" textAnchor="middle" fill="currentColor" fontSize="8">Pool</text>
-                          
-                          <rect x="290" y="45" width="60" height="10" rx="3" fill="rgb(var(--primary))" fillOpacity="0.3" />
-                          <rect x="290" y="60" width="60" height="10" rx="3" fill="rgb(var(--primary))" fillOpacity="0.3" />
-                          <rect x="290" y="75" width="60" height="10" rx="3" fill="rgb(var(--primary))" fillOpacity="0.3" />
-                          <text x="320" y="100" textAnchor="middle" fill="currentColor" fontSize="8">Fully Connected</text>
-                          
-                          <line x1="90" y1="70" x2="110" y2="70" stroke="rgb(var(--primary))" strokeWidth="2" />
-                          <line x1="160" y1="70" x2="180" y2="70" stroke="rgb(var(--primary))" strokeWidth="2" />
-                          <line x1="220" y1="70" x2="240" y2="70" stroke="rgb(var(--primary))" strokeWidth="2" />
-                          <line x1="270" y1="70" x2="290" y2="70" stroke="rgb(var(--primary))" strokeWidth="2" />
-                        </svg>
-                      </div>
-                    )}
-                    
-                    {selectedArch === 'rnn' && (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <svg viewBox="0 0 400 150" width="100%" height="100%">
-                          <text x="200" y="15" textAnchor="middle" fill="currentColor" fontSize="12">Architecture RNN</text>
-                          
-                          <rect x="50" y="60" width="40" height="40" rx="20" fill="rgb(var(--primary))" fillOpacity="0.3" />
-                          <text x="70" y="80" textAnchor="middle" fill="currentColor" fontSize="10">X₁</text>
-                          
-                          <rect x="150" y="60" width="40" height="40" rx="20" fill="rgb(var(--primary))" fillOpacity="0.3" />
-                          <text x="170" y="80" textAnchor="middle" fill="currentColor" fontSize="10">X₂</text>
-                          
-                          <rect x="250" y="60" width="40" height="40" rx="20" fill="rgb(var(--primary))" fillOpacity="0.3" />
-                          <text x="270" y="80" textAnchor="middle" fill="currentColor" fontSize="10">X₃</text>
-                          
-                          <rect x="100" y="60" width="40" height="40" rx="3" fill="rgb(var(--primary))" fillOpacity="0.2" />
-                          <text x="120" y="80" textAnchor="middle" fill="currentColor" fontSize="10">h₁</text>
-                          
-                          <rect x="200" y="60" width="40" height="40" rx="3" fill="rgb(var(--primary))" fillOpacity="0.2" />
-                          <text x="220" y="80" textAnchor="middle" fill="currentColor" fontSize="10">h₂</text>
-                          
-                          <rect x="300" y="60" width="40" height="40" rx="3" fill="rgb(var(--primary))" fillOpacity="0.2" />
-                          <text x="320" y="80" textAnchor="middle" fill="currentColor" fontSize="10">h₃</text>
-                          
-                          <line x1="90" y1="80" x2="100" y2="80" stroke="rgb(var(--primary))" strokeWidth="2" />
-                          <line x1="140" y1="80" x2="150" y2="80" stroke="rgb(var(--primary))" strokeWidth="2" />
-                          <line x1="190" y1="80" x2="200" y2="80" stroke="rgb(var(--primary))" strokeWidth="2" />
-                          <line x1="240" y1="80" x2="250" y2="80" stroke="rgb(var(--primary))" strokeWidth="2" />
-                          <line x1="290" y1="80" x2="300" y2="80" stroke="rgb(var(--primary))" strokeWidth="2" />
-                          
-                          <path d="M140,50 C150,40 190,40 200,50" fill="none" stroke="rgb(var(--primary))" strokeWidth="2" />
-                          <path d="M240,50 C250,40 290,40 300,50" fill="none" stroke="rgb(var(--primary))" strokeWidth="2" />
-                        </svg>
-                      </div>
-                    )}
-                    
-                    {selectedArch === 'gan' && (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <svg viewBox="0 0 400 200" width="100%" height="100%">
-                          <text x="200" y="15" textAnchor="middle" fill="currentColor" fontSize="12">Architecture GAN</text>
-                          
-                          <rect x="50" y="40" width="80" height="50" rx="3" fill="rgb(var(--primary))" fillOpacity="0.2" />
-                          <text x="90" y="65" textAnchor="middle" fill="currentColor" fontSize="10">Bruit aléatoire</text>
-                          
-                          <rect x="160" y="40" width="80" height="50" rx="3" fill="rgb(var(--primary))" fillOpacity="0.3" />
-                          <text x="200" y="65" textAnchor="middle" fill="currentColor" fontSize="10">Générateur</text>
-                          
-                          <rect x="270" y="40" width="80" height="50" rx="3" fill="rgb(var(--primary))" fillOpacity="0.2" />
-                          <text x="310" y="65" textAnchor="middle" fill="currentColor" fontSize="10">Image générée</text>
-                          
-                          <rect x="160" y="120" width="80" height="50" rx="3" fill="rgb(var(--primary))" fillOpacity="0.3" />
-                          <text x="200" y="145" textAnchor="middle" fill="currentColor" fontSize="10">Discriminateur</text>
-                          
-                          <rect x="50" y="120" width="80" height="50" rx="3" fill="rgb(var(--primary))" fillOpacity="0.2" />
-                          <text x="90" y="145" textAnchor="middle" fill="currentColor" fontSize="10">Image réelle</text>
-                          
-                          <rect x="270" y="120" width="80" height="50" rx="3" fill="rgb(var(--primary))" fillOpacity="0.2" />
-                          <text x="310" y="145" textAnchor="middle" fill="currentColor" fontSize="10">Vrai/Faux</text>
-                          
-                          <line x1="130" y1="65" x2="160" y2="65" stroke="rgb(var(--primary))" strokeWidth="2" />
-                          <line x1="240" y1="65" x2="270" y2="65" stroke="rgb(var(--primary))" strokeWidth="2" />
-                          
-                          <line x1="130" y1="145" x2="160" y2="145" stroke="rgb(var(--primary))" strokeWidth="2" />
-                          <line x1="240" y1="145" x2="270" y2="145" stroke="rgb(var(--primary))" strokeWidth="2" />
-                          
-                          <line x1="310" y1="90" x2="310" y2="120" stroke="rgb(var(--primary))" strokeWidth="2" />
-                          <line x1="310" y1="90" x2="240" y2="90" stroke="rgb(var(--primary))" strokeWidth="2" />
-                          <line x1="240" y1="90" x2="200" y2="90" stroke="rgb(var(--primary))" strokeWidth="2" />
-                          <line x1="200" y1="90" x2="200" y2="120" stroke="rgb(var(--primary))" strokeWidth="2" />
-                        </svg>
-                      </div>
-                    )}
-                  </div>
+                    </div>
+                  ))}
                 </div>
               </div>
               
-              <div className="mt-32">
-                <Tabs defaultValue="applications">
-                  <TabsList>
+              <div className="mt-40 mb-12 relative">
+                <Tabs defaultValue="applications" className="relative z-20">
+                  <TabsList className="relative z-10 bg-background">
                     <TabsTrigger value="applications">Applications</TabsTrigger>
                     <TabsTrigger value="advantages">Avantages</TabsTrigger>
                     <TabsTrigger value="limitations">Limitations</TabsTrigger>
                   </TabsList>
-                  <TabsContent value="applications" className="p-4 mt-4 rounded-lg bg-secondary/20 border">
+                  <TabsContent value="applications" className="p-4 mt-4 rounded-lg bg-secondary/20 border relative z-10">
                     <ul className="space-y-1">
                       {selectedArchitecture.applications.map((app, index) => (
                         <li key={index} className="flex items-start gap-2">
@@ -296,7 +165,7 @@ const AIArchitecturesVisualization = () => {
                       ))}
                     </ul>
                   </TabsContent>
-                  <TabsContent value="advantages" className="p-4 mt-4 rounded-lg bg-secondary/20 border">
+                  <TabsContent value="advantages" className="p-4 mt-4 rounded-lg bg-secondary/20 border relative z-10">
                     <ul className="space-y-1">
                       {selectedArchitecture.advantages.map((adv, index) => (
                         <li key={index} className="flex items-start gap-2">
@@ -306,7 +175,7 @@ const AIArchitecturesVisualization = () => {
                       ))}
                     </ul>
                   </TabsContent>
-                  <TabsContent value="limitations" className="p-4 mt-4 rounded-lg bg-secondary/20 border">
+                  <TabsContent value="limitations" className="p-4 mt-4 rounded-lg bg-secondary/20 border relative z-10">
                     <ul className="space-y-1">
                       {selectedArchitecture.limitations.map((lim, index) => (
                         <li key={index} className="flex items-start gap-2">
@@ -365,6 +234,135 @@ const AIArchitecturesVisualization = () => {
                   {selectedArch === 'rnn' && "Les cellules LSTM qui résolvent le problème de disparition du gradient dans les séquences longues."}
                   {selectedArch === 'gan' && "L'apprentissage par compétition qui améliore progressivement la qualité des données générées."}
                 </p>
+              </div>
+              
+              {/* Ajout du schéma dans la colonne des points clés */}
+              <div className="p-4 rounded-lg bg-secondary/30 mt-8">
+                <h4 className="flex items-center gap-2 font-medium mb-3">
+                  <Brain className="h-4 w-4 text-primary" />
+                  Schéma d'architecture
+                </h4>
+                <div className="w-full aspect-square rounded-lg bg-secondary/20 flex items-center justify-center p-4">
+                  {selectedArch === 'transformer' && (
+                    <svg viewBox="0 0 300 200" width="100%" height="100%">
+                      <rect x="100" y="20" width="100" height="160" rx="5" fill="rgb(var(--primary))" fillOpacity="0.2" />
+                      <text x="150" y="15" textAnchor="middle" fill="currentColor" fontSize="12">Transformer</text>
+                      
+                      <rect x="110" y="40" width="80" height="60" rx="3" fill="rgb(var(--primary))" fillOpacity="0.3" />
+                      <text x="150" y="55" textAnchor="middle" fill="currentColor" fontSize="10">Encodeur</text>
+                      
+                      <rect x="110" y="110" width="80" height="60" rx="3" fill="rgb(var(--primary))" fillOpacity="0.3" />
+                      <text x="150" y="125" textAnchor="middle" fill="currentColor" fontSize="10">Décodeur</text>
+                      
+                      <line x1="150" y1="100" x2="150" y2="110" stroke="rgb(var(--primary))" strokeWidth="2" />
+                      
+                      <rect x="30" y="90" width="60" height="20" rx="3" fill="rgb(var(--primary))" fillOpacity="0.2" />
+                      <text x="60" y="103" textAnchor="middle" fill="currentColor" fontSize="8">Entrée</text>
+                      
+                      <rect x="210" y="90" width="60" height="20" rx="3" fill="rgb(var(--primary))" fillOpacity="0.2" />
+                      <text x="240" y="103" textAnchor="middle" fill="currentColor" fontSize="8">Sortie</text>
+                      
+                      <line x1="90" y1="100" x2="110" y2="70" stroke="rgb(var(--primary))" strokeWidth="2" />
+                      <line x1="190" y1="140" x2="210" y2="100" stroke="rgb(var(--primary))" strokeWidth="2" />
+                    </svg>
+                  )}
+                  
+                  {selectedArch === 'cnn' && (
+                    <svg viewBox="0 0 400 150" width="100%" height="100%">
+                      <text x="200" y="15" textAnchor="middle" fill="currentColor" fontSize="12">Architecture CNN</text>
+                      
+                      <rect x="30" y="40" width="60" height="60" rx="3" fill="rgb(var(--primary))" fillOpacity="0.2" />
+                      <text x="60" y="75" textAnchor="middle" fill="currentColor" fontSize="10">Image</text>
+                      
+                      <rect x="110" y="45" width="50" height="50" rx="3" fill="rgb(var(--primary))" fillOpacity="0.3" />
+                      <text x="135" y="75" textAnchor="middle" fill="currentColor" fontSize="8">Conv1</text>
+                      
+                      <rect x="180" y="50" width="40" height="40" rx="3" fill="rgb(var(--primary))" fillOpacity="0.3" />
+                      <text x="200" y="75" textAnchor="middle" fill="currentColor" fontSize="8">Conv2</text>
+                      
+                      <rect x="240" y="55" width="30" height="30" rx="3" fill="rgb(var(--primary))" fillOpacity="0.3" />
+                      <text x="255" y="75" textAnchor="middle" fill="currentColor" fontSize="8">Pool</text>
+                      
+                      <rect x="290" y="45" width="60" height="10" rx="3" fill="rgb(var(--primary))" fillOpacity="0.3" />
+                      <rect x="290" y="60" width="60" height="10" rx="3" fill="rgb(var(--primary))" fillOpacity="0.3" />
+                      <rect x="290" y="75" width="60" height="10" rx="3" fill="rgb(var(--primary))" fillOpacity="0.3" />
+                      <text x="320" y="100" textAnchor="middle" fill="currentColor" fontSize="8">Fully Connected</text>
+                      
+                      <line x1="90" y1="70" x2="110" y2="70" stroke="rgb(var(--primary))" strokeWidth="2" />
+                      <line x1="160" y1="70" x2="180" y2="70" stroke="rgb(var(--primary))" strokeWidth="2" />
+                      <line x1="220" y1="70" x2="240" y2="70" stroke="rgb(var(--primary))" strokeWidth="2" />
+                      <line x1="270" y1="70" x2="290" y2="70" stroke="rgb(var(--primary))" strokeWidth="2" />
+                    </svg>
+                  )}
+                  
+                  {selectedArch === 'rnn' && (
+                    <svg viewBox="0 0 400 150" width="100%" height="100%">
+                      <text x="200" y="15" textAnchor="middle" fill="currentColor" fontSize="12">Architecture RNN</text>
+                      
+                      <rect x="50" y="60" width="40" height="40" rx="20" fill="rgb(var(--primary))" fillOpacity="0.3" />
+                      <text x="70" y="80" textAnchor="middle" fill="currentColor" fontSize="10">X₁</text>
+                      
+                      <rect x="150" y="60" width="40" height="40" rx="20" fill="rgb(var(--primary))" fillOpacity="0.3" />
+                      <text x="170" y="80" textAnchor="middle" fill="currentColor" fontSize="10">X₂</text>
+                      
+                      <rect x="250" y="60" width="40" height="40" rx="20" fill="rgb(var(--primary))" fillOpacity="0.3" />
+                      <text x="270" y="80" textAnchor="middle" fill="currentColor" fontSize="10">X₃</text>
+                      
+                      <rect x="100" y="60" width="40" height="40" rx="3" fill="rgb(var(--primary))" fillOpacity="0.2" />
+                      <text x="120" y="80" textAnchor="middle" fill="currentColor" fontSize="10">h₁</text>
+                      
+                      <rect x="200" y="60" width="40" height="40" rx="3" fill="rgb(var(--primary))" fillOpacity="0.2" />
+                      <text x="220" y="80" textAnchor="middle" fill="currentColor" fontSize="10">h₂</text>
+                      
+                      <rect x="300" y="60" width="40" height="40" rx="3" fill="rgb(var(--primary))" fillOpacity="0.2" />
+                      <text x="320" y="80" textAnchor="middle" fill="currentColor" fontSize="10">h₃</text>
+                      
+                      <line x1="90" y1="80" x2="100" y2="80" stroke="rgb(var(--primary))" strokeWidth="2" />
+                      <line x1="140" y1="80" x2="150" y2="80" stroke="rgb(var(--primary))" strokeWidth="2" />
+                      <line x1="190" y1="80" x2="200" y2="80" stroke="rgb(var(--primary))" strokeWidth="2" />
+                      <line x1="240" y1="80" x2="250" y2="80" stroke="rgb(var(--primary))" strokeWidth="2" />
+                      <line x1="290" y1="80" x2="300" y2="80" stroke="rgb(var(--primary))" strokeWidth="2" />
+                      
+                      <path d="M140,50 C150,40 190,40 200,50" fill="none" stroke="rgb(var(--primary))" strokeWidth="2" />
+                      <path d="M240,50 C250,40 290,40 300,50" fill="none" stroke="rgb(var(--primary))" strokeWidth="2" />
+                    </svg>
+                  )}
+                  
+                  {selectedArch === 'gan' && (
+                    <svg viewBox="0 0 400 200" width="100%" height="100%">
+                      <text x="200" y="15" textAnchor="middle" fill="currentColor" fontSize="12">Architecture GAN</text>
+                      
+                      <rect x="50" y="40" width="80" height="50" rx="3" fill="rgb(var(--primary))" fillOpacity="0.2" />
+                      <text x="90" y="65" textAnchor="middle" fill="currentColor" fontSize="10">Bruit aléatoire</text>
+                      
+                      <rect x="160" y="40" width="80" height="50" rx="3" fill="rgb(var(--primary))" fillOpacity="0.3" />
+                      <text x="200" y="65" textAnchor="middle" fill="currentColor" fontSize="10">Générateur</text>
+                      
+                      <rect x="270" y="40" width="80" height="50" rx="3" fill="rgb(var(--primary))" fillOpacity="0.2" />
+                      <text x="310" y="65" textAnchor="middle" fill="currentColor" fontSize="10">Image générée</text>
+                      
+                      <rect x="160" y="120" width="80" height="50" rx="3" fill="rgb(var(--primary))" fillOpacity="0.3" />
+                      <text x="200" y="145" textAnchor="middle" fill="currentColor" fontSize="10">Discriminateur</text>
+                      
+                      <rect x="50" y="120" width="80" height="50" rx="3" fill="rgb(var(--primary))" fillOpacity="0.2" />
+                      <text x="90" y="145" textAnchor="middle" fill="currentColor" fontSize="10">Image réelle</text>
+                      
+                      <rect x="270" y="120" width="80" height="50" rx="3" fill="rgb(var(--primary))" fillOpacity="0.2" />
+                      <text x="310" y="145" textAnchor="middle" fill="currentColor" fontSize="10">Vrai/Faux</text>
+                      
+                      <line x1="130" y1="65" x2="160" y2="65" stroke="rgb(var(--primary))" strokeWidth="2" />
+                      <line x1="240" y1="65" x2="270" y2="65" stroke="rgb(var(--primary))" strokeWidth="2" />
+                      
+                      <line x1="130" y1="145" x2="160" y2="145" stroke="rgb(var(--primary))" strokeWidth="2" />
+                      <line x1="240" y1="145" x2="270" y2="145" stroke="rgb(var(--primary))" strokeWidth="2" />
+                      
+                      <line x1="310" y1="90" x2="310" y2="120" stroke="rgb(var(--primary))" strokeWidth="2" />
+                      <line x1="310" y1="90" x2="240" y2="90" stroke="rgb(var(--primary))" strokeWidth="2" />
+                      <line x1="240" y1="90" x2="200" y2="90" stroke="rgb(var(--primary))" strokeWidth="2" />
+                      <line x1="200" y1="90" x2="200" y2="120" stroke="rgb(var(--primary))" strokeWidth="2" />
+                    </svg>
+                  )}
+                </div>
               </div>
             </CardContent>
           </Card>

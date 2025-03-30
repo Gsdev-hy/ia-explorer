@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Check, X, HelpCircle, AlertTriangle, BadgeCheck } from 'lucide-react';
 import {
@@ -163,14 +164,16 @@ const AIComparisonTable: React.FC = () => {
   };
   
   return (
-    <div className="w-full mt-12 mb-24 animate-fade-in">
+    <div className="w-full mt-12 mb-28 animate-fade-in">
       <Tabs defaultValue="capacités" className="w-full">
-        <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 z-10 relative">
-          <TabsTrigger value="capacités">Capacités techniques</TabsTrigger>
-          <TabsTrigger value="applications">Applications par domaine</TabsTrigger>
-        </TabsList>
+        <div className="sticky top-0 bg-background pt-2 pb-4 z-20">
+          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 relative">
+            <TabsTrigger value="capacités">Capacités techniques</TabsTrigger>
+            <TabsTrigger value="applications">Applications par domaine</TabsTrigger>
+          </TabsList>
+        </div>
         
-        <TabsContent value="capacités" className="mt-6">
+        <TabsContent value="capacités" className="mt-2">
           <div className="rounded-md border">
             <Table>
               <TableCaption>Comparaison des capacités par type d'IA</TableCaption>
@@ -202,7 +205,7 @@ const AIComparisonTable: React.FC = () => {
           </div>
         </TabsContent>
         
-        <TabsContent value="applications" className="mt-6">
+        <TabsContent value="applications" className="mt-2">
           <div className="rounded-md border">
             <Table>
               <TableCaption>Applications par domaine et types d'IA utilisés</TableCaption>
