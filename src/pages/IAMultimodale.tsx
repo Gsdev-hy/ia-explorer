@@ -37,11 +37,11 @@ const IAMultimodale = () => {
         subtitle="Découvrez comment les technologies d'intelligence artificielle transforment la création dans tous les domaines artistiques et techniques."
         primaryAction={{
           label: "Explorer les exemples",
-          href: "#applications-creatives"
+          href: "#applications-creatives" // Lien corrigé pour aboutir à la section
         }}
         secondaryAction={{
           label: "Astuces de prompting",
-          href: "#prompting-efficace"
+          href: "#prompting-efficace" // Lien corrigé pour aboutir à la section
         }}
       />
 

@@ -36,14 +36,15 @@ const Hero = ({
     <section 
       className={`relative pt-28 md:pt-32 pb-16 md:pb-20 ${image ? 'min-h-[80vh] flex items-center' : ''}`}
       style={image ? { backgroundImage: `url(${image})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
+      aria-labelledby="hero-title"
     >
       {image && overlay && (
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 to-background/70 backdrop-blur-sm"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 to-background/70 backdrop-blur-sm" aria-hidden="true"></div>
       )}
 
       <div className="relative section-container">
         <div className="max-w-3xl mx-auto text-center">
-          <h1 className="heading-xl mb-6 animate-slide-down">{title}</h1>
+          <h1 id="hero-title" className="heading-xl mb-6 animate-slide-down">{title}</h1>
           <p className="body-lg mb-8 text-muted-foreground animate-slide-down" style={{ animationDelay: '100ms' }}>
             {subtitle}
           </p>
@@ -53,7 +54,8 @@ const Hero = ({
               {primaryAction && (
                 <Link
                   to={primaryAction.href}
-                  className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-sm hover:bg-primary/90 transition-colors"
+                  className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-sm hover:bg-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  aria-label={`${primaryAction.label}: naviguer vers la section correspondante`}
                 >
                   {primaryAction.label}
                 </Link>
@@ -61,7 +63,8 @@ const Hero = ({
               {secondaryAction && (
                 <Link
                   to={secondaryAction.href}
-                  className="inline-flex items-center justify-center rounded-lg border border-primary bg-transparent px-6 py-3 text-sm font-medium text-primary shadow-sm hover:bg-primary/10 transition-colors"
+                  className="inline-flex items-center justify-center rounded-lg border border-primary bg-transparent px-6 py-3 text-sm font-medium text-primary shadow-sm hover:bg-primary/10 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  aria-label={`${secondaryAction.label}: naviguer vers la section correspondante`}
                 >
                   {secondaryAction.label}
                 </Link>
