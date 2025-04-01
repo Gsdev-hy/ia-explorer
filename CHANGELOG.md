@@ -14,6 +14,7 @@ IA-Explorer/
 │   │   ├── glossary/          # Composants pour le glossaire
 │   │   ├── memory/            # Composants pour la section mémoire d'IA
 │   │   ├── ml/                # Composants pour le Machine Learning
+│   │   │   └── visualization/ # Sous-composants pour les visualisations
 │   │   ├── news/              # Composants pour les actualités
 │   │   ├── resources/         # Composants pour les ressources
 │   │   ├── timeline/          # Composants pour la timeline
@@ -25,8 +26,7 @@ IA-Explorer/
 ├── .gitignore                  # Fichiers ignorés par Git
 ├── components.json             # Configuration des composants shadcn/ui
 ├── CHANGELOG.md                # Ce fichier de changelog
-├── README.md                   # Documentation du projet
-└── ...                         # Autres fichiers de configuration
+└── README.md                   # Documentation du projet
 ```
 
 ## Fonctionnalités existantes
@@ -53,6 +53,38 @@ IA-Explorer/
 
 ## Évolution du projet
 
+### 03/10/2024 - Améliorations et refactorisation
+- **Enrichissement de la page Histoire de l'IA**:
+  - Ajout d'une navigation par ères historiques avec onglets interactifs
+  - Ajout d'une section sur les publications fondatrices
+  - Intégration d'une bibliographie de ressources externes
+  - Amélioration de la présentation des figures emblématiques
+  - Enrichissement de la section sur l'impact culturel
+- **Refactorisation des composants volumineux**:
+  - Modularisation du composant AITypesVisualization en sous-composants spécialisés
+  - Création de composants dédiés: AINodeGraph, AITypeExplanation, AICapabilitiesChart
+  - Amélioration de la maintenabilité du code
+- **Création d'un rapport de structure (APP_STRUCTURE.md)**:
+  - Documentation détaillée de l'architecture du projet
+  - Analyse des forces et faiblesses
+  - Identification des opportunités d'amélioration
+
+### 02/10/2024 - Corrections de bugs
+- **Correction du bug d'icône** dans HistoireIA.tsx (remplacement de Robot par Bot)
+- **Correction de l'exportation du composant** dans HistoireIA.tsx pour résoudre l'erreur d'exportation par défaut
+
+### 01/10/2024 - Optimisations et corrections
+- **Mise à jour du routage**: Home.tsx est maintenant la page d'accueil par défaut
+- **Optimisation des flux RSS dans Actualités**:
+  - Suppression des flux INRIA et HAL Science (non fonctionnels)
+  - Ajout du flux TLDR Tech
+  - Conservation des flux Interstices, Usbek & Rica et Siècle Digital
+
+### 30/09/2024 - Corrections et documentation
+- **Correction du bug d'icône** dans Home.tsx (remplacement de Robot par Bot)
+- **Création du fichier CHANGELOG.md** pour documenter l'évolution du projet
+- **Clarification de la structure des routes**: l'application a actuellement deux pages d'accueil (Index.tsx et Home.tsx), avec Index.tsx étant la page par défaut
+
 ### 29/09/2024 - Améliorations visuelles et contenu
 - **Améliorations du composant NeuralNetworkAnimation**:
   - Ajout de contrôles (pause/reprise/réinitialisation)
@@ -67,19 +99,3 @@ IA-Explorer/
   - Visualisations interactives des architectures CNN, Transformer et GAN
   - Descriptions détaillées des concepts clés
   - Tendances émergentes en Deep Learning
-
-### 30/09/2024 - Corrections et documentation
-- **Correction du bug d'icône** dans Home.tsx (remplacement de Robot par Bot)
-- **Création du fichier CHANGELOG.md** pour documenter l'évolution du projet
-- **Clarification de la structure des routes**: l'application a actuellement deux pages d'accueil (Index.tsx et Home.tsx), avec Index.tsx étant la page par défaut
-
-### 01/10/2024 - Optimisations et corrections
-- **Mise à jour du routage**: Home.tsx est maintenant la page d'accueil par défaut
-- **Optimisation des flux RSS dans Actualités**:
-  - Suppression des flux INRIA et HAL Science (non fonctionnels)
-  - Ajout du flux TLDR Tech
-  - Conservation des flux Interstices, Usbek & Rica et Siècle Digital
-
-### 02/10/2024 - Corrections de bugs
-- **Correction du bug d'icône** dans HistoireIA.tsx (remplacement de Robot par Bot)
-- **Correction de l'exportation du composant** dans HistoireIA.tsx pour résoudre l'erreur d'exportation par défaut
