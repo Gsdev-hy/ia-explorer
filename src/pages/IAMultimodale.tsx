@@ -37,17 +37,23 @@ const IAMultimodale = () => {
         subtitle="Découvrez comment les technologies d'intelligence artificielle transforment la création dans tous les domaines artistiques et techniques."
         primaryAction={{
           label: "Explorer les exemples",
-          href: "#applications-creatives" // Lien corrigé pour aboutir à la section
+          href: "#applications-creatives" // Le fragment d'ancrage pour la navigation interne
         }}
         secondaryAction={{
           label: "Astuces de prompting",
-          href: "#prompting-efficace" // Lien corrigé pour aboutir à la section
+          href: "#prompting-efficace" // Le fragment d'ancrage pour la navigation interne
         }}
       />
 
-      <ApplicationsSection activeTab={activeTab} setActiveTab={setActiveTab} />
+      {/* Important: ID ajouté pour l'ancrage des liens de navigation */}
+      <div id="applications-creatives">
+        <ApplicationsSection activeTab={activeTab} setActiveTab={setActiveTab} />
+      </div>
       
-      <PromptingSection />
+      {/* Important: ID ajouté pour l'ancrage des liens de navigation */}
+      <div id="prompting-efficace">
+        <PromptingSection />
+      </div>
       
       <ExploreMoreSection links={exploreLinks} />
     </>

@@ -5,7 +5,7 @@ import PromptExamplesSection from '@/components/multimodal/PromptExamplesSection
 
 const PromptingSection: React.FC = () => {
   return (
-    <section id="prompting-efficace" className="section-container bg-muted/30 dark:bg-secondary/10 py-16 rounded-3xl">
+    <section className="section-container bg-muted/30 dark:bg-secondary/10 py-16 rounded-3xl">
       <div className="max-w-4xl mx-auto">
         <SectionHeading
           pretitle="Astuces"

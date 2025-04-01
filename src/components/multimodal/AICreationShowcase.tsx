@@ -16,7 +16,10 @@ import {
   Music, 
   MessageSquare, 
   Video,
-  ExternalLink
+  ExternalLink,
+  Sparkles,
+  FileCode,
+  Zap
 } from 'lucide-react';
 
 /**
@@ -28,7 +31,7 @@ const AICreationShowcase = () => {
       title: "Illustrations génératives",
       category: "Image",
       description: "Série d'illustrations créées avec DALL-E 3 à partir de prompts détaillés",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&w=800&h=600",
+      imagePath: "/lovable-uploads/93b1a36e-0fc6-4f70-8be1-d27437de628c.png", // L'image téléchargée
       prompt: "Illustration d'un explorateur futuriste dans une jungle alien luminescente, avec des plantes bioluminescentes et des créatures étranges. Style mélange d'art conceptuel de film et d'aquarelle, palette dominante bleu-violet.",
       tools: ["DALL-E 3", "Midjourney", "Photoshop"],
       link: "https://openai.com/blog/dall-e/",
@@ -38,7 +41,8 @@ const AICreationShowcase = () => {
       title: "Composition ambient",
       category: "Audio",
       description: "Pièce musicale générative créée à partir d'une description d'ambiance",
-      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&w=800&h=600",
+      imagePath: "/placeholder.svg",
+      customIcon: <Sparkles className="w-20 h-20 text-blue-500/70" aria-hidden="true" />,
       prompt: "Crée une pièce ambient atmosphérique inspirée par une forêt nordique sous la neige. Utilise des pad synthétiques éthérés, des field recordings de vent et de pas dans la neige, et de subtils éléments de piano distant.",
       tools: ["Suno AI", "Soundraw", "Ableton Live"],
       link: "https://www.suno.ai/",
@@ -48,7 +52,8 @@ const AICreationShowcase = () => {
       title: "Court-métrage généré par IA",
       category: "Vidéo",
       description: "Séquence vidéo produite à partir d'un script et d'images de référence",
-      image: "https://images.unsplash.com/photo-1473091534298-04dcbce3278c?auto=format&w=800&h=600",
+      imagePath: "/placeholder.svg",
+      customIcon: <Video className="w-20 h-20 text-amber-500/70" aria-hidden="true" />,
       prompt: "Crée une courte séquence vidéo montrant une transformation progressive d'une graine en arbre, avec un time-lapse accéléré, une esthétique cinématographique et des détails sur la croissance des racines.",
       tools: ["Runway Gen-2", "Pika Labs", "DaVinci Resolve"],
       link: "https://runwayml.com/",
@@ -58,7 +63,8 @@ const AICreationShowcase = () => {
       title: "Dialogue multimodal",
       category: "Conversation",
       description: "Échange avec une IA utilisant texte et images pour résoudre un problème",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&w=800&h=600",
+      imagePath: "/placeholder.svg",
+      customIcon: <Zap className="w-20 h-20 text-indigo-500/70" aria-hidden="true" />,
       prompt: "[Image d'un circuit électronique] \"Peux-tu identifier les composants de ce circuit et m'expliquer leur fonction? Ensuite, suggère des améliorations possibles pour optimiser l'efficacité énergétique.\"",
       tools: ["GPT-4 Vision", "Claude Opus", "Gemini"],
       link: "https://openai.com/research/gpt-4v-system-card",
@@ -77,12 +83,19 @@ const AICreationShowcase = () => {
           viewport={{ once: true }}
         >
           <Card className="overflow-hidden h-full flex flex-col">
-            <div className="relative w-full aspect-video bg-muted">
-              <img 
-                src={item.image} 
-                alt={`Exemple de ${item.title}`} 
-                className="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
-              />
+            <div className="relative w-full aspect-video bg-muted flex items-center justify-center overflow-hidden">
+              {item.imagePath === "/placeholder.svg" || item.imagePath === "" ? (
+                // Afficher une icône générique si pas d'image
+                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/5 to-primary/10">
+                  {item.customIcon}
+                </div>
+              ) : (
+                <img 
+                  src={item.imagePath} 
+                  alt={`Exemple de ${item.title}`} 
+                  className="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
+                />
+              )}
               <Badge variant="secondary" className="absolute top-3 left-3 flex items-center gap-1">
                 {item.icon}
                 <span>{item.category}</span>

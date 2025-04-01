@@ -2,6 +2,7 @@
 import { Database, BarChart3, Network, Layers } from 'lucide-react';
 import SectionHeading from '../SectionHeading';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import AlgorithmVisualizer from './AlgorithmVisualizer';
 
 interface AlgorithmProps {
   icon: React.ReactNode;
@@ -78,6 +79,9 @@ const Algorithms = () => {
           description="Découvrez les algorithmes qui sont au cœur du machine learning et leurs applications."
           center
         />
+
+        {/* Ajout du nouveau composant de visualisation interactive */}
+        <AlgorithmVisualizer />
 
         <div className="mt-12 max-w-4xl mx-auto">
           <div className="mb-8 grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
