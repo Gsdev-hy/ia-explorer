@@ -10,11 +10,13 @@ IA-Explorer/
 ├── public/                     # Ressources statiques
 ├── src/                        # Code source
 │   ├── components/             # Composants réutilisables
+│   │   ├── common/             # Composants communs à plusieurs pages
 │   │   ├── ethics/            # Composants pour la section éthique
 │   │   ├── glossary/          # Composants pour le glossaire
 │   │   ├── memory/            # Composants pour la section mémoire d'IA
 │   │   ├── ml/                # Composants pour le Machine Learning
 │   │   │   └── visualization/ # Sous-composants pour les visualisations
+│   │   ├── multimodal/        # Composants pour les IA multimodales
 │   │   ├── news/              # Composants pour les actualités
 │   │   ├── resources/         # Composants pour les ressources
 │   │   ├── timeline/          # Composants pour la timeline
@@ -52,6 +54,21 @@ IA-Explorer/
   - Visualisations de différents algorithmes ML
 
 ## Évolution du projet
+
+### 04/10/2024 - Refactorisation majeure des pages volumineuses
+- **Refactorisation de la page Ethique.tsx**:
+  - Découpage en composants réutilisables et modulaires
+  - Création de EthicalPrinciplesSection, EthicalChallengesSection, RegulatoryFrameworkSection et QuizSection
+  - Amélioration de la maintenabilité et des performances
+- **Refactorisation de la page IAMultimodale.tsx**:
+  - Découpage en composants dédiés: ApplicationsSection et PromptingSection
+  - Meilleure organisation du code et des responsabilités
+- **Création du composant commun ExploreMoreSection**:
+  - Composant réutilisable pour les sections de navigation entre pages
+  - Utilisé dans plusieurs pages pour une expérience utilisateur cohérente
+- **Optimisation des performances**:
+  - Chargement plus rapide des pages volumineuses grâce à la modularisation
+  - Réduction de la complexité des composants individuels
 
 ### 03/10/2024 - Améliorations et refactorisation
 - **Enrichissement de la page Histoire de l'IA**:
