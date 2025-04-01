@@ -1,3 +1,4 @@
+
 # Changelog - IA Explorer
 
 Ce fichier documente les changements et améliorations apportés au projet IA Explorer, une ressource éducative sur l'intelligence artificielle.
@@ -78,6 +79,9 @@ IA-Explorer/
   - Suppression des flux INRIA et HAL Science (non fonctionnels)
   - Ajout du flux TLDR Tech
   - Conservation des flux Interstices, Usbek & Rica et Siècle Digital
+
+### 02/10/2024 - Corrections de bugs
+- **Correction du bug d'icône** dans HistoireIA.tsx (remplacement de Robot par Bot)
 
 ## Note sur les pages d'accueil
 Actuellement, le projet comporte deux pages d'accueil:
