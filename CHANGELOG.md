@@ -82,10 +82,4 @@ IA-Explorer/
 
 ### 02/10/2024 - Corrections de bugs
 - **Correction du bug d'icône** dans HistoireIA.tsx (remplacement de Robot par Bot)
-
-## Note sur les pages d'accueil
-Actuellement, le projet comporte deux pages d'accueil:
-- **Index.tsx**: Route par défaut (`/`), version plus récente et simplifiée
-- **Home.tsx**: Accessible via `/home`, version plus détaillée mais potentiellement redondante
-
-Une rationalisation future pourrait consister à fusionner ces deux pages pour une expérience utilisateur plus cohérente.
+- **Correction de l'exportation du composant** dans HistoireIA.tsx pour résoudre l'erreur d'exportation par défaut
