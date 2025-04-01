@@ -16,17 +16,17 @@ const Ethique = () => {
     {
       to: "/niveaux-ia",
       label: "Niveaux d'IA",
-      variant: "default"
+      variant: "default" as const
     },
     {
       to: "/types-ia",
       label: "Types d'IA",
-      variant: "outline"
+      variant: "outline" as const
     },
     {
       to: "/glossaire",
       label: "Glossaire des termes",
-      variant: "secondary"
+      variant: "secondary" as const
     }
   ];
 

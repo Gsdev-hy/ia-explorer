@@ -16,17 +16,17 @@ const IAMultimodale = () => {
     {
       to: "/ethique",
       label: "Éthique de l'IA",
-      variant: "default"
+      variant: "default" as const
     },
     {
       to: "/types-ia",
       label: "Types d'IA",
-      variant: "outline"
+      variant: "outline" as const
     },
     {
       to: "/machine-learning",
       label: "Machine Learning",
-      variant: "secondary"
+      variant: "secondary" as const
     }
   ];
 
