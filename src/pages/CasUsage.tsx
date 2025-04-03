@@ -16,7 +16,7 @@ import {
   FileUp, Share2, Clock, Layers, RefreshCw, Database,
   Map, Smartphone, Upload, MessageCircle, ImagePlus,
   Gauge, Tool, Cpu, Share, ArrowUpRight, Eye,
-  CircleDot, Activity
+  CircleDot, Activity, FileVideo
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Card as ShadcnCard, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -744,22 +744,22 @@ const CasUsage = () => {
     const resources = {
       manufacturing: [
         { title: "Guide: Implémentation de l'IA dans la production industrielle", url: "#", icon: <FileUp size={16} /> },
-        { title: "Webinar: Maintenance prédictive et IA", url: "#", icon: <Video size={16} /> },
+        { title: "Webinar: Maintenance prédictive et IA", url: "#", icon: <FileVideo size={16} /> },
         { title: "Étude de cas: Transformation digitale chez Schneider Electric", url: "#", icon: <BookOpen size={16} /> }
       ],
       healthcare: [
         { title: "Livre blanc: IA et éthique médicale", url: "#", icon: <FileUp size={16} /> },
-        { title: "Conférence: IA en imagerie médicale", url: "#", icon: <Video size={16} /> },
+        { title: "Conférence: IA en imagerie médicale", url: "#", icon: <FileVideo size={16} /> },
         { title: "Étude: Impact de l'IA sur les diagnostics précoces", url: "#", icon: <BookOpen size={16} /> }
       ],
       finance: [
         { title: "Guide: Sécurité des systèmes d'IA dans la finance", url: "#", icon: <FileUp size={16} /> },
-        { title: "Webinar: IA et compliance réglementaire", url: "#", icon: <Video size={16} /> },
+        { title: "Webinar: IA et compliance réglementaire", url: "#", icon: <FileVideo size={16} /> },
         { title: "Rapport: Évolution des applications d'IA en finance", url: "#", icon: <BookOpen size={16} /> }
       ],
       education: [
         { title: "Guide: Intégration de l'IA dans le curriculum scolaire", url: "#", icon: <FileUp size={16} /> },
-        { title: "Webinar: Personnalisation de l'apprentissage par l'IA", url: "#", icon: <Video size={16} /> },
+        { title: "Webinar: Personnalisation de l'apprentissage par l'IA", url: "#", icon: <FileVideo size={16} /> },
         { title: "Étude: Impact de l'IA sur les résultats d'apprentissage", url: "#", icon: <BookOpen size={16} /> }
       ]
     };
