@@ -44,7 +44,6 @@ const Ethique = () => {
       
       <RegulatoryFrameworkSection />
       
-      {/* Nouvelle section d'exemples éthiques */}
       <EthicalExamplesSection />
       
       <QuizSection />

@@ -22,6 +22,14 @@ const Glossaire = () => {
 
       <section className="section-container">
         <div className="max-w-5xl mx-auto">
+          <div className="mb-12 rounded-2xl overflow-hidden shadow-lg">
+            <img 
+              src="/pics/actu.jpg" 
+              alt="Intelligence artificielle glossaire" 
+              className="w-full h-64 object-cover object-center"
+            />
+          </div>
+          
           <SectionHeading
             pretitle="Référence"
             title="Comprendre le vocabulaire de l'IA"
