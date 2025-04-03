@@ -26,7 +26,7 @@ const CasUsage = () => {
       icon: <Stethoscope className="h-5 w-5" />,
       description: 'Diagnostic assisté, découverte de médicaments, imagerie médicale améliorée',
       examples: [
-        'Détection précoce de maladies via l'analyse d'images médicales',
+        'Détection précoce de maladies via l\'analyse d\'images médicales',
         'Prédiction des épidémies et gestion des ressources hospitalières',
         'Création de traitements personnalisés basés sur le génome'
       ]
@@ -36,7 +36,7 @@ const CasUsage = () => {
       icon: <BookOpen className="h-5 w-5" />,
       description: 'Apprentissage personnalisé, évaluation automatisée, assistance pédagogique',
       examples: [
-        'Systèmes adaptatifs ajustant le contenu selon le rythme de l'apprenant',
+        'Systèmes adaptatifs ajustant le contenu selon le rythme de l\'apprenant',
         'Outils de correction automatique pour les enseignants',
         'Assistants virtuels pour répondre aux questions des étudiants'
       ]
@@ -47,7 +47,7 @@ const CasUsage = () => {
       description: 'Détection de fraudes, trading algorithmique, évaluation des risques',
       examples: [
         'Modèles prédictifs pour les investissements et la gestion de portefeuille',
-        'Systèmes d'alerte pour les transactions suspectes',
+        'Systèmes d\'alerte pour les transactions suspectes',
         'Chatbots de service client pour les opérations bancaires'
       ]
     },
@@ -57,7 +57,7 @@ const CasUsage = () => {
       description: 'Analyse de contrats, recherche juridique, prédiction des décisions',
       examples: [
         'Examen automatisé de documents juridiques complexes',
-        'Systèmes d'aide à la décision pour les juges et avocats',
+        'Systèmes d\'aide à la décision pour les juges et avocats',
         'Analyse prédictive des résultats de procès basée sur des cas similaires'
       ]
     },
@@ -68,7 +68,7 @@ const CasUsage = () => {
       examples: [
         'Moteurs de recommandation adaptés aux préférences des utilisateurs',
         'Prévision de la demande et gestion des stocks optimisée',
-        'Assistants virtuels pour l'expérience d'achat en ligne'
+        'Assistants virtuels pour l\'expérience d\'achat en ligne'
       ]
     },
     {
@@ -76,9 +76,9 @@ const CasUsage = () => {
       icon: <Factory className="h-5 w-5" />,
       description: 'Maintenance prédictive, optimisation de production, contrôle qualité',
       examples: [
-        'Détection anticipée des pannes d'équipement',
+        'Détection anticipée des pannes d\'équipement',
         'Optimisation des processus de fabrication et réduction des déchets',
-        'Systèmes de vision par ordinateur pour l'inspection qualité'
+        'Systèmes de vision par ordinateur pour l\'inspection qualité'
       ]
     },
     {
@@ -88,7 +88,7 @@ const CasUsage = () => {
       examples: [
         'Planification dynamique des routes de livraison',
         'Prédiction des besoins de maintenance pour les véhicules',
-        'Optimisation des chaînes d'approvisionnement mondiales'
+        'Optimisation des chaînes d\'approvisionnement mondiales'
       ]
     },
     {
@@ -96,7 +96,7 @@ const CasUsage = () => {
       icon: <Music className="h-5 w-5" />,
       description: 'Création de contenu, recommandations personnalisées, effets spéciaux',
       examples: [
-        'Génération de musique et d'art assistée par IA',
+        'Génération de musique et d\'art assistée par IA',
         'Systèmes de recommandation pour les plateformes de streaming',
         'Animation et rendu 3D améliorés pour les films et jeux'
       ]
@@ -108,7 +108,7 @@ const CasUsage = () => {
       examples: [
         'Analyse vidéo des techniques et des performances des athlètes',
         'Prédiction et prévention des blessures via des données biométriques',
-        'Planification tactique basée sur l'analyse des adversaires'
+        'Planification tactique basée sur l\'analyse des adversaires'
       ]
     },
     {
