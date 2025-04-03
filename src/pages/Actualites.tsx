@@ -22,6 +22,14 @@ const Actualites = () => {
 
       <section className="section-container">
         <div className="max-w-5xl mx-auto">
+          <div className="mb-8 rounded-2xl overflow-hidden shadow-lg">
+            <img 
+              src="/pics/actu.jpg" 
+              alt="Actualités de l'IA" 
+              className="w-full h-64 object-cover object-center"
+            />
+          </div>
+          
           <SectionHeading
             pretitle="Veille technologique"
             title="Les dernières nouvelles de l'IA"

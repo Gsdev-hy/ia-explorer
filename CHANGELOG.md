@@ -55,6 +55,19 @@ IA-Explorer/
 
 ## Évolution du projet
 
+### 05/04/2025 - Améliorations d'interface et cohérence visuelle
+- **Uniformisation du style des pages**:
+  - Standardisation de l'interface des pages Histoire et À propos pour correspondre aux autres pages
+  - Ajout du composant Hero sur toutes les pages
+  - Réduction des espaces verticaux pour une meilleure densité d'information
+- **Correction du placement des images**:
+  - Intégration des images dans les bonnes sections: Actualités, Cas d'usage et Histoire
+  - Optimisation de l'affichage des images avec des ratios cohérents
+- **Optimisations de performance**:
+  - Réduction de la taille des composants Hero et SectionHeading
+  - Amélioration du chargement des images avec l'attribut loading="lazy"
+- **Mise à jour du changelog** pour documenter les améliorations récentes
+
 ### 04/10/2024 - Refactorisation majeure des pages volumineuses
 - **Refactorisation de la page Ethique.tsx**:
   - Découpage en composants réutilisables et modulaires
