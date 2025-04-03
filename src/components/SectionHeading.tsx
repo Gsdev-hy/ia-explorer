@@ -26,7 +26,7 @@ const SectionHeading = ({
   children
 }: SectionHeadingProps) => {
   return (
-    <div className={`max-w-3xl ${center ? 'mx-auto text-center' : ''} mb-6 md:mb-8`}>
+    <div className={`max-w-3xl ${center ? 'mx-auto text-center' : ''} mb-4 md:mb-5`}>
       {pretitle && (
         <p className="inline-block px-3 py-1 mb-3 text-sm font-medium rounded-full bg-primary/10 text-primary animate-fade-in">
           {pretitle}

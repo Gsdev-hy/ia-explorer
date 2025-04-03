@@ -1,19 +1,20 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from '@/components/ui/badge';
-import { Mail, Github, Linkedin, Heart, Code, BookOpen, Users, MessageSquare, GraduationCap } from 'lucide-react';
+import { Mail, Github, Linkedin, Heart, Code, BookOpen, Users, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Hero from '@/components/Hero';
 import SectionHeading from '@/components/SectionHeading';
+import NeuralNetworkInteractive from '@/components/ml/visualization/NeuralNetworkInteractive';
 
 const About = () => {
   const teamMembers = [
     {
       name: "Geoffroy Streit",
       role: "Fondateur & Développeur",
-      bio: "Passionné d'IA et d'éducation numérique. Ancien ingénieur chez [Entreprise Tech], avec plus de 10 ans d'expérience en développement et vulgarisation technique.",
+      bio: "Passionné d'IA et d'éducation numérique. Expert en développement et vulgarisation technique avec une forte expérience dans le domaine de l'intelligence artificielle.",
       avatar: "/placeholder.svg",
       initials: "GS",
       links: {
@@ -30,6 +31,14 @@ const About = () => {
         title="À propos d'IA Explorer"
         subtitle="Découvrez notre mission, notre équipe et comment nous contribuons à rendre l'intelligence artificielle plus accessible et compréhensible pour tous."
       />
+
+      <section className="py-8 relative overflow-hidden">
+        <div className="container mx-auto">
+          <div className="h-[300px] relative mb-12 rounded-xl overflow-hidden border border-primary/20 shadow-lg">
+            <NeuralNetworkInteractive />
+          </div>
+        </div>
+      </section>
 
       <section className="section-container">
         <div className="max-w-5xl mx-auto">
@@ -74,12 +83,12 @@ const About = () => {
           
           <SectionHeading
             pretitle="Notre équipe"
-            title="Les créateurs d'IA Explorer"
-            description="Découvrez les passionnés qui ont conçu et développé cette ressource éducative sur l'intelligence artificielle."
+            title="Le créateur d'IA Explorer"
+            description="Découvrez le passionné qui a conçu et développé cette ressource éducative sur l'intelligence artificielle."
             center
           />
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          <div className="max-w-2xl mx-auto">
             {teamMembers.map((member, index) => (
               <Card key={index} className="bg-card shadow-sm overflow-hidden">
                 <div className="p-6">

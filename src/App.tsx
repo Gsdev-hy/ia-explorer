@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -17,6 +18,8 @@ import Ressources from "./pages/Ressources";
 import IAMultimodale from "./pages/IAMultimodale";
 import Actualites from "./pages/Actualites";
 import About from "./pages/About";
+import MentionsLegales from "./pages/MentionsLegales";
+import Confidentialite from "./pages/Confidentialite";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
 
@@ -98,6 +101,16 @@ const App = () => (
             <Route path="/about" element={
               <MainLayout>
                 <About />
+              </MainLayout>
+            } />
+            <Route path="/mentions-legales" element={
+              <MainLayout>
+                <MentionsLegales />
+              </MainLayout>
+            } />
+            <Route path="/confidentialite" element={
+              <MainLayout>
+                <Confidentialite />
               </MainLayout>
             } />
             <Route path="*" element={

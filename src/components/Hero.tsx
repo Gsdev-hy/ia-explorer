@@ -34,7 +34,7 @@ const Hero = ({
 }: HeroProps) => {
   return (
     <section 
-      className={`relative pt-28 md:pt-32 pb-8 md:pb-10 ${image ? 'min-h-[70vh] flex items-center' : ''}`}
+      className={`relative pt-20 md:pt-24 pb-4 md:pb-6 ${image ? 'min-h-[60vh] flex items-center' : ''}`}
       style={image ? { backgroundImage: `url(${image})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
       aria-labelledby="hero-title"
     >
