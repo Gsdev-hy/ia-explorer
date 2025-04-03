@@ -27,8 +27,13 @@ const IAMultimodale = () => {
               top: element.offsetTop - 100,
               behavior: 'smooth'
             });
+            
+            // Log pour debugging
+            console.log(`Scrolling to ${hash} at position ${element.offsetTop - 100}`);
+          } else {
+            console.log(`Element with id ${hash.substring(1)} not found`);
           }
-        }, 100);
+        }, 300); // Augmentation du délai pour s'assurer que tous les éléments sont rendus
       }
     };
 
@@ -63,32 +68,28 @@ const IAMultimodale = () => {
   ];
 
   return (
-    <>
+    <main>
       <Hero
         title="IA et Création Multimodale"
         subtitle="Découvrez comment les technologies d'intelligence artificielle transforment la création dans tous les domaines artistiques et techniques."
         primaryAction={{
           label: "Explorer les exemples",
-          href: "#applications-creatives" // Le fragment d'ancrage pour la navigation interne
+          href: "#applications-creatives"
         }}
         secondaryAction={{
           label: "Astuces de prompting",
-          href: "#prompting-efficace" // Le fragment d'ancrage pour la navigation interne
+          href: "#prompting-efficace"
         }}
       />
 
-      {/* IMPORTANT: ID ajouté pour l'ancrage des liens de navigation */}
-      <div id="applications-creatives">
-        <ApplicationsSection activeTab={activeTab} setActiveTab={setActiveTab} />
-      </div>
+      <ApplicationsSection activeTab={activeTab} setActiveTab={setActiveTab} />
       
-      {/* IMPORTANT: ID ajouté pour l'ancrage des liens de navigation */}
       <div id="prompting-efficace">
         <PromptingSection />
       </div>
       
       <ExploreMoreSection links={exploreLinks} />
-    </>
+    </main>
   );
 };
 

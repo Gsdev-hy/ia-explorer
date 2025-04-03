@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
 import Card from '@/components/Card';
@@ -12,9 +11,16 @@ import {
   Bus, Car, Shield, BadgeDollarSign, BookOpen, 
   BrainCircuit, Bot, ArrowRight, Check, X, Lightbulb,
   ChevronRight, LineChart, UserRound, Briefcase, Settings,
-  Code, PencilRuler, CloudRain, Heart, HelpCircle, Zap
+  Code, PencilRuler, CloudRain, Heart, HelpCircle, Zap,
+  Search, BarChart2, PieChart, Users, Brain, Network,
+  FileUp, Share2, Clock, Layers, RefreshCw, Database,
+  Map, Smartphone, Upload, MessageCircle, ImagePlus,
+  Gauge, Tool, Cpu, Share, ArrowUpRight, Eye,
+  CircleDot, Activity
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Card as ShadcnCard, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 /**
  * Page présentant des cas d'usage de l'IA dans différents secteurs
@@ -23,6 +29,7 @@ import { motion } from 'framer-motion';
 const CasUsage = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [selectedSector, setSelectedSector] = useState('manufacturing');
+  const detailsRef = useRef(null);
   
   // Animation variants for the motion components
   const containerVariants = {
@@ -39,6 +46,16 @@ const CasUsage = () => {
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: { y: 0, opacity: 1 }
+  };
+
+  const scrollToDetails = (sectorId) => {
+    setActiveTab('details');
+    setSelectedSector(sectorId);
+    if (detailsRef.current) {
+      setTimeout(() => {
+        detailsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
   };
 
   const casUsages = [
@@ -121,7 +138,6 @@ const CasUsage = () => {
     },
   ];
 
-  // Contenu détaillé pour chaque secteur d'application
   const sectorDetails = {
     manufacturing: {
       title: "L'IA dans l'industrie manufacturière",
@@ -365,6 +381,416 @@ const CasUsage = () => {
     }
   };
 
+  const expertQuotes = {
+    manufacturing: [
+      {
+        quote: "L'IA industrielle permet désormais d'anticiper les problèmes de qualité avant même qu'ils ne surviennent, transformant complètement notre approche de la production.",
+        author: "Marie Dubois",
+        role: "Directrice d'usine, Renault Group"
+      },
+      {
+        quote: "La maintenance prédictive basée sur l'IA nous a permis de réduire nos temps d'arrêt non planifiés de 78% en seulement 18 mois d'implémentation.",
+        author: "Thomas Legrand",
+        role: "Responsable maintenance, Schneider Electric"
+      }
+    ],
+    healthcare: [
+      {
+        quote: "Les algorithmes de diagnostic assisté nous permettent de détecter des anomalies subtiles qui auraient pu passer inaperçues, sauvant littéralement des vies.",
+        author: "Dr. Sophie Martin",
+        role: "Chef du service de radiologie, CHU de Bordeaux"
+      },
+      {
+        quote: "Grâce à l'IA, nous avons réduit de 35% le temps nécessaire pour analyser les données génomiques complexes des patients atteints de cancer.",
+        author: "Prof. Antoine Mercier",
+        role: "Directeur de recherche, Institut Curie"
+      }
+    ],
+    finance: [
+      {
+        quote: "Nos systèmes de détection de fraude basés sur l'IA ont permis d'identifier des schémas de fraude complexes qui échappaient à nos contrôles traditionnels.",
+        author: "Jeanne Moreau",
+        role: "Chief Risk Officer, BNP Paribas"
+      },
+      {
+        quote: "L'automatisation intelligente de l'analyse de crédit nous a permis d'augmenter notre capacité de traitement de 200% tout en améliorant la précision des décisions.",
+        author: "Alexandre Petit",
+        role: "Directeur de l'innovation, Crédit Agricole"
+      }
+    ],
+    education: [
+      {
+        quote: "L'apprentissage adaptatif transforme l'expérience éducative en permettant à chaque élève d'avancer à son propre rythme, selon ses besoins spécifiques.",
+        author: "Claire Dupont",
+        role: "Directrice pédagogique, Académie de Paris"
+      },
+      {
+        quote: "Nos tuteurs virtuels ont permis d'augmenter de 42% les résultats des élèves en difficulté, en leur offrant un soutien personnalisé disponible 24/7.",
+        author: "Dr. Laurent Bernard",
+        role: "Chercheur en sciences de l'éducation, Université de Lyon"
+      }
+    ]
+  };
+
+  const visualizationData = {
+    manufacturing: {
+      title: "Adoption de l'IA dans l'industrie manufacturière",
+      description: "Pourcentage d'entreprises du secteur qui ont adopté différentes technologies d'IA",
+      data: [
+        { name: "Maintenance prédictive", value: 68 },
+        { name: "Contrôle qualité", value: 72 },
+        { name: "Optimisation de production", value: 56 },
+        { name: "Gestion de chaîne logistique", value: 48 },
+        { name: "Conception assistée", value: 41 }
+      ]
+    },
+    healthcare: {
+      title: "Impact de l'IA dans le secteur de la santé",
+      description: "Amélioration des indicateurs clés grâce à l'IA (en %)",
+      data: [
+        { name: "Précision des diagnostics", value: 62 },
+        { name: "Réduction temps d'attente", value: 47 },
+        { name: "Efficacité des traitements", value: 53 },
+        { name: "Réduction des coûts", value: 38 },
+        { name: "Satisfaction patients", value: 44 }
+      ]
+    },
+    finance: {
+      title: "Technologies d'IA dans les services financiers",
+      description: "Répartition des investissements en IA dans le secteur financier",
+      data: [
+        { name: "Détection de fraude", value: 34 },
+        { name: "Trading algorithmique", value: 28 },
+        { name: "Analyse de risque", value: 23 },
+        { name: "Service client", value: 15 }
+      ]
+    },
+    education: {
+      title: "Impact de l'IA sur les résultats d'apprentissage",
+      description: "Amélioration des performances des élèves utilisant des outils d'IA",
+      data: [
+        { name: "Mathématiques", value: 35 },
+        { name: "Sciences", value: 29 },
+        { name: "Langues", value: 24 },
+        { name: "Compétences techniques", value: 48 }
+      ]
+    }
+  };
+
+  const innovativeProjects = {
+    manufacturing: [
+      {
+        title: "Jumeaux numériques en production",
+        description: "Création de répliques virtuelles des chaînes de production pour simuler et optimiser les processus en temps réel.",
+        icon: <RefreshCw />,
+        company: "Siemens",
+        results: "Réduction des temps de configuration de 60%, amélioration du rendement de 25%"
+      },
+      {
+        title: "Robots collaboratifs intelligents",
+        description: "Robots équipés d'IA capables d'apprendre et de s'adapter aux tâches et aux environnements changeants.",
+        icon: <Bot />,
+        company: "ABB",
+        results: "Augmentation de la productivité de 40%, réduction des accidents de travail de 80%"
+      },
+      {
+        title: "Inspection visuelle automatisée",
+        description: "Systèmes de vision par ordinateur qui détectent les défauts invisibles à l'œil humain sur les lignes de production.",
+        icon: <Eye />,
+        company: "NVIDIA & BMW",
+        results: "Détection de défauts améliorée de 95%, réduction des retours clients de 30%"
+      }
+    ],
+    healthcare: [
+      {
+        title: "Diagnostic assisté par IA",
+        description: "Algorithmes qui analysent les images médicales pour aider à la détection précoce des maladies.",
+        icon: <Search />,
+        company: "Google Health & DeepMind",
+        results: "Détection du cancer du sein améliorée de 8,5%, réduction des faux positifs de 5,7%"
+      },
+      {
+        title: "Médecine personnalisée",
+        description: "Utilisation de l'IA pour adapter les traitements au profil génétique spécifique de chaque patient.",
+        icon: <UserRound />,
+        company: "Foundation Medicine",
+        results: "Efficacité des traitements contre le cancer améliorée de 40% pour les patients ciblés"
+      },
+      {
+        title: "Surveillance à distance des patients",
+        description: "Dispositifs connectés et IA pour surveiller les patients à domicile et prévenir les complications.",
+        icon: <Activity />,
+        company: "AliveCor & Mayo Clinic",
+        results: "Réduction des réadmissions hospitalières de 52%, détection précoce améliorée de 73%"
+      }
+    ],
+    finance: [
+      {
+        title: "Détection de fraude en temps réel",
+        description: "Systèmes qui analysent les transactions en temps réel pour identifier les comportements suspects.",
+        icon: <Shield />,
+        company: "Feedzai & Citibank",
+        results: "Réduction des fraudes de 75%, diminution des faux positifs de 50%"
+      },
+      {
+        title: "Assistants financiers virtuels",
+        description: "Chatbots intelligents qui offrent des conseils financiers personnalisés 24/7.",
+        icon: <MessageCircle />,
+        company: "Bank of America (Erica)",
+        results: "20 millions d'utilisateurs actifs, 400 millions de requêtes traitées"
+      },
+      {
+        title: "Analyse prédictive des marchés",
+        description: "Modèles prédictifs qui anticipent les tendances des marchés financiers.",
+        icon: <LineChart />,
+        company: "JP Morgan",
+        results: "Amélioration de 23% de la précision des prévisions, 15% d'augmentation du ROI"
+      }
+    ],
+    education: [
+      {
+        title: "Plateformes d'apprentissage adaptatif",
+        description: "Systèmes qui adaptent le contenu éducatif au niveau et au style d'apprentissage de chaque élève.",
+        icon: <Brain />,
+        company: "Carnegie Learning",
+        results: "Amélioration des résultats en mathématiques de 83% par rapport aux méthodes traditionnelles"
+      },
+      {
+        title: "Tuteurs intelligents",
+        description: "Assistants virtuels qui fournissent un soutien personnalisé pour les matières complexes.",
+        icon: <BookOpen />,
+        company: "Duolingo",
+        results: "500 millions d'utilisateurs, efficacité d'apprentissage des langues multipliée par 3"
+      },
+      {
+        title: "Évaluation automatisée",
+        description: "Outils d'IA qui notent et fournissent des retours détaillés sur les travaux des étudiants.",
+        icon: <Check />,
+        company: "Turnitin",
+        results: "Réduction de 70% du temps de correction, amélioration de 40% de la qualité des retours"
+      }
+    ]
+  };
+
+  const userTestimonials = {
+    manufacturing: [
+      {
+        quote: "L'IA nous a permis de réduire nos déchets de production de 32% tout en augmentant notre rendement. C'est une véritable révolution pour notre usine.",
+        name: "Laurent Girard",
+        role: "Responsable de production, Michelin",
+        image: "/placeholder.svg"
+      },
+      {
+        quote: "Grâce à la maintenance prédictive, nous avons pu éviter 18 arrêts majeurs l'année dernière, représentant des économies de plus de 5 millions d'euros.",
+        name: "Isabelle Blanc",
+        role: "Directrice technique, ArcelorMittal",
+        image: "/placeholder.svg"
+      }
+    ],
+    healthcare: [
+      {
+        quote: "L'assistant IA m'aide à analyser les dossiers médicaux complexes en quelques minutes au lieu de plusieurs heures, me permettant de consacrer plus de temps à mes patients.",
+        name: "Dr. Paul Dupont",
+        role: "Médecin généraliste, Paris",
+        image: "/placeholder.svg"
+      },
+      {
+        quote: "Le système d'IA a détecté une anomalie subtile dans ma radiographie que deux radiologues avaient manquée. Cette détection précoce a littéralement sauvé ma vie.",
+        name: "Marie Leclerc",
+        role: "Patiente",
+        image: "/placeholder.svg"
+      }
+    ],
+    finance: [
+      {
+        quote: "Notre robo-conseiller nous a permis d'offrir des services d'investissement professionnels à des clients qui n'auraient jamais eu accès à un conseiller traditionnel.",
+        name: "Jean-Pierre Moreau",
+        role: "Directeur clientèle, Société Générale",
+        image: "/placeholder.svg"
+      },
+      {
+        quote: "L'IA a détecté une tentative de fraude sur mon compte à 3h du matin et a bloqué la transaction avant même que je ne m'en rende compte.",
+        name: "Sophie Martin",
+        role: "Cliente bancaire",
+        image: "/placeholder.svg"
+      }
+    ],
+    education: [
+      {
+        quote: "L'outil d'apprentissage adaptatif a permis à mon fils dyslexique de progresser à son rythme en lecture. Sa confiance en lui s'est considérablement améliorée.",
+        name: "Nathalie Leroy",
+        role: "Parent d'élève",
+        image: "/placeholder.svg"
+      },
+      {
+        quote: "L'automatisation des tâches administratives par l'IA me permet de consacrer 40% de temps en plus à l'accompagnement individualisé de mes élèves.",
+        name: "Michel Dubois",
+        role: "Enseignant de mathématiques, Lycée Henri IV",
+        image: "/placeholder.svg"
+      }
+    ]
+  };
+
+  const renderInnovativeProjects = (sector) => (
+    <div className="mt-6 space-y-5">
+      <h4 className="text-lg font-medium">Projets innovants</h4>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {innovativeProjects[sector].map((project, idx) => (
+          <ShadcnCard key={idx} className="h-full border-primary/10 hover:border-primary/30 transition-all">
+            <CardHeader className="pb-2">
+              <div className="p-2 rounded-full bg-primary/10 w-10 h-10 flex items-center justify-center mb-2">
+                {project.icon}
+              </div>
+              <CardTitle className="text-base">{project.title}</CardTitle>
+              <CardDescription>{project.company}</CardDescription>
+            </CardHeader>
+            <CardContent className="text-sm text-muted-foreground">
+              <p>{project.description}</p>
+            </CardContent>
+            <CardFooter className="pt-0">
+              <div className="bg-secondary/20 p-2 rounded-md w-full text-xs">
+                <span className="font-medium text-primary">Résultats: </span>
+                {project.results}
+              </div>
+            </CardFooter>
+          </ShadcnCard>
+        ))}
+      </div>
+    </div>
+  );
+
+  const renderVisualizationSection = (sector) => (
+    <div className="mt-8 p-5 bg-secondary/20 rounded-lg">
+      <h4 className="text-lg font-medium mb-2">{visualizationData[sector].title}</h4>
+      <p className="text-sm text-muted-foreground mb-4">{visualizationData[sector].description}</p>
+      <div className="grid grid-cols-1 gap-2">
+        {visualizationData[sector].data.map((item, idx) => (
+          <div key={idx} className="flex items-center space-x-2">
+            <div className="text-sm w-48 font-medium">{item.name}</div>
+            <div className="flex-1 h-4 bg-secondary/30 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-primary rounded-full" 
+                style={{ width: `${item.value}%` }}
+                role="progressbar"
+                aria-valuenow={item.value}
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
+            </div>
+            <div className="text-sm font-medium w-12 text-right">{item.value}%</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  const renderExpertInsights = (sector) => (
+    <div className="mt-8">
+      <h4 className="text-lg font-medium mb-4">Paroles d'experts</h4>
+      <Carousel className="w-full">
+        <CarouselContent>
+          {expertQuotes[sector].map((item, idx) => (
+            <CarouselItem key={idx} className="md:basis-1/2 lg:basis-1/2">
+              <div className="p-4">
+                <ShadcnCard className="h-full">
+                  <CardContent className="pt-6">
+                    <blockquote className="text-sm italic mb-4">
+                      "{item.quote}"
+                    </blockquote>
+                    <div className="flex items-center gap-2">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                        <Users size={20} className="text-primary" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-sm">{item.author}</p>
+                        <p className="text-xs text-muted-foreground">{item.role}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </ShadcnCard>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <div className="flex justify-center mt-4 gap-2">
+          <CarouselPrevious />
+          <CarouselNext />
+        </div>
+      </Carousel>
+    </div>
+  );
+
+  const renderUserTestimonials = (sector) => (
+    <div className="mt-8">
+      <h4 className="text-lg font-medium mb-4">Témoignages d'utilisateurs</h4>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {userTestimonials[sector].map((item, idx) => (
+          <div key={idx} className="p-4 bg-secondary/10 rounded-lg">
+            <p className="text-sm italic mb-3">"{item.quote}"</p>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-primary/20"></div>
+              <div>
+                <p className="text-sm font-medium">{item.name}</p>
+                <p className="text-xs text-muted-foreground">{item.role}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  const renderResourceLinks = (sector) => {
+    const resources = {
+      manufacturing: [
+        { title: "Guide: Implémentation de l'IA dans la production industrielle", url: "#", icon: <FileUp size={16} /> },
+        { title: "Webinar: Maintenance prédictive et IA", url: "#", icon: <Video size={16} /> },
+        { title: "Étude de cas: Transformation digitale chez Schneider Electric", url: "#", icon: <BookOpen size={16} /> }
+      ],
+      healthcare: [
+        { title: "Livre blanc: IA et éthique médicale", url: "#", icon: <FileUp size={16} /> },
+        { title: "Conférence: IA en imagerie médicale", url: "#", icon: <Video size={16} /> },
+        { title: "Étude: Impact de l'IA sur les diagnostics précoces", url: "#", icon: <BookOpen size={16} /> }
+      ],
+      finance: [
+        { title: "Guide: Sécurité des systèmes d'IA dans la finance", url: "#", icon: <FileUp size={16} /> },
+        { title: "Webinar: IA et compliance réglementaire", url: "#", icon: <Video size={16} /> },
+        { title: "Rapport: Évolution des applications d'IA en finance", url: "#", icon: <BookOpen size={16} /> }
+      ],
+      education: [
+        { title: "Guide: Intégration de l'IA dans le curriculum scolaire", url: "#", icon: <FileUp size={16} /> },
+        { title: "Webinar: Personnalisation de l'apprentissage par l'IA", url: "#", icon: <Video size={16} /> },
+        { title: "Étude: Impact de l'IA sur les résultats d'apprentissage", url: "#", icon: <BookOpen size={16} /> }
+      ]
+    };
+
+    return (
+      <div className="mt-8 bg-primary/5 p-4 rounded-lg border border-primary/10">
+        <h4 className="text-lg font-medium mb-3 flex items-center gap-2">
+          <BookOpen size={18} className="text-primary" /> 
+          Ressources complémentaires
+        </h4>
+        <div className="space-y-2">
+          {resources[sector].map((item, idx) => (
+            <a 
+              key={idx} 
+              href={item.url} 
+              className="flex items-center gap-2 p-2 hover:bg-primary/10 rounded-md transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="p-1 rounded-full bg-primary/10">
+                {item.icon}
+              </div>
+              <span className="text-sm">{item.title}</span>
+              <ArrowUpRight size={14} className="ml-auto" />
+            </a>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
       <Hero
@@ -392,10 +818,27 @@ const CasUsage = () => {
             </TabsList>
             
             <TabsContent value="overview" className="mt-6">
-              <FeatureGrid features={casUsages} columns={3} />
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {casUsages.map((usage, idx) => (
+                  <motion.div
+                    key={idx}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="h-full"
+                  >
+                    <Card
+                      title={usage.title}
+                      description={usage.description}
+                      icon={usage.icon}
+                      className="h-full cursor-pointer"
+                      onClick={() => scrollToDetails(usage.id)}
+                    />
+                  </motion.div>
+                ))}
+              </div>
             </TabsContent>
             
-            <TabsContent value="details" className="mt-6">
+            <TabsContent value="details" className="mt-6" ref={detailsRef}>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div className="md:col-span-1 space-y-2">
                   {casUsages.slice(0, 5).map((sector) => (
@@ -425,88 +868,100 @@ const CasUsage = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="glass-card p-6 rounded-xl"
+                      className="space-y-6"
                     >
-                      <div className="flex items-center gap-4 mb-6">
-                        <div className="p-3 bg-primary/10 rounded-lg">
-                          {sectorDetails[selectedSector].icon}
-                        </div>
-                        <div>
-                          <h2 className="text-2xl font-bold">{sectorDetails[selectedSector].title}</h2>
-                          <p className="text-muted-foreground">{sectorDetails[selectedSector].subtitle}</p>
-                        </div>
-                      </div>
-                      
-                      <p className="mb-8 text-lg">{sectorDetails[selectedSector].description}</p>
-                      
-                      <h3 className="font-medium text-xl mb-4">Applications principales</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                        {sectorDetails[selectedSector].applications.map((app, index) => (
-                          <div key={index} className="border border-border p-4 rounded-lg bg-secondary/5">
-                            <div className="flex items-center gap-3 mb-3">
-                              <div className="p-2 rounded-full bg-primary/10">
-                                {app.icon}
-                              </div>
-                              <h4 className="font-medium">{app.title}</h4>
-                            </div>
-                            <p className="text-sm text-muted-foreground mb-4">{app.description}</p>
-                            <div className="space-y-2">
-                              {app.benefits.map((benefit, i) => (
-                                <div key={i} className="flex items-start gap-2 text-sm">
-                                  <Check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                                  <span>{benefit}</span>
-                                </div>
-                              ))}
-                            </div>
-                            <div className="mt-4 p-3 bg-secondary/20 rounded-lg">
-                              <p className="text-xs italic">
-                                <span className="font-medium text-sm">Exemple: </span>
-                                {app.example}
-                              </p>
-                            </div>
+                      <div className="glass-card p-6 rounded-xl">
+                        <div className="flex items-center gap-4 mb-6">
+                          <div className="p-3 bg-primary/10 rounded-lg">
+                            {sectorDetails[selectedSector].icon}
                           </div>
-                        ))}
-                      </div>
-                      
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                        <div className="md:col-span-1">
-                          <h3 className="font-medium text-lg mb-4">Défis principaux</h3>
-                          <div className="space-y-2">
-                            {sectorDetails[selectedSector].challenges.map((challenge, i) => (
-                              <div key={i} className="flex items-start gap-2">
-                                <ChevronRight className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                                <span className="text-sm">{challenge}</span>
-                              </div>
-                            ))}
+                          <div>
+                            <h2 className="text-2xl font-bold">{sectorDetails[selectedSector].title}</h2>
+                            <p className="text-muted-foreground">{sectorDetails[selectedSector].subtitle}</p>
                           </div>
                         </div>
                         
-                        <div className="md:col-span-2 p-5 border border-dashed border-primary/50 rounded-lg">
-                          <h3 className="font-medium text-lg mb-1">Étude de cas</h3>
-                          <h4 className="text-xl font-bold mb-3">
-                            {sectorDetails[selectedSector].casStudy.company}: {sectorDetails[selectedSector].casStudy.title}
-                          </h4>
-                          <p className="mb-4 text-sm">{sectorDetails[selectedSector].casStudy.description}</p>
-                          
-                          <h5 className="font-medium mb-2 text-sm">Résultats clés:</h5>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
-                            {sectorDetails[selectedSector].casStudy.results.map((result, i) => (
-                              <div key={i} className="flex items-start gap-2 bg-secondary/10 p-2 rounded">
-                                <Check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                                <span className="text-sm">{result}</span>
+                        <p className="mb-8 text-lg">{sectorDetails[selectedSector].description}</p>
+                        
+                        <h3 className="font-medium text-xl mb-4">Applications principales</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                          {sectorDetails[selectedSector].applications.map((app, index) => (
+                            <div key={index} className="border border-border p-4 rounded-lg bg-secondary/5">
+                              <div className="flex items-center gap-3 mb-3">
+                                <div className="p-2 rounded-full bg-primary/10">
+                                  {app.icon}
+                                </div>
+                                <h4 className="font-medium">{app.title}</h4>
                               </div>
-                            ))}
+                              <p className="text-sm text-muted-foreground mb-4">{app.description}</p>
+                              <div className="space-y-2">
+                                {app.benefits.map((benefit, i) => (
+                                  <div key={i} className="flex items-start gap-2 text-sm">
+                                    <Check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                                    <span>{benefit}</span>
+                                  </div>
+                                ))}
+                              </div>
+                              <div className="mt-4 p-3 bg-secondary/20 rounded-lg">
+                                <p className="text-xs italic">
+                                  <span className="font-medium text-sm">Exemple: </span>
+                                  {app.example}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                        
+                        {renderVisualizationSection(selectedSector)}
+                        
+                        {renderInnovativeProjects(selectedSector)}
+                        
+                        {renderExpertInsights(selectedSector)}
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 mt-8">
+                          <div className="md:col-span-1">
+                            <h3 className="font-medium text-lg mb-4">Défis principaux</h3>
+                            <div className="space-y-2">
+                              {sectorDetails[selectedSector].challenges.map((challenge, i) => (
+                                <div key={i} className="flex items-start gap-2">
+                                  <ChevronRight className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                                  <span className="text-sm">{challenge}</span>
+                                </div>
+                              ))}
+                            </div>
                           </div>
                           
-                          <div className="p-3 bg-primary/5 rounded-lg">
-                            <p className="text-sm italic">
-                              "{sectorDetails[selectedSector].casStudy.quote}"
-                            </p>
-                            <p className="text-xs text-right mt-2 text-muted-foreground">
-                              — {sectorDetails[selectedSector].casStudy.author}
-                            </p>
+                          <div className="md:col-span-2 p-5 border border-dashed border-primary/50 rounded-lg">
+                            <h3 className="font-medium text-lg mb-1">Étude de cas</h3>
+                            <h4 className="text-xl font-bold mb-3">
+                              {sectorDetails[selectedSector].casStudy.company}: {sectorDetails[selectedSector].casStudy.title}
+                            </h4>
+                            <p className="mb-4 text-sm">{sectorDetails[selectedSector].casStudy.description}</p>
+                            
+                            <h5 className="font-medium mb-2 text-sm">Résultats clés:</h5>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
+                              {sectorDetails[selectedSector].casStudy.results.map((result, i) => (
+                                <div key={i} className="flex items-start gap-2 bg-secondary/10 p-2 rounded">
+                                  <Check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                                  <span className="text-sm">{result}</span>
+                                </div>
+                              ))}
+                            </div>
+                            
+                            <div className="p-3 bg-primary/5 rounded-lg">
+                              <p className="text-sm italic">
+                                "{sectorDetails[selectedSector].casStudy.quote}"
+                              </p>
+                              <p className="text-xs text-right mt-2 text-muted-foreground">
+                                — {sectorDetails[selectedSector].casStudy.author}
+                              </p>
+                            </div>
                           </div>
                         </div>
+                        
+                        {renderUserTestimonials(selectedSector)}
+                        
+                        {renderResourceLinks(selectedSector)}
                       </div>
                     </motion.div>
                   )}
