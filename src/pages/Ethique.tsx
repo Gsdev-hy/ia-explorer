@@ -4,6 +4,7 @@ import Hero from '../components/Hero';
 import EthicalPrinciplesSection from '@/components/ethics/EthicalPrinciplesSection';
 import EthicalChallengesSection from '@/components/ethics/EthicalChallengesSection';
 import RegulatoryFrameworkSection from '@/components/ethics/RegulatoryFrameworkSection';
+import EthicalExamplesSection from '@/components/ethics/EthicalExamplesSection';
 import QuizSection from '@/components/ethics/QuizSection';
 import ExploreMoreSection from '@/components/common/ExploreMoreSection';
 
@@ -42,6 +43,9 @@ const Ethique = () => {
       <EthicalChallengesSection />
       
       <RegulatoryFrameworkSection />
+      
+      {/* Nouvelle section d'exemples éthiques */}
+      <EthicalExamplesSection />
       
       <QuizSection />
       

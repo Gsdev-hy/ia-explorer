@@ -25,61 +25,71 @@ const ApplicationsSection: React.FC<ApplicationsSectionProps> = ({ activeTab, se
       title: "Génération d'images",
       description: "Création d'images à partir de descriptions textuelles avec Midjourney, DALL-E, Stable Diffusion. Utilisez des prompts détaillés et spécifiez le style artistique souhaité.",
       icon: <ImagePlus size={24} className="text-fuchsia-500" />,
-      link: "#generation-images"
+      link: "#generation-images",
+      imagePath: "/pics/image-generation.jpg" // Image personnalisée attendue
     },
     {
       title: "Création musicale",
       description: "Composition de musique avec Suno AI, MusicLM, Mubert. Décrivez l'ambiance, le genre et les instruments pour obtenir les meilleurs résultats.",
       icon: <Music size={24} className="text-blue-500" />,
-      link: "#creation-musicale"
+      link: "#creation-musicale",
+      imagePath: "/pics/music-creation.jpg" // Image personnalisée attendue
     },
     {
       title: "Génération de code",
       description: "Assistance à la programmation avec GitHub Copilot, CodeWhisperer. Commentez clairement ce que vous souhaitez accomplir pour guider l'IA efficacement.",
       icon: <Code size={24} className="text-emerald-500" />,
-      link: "#generation-code"
+      link: "#generation-code",
+      imagePath: "/pics/code-generation.jpg" // Image personnalisée attendue
     },
     {
       title: "Création vidéo",
       description: "Production de vidéos avec Runway, Synthesia, D-ID. Combinez texte, images et narration pour des résultats optimaux.",
       icon: <Video size={24} className="text-amber-500" />,
-      link: "#creation-video"
+      link: "#creation-video",
+      imagePath: "/pics/video-creation.jpg" // Image personnalisée attendue
     },
     {
       title: "Conversation multimodale",
       description: "Dialogues intégrant texte, images et autres médias avec GPT-4V, Claude Opus, Gemini. Posez des questions précises sur les éléments visuels.",
       icon: <MessagesSquare size={24} className="text-indigo-500" />,
-      link: "#conversation-multimodale"
+      link: "#conversation-multimodale",
+      imagePath: "/pics/multimodal-conversation.jpg" // Image personnalisée attendue
     },
     {
       title: "Rédaction assistée",
       description: "Aide à l'écriture avec ChatGPT, Claude, Notion AI. Définissez clairement le ton, le style et le public cible dans vos instructions.",
       icon: <FileText size={24} className="text-purple-500" />,
-      link: "#redaction-assistee"
+      link: "#redaction-assistee",
+      imagePath: "/pics/assisted-writing.jpg" // Image personnalisée attendue
     },
     {
       title: "Synthèse vocale",
       description: "Conversion de texte en parole avec ElevenLabs, Resemble AI, Play.ht. Ajustez l'émotion et le rythme pour une narration naturelle.",
       icon: <Volume2 size={24} className="text-pink-500" />,
-      link: "#synthese-vocale"
+      link: "#synthese-vocale",
+      imagePath: "/pics/voice-synthesis.jpg" // Image personnalisée attendue
     },
     {
       title: "Design graphique",
       description: "Création de designs et logos avec Canva AI, Adobe Firefly. Combinez des instructions textuelles avec des références visuelles pour guider l'IA.",
       icon: <Palette size={24} className="text-rose-500" />,
-      link: "#design-graphique"
+      link: "#design-graphique",
+      imagePath: "/pics/graphic-design.jpg" // Image personnalisée attendue
     },
     {
       title: "Édition de contenu",
       description: "Amélioration et correction de textes avec Grammarly, DeepL Write. Spécifiez le niveau de formalité et le type de modifications souhaités.",
       icon: <Pencil size={24} className="text-cyan-500" />,
-      link: "#edition-contenu"
+      link: "#edition-contenu",
+      imagePath: "/pics/content-editing.jpg" // Image personnalisée attendue
     },
     {
       title: "Automatisation de tâches",
       description: "Intégration d'IA dans les workflows avec Zapier AI, Make.com. Utilisez des descriptifs clairs des actions à automatiser pour de meilleurs résultats.",
       icon: <Braces size={24} className="text-orange-500" />,
-      link: "#automatisation-taches"
+      link: "#automatisation-taches",
+      imagePath: "/pics/task-automation.jpg" // Image personnalisée attendue
     },
   ];
 

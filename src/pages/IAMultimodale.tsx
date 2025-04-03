@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Hero from '@/components/Hero';
 import ApplicationsSection from '@/components/multimodal/ApplicationsSection';
 import PromptingSection from '@/components/multimodal/PromptingSection';
@@ -11,6 +11,38 @@ import ExploreMoreSection from '@/components/common/ExploreMoreSection';
  */
 const IAMultimodale = () => {
   const [activeTab, setActiveTab] = useState("applications");
+  
+  // Effet pour gérer le scroll vers les sections lors du clic sur les liens d'ancrage
+  useEffect(() => {
+    // Fonction pour gérer le scroll vers un élément avec un ID spécifique
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        // Petit délai pour s'assurer que la page est chargée
+        setTimeout(() => {
+          const element = document.getElementById(hash.substring(1));
+          if (element) {
+            // Scroll avec un offset pour tenir compte du header fixe
+            window.scrollTo({
+              top: element.offsetTop - 100,
+              behavior: 'smooth'
+            });
+          }
+        }, 100);
+      }
+    };
+
+    // Vérifie si un hash est présent au chargement initial
+    handleHashChange();
+    
+    // Ajoute un listener pour les changements de hash
+    window.addEventListener('hashchange', handleHashChange);
+    
+    // Nettoie le listener au démontage du composant
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
 
   const exploreLinks = [
     {
@@ -45,12 +77,12 @@ const IAMultimodale = () => {
         }}
       />
 
-      {/* Important: ID ajouté pour l'ancrage des liens de navigation */}
+      {/* IMPORTANT: ID ajouté pour l'ancrage des liens de navigation */}
       <div id="applications-creatives">
         <ApplicationsSection activeTab={activeTab} setActiveTab={setActiveTab} />
       </div>
       
-      {/* Important: ID ajouté pour l'ancrage des liens de navigation */}
+      {/* IMPORTANT: ID ajouté pour l'ancrage des liens de navigation */}
       <div id="prompting-efficace">
         <PromptingSection />
       </div>
