@@ -1,3 +1,4 @@
+
 import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
 import Card from '../components/Card';
@@ -83,19 +84,19 @@ const Home = () => {
       title: "Réseaux de neurones",
       description: "Visualisez le fonctionnement d'un réseau neuronal en temps réel avec notre simulation interactive.",
       icon: <Network size={24} />,
-      link: "/machine-learning"
+      link: "/machine-learning#neural-network-animation"
     },
     {
       title: "Graphiques d'apprentissage",
       description: "Explorez des visualisations comparant les performances de différents algorithmes de machine learning.",
       icon: <LineChart size={24} />,
-      link: "/machine-learning"
+      link: "/machine-learning#ml-visualizations-charts"
     },
     {
       title: "Deep Learning illustré",
       description: "Comprenez les architectures CNN, RNN, et Transformers à travers des schémas interactifs.",
       icon: <Brain size={24} />,
-      link: "/machine-learning"
+      link: "/machine-learning#deep-learning"
     }
   ];
 
@@ -187,12 +188,12 @@ const Home = () => {
               title="Visualisations interactives"
               description="Explorez nos nouvelles visualisations et simulations interactives pour une compréhension plus intuitive des concepts d'intelligence artificielle."
             />
-            <Link
-              to="/machine-learning"
+            <a
+              href="/machine-learning#ml-visualizations-charts"
               className="inline-flex items-center mt-4 text-primary hover:underline"
             >
               Explorer les visualisations →
-            </Link>
+            </a>
           </div>
           
           <div className="grid grid-cols-1 gap-6 animate-slide-right">
@@ -206,9 +207,9 @@ const Home = () => {
                     <h3 className="font-medium mb-1">{feature.title}</h3>
                     <p className="text-sm text-muted-foreground mb-3">{feature.description}</p>
                     <Button variant="link" size="sm" className="p-0 h-auto text-sm" asChild>
-                      <Link to={feature.link}>
+                      <a href={feature.link}>
                         Découvrir <ChevronRight className="ml-1 h-3 w-3" />
-                      </Link>
+                      </a>
                     </Button>
                   </div>
                 </div>

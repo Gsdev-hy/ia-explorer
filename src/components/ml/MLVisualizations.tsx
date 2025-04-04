@@ -79,7 +79,7 @@ const modelAccuracyProgressData = [
  */
 const MLVisualizations = () => {
   return (
-    <section className="section-container py-16">
+    <section id="ml-visualizations-charts" className="section-container py-16">
       <SectionHeading
         pretitle="Visualisations"
         title="Illustrating Machine Learning Concepts"

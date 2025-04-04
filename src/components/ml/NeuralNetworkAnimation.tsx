@@ -87,8 +87,8 @@ const NeuralNetworkAnimation = () => {
   // Layout du réseau de neurones
   const layers = 3;
   const neuronsPerLayer = 4;
-  const width = 280;
-  const height = 180;
+  const width = 560; // Doubled from 280
+  const height = 360; // Doubled from 180
   const layerGap = width / (layers + 1);
   const neuronGap = height / (neuronsPerLayer + 1);
 
@@ -137,19 +137,19 @@ const NeuralNetworkAnimation = () => {
     <text
       key={`layer-label-${idx}`}
       x={(idx + 1) * layerGap}
-      y={height - 5}
+      y={height - 15}
       textAnchor="middle"
       className="text-xs fill-muted-foreground"
-      fontSize="10"
+      fontSize="12"
     >
       {label}
     </text>
   ));
 
   return (
-    <div className="w-full max-w-md mx-auto bg-card/50 rounded-lg p-4 shadow-sm">
+    <div className="w-full max-w-4xl mx-auto bg-card/50 rounded-lg p-6 shadow-sm">
       <div className="mb-3 text-center">
-        <h4 className="text-sm font-medium">Simulation d'un réseau de neurones en action</h4>
+        <h4 className="text-lg font-medium">Simulation d'un réseau de neurones en action</h4>
       </div>
       
       <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto">
@@ -158,13 +158,13 @@ const NeuralNetworkAnimation = () => {
         {renderLayerLabels}
       </svg>
       
-      <div className="flex justify-between items-center mt-4">
+      <div className="flex justify-between items-center mt-6">
         <div className="flex space-x-2">
           <Button 
             size="sm" 
             variant="outline" 
             onClick={() => setIsAnimating(!isAnimating)}
-            className="text-xs"
+            className="text-xs md:text-sm"
           >
             {isAnimating ? "Pause" : "Lecture"}
           </Button>
@@ -177,7 +177,7 @@ const NeuralNetworkAnimation = () => {
               setActiveConnections([]);
               setStep(0);
             }}
-            className="text-xs"
+            className="text-xs md:text-sm"
             disabled={!isAnimating}
           >
             Réinitialiser
@@ -185,7 +185,7 @@ const NeuralNetworkAnimation = () => {
         </div>
         
         <div className="flex items-center space-x-1">
-          <span className="text-xs text-muted-foreground mr-1">Vitesse:</span>
+          <span className="text-xs text-muted-foreground mr-1 hidden md:inline">Vitesse:</span>
           <Button 
             size="sm" 
             variant={speed === 2000 ? "default" : "outline"}

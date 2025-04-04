@@ -61,7 +61,7 @@ const MachineLearning = () => {
       <TypesOfML />
       
       {/* Section d'animation de réseau de neurones */}
-      <section className="section-container py-12 bg-secondary/10">
+      <section id="neural-network-animation" className="section-container py-12 bg-secondary/10">
         <SectionHeading
           pretitle="Visualisation interactive"
           title="Comment fonctionne un réseau de neurones"
@@ -75,9 +75,13 @@ const MachineLearning = () => {
       </section>
       
       {/* Ajout des visualisations interactives */}
-      <MLVisualizations />
+      <section id="ml-visualizations">
+        <MLVisualizations />
+      </section>
       
-      <DeepLearning />
+      <section id="deep-learning">
+        <DeepLearning />
+      </section>
       <Algorithms />
 
       <section className="section-container bg-secondary/30 rounded-3xl my-12">
