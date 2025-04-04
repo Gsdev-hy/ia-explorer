@@ -3,144 +3,108 @@
 
 Ce fichier documente les changements et améliorations apportés au projet IA Explorer, une ressource éducative sur l'intelligence artificielle.
 
-## Structure du projet
+## [Unreleased]
 
-```
-IA-Explorer/
-├── public/                     # Ressources statiques
-├── src/                        # Code source
-│   ├── components/             # Composants réutilisables
-│   │   ├── common/             # Composants communs à plusieurs pages
-│   │   ├── ethics/             # Composants pour la section éthique
-│   │   ├── glossary/           # Composants pour le glossaire
-│   │   ├── memory/             # Composants pour la section mémoire d'IA
-│   │   ├── ml/                 # Composants pour le Machine Learning
-│   │   │   └── visualization/  # Sous-composants pour les visualisations
-│   │   ├── multimodal/         # Composants pour les IA multimodales
-│   │   ├── news/               # Composants pour les actualités
-│   │   ├── resources/          # Composants pour les ressources
-│   │   ├── timeline/           # Composants pour la timeline
-│   │   └── ui/                 # Composants UI réutilisables (shadcn/ui)
-│   ├── hooks/                  # Hooks React personnalisés
-│   ├── layouts/                # Layouts de page
-│   ├── lib/                    # Utilitaires et fonctions
-│   └── pages/                  # Pages principales de l'application
-├── .gitignore                  # Fichiers ignorés par Git
-├── components.json             # Configuration des composants shadcn/ui
-├── CHANGELOG.md                # Ce fichier de changelog
-└── README.md                   # Documentation du projet
-```
+## [0.6.1] - 2025-04-09
 
-## Fonctionnalités existantes
+### Ajouté
+- Implémentation complète de la page détaillée sur les LLM et le RLHF avec illustrations
+- Enrichissement majeur des exemples de prompts multimodaux avec des cas d'usage pratiques
+- Nouvelles illustrations pour les exemples de création multimodale
+- Ajout de sections applicatives professionnelles dans la galerie d'exemples
+- FAQ complète sur le prompting avec questions/réponses détaillées
 
-- **Navigation complète** avec menu responsive
-- **Mode sombre/clair** avec persistance des préférences
-- **Pages thématiques** sur l'IA:
-  - Niveaux d'IA
-  - Types d'IA
-  - Machine Learning
-  - IA Multimodale
-  - Cas d'usage
-  - Éthique de l'IA
-  - Histoire de l'IA
-  - Glossaire des termes
-  - Ressources externes
-  - Actualités en IA
-- **Composants interactifs**:
-  - Quiz sur l'éthique de l'IA
-  - Timeline interactive de l'histoire de l'IA
-  - Glossaire des termes avec recherche
-  - Visualisation des réseaux de neurones
-  - Visualisations de différents algorithmes ML
+### Amélioré
+- Optimisation du contenu de la galerie d'exemples multimodaux avec des utilisations réelles
+- Amélioration de la navigation entre sections avec meilleure gestion des ancrages
+- Refonte visuelle de la section FAQ avec accordéons et mise en valeur des conseils pratiques
+- Amélioration de la documentation CHANGELOG et README pour une meilleure structure
+- Illustrations optimisées pour améliorer les performances de chargement
 
-## Évolution du projet
+### Corrigé
+- Correction du lien "Approfondir le sujet" qui pointait vers une page 404
+- Résolution des problèmes de navigation par ancrage dans la page IA Multimodale
+- Optimisation des animations pour réduire la consommation de ressources
+- Amélioration de l'accessibilité des composants interactifs
 
-### 06/04/2025 - Refactorisation et améliorations UI
-- **Refactorisation du composant NeuralNetworkInteractive**:
-  - Division en sous-composants réutilisables
-  - Création de NeuralNetworkNode et NeuralNetworkConnection
-  - Meilleure organisation du code pour faciliter la maintenance
-- **Amélioration du design global**:
-  - Réduction de l'espace vertical sous les composants Hero et SectionHeading
-  - Ajout de dégradés de couleurs pour les titres
-  - Modernisation des interfaces avec des effets visuels subtils
-  - Harmonisation des styles entre toutes les pages
-- **Optimisations visuelles**:
-  - Amélioration de l'interface du réseau de neurones interactif
-  - Arrière-plans avec dégradés plus élaborés
-  - Effets de glassmorphisme sur certains éléments
+## [0.6.0] - 2025-04-06
 
-### 05/04/2025 - Améliorations d'interface et cohérence visuelle
-- **Uniformisation du style des pages**:
-  - Standardisation de l'interface des pages Histoire et À propos pour correspondre aux autres pages
-  - Ajout du composant Hero sur toutes les pages
-  - Réduction des espaces verticaux pour une meilleure densité d'information
-- **Correction du placement des images**:
-  - Intégration des images dans les bonnes sections: Actualités, Cas d'usage et Histoire
-  - Optimisation de l'affichage des images avec des ratios cohérents
-- **Optimisations de performance**:
-  - Réduction de la taille des composants Hero et SectionHeading
-  - Amélioration du chargement des images avec l'attribut loading="lazy"
-- **Mise à jour du changelog** pour documenter les améliorations récentes
+### Ajouté
+- Nouvelle page détaillée sur les LLM et les techniques RLHF
+- Enrichissement majeur de la page IA Multimodales avec plus d'exemples, illustrations et contenus
+- Nouveaux exemples de prompts détaillés pour différents types de médias
+- FAQ complète sur l'art du prompting
+- Deux nouvelles catégories dans les applications d'IA multimodales: Marketing IA et Avatars digitaux
+- Système de notifications toast pour interactions utilisateur
 
-### 04/10/2024 - Refactorisation majeure des pages volumineuses
-- **Refactorisation de la page Ethique.tsx**:
-  - Découpage en composants réutilisables et modulaires
-  - Création de EthicalPrinciplesSection, EthicalChallengesSection, RegulatoryFrameworkSection et QuizSection
-  - Amélioration de la maintenabilité et des performances
-- **Refactorisation de la page IAMultimodale.tsx**:
-  - Découpage en composants dédiés: ApplicationsSection et PromptingSection
-  - Meilleure organisation du code et des responsabilités
-- **Création du composant commun ExploreMoreSection**:
-  - Composant réutilisable pour les sections de navigation entre pages
-  - Utilisé dans plusieurs pages pour une expérience utilisateur cohérente
-- **Optimisation des performances**:
-  - Chargement plus rapide des pages volumineuses grâce à la modularisation
-  - Réduction de la complexité des composants individuels
+### Amélioré
+- Design des cartes d'applications avec ajout d'outils populaires et animations
+- Optimisation du composant Hero pour supporter des boutons d'action primaire et secondaire
+- Structure du document CHANGELOG pour une meilleure lisibilité et organisation
+- Refactorisation et enrichissement de la structure du README
+- Mise à jour complète de la documentation des composants
 
-### 03/10/2024 - Améliorations et refactorisation
-- **Enrichissement de la page Histoire de l'IA**:
-  - Ajout d'une navigation par ères historiques avec onglets interactifs
-  - Ajout d'une section sur les publications fondatrices
-  - Intégration d'une bibliographie de ressources externes
-  - Amélioration de la présentation des figures emblématiques
-  - Enrichissement de la section sur l'impact culturel
-- **Refactorisation des composants volumineux**:
-  - Modularisation du composant AITypesVisualization en sous-composants spécialisés
-  - Création de composants dédiés: AINodeGraph, AITypeExplanation, AICapabilitiesChart
-  - Amélioration de la maintenabilité du code
-- **Création d'un rapport de structure (APP_STRUCTURE.md)**:
-  - Documentation détaillée de l'architecture du projet
-  - Analyse des forces et faiblesses
-  - Identification des opportunités d'amélioration
+### Corrigé
+- Correction du lien "Approfondir le sujet" dans la section LLM qui menait à une page 404
+- Optimisation des images dans la section IA Multimodale pour améliorer les performances
+- Correction des problèmes d'ancrage vers les sections spécifiques des pages
 
-### 02/10/2024 - Corrections de bugs
-- **Correction du bug d'icône** dans HistoireIA.tsx (remplacement de Robot par Bot)
-- **Correction de l'exportation du composant** dans HistoireIA.tsx pour résoudre l'erreur d'exportation par défaut
+## [0.5.0] - 2025-04-04
 
-### 01/10/2024 - Optimisations et corrections
-- **Mise à jour du routage**: Home.tsx est maintenant la page d'accueil par défaut
-- **Optimisation des flux RSS dans Actualités**:
-  - Suppression des flux INRIA et HAL Science (non fonctionnels)
-  - Ajout du flux TLDR Tech
-  - Conservation des flux Interstices, Usbek & Rica et Siècle Digital
+### Amélioré
+- Enrichissement complet de la page des niveaux d'IA avec plus de contenu, des cartes informatives, et une navigation améliorée
+- Optimisation du composant de réseau neuronal en animation
+- Amélioration des visualisations interactives avec des tailles doublées
+- Ajout d'un système d'ancres et de navigation interne sur la page des niveaux d'IA
+- Amélioration du design global avec des dégradés et des animations
+- Optimisation de l'espacement dans les composants Hero et SectionHeading
+- Création de liens fonctionnels pour le bouton "Approfondir le sujet" dans la section LLM
 
-### 30/09/2024 - Corrections et documentation
-- **Correction du bug d'icône** dans Home.tsx (remplacement de Robot par Bot)
-- **Création du fichier CHANGELOG.md** pour documenter l'évolution du projet
-- **Clarification de la structure des routes**: l'application a actuellement deux pages d'accueil (Index.tsx et Home.tsx), avec Index.tsx étant la page par défaut
+### Corrigé
+- Correction de la taille des visualisations de réseaux de neurones
+- Optimisation du rendu pour améliorer les performances
+- Correction des liens d'ancrage dans les pages internes
+- Amélioration de la structure HTML pour une meilleure accessibilité
 
-### 29/09/2024 - Améliorations visuelles et contenu
-- **Améliorations du composant NeuralNetworkAnimation**:
-  - Ajout de contrôles (pause/reprise/réinitialisation)
-  - Ajout de contrôles de vitesse
-  - Amélioration du design visuel
-  - Étiquettes pour les couches du réseau
-  - Notifications toast pour les changements de vitesse
-  - Interactivité utilisateur améliorée
+## [0.4.0] - 2025-03-28
 
-- **Enrichissement de la page Machine Learning**:
-  - Section sur le Deep Learning enrichie
-  - Visualisations interactives des architectures CNN, Transformer et GAN
-  - Descriptions détaillées des concepts clés
-  - Tendances émergentes en Deep Learning
+### Ajouté
+- Création des pages "Mentions légales" et "Politique de confidentialité"
+- Animation interactive de réseau neuronal dans la page À propos
+- Nouvelles visualisations pour les différents types d'IA
+
+### Amélioré
+- Réduction de l'espace sous les composants Hero pour un design plus compact
+- Mise à jour des informations de l'auteur dans la page À propos
+- Amélioration du responsive design sur toutes les pages
+
+## [0.3.0] - 2025-03-20
+
+### Ajouté
+- Nouvelle section sur les types d'IA
+- Ajout de contenu détaillé sur les modèles de langage
+- Implémentation des visualisations interactives pour le machine learning
+
+### Amélioré
+- Design global de l'application
+- Performance et temps de chargement
+- Navigation mobile
+
+## [0.2.0] - 2025-03-10
+
+### Ajouté
+- Section histoire de l'IA avec frise chronologique
+- Page des niveaux d'intelligence artificielle
+- Glossaire des termes techniques
+
+### Amélioré
+- Interface utilisateur avec des composants Shadcn
+- Animations et transitions de page
+
+## [0.1.0] - 2025-03-01
+
+### Ajouté
+- Structure initiale du projet
+- Mise en place du système de navigation
+- Page d'accueil avec introduction à l'IA
+- Système de thème clair/sombre
