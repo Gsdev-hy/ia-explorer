@@ -1,11 +1,28 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import NeuralNetworkNode from './NeuralNetworkNode';
+import NeuralNetworkConnection from './NeuralNetworkConnection';
 
-const NeuralNetworkInteractive = () => {
+// Types
+interface Node {
+  id: number;
+  x: number;
+  y: number;
+  layer: number;
+  active: boolean;
+}
+
+interface Connection {
+  id: string;
+  from: number;
+  to: number;
+  active: boolean;
+}
+
+const NeuralNetworkInteractive: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [nodes, setNodes] = useState<{ id: number; x: number; y: number; layer: number; active: boolean }[]>([]);
-  const [connections, setConnections] = useState<{ id: string; from: number; to: number; active: boolean }[]>([]);
+  const [nodes, setNodes] = useState<Node[]>([]);
+  const [connections, setConnections] = useState<Connection[]>([]);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [isInit, setIsInit] = useState(false);
@@ -16,52 +33,57 @@ const NeuralNetworkInteractive = () => {
       const rect = containerRef.current.getBoundingClientRect();
       setDimensions({ width: rect.width, height: rect.height });
       
-      // Define network structure
-      const layers = 4;
-      const nodesPerLayer = [6, 8, 8, 4];
-      const newNodes: typeof nodes = [];
-      const newConnections: typeof connections = [];
-      
-      // Create nodes
-      let nodeId = 0;
-      for (let l = 0; l < layers; l++) {
-        const layerNodes = nodesPerLayer[l];
-        const xPos = rect.width * (l + 1) / (layers + 1);
-        
-        for (let n = 0; n < layerNodes; n++) {
-          const yPos = rect.height * (n + 1) / (layerNodes + 1);
-          newNodes.push({
-            id: nodeId,
-            x: xPos,
-            y: yPos,
-            layer: l,
-            active: false
-          });
-          
-          // Connect to previous layer
-          if (l > 0) {
-            const prevLayerStart = newNodes.findIndex(node => node.layer === l - 1);
-            const prevLayerCount = nodesPerLayer[l - 1];
-            
-            for (let prev = prevLayerStart; prev < prevLayerStart + prevLayerCount; prev++) {
-              newConnections.push({
-                id: `${newNodes[prev].id}-${nodeId}`,
-                from: newNodes[prev].id,
-                to: nodeId,
-                active: false
-              });
-            }
-          }
-          
-          nodeId++;
-        }
-      }
-      
-      setNodes(newNodes);
-      setConnections(newConnections);
+      initializeNetwork(rect.width, rect.height);
       setIsInit(true);
     }
   }, [containerRef, isInit]);
+
+  // Create network nodes and connections
+  const initializeNetwork = (width: number, height: number) => {
+    // Define network structure
+    const layers = 4;
+    const nodesPerLayer = [6, 8, 8, 4];
+    const newNodes: Node[] = [];
+    const newConnections: Connection[] = [];
+    
+    // Create nodes
+    let nodeId = 0;
+    for (let l = 0; l < layers; l++) {
+      const layerNodes = nodesPerLayer[l];
+      const xPos = width * (l + 1) / (layers + 1);
+      
+      for (let n = 0; n < layerNodes; n++) {
+        const yPos = height * (n + 1) / (layerNodes + 1);
+        newNodes.push({
+          id: nodeId,
+          x: xPos,
+          y: yPos,
+          layer: l,
+          active: false
+        });
+        
+        // Connect to previous layer
+        if (l > 0) {
+          const prevLayerStart = newNodes.findIndex(node => node.layer === l - 1);
+          const prevLayerCount = nodesPerLayer[l - 1];
+          
+          for (let prev = prevLayerStart; prev < prevLayerStart + prevLayerCount; prev++) {
+            newConnections.push({
+              id: `${newNodes[prev].id}-${nodeId}`,
+              from: newNodes[prev].id,
+              to: nodeId,
+              active: false
+            });
+          }
+        }
+        
+        nodeId++;
+      }
+    }
+    
+    setNodes(newNodes);
+    setConnections(newConnections);
+  };
 
   // Update active nodes based on mouse position
   useEffect(() => {
@@ -90,7 +112,7 @@ const NeuralNetworkInteractive = () => {
     
     setNodes(activeNodes);
     setConnections(activeConnections);
-  }, [mousePos, isInit]);
+  }, [mousePos, isInit, nodes, connections]);
 
   // Handle mouse movement
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -113,16 +135,44 @@ const NeuralNetworkInteractive = () => {
     });
   };
 
-  // Animation variants
-  const nodeVariants = {
-    active: { scale: 1.2, opacity: 1 },
-    inactive: { scale: 1, opacity: 0.5 }
+  // Render connections
+  const renderConnections = () => {
+    return connections.map(conn => {
+      const fromNode = nodes.find(n => n.id === conn.from);
+      const toNode = nodes.find(n => n.id === conn.to);
+      if (!fromNode || !toNode) return null;
+      
+      return (
+        <NeuralNetworkConnection
+          key={conn.id}
+          id={conn.id}
+          x1={fromNode.x}
+          y1={fromNode.y}
+          x2={toNode.x}
+          y2={toNode.y}
+          active={conn.active}
+        />
+      );
+    });
+  };
+
+  // Render nodes
+  const renderNodes = () => {
+    return nodes.map(node => (
+      <NeuralNetworkNode
+        key={node.id}
+        id={node.id}
+        x={node.x}
+        y={node.y}
+        active={node.active}
+      />
+    ));
   };
 
   return (
     <div 
       ref={containerRef} 
-      className="w-full h-full bg-black/90 relative overflow-hidden"
+      className="w-full h-full bg-gradient-to-br from-black/90 to-purple-950/50 relative overflow-hidden rounded-xl border border-purple-700/30"
       onMouseMove={handleMouseMove}
       onTouchMove={handleTouchMove}
     >
@@ -130,55 +180,23 @@ const NeuralNetworkInteractive = () => {
       
       {/* Title overlay */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <h2 className="text-white text-xl md:text-3xl font-bold text-center px-4 py-2 bg-black/50 backdrop-blur-sm rounded-lg">
+        <h2 className="text-white text-xl md:text-3xl font-bold text-center px-6 py-3 bg-black/50 backdrop-blur-sm rounded-lg">
           Explorez le Réseau Neural
         </h2>
       </div>
       
       {/* Render connections */}
       <svg className="absolute inset-0 w-full h-full">
-        {connections.map(conn => {
-          const fromNode = nodes.find(n => n.id === conn.from);
-          const toNode = nodes.find(n => n.id === conn.to);
-          if (!fromNode || !toNode) return null;
-          
-          return (
-            <motion.line
-              key={conn.id}
-              x1={fromNode.x}
-              y1={fromNode.y}
-              x2={toNode.x}
-              y2={toNode.y}
-              stroke={conn.active ? "#9b87f5" : "#333"}
-              strokeWidth={conn.active ? 1.5 : 0.5}
-              initial={{ opacity: 0.3 }}
-              animate={{ 
-                opacity: conn.active ? 0.8 : 0.3,
-                strokeWidth: conn.active ? 1.5 : 0.5
-              }}
-              transition={{ duration: 0.3 }}
-            />
-          );
-        })}
+        {renderConnections()}
       </svg>
       
       {/* Render nodes */}
       <div className="absolute inset-0">
-        {nodes.map(node => (
-          <motion.div
-            key={node.id}
-            className="absolute rounded-full bg-purple-500"
-            style={{ left: node.x, top: node.y, marginLeft: -5, marginTop: -5 }}
-            initial={{ width: 10, height: 10, opacity: 0.5 }}
-            animate={node.active ? "active" : "inactive"}
-            variants={nodeVariants}
-            transition={{ duration: 0.3 }}
-          />
-        ))}
+        {renderNodes()}
       </div>
       
       {/* Instructions */}
-      <div className="absolute bottom-3 left-0 right-0 text-center text-white/70 text-xs">
+      <div className="absolute bottom-4 left-0 right-0 text-center text-white/70 text-sm backdrop-blur-sm py-2">
         Déplacez votre souris ou votre doigt pour activer les neurones
       </div>
     </div>

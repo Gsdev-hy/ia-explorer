@@ -34,7 +34,7 @@ const Hero = ({
 }: HeroProps) => {
   return (
     <section 
-      className={`relative pt-20 md:pt-24 pb-4 md:pb-6 ${image ? 'min-h-[60vh] flex items-center' : ''}`}
+      className={`relative pt-16 md:pt-20 pb-2 md:pb-3 ${image ? 'min-h-[50vh] flex items-center' : ''}`}
       style={image ? { backgroundImage: `url(${image})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
       aria-labelledby="hero-title"
     >
@@ -44,8 +44,8 @@ const Hero = ({
 
       <div className="relative section-container">
         <div className="max-w-3xl mx-auto text-center">
-          <h1 id="hero-title" className="heading-xl mb-4 animate-slide-down">{title}</h1>
-          <p className="body-lg mb-6 text-muted-foreground animate-slide-down" style={{ animationDelay: '100ms' }}>
+          <h1 id="hero-title" className="heading-xl mb-3 animate-slide-down bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent">{title}</h1>
+          <p className="body-lg mb-4 text-muted-foreground animate-slide-down" style={{ animationDelay: '100ms' }}>
             {subtitle}
           </p>
 

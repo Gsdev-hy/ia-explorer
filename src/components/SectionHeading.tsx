@@ -26,13 +26,13 @@ const SectionHeading = ({
   children
 }: SectionHeadingProps) => {
   return (
-    <div className={`max-w-3xl ${center ? 'mx-auto text-center' : ''} mb-4 md:mb-5`}>
+    <div className={`max-w-3xl ${center ? 'mx-auto text-center' : ''} mb-3 md:mb-4`}>
       {pretitle && (
-        <p className="inline-block px-3 py-1 mb-3 text-sm font-medium rounded-full bg-primary/10 text-primary animate-fade-in">
+        <p className="inline-block px-3 py-1 mb-2 text-sm font-medium rounded-full bg-primary/10 text-primary animate-fade-in">
           {pretitle}
         </p>
       )}
-      <h2 className="heading-lg mb-3 animate-slide-up">{title}</h2>
+      <h2 className="heading-lg mb-2 animate-slide-up bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent">{title}</h2>
       {description && (
         <p className="body-lg text-muted-foreground animate-slide-up" style={{ animationDelay: '100ms' }}>
           {description}

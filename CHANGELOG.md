@@ -11,16 +11,16 @@ IA-Explorer/
 ├── src/                        # Code source
 │   ├── components/             # Composants réutilisables
 │   │   ├── common/             # Composants communs à plusieurs pages
-│   │   ├── ethics/            # Composants pour la section éthique
-│   │   ├── glossary/          # Composants pour le glossaire
-│   │   ├── memory/            # Composants pour la section mémoire d'IA
-│   │   ├── ml/                # Composants pour le Machine Learning
-│   │   │   └── visualization/ # Sous-composants pour les visualisations
-│   │   ├── multimodal/        # Composants pour les IA multimodales
-│   │   ├── news/              # Composants pour les actualités
-│   │   ├── resources/         # Composants pour les ressources
-│   │   ├── timeline/          # Composants pour la timeline
-│   │   └── ui/                # Composants UI réutilisables (shadcn/ui)
+│   │   ├── ethics/             # Composants pour la section éthique
+│   │   ├── glossary/           # Composants pour le glossaire
+│   │   ├── memory/             # Composants pour la section mémoire d'IA
+│   │   ├── ml/                 # Composants pour le Machine Learning
+│   │   │   └── visualization/  # Sous-composants pour les visualisations
+│   │   ├── multimodal/         # Composants pour les IA multimodales
+│   │   ├── news/               # Composants pour les actualités
+│   │   ├── resources/          # Composants pour les ressources
+│   │   ├── timeline/           # Composants pour la timeline
+│   │   └── ui/                 # Composants UI réutilisables (shadcn/ui)
 │   ├── hooks/                  # Hooks React personnalisés
 │   ├── layouts/                # Layouts de page
 │   ├── lib/                    # Utilitaires et fonctions
@@ -54,6 +54,21 @@ IA-Explorer/
   - Visualisations de différents algorithmes ML
 
 ## Évolution du projet
+
+### 06/04/2025 - Refactorisation et améliorations UI
+- **Refactorisation du composant NeuralNetworkInteractive**:
+  - Division en sous-composants réutilisables
+  - Création de NeuralNetworkNode et NeuralNetworkConnection
+  - Meilleure organisation du code pour faciliter la maintenance
+- **Amélioration du design global**:
+  - Réduction de l'espace vertical sous les composants Hero et SectionHeading
+  - Ajout de dégradés de couleurs pour les titres
+  - Modernisation des interfaces avec des effets visuels subtils
+  - Harmonisation des styles entre toutes les pages
+- **Optimisations visuelles**:
+  - Amélioration de l'interface du réseau de neurones interactif
+  - Arrière-plans avec dégradés plus élaborés
+  - Effets de glassmorphisme sur certains éléments
 
 ### 05/04/2025 - Améliorations d'interface et cohérence visuelle
 - **Uniformisation du style des pages**:
