@@ -4,6 +4,7 @@ import { MessageSquare, Cpu, Braces, Sparkles, ArrowRight } from 'lucide-react';
 import IASection from './IASection';
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
+import { Link } from 'react-router-dom';
 
 const LLMSection = () => {
   const detailsCard = (
@@ -93,10 +94,12 @@ const LLMSection = () => {
         </p>
         
         <div className="mt-4 flex justify-end">
-          <Button size="sm" variant="outline" className="text-xs flex items-center gap-1">
-            <span>Approfondir le sujet</span>
-            <ArrowRight className="h-3 w-3" />
-          </Button>
+          <Link to="/types-ia/llm">
+            <Button size="sm" variant="outline" className="text-xs flex items-center gap-1">
+              <span>Approfondir le sujet</span>
+              <ArrowRight className="h-3 w-3" />
+            </Button>
+          </Link>
         </div>
       </div>
     </>

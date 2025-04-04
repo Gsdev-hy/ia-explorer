@@ -1,46 +1,109 @@
 
-import { ReactNode } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 interface SectionHeadingProps {
-  pretitle?: string;
   title: string;
   description?: string;
+  pretitle?: string;
   center?: boolean;
-  children?: ReactNode;
+  light?: boolean;
+  underline?: boolean;
+  animated?: boolean;
 }
 
 /**
- * En-tête de section avec pré-titre, titre et description
- * @param {string} pretitle - Texte au-dessus du titre (optionnel)
- * @param {string} title - Titre principal
- * @param {string} description - Description (optionnel)
- * @param {boolean} center - Si le texte doit être centré (optionnel)
- * @param {ReactNode} children - Contenu supplémentaire (optionnel)
+ * Composant d'en-tête de section avec animation et styling paramétrable
+ * @param {SectionHeadingProps} props - Les propriétés du composant
  * @returns {JSX.Element} Le composant SectionHeading
  */
-const SectionHeading = ({
-  pretitle,
+const SectionHeading: React.FC<SectionHeadingProps> = ({
   title,
   description,
+  pretitle,
   center = false,
-  children
-}: SectionHeadingProps) => {
-  return (
-    <div className={`max-w-3xl ${center ? 'mx-auto text-center' : ''} mb-3 md:mb-4`}>
+  light = false,
+  underline = false,
+  animated = true
+}) => {
+  const containerClasses = `mb-8 ${center ? 'text-center' : ''}`;
+  const titleClasses = `heading-lg ${light ? 'text-white' : 'text-foreground'}`;
+  const descriptionClasses = `mt-4 text-lg ${light ? 'text-white/80' : 'text-muted-foreground'}`;
+  const pretitleClasses = `text-sm uppercase tracking-wider font-medium mb-2 ${light ? 'text-white/60' : 'text-primary'}`;
+  
+  const animations = {
+    container: {
+      hidden: { opacity: 0 },
+      visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+    },
+    pretitle: {
+      hidden: { opacity: 0, y: 10 },
+      visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+    },
+    title: {
+      hidden: { opacity: 0, y: 15 },
+      visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+    },
+    underline: {
+      hidden: { width: 0 },
+      visible: { width: '60px', transition: { duration: 0.7, ease: 'easeOut' } }
+    },
+    description: {
+      hidden: { opacity: 0, y: 20 },
+      visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.2 } }
+    }
+  };
+
+  const content = (
+    <div className={containerClasses}>
       {pretitle && (
-        <p className="inline-block px-3 py-1 mb-2 text-sm font-medium rounded-full bg-primary/10 text-primary animate-fade-in">
+        <motion.p 
+          className={pretitleClasses}
+          variants={animations.pretitle}
+        >
           {pretitle}
-        </p>
+        </motion.p>
       )}
-      <h2 className="heading-lg mb-2 animate-slide-up bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent">{title}</h2>
+
+      <motion.h2 
+        className={titleClasses}
+        variants={animations.title}
+      >
+        {title}
+      </motion.h2>
+
+      {underline && (
+        <motion.div 
+          className={`h-1 bg-primary rounded-full mt-4 ${center ? 'mx-auto' : ''}`}
+          variants={animations.underline}
+        />
+      )}
+
       {description && (
-        <p className="body-lg text-muted-foreground animate-slide-up" style={{ animationDelay: '100ms' }}>
+        <motion.p 
+          className={descriptionClasses}
+          variants={animations.description}
+        >
           {description}
-        </p>
+        </motion.p>
       )}
-      {children}
     </div>
   );
+
+  if (animated) {
+    return (
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-100px' }}
+        variants={animations.container}
+      >
+        {content}
+      </motion.div>
+    );
+  }
+
+  return content;
 };
 
 export default SectionHeading;

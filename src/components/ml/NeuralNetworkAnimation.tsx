@@ -87,8 +87,8 @@ const NeuralNetworkAnimation = () => {
   // Layout du réseau de neurones
   const layers = 3;
   const neuronsPerLayer = 4;
-  const width = 560; // Doubled from 280
-  const height = 360; // Doubled from 180
+  const width = 1120; // Doubled from previous 560
+  const height = 720; // Doubled from previous 360
   const layerGap = width / (layers + 1);
   const neuronGap = height / (neuronsPerLayer + 1);
 
@@ -137,19 +137,19 @@ const NeuralNetworkAnimation = () => {
     <text
       key={`layer-label-${idx}`}
       x={(idx + 1) * layerGap}
-      y={height - 15}
+      y={height - 30}
       textAnchor="middle"
-      className="text-xs fill-muted-foreground"
-      fontSize="12"
+      className="text-base fill-muted-foreground"
+      fontSize="24"
     >
       {label}
     </text>
   ));
 
   return (
-    <div className="w-full max-w-4xl mx-auto bg-card/50 rounded-lg p-6 shadow-sm">
+    <div className="w-full max-w-6xl mx-auto bg-card/50 rounded-lg p-6 shadow-sm">
       <div className="mb-3 text-center">
-        <h4 className="text-lg font-medium">Simulation d'un réseau de neurones en action</h4>
+        <h4 className="text-xl font-medium">Simulation d'un réseau de neurones en action</h4>
       </div>
       
       <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto">

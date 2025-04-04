@@ -1,106 +1,131 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Brain, MessageSquare, EyeIcon, Bot, BarChart3 } from 'lucide-react';
 
-interface AINodeProps {
-  icon: React.ReactNode;
-  title: string;
-  x: string;
-  y: string;
-  color: string;
-  delay: number;
-  onHover: () => void;
+interface Node {
+  id: string;
+  label: string;
+  x: number;
+  y: number;
+  radius: number;
 }
 
-const AINode: React.FC<AINodeProps> = ({ icon, title, x, y, color, delay, onHover }) => {
-  return (
-    <motion.div 
-      className="absolute cursor-pointer"
-      style={{ left: x, top: y }}
-      initial={{ scale: 0, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      transition={{ delay: delay * 0.2, duration: 0.5, type: "spring" }}
-      whileHover={{ scale: 1.1 }}
-      onMouseEnter={onHover}
-    >
-      <div className={`flex items-center justify-center w-12 h-12 rounded-full ${color} shadow-lg`}>
-        {icon}
-      </div>
-      <div className="absolute top-14 left-1/2 transform -translate-x-1/2 whitespace-nowrap text-xs font-medium">
-        {title}
-      </div>
-    </motion.div>
-  );
-};
+interface Connection {
+  source: string;
+  target: string;
+  strength: number;
+}
 
 interface AINodeGraphProps {
-  onNodeSelect: (nodeType: string) => void;
+  onNodeSelect: (nodeId: string) => void;
 }
 
 const AINodeGraph: React.FC<AINodeGraphProps> = ({ onNodeSelect }) => {
-  const nodes = [
-    { type: "LLM", icon: <MessageSquare className="text-white" />, title: "LLM", x: "20%", y: "40%", color: "bg-primary", delay: 0 },
-    { type: "CNN", icon: <EyeIcon className="text-white" />, title: "CNN", x: "40%", y: "20%", color: "bg-blue-500", delay: 1 },
-    { type: "RL", icon: <Bot className="text-white" />, title: "RL", x: "60%", y: "40%", color: "bg-orange-500", delay: 2 },
-    { type: "XAI", icon: <BarChart3 className="text-white" />, title: "XAI", x: "40%", y: "60%", color: "bg-green-500", delay: 3 },
-    { type: "AGI", icon: <Brain className="text-white" />, title: "AGI", x: "80%", y: "40%", color: "bg-purple-600", delay: 4 }
-  ];
-
+  const [selectedNode, setSelectedNode] = useState<string | null>('LLM');
+  const [nodes, setNodes] = useState<Node[]>([]);
+  const [connections, setConnections] = useState<Connection[]>([]);
+  
+  // Initialize graph nodes and connections
+  useEffect(() => {
+    // Define nodes
+    const graphNodes: Node[] = [
+      { id: 'LLM', label: 'LLM', x: 40, y: 50, radius: 25 },
+      { id: 'CNN', label: 'CNN', x: 70, y: 30, radius: 25 },
+      { id: 'RL', label: 'RL', x: 60, y: 70, radius: 25 },
+      { id: 'XAI', label: 'XAI', x: 25, y: 35, radius: 25 },
+      { id: 'AGI', label: 'AGI', x: 50, y: 50, radius: 25 },
+    ];
+    
+    // Define connections
+    const graphConnections: Connection[] = [
+      { source: 'LLM', target: 'CNN', strength: 0.7 },
+      { source: 'LLM', target: 'AGI', strength: 0.8 },
+      { source: 'CNN', target: 'RL', strength: 0.6 },
+      { source: 'RL', target: 'AGI', strength: 0.9 },
+      { source: 'XAI', target: 'LLM', strength: 0.5 },
+      { source: 'XAI', target: 'AGI', strength: 0.7 },
+      { source: 'CNN', target: 'AGI', strength: 0.8 },
+    ];
+    
+    setNodes(graphNodes);
+    setConnections(graphConnections);
+  }, []);
+  
+  const handleNodeClick = (nodeId: string) => {
+    setSelectedNode(nodeId);
+    onNodeSelect(nodeId);
+  };
+  
+  // Calculate positions for SVG viewport
+  const viewBox = "0 0 100 100";
+  
   return (
-    <>
-      {nodes.map((node) => (
-        <AINode
-          key={node.type}
-          icon={node.icon}
-          title={node.title}
-          x={node.x}
-          y={node.y}
-          color={node.color}
-          delay={node.delay}
-          onHover={() => onNodeSelect(node.type)}
-        />
-      ))}
-      
-      {/* Lignes de connexion */}
-      <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 0 }}>
-        <motion.line 
-          x1="20%" y1="40%" x2="40%" y2="20%" 
-          stroke="var(--border)" strokeWidth="1" 
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 0.6 }}
-          transition={{ delay: 1, duration: 1 }}
-        />
-        <motion.line 
-          x1="40%" y1="20%" x2="60%" y2="40%" 
-          stroke="var(--border)" strokeWidth="1"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 0.6 }}
-          transition={{ delay: 1.2, duration: 1 }}
-        />
-        <motion.line 
-          x1="60%" y1="40%" x2="40%" y2="60%" 
-          stroke="var(--border)" strokeWidth="1"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 0.6 }}
-          transition={{ delay: 1.4, duration: 1 }}
-        />
-        <motion.line 
-          x1="40%" y1="60%" x2="20%" y2="40%" 
-          stroke="var(--border)" strokeWidth="1"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 0.6 }}
-          transition={{ delay: 1.6, duration: 1 }}
-        />
-        <motion.line 
-          x1="60%" y1="40%" x2="80%" y2="40%" 
-          stroke="var(--border)" strokeWidth="1"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 0.6 }}
-          transition={{ delay: 1.8, duration: 1 }}
-        />
+    <div className="w-full h-full">
+      <svg viewBox={viewBox} className="w-full h-full">
+        {/* Render connections */}
+        {connections.map((connection) => {
+          const source = nodes.find(node => node.id === connection.source);
+          const target = nodes.find(node => node.id === connection.target);
+          
+          if (!source || !target) return null;
+          
+          const isHighlighted = 
+            selectedNode === source.id || 
+            selectedNode === target.id;
+          
+          return (
+            <motion.line
+              key={`${source.id}-${target.id}`}
+              x1={source.x}
+              y1={source.y}
+              x2={target.x}
+              y2={target.y}
+              stroke={isHighlighted ? "rgb(var(--primary))" : "#9ca3af"}
+              strokeWidth={isHighlighted ? 1.5 : 1}
+              strokeOpacity={isHighlighted ? 0.8 : 0.3}
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+            />
+          );
+        })}
+        
+        {/* Render nodes */}
+        {nodes.map((node) => (
+          <g 
+            key={node.id}
+            onClick={() => handleNodeClick(node.id)}
+            className="cursor-pointer"
+            transform={`translate(${node.x}, ${node.y})`}
+          >
+            <motion.circle
+              r={node.radius * (selectedNode === node.id ? 1.2 : 1)}
+              fill={selectedNode === node.id ? "rgb(var(--primary))" : "rgb(var(--primary-foreground))"}
+              stroke={selectedNode === node.id ? "rgb(var(--primary))" : "rgb(var(--primary))"}
+              strokeWidth={selectedNode === node.id ? 2 : 1}
+              fillOpacity={selectedNode === node.id ? 0.2 : 0.1}
+              whileHover={{ 
+                scale: 1.1,
+                fillOpacity: 0.3,
+                transition: { duration: 0.2 }
+              }}
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.5, ease: "backOut", delay: 0.2 }}
+            />
+            <text
+              textAnchor="middle"
+              dy="0.3em"
+              fontSize="4"
+              fontWeight={selectedNode === node.id ? "bold" : "normal"}
+              fill={selectedNode === node.id ? "rgb(var(--primary))" : "currentColor"}
+            >
+              {node.label}
+            </text>
+          </g>
+        ))}
       </svg>
-    </>
+    </div>
   );
 };
 
