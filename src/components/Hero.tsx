@@ -1,6 +1,13 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
+
+interface ActionProps {
+  label: string;
+  href: string;
+}
 
 interface HeroProps {
   title: string;
@@ -9,6 +16,8 @@ interface HeroProps {
   centered?: boolean;
   overlap?: boolean;
   gradient?: boolean;
+  primaryAction?: ActionProps;
+  secondaryAction?: ActionProps;
 }
 
 /**
@@ -23,6 +32,8 @@ const Hero: React.FC<HeroProps> = ({
   centered = true,
   overlap = false,
   gradient = true,
+  primaryAction,
+  secondaryAction,
 }) => {
   // Style conditionnel basé sur les props
   const containerClasses = `
@@ -48,6 +59,14 @@ const Hero: React.FC<HeroProps> = ({
         opacity: 1, 
         y: 0,
         transition: { duration: 0.6, ease: 'easeOut', delay: 0.2 }
+      }
+    },
+    actions: {
+      hidden: { opacity: 0, y: 20 },
+      visible: { 
+        opacity: 1, 
+        y: 0,
+        transition: { duration: 0.6, ease: 'easeOut', delay: 0.3 }
       }
     }
   };
@@ -81,6 +100,31 @@ const Hero: React.FC<HeroProps> = ({
             >
               {subtitle}
             </motion.p>
+          )}
+          
+          {(primaryAction || secondaryAction) && (
+            <motion.div 
+              className="mt-8 flex flex-wrap gap-4 justify-center"
+              initial="hidden"
+              animate="visible"
+              variants={animations.actions}
+            >
+              {primaryAction && (
+                <Button asChild size="lg">
+                  <a href={primaryAction.href}>
+                    {primaryAction.label}
+                  </a>
+                </Button>
+              )}
+              
+              {secondaryAction && (
+                <Button variant="outline" asChild size="lg">
+                  <a href={secondaryAction.href}>
+                    {secondaryAction.label}
+                  </a>
+                </Button>
+              )}
+            </motion.div>
           )}
         </div>
       </div>
