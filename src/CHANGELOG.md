@@ -5,6 +5,28 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 
 ## [Unreleased]
 
+## [0.6.0] - 2025-04-06
+
+### Ajouté
+- Nouvelle page détaillée sur les LLM et les techniques RLHF
+- Enrichissement majeur de la page IA Multimodales avec plus d'exemples, illustrations et contenus
+- Nouveaux exemples de prompts détaillés pour différents types de médias
+- FAQ complète sur l'art du prompting
+- Deux nouvelles catégories dans les applications d'IA multimodales: Marketing IA et Avatars digitaux
+- Système de notifications toast pour interactions utilisateur
+
+### Amélioré
+- Design des cartes d'applications avec ajout d'outils populaires et animations
+- Optimisation du composant Hero pour supporter des boutons d'action primaire et secondaire
+- Structure du document CHANGELOG pour une meilleure lisibilité et organisation
+- Refactorisation et enrichissement de la structure du README
+- Mise à jour complète de la documentation des composants
+
+### Corrigé
+- Correction du lien "Approfondir le sujet" dans la section LLM qui menait à une page 404
+- Optimisation des images dans la section IA Multimodale pour améliorer les performances
+- Correction des problèmes d'ancrage vers les sections spécifiques des pages
+
 ## [0.5.0] - 2025-04-04
 
 ### Amélioré

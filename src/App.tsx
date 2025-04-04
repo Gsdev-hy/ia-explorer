@@ -22,6 +22,7 @@ import MentionsLegales from "./pages/MentionsLegales";
 import Confidentialite from "./pages/Confidentialite";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
+import LLMDetails from "./pages/LLMDetails";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +57,11 @@ const App = () => (
             <Route path="/types-ia" element={
               <MainLayout>
                 <TypesIA />
+              </MainLayout>
+            } />
+            <Route path="/types-ia/llm" element={
+              <MainLayout>
+                <LLMDetails />
               </MainLayout>
             } />
             <Route path="/machine-learning" element={

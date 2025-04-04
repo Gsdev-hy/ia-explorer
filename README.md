@@ -1,101 +1,119 @@
 
-# IA Explorer - Guide Éducatif sur l'Intelligence Artificielle
+# IA Explorer
 
-## Présentation du Projet
+Une plateforme éducative interactive sur l'intelligence artificielle, ses concepts, applications et enjeux.
 
-**IA Explorer** est une ressource éducative complète sur l'intelligence artificielle, conçue pour rendre ce domaine complexe accessible à tous les niveaux de connaissance. La plateforme offre une exploration détaillée de tous les aspects de l'IA, des concepts fondamentaux aux applications avancées.
+## À propos du projet
 
-**URL**: https://lovable.dev/projects/ca21d6c5-36b0-4b33-bf3f-15c29fa6fead
+IA Explorer est une application web conçue pour rendre les concepts de l'intelligence artificielle accessibles à tous. Ce projet vise à démystifier l'IA à travers des explications claires, des visualisations interactives et des exemples concrets.
 
-**Auteur**: Geoffroy Streit (geoffroy.streit@gmail.com)
+## Fonctionnalités
 
-## Fonctionnalités principales
+- **Contenu éducatif structuré** sur les différents types d'intelligence artificielle
+- **Visualisations interactives** pour comprendre les concepts complexes
+- **Glossaire** des termes techniques
+- **Section histoire** retraçant l'évolution de l'IA
+- **Exemples pratiques** d'applications de l'IA dans différents domaines
+- **Actualités** sur les dernières avancées
+- **Ressources externes** pour approfondir ses connaissances
 
-- **Explorations thématiques complètes** : Types d'IA, niveaux d'intelligence artificielle, machine learning, IA multimodale...
-- **Resources pédagogiques** : Glossaire détaillé, études de cas, exemples pratiques en français
-- **Contenu multimédia** : Schémas explicatifs, timeline interactive de l'histoire de l'IA
-- **Actualités sur l'IA** : Flux RSS automatisé des dernières innovations dans le domaine avec des sources francophones de qualité
-- **Interface adaptative** : Support du mode clair/sombre, design responsive pour tous les appareils
+## Pages principales
 
-## Sections du site
-
-- **Accueil** : Présentation générale et navigation intuitive
-- **Types d'IA** : IA faible vs IA forte, systèmes experts, etc.
-- **Niveaux d'IA** : ANI, AGI, ASI expliqués en détail
-- **Machine Learning** : Principes, types d'apprentissage, algorithmes courants
-- **IA Multimodale** : IA pour la création d'images, vidéos, musique et code
-- **Cas d'Usage** : Applications pratiques de l'IA dans divers secteurs
-- **Histoire de l'IA** : Chronologie interactive des événements clés
-- **Éthique de l'IA** : Enjeux, défis et considérations éthiques
-- **Glossaire** : Définitions détaillées des termes techniques
-- **Ressources** : Collection de ressources gratuites en français: articles, cours, vidéos et sites web
-- **Actualités** : Dernières nouvelles du monde de l'IA via flux RSS francophones
-- **À propos** : Information sur le projet et son auteur
+- **Accueil** : Introduction et navigation vers les différentes sections
+- **Niveaux d'IA** : Présentation des différents niveaux d'intelligence artificielle
+- **Types d'IA** : Exploration des différentes approches et techniques d'IA
+- **Machine Learning** : Focus sur l'apprentissage automatique et ses méthodes
+- **IA Multimodale** : Technologies combinant plusieurs types de médias et d'entrées
+- **Cas d'usage** : Applications concrètes de l'IA dans différents secteurs
+- **Éthique** : Enjeux éthiques liés au développement et à l'utilisation de l'IA
+- **Histoire de l'IA** : Chronologie des avancées majeures et figures importantes
+- **Glossaire** : Définitions des termes techniques
+- **Ressources** : Livres, cours, sites web et autres ressources pour approfondir
+- **Actualités** : Dernières nouvelles du domaine de l'IA
 
 ## Technologies utilisées
 
-Cette application a été développée avec:
+- **React** avec **TypeScript** pour le front-end
+- **Vite** pour le build et le développement
+- **Tailwind CSS** pour le styling
+- **Shadcn/UI** pour les composants UI
+- **Framer Motion** pour les animations
+- **Recharts** pour les graphiques et visualisations
+- **React Router** pour la navigation
 
-- **React** avec TypeScript pour un développement robuste et typé
-- **Vite** comme outil de build ultra-rapide
-- **React Router** pour la navigation entre les différentes sections
-- **Tailwind CSS** pour le styling efficace et responsive
-- **shadcn/ui** pour des composants UI réutilisables et accessibles
-- **Lucide React** pour les icônes vectorielles
-- **React Query** pour la gestion des données
-- **RSS2JSON API** pour l'intégration des flux RSS
-- **Mode sombre/clair** avec persistance des préférences utilisateur
+## Visualisations interactives
 
-## Comment utiliser ce projet
+L'application comprend plusieurs visualisations interactives pour faciliter la compréhension des concepts d'IA :
 
-### Installation et démarrage
+- Animation de réseau neuronal
+- Graphiques d'apprentissage machine
+- Visualisation des différents types d'IA et leurs relations
+- Timeline interactive de l'histoire de l'IA
+- Workflow de traitement des données en IA multimodale
 
-```sh
-# Cloner le dépôt
-git clone <URL_DU_DÉPÔT>
+## Développement
 
-# Accéder au répertoire du projet
-cd ia-explorer
+### Prérequis
 
-# Installer les dépendances
-npm install
+- Node.js 18+
+- npm ou Yarn
 
-# Lancer le serveur de développement
-npm run dev
+### Installation
+
+1. Cloner le dépôt
+2. Installer les dépendances : `npm install` ou `yarn install`
+3. Lancer le serveur de développement : `npm run dev` ou `yarn dev`
+
+### Structure du projet
+
 ```
-
-### Personnalisation
-
-Le contenu du site peut être facilement mis à jour en modifiant les fichiers dans les répertoires:
-- `src/pages/` pour les pages principales
-- `src/components/` pour les composants réutilisables
-- `src/data/` pour les données (termes du glossaire, ressources, etc.)
-
-### Sources d'actualités
-
-Les flux RSS utilisés pour la section Actualités incluent des sources francophones de qualité comme:
-- Interstices (INRIA)
-- INRIA
-- Usbek & Rica
-- Siècle Digital
-- HAL Science
-
-Pour ajouter ou modifier des sources, consultez le fichier `src/components/news/IANews.tsx`.
-
-## Déploiement
-
-Pour déployer ce projet:
-
-1. Ouvrez [Lovable](https://lovable.dev/projects/ca21d6c5-36b0-4b33-bf3f-15c29fa6fead)
-2. Cliquez sur Share -> Publish
+IA-Explorer/
+├── public/                     # Ressources statiques
+├── src/                        # Code source
+│   ├── components/             # Composants réutilisables
+│   │   ├── common/             # Composants communs à plusieurs pages
+│   │   ├── ethics/             # Composants pour la section éthique
+│   │   ├── glossary/           # Composants pour le glossaire
+│   │   ├── memory/             # Composants pour la section mémoire d'IA
+│   │   ├── ml/                 # Composants pour le Machine Learning
+│   │   │   └── visualization/  # Visualisations interactives
+│   │   ├── multimodal/         # Composants pour les IA multimodales
+│   │   ├── news/               # Composants pour les actualités
+│   │   ├── resources/          # Composants pour les ressources
+│   │   ├── timeline/           # Composants pour la timeline
+│   │   └── ui/                 # Composants UI réutilisables (shadcn/ui)
+│   ├── hooks/                  # Hooks React personnalisés
+│   ├── layouts/                # Layouts de page
+│   ├── lib/                    # Utilitaires et fonctions
+│   └── pages/                  # Pages principales de l'application
+├── .gitignore
+├── package.json
+├── CHANGELOG.md                # Historique des changements
+└── README.md                   # Documentation
+```
 
 ## Contribution
 
-Les contributions à ce projet sont les bienvenues. Pour contribuer:
+Les contributions sont les bienvenues ! Pour contribuer :
 
-1. Contactez l'auteur: geoffroy.streit@gmail.com
-2. Proposez des améliorations ou signaler des problèmes
+1. Forkez le repo
+2. Créez une branche pour votre fonctionnalité (`git checkout -b feature/amazing-feature`)
+3. Commitez vos changements (`git commit -m 'Add some amazing feature'`)
+4. Poussez vers la branche (`git push origin feature/amazing-feature`)
+5. Ouvrez une Pull Request
+
+## Roadmap
+
+- Ajout de plus de visualisations interactives
+- Section quiz pour tester ses connaissances
+- Support multilingue
+- Mode hors-ligne
+- Application mobile
+
+## Contact
+
+Pour toute question ou suggestion, n'hésitez pas à ouvrir une issue sur le dépôt GitHub.
 
 ## Licence
 
-Tous droits réservés. © 2023-2025 Geoffroy Streit.
+Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
