@@ -230,7 +230,7 @@ const AICapabilitiesChart: React.FC = () => {
             <ChartTooltip 
               content={
                 <ChartTooltipContent 
-                  formatValue={(value, name, props) => {
+                  formatter={(value, name, props) => {
                     // Customisation du texte de l'infobulle
                     const dimensionKey = props.dataKey as string;
                     if (dimensionKey && dimensionDescriptions[dimensionKey as keyof typeof dimensionDescriptions]) {
