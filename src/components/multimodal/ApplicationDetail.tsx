@@ -45,6 +45,13 @@ const ApplicationDetail: React.FC<ApplicationDetailProps> = ({ application, onBa
           <div className="mb-8">
             <h3 className="heading-sm mb-3">Description</h3>
             <p className="text-muted-foreground">{application.description}</p>
+            {application.detailedDescription && (
+              <div className="mt-4 space-y-3">
+                {application.detailedDescription.map((paragraph, i) => (
+                  <p key={i} className="text-muted-foreground">{paragraph}</p>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="mb-8">
@@ -63,39 +70,19 @@ const ApplicationDetail: React.FC<ApplicationDetailProps> = ({ application, onBa
           <div className="mb-4">
             <h3 className="heading-sm mb-3">Ressources utiles</h3>
             <ul className="space-y-2">
-              <li>
-                <a 
-                  href="https://openai.com/research/dall-e" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline flex items-center gap-1"
-                >
-                  <span>Documentation DALL-E</span>
-                  <ExternalLink size={14} />
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://midjourney.com/docs" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline flex items-center gap-1"
-                >
-                  <span>Guide de prompting Midjourney</span>
-                  <ExternalLink size={14} />
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://stability.ai/stable-diffusion" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline flex items-center gap-1"
-                >
-                  <span>Stable Diffusion Documentation</span>
-                  <ExternalLink size={14} />
-                </a>
-              </li>
+              {application.resources?.map((resource, i) => (
+                <li key={i}>
+                  <a 
+                    href={resource.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline flex items-center gap-1"
+                  >
+                    <span>{resource.title}</span>
+                    <ExternalLink size={14} />
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -125,7 +112,7 @@ const ApplicationDetail: React.FC<ApplicationDetailProps> = ({ application, onBa
                     <span>Mobile</span>
                   </div>
                   <div className="flex items-center gap-1 p-1.5 bg-secondary/10 rounded">
-                    <span className="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-{application.compatibility?.api ? 'green' : 'yellow'}-500"></span>
                     <span>API</span>
                   </div>
                   <div className="flex items-center gap-1 p-1.5 bg-secondary/10 rounded">
