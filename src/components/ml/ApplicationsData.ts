@@ -13,7 +13,8 @@ export interface ApplicationExample {
 export interface AIApplication {
   id: string;
   name: string;
-  icon: React.ReactNode;
+  icon: string; // Changed to string to store icon name
+  iconComponent: React.ElementType; // Added to store the actual component reference
   description: string;
   examples: ApplicationExample[];
 }
@@ -22,7 +23,8 @@ export const applicationsData: AIApplication[] = [
   {
     id: "healthcare",
     name: "Santé",
-    icon: <HeartPulse size={28} />,
+    icon: "HeartPulse",
+    iconComponent: HeartPulse,
     description: "L'IA révolutionne le secteur médical en améliorant le diagnostic, la découverte de médicaments et les soins personnalisés.",
     examples: [
       {
@@ -44,7 +46,8 @@ export const applicationsData: AIApplication[] = [
   {
     id: "finance",
     name: "Finance",
-    icon: <Building size={28} />,
+    icon: "Building",
+    iconComponent: Building,
     description: "L'IA transforme les services financiers avec la détection de fraude, les investissements algorithmiques et l'analyse de risque.",
     examples: [
       {
@@ -66,7 +69,8 @@ export const applicationsData: AIApplication[] = [
   {
     id: "automotive",
     name: "Automobile",
-    icon: <Car size={28} />,
+    icon: "Car",
+    iconComponent: Car,
     description: "L'IA permet le développement de véhicules autonomes et de systèmes d'assistance à la conduite avancés.",
     examples: [
       {
@@ -88,7 +92,8 @@ export const applicationsData: AIApplication[] = [
   {
     id: "entertainment",
     name: "Divertissement",
-    icon: <VideoIcon size={28} />,
+    icon: "VideoIcon",
+    iconComponent: VideoIcon,
     description: "L'IA révolutionne la création et la personnalisation du contenu dans l'industrie du divertissement.",
     examples: [
       {
@@ -110,7 +115,8 @@ export const applicationsData: AIApplication[] = [
   {
     id: "retail",
     name: "Commerce",
-    icon: <ShoppingBag size={28} />,
+    icon: "ShoppingBag",
+    iconComponent: ShoppingBag,
     description: "L'IA transforme l'expérience d'achat avec la personnalisation, l'optimisation des stocks et le service client automatisé.",
     examples: [
       {
@@ -132,7 +138,8 @@ export const applicationsData: AIApplication[] = [
   {
     id: "education",
     name: "Éducation",
-    icon: <School size={28} />,
+    icon: "School",
+    iconComponent: School,
     description: "L'IA permet de personnaliser l'apprentissage, d'automatiser les tâches administratives et d'améliorer l'accès à l'éducation.",
     examples: [
       {
@@ -154,7 +161,8 @@ export const applicationsData: AIApplication[] = [
   {
     id: "security",
     name: "Cybersécurité",
-    icon: <Shield size={28} />,
+    icon: "Shield",
+    iconComponent: Shield,
     description: "L'IA renforce la sécurité informatique avec la détection de menaces, l'analyse comportementale et la réponse automatisée.",
     examples: [
       {
