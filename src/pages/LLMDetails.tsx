@@ -2,7 +2,7 @@
 import React from 'react';
 import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
-import { ExternalLink, Brain, Lightbulb, ArrowLeft, BookOpen, Layers, Bot, PuzzlePiece, Server, BarChart, Bot as BotIcon, Code, Users, Database, Cpu } from 'lucide-react';
+import { ExternalLink, Brain, Lightbulb, ArrowLeft, BookOpen, Layers, Bot, Puzzle, Server, BarChart, Bot as BotIcon, Code, Users, Database, Cpu } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from 'framer-motion';
@@ -44,7 +44,7 @@ const LLMDetails = () => {
     {
       title: "Optimisation par RL",
       description: "Application de l'apprentissage par renforcement pour optimiser le modèle en utilisant les signaux du modèle de récompense",
-      icon: <PuzzlePiece className="h-5 w-5 text-primary" />
+      icon: <Puzzle className="h-5 w-5 text-primary" />
     },
     {
       title: "Itération et évaluation",
