@@ -17,6 +17,8 @@ import AITypesVisualization from './ml/AITypesVisualization';
 import AIComparisonTable from './ml/AIComparisonTable';
 import MLApplications from './ml/MLApplications';
 import AIArchitecturesVisualization from './ml/AIArchitecturesVisualization';
+import ApplicationDetail from './ml/ApplicationDetail';
+import ApplicationSelector from './ml/ApplicationSelector';
 
 export {
   Card,
@@ -36,5 +38,7 @@ export {
   AITypesVisualization,
   AIComparisonTable,
   MLApplications,
-  AIArchitecturesVisualization
+  AIArchitecturesVisualization,
+  ApplicationDetail,
+  ApplicationSelector
 };
