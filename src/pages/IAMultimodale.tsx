@@ -16,12 +16,15 @@ const IAMultimodale = () => {
   const scrollToElement = useCallback((elementId: string, offset: number = 100) => {
     const element = document.getElementById(elementId);
     if (element) {
-      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({
-        top: elementPosition - offset,
-        behavior: 'smooth'
-      });
-      console.log(`Scrolling to ${elementId} at position ${elementPosition - offset}`);
+      // Attendre un peu pour s'assurer que tous les éléments sont rendus
+      setTimeout(() => {
+        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+          top: elementPosition - offset,
+          behavior: 'smooth'
+        });
+        console.log(`Scrolling to ${elementId} at position ${elementPosition - offset}`);
+      }, 50);
     } else {
       console.log(`Element with id ${elementId} not found`);
     }
@@ -53,7 +56,7 @@ const IAMultimodale = () => {
       setTimeout(() => {
         const id = window.location.hash.substring(1);
         scrollToElement(id);
-      }, 300);
+      }, 500);
     }
     
     // Nettoyer les listeners au démontage du composant
@@ -61,6 +64,39 @@ const IAMultimodale = () => {
       document.removeEventListener('click', handleAnchorClick);
     };
   }, [scrollToElement]);
+
+  // Effet pour observer les sections visibles et mettre à jour le hash de l'URL
+  useEffect(() => {
+    const sections = document.querySelectorAll('section[id]');
+    
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.3,
+    };
+    
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          // Mettre à jour l'URL sans déclencher de scroll
+          history.replaceState(null, '', `#${id}`);
+        }
+      });
+    };
+    
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+    
+    return () => {
+      sections.forEach(section => {
+        observer.unobserve(section);
+      });
+    };
+  }, []);
 
   const exploreLinks = [
     {

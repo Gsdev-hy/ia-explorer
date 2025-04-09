@@ -27,6 +27,18 @@ const AITypeExplanation: React.FC<AITypeExplanationProps> = ({ selectedType }) =
     "AGI": {
       type: "Intelligence Artificielle Générale (AGI)",
       description: "L'AGI représente des systèmes capables de comprendre, d'apprendre et d'appliquer des connaissances à travers différents domaines au niveau humain ou supérieur. Elle reste un objectif théorique poursuivi par la recherche."
+    },
+    "NLP": {
+      type: "Traitement du Langage Naturel (NLP)",
+      description: "Le NLP permet aux ordinateurs de comprendre, interpréter et générer le langage humain. Ces technologies sont à la base des assistants virtuels, de l'analyse de sentiment, de la traduction automatique et de l'extraction d'informations de textes."
+    },
+    "RAG": {
+      type: "Génération Augmentée par Récupération (RAG)",
+      description: "Les systèmes RAG améliorent les réponses des modèles de langage en recherchant des informations pertinentes dans une base de connaissances externe avant de générer une réponse. Ils combinent ainsi la puissance générative des LLM avec des informations factuelles précises."
+    },
+    "GAN": {
+      type: "Réseaux Antagonistes Génératifs (GAN)",
+      description: "Les GAN utilisent deux réseaux neuronaux qui s'affrontent : un générateur qui crée des contenus et un discriminateur qui tente de distinguer le vrai du faux. Cette compétition permet de créer des images, sons ou vidéos d'un réalisme impressionnant."
     }
   };
 

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { ArrowRightCircle } from 'lucide-react';
 import { AppExample } from './ApplicationsData';
+import { Button } from '@/components/ui/button';
 
 interface AppCardProps {
   app: AppExample;
@@ -52,13 +53,14 @@ const AppCard: React.FC<AppCardProps> = ({ app, onExampleClick }) => {
             </div>
           </div>
           
-          <button 
+          <Button 
             onClick={() => onExampleClick(app.id, app.title)}
-            className="mt-auto inline-flex items-center gap-1 text-primary font-medium text-sm hover:underline"
+            variant="ghost"
+            className="mt-auto inline-flex items-center gap-1 text-primary font-medium text-sm hover:bg-primary/5 px-0 justify-start"
             aria-label={`En savoir plus sur ${app.title}`}
           >
             Découvrir <ArrowRightCircle size={14} />
-          </button>
+          </Button>
         </div>
       </Card>
     </motion.div>

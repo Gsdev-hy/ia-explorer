@@ -27,24 +27,36 @@ const AINodeGraph: React.FC<AINodeGraphProps> = ({ onNodeSelect }) => {
   
   // Initialize graph nodes and connections
   useEffect(() => {
-    // Define nodes
+    // Define nodes with optimized positioning for better visualization
     const graphNodes: Node[] = [
-      { id: 'LLM', label: 'LLM', x: 40, y: 50, radius: 25 },
-      { id: 'CNN', label: 'CNN', x: 70, y: 30, radius: 25 },
-      { id: 'RL', label: 'RL', x: 60, y: 70, radius: 25 },
-      { id: 'XAI', label: 'XAI', x: 25, y: 35, radius: 25 },
-      { id: 'AGI', label: 'AGI', x: 50, y: 50, radius: 25 },
+      { id: 'LLM', label: 'LLM', x: 30, y: 45, radius: 28 },
+      { id: 'CNN', label: 'CNN', x: 60, y: 25, radius: 28 },
+      { id: 'RL', label: 'RL', x: 75, y: 65, radius: 28 },
+      { id: 'XAI', label: 'XAI', x: 20, y: 70, radius: 28 },
+      { id: 'AGI', label: 'AGI', x: 50, y: 50, radius: 32 },
+      { id: 'NLP', label: 'NLP', x: 15, y: 30, radius: 25 },
+      { id: 'RAG', label: 'RAG', x: 40, y: 20, radius: 25 },
+      { id: 'GAN', label: 'GAN', x: 80, y: 40, radius: 25 },
     ];
     
-    // Define connections
+    // Define connections with more relationships
     const graphConnections: Connection[] = [
       { source: 'LLM', target: 'CNN', strength: 0.7 },
       { source: 'LLM', target: 'AGI', strength: 0.8 },
+      { source: 'LLM', target: 'NLP', strength: 0.9 },
+      { source: 'LLM', target: 'RAG', strength: 0.9 },
       { source: 'CNN', target: 'RL', strength: 0.6 },
+      { source: 'CNN', target: 'GAN', strength: 0.8 },
       { source: 'RL', target: 'AGI', strength: 0.9 },
       { source: 'XAI', target: 'LLM', strength: 0.5 },
       { source: 'XAI', target: 'AGI', strength: 0.7 },
+      { source: 'XAI', target: 'CNN', strength: 0.6 },
       { source: 'CNN', target: 'AGI', strength: 0.8 },
+      { source: 'NLP', target: 'LLM', strength: 0.9 },
+      { source: 'RAG', target: 'LLM', strength: 0.8 },
+      { source: 'RAG', target: 'NLP', strength: 0.7 },
+      { source: 'GAN', target: 'CNN', strength: 0.8 },
+      { source: 'GAN', target: 'AGI', strength: 0.6 },
     ];
     
     setNodes(graphNodes);

@@ -11,6 +11,7 @@ import { useToast } from '@/hooks/use-toast';
 import ApplicationGrid from './ApplicationGrid';
 import ExamplePrompts from './ExamplePrompts';
 import { multimodalExamples } from './ApplicationsData';
+import ApplicationDetail from './ApplicationDetail';
 
 interface ApplicationsSectionProps {
   activeTab: string;
@@ -20,14 +21,20 @@ interface ApplicationsSectionProps {
 const ApplicationsSection: React.FC<ApplicationsSectionProps> = ({ activeTab, setActiveTab }) => {
   const { toast } = useToast();
   const [selectedExample, setSelectedExample] = useState<string | null>(null);
+  const [showDetailView, setShowDetailView] = useState(false);
 
   const handleExampleClick = (id: string, title: string) => {
     setSelectedExample(id);
+    setShowDetailView(true);
     toast({
-      title: `Information sur ${title}`,
-      description: "Un exemple concret d'utilisation apparaîtra bientôt dans cette section.",
+      title: `Exploration de ${title}`,
+      description: "Découvrez les exemples d'utilisation et les outils associés.",
       duration: 3000,
     });
+  };
+
+  const handleBackToGrid = () => {
+    setShowDetailView(false);
   };
 
   return (
@@ -58,15 +65,24 @@ const ApplicationsSection: React.FC<ApplicationsSectionProps> = ({ activeTab, se
         </div>
         
         <TabsContent value="applications" className="animate-fade-in">
-          <ApplicationGrid 
-            applications={multimodalExamples} 
-            onExampleClick={handleExampleClick} 
-          />
-          
-          <ExamplePrompts 
-            selectedExample={selectedExample}
-            applications={multimodalExamples}
-          />
+          {!showDetailView ? (
+            <>
+              <ApplicationGrid 
+                applications={multimodalExamples} 
+                onExampleClick={handleExampleClick} 
+              />
+              
+              <ExamplePrompts 
+                selectedExample={selectedExample}
+                applications={multimodalExamples}
+              />
+            </>
+          ) : (
+            <ApplicationDetail 
+              application={multimodalExamples.find(app => app.id === selectedExample) || multimodalExamples[0]} 
+              onBack={handleBackToGrid}
+            />
+          )}
         </TabsContent>
         
         <TabsContent value="fonctionnement" className="animate-fade-in space-y-8">
