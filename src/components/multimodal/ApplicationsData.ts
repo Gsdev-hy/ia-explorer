@@ -177,7 +177,7 @@ export const multimodalExamples: AppExample[] = [
     icon: "Building",
     iconComponent: Building,
     link: "#marketing-ia",
-    imagePath: "/lovable-uploads/93b1a36e-0fc6-4f70-8be1-d27437de628c.png",
+    imagePath: "/pics/ai_marketing.jpg", // Mise à jour du chemin de l'image
     tools: ["Copy.ai", "Persado", "MarketMuse", "Phrasee", "Albert"],
     examples: [
       "Génération de slogans accrocheurs pour une campagne publicitaire",
@@ -192,7 +192,7 @@ export const multimodalExamples: AppExample[] = [
     icon: "Users",
     iconComponent: Users,
     link: "#education-formation",
-    imagePath: "/pics/image-placeholder.jpg",
+    imagePath: "/pics/education.jpg", // Mise à jour du chemin de l'image
     tools: ["Khanmigo", "Duolingo AI", "Quizlet", "Pearson AI", "Coursera Coach"],
     examples: [
       "Module d'apprentissage interactif sur un sujet scientifique complexe",
@@ -207,7 +207,7 @@ export const multimodalExamples: AppExample[] = [
     icon: "UserSquare2",
     iconComponent: UserSquare2,
     link: "#avatars-digitaux",
-    imagePath: "/pics/avatar-placeholder.jpg",
+    imagePath: "/pics/digital_avatars.jpg", // Mise à jour du chemin de l'image
     tools: ["Ready Player Me", "Inworld AI", "Synthesia", "Soul Machines", "Replica Studios"],
     examples: [
       "Avatar pour présentateur virtuel d'événements professionnels en ligne",

@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Hero from '@/components/Hero';
 import ApplicationsSection from '@/components/multimodal/ApplicationsSection';
 import PromptingSection from '@/components/multimodal/PromptingSection';
@@ -12,42 +12,55 @@ import ExploreMoreSection from '@/components/common/ExploreMoreSection';
 const IAMultimodale = () => {
   const [activeTab, setActiveTab] = useState("applications");
   
+  // Fonction améliorée pour gérer le scroll vers un élément avec offset
+  const scrollToElement = useCallback((elementId: string, offset: number = 100) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: 'smooth'
+      });
+      console.log(`Scrolling to ${elementId} at position ${elementPosition - offset}`);
+    } else {
+      console.log(`Element with id ${elementId} not found`);
+    }
+  }, []);
+
   // Effet pour gérer le scroll vers les sections lors du clic sur les liens d'ancrage
   useEffect(() => {
-    // Fonction pour gérer le scroll vers un élément avec un ID spécifique
-    const handleHashChange = () => {
-      const hash = window.location.hash;
-      if (hash) {
-        // Petit délai pour s'assurer que la page est chargée
-        setTimeout(() => {
-          const element = document.getElementById(hash.substring(1));
-          if (element) {
-            // Scroll avec un offset pour tenir compte du header fixe
-            window.scrollTo({
-              top: element.offsetTop - 100,
-              behavior: 'smooth'
-            });
-            
-            // Log pour debugging
-            console.log(`Scrolling to ${hash} at position ${element.offsetTop - 100}`);
-          } else {
-            console.log(`Element with id ${hash.substring(1)} not found`);
-          }
-        }, 300); // Augmentation du délai pour s'assurer que tous les éléments sont rendus
+    // Fonction pour intercepter les clics sur les liens d'ancrage
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a[href^="#"]');
+      
+      if (anchor) {
+        e.preventDefault();
+        const hash = anchor.getAttribute('href');
+        if (hash && hash.startsWith('#')) {
+          const id = hash.substring(1);
+          scrollToElement(id);
+        }
       }
     };
 
-    // Vérifie si un hash est présent au chargement initial
-    handleHashChange();
+    // Ajouter un listener pour les clics
+    document.addEventListener('click', handleAnchorClick);
+
+    // Vérifier si un hash est présent au chargement initial
+    if (window.location.hash) {
+      // Petit délai pour s'assurer que la page est chargée
+      setTimeout(() => {
+        const id = window.location.hash.substring(1);
+        scrollToElement(id);
+      }, 300);
+    }
     
-    // Ajoute un listener pour les changements de hash
-    window.addEventListener('hashchange', handleHashChange);
-    
-    // Nettoie le listener au démontage du composant
+    // Nettoyer les listeners au démontage du composant
     return () => {
-      window.removeEventListener('hashchange', handleHashChange);
+      document.removeEventListener('click', handleAnchorClick);
     };
-  }, []);
+  }, [scrollToElement]);
 
   const exploreLinks = [
     {
@@ -82,11 +95,13 @@ const IAMultimodale = () => {
         }}
       />
 
-      <ApplicationsSection activeTab={activeTab} setActiveTab={setActiveTab} />
+      <section id="applications-creatives">
+        <ApplicationsSection activeTab={activeTab} setActiveTab={setActiveTab} />
+      </section>
       
-      <div id="prompting-efficace">
+      <section id="prompting-efficace">
         <PromptingSection />
-      </div>
+      </section>
       
       <ExploreMoreSection links={exploreLinks} />
     </main>
