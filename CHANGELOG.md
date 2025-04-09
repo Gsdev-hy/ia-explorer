@@ -5,6 +5,22 @@ Ce fichier documente les changements et améliorations apportés au projet IA Ex
 
 ## [Unreleased]
 
+## [0.6.2] - 2025-04-10
+
+### Ajouté
+- Enrichissement complet de la page Cas d'Usage avec une approche modulaire
+- Ajout d'une section sur les technologies émergentes d'IA en 2025
+- Nouveaux exemples détaillés dans les cas d'usage sectoriels
+- Structure plus modulaire pour les composants de la page Cas d'Usage
+- Intégration de nouveaux secteurs d'application (Agriculture, Ressources Humaines)
+
+### Amélioré
+- Restructuration complète de la page Cas d'Usage pour une meilleure lisibilité
+- Optimisation de la navigation entre les différentes sections
+- Descriptions plus détaillées des technologies et applications
+- Contenu plus riche pour les exemples concrets d'applications d'IA
+- Liens contextuels vers les pages associées pour une navigation fluide
+
 ## [0.6.1] - 2025-04-09
 
 ### Ajouté
