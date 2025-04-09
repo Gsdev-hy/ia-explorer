@@ -3,7 +3,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { 
   Briefcase, Building2, Stethoscope, BookOpen, Scale, ShoppingBag, 
-  Truck, Factory, Music, Dumbbell, Microscope, Landmark, CheckCircle
+  Truck, Factory, Music, Dumbbell, Microscope, Landmark, CheckCircle,
+  Users, Leaf
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
@@ -137,7 +138,7 @@ const sectors: BusinessSector[] = [
   },
   {
     name: 'Ressources humaines',
-    icon: <Users2 className="h-5 w-5" />,
+    icon: <Users className="h-5 w-5" />,
     description: 'Recrutement assisté, analyse des talents, formation personnalisée, gestion de la performance et prédiction des besoins en personnel.',
     examples: [
       'Analyse automatisée des CV et présélection des candidats',

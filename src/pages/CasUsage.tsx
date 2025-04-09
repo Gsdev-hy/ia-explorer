@@ -9,7 +9,7 @@ import ApplicationsGrid from '@/components/cas-usage/ApplicationsGrid';
 import DetailedExamples from '@/components/cas-usage/DetailedExamples';
 import ResourceLinks from '@/components/cas-usage/ResourceLinks';
 import EmergingTechnologies from '@/components/cas-usage/EmergingTechnologies';
-import { Users2, Leaf, BarChart } from 'lucide-react';
+import { Users, Leaf, BarChart } from 'lucide-react';
 
 /**
  * Page présentant les cas d'usage concrets de l'IA

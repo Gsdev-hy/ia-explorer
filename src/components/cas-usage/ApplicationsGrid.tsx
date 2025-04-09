@@ -3,7 +3,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { 
   FileVideo, Bot, Zap, Factory, Network, Brain, CheckCircle,
-  MessageCircle, Camera, Search, CloudLightning, Sparkles, Database
+  MessageCircle, Camera, Search, CloudLightning, Sparkles, Database,
+  BarChart
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
