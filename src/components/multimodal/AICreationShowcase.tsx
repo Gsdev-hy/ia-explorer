@@ -50,7 +50,7 @@ const AICreationShowcase = () => {
       title: "Illustrations génératives",
       category: "Image",
       description: "Série d'illustrations créées avec DALL-E 3 à partir de prompts détaillés",
-      imagePath: "/lovable-uploads/93b1a36e-0fc6-4f70-8be1-d27437de628c.png", // L'image téléchargée
+      imagePath: "/pics/generated_illustration.jpg", // Emplacement de l'image personnalisée
       prompt: "Illustration d'un explorateur futuriste dans une jungle alien luminescente, avec des plantes bioluminescentes et des créatures étranges. Style mélange d'art conceptuel de film et d'aquarelle, palette dominante bleu-violet.",
       tools: ["DALL-E 3", "Midjourney", "Photoshop"],
       link: "https://openai.com/blog/dall-e/",
@@ -120,7 +120,7 @@ const AICreationShowcase = () => {
       title: "Avatars personnalisés",
       category: "Personnalisation",
       description: "Série d'avatars d'une même personne dans différents styles artistiques",
-      imagePath: "/lovable-uploads/93b1a36e-0fc6-4f70-8be1-d27437de628c.png",
+      imagePath: "/pics/avatar-placeholder.jpg",
       customIconSize: "w-12 h-12",
       customIcon: <Bot className="w-12 h-12 text-violet-500/70" aria-hidden="true" />,
       prompt: "À partir de ces 5 photos de référence de mon visage, crée une série de 10 avatars stylisés dans différents styles: pixel art, anime, art vectoriel, peinture à l'huile, cyberpunk, etc. Garde une bonne ressemblance tout en adaptant au style artistique.",
