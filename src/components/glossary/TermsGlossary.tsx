@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -404,6 +403,132 @@ const aiTerms: GlossaryTerm[] = [
   {
     term: "Alignment (alignement)",
     definition: "Processus visant à s'assurer que les systèmes d'IA agissent conformément aux intentions et valeurs humaines, minimisant les comportements non désirés ou dangereux.",
+    category: "advanced"
+  },
+  
+  // NEW TERMS
+  {
+    term: "Apprentissage Continu",
+    definition: "Capacité d'un système d'IA à continuer d'apprendre et d'améliorer ses performances au fil du temps, en intégrant de nouvelles données et expériences sans nécessiter de réentraînement complet.",
+    category: "general"
+  },
+  {
+    term: "Intelligence Augmentée",
+    definition: "Approche qui vise à utiliser l'IA comme complément à l'intelligence humaine plutôt que comme remplacement, créant une synergie entre capacités humaines et technologiques.",
+    category: "general"
+  },
+  {
+    term: "Intelligence Collective",
+    definition: "Forme d'intelligence qui émerge de la collaboration entre plusieurs agents intelligents, qu'ils soient humains ou artificiels, permettant de résoudre des problèmes complexes.",
+    category: "general"
+  },
+  
+  {
+    term: "Pruning (Élagage)",
+    definition: "Technique qui consiste à réduire la taille d'un modèle d'IA en supprimant les connexions ou paramètres les moins importants, permettant d'améliorer l'efficacité sans perte significative de performance.",
+    category: "technical"
+  },
+  {
+    term: "Quantization (Quantification)",
+    definition: "Processus de réduction de la précision numérique des paramètres d'un modèle d'IA, permettant de diminuer sa taille et d'accélérer l'inférence avec un impact minimal sur les performances.",
+    category: "technical"
+  },
+  {
+    term: "Distillation de Modèle",
+    definition: "Technique où un modèle plus petit (étudiant) est entraîné pour reproduire le comportement d'un modèle plus grand et plus performant (enseignant), permettant des déploiements plus efficaces.",
+    category: "technical"
+  },
+  {
+    term: "Mixture of Experts (MoE)",
+    definition: "Architecture de réseau neuronal où plusieurs sous-réseaux spécialisés (experts) sont combinés avec un mécanisme de routage qui sélectionne les experts les plus appropriés pour chaque entrée.",
+    category: "technical"
+  },
+  {
+    term: "Parameter-Efficient Fine-Tuning (PEFT)",
+    definition: "Ensemble de techniques permettant d'adapter un grand modèle pré-entraîné à une tâche spécifique en modifiant seulement une petite fraction de ses paramètres, économisant ainsi ressources et temps.",
+    category: "technical"
+  },
+  {
+    term: "LoRA (Low-Rank Adaptation)",
+    definition: "Méthode de fine-tuning efficace qui ajoute des matrices de faible rang aux poids existants d'un grand modèle, permettant de l'adapter à de nouvelles tâches avec beaucoup moins de paramètres à entraîner.",
+    category: "technical"
+  },
+  {
+    term: "QLoRA",
+    definition: "Extension de LoRA qui combine quantification et adaptation de rang faible pour permettre le fine-tuning de très grands modèles de langage sur du matériel grand public avec des ressources limitées.",
+    category: "technical"
+  },
+  
+  {
+    term: "Souveraineté Numérique",
+    definition: "Capacité d'un État, d'une organisation ou d'un individu à exercer un contrôle sur ses données, infrastructures et compétences en matière d'IA, réduisant ainsi la dépendance à des entités extérieures.",
+    category: "ethical"
+  },
+  {
+    term: "Empreinte Carbone de l'IA",
+    definition: "Impact environnemental lié à l'entraînement et à l'exploitation des modèles d'IA, particulièrement important pour les grands modèles qui nécessitent d'importantes ressources computationnelles.",
+    category: "ethical"
+  },
+  {
+    term: "Principe de Précaution en IA",
+    definition: "Approche qui prône une évaluation préalable rigoureuse des risques potentiels avant le déploiement de systèmes d'IA, particulièrement pour ceux susceptibles d'avoir un impact sociétal significatif.",
+    category: "ethical"
+  },
+  
+  {
+    term: "Mémoire externe",
+    definition: "Système permettant à un modèle d'IA d'accéder à des informations stockées séparément de ses paramètres, comme des bases de données ou des vecteurs d'embeddings, augmentant ainsi sa capacité de stockage et sa précision factuelle.",
+    category: "memory"
+  },
+  {
+    term: "Système de mémoire hiérarchique",
+    definition: "Architecture inspirée de la cognition humaine où différents types de mémoire (court terme, long terme, de travail) sont organisés en niveaux d'accessibilité et de permanence pour optimiser le traitement de l'information.",
+    category: "memory"
+  },
+  {
+    term: "Cognitive architecture",
+    definition: "Cadre théorique qui modélise les structures et processus mentaux, y compris les systèmes de mémoire, permettant aux systèmes d'IA d'imiter plus fidèlement le fonctionnement cognitif humain.",
+    category: "memory"
+  },
+  
+  {
+    term: "AI Safety",
+    definition: "Domaine de recherche dédié à garantir que les systèmes d'IA avancés restent alignés sur les valeurs humaines et ne causent pas de dommages involontaires, même en cas d'évolution autonome ou d'amélioration récursive.",
+    category: "advanced"
+  },
+  {
+    term: "Mechanistic Interpretability",
+    definition: "Approche d'explicabilité de l'IA qui cherche à comprendre les mécanismes internes précis par lesquels les modèles traitent l'information et prennent des décisions, au niveau des neurones individuels et de leurs interactions.",
+    category: "advanced"
+  },
+  {
+    term: "Agentic AI",
+    definition: "Systèmes d'IA dotés d'une forme d'autonomie leur permettant de fixer des objectifs, planifier des actions et interagir avec leur environnement pour atteindre ces objectifs sans intervention humaine constante.",
+    category: "advanced"
+  },
+  {
+    term: "Constitutional AI",
+    definition: "Approche de développement qui intègre un ensemble de principes ou 'constitution' directement dans la conception d'un système d'IA, guidant son comportement et permettant une forme d'auto-supervision éthique.",
+    category: "advanced"
+  },
+  {
+    term: "Multimodal Chain-of-Thought",
+    definition: "Extension du raisonnement étape par étape aux modèles multimodaux, permettant de décomposer le traitement d'informations visuelles et textuelles en étapes intermédiaires explicites pour améliorer le raisonnement.",
+    category: "advanced"
+  },
+  {
+    term: "System 1 & System 2",
+    definition: "Cadre conceptuel inspiré de la psychologie cognitive qui distingue la pensée rapide, intuitive et automatique (Système 1) de la pensée lente, délibérée et analytique (Système 2) dans les architectures d'IA avancées.",
+    category: "advanced"
+  },
+  {
+    term: "Scaffolded LLM",
+    definition: "Architecture où un grand modèle de langage est augmenté par des composants spécialisés (bases de connaissances, outils externes, modules de raisonnement) formant un 'échafaudage' qui étend ses capacités au-delà du texte seul.",
+    category: "advanced"
+  },
+  {
+    term: "Cybernetic AI",
+    definition: "Approche qui intègre les principes de la cybernétique dans la conception des systèmes d'IA, mettant l'accent sur les boucles de rétroaction, l'auto-régulation et l'interaction dynamique avec l'environnement.",
     category: "advanced"
   }
 ];
