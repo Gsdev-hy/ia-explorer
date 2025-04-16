@@ -112,7 +112,7 @@ const ApplicationDetail: React.FC<ApplicationDetailProps> = ({ application, onBa
                     <span>Mobile</span>
                   </div>
                   <div className="flex items-center gap-1 p-1.5 bg-secondary/10 rounded">
-                    <span className="w-1.5 h-1.5 rounded-full bg-{application.compatibility?.api ? 'green' : 'yellow'}-500"></span>
+                    <span className={`w-1.5 h-1.5 rounded-full bg-${application.compatibility?.api ? 'green' : 'yellow'}-500`}></span>
                     <span>API</span>
                   </div>
                   <div className="flex items-center gap-1 p-1.5 bg-secondary/10 rounded">

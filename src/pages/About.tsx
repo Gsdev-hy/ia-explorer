@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from '@/components/ui/badge';
@@ -10,26 +10,24 @@ import SectionHeading from '@/components/SectionHeading';
 import NeuralNetworkInteractive from '@/components/ml/visualization/NeuralNetworkInteractive';
 
 const About = () => {
-  const teamMembers = [
-    {
-      name: "Geoffroy Streit",
-      role: "Fondateur & Développeur",
-      bio: "Passionné d'IA et d'éducation numérique. Expert en développement et vulgarisation technique avec une forte expérience dans le domaine de l'intelligence artificielle.",
-      avatar: "/placeholder.svg",
-      initials: "GS",
-      links: {
-        email: "geoffroy.streit@gmail.com",
-        github: "https://github.com/gstreit",
-        linkedin: "https://linkedin.com/in/gstreit"
-      }
+  const author = {
+    name: "Geoffroy Streit",
+    role: "Créateur & Développeur",
+    bio: "Passionné d'IA et d'éducation numérique. Expert en développement et vulgarisation technique avec une forte expérience dans le domaine de l'intelligence artificielle. À travers IA Explorer, il souhaite partager sa passion et ses connaissances au plus grand nombre dans un esprit d'accessibilité.",
+    avatar: "/placeholder.svg",
+    initials: "GS",
+    links: {
+      email: "geoffroy.streit@gmail.com",
+      github: "https://github.com/gstreit",
+      linkedin: "https://linkedin.com/in/gstreit"
     }
-  ];
+  };
 
   return (
     <>
       <Hero
         title="À propos d'IA Explorer"
-        subtitle="Découvrez notre mission, notre équipe et comment nous contribuons à rendre l'intelligence artificielle plus accessible et compréhensible pour tous."
+        subtitle="Découvrez la mission derrière IA Explorer et comment ce projet contribue à rendre l'intelligence artificielle plus accessible et compréhensible pour tous."
       />
 
       <section className="py-8 relative overflow-hidden">
@@ -43,7 +41,7 @@ const About = () => {
       <section className="section-container">
         <div className="max-w-5xl mx-auto">
           <SectionHeading
-            pretitle="Notre mission"
+            pretitle="La mission"
             title="Démystifier l'intelligence artificielle pour tous"
             description="IA Explorer a été créé avec un objectif clair : rendre l'IA accessible et compréhensible pour le grand public francophone."
             center
@@ -82,58 +80,57 @@ const About = () => {
           </div>
           
           <SectionHeading
-            pretitle="Notre équipe"
-            title="Le créateur d'IA Explorer"
+            pretitle="Le créateur"
+            title="L'auteur d'IA Explorer"
             description="Découvrez le passionné qui a conçu et développé cette ressource éducative sur l'intelligence artificielle."
             center
           />
           
           <div className="max-w-2xl mx-auto">
-            {teamMembers.map((member, index) => (
-              <Card key={index} className="bg-card shadow-sm overflow-hidden">
-                <div className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <Avatar className="h-16 w-16 border-2 border-primary/20">
-                      <AvatarImage src={member.avatar} alt={member.name} />
-                      <AvatarFallback className="bg-primary/10 text-primary font-medium">
-                        {member.initials}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <h3 className="text-xl font-semibold">{member.name}</h3>
-                      <p className="text-sm text-muted-foreground">{member.role}</p>
-                      <div className="flex gap-1 mt-1">
-                        <Badge variant="outline" className="text-xs">#ia</Badge>
-                        <Badge variant="outline" className="text-xs">#éducation</Badge>
-                      </div>
+            <Card className="bg-card shadow-sm overflow-hidden">
+              <div className="p-6">
+                <div className="flex items-center gap-4 mb-4">
+                  <Avatar className="h-16 w-16 border-2 border-primary/20">
+                    <AvatarImage src={author.avatar} alt={author.name} />
+                    <AvatarFallback className="bg-primary/10 text-primary font-medium">
+                      {author.initials}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <h3 className="text-xl font-semibold">{author.name}</h3>
+                    <p className="text-sm text-muted-foreground">{author.role}</p>
+                    <div className="flex gap-1 mt-1">
+                      <Badge variant="outline" className="text-xs">#ia</Badge>
+                      <Badge variant="outline" className="text-xs">#éducation</Badge>
+                      <Badge variant="outline" className="text-xs">#accessibilité</Badge>
                     </div>
                   </div>
-                  
-                  <p className="text-muted-foreground text-sm mb-4">{member.bio}</p>
-                  
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm" className="gap-1" asChild>
-                      <a href={`mailto:${member.links.email}`}>
-                        <Mail className="h-3.5 w-3.5" />
-                        <span className="text-xs">Email</span>
-                      </a>
-                    </Button>
-                    <Button variant="outline" size="sm" className="gap-1" asChild>
-                      <a href={member.links.github} target="_blank" rel="noopener noreferrer">
-                        <Github className="h-3.5 w-3.5" />
-                        <span className="text-xs">GitHub</span>
-                      </a>
-                    </Button>
-                    <Button variant="outline" size="sm" className="gap-1" asChild>
-                      <a href={member.links.linkedin} target="_blank" rel="noopener noreferrer">
-                        <Linkedin className="h-3.5 w-3.5" />
-                        <span className="text-xs">LinkedIn</span>
-                      </a>
-                    </Button>
-                  </div>
                 </div>
-              </Card>
-            ))}
+                
+                <p className="text-muted-foreground text-sm mb-4">{author.bio}</p>
+                
+                <div className="flex gap-2">
+                  <Button variant="outline" size="sm" className="gap-1" asChild>
+                    <a href={`mailto:${author.links.email}`}>
+                      <Mail className="h-3.5 w-3.5" />
+                      <span className="text-xs">Email</span>
+                    </a>
+                  </Button>
+                  <Button variant="outline" size="sm" className="gap-1" asChild>
+                    <a href={author.links.github} target="_blank" rel="noopener noreferrer">
+                      <Github className="h-3.5 w-3.5" />
+                      <span className="text-xs">GitHub</span>
+                    </a>
+                  </Button>
+                  <Button variant="outline" size="sm" className="gap-1" asChild>
+                    <a href={author.links.linkedin} target="_blank" rel="noopener noreferrer">
+                      <Linkedin className="h-3.5 w-3.5" />
+                      <span className="text-xs">LinkedIn</span>
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </Card>
           </div>
 
           <div className="mt-16 max-w-2xl mx-auto text-center">
@@ -148,13 +145,13 @@ const About = () => {
               </p>
               <div className="flex flex-wrap gap-3 justify-center">
                 <Button variant="default" className="gap-2" asChild>
-                  <a href="mailto:geoffroy.streit@gmail.com">
+                  <a href={`mailto:${author.links.email}`}>
                     <Mail className="h-4 w-4" />
-                    <span>Contacter l'équipe</span>
+                    <span>Contacter l'auteur</span>
                   </a>
                 </Button>
                 <Button variant="outline" className="gap-2" asChild>
-                  <a href="https://github.com/gstreit/ia-explorer" target="_blank" rel="noopener noreferrer">
+                  <a href={author.links.github} target="_blank" rel="noopener noreferrer">
                     <Code className="h-4 w-4" />
                     <span>Voir le code source</span>
                   </a>

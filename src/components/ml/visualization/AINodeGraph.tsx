@@ -110,8 +110,8 @@ const AINodeGraph: React.FC<AINodeGraphProps> = ({ onNodeSelect }) => {
   return (
     <div className="w-full h-full">
       <svg viewBox={viewBox} className="w-full h-full">
-        {/* Legend */}
-        <g transform="translate(2, 2)" className="text-xs">
+        {/* Moved legend to the left */}
+        <g transform="translate(1, 2)" className="text-xs">
           <rect x="0" y="0" width="30" height="12" rx="2" fill="rgba(0,0,0,0.1)" />
           <text x="15" y="8" textAnchor="middle" fill="currentColor" fontSize="3.5">Catégories</text>
           

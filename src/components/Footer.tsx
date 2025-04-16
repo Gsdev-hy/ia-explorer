@@ -12,7 +12,7 @@ interface FooterProps {
  * @param {string} email - Email de l'auteur du site (optionnel)
  * @returns {JSX.Element} Le composant Footer
  */
-const Footer = ({ author, email }: FooterProps) => {
+const Footer = ({ author = "Geoffroy Streit", email = "geoffroy.streit@gmail.com" }: FooterProps) => {
   const currentYear = new Date().getFullYear();
   
   return (
@@ -23,6 +23,7 @@ const Footer = ({ author, email }: FooterProps) => {
             <h3 className="font-bold text-lg mb-4">IA Explorer</h3>
             <p className="text-muted-foreground">
               Une ressource éducative pour découvrir et comprendre l'intelligence artificielle sous tous ses aspects.
+              Créé par Geoffroy Streit, passionné d'IA souhaitant la rendre accessible à tous.
             </p>
           </div>
           
@@ -49,24 +50,18 @@ const Footer = ({ author, email }: FooterProps) => {
           <div>
             <h3 className="font-bold text-lg mb-4">Contact</h3>
             <p className="text-muted-foreground mb-2">
-              Questions ou suggestions? N'hésitez pas à nous contacter.
+              Questions ou suggestions? N'hésitez pas à contacter l'auteur.
             </p>
-            {email ? (
-              <a href={`mailto:${email}`} className="text-primary hover:underline">
-                {email}
-              </a>
-            ) : (
-              <a href="mailto:contact@ia-explorer.fr" className="text-primary hover:underline">
-                contact@ia-explorer.fr
-              </a>
-            )}
+            <a href={`mailto:${email}`} className="text-primary hover:underline">
+              {email}
+            </a>
           </div>
         </div>
         
         <div className="border-t border-border/40 mt-8 pt-6 flex flex-col sm:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground mb-2 sm:mb-0">
             © {currentYear} IA Explorer. Tous droits réservés.
-            {author && ` Créé par ${author}.`}
+            Créé avec passion par {author}.
           </p>
           <div className="flex space-x-4">
             <Link to="/mentions-legales" className="text-sm text-muted-foreground hover:text-primary transition-colors">

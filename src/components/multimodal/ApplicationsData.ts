@@ -262,7 +262,7 @@ export const multimodalExamples: AppExample[] = [
     icon: "Palette",
     iconComponent: Palette,
     link: "#design-graphique",
-    imagePath: "/pics/graphic-design.jpg",
+    imagePath: "/pics/generated_illustration.jpg",
     tools: ["Canva AI", "Adobe Firefly", "Galileo AI", "Designs.ai", "Brandmark"],
     examples: [
       "Logo minimaliste pour une startup technologique dans le domaine de la santé, couleurs bleu-vert, symbole abstrait évoquant la croissance et le bien-être",

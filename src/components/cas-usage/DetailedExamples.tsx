@@ -22,7 +22,7 @@ const detailedExamples: DetailedExample[] = [
     impact: "Détection précoce des cancers, réduction des erreurs de diagnostic, accélération du traitement des examens médicaux, amélioration de l'accès aux soins dans les régions sous-desservies.",
     technology: "Réseaux de neurones convolutifs (CNN), vision par ordinateur, apprentissage par transfert, augmentation de données",
     realWorldCase: "L'outil IDx-DR approuvé par la FDA qui détecte la rétinopathie diabétique sans intervention humaine, avec une sensibilité de plus de 87%. En 2025, il est utilisé dans plus de 1000 cliniques à travers le monde.",
-    image: "/lovable-uploads/diagnostic-medical.jpg"
+    image: "/pics/diagnostic.jpg"
   },
   {
     title: "Systèmes d'alerte précoce en finance",
@@ -31,7 +31,7 @@ const detailedExamples: DetailedExample[] = [
     impact: "Réduction des pertes dues aux fraudes de plus de 60%, protection des consommateurs contre les vols d'identité, maintien de l'intégrité des systèmes financiers et détection de nouveaux schémas frauduleux.",
     technology: "Apprentissage par renforcement, détection d'anomalies en temps réel, analyse comportementale, graphes de connaissance",
     realWorldCase: "Mastercard utilise l'IA pour analyser plus de 75 milliards de transactions annuelles, réduisant les faux positifs de 50% dans la détection de fraudes tout en améliorant la précision de 30% depuis 2022.",
-    image: "/lovable-uploads/finance-fraud.jpg"
+    image: "/pics/alert_systems.jpg"
   },
   {
     title: "Assistants pédagogiques personnalisés",
@@ -40,7 +40,7 @@ const detailedExamples: DetailedExample[] = [
     impact: "Amélioration des résultats d'apprentissage de 25 à 40%, réduction des abandons scolaires, soutien aux enseignants dans la différenciation pédagogique, identification précoce des difficultés d'apprentissage.",
     technology: "Systèmes de tutorat intelligents, modèles prédictifs, traitement du langage naturel, analyse de progression",
     realWorldCase: "Duolingo utilise l'IA pour adapter ses leçons de langue en fonction des performances de l'utilisateur, augmentant les taux de rétention de 12% et l'efficacité d'apprentissage de 28% selon une étude indépendante de 2024.",
-    image: "/lovable-uploads/education-ia.jpg"
+    image: "/pics/educative.jpg"
   },
   {
     title: "Maintenance prédictive industrielle",
@@ -49,7 +49,7 @@ const detailedExamples: DetailedExample[] = [
     impact: "Réduction des temps d'arrêt non planifiés jusqu'à 50%, optimisation des coûts de maintenance de 10 à 40%, prolongation de la durée de vie des équipements et amélioration de la sécurité des installations.",
     technology: "Internet des objets (IoT), analyse prédictive, apprentissage automatique, jumeaux numériques, edge computing",
     realWorldCase: "Siemens a réduit les temps d'arrêt non planifiés de 30% dans ses usines de fabrication grâce à ses systèmes de maintenance prédictive, économisant plus de 25 millions d'euros annuellement sur l'ensemble de ses installations.",
-    image: "/lovable-uploads/maintenance-predictive.jpg"
+    image: "/pics/industrial.jpg"
   },
   {
     title: "Optimisation logistique du dernier kilomètre",
@@ -58,7 +58,7 @@ const detailedExamples: DetailedExample[] = [
     impact: "Réduction des coûts de livraison de 15 à 20%, diminution de l'empreinte carbone, amélioration de la satisfaction client avec des fenêtres de livraison plus précises et réduction des distances parcourues.",
     technology: "Optimisation combinatoire, algorithmes génétiques, apprentissage par renforcement, GPS et cartographie avancée",
     realWorldCase: "UPS économise annuellement plus de 10 millions de gallons de carburant grâce à son système ORION qui optimise les itinéraires des chauffeurs-livreurs, réduisant les émissions de CO2 de 100 000 tonnes par an.",
-    image: "/lovable-uploads/logistique-ia.jpg"
+    image: "/pics/logistics.jpg"
   },
   {
     title: "Analyse juridique automatisée",
@@ -67,7 +67,7 @@ const detailedExamples: DetailedExample[] = [
     impact: "Accélération de la recherche juridique jusqu'à 70%, réduction des coûts pour les clients, amélioration de la précision des analyses et démocratisation de l'accès aux services juridiques.",
     technology: "Traitement du langage naturel (NLP), extraction d'information, classification de texte, systèmes de raisonnement",
     realWorldCase: "JPMorgan Chase utilise le système COIN qui analyse les contrats en quelques secondes, un travail qui prenait auparavant 360 000 heures d'avocat par an, avec une précision dépassant 95% pour certaines tâches d'extraction d'information.",
-    image: "/lovable-uploads/juridique-ia.jpg"
+    image: "/pics/juridic.jpg"
   },
   {
     title: "Agriculture de précision",
@@ -76,7 +76,7 @@ const detailedExamples: DetailedExample[] = [
     impact: "Augmentation des rendements agricoles de 10 à 15%, réduction de l'utilisation d'eau jusqu'à 30%, diminution des intrants chimiques de 20%, amélioration de la durabilité et de la rentabilité agricole.",
     technology: "Vision par ordinateur, apprentissage automatique, IoT agricole, traitement d'images satellites, drones",
     realWorldCase: "Le système de Blue River Technology (acquis par John Deere) utilise la vision par ordinateur pour pulvériser des herbicides uniquement sur les mauvaises herbes, réduisant l'utilisation de produits chimiques de 90% tout en maintenant l'efficacité.",
-    image: "/lovable-uploads/agriculture-ia.jpg"
+    image: "/pics/agri.jpg"
   },
   {
     title: "Assistant vocal pour personnes handicapées",
@@ -85,7 +85,7 @@ const detailedExamples: DetailedExample[] = [
     impact: "Autonomie accrue pour les personnes à mobilité réduite, inclusion numérique, amélioration de la qualité de vie et possibilités d'emploi élargies pour les personnes handicapées.",
     technology: "Reconnaissance vocale, suivi oculaire, interfaces cerveau-machine, traitement du signal, synthèse vocale",
     realWorldCase: "Le projet ORBIT de Microsoft utilise l'IA pour transformer les mouvements oculaires en commandes, permettant à des personnes paralysées de contrôler des ordinateurs et appareils domestiques avec une précision de 98%.",
-    image: "/lovable-uploads/accessibilite-ia.jpg"
+    image: "/pics/vocal.jpg"
   }
 ];
 
@@ -114,10 +114,12 @@ const DetailedExamples: React.FC = () => {
             <CardContent className="pt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {example.image && (
-                  <div className="rounded-lg overflow-hidden bg-secondary/10 flex items-center justify-center h-64">
-                    <div className="text-center text-muted-foreground p-4">
-                      [Image illustrative: {example.title}]
-                    </div>
+                  <div className="rounded-lg overflow-hidden h-64">
+                    <img 
+                      src={example.image} 
+                      alt={`Illustration: ${example.title}`}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 )}
 
