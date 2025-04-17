@@ -1,19 +1,14 @@
 
-import { ReactNode, useEffect } from 'react';
+import { useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { useLocation } from 'react-router-dom';
-
-interface MainLayoutProps {
-  children: ReactNode;
-}
 
 /**
  * Layout principal de l'application
- * @param {ReactNode} children - Les composants enfants à afficher
  * @returns {JSX.Element} Le layout avec header, contenu principal et footer
  */
-const MainLayout = ({ children }: MainLayoutProps) => {
+const MainLayout = () => {
   const location = useLocation();
 
   // Défilement vers le haut à chaque changement de page
@@ -25,7 +20,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
     <div className="flex flex-col min-h-screen transition-colors duration-300">
       <Header />
       <main className="flex-grow">
-        {children}
+        <Outlet />
       </main>
       <Footer author="Geoffroy Streit" email="geoffroy.streit@gmail.com" />
     </div>
