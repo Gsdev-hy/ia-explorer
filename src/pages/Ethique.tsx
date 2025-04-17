@@ -20,8 +20,8 @@ const Ethique = () => {
       variant: "default" as const
     },
     {
-      to: "/types-ia",
-      label: "Types d'IA",
+      to: "/ethique-gouvernance",
+      label: "Gouvernance de l'IA",
       variant: "outline" as const
     },
     {

@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
@@ -6,6 +5,7 @@ import { Lightbulb, Brain, Zap, Cpu, Bot, Settings, Eye, Users, ArrowRight, Info
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 /**
  * Page sur les 7 niveaux d'IA
@@ -515,7 +515,7 @@ const NiveauxIA = () => {
                 <ul className="list-disc list-inside text-sm text-muted-foreground mt-2">
                   <li>Intelligence distribuée à travers de multiples systèmes spécialisés</li>
                   <li>Propriétés émergentes complexes issues de l'interaction entre agents</li>
-                  <li>Systèmes auto-organisants et auto-améliorants</li>
+                  <li>Syst��mes auto-organisants et auto-améliorants</li>
                   <li>Intégration potentielle entre intelligences humaines et artificielles</li>
                 </ul>
               </div>
@@ -723,8 +723,10 @@ const NiveauxIA = () => {
             </div>
           </div>
           <div className="mt-6 text-center">
-            <Button variant="outline" className="rounded-full">
-              En savoir plus sur l'éthique et la gouvernance <ArrowRight className="ml-1 h-4 w-4" />
+            <Button variant="outline" className="rounded-full" asChild>
+              <Link to="/ethique-gouvernance">
+                En savoir plus sur l'éthique et la gouvernance <ArrowRight className="ml-1 h-4 w-4" />
+              </Link>
             </Button>
           </div>
         </div>

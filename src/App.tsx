@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -23,112 +22,44 @@ import Confidentialite from "./pages/Confidentialite";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
 import LLMDetails from "./pages/LLMDetails";
+import EthiqueGouvernance from './pages/EthiqueGouvernance';
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={
-              <MainLayout>
-                <Home />
-              </MainLayout>
-            } />
-            <Route path="/index" element={
-              <MainLayout>
-                <Index />
-              </MainLayout>
-            } />
-            <Route path="/home" element={
-              <MainLayout>
-                <Home />
-              </MainLayout>
-            } />
-            <Route path="/niveaux-ia" element={
-              <MainLayout>
-                <NiveauxIA />
-              </MainLayout>
-            } />
-            <Route path="/types-ia" element={
-              <MainLayout>
-                <TypesIA />
-              </MainLayout>
-            } />
-            <Route path="/types-ia/llm" element={
-              <MainLayout>
-                <LLMDetails />
-              </MainLayout>
-            } />
-            <Route path="/machine-learning" element={
-              <MainLayout>
-                <MachineLearning />
-              </MainLayout>
-            } />
-            <Route path="/cas-usage" element={
-              <MainLayout>
-                <CasUsage />
-              </MainLayout>
-            } />
-            <Route path="/ethique" element={
-              <MainLayout>
-                <Ethique />
-              </MainLayout>
-            } />
-            <Route path="/glossaire" element={
-              <MainLayout>
-                <Glossaire />
-              </MainLayout>
-            } />
-            <Route path="/histoire-ia" element={
-              <MainLayout>
-                <HistoireIA />
-              </MainLayout>
-            } />
-            <Route path="/ressources" element={
-              <MainLayout>
-                <Ressources />
-              </MainLayout>
-            } />
-            <Route path="/ia-multimodale" element={
-              <MainLayout>
-                <IAMultimodale />
-              </MainLayout>
-            } />
-            <Route path="/actualites" element={
-              <MainLayout>
-                <Actualites />
-              </MainLayout>
-            } />
-            <Route path="/about" element={
-              <MainLayout>
-                <About />
-              </MainLayout>
-            } />
-            <Route path="/mentions-legales" element={
-              <MainLayout>
-                <MentionsLegales />
-              </MainLayout>
-            } />
-            <Route path="/confidentialite" element={
-              <MainLayout>
-                <Confidentialite />
-              </MainLayout>
-            } />
-            <Route path="*" element={
-              <MainLayout>
-                <NotFound />
-              </MainLayout>
-            } />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </ThemeProvider>
-  </QueryClientProvider>
-);
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<MainLayout />}>
+                <Route index element={<Home />} />
+                <Route path="histoire-ia" element={<HistoireIA />} />
+                <Route path="niveaux-ia" element={<NiveauxIA />} />
+                <Route path="types-ia" element={<TypesIA />} />
+                <Route path="machine-learning" element={<MachineLearning />} />
+                <Route path="ia-multimodale" element={<IAMultimodale />} />
+                <Route path="ethique" element={<Ethique />} />
+                <Route path="ethique-gouvernance" element={<EthiqueGouvernance />} />
+                <Route path="cas-usage" element={<CasUsage />} />
+                <Route path="actualites" element={<Actualites />} />
+                <Route path="glossaire" element={<Glossaire />} />
+                <Route path="ressources" element={<Ressources />} />
+                <Route path="llm-details" element={<LLMDetails />} />
+                <Route path="mentions-legales" element={<MentionsLegales />} />
+                <Route path="confidentialite" element={<Confidentialite />} />
+                <Route path="a-propos" element={<About />} />
+                <Route path="*" element={<NotFound />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
+  );
+}
 
 export default App;
