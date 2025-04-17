@@ -110,17 +110,39 @@ const AINodeGraph: React.FC<AINodeGraphProps> = ({ onNodeSelect }) => {
   return (
     <div className="w-full h-full">
       <svg viewBox={viewBox} className="w-full h-full">
-        {/* Moved legend to the left */}
-        <g transform="translate(1, 2)" className="text-xs">
-          <rect x="0" y="0" width="30" height="12" rx="2" fill="rgba(0,0,0,0.1)" />
-          <text x="15" y="8" textAnchor="middle" fill="currentColor" fontSize="3.5">Catégories</text>
+        {/* Moved legend to the top right corner with better positioning */}
+        <g transform="translate(70, 5)" className="text-xs">
+          <rect x="0" y="0" width="28" height="40" rx="2" fill="rgba(0,0,0,0.1)" />
+          <text x="14" y="6" textAnchor="middle" fill="currentColor" fontSize="3.5">Catégories</text>
           
-          {['language', 'vision', 'decision', 'explainability', 'general', 'hybrid', 'generative'].map((category, index) => (
-            <g key={category} transform={`translate(2, ${index * 4 + 14})`}>
-              <circle r="1.5" fill={getCategoryColor(category)} />
-              <text x="3.5" y="0.5" fontSize="2.5" fill="currentColor">{category}</text>
-            </g>
-          ))}
+          <g transform="translate(2, 10)">
+            <circle r="1.2" fill={getCategoryColor('language')} />
+            <text x="3" y="0.5" fontSize="2.2" fill="currentColor">language</text>
+          </g>
+          <g transform="translate(2, 14)">
+            <circle r="1.2" fill={getCategoryColor('vision')} />
+            <text x="3" y="0.5" fontSize="2.2" fill="currentColor">vision</text>
+          </g>
+          <g transform="translate(2, 18)">
+            <circle r="1.2" fill={getCategoryColor('decision')} />
+            <text x="3" y="0.5" fontSize="2.2" fill="currentColor">decision</text>
+          </g>
+          <g transform="translate(2, 22)">
+            <circle r="1.2" fill={getCategoryColor('explainability')} />
+            <text x="3" y="0.5" fontSize="2.2" fill="currentColor">explainability</text>
+          </g>
+          <g transform="translate(2, 26)">
+            <circle r="1.2" fill={getCategoryColor('general')} />
+            <text x="3" y="0.5" fontSize="2.2" fill="currentColor">general</text>
+          </g>
+          <g transform="translate(2, 30)">
+            <circle r="1.2" fill={getCategoryColor('hybrid')} />
+            <text x="3" y="0.5" fontSize="2.2" fill="currentColor">hybrid</text>
+          </g>
+          <g transform="translate(2, 34)">
+            <circle r="1.2" fill={getCategoryColor('generative')} />
+            <text x="3" y="0.5" fontSize="2.2" fill="currentColor">generative</text>
+          </g>
         </g>
 
         {/* Render connections */}
