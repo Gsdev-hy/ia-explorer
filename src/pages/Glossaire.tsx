@@ -36,8 +36,12 @@ const Glossaire = () => {
             description="Ce glossaire rassemble les termes techniques, généraux, éthiques et liés à la mémoire en intelligence artificielle."
             center
           />
+          
+          <div className="mt-10">
+            <TermsGlossary />
+          </div>
 
-          <Card className="mb-8 border border-dashed">
+          <Card className="mt-16 mb-8 border border-dashed">
             <CardContent className="pt-6">
               <div className="flex flex-col md:flex-row gap-4 items-center">
                 <div className="bg-primary/10 p-3 rounded-full">
@@ -56,9 +60,47 @@ const Glossaire = () => {
               </div>
             </CardContent>
           </Card>
-          
-          <div className="mt-10">
-            <TermsGlossary />
+
+          <div className="mt-8 mb-16">
+            <SectionHeading
+              pretitle="Fonctionnement"
+              title="Comprendre les mémoires en IA"
+              description="Découvrez comment les différents types de mémoire permettent aux systèmes d'IA de stocker, traiter et récupérer l'information."
+              center
+            />
+            
+            <div className="mt-8 p-4 bg-muted/50 rounded-lg border border-border">
+              <div className="w-full h-[200px] bg-card flex items-center justify-center rounded-md overflow-hidden">
+                <svg width="90%" height="180" viewBox="0 0 800 300" className="mx-auto">
+                  {/* Mémoire à court terme */}
+                  <rect x="50" y="50" width="200" height="80" rx="10" fill="rgba(var(--primary), 0.2)" stroke="rgb(var(--primary))" strokeWidth="2" />
+                  <text x="150" y="95" textAnchor="middle" fill="currentColor" fontSize="16" fontWeight="bold">Mémoire à court terme</text>
+                  
+                  {/* Mémoire à long terme */}
+                  <rect x="550" y="50" width="200" height="200" rx="10" fill="rgba(var(--primary), 0.1)" stroke="rgb(var(--primary))" strokeWidth="2" />
+                  <text x="650" y="80" textAnchor="middle" fill="currentColor" fontSize="16" fontWeight="bold">Mémoire à long terme</text>
+                  
+                  {/* Sous-types de mémoire à long terme */}
+                  <rect x="570" y="100" width="160" height="40" rx="5" fill="rgba(var(--primary), 0.3)" stroke="rgb(var(--primary))" strokeWidth="1" />
+                  <text x="650" y="125" textAnchor="middle" fill="currentColor" fontSize="14">Sémantique</text>
+                  
+                  <rect x="570" y="150" width="160" height="40" rx="5" fill="rgba(var(--primary), 0.3)" stroke="rgb(var(--primary))" strokeWidth="1" />
+                  <text x="650" y="175" textAnchor="middle" fill="currentColor" fontSize="14">Épisodique</text>
+                  
+                  <rect x="570" y="200" width="160" height="40" rx="5" fill="rgba(var(--primary), 0.3)" stroke="rgb(var(--primary))" strokeWidth="1" />
+                  <text x="650" y="225" textAnchor="middle" fill="currentColor" fontSize="14">Procédurale</text>
+                  
+                  {/* Mémoire de contexte */}
+                  <rect x="300" y="150" width="200" height="80" rx="10" fill="rgba(var(--primary), 0.15)" stroke="rgb(var(--primary))" strokeWidth="2" />
+                  <text x="400" y="195" textAnchor="middle" fill="currentColor" fontSize="16" fontWeight="bold">Mémoire de contexte</text>
+                  
+                  {/* Flèches */}
+                  <path d="M250 90 L300 90 L300 150" fill="none" stroke="rgb(var(--primary))" strokeWidth="2" strokeDasharray="5,5" />
+                  <path d="M500 190 L550 190" fill="none" stroke="rgb(var(--primary))" strokeWidth="2" strokeDasharray="5,5" />
+                  <path d="M150 130 L150 150 L300 150" fill="none" stroke="rgb(var(--primary))" strokeWidth="2" strokeDasharray="5,5" />
+                </svg>
+              </div>
+            </div>
           </div>
         </div>
       </section>

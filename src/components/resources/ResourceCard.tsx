@@ -46,8 +46,8 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({
   };
   
   return (
-    <Card className="overflow-hidden hover:shadow-md transition-shadow">
-      <CardContent className="p-6">
+    <Card className="overflow-hidden hover:shadow-md transition-shadow h-full">
+      <CardContent className="p-6 flex flex-col h-full">
         <div className="flex justify-between items-start mb-3">
           <Badge variant="outline" className="mb-2">{type}</Badge>
           {year && <Badge variant="secondary">{year}</Badge>}
@@ -55,14 +55,14 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({
         <h3 className="text-lg font-medium mb-2">{title}</h3>
         <p className="text-sm text-muted-foreground mb-1">Source: {source}</p>
         <p className="text-sm text-muted-foreground mb-4">{description}</p>
-        <div className="mb-4 flex flex-wrap gap-2">
+        <div className="mb-4 flex flex-wrap gap-2 flex-grow">
           {tags && tags.map((tag, idx) => (
             <Badge key={idx} variant="outline" className="text-xs">
               {tag}
             </Badge>
           ))}
         </div>
-        <Button variant="outline" size="sm" className="w-full gap-2" asChild>
+        <Button variant="outline" size="sm" className="w-full gap-2 mt-auto" asChild>
           <a href={link} target="_blank" rel="noopener noreferrer">
             <ExternalLink className="h-4 w-4" />
             Consulter

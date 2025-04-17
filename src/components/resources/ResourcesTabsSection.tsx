@@ -24,12 +24,12 @@ export const ResourcesTabsSection: React.FC<ResourcesTabsSectionProps> = ({
 }) => {
   return (
     <Tabs defaultValue="toutes" className="w-full mb-8" onValueChange={setActiveTab} value={activeTab}>
-      <TabsList className="w-full max-w-3xl mx-auto grid grid-cols-2 md:grid-cols-5">
-        <TabsTrigger value="toutes">Toutes</TabsTrigger>
-        <TabsTrigger value="cours">Cours</TabsTrigger>
-        <TabsTrigger value="livres">Livres</TabsTrigger>
-        <TabsTrigger value="science">Publications</TabsTrigger>
-        <TabsTrigger value="outils">Outils</TabsTrigger>
+      <TabsList className="w-full max-w-4xl mx-auto grid grid-cols-5 mb-4">
+        <TabsTrigger value="toutes" className="whitespace-normal">Toutes</TabsTrigger>
+        <TabsTrigger value="cours" className="whitespace-normal">Cours</TabsTrigger>
+        <TabsTrigger value="livres" className="whitespace-normal">Livres</TabsTrigger>
+        <TabsTrigger value="science" className="whitespace-normal">Publications</TabsTrigger>
+        <TabsTrigger value="outils" className="whitespace-normal">Outils</TabsTrigger>
       </TabsList>
       
       <TabsContent value="toutes" className="mt-6">

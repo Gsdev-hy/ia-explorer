@@ -5,6 +5,13 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 
 ## [Unreleased]
 
+### Amélioré
+- Réorganisation de la page Glossaire avec les sections sur la mémoire en IA placées en bas de page
+- Déplacement de la section "Mémoire dans les systèmes d'IA" de la page Ressources vers la page Glossaire
+- Simplification du menu de la page Ressources avec un seul système de navigation
+- Amélioration de la cohérence visuelle des cartes de ressources
+- Mise à jour du README pour refléter la nouvelle organisation du contenu
+
 ## [0.6.0] - 2025-04-06
 
 ### Ajouté

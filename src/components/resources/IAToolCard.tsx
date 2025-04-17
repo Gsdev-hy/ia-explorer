@@ -15,14 +15,14 @@ interface IAToolCardProps {
 
 export const IAToolCard: React.FC<IAToolCardProps> = ({ tool }) => {
   return (
-    <Card className="overflow-hidden hover:shadow-md transition-shadow">
-      <CardContent className="p-6">
+    <Card className="overflow-hidden hover:shadow-md transition-shadow h-full">
+      <CardContent className="p-6 flex flex-col h-full">
         <div className="flex justify-between items-start mb-3">
           <Badge>{tool.category}</Badge>
         </div>
         <h3 className="text-lg font-medium mb-2">{tool.name}</h3>
-        <p className="text-sm text-muted-foreground mb-4">{tool.description}</p>
-        <Button variant="outline" size="sm" className="w-full gap-2" asChild>
+        <p className="text-sm text-muted-foreground mb-4 flex-grow">{tool.description}</p>
+        <Button variant="outline" size="sm" className="w-full gap-2 mt-auto" asChild>
           <a href={tool.link} target="_blank" rel="noopener noreferrer">
             <ExternalLink className="h-4 w-4" />
             Visiter

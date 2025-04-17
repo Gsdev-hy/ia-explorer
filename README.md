@@ -1,3 +1,4 @@
+
 # IA Explorer
 
 Une plateforme éducative interactive sur l'intelligence artificielle, ses concepts, applications et enjeux.
@@ -14,7 +15,7 @@ IA Explorer est une application web conçue pour rendre les concepts de l'intell
 
 - **Contenu éducatif structuré** sur les différents types d'intelligence artificielle
 - **Visualisations interactives** pour comprendre les concepts complexes
-- **Glossaire** des termes techniques avec définitions claires
+- **Glossaire** des termes techniques avec définitions claires et section dédiée à la mémoire en IA
 - **Section histoire** retraçant l'évolution de l'IA depuis ses débuts
 - **Exemples pratiques** d'applications de l'IA dans différents domaines
 - **Actualités** sur les dernières avancées et innovations
@@ -34,7 +35,7 @@ IA Explorer est une application web conçue pour rendre les concepts de l'intell
 - **Éthique** : Enjeux éthiques liés au développement et à l'utilisation de l'IA
 - **Éthique et Gouvernance** : Approfondissement sur la gouvernance et la réglementation de l'IA
 - **Histoire de l'IA** : Chronologie des avancées majeures et figures importantes
-- **Glossaire** : Définitions des termes techniques du domaine
+- **Glossaire** : Définitions des termes techniques du domaine et section sur les types de mémoire en IA
 - **Ressources** : Livres, cours, sites web et autres ressources pour approfondir
 - **Actualités** : Dernières nouvelles du domaine de l'IA
 - **À propos** : Informations sur le projet et son auteur, la mission et les objectifs
@@ -60,6 +61,7 @@ L'application comprend plusieurs visualisations interactives pour faciliter la c
 - Timeline interactive de l'histoire de l'IA avec événements clés
 - Workflow de traitement des données en IA multimodale
 - Schémas explicatifs du processus RLHF pour l'alignement des modèles
+- Visualisation des différents types de mémoire utilisés en IA
 
 ## Sections spéciales
 
