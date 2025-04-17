@@ -27,7 +27,15 @@ IA-Explorer/
 │   │   ├── memory/            # Composants pour la section mémoire d'IA
 │   │   ├── ml/                # Composants pour le Machine Learning
 │   │   ├── news/              # Composants pour les actualités
-│   │   ├── resources/         # Composants pour les ressources
+│   │   ├── resources/         # Composants pour les ressources (refactorisés)
+│   │   │   ├── resourcesData.ts         # Données des ressources
+│   │   │   ├── ResourceCard.tsx         # Carte de ressource standard
+│   │   │   ├── ResourceFilters.tsx      # Filtres de recherche
+│   │   │   ├── ResourcesHeader.tsx      # En-tête de la page
+│   │   │   ├── ResourcesTabsSection.tsx # Section des onglets
+│   │   │   ├── ScientificPublicationCard.tsx # Carte de publication
+│   │   │   ├── IAToolCard.tsx           # Carte d'outil IA
+│   │   │   └── ContinueLearningSection.tsx # Section finale
 │   │   ├── timeline/          # Composants pour la timeline
 │   │   ├── types-ia/          # Composants pour les types d'IA
 │   │   └── ui/                # Composants UI réutilisables (shadcn/ui)
@@ -138,12 +146,14 @@ Le site offre une navigation complète via un menu responsive qui permet d'accé
 
 1. ~~Correction de l'importation de l'icône Robot (remplacée par Bot)~~
 2. ~~Ajout de l'export default manquant dans HistoireIA.tsx~~
-3. Optimisation nécessaire des visualisations complexes pour améliorer les performances
+3. ~~Refactorisation de la page Ressources pour une meilleure organisation et maintenabilité~~
+4. Optimisation nécessaire des visualisations complexes pour améliorer les performances
 
 ## Recommandations
 
-1. Refactoriser les fichiers volumineux en composants plus petits et spécialisés
+1. Refactoriser les fichiers volumineux en composants plus petits et spécialisés (page Ressources déjà refactorisée)
 2. Enrichir le contenu des sections Histoire et Cas d'usage
 3. Ajouter des tests pour assurer la stabilité
 4. Renforcer l'accessibilité (ARIA, navigation clavier, etc.)
 5. Mettre en place des outils d'analyse pour suivre l'engagement des utilisateurs
+
