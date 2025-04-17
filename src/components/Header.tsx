@@ -42,7 +42,7 @@ const Header = () => {
     { text: 'Glossaire', href: '/glossaire' },
     { text: 'Ressources', href: '/ressources' },
     { text: 'Actualités', href: '/actualites' },
-    { text: 'À propos', href: '/about' }
+    { text: 'À propos', href: '/a-propos' }
   ];
 
   return (

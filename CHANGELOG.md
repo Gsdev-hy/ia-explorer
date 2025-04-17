@@ -4,6 +4,8 @@
 Ce fichier documente les changements et améliorations apportés au projet IA Explorer, une ressource éducative sur l'intelligence artificielle.
 
 ## [Unreleased]
+- Correction de l'accès à la page "À propos" depuis le menu de navigation
+- Mise à jour de la documentation de la structure de l'application
 
 ## [0.6.2] - 2025-04-10
 

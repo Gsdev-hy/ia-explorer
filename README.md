@@ -1,4 +1,3 @@
-
 # IA Explorer
 
 Une plateforme éducative interactive sur l'intelligence artificielle, ses concepts, applications et enjeux.
@@ -33,10 +32,12 @@ IA Explorer est une application web conçue pour rendre les concepts de l'intell
 - **IA Multimodale** : Technologies combinant plusieurs types de médias et d'entrées
 - **Cas d'usage** : Applications concrètes de l'IA dans différents secteurs
 - **Éthique** : Enjeux éthiques liés au développement et à l'utilisation de l'IA
+- **Éthique et Gouvernance** : Approfondissement sur la gouvernance et la réglementation de l'IA
 - **Histoire de l'IA** : Chronologie des avancées majeures et figures importantes
 - **Glossaire** : Définitions des termes techniques du domaine
 - **Ressources** : Livres, cours, sites web et autres ressources pour approfondir
 - **Actualités** : Dernières nouvelles du domaine de l'IA
+- **À propos** : Informations sur le projet et son auteur, la mission et les objectifs
 
 ## Technologies utilisées
 
