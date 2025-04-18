@@ -1,8 +1,8 @@
-
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import FloatingChatButton from '../components/chat/FloatingChatButton';
 
 /**
  * Layout principal de l'application
@@ -23,6 +23,7 @@ const MainLayout = () => {
         <Outlet />
       </main>
       <Footer author="Geoffroy Streit" email="geoffroy.streit@gmail.com" />
+      <FloatingChatButton />
     </div>
   );
 };

@@ -6,7 +6,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Brain, Mail, BookOpen } from 'lucide-react';
-import AIAdvisorChat from '@/components/chat/AIAdvisorChat';
 
 const Glossaire = () => {
   return (
@@ -95,20 +94,6 @@ const Glossaire = () => {
               </div>
             </CardContent>
           </Card>
-        </div>
-      </section>
-
-      <section className="section-container mb-16">
-        <div className="max-w-5xl mx-auto">
-          <SectionHeading
-            pretitle="Assistant IA"
-            title="Posez vos questions sur l'IA"
-            description="Notre assistant IA est là pour répondre à vos questions sur l'intelligence artificielle et vous aider à comprendre les concepts."
-            center
-          />
-          <div className="mt-8">
-            <AIAdvisorChat />
-          </div>
         </div>
       </section>
 
