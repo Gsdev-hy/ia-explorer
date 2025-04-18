@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
-import AIAdvisorChat from './AIAdvisorChat';
+import GeminiChat from './GeminiChat';
 
 const FloatingChatButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +21,7 @@ const FloatingChatButton = () => {
           </Button>
         </SheetTrigger>
         <SheetContent className="w-full sm:w-[440px] sm:max-w-md p-0">
-          <AIAdvisorChat />
+          <GeminiChat />
         </SheetContent>
       </Sheet>
     </div>
