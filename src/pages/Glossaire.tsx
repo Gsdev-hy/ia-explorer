@@ -1,17 +1,13 @@
-
 import React from 'react';
 import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
 import TermsGlossary from '@/components/glossary/TermsGlossary';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { BookOpen, Brain, Mail } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
+import { Brain, Mail, BookOpen } from 'lucide-react';
+import AIAdvisorChat from '@/components/chat/AIAdvisorChat';
 
-/**
- * Page du glossaire des termes liés à l'IA
- * @returns {JSX.Element} Le composant de la page Glossaire
- */
 const Glossaire = () => {
   return (
     <>
@@ -41,27 +37,7 @@ const Glossaire = () => {
             <TermsGlossary />
           </div>
 
-          <Card className="mt-16 mb-8 border border-dashed">
-            <CardContent className="pt-6">
-              <div className="flex flex-col md:flex-row gap-4 items-center">
-                <div className="bg-primary/10 p-3 rounded-full">
-                  <Brain className="h-6 w-6 text-primary" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-medium mb-1">Les différents types de mémoire en IA</h3>
-                  <p className="text-muted-foreground text-sm mb-2">
-                    Comme dans la cognition humaine, les systèmes d'IA utilisent différents types de mémoire pour traiter l'information.
-                    Explorez les concepts de mémoire à court terme, mémoire à long terme, mémoire de contexte et bien plus.
-                  </p>
-                </div>
-                <Button variant="outline" asChild className="whitespace-nowrap">
-                  <Link to="/niveaux-ia">En savoir plus</Link>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-
-          <div className="mt-8 mb-16">
+          <div className="mt-16 mb-8">
             <SectionHeading
               pretitle="Fonctionnement"
               title="Comprendre les mémoires en IA"
@@ -102,6 +78,37 @@ const Glossaire = () => {
               </div>
             </div>
           </div>
+
+          <Card className="mt-8 mb-16 border border-dashed">
+            <CardContent className="pt-6">
+              <div className="flex flex-col md:flex-row gap-4 items-center">
+                <div className="bg-primary/10 p-3 rounded-full">
+                  <Brain className="h-6 w-6 text-primary" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-medium mb-1">Les différents types de mémoire en IA</h3>
+                  <p className="text-muted-foreground text-sm mb-2">
+                    Les systèmes d'IA modernes utilisent différents types de mémoire pour stocker et traiter l'information. 
+                    Ces illustrations montrent les principales architectures de mémoire et leurs applications.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      <section className="section-container mb-16">
+        <div className="max-w-5xl mx-auto">
+          <SectionHeading
+            pretitle="Assistant IA"
+            title="Posez vos questions sur l'IA"
+            description="Notre assistant IA est là pour répondre à vos questions sur l'intelligence artificielle et vous aider à comprendre les concepts."
+            center
+          />
+          <div className="mt-8">
+            <AIAdvisorChat />
+          </div>
         </div>
       </section>
 
@@ -114,7 +121,7 @@ const Glossaire = () => {
           </div>
           <h2 className="heading-lg mb-3">Enrichir votre connaissance</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-            Explorez nos autres sections pour approfondir votre compréhension des technologies d'intelligence artificielle, de leurs applications et des enjeux éthiques associés.
+            Explorez nos autres sections pour approfondir votre compréhension des technologies d'intelligence artificielle.
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center">
