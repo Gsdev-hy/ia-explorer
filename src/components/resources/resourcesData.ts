@@ -65,6 +65,15 @@ export const realResources: Resource[] = [
     tags: ["1ère approche", "enfant", "vulgarisation"]
   },
   {
+    title: "Les bases pour développer une APP avec de l'IA",
+    source: "Geoffroy Streit",
+    description: "Guide complet sur les concepts, outils et bonnes pratiques pour développer des applications intégrant l'IA.",
+    link: "/coder-avec-ia",
+    type: "cours",
+    year: 2024,
+    tags: ["code", "app", "dev par ia"]
+  },
+  {
     title: "Deep Learning Specialization",
     source: "Coursera",
     description: "Série de cours approfondis sur le deep learning par Andrew Ng.",
