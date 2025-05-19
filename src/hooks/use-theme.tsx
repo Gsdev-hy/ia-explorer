@@ -1,7 +1,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
-type Theme = "dark" | "light";
+type Theme = "dark" | "light" | "system";
 
 interface ThemeContextType {
   theme: Theme;
@@ -10,35 +10,52 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+interface ThemeProviderProps {
+  children: React.ReactNode;
+  defaultTheme?: Theme;
+  storageKey?: string;
+}
+
 /**
  * Fournisseur de thème pour l'application
  * @param {object} props - Props du composant
  * @param {React.ReactNode} props.children - Composants enfants
+ * @param {Theme} props.defaultTheme - Thème par défaut (dark, light, ou system)
+ * @param {string} props.storageKey - Clé pour stocker le thème dans localStorage
  * @returns {JSX.Element} Le fournisseur de thème
  */
-export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+export const ThemeProvider = ({
+  children,
+  defaultTheme = "system",
+  storageKey = "theme"
+}: ThemeProviderProps) => {
   const [theme, setTheme] = useState<Theme>(() => {
     // Vérifier s'il y a un thème sauvegardé dans localStorage
-    const savedTheme = localStorage.getItem("theme") as Theme;
+    const savedTheme = localStorage.getItem(storageKey) as Theme;
     
-    // Vérifier si l'utilisateur préfère le mode sombre au niveau du système
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    // Si le thème par défaut est "system", vérifier la préférence système
+    if (defaultTheme === "system" || !savedTheme) {
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      return savedTheme || (prefersDark ? "dark" : "light");
+    }
     
-    // Utiliser le thème sauvegardé ou la préférence système, sinon utiliser le thème clair
-    return savedTheme || (prefersDark ? "dark" : "light");
+    // Utiliser le thème sauvegardé ou le thème par défaut
+    return savedTheme || defaultTheme;
   });
 
   // Appliquer la classe dark au body lorsque le thème change
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
     } else {
       document.documentElement.classList.remove("dark");
+      document.documentElement.classList.add("light");
     }
     
     // Sauvegarder le thème dans localStorage
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+    localStorage.setItem(storageKey, theme);
+  }, [theme, storageKey]);
 
   const toggleTheme = () => {
     setTheme(prevTheme => prevTheme === "dark" ? "light" : "dark");
