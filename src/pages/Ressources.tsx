@@ -51,7 +51,7 @@ const Ressources = () => {
     const matchesSearch = 
       resource.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
       resource.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      resource.author.toLowerCase().includes(searchTerm.toLowerCase());
+      (resource.source && resource.source.toLowerCase().includes(searchTerm.toLowerCase()));
     
     const matchesLevel = selectedLevel === 'all';
     const matchesTopic = selectedTopic === 'all' || resource.tags?.includes(selectedTopic);

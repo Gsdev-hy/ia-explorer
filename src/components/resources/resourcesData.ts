@@ -6,12 +6,24 @@ export interface Resource {
   type: string;
   year?: number;
   tags?: string[];
+  author?: string;
 }
 
-export interface IATool {
+export interface IAToolResource {
   name: string;
   description: string;
   link: string;
+  category: string;
+  tags?: string[];
+}
+
+export interface ScientificPublication {
+  title: string;
+  authors: string[];
+  publication: string;
+  description: string;
+  link: string;
+  year: number;
   tags?: string[];
 }
 
@@ -137,29 +149,33 @@ export const scientificPublications = [
   },
 ];
 
-export const iaTools: IATool[] = [
+export const iaTools: IAToolResource[] = [
   {
     name: "ChatGPT",
     description: "Un modèle de langage développé par OpenAI, capable de générer du texte, de traduire des langues et de répondre à des questions.",
     link: "https://chat.openai.com/",
+    category: "LLM",
     tags: ["nlp", "génération de texte"]
   },
   {
     name: "DALL-E 2",
     description: "Un modèle de génération d'images développé par OpenAI, capable de créer des images à partir de descriptions textuelles.",
     link: "https://openai.com/dall-e-2/",
+    category: "Vision",
     tags: ["génération d'images", "vision par ordinateur"]
   },
   {
     name: "TensorFlow",
     description: "Une bibliothèque open source pour le machine learning, développée par Google.",
     link: "https://www.tensorflow.org/",
+    category: "Framework",
     tags: ["machine learning", "deep learning"]
   },
   {
     name: "RunwayML",
     description: "Une plateforme pour créer et expérimenter avec des modèles de machine learning.",
     link: "https://runwayml.com/",
+    category: "No-code",
     tags: ["machine learning", "no-code"]
   },
 ];

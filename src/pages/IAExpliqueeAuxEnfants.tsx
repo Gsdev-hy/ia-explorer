@@ -5,7 +5,7 @@ import SectionHeading from '@/components/SectionHeading';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Brain, Lightbulb, Robot, Star, BookOpen, Memory, Cpu, Network, ArrowRight } from 'lucide-react';
+import { Brain, Lightbulb, Bot, Star, BookOpen, Cpu, Network, ArrowRight } from 'lucide-react';
 
 const IAExpliqueeAuxEnfants = () => {
   return (
@@ -80,7 +80,7 @@ const IAExpliqueeAuxEnfants = () => {
             <Card className="bg-primary/5 shadow-md">
               <CardContent className="pt-6">
                 <div className="flex flex-col items-center text-center gap-2">
-                  <Robot size={40} className="text-primary" />
+                  <Bot size={40} className="text-primary" />
                   <h3 className="text-lg font-bold">As-tu une question ?</h3>
                   <p className="text-muted-foreground text-sm">
                     Utilise notre assistant IA pour poser toutes tes questions sur l'intelligence artificielle !
@@ -160,7 +160,7 @@ const IAExpliqueeAuxEnfants = () => {
                 
                 <div className="bg-primary/10 p-4 rounded-lg my-6">
                   <h4 className="text-lg font-semibold flex items-center gap-2">
-                    <Memory className="text-primary" size={20} />
+                    <Cpu className="text-primary" size={20} />
                     La fenêtre de contexte, c'est quoi ?
                   </h4>
                   <p className="m-0">
