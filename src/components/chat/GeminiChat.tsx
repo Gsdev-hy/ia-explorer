@@ -6,7 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "@/components/ui/card";
 import { Send, Bot, User } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { supabase } from "@/integrations/supabase/client";
 
 interface Message {
   role: 'user' | 'assistant';
@@ -41,14 +41,14 @@ const GeminiChat = () => {
     setIsLoading(true);
 
     try {
-      const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
-      const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+      const { data, error } = await supabase.functions.invoke('deepseek-chat', {
+        body: { prompt: userMessage }
+      });
       
-      const result = await model.generateContent(userMessage);
-      const response = result.response;
-      const text = response.text();
+      if (error) throw new Error(error.message);
       
-      setMessages(prev => [...prev, { role: 'assistant', content: text }]);
+      const aiResponse = data.generatedText;
+      setMessages(prev => [...prev, { role: 'assistant', content: aiResponse }]);
     } catch (error) {
       toast({
         title: "Erreur",

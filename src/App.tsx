@@ -16,6 +16,7 @@ import Glossaire from "./pages/Glossaire";
 import HistoireIA from "./pages/HistoireIA";
 import Ressources from "./pages/Ressources";
 import IAMultimodale from "./pages/IAMultimodale";
+import IAExpliqueeAuxEnfants from "./pages/IAExpliqueeAuxEnfants";
 import Actualites from "./pages/Actualites";
 import About from "./pages/About";
 import MentionsLegales from "./pages/MentionsLegales";
@@ -49,6 +50,7 @@ function App() {
                 <Route path="actualites" element={<Actualites />} />
                 <Route path="glossaire" element={<Glossaire />} />
                 <Route path="ressources" element={<Ressources />} />
+                <Route path="ia-expliquee-aux-enfants" element={<IAExpliqueeAuxEnfants />} />
                 <Route path="llm-details" element={<LLMDetails />} />
                 <Route path="mentions-legales" element={<MentionsLegales />} />
                 <Route path="confidentialite" element={<Confidentialite />} />

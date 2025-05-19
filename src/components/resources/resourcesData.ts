@@ -1,228 +1,165 @@
-
-// Types
 export interface Resource {
   title: string;
   source: string;
-  author: string;
-  type: 'cours' | 'livre' | 'article' | 'vidéo' | 'podcast';
+  description: string;
+  link: string;
+  type: string;
+  year?: number;
+  tags?: string[];
+}
+
+export interface IATool {
+  name: string;
+  description: string;
   link: string;
   tags?: string[];
-  year?: number;
-  description: string;
 }
 
-export interface ScientificPublication {
-  title: string;
-  authors: string;
-  publication: string;
-  link: string;
-  year: number;
-  description: string;
-}
-
-export interface IAToolResource {
-  name: string;
-  category: string;
-  link: string;
-  description: string;
-}
-
-// Ressources réelles
 export const realResources: Resource[] = [
   {
-    title: "Cours Introduction au Deep Learning",
+    title: "Cours introduction au Deep Learning",
     source: "Collège de France",
-    author: "Yann LeCun",
+    description: "Série de cours sur les fondements du deep learning par l'un des pionniers du domaine.",
+    link: "https://www.college-de-france.fr/fr/agenda/cours/les-bases-theoriques-et-algorithmiques-du-deep-learning",
     type: "cours",
-    link: "https://www.college-de-france.fr/site/yann-lecun/course-2016-02-04-14h00.htm",
-    tags: ["deep learning", "fondamentaux", "cours"],
     year: 2022,
-    description: "Série de cours sur les fondements du deep learning par l'un des pionniers du domaine."
-  },
-  {
-    title: "Intelligence artificielle : avec quoi les étudiants doivent-ils se familiariser ?",
-    source: "The Conversation",
-    author: "Serge Abiteboul",
-    type: "article",
-    link: "https://theconversation.com/intelligence-artificielle-avec-quoi-les-etudiants-doivent-ils-se-familiariser-213183",
-    tags: ["éducation", "IA générale", "introduction"],
-    year: 2023,
-    description: "Article explorant les compétences essentielles en IA pour les étudiants."
+    tags: ["deep learning", "fondamentaux"]
   },
   {
     title: "Elements of AI",
     source: "Université d'Helsinki",
-    author: "Université d'Helsinki et Reaktor",
-    type: "cours",
+    description: "Cours interactif gratuit sur les concepts fondamentaux de l'IA, accessible à tous.",
     link: "https://www.elementsofai.fr/",
-    tags: ["introduction", "cours", "gratuit"],
-    year: 2023, 
-    description: "Cours interactif gratuit sur les concepts fondamentaux de l'IA, accessible à tous."
-  },
-  {
-    title: "Artificial Intelligence - A Modern Approach (4e édition, traduction française)",
-    source: "Pearson",
-    author: "Stuart Russell et Peter Norvig",
-    type: "livre",
-    link: "https://www.pearson.fr/book/?gcoi=27440100827370",
-    tags: ["manuel", "référence", "IA générale"],
-    year: 2020,
-    description: "L'ouvrage de référence sur l'IA, couvrant l'ensemble des approches modernes."
-  },
-  {
-    title: "L'IA expliquée à mon boss",
-    source: "Dunod",
-    author: "Emmanuel Manceau et Romain Chaumais",
-    type: "livre",
-    link: "https://www.dunod.com/sciences-techniques/ia-expliquee-mon-boss",
-    tags: ["vulgarisation", "business", "introduction"],
+    type: "cours",
     year: 2023,
-    description: "Livre accessible expliquant les aspects pratiques de l'IA pour le monde professionnel."
-  },
-  {
-    title: "Fondamentaux du Deep Learning",
-    source: "O'Reilly",
-    author: "Nikhil Buduma et Nicholas Locascio",
-    type: "livre",
-    link: "https://www.eyrolles.com/Informatique/Livre/fondamentaux-du-deep-learning-9782412034438/",
-    tags: ["deep learning", "neural networks", "programmation"],
-    year: 2022,
-    description: "Introduction technique au deep learning avec exemples pratiques."
-  },
-  {
-    title: "L'intelligence artificielle pas à pas",
-    source: "Eyrolles",
-    author: "Vincent Renvoizé",
-    type: "livre",
-    link: "https://www.eyrolles.com/Informatique/Livre/l-intelligence-artificielle-pas-a-pas-9782212675610/",
-    tags: ["programmation", "python", "débutant"],
-    year: 2024,
-    description: "Approche progressive de l'IA avec des exemples concrets en Python."
+    tags: ["introduction", "fondamentaux"]
   },
   {
     title: "Coursera - Machine Learning",
     source: "Coursera",
-    author: "Andrew Ng",
-    type: "cours",
+    description: "Le cours emblématique d'Andrew Ng sur le machine learning, disponible en plusieurs langues.",
     link: "https://www.coursera.org/learn/machine-learning",
-    tags: ["machine learning", "cours", "fondamentaux"],
-    year: 2024,
-    description: "Le cours emblématique d'Andrew Ng sur le machine learning, disponible en plusieurs langues."
-  },
-  {
-    title: "AI for Everyone",
-    source: "Coursera",
-    author: "Andrew Ng",
     type: "cours",
-    link: "https://www.coursera.org/learn/ai-for-everyone",
-    tags: ["introduction", "non-technique", "cours"],
+    year: 2024,
+    tags: ["machine learning", "fondamentaux"]
+  },
+  {
+    title: "L'IA expliquée aux enfants",
+    source: "Geoffroy Streit",
+    description: "Une approche progressive, pédagogique et accessible pour comprendre l'IA destinée aux enfants dès 12 ans.",
+    link: "/ia-expliquee-aux-enfants",
+    type: "cours",
+    year: 2024,
+    tags: ["1ère approche", "enfant", "vulgarisation"]
+  },
+  {
+    title: "Deep Learning Specialization",
+    source: "Coursera",
+    description: "Série de cours approfondis sur le deep learning par Andrew Ng.",
+    link: "https://www.coursera.org/specializations/deep-learning",
+    type: "cours",
     year: 2023,
-    description: "Cours non-technique sur l'IA, accessible à tous, disponible en français."
+    tags: ["deep learning", "avancé"]
   },
   {
-    title: "Intelligence artificielle - Données massives et algorithmes",
-    source: "La Découverte",
-    author: "Jean-Gabriel Ganascia",
+    title: "Artificial Intelligence: A Modern Approach",
+    source: "Peter Norvig & Stuart J. Russell",
+    description: "Un manuel de référence complet sur l'IA, couvrant tous les aspects du domaine.",
+    link: "https://aima.cs.berkeley.edu/",
     type: "livre",
-    link: "https://www.editionsladecouverte.fr/intelligence_artificielle-9782707199935",
-    tags: ["sociologie", "philosophie", "éthique"],
-    year: 2024,
-    description: "Analyse des enjeux sociétaux et éthiques de l'IA par un expert reconnu."
+    year: 2020,
+    tags: ["manuel", "fondamentaux"]
   },
   {
-    title: "La chaîne YouTube d'Hugo Larochelle",
-    source: "YouTube",
-    author: "Hugo Larochelle",
+    title: "Hands-On Machine Learning with Scikit-Learn, Keras & TensorFlow",
+    source: "Aurélien Géron",
+    description: "Guide pratique pour apprendre le machine learning avec Scikit-Learn, Keras et TensorFlow.",
+    link: "https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/",
+    type: "livre",
+    year: 2019,
+    tags: ["machine learning", "pratique"]
+  },
+  {
+    title: "Deep Learning (Adaptive Computation and Machine Learning series)",
+    source: "Ian Goodfellow, Yoshua Bengio and Aaron Courville",
+    description: "Un livre de référence sur le deep learning, couvrant les aspects théoriques et pratiques.",
+    link: "https://www.deeplearningbook.org/",
+    type: "livre",
+    year: 2016,
+    tags: ["deep learning", "théorique"]
+  },
+  {
+    title: "The AI Revolution: The Road to Superintelligence",
+    source: "Tim Urban",
+    description: "Un article de blog vulgarisant les concepts de l'IA et de la superintelligence.",
+    link: "https://waitbutwhy.com/2015/01/artificial-intelligence-revolution-1.html",
+    type: "article",
+    year: 2015,
+    tags: ["vulgarisation", "futur"]
+  },
+  {
+    title: "How AI works",
+    source: "Lex Fridman",
+    description: "Une série de vidéos expliquant le fonctionnement de l'IA.",
+    link: "https://www.youtube.com/playlist?list=PLrAXtmErZgOeiKm4EmQ9V5yrDF6o_eFGj",
     type: "vidéo",
-    link: "https://www.youtube.com/@hugolarochelle",
-    tags: ["deep learning", "vidéo", "cours"],
-    year: 2024,
-    description: "Série de cours vidéo approfondis sur le deep learning par un chercheur Google."
+    year: 2021,
+    tags: ["vulgarisation", "vidéo"]
   },
   {
-    title: "Podcast La French Tech",
-    source: "La French Tech",
-    author: "Divers",
+    title: "AI Podcast",
+    source: "Lex Fridman",
+    description: "Un podcast avec des interviews de chercheurs et d'experts en IA.",
+    link: "https://lexfridman.com/ai/",
     type: "podcast",
-    link: "https://lafrenchtech.com/fr/",
-    tags: ["tech", "innovation", "podcast"],
-    year: 2025,
-    description: "Épisodes sur les avancées en IA et l'écosystème tech français."
-  }
+    tags: ["interview", "podcast"]
+  },
 ];
 
-// Publications scientifiques
-export const scientificPublications: ScientificPublication[] = [
+export const scientificPublications = [
   {
-    title: "Attention Is All You Need",
-    authors: "Vaswani et al.",
-    publication: "NIPS 2017",
+    title: "Attention is All You Need",
+    authors: ["Ashish Vaswani", "Noam Shazeer", "Niki Parmar", "Jakob Uszkoreit", "Llion Jones", "Aidan N. Gomez", "Łukasz Kaiser", "Illia Polosukhin"],
+    source: "Google Brain",
+    description: "Article introduisant l'architecture Transformer, qui a révolutionné le traitement du langage naturel.",
     link: "https://arxiv.org/abs/1706.03762",
     year: 2017,
-    description: "Article fondateur introduisant l'architecture Transformer, à la base des modèles LLM modernes."
+    tags: ["transformer", "nlp"]
   },
   {
-    title: "Deep Residual Learning for Image Recognition",
-    authors: "He et al.",
-    publication: "CVPR 2016",
-    link: "https://arxiv.org/abs/1512.03385",
-    year: 2016,
-    description: "Introduction des réseaux résiduels (ResNet), une avancée majeure en vision par ordinateur."
+    title: "Generative Adversarial Nets",
+    authors: ["Ian J. Goodfellow", "Jean Pouget-Abadie", "Mehdi Mirza", "Bing Xu", "David Warde-Farley", "Sherjil Ozair", "Aaron Courville", "Yoshua Bengio"],
+    source: "Université de Montréal",
+    description: "Article introduisant les réseaux antagonistes génératifs (GANs), une approche novatrice pour la génération d'images.",
+    link: "https://arxiv.org/abs/1406.2661",
+    year: 2014,
+    tags: ["gan", "génération d'images"]
   },
-  {
-    title: "Language Models are Few-Shot Learners",
-    authors: "Brown et al.",
-    publication: "NeurIPS 2020",
-    link: "https://arxiv.org/abs/2005.14165",
-    year: 2020,
-    description: "Article présentant GPT-3 et les capacités d'apprentissage avec peu d'exemples."
-  },
-  {
-    title: "Learning Transferable Visual Models From Natural Language Supervision",
-    authors: "Radford et al.",
-    publication: "ICML 2021",
-    link: "https://arxiv.org/abs/2103.00020",
-    year: 2021,
-    description: "Introduction de CLIP, un modèle multimodal texte-image révolutionnaire."
-  }
 ];
 
-// Outils et plateformes d'IA
-export const iaTools: IAToolResource[] = [
+export const iaTools: IATool[] = [
   {
-    name: "Hugging Face",
-    category: "Plateforme",
-    link: "https://huggingface.co/",
-    description: "Bibliothèque et écosystème open-source pour les modèles de langage et d'autres modèles d'IA."
+    name: "ChatGPT",
+    description: "Un modèle de langage développé par OpenAI, capable de générer du texte, de traduire des langues et de répondre à des questions.",
+    link: "https://chat.openai.com/",
+    tags: ["nlp", "génération de texte"]
+  },
+  {
+    name: "DALL-E 2",
+    description: "Un modèle de génération d'images développé par OpenAI, capable de créer des images à partir de descriptions textuelles.",
+    link: "https://openai.com/dall-e-2/",
+    tags: ["génération d'images", "vision par ordinateur"]
   },
   {
     name: "TensorFlow",
-    category: "Framework",
+    description: "Une bibliothèque open source pour le machine learning, développée par Google.",
     link: "https://www.tensorflow.org/",
-    description: "Framework open-source pour le développement et l'entraînement de modèles de deep learning."
+    tags: ["machine learning", "deep learning"]
   },
   {
-    name: "PyTorch",
-    category: "Framework",
-    link: "https://pytorch.org/",
-    description: "Framework flexible de deep learning populaire dans la recherche en IA."
+    name: "RunwayML",
+    description: "Une plateforme pour créer et expérimenter avec des modèles de machine learning.",
+    link: "https://runwayml.com/",
+    tags: ["machine learning", "no-code"]
   },
-  {
-    name: "Kaggle",
-    category: "Plateforme d'apprentissage",
-    link: "https://www.kaggle.com/",
-    description: "Communauté pour l'apprentissage du machine learning et la participation à des compétitions."
-  },
-  {
-    name: "Scikit-learn",
-    category: "Bibliothèque",
-    link: "https://scikit-learn.org/",
-    description: "Bibliothèque Python simple et efficace pour le machine learning classique."
-  },
-  {
-    name: "Google Colab",
-    category: "Environnement",
-    link: "https://colab.research.google.com/",
-    description: "Notebook Jupyter gratuit permettant d'utiliser des GPU pour l'entraînement de modèles."
-  }
 ];

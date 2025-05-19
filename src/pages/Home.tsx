@@ -1,4 +1,3 @@
-
 import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
 import Card from '../components/Card';
@@ -143,6 +142,14 @@ const Home = () => {
               Comprendre l'IA permet de saisir les transformations actuelles, d'anticiper les évolutions futures 
               et de participer de manière éclairée aux débats sociétaux qu'elle suscite.
             </p>
+            <div className="mt-4">
+              <Button asChild variant="outline" className="flex items-center gap-2">
+                <Link to="/ia-expliquee-aux-enfants">
+                  L'IA expliquée aux enfants
+                  <ChevronRight size={16} />
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
