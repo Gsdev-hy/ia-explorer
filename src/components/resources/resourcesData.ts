@@ -1,4 +1,3 @@
-
 export interface Resource {
   title: string;
   source?: string;
@@ -121,6 +120,26 @@ export const realResources: Resource[] = [
     type: "cours",
     year: 2024,
     tags: ["code", "app", "dev par ia", "no code", "prompting", "architecture"]
+  },
+  {
+    title: "Comment l'IA Révolutionne le Marketing et la Vente",
+    source: "Comprendre l'IA",
+    author: "Geoffroy Streit",
+    description: "Exploration détaillée des applications de l'IA dans le marketing et la vente : personnalisation des offres, analyse prédictive des comportements clients, automatisation des campagnes publicitaires, chatbots commerciaux avancés et optimisation de la relation client grâce à l'intelligence artificielle.",
+    link: "/ia-marketing-vente",
+    type: "cours",
+    year: 2024,
+    tags: ["marketing", "vente", "personnalisation", "prédiction", "automatisation", "relation client"]
+  },
+  {
+    title: "L'IA au Service de l'Environnement et du Développement Durable",
+    source: "Comprendre l'IA",
+    author: "Geoffroy Streit",
+    description: "Analyse approfondie des applications de l'IA dans les domaines de l'écologie et du développement durable : modélisation climatique, optimisation des ressources, surveillance environnementale, agriculture de précision et solutions innovantes pour réduire l'empreinte carbone grâce aux technologies d'intelligence artificielle.",
+    link: "/ia-environnement",
+    type: "cours",
+    year: 2024,
+    tags: ["environnement", "développement durable", "écologie", "climat", "ressources", "agriculture"]
   },
 ];
 

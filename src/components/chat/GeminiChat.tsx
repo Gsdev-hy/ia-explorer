@@ -8,6 +8,7 @@ import { Send, Bot, User, Lightbulb } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Badge } from "@/components/ui/badge";
+import ReactMarkdown from 'react-markdown';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -131,11 +132,15 @@ const GeminiChat = () => {
               <div
                 className={`rounded-lg px-3 py-2 max-w-[80%] ${
                   message.role === 'assistant'
-                    ? 'bg-muted'
+                    ? 'bg-muted prose prose-sm dark:prose-invert'
                     : 'bg-primary text-primary-foreground'
                 }`}
               >
-                {message.content}
+                {message.role === 'assistant' ? (
+                  <ReactMarkdown>{message.content}</ReactMarkdown>
+                ) : (
+                  message.content
+                )}
               </div>
             </div>
           ))}
