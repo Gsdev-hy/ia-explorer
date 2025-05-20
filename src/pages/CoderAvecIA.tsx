@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Hero from '@/components/Hero';
@@ -7,7 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { Check, Code, Lightbulb, BrainCircuit, Gem, BookOpen, XSquare, AlertCircle, Bot, Wrench } from 'lucide-react';
+import { Check, Code, Lightbulb, BrainCircuit, Gem, BookOpen, XSquare, AlertCircle, Bot, Wrench, Palette } from 'lucide-react';
 
 const CodeSnippet = ({ children }: { children: React.ReactNode }) => (
   <pre className="bg-muted p-4 rounded-md overflow-x-auto my-4 text-sm">
@@ -82,11 +81,12 @@ const CoderAvecIA = () => {
           </div>
 
           <Tabs defaultValue="concepts" className="w-full mt-8">
-            <TabsList className="grid w-full grid-cols-4">
+            <TabsList className="grid w-full grid-cols-5">
               <TabsTrigger value="concepts">Concepts clés</TabsTrigger>
               <TabsTrigger value="assistants">Assistants IA</TabsTrigger>
               <TabsTrigger value="integration">Intégration IA</TabsTrigger>
               <TabsTrigger value="nocode">Approche No Code</TabsTrigger>
+              <TabsTrigger value="workflow">Workflows Avancés</TabsTrigger>
             </TabsList>
             
             <TabsContent value="concepts" className="mt-6">
@@ -140,7 +140,7 @@ const CoderAvecIA = () => {
                 et des extraits pertinents de votre code.
               </TipCard>
               
-              <h3 className="text-xl font-semibold mt-6">Tokens : l'unité de mesure de l'IA</h3>
+              <h3 className="text-xl font-semibold mt-6">Tokens : l'unit�� de mesure de l'IA</h3>
               <p>
                 Les tokens sont les unités de base traitées par un LLM. Un token peut être un mot, une partie de mot,
                 un caractère ou un symbole. Pour le code, les tokens peuvent être des mots-clés, des opérateurs,
@@ -830,6 +830,321 @@ function AIChat() {
                       <li>Prévoir des fallbacks en cas d'indisponibilité des services IA</li>
                       <li>Tester régulièrement avec des utilisateurs réels</li>
                     </ul>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="workflow" className="mt-6">
+              <h2 className="text-2xl font-bold mb-4">Workflows Avancés pour Développer avec l'IA</h2>
+              
+              <h3 className="text-xl font-semibold mt-6">Méthodologie de développement assisté par IA</h3>
+              <p>
+                Pour tirer le meilleur parti des outils d'IA dans le développement, il est utile de suivre
+                une méthodologie adaptée qui capitalise sur les forces de l'IA tout en reconnaissant ses limites.
+              </p>
+              
+              <div className="space-y-6 mt-4">
+                <div className="flex items-start gap-4">
+                  <div className="bg-primary/10 p-3 rounded-full">
+                    <span className="text-primary font-bold">1</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Planification et architecture</h4>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Avant de commencer à générer du code, définissez clairement l'architecture et les fonctionnalités 
+                      du système. L'IA peut vous aider à explorer différentes options d'architecture, mais la décision 
+                      finale bénéficie de l'expertise humaine.
+                    </p>
+                    <div className="mt-2 text-sm bg-muted p-3 rounded-md">
+                      <p className="font-medium">Exemple de prompt:</p>
+                      <p>"Je veux créer une application web pour la gestion de tâches avec authentification, stockage 
+                      en temps réel et notifications push. Propose-moi plusieurs options d'architecture avec leurs avantages 
+                      et inconvénients, en utilisant des technologies modernes comme React, Firebase, etc."</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="bg-primary/10 p-3 rounded-full">
+                    <span className="text-primary font-bold">2</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Développement itératif par composants</h4>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Plutôt que de demander à l'IA de générer une application complète en une seule fois, 
+                      adoptez une approche itérative par composants. Cela permet de mieux contrôler la qualité et 
+                      de comprendre chaque partie du système.
+                    </p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                      <div className="text-sm bg-red-50 dark:bg-red-950 p-3 rounded-md border border-red-200 dark:border-red-800">
+                        <p className="font-medium text-red-700 dark:text-red-300">❌ Mauvaise approche:</p>
+                        <p className="text-red-600 dark:text-red-400">"Génère une application complète de e-commerce avec React, Node.js et MongoDB"</p>
+                      </div>
+                      <div className="text-sm bg-green-50 dark:bg-green-950 p-3 rounded-md border border-green-200 dark:border-green-800">
+                        <p className="font-medium text-green-700 dark:text-green-300">✅ Bonne approche:</p>
+                        <p className="text-green-600 dark:text-green-400">"Génère un composant de carte produit pour une application e-commerce React avec gestion d'état et animations"</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="bg-primary/10 p-3 rounded-full">
+                    <span className="text-primary font-bold">3</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Méthodologie REPL pour le développement avec IA</h4>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      La méthode REPL (Read, Evaluate, Print, Loop) adaptée au développement avec IA:
+                    </p>
+                    <ul className="list-disc pl-5 mt-2 text-sm space-y-2 text-muted-foreground">
+                      <li><span className="font-medium">Read</span>: Analyser la documentation, les spécifications et le code existant</li>
+                      <li><span className="font-medium">Evaluate</span>: Demander à l'IA de générer des solutions ou améliorations</li>
+                      <li><span className="font-medium">Print</span>: Intégrer et tester le code généré</li>
+                      <li><span className="font-medium">Loop</span>: Affiner, corriger et améliorer avec l'aide de l'IA</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <h3 className="text-xl font-semibold mt-8">Techniques avancées de prompting pour le développement</h3>
+              
+              <div className="space-y-6 mt-4">
+                <Card>
+                  <CardContent className="p-6">
+                    <h4 className="text-lg font-semibold mb-3 flex items-center gap-2">
+                      <Palette className="h-5 w-5 text-primary" />
+                      Prompt Engineering pour le code
+                    </h4>
+                    
+                    <div className="space-y-4">
+                      <div>
+                        <h5 className="font-medium text-sm">Prompting avec contexte complet</h5>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Fournissez le contexte nécessaire: langage, framework, style de code, versions, contraintes.
+                        </p>
+                        <CodeSnippet>
+                          {`"Je travaille sur une application React 18 avec TypeScript 5.0 et Tailwind CSS. 
+Notre convention de code utilise des composants fonctionnels, des hooks personnalisés, 
+et nous suivons les principes de l'architecture propre. 
+Génère un composant de formulaire de contact avec validation qui envoie les données à une API."`}
+                        </CodeSnippet>
+                      </div>
+                      
+                      <div>
+                        <h5 className="font-medium text-sm">Prompting incrémental ciblé</h5>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Posez des questions spécifiques sur des parties du code plutôt que de demander des refactorisations complètes.
+                        </p>
+                        <CodeSnippet>
+                          {`"Dans ce composant React, j'ai un problème de performance avec la fonction handleSubmit. 
+Elle est appelée trop souvent et cause des re-rendus inutiles. 
+Voici le code:
+
+function ContactForm() {
+  // ... [code du composant]
+  
+  const handleSubmit = () => {
+    // ... [code de la fonction]
+  }
+  
+  // ... [reste du code]
+}
+
+Comment puis-je optimiser cette fonction avec useCallback et useMemo pour éviter les re-rendus?"`}
+                        </CodeSnippet>
+                      </div>
+                      
+                      <div>
+                        <h5 className="font-medium text-sm">Prompting avec auto-critique</h5>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Demandez à l'IA d'évaluer ses propres solutions et de proposer des améliorations.
+                        </p>
+                        <CodeSnippet>
+                          {`"Génère une fonction en JavaScript pour trier un tableau d'objets par une propriété spécifiée.
+Ensuite, analyse ton propre code et identifie:
+1. Les potentiels bugs ou cas limites
+2. Les optimisations possibles
+3. Comment la rendre plus maintenable et réutilisable
+Enfin, propose une version améliorée basée sur cette analyse."`}
+                        </CodeSnippet>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-6">
+                    <h4 className="text-lg font-semibold mb-3 flex items-center gap-2">
+                      <Code className="h-5 w-5 text-primary" />
+                      Modèles de prompts pour tâches de développement spécifiques
+                    </h4>
+                    
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                      <div>
+                        <h5 className="font-medium text-sm">Pour créer des tests unitaires</h5>
+                        <CodeSnippet>
+                          {`"Génère des tests unitaires Jest pour cette fonction:
+[CODE DE LA FONCTION]
+
+Les tests doivent:
+1. Couvrir les cas nominaux
+2. Gérer les cas d'erreur
+3. Tester les cas limites
+4. Utiliser des mocks pour les dépendances externes
+5. Suivre le pattern AAA (Arrange, Act, Assert)"`}
+                        </CodeSnippet>
+                      </div>
+                      
+                      <div>
+                        <h5 className="font-medium text-sm">Pour refactorer du code</h5>
+                        <CodeSnippet>
+                          {`"Refactorise ce code pour:
+[CODE À REFACTORISER]
+
+Objectifs:
+1. Améliorer la lisibilité
+2. Réduire la complexité cognitive
+3. Appliquer les principes SOLID
+4. Utiliser les fonctionnalités modernes du langage
+5. Maintenir la fonctionnalité exacte (comportement identique)
+
+Explique chaque changement majeur et ses avantages."`}
+                        </CodeSnippet>
+                      </div>
+                      
+                      <div>
+                        <h5 className="font-medium text-sm">Pour optimiser les performances</h5>
+                        <CodeSnippet>
+                          {`"Analyse les performances de ce code:
+[CODE À OPTIMISER]
+
+Propose des optimisations spécifiques pour:
+1. Réduire la complexité algorithmique
+2. Minimiser les opérations coûteuses
+3. Éviter les fuites mémoire
+4. Améliorer la mise en cache
+5. Réduire les calculs redondants
+
+Pour chaque optimisation, explique le gain attendu et les compromis."`}
+                        </CodeSnippet>
+                      </div>
+                      
+                      <div>
+                        <h5 className="font-medium text-sm">Pour implémenter un design pattern</h5>
+                        <CodeSnippet>
+                          {`"J'ai besoin d'implémenter le pattern Observer dans mon application JavaScript pour:
+[DESCRIPTION DU PROBLÈME]
+
+Génère une implémentation qui:
+1. Est facile à comprendre et à utiliser
+2. Utilise des concepts modernes (classes ES6, etc.)
+3. Est typée avec JSDoc ou TypeScript
+4. Inclut des exemples d'utilisation
+5. Est facilement extensible"`}
+                        </CodeSnippet>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+              
+              <h3 className="text-xl font-semibold mt-8">Collaboration Humain-IA: Bonnes pratiques</h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                <Card>
+                  <CardContent className="p-6">
+                    <h4 className="font-semibold mb-3">Comprendre avant d'intégrer</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Ne copiez jamais de code généré par une IA sans le comprendre. Prenez le temps d'analyser 
+                      la solution proposée et assurez-vous de comprendre comment elle fonctionne.
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-6">
+                    <h4 className="font-semibold mb-3">Vérifier et tester rigoureusement</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Le code généré par l'IA peut contenir des erreurs subtiles ou des problèmes de sécurité.
+                      Testez toujours minutieusement et utilisez des outils d'analyse statique.
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-6">
+                    <h4 className="font-semibold mb-3">L'IA comme partenaire, non remplaçant</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Utilisez l'IA pour augmenter votre productivité et créativité, mais maintenez votre
+                      jugement critique. La vision d'ensemble du projet reste une compétence humaine clé.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+              
+              <TipCard title="Construire une mémoire de projet avec l'IA">
+                Pour les projets complexes, créez un "guide IA" spécifique au projet qui définit la structure,
+                les conventions et les dépendances. Au début de chaque session avec un outil IA,
+                fournissez ce guide pour assurer que le code généré reste cohérent avec la vision du projet.
+              </TipCard>
+              
+              <h3 className="text-xl font-semibold mt-8">Automatisation des tâches de développement</h3>
+              
+              <div className="space-y-4 mt-4">
+                <Card>
+                  <CardContent className="p-4">
+                    <h4 className="font-semibold mb-2">Scripts personnalisés + IA</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Créez des scripts qui utilisent les API des modèles d'IA pour automatiser des tâches répétitives
+                      comme la génération de documentation, la création de tests, ou la revue de code.
+                    </p>
+                    <CodeSnippet>
+                      {`#!/usr/bin/env node
+// generate-docs.js - Script pour générer automatiquement de la documentation
+
+const fs = require('fs');
+const path = require('path');
+const { execSync } = require('child_process');
+const { OpenAI } = require('openai');
+
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+async function generateDocForFile(filePath) {
+  const code = fs.readFileSync(filePath, 'utf8');
+  
+  const response = await openai.chat.completions.create({
+    model: "gpt-4",
+    messages: [
+      { 
+        role: "system", 
+        content: "Génère une documentation complète pour le code suivant." 
+      },
+      { 
+        role: "user", 
+        content: code 
+      }
+    ]
+  });
+  
+  const docContent = response.choices[0].message.content;
+  const docPath = filePath.replace(/\.js$/, '.md');
+  
+  fs.writeFileSync(docPath, docContent);
+  console.log(\`Documentation générée pour \${filePath} -> \${docPath}\`);
+}
+
+// Usage: node generate-docs.js src/components/*.js
+const filePattern = process.argv[2];
+const files = execSync(\`ls \${filePattern}\`).toString().split('\n').filter(Boolean);
+
+(async () => {
+  for (const file of files) {
+    await generateDocForFile(file);
+  }
+})();`}
+                    </CodeSnippet>
                   </CardContent>
                 </Card>
               </div>

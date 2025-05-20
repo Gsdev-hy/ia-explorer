@@ -1,3 +1,4 @@
+
 export interface Resource {
   title: string;
   source?: string;
@@ -22,7 +23,7 @@ export interface ScientificPublication {
 export interface IAToolResource {
   name: string;
   description: string;
-  url: string;  // This is what IAToolCard is trying to use as 'link'
+  url: string;  // This is what IAToolCard is using
   category: string;
   free: boolean;
   tags: string[];
@@ -115,11 +116,11 @@ export const realResources: Resource[] = [
     title: "Les bases pour développer une APP avec de l'IA",
     source: "Comprendre l'IA",
     author: "Geoffroy Streit",
-    description: "Guide complet des concepts, outils et bonnes pratiques pour le développement d'applications avec l'IA, incluant les approches No Code et les techniques avancées.",
+    description: "Guide complet des concepts, outils et bonnes pratiques pour le développement d'applications avec l'IA, incluant les approches No Code, les techniques avancées de prompting pour le code, l'architecture de projets IA et les meilleures méthodes de déploiement.",
     link: "/coder-avec-ia",
     type: "cours",
     year: 2024,
-    tags: ["code", "app", "dev par ia", "no code"]
+    tags: ["code", "app", "dev par ia", "no code", "prompting", "architecture"]
   },
 ];
 

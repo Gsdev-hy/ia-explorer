@@ -4,14 +4,31 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "@/components/ui/card";
-import { Send, Bot, User } from "lucide-react";
+import { Send, Bot, User, Lightbulb } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { Badge } from "@/components/ui/badge";
 
 interface Message {
   role: 'user' | 'assistant';
   content: string;
 }
+
+interface SuggestionTopicProps {
+  title: string;
+  onClick: (topic: string) => void;
+}
+
+const SuggestionTopic: React.FC<SuggestionTopicProps> = ({ title, onClick }) => (
+  <Badge 
+    variant="outline" 
+    className="px-3 py-1 cursor-pointer hover:bg-primary/10 transition-colors"
+    onClick={() => onClick(title)}
+  >
+    <Lightbulb className="h-3 w-3 mr-1" />
+    {title}
+  </Badge>
+);
 
 const GeminiChat = () => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -19,6 +36,15 @@ const GeminiChat = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+
+  const suggestionTopics = [
+    "Expliquer le machine learning",
+    "Différence entre IA et ML",
+    "Comment intégrer ChatGPT dans mon app",
+    "Qu'est-ce que le RAG",
+    "Exemples de prompts efficaces", 
+    "Outils pour développer avec IA"
+  ];
 
   const scrollToBottom = () => {
     if (scrollAreaRef.current) {
@@ -30,6 +56,10 @@ const GeminiChat = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  const handleSuggestionClick = (topic: string) => {
+    setInput(topic);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,6 +100,20 @@ const GeminiChat = () => {
 
       <ScrollArea ref={scrollAreaRef} className="flex-1 p-4">
         <div className="space-y-4">
+          {messages.length === 0 && (
+            <div className="text-center py-8">
+              <Bot className="h-10 w-10 text-primary/30 mx-auto mb-3" />
+              <h3 className="text-lg font-medium text-muted-foreground">Comment puis-je vous aider?</h3>
+              <p className="text-sm text-muted-foreground mt-2">Posez une question sur l'IA ou cliquez sur une suggestion ci-dessous.</p>
+              
+              <div className="flex flex-wrap gap-2 justify-center mt-4">
+                {suggestionTopics.map((topic, i) => (
+                  <SuggestionTopic key={i} title={topic} onClick={handleSuggestionClick} />
+                ))}
+              </div>
+            </div>
+          )}
+
           {messages.map((message, i) => (
             <div
               key={i}
