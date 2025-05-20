@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
@@ -23,6 +24,10 @@ import CoderAvecIA from './pages/CoderAvecIA';
 import IAMarketingVente from './pages/IAMarketingVente';
 import IAEnvironnement from './pages/IAEnvironnement';
 import GeminiChatPage from './pages/GeminiChatPage';
+import PythonIA from './pages/PythonIA';
+import DeepLearning from './pages/DeepLearning';
+import NLPConcepts from './pages/NLPConcepts';
+import PremierModeleML from './pages/PremierModeleML';
 
 /**
  * Application principale
@@ -54,6 +59,10 @@ const App = () => {
           <Route path="ia-marketing-vente" element={<IAMarketingVente />} />
           <Route path="ia-environnement" element={<IAEnvironnement />} />
           <Route path="chat" element={<GeminiChatPage />} />
+          <Route path="python-ia" element={<PythonIA />} />
+          <Route path="deep-learning" element={<DeepLearning />} />
+          <Route path="nlp-concepts" element={<NLPConcepts />} />
+          <Route path="premier-modele-ml" element={<PremierModeleML />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

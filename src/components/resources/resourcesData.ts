@@ -141,6 +141,46 @@ export const realResources: Resource[] = [
     year: 2024,
     tags: ["environnement", "développement durable", "écologie", "climat", "ressources", "agriculture"]
   },
+  {
+    title: "Initiation à Python pour l'Intelligence Artificielle",
+    source: "Comprendre l'IA",
+    author: "Geoffroy Streit",
+    description: "Formation complète pour débutants souhaitant apprendre Python spécifiquement pour les applications d'IA. Ce cours couvre les bases du langage, les bibliothèques essentielles (NumPy, Pandas) et introduit les premiers pas vers les modèles d'apprentissage automatique.",
+    link: "/python-ia",
+    type: "cours",
+    year: 2024,
+    tags: ["python", "programmation", "débutant", "data science", "bibliothèques", "numpy", "pandas"]
+  },
+  {
+    title: "Les Bases du Deep Learning avec TensorFlow ou PyTorch",
+    source: "Comprendre l'IA",
+    author: "Geoffroy Streit",
+    description: "Exploration des fondamentaux du Deep Learning à travers les deux frameworks les plus populaires. Ce cours présente l'architecture des réseaux de neurones profonds, les techniques d'optimisation, et guide l'apprenant dans la création de ses premiers modèles avec des applications concrètes.",
+    link: "/deep-learning",
+    type: "cours",
+    year: 2024,
+    tags: ["deep learning", "tensorflow", "pytorch", "réseaux de neurones", "frameworks", "modèles"]
+  },
+  {
+    title: "Traitement du Langage Naturel (NLP) : Concepts et Outils",
+    source: "Comprendre l'IA",
+    author: "Geoffroy Streit",
+    description: "Introduction aux techniques modernes de traitement automatique du langage naturel. Ce cours présente les concepts fondamentaux du NLP, les modèles de type transformer, les techniques d'embedding, et explique comment implémenter des solutions de compréhension et génération de texte.",
+    link: "/nlp-concepts",
+    type: "cours",
+    year: 2024,
+    tags: ["nlp", "langage naturel", "transformers", "bert", "gpt", "word embedding", "texte"]
+  },
+  {
+    title: "Construire son Premier Modèle de Machine Learning (pas à pas)",
+    source: "Comprendre l'IA",
+    author: "Geoffroy Streit",
+    description: "Guide pratique pour créer et déployer un modèle de machine learning de A à Z. Ce cours détaille chaque étape du processus : préparation des données, feature engineering, entraînement du modèle, évaluation des performances, et mise en production, avec des exemples concrets.",
+    link: "/premier-modele-ml",
+    type: "cours",
+    year: 2024,
+    tags: ["machine learning", "modélisation", "data science", "scikit-learn", "déploiement", "pas à pas", "prédiction"]
+  }
 ];
 
 export const scientificPublications: ScientificPublication[] = [
