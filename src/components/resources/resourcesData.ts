@@ -24,7 +24,7 @@ export interface ScientificPublication {
 export interface IAToolResource {
   name: string;
   description: string;
-  url: string;
+  url: string;  // This is what IAToolCard is trying to use as 'link'
   category: string;
   free: boolean;
   tags: string[];

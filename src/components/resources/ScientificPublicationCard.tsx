@@ -21,7 +21,7 @@ export const ScientificPublicationCard: React.FC<ScientificPublicationCardProps>
           <Badge variant="outline" className="bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">
             {publication.year}
           </Badge>
-          <Badge variant="secondary">{publication.publication}</Badge>
+          <Badge variant="secondary">{publication.journal}</Badge>
         </div>
         <h3 className="text-lg font-medium mb-2">{publication.title}</h3>
         <p className="text-sm text-muted-foreground mb-2 italic">{publication.authors}</p>
