@@ -1,11 +1,47 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Hero from '@/components/Hero';
 import SectionHeading from '@/components/SectionHeading';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { Bot, Code, Terminal, Database, Shield, Rocket, FlaskConical, Layers, CheckCircle } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
+import { Check, Code, Lightbulb, BrainCircuit, Gem, BookOpen, XSquare, AlertCircle, Bot, Wrench } from 'lucide-react';
+
+const CodeSnippet = ({ children }: { children: React.ReactNode }) => (
+  <pre className="bg-muted p-4 rounded-md overflow-x-auto my-4 text-sm">
+    <code>{children}</code>
+  </pre>
+);
+
+const TipCard = ({ title, children }: { title: string; children: React.ReactNode }) => (
+  <Card className="my-4 border-l-4 border-l-primary">
+    <CardContent className="p-4">
+      <div className="flex gap-2 items-start">
+        <Lightbulb className="h-5 w-5 text-primary shrink-0 mt-1" />
+        <div>
+          <h4 className="font-semibold text-sm">{title}</h4>
+          <div className="text-sm text-muted-foreground mt-1">{children}</div>
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+);
+
+const WarningCard = ({ title, children }: { title: string; children: React.ReactNode }) => (
+  <Card className="my-4 border-l-4 border-l-orange-400">
+    <CardContent className="p-4">
+      <div className="flex gap-2 items-start">
+        <AlertCircle className="h-5 w-5 text-orange-500 shrink-0 mt-1" />
+        <div>
+          <h4 className="font-semibold text-sm">{title}</h4>
+          <div className="text-sm text-muted-foreground mt-1">{children}</div>
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+);
 
 const CoderAvecIA = () => {
   return (
@@ -16,344 +52,799 @@ const CoderAvecIA = () => {
       />
 
       <section className="section-container">
-        <div className="prose prose-lg max-w-none dark:prose-invert mb-10">
-          <h2 className="text-2xl font-bold">Introduction</h2>
-          <div className="bg-primary/5 p-6 rounded-lg my-6">
-            <p className="text-lg font-medium">L'IA, votre nouveau partenaire de codage</p>
-            <p>
-              L'intelligence artificielle révolutionne le développement d'applications en proposant 
-              de nouvelles façons de coder. Il est important de distinguer deux approches complémentaires :
+        <div className="max-w-3xl mx-auto mb-16">
+          <div className="prose dark:prose-invert max-w-none">
+            <p className="lead">
+              L'intelligence artificielle transforme radicalement la façon dont nous développons des applications.
+              Qu'il s'agisse de l'utilisation d'outils comme GitHub Copilot pour accélérer votre codage ou
+              de l'intégration de fonctionnalités IA dans vos applications, ce guide vous aidera à
+              comprendre les concepts, techniques et bonnes pratiques nécessaires.
             </p>
-            <ul>
-              <li><strong>L'IA comme assistant au codage</strong> - Des outils comme GitHub Copilot ou ChatGPT qui vous aident à générer du code</li>
-              <li><strong>L'IA comme fonctionnalité</strong> - L'intégration de capacités IA dans votre application, comme un chatbot intelligent</li>
-            </ul>
-            <p className="mt-4">
-              <strong>Les avantages sont nombreux :</strong> accélération du développement, aide à la résolution de problèmes, 
-              génération de code répétitif, prototypage rapide, et bien plus encore.
-            </p>
+
+            <div className="flex flex-wrap gap-4 my-6">
+              <div className="flex items-center gap-2">
+                <Check className="h-5 w-5 text-primary" />
+                <span>Accélération du développement</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="h-5 w-5 text-primary" />
+                <span>Résolution de problèmes complexes</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="h-5 w-5 text-primary" />
+                <span>Génération automatique de code</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="h-5 w-5 text-primary" />
+                <span>Prototypage rapide</span>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <Tabs defaultValue="comprendre" className="w-full mb-16">
-          <TabsList className="w-full max-w-4xl mx-auto grid grid-cols-4 mb-8">
-            <TabsTrigger value="comprendre">
-              <div className="flex flex-col items-center gap-2 py-2">
-                <Bot className="h-5 w-5" />
-                <span>Comprendre les IA</span>
-              </div>
-            </TabsTrigger>
-            <TabsTrigger value="integration">
-              <div className="flex flex-col items-center gap-2 py-2">
-                <Code className="h-5 w-5" />
-                <span>Intégrer l'IA</span>
-              </div>
-            </TabsTrigger>
-            <TabsTrigger value="deploiement">
-              <div className="flex flex-col items-center gap-2 py-2">
-                <Rocket className="h-5 w-5" />
-                <span>Déploiement</span>
-              </div>
-            </TabsTrigger>
-            <TabsTrigger value="bonnes-pratiques">
-              <div className="flex flex-col items-center gap-2 py-2">
-                <CheckCircle className="h-5 w-5" />
-                <span>Bonnes Pratiques</span>
-              </div>
-            </TabsTrigger>
-          </TabsList>
+          <Tabs defaultValue="concepts" className="w-full mt-8">
+            <TabsList className="grid w-full grid-cols-4">
+              <TabsTrigger value="concepts">Concepts clés</TabsTrigger>
+              <TabsTrigger value="assistants">Assistants IA</TabsTrigger>
+              <TabsTrigger value="integration">Intégration IA</TabsTrigger>
+              <TabsTrigger value="nocode">Approche No Code</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="concepts" className="mt-6">
+              <h2 className="text-2xl font-bold mb-4">Les concepts fondamentaux de l'IA pour le code</h2>
+              
+              <h3 className="text-xl font-semibold mt-6">LLM : Les grands modèles de langage</h3>
+              <p>
+                Les Grands Modèles de Langage (LLM) sont au cœur des IA qui comprennent et génèrent du code.
+                Ces modèles ont été entraînés sur d'immenses corpus de textes et de code, leur permettant
+                de comprendre la structure, la syntaxe et même la sémantique du code dans différents langages
+                de programmation.
+              </p>
 
-          <TabsContent value="comprendre" className="animate-fade-in space-y-8">
-            <SectionHeading 
-              title="Comprendre les IA Génératives pour le Code" 
-              description="Les concepts essentiels pour mieux utiliser les IA dans le développement"
-            />
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-4">
-                    <Bot className="h-8 w-8 text-primary flex-shrink-0" />
-                    <div>
-                      <h3 className="text-xl font-bold mb-2">Les Grands Modèles de Langage (LLM)</h3>
-                      <p className="text-muted-foreground mb-4">
-                        Les LLM sont le moteur des IA qui comprennent et génèrent du code. Ils sont entraînés sur d'énormes
-                        corpus de texte et de code source public, formant une sorte de "dictionnaire" gigantesque.
-                      </p>
-                      <ul className="space-y-2 list-disc pl-5">
-                        <li>Entraînés sur des dépôts de code publics (GitHub, StackOverflow...)</li>
-                        <li>Incorporent des documentations techniques et tutoriels</li>
-                        <li>Peuvent reconnaître des patterns et produire du code adapté</li>
-                      </ul>
-                    </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+                <Card>
+                  <CardContent className="p-4">
+                    <h4 className="font-semibold mb-2 flex items-center gap-2">
+                      <Bot className="h-4 w-4 text-primary" />
+                      Entraînement
+                    </h4>
+                    <p className="text-sm text-muted-foreground">
+                      Les LLM sont entraînés sur des milliards de lignes de code open-source,
+                      des documentations techniques et des discussions de développeurs.
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-4">
+                    <h4 className="font-semibold mb-2 flex items-center gap-2">
+                      <BrainCircuit className="h-4 w-4 text-primary" />
+                      Fonctionnement
+                    </h4>
+                    <p className="text-sm text-muted-foreground">
+                      Ces modèles prédisent la suite probable d'une séquence de texte ou de code,
+                      en fonction des motifs qu'ils ont appris.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+              
+              <h3 className="text-xl font-semibold mt-6">Fenêtre de contexte</h3>
+              <p>
+                La fenêtre de contexte représente la quantité d'information que l'IA peut "retenir" et
+                prendre en compte lors d'une interaction. C'est comme la mémoire à court terme de l'IA.
+              </p>
+              
+              <TipCard title="Optimisation du contexte">
+                Pour obtenir les meilleurs résultats avec les outils IA, fournissez un contexte clair et concis.
+                Incluez les informations essentielles sur votre projet, comme le langage, les frameworks utilisés,
+                et des extraits pertinents de votre code.
+              </TipCard>
+              
+              <h3 className="text-xl font-semibold mt-6">Tokens : l'unité de mesure de l'IA</h3>
+              <p>
+                Les tokens sont les unités de base traitées par un LLM. Un token peut être un mot, une partie de mot,
+                un caractère ou un symbole. Pour le code, les tokens peuvent être des mots-clés, des opérateurs,
+                des identificateurs, etc.
+              </p>
+              
+              <div className="bg-muted p-4 rounded-md my-4">
+                <h4 className="font-semibold mb-2">Exemple de tokenisation</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-sm font-medium mb-1">Code</p>
+                    <p className="text-sm text-muted-foreground">const greeting = "Hello, world!";</p>
                   </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-4">
-                    <Layers className="h-8 w-8 text-primary flex-shrink-0" />
-                    <div>
-                      <h3 className="text-xl font-bold mb-2">La Fenêtre de Contexte</h3>
-                      <p className="text-muted-foreground mb-4">
-                        La quantité d'information que l'IA peut "retenir" lors d'une interaction. Pour le code, c'est crucial
-                        car les projets sont souvent complexes et interconnectés.
-                      </p>
-                      <ul className="space-y-2 list-disc pl-5">
-                        <li>Limite la quantité de code que l'IA peut comprendre à la fois</li>
-                        <li>Impact direct sur la cohérence des suggestions</li>
-                        <li>Les modèles récents ont des fenêtres toujours plus grandes</li>
-                      </ul>
-                    </div>
+                  <div>
+                    <p className="text-sm font-medium mb-1">Tokens</p>
+                    <p className="text-sm text-muted-foreground">["const", " greeting", " =", " \"", "Hello", ",", " world", "!", "\"", ";"]</p>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
+              
+              <h3 className="text-xl font-semibold mt-6">L'art du prompting pour le code</h3>
+              <p>
+                Le "prompting" est l'art de communiquer efficacement avec l'IA pour obtenir les résultats souhaités.
+                Dans le contexte du développement, des prompts bien conçus peuvent faire toute la différence
+                dans la qualité du code généré.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+                <Card>
+                  <CardContent className="p-4">
+                    <h4 className="font-semibold mb-2 text-green-600">✓ Bon Prompt</h4>
+                    <p className="text-sm text-muted-foreground">
+                      "Écris une fonction JavaScript qui prend un tableau de nombres en entrée et retourne
+                      la somme des éléments pairs. Utilise la syntaxe ES6 avec des arrow functions et des méthodes
+                      de tableau comme filter et reduce."
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-4">
+                    <h4 className="font-semibold mb-2 text-red-600">✗ Mauvais Prompt</h4>
+                    <p className="text-sm text-muted-foreground">
+                      "Écris une fonction pour faire des maths avec des nombres."
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
 
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-4">
-                    <Terminal className="h-8 w-8 text-primary flex-shrink-0" />
-                    <div>
-                      <h3 className="text-xl font-bold mb-2">Les Tokens : l'unité de mesure</h3>
-                      <p className="text-muted-foreground mb-4">
-                        Les tokens sont les unités de base que l'IA traite - ce sont des morceaux de mots ou des caractères.
-                        Ils déterminent la capacité et le coût d'utilisation des modèles.
-                      </p>
-                      <ul className="space-y-2 list-disc pl-5">
-                        <li>Un token = environ 4 caractères ou 3/4 d'un mot</li>
-                        <li>La facturation des API est souvent basée sur les tokens</li>
-                        <li>Optimiser ses prompts permet de réduire les coûts</li>
-                      </ul>
+            <TabsContent value="assistants" className="mt-6">
+              <h2 className="text-2xl font-bold mb-4">Utiliser les Assistants IA pour le code</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <Card>
+                  <CardContent className="p-6 flex flex-col items-center text-center">
+                    <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                      <Code className="h-6 w-6 text-primary" />
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-4">
-                    <FlaskConical className="h-8 w-8 text-primary flex-shrink-0" />
-                    <div>
-                      <h3 className="text-xl font-bold mb-2">L'Art du Prompting</h3>
-                      <p className="text-muted-foreground mb-4">
-                        Savoir communiquer efficacement avec l'IA est une compétence essentielle pour obtenir du code de qualité.
-                      </p>
-                      <div className="bg-secondary/20 p-4 rounded-lg">
-                        <p className="font-medium mb-2">Exemple de bon prompt pour générer du code :</p>
-                        <p className="text-sm italic">
-                          "Écris une fonction React en TypeScript qui gère un formulaire de contact avec validation d'email. 
-                          Utilise les hooks useState et useEffect. Voici ma structure de projet: [...]"
+                    <h3 className="text-lg font-semibold mb-2">Complétion de code</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Les assistants IA peuvent suggérer et compléter des lignes de code pendant que vous programmez.
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-6 flex flex-col items-center text-center">
+                    <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                      <BookOpen className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2">Documentation</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Génération automatique de documentation pour votre code, y compris les commentaires JSDoc et README.
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-6 flex flex-col items-center text-center">
+                    <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                      <Wrench className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2">Refactoring</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Optimisation et restructuration de code existant pour améliorer sa qualité et sa maintenabilité.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+              
+              <h3 className="text-xl font-semibold mt-8">Outils populaires d'IA pour les développeurs</h3>
+              
+              <div className="space-y-4 mt-4">
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h4 className="font-semibold">GitHub Copilot</h4>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Assistant de code intégré directement dans votre IDE qui suggère des lignes ou des blocs
+                          entiers de code pendant que vous programmez.
                         </p>
                       </div>
+                      <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">Payant</span>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-
-          <TabsContent value="integration" className="animate-fade-in space-y-8">
-            <SectionHeading 
-              title="Intégrer une IA dans Votre Application" 
-              description="Comment ajouter des capacités d'IA à votre application"
-            />
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-4">
-                    <Code className="h-8 w-8 text-primary flex-shrink-0" />
-                    <div>
-                      <h3 className="text-xl font-bold mb-2">Appel API : La Passerelle vers l'Intelligence</h3>
-                      <p className="text-muted-foreground mb-4">
-                        Les API sont le pont entre votre application et les modèles d'IA hébergés par des fournisseurs comme OpenAI, Google, ou Hugging Face.
-                      </p>
-                      <div className="bg-secondary/20 p-4 rounded-lg">
-                        <p className="font-medium mb-2">Exemple d'un appel API simple à OpenAI :</p>
-                        <pre className="text-xs overflow-x-auto p-2 bg-black/70 rounded text-gray-100">
-                          {`const response = await fetch('https://api.openai.com/v1/completions', {
-  method: 'POST',
-  headers: { 'Authorization': \`Bearer \${apiKey}\` },
-  body: JSON.stringify({
-    model: "gpt-4o",
-    prompt: "Explique cette erreur: " + errorMessage
-  })
-});`}
-                        </pre>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h4 className="font-semibold">ChatGPT / Claude / Gemini</h4>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Interfaces conversationnelles permettant de décrire ce que vous souhaitez réaliser et d'obtenir
+                          des explications ou du code en réponse.
+                        </p>
                       </div>
+                      <span className="text-xs bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 px-2 py-1 rounded-full">Gratuit/Payant</span>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-4">
-                    <Database className="h-8 w-8 text-primary flex-shrink-0" />
-                    <div>
-                      <h3 className="text-xl font-bold mb-2">Architecture d'une Application avec IA</h3>
-                      <p className="text-muted-foreground mb-4">
-                        Intégrer l'IA dans votre application nécessite une architecture bien pensée.
-                      </p>
-                      <div className="space-y-4">
-                        <div>
-                          <h4 className="font-semibold">Front-end</h4>
-                          <p className="text-sm">Interface utilisateur qui communique avec le back-end pour les fonctionnalités IA</p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold">Back-end</h4>
-                          <p className="text-sm">Gère la communication sécurisée avec les API d'IA et protège les clés</p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold">Database</h4>
-                          <p className="text-sm">Stocke les données, y compris les résultats des interactions avec l'IA</p>
-                        </div>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h4 className="font-semibold">Tabnine</h4>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Assistant de code basé sur l'IA qui apprend de votre style de codage et offre des suggestions personnalisées.
+                        </p>
                       </div>
+                      <span className="text-xs bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 px-2 py-1 rounded-full">Freemium</span>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-
-          <TabsContent value="deploiement" className="animate-fade-in space-y-8">
-            <SectionHeading 
-              title="Du Développement au Déploiement" 
-              description="Comment déployer efficacement des applications intégrant l'IA"
-            />
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-4">
-                    <Terminal className="h-8 w-8 text-primary flex-shrink-0" />
-                    <div>
-                      <h3 className="text-xl font-bold mb-2">Environnement Local vs. Production</h3>
-                      <p className="text-muted-foreground mb-4">
-                        Les applications intégrant l'IA nécessitent une attention particulière lors du passage en production.
-                      </p>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="bg-secondary/20 p-3 rounded-lg">
-                          <h4 className="font-semibold mb-1">Local</h4>
-                          <ul className="text-sm space-y-1 list-disc pl-4">
-                            <li>Clés API de test</li>
-                            <li>Mocks pour simulation</li>
-                            <li>Développement rapide</li>
-                          </ul>
-                        </div>
-                        <div className="bg-secondary/20 p-3 rounded-lg">
-                          <h4 className="font-semibold mb-1">Production</h4>
-                          <ul className="text-sm space-y-1 list-disc pl-4">
-                            <li>Clés API sécurisées</li>
-                            <li>Monitoring des coûts</li>
-                            <li>Gestion des erreurs</li>
-                          </ul>
-                        </div>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h4 className="font-semibold">DeepCode</h4>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Outil d'analyse statique qui utilise l'IA pour détecter les bugs et les problèmes de sécurité.
+                        </p>
                       </div>
+                      <span className="text-xs bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 px-2 py-1 rounded-full">Freemium</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+              
+              <h3 className="text-xl font-semibold mt-8">Techniques avancées de prompting pour le code</h3>
+              
+              <div className="space-y-6 mt-4">
+                <div>
+                  <h4 className="font-semibold text-primary">Few-Shot Prompting</h4>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Fournir quelques exemples pour montrer à l'IA le style et le format que vous attendez.
+                  </p>
+                  <CodeSnippet>
+                    {`Convertis ces fonctions JavaScript en TypeScript:
+Exemple 1:
+JS: function add(a, b) { return a + b; }
+TS: function add(a: number, b: number): number { return a + b; }
+
+Exemple 2:
+JS: function greet(name) { return \`Hello \${name}!\`; }
+TS: function greet(name: string): string { return \`Hello \${name}!\`; }
+
+Maintenant, convertis ceci:
+function multiply(x, y) { return x * y; }`}
+                  </CodeSnippet>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold text-primary">Chain-of-Thought</h4>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Demander à l'IA de raisonner étape par étape pour résoudre des problèmes complexes.
+                  </p>
+                  <CodeSnippet>
+                    {`Aide-moi à créer un algorithme de tri fusion en JavaScript.
+Explique ton raisonnement étape par étape:
+1. Comment diviser le tableau?
+2. Comment fusionner les sous-tableaux triés?
+3. Comment implémenter la récursion?
+Puis écris le code complet.`}
+                  </CodeSnippet>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold text-primary">Prompting incrémental</h4>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Commencer par une base simple et ajouter progressivement des détails et des contraintes.
+                  </p>
+                </div>
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="integration" className="mt-6">
+              <h2 className="text-2xl font-bold mb-4">Intégrer l'IA dans votre application</h2>
+              
+              <p>
+                Au-delà de l'utilisation d'assistants IA pour développer, vous pouvez également intégrer
+                des fonctionnalités d'IA directement dans vos applications pour offrir des expériences intelligentes à vos utilisateurs.
+              </p>
+              
+              <h3 className="text-xl font-semibold mt-6">Architecture d'une application intégrant l'IA</h3>
+              
+              <div className="relative bg-muted p-6 rounded-md my-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div>
+                    <h4 className="font-semibold text-lg mb-3">Frontend</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Interface utilisateur qui capture les entrées et affiche les résultats de l'IA.
+                    </p>
+                    <div className="mt-3 space-y-2">
+                      <div className="text-xs bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-2 py-1 rounded-full inline-block">React</div>
+                      <div className="text-xs bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-2 py-1 rounded-full inline-block">Vue</div>
+                      <div className="text-xs bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-2 py-1 rounded-full inline-block">Angular</div>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-4">
-                    <Rocket className="h-8 w-8 text-primary flex-shrink-0" />
-                    <div>
-                      <h3 className="text-xl font-bold mb-2">Options de Déploiement</h3>
-                      <p className="text-muted-foreground mb-4">
-                        Plusieurs options s'offrent à vous pour déployer votre application avec IA.
-                      </p>
-                      <ul className="space-y-2 list-disc pl-5">
-                        <li><strong>Plateformes Cloud</strong> - AWS, Google Cloud, Azure</li>
-                        <li><strong>PaaS</strong> - Heroku, Vercel, Netlify</li>
-                        <li><strong>Conteneurisation</strong> - Docker, Kubernetes</li>
-                        <li><strong>Edge Functions</strong> - Idéales pour les appels API d'IA</li>
-                      </ul>
+                  
+                  <div>
+                    <h4 className="font-semibold text-lg mb-3">Backend</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Gestion des requêtes, appels API IA sécurisés, logique métier.
+                    </p>
+                    <div className="mt-3 space-y-2">
+                      <div className="text-xs bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 px-2 py-1 rounded-full inline-block">Node.js</div>
+                      <div className="text-xs bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 px-2 py-1 rounded-full inline-block">Python</div>
+                      <div className="text-xs bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 px-2 py-1 rounded-full inline-block">Serverless</div>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-
-          <TabsContent value="bonnes-pratiques" className="animate-fade-in space-y-8">
-            <SectionHeading 
-              title="Défis, Contraintes et Bonnes Pratiques" 
-              description="Optimisez votre utilisation de l'IA pour le développement"
-            />
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-4">
-                    <Shield className="h-8 w-8 text-primary flex-shrink-0" />
-                    <div>
-                      <h3 className="text-xl font-bold mb-2">Règles de Sécurité Essentielles</h3>
-                      <p className="text-muted-foreground mb-4">
-                        La sécurité est primordiale lors de l'intégration d'IA dans vos applications.
-                      </p>
-                      <ul className="space-y-2 list-disc pl-5">
-                        <li><strong>Protection des clés API</strong> - Jamais côté client, utilisez des variables d'environnement</li>
-                        <li><strong>Validation des entrées</strong> - Évitez les attaques par injection de prompt</li>
-                        <li><strong>Gestion des données sensibles</strong> - Anonymisez les données avant envoi aux API</li>
-                      </ul>
+                  
+                  <div>
+                    <h4 className="font-semibold text-lg mb-3">Services IA</h4>
+                    <p className="text-sm text-muted-foreground">
+                      API d'IA tierce ou modèles hébergés qui fournissent l'intelligence.
+                    </p>
+                    <div className="mt-3 space-y-2">
+                      <div className="text-xs bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 px-2 py-1 rounded-full inline-block">OpenAI</div>
+                      <div className="text-xs bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 px-2 py-1 rounded-full inline-block">Hugging Face</div>
+                      <div className="text-xs bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 px-2 py-1 rounded-full inline-block">Vertex AI</div>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+                
+                <div className="mt-8">
+                  <h4 className="font-semibold mb-3">Flux d'une requête typique</h4>
+                  <ol className="space-y-4 text-sm">
+                    <li className="flex items-start gap-2">
+                      <span className="bg-primary text-white w-6 h-6 rounded-full flex items-center justify-center shrink-0">1</span>
+                      <p>L'utilisateur interagit avec l'interface (ex: pose une question, télécharge une image)</p>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="bg-primary text-white w-6 h-6 rounded-full flex items-center justify-center shrink-0">2</span>
+                      <p>Le frontend envoie la requête au backend</p>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="bg-primary text-white w-6 h-6 rounded-full flex items-center justify-center shrink-0">3</span>
+                      <p>Le backend prétraite les données et les envoie au service IA via API</p>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="bg-primary text-white w-6 h-6 rounded-full flex items-center justify-center shrink-0">4</span>
+                      <p>Le service IA traite la requête et renvoie une réponse</p>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="bg-primary text-white w-6 h-6 rounded-full flex items-center justify-center shrink-0">5</span>
+                      <p>Le backend post-traite la réponse et l'envoie au frontend</p>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="bg-primary text-white w-6 h-6 rounded-full flex items-center justify-center shrink-0">6</span>
+                      <p>Le frontend affiche le résultat à l'utilisateur</p>
+                    </li>
+                  </ol>
+                </div>
+              </div>
+              
+              <h3 className="text-xl font-semibold mt-8">Code d'exemple : Appel API à OpenAI</h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                <div>
+                  <h4 className="font-semibold mb-3">Backend (Node.js)</h4>
+                  <CodeSnippet>
+                    {`// Edge Function ou API Route
+import { OpenAI } from 'openai';
 
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-4">
-                    <CheckCircle className="h-8 w-8 text-primary flex-shrink-0" />
-                    <div>
-                      <h3 className="text-xl font-bold mb-2">Astuces et Conseils Pratiques</h3>
-                      <p className="text-muted-foreground mb-4">
-                        Quelques recommandations pour tirer le meilleur parti de l'IA dans vos projets.
-                      </p>
-                      <ul className="space-y-2 list-disc pl-5">
-                        <li>Commencez petit et itérez progressivement</li>
-                        <li>Vérifiez toujours le code généré par une IA</li>
-                        <li>Utilisez l'IA pour apprendre, pas seulement pour produire</li>
-                        <li>Documentez vos prompts efficaces pour réutilisation</li>
-                        <li>Tenez-vous informé des évolutions constantes des modèles</li>
-                      </ul>
+export async function POST(req) {
+  const { prompt } = await req.json();
+  
+  const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY
+  });
+  
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4",
+      messages: [
+        { role: "user", content: prompt }
+      ]
+    });
+    
+    return new Response(JSON.stringify({
+      content: response.choices[0].message.content
+    }), { status: 200 });
+    
+  } catch (error) {
+    return new Response(JSON.stringify({
+      error: error.message
+    }), { status: 500 });
+  }
+}`}
+                  </CodeSnippet>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold mb-3">Frontend (React)</h4>
+                  <CodeSnippet>
+                    {`import { useState } from 'react';
+
+function AIChat() {
+  const [prompt, setPrompt] = useState('');
+  const [response, setResponse] = useState('');
+  const [loading, setLoading] = useState(false);
+  
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setLoading(true);
+    
+    try {
+      const res = await fetch('/api/ai-chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt })
+      });
+      
+      const data = await res.json();
+      
+      if (res.ok) {
+        setResponse(data.content);
+      } else {
+        throw new Error(data.error);
+      }
+    } catch (error) {
+      console.error(error);
+      setResponse('Erreur: ' + error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+  
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input 
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+          placeholder="Posez votre question..."
+        />
+        <button type="submit" disabled={loading}>
+          {loading ? 'Chargement...' : 'Envoyer'}
+        </button>
+      </form>
+      
+      {response && (
+        <div className="response">
+          <h3>Réponse:</h3>
+          <p>{response}</p>
+        </div>
+      )}
+    </div>
+  );
+}`}
+                  </CodeSnippet>
+                </div>
+              </div>
+              
+              <WarningCard title="Sécurité des clés API">
+                Ne stockez JAMAIS vos clés API côté client! Utilisez toujours un backend ou des fonctions edge sécurisées
+                pour effectuer les appels vers les services IA. Les clés exposées peuvent mener à une utilisation abusive
+                et à des factures élevées.
+              </WarningCard>
+              
+              <h3 className="text-xl font-semibold mt-8">Bases de données vectorielles pour RAG</h3>
+              <p>
+                Le RAG (Retrieval Augmented Generation) est une technique qui améliore les réponses d'un LLM en
+                lui fournissant des informations spécifiques issues d'une base de données.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                <Card>
+                  <CardContent className="p-4">
+                    <h4 className="font-semibold">Cas d'usage</h4>
+                    <ul className="list-disc pl-4 mt-2 text-sm space-y-1 text-muted-foreground">
+                      <li>Assistants virtuels avec accès à la documentation de votre produit</li>
+                      <li>Systèmes de recommandation basés sur le contenu utilisateur</li>
+                      <li>Recherche sémantique dans un corpus de documents</li>
+                      <li>Chatbots avec connaissance de données confidentielles</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-4">
+                    <h4 className="font-semibold">Solutions populaires</h4>
+                    <ul className="list-disc pl-4 mt-2 text-sm space-y-1 text-muted-foreground">
+                      <li>Pinecone - Base de données vectorielle cloud</li>
+                      <li>Weaviate - Moteur de recherche vectorielle</li>
+                      <li>Chroma - Base de données pour embeddings</li>
+                      <li>Milvus - Système de recherche vectorielle open-source</li>
+                      <li>Supabase avec pgvector - Extension PostgreSQL</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="nocode" className="mt-6">
+              <h2 className="text-2xl font-bold mb-4">Développer une application avec l'IA en No Code</h2>
+              
+              <p className="mb-6">
+                L'approche No Code démocratise le développement d'applications en permettant à des personnes
+                sans compétences techniques poussées de créer des applications fonctionnelles. Combinée avec l'IA,
+                cette approche devient encore plus puissante.
+              </p>
+              
+              <h3 className="text-xl font-semibold mt-6">Avantages du No Code avec IA</h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-6">
+                <Card>
+                  <CardContent className="p-4">
+                    <h4 className="font-semibold mb-2 text-primary">Rapidité</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Développement d'applications en jours plutôt qu'en mois.
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-4">
+                    <h4 className="font-semibold mb-2 text-primary">Accessibilité</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Permet aux non-développeurs de créer des applications intelligentes.
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-4">
+                    <h4 className="font-semibold mb-2 text-primary">Coût réduit</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Nécessite moins de ressources techniques spécialisées.
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-4">
+                    <h4 className="font-semibold mb-2 text-primary">Flexibilité</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Facilité d'itération et d'adaptation aux besoins changeants.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+              
+              <h3 className="text-xl font-semibold mt-8">Outils No Code avec capacités IA</h3>
+              
+              <div className="space-y-4 mt-4">
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h4 className="font-semibold">Bubble</h4>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Plateforme complète de développement no-code avec possibilité d'intégrer des API d'IA via des plugins.
+                          Permet de créer des applications web avec bases de données, workflows et interfaces personnalisées.
+                        </p>
+                      </div>
+                      <span className="text-xs bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-2 py-1 rounded-full">Web Apps</span>
+                    </div>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h4 className="font-semibold">FlutterFlow</h4>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Création d'applications mobiles Flutter sans code, avec intégration possible d'API IA
+                          pour la génération de contenu, la reconnaissance d'images ou le traitement de langage naturel.
+                        </p>
+                      </div>
+                      <span className="text-xs bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-2 py-1 rounded-full">Mobile Apps</span>
+                    </div>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h4 className="font-semibold">Adalo</h4>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Plateforme de création d'applications mobiles et web avec une interface glisser-déposer.
+                          Support d'intégrations API externes pour ajouter des fonctionnalités IA.
+                        </p>
+                      </div>
+                      <span className="text-xs bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-2 py-1 rounded-full">Mobile/Web Apps</span>
+                    </div>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h4 className="font-semibold">Voiceflow</h4>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Spécialisé dans la création d'assistants vocaux et de chatbots, avec des intégrations IA natives
+                          pour la compréhension du langage naturel et la génération de réponses.
+                        </p>
+                      </div>
+                      <span className="text-xs bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-2 py-1 rounded-full">Chatbots/Voicebots</span>
+                    </div>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h4 className="font-semibold">Softr</h4>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Création de portails web et d'applications basés sur Airtable ou Google Sheets.
+                          Possibilité d'intégrer des widgets IA pour enrichir les fonctionnalités.
+                        </p>
+                      </div>
+                      <span className="text-xs bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-2 py-1 rounded-full">Web Apps</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+              
+              <h3 className="text-xl font-semibold mt-8">Conception d'une app No Code avec IA : Étapes clés</h3>
+              
+              <div className="mt-6 space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="bg-primary/10 p-3 rounded-full">
+                    <span className="text-primary font-bold">1</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Définir les objectifs et besoins</h4>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Identifiez clairement le problème à résoudre, le public cible et les fonctionnalités essentielles.
+                      Pour les fonctionnalités IA, précisez les tâches spécifiques où l'intelligence artificielle
+                      apporterait une réelle valeur ajoutée.
+                    </p>
+                    <div className="mt-2 text-sm bg-muted p-3 rounded-md">
+                      <p className="font-medium">Exemple:</p>
+                      <p>Application de feedback client qui analyse automatiquement les sentiments et classe les commentaires.</p>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-        </Tabs>
-
-        <div className="prose prose-lg max-w-none dark:prose-invert">
-          <Separator className="my-12" />
+                </div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="bg-primary/10 p-3 rounded-full">
+                    <span className="text-primary font-bold">2</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Choisir les outils appropriés</h4>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Sélectionnez une plateforme no-code qui correspond à vos besoins (web, mobile, etc.)
+                      et qui permet l'intégration avec des services IA externes ou propose des fonctionnalités
+                      IA natives.
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="bg-primary/10 p-3 rounded-full">
+                    <span className="text-primary font-bold">3</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Concevoir l'interface utilisateur</h4>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Créez une interface intuitive avec les plateformes no-code qui offrent des composants
+                      drag-and-drop. Pour les interactions IA, pensez à intégrer des éléments comme des zones de texte
+                      pour les prompts, des espaces pour afficher les réponses, ou des zones de téléchargement pour les images.
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="bg-primary/10 p-3 rounded-full">
+                    <span className="text-primary font-bold">4</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Configurer les intégrations IA</h4>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Utilisez des connecteurs ou des API pour intégrer des services d'IA comme OpenAI, Google AI,
+                      ou des solutions spécialisées. La plupart des plateformes no-code permettent d'ajouter des
+                      intégrations via des webhooks, des plugins, ou des API.
+                    </p>
+                    
+                    <TipCard title="Astuce pour les intégrations IA">
+                      Utilisez des services comme Zapier, Make (anciennement Integromat) ou n8n pour créer des workflows
+                      d'automatisation entre votre application no-code et les API d'IA sans avoir à écrire de code.
+                    </TipCard>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="bg-primary/10 p-3 rounded-full">
+                    <span className="text-primary font-bold">5</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Configurer la base de données et la logique</h4>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Définissez la structure de données et les workflows dans votre plateforme no-code.
+                      Pour les fonctionnalités IA, pensez à stocker les résultats générés pour éviter
+                      de refaire des appels API coûteux.
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="bg-primary/10 p-3 rounded-full">
+                    <span className="text-primary font-bold">6</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Tester et itérer</h4>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Testez votre application avec des utilisateurs réels et recueillez leurs commentaires.
+                      Les fonctionnalités IA peuvent nécessiter plusieurs itérations pour affiner les prompts
+                      et améliorer la qualité des résultats.
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="bg-primary/10 p-3 rounded-full">
+                    <span className="text-primary font-bold">7</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Déployer et surveiller</h4>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Publiez votre application et mettez en place un suivi des performances.
+                      Pour les fonctionnalités IA, surveillez particulièrement les coûts d'API,
+                      la qualité des réponses générées et le feedback utilisateur.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <h3 className="text-xl font-semibold mt-8">Limites et considérations</h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                <Card className="border-l-4 border-l-orange-400">
+                  <CardContent className="p-4">
+                    <h4 className="font-semibold flex items-center gap-2">
+                      <XSquare className="h-4 w-4 text-orange-500" />
+                      Limites techniques
+                    </h4>
+                    <ul className="list-disc pl-4 mt-2 text-sm space-y-1 text-muted-foreground">
+                      <li>Personnalisation moins poussée qu'avec du code</li>
+                      <li>Intégrations IA parfois limitées aux API disponibles</li>
+                      <li>Performances potentiellement réduites pour les applications complexes</li>
+                      <li>Dépendance aux plateformes et services tiers</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+                
+                <Card className="border-l-4 border-l-blue-400">
+                  <CardContent className="p-4">
+                    <h4 className="font-semibold flex items-center gap-2">
+                      <Gem className="h-4 w-4 text-blue-500" />
+                      Meilleures pratiques
+                    </h4>
+                    <ul className="list-disc pl-4 mt-2 text-sm space-y-1 text-muted-foreground">
+                      <li>Commencer simple et itérer progressivement</li>
+                      <li>Utiliser des templates et exemples existants</li>
+                      <li>Se former sur les capacités et limites des outils choisis</li>
+                      <li>Prévoir des fallbacks en cas d'indisponibilité des services IA</li>
+                      <li>Tester régulièrement avec des utilisateurs réels</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+          </Tabs>
           
-          <h2 className="text-2xl font-bold">Conclusion</h2>
-          <p>
-            L'IA transforme profondément le développement d'applications, offrant de nouvelles possibilités pour accélérer 
-            et améliorer le processus de création. Qu'elle soit utilisée comme un assistant pour générer du code ou 
-            comme une fonctionnalité intégrée dans l'application, l'IA agit comme un multiplicateur de productivité 
-            et un catalyseur d'innovation.
-          </p>
-
-          <p>
-            Cependant, l'IA reste un outil qui augmente les capacités des développeurs sans les remplacer. La connaissance 
-            des fondamentaux du développement, l'esprit critique et la capacité à vérifier la qualité du code restent 
-            indispensables. L'avenir appartient aux développeurs qui sauront combiner leur expertise technique avec 
-            une utilisation intelligente et éthique de l'IA.
-          </p>
-
-          <div className="bg-primary/10 p-6 rounded-lg my-8">
-            <h3 className="text-xl font-bold mb-3">À retenir</h3>
-            <ul className="space-y-2">
-              <li>L'IA est un partenaire de développement puissant, mais qui nécessite une utilisation réfléchie</li>
-              <li>La qualité de vos prompts détermine la qualité du code généré</li>
-              <li>La sécurité ne doit jamais être compromise lors de l'intégration d'IA</li>
-              <li>L'évolution rapide des modèles d'IA continuera d'offrir de nouvelles possibilités</li>
-            </ul>
+          <Separator className="my-8" />
+          
+          <div className="text-center">
+            <h3 className="text-lg font-semibold mb-6">Prêt à commencer votre projet ?</h3>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Button asChild>
+                <Link to="/ressources">Explorer plus de ressources</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>

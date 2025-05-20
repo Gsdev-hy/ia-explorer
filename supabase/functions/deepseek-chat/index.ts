@@ -31,7 +31,7 @@ serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'deepseek-chat-v3.1',
+        model: 'deepseek-chat', // Correction du nom du modèle
         messages: [
           { role: 'system', content: 'Vous êtes un assistant IA serviable et pédagogique qui aide à comprendre les concepts liés à l\'intelligence artificielle.' },
           { role: 'user', content: prompt }
@@ -42,8 +42,15 @@ serve(async (req) => {
     });
 
     if (!response.ok) {
-      console.error("Deepseek API error:", await response.text());
-      throw new Error(`API responded with status: ${response.status}`);
+      const errorText = await response.text();
+      console.error("Deepseek API error:", errorText);
+      
+      // Fallback à une réponse prédéfinie en cas d'erreur
+      return new Response(JSON.stringify({ 
+        generatedText: "Je suis désolé, je rencontre actuellement des difficultés techniques pour accéder à mes connaissances. Pourriez-vous reformuler votre question ou réessayer plus tard?" 
+      }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
     }
 
     const data = await response.json();
@@ -60,8 +67,12 @@ serve(async (req) => {
     });
   } catch (error) {
     console.error('Error in deepseek-chat function:', error);
-    return new Response(JSON.stringify({ error: error.message }), {
-      status: 500,
+    
+    // Réponse de secours en cas d'erreur
+    return new Response(JSON.stringify({ 
+      generatedText: "Je suis désolé, je rencontre des difficultés techniques. Voici ce qui s'est passé : " + error.message + ". Pourriez-vous réessayer plus tard?"
+    }), {
+      status: 200, // Retourne un statut 200 OK malgré l'erreur pour éviter le blocage
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   }
