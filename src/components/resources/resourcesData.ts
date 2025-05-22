@@ -31,6 +31,76 @@ export interface IAToolResource {
 
 export const realResources: Resource[] = [
   {
+    title: "Les bases pour développer une APP avec de l'IA",
+    source: "Geoffroy Streit",
+    author: "Geoffroy Streit",
+    description: "Guide complet des concepts, outils et bonnes pratiques pour le développement d'applications avec l'IA, incluant les approches No Code, les techniques avancées de prompting pour le code, l'architecture de projets IA et les meilleures méthodes de déploiement.",
+    link: "/coder-avec-ia",
+    type: "cours",
+    year: 2024,
+    tags: ["code", "app", "dev par ia", "no code", "prompting", "architecture"]
+  },
+  {
+    title: "Comment l'IA Révolutionne le Marketing et la Vente",
+    source: "Geoffroy Streit",
+    author: "Geoffroy Streit",
+    description: "Exploration détaillée des applications de l'IA dans le marketing et la vente : personnalisation des offres, analyse prédictive des comportements clients, automatisation des campagnes publicitaires, chatbots commerciaux avancés et optimisation de la relation client grâce à l'intelligence artificielle.",
+    link: "/ia-marketing-vente",
+    type: "cours",
+    year: 2024,
+    tags: ["marketing", "vente", "personnalisation", "prédiction", "automatisation", "relation client"]
+  },
+  {
+    title: "L'IA au Service de l'Environnement et du Développement Durable",
+    source: "Geoffroy Streit",
+    author: "Geoffroy Streit",
+    description: "Analyse approfondie des applications de l'IA dans les domaines de l'écologie et du développement durable : modélisation climatique, optimisation des ressources, surveillance environnementale, agriculture de précision et solutions innovantes pour réduire l'empreinte carbone grâce aux technologies d'intelligence artificielle.",
+    link: "/ia-environnement",
+    type: "cours",
+    year: 2024,
+    tags: ["environnement", "développement durable", "écologie", "climat", "ressources", "agriculture"]
+  },
+  {
+    title: "Initiation à Python pour l'Intelligence Artificielle",
+    source: "Geoffroy Streit",
+    author: "Geoffroy Streit",
+    description: "Formation complète pour débutants souhaitant apprendre Python spécifiquement pour les applications d'IA. Ce cours couvre les bases du langage, les bibliothèques essentielles (NumPy, Pandas) et introduit les premiers pas vers les modèles d'apprentissage automatique.",
+    link: "/python-ia",
+    type: "cours",
+    year: 2024,
+    tags: ["python", "programmation", "débutant", "data science", "bibliothèques", "numpy", "pandas"]
+  },
+  {
+    title: "Les Bases du Deep Learning avec TensorFlow ou PyTorch",
+    source: "Geoffroy Streit",
+    author: "Geoffroy Streit",
+    description: "Exploration des fondamentaux du Deep Learning à travers les deux frameworks les plus populaires. Ce cours présente l'architecture des réseaux de neurones profonds, les techniques d'optimisation, et guide l'apprenant dans la création de ses premiers modèles avec des applications concrètes.",
+    link: "/deep-learning",
+    type: "cours",
+    year: 2024,
+    tags: ["deep learning", "tensorflow", "pytorch", "réseaux de neurones", "frameworks", "modèles"]
+  },
+  {
+    title: "Traitement du Langage Naturel (NLP) : Concepts et Outils",
+    source: "Geoffroy Streit",
+    author: "Geoffroy Streit",
+    description: "Introduction aux techniques modernes de traitement automatique du langage naturel. Ce cours présente les concepts fondamentaux du NLP, les modèles de type transformer, les techniques d'embedding, et explique comment implémenter des solutions de compréhension et génération de texte.",
+    link: "/nlp-concepts",
+    type: "cours",
+    year: 2024,
+    tags: ["nlp", "langage naturel", "transformers", "bert", "gpt", "word embedding", "texte"]
+  },
+  {
+    title: "Construire son Premier Modèle de Machine Learning (pas à pas)",
+    source: "Geoffroy Streit",
+    author: "Geoffroy Streit",
+    description: "Guide pratique pour créer et déployer un modèle de machine learning de A à Z. Ce cours détaille chaque étape du processus : préparation des données, feature engineering, entraînement du modèle, évaluation des performances, et mise en production, avec des exemples concrets.",
+    link: "/premier-modele-ml",
+    type: "cours",
+    year: 2024,
+    tags: ["machine learning", "modélisation", "data science", "scikit-learn", "déploiement", "pas à pas", "prédiction"]
+  },
+  {
     title: "Intelligence artificielle : comprendre les enjeux",
     source: "France Culture",
     description: "Qu'est-ce que l'intelligence artificielle ? Comment ça marche ? Quels sont les enjeux éthiques, économiques, sociaux et politiques ?",
@@ -110,76 +180,6 @@ export const realResources: Resource[] = [
     type: "cours",
     year: 2018,
     tags: ["ia", "mooc", "formation en ligne", "débutant"]
-  },
-  {
-    title: "Les bases pour développer une APP avec de l'IA",
-    source: "Comprendre l'IA",
-    author: "Geoffroy Streit",
-    description: "Guide complet des concepts, outils et bonnes pratiques pour le développement d'applications avec l'IA, incluant les approches No Code, les techniques avancées de prompting pour le code, l'architecture de projets IA et les meilleures méthodes de déploiement.",
-    link: "/coder-avec-ia",
-    type: "cours",
-    year: 2024,
-    tags: ["code", "app", "dev par ia", "no code", "prompting", "architecture"]
-  },
-  {
-    title: "Comment l'IA Révolutionne le Marketing et la Vente",
-    source: "Comprendre l'IA",
-    author: "Geoffroy Streit",
-    description: "Exploration détaillée des applications de l'IA dans le marketing et la vente : personnalisation des offres, analyse prédictive des comportements clients, automatisation des campagnes publicitaires, chatbots commerciaux avancés et optimisation de la relation client grâce à l'intelligence artificielle.",
-    link: "/ia-marketing-vente",
-    type: "cours",
-    year: 2024,
-    tags: ["marketing", "vente", "personnalisation", "prédiction", "automatisation", "relation client"]
-  },
-  {
-    title: "L'IA au Service de l'Environnement et du Développement Durable",
-    source: "Comprendre l'IA",
-    author: "Geoffroy Streit",
-    description: "Analyse approfondie des applications de l'IA dans les domaines de l'écologie et du développement durable : modélisation climatique, optimisation des ressources, surveillance environnementale, agriculture de précision et solutions innovantes pour réduire l'empreinte carbone grâce aux technologies d'intelligence artificielle.",
-    link: "/ia-environnement",
-    type: "cours",
-    year: 2024,
-    tags: ["environnement", "développement durable", "écologie", "climat", "ressources", "agriculture"]
-  },
-  {
-    title: "Initiation à Python pour l'Intelligence Artificielle",
-    source: "Comprendre l'IA",
-    author: "Geoffroy Streit",
-    description: "Formation complète pour débutants souhaitant apprendre Python spécifiquement pour les applications d'IA. Ce cours couvre les bases du langage, les bibliothèques essentielles (NumPy, Pandas) et introduit les premiers pas vers les modèles d'apprentissage automatique.",
-    link: "/python-ia",
-    type: "cours",
-    year: 2024,
-    tags: ["python", "programmation", "débutant", "data science", "bibliothèques", "numpy", "pandas"]
-  },
-  {
-    title: "Les Bases du Deep Learning avec TensorFlow ou PyTorch",
-    source: "Comprendre l'IA",
-    author: "Geoffroy Streit",
-    description: "Exploration des fondamentaux du Deep Learning à travers les deux frameworks les plus populaires. Ce cours présente l'architecture des réseaux de neurones profonds, les techniques d'optimisation, et guide l'apprenant dans la création de ses premiers modèles avec des applications concrètes.",
-    link: "/deep-learning",
-    type: "cours",
-    year: 2024,
-    tags: ["deep learning", "tensorflow", "pytorch", "réseaux de neurones", "frameworks", "modèles"]
-  },
-  {
-    title: "Traitement du Langage Naturel (NLP) : Concepts et Outils",
-    source: "Comprendre l'IA",
-    author: "Geoffroy Streit",
-    description: "Introduction aux techniques modernes de traitement automatique du langage naturel. Ce cours présente les concepts fondamentaux du NLP, les modèles de type transformer, les techniques d'embedding, et explique comment implémenter des solutions de compréhension et génération de texte.",
-    link: "/nlp-concepts",
-    type: "cours",
-    year: 2024,
-    tags: ["nlp", "langage naturel", "transformers", "bert", "gpt", "word embedding", "texte"]
-  },
-  {
-    title: "Construire son Premier Modèle de Machine Learning (pas à pas)",
-    source: "Comprendre l'IA",
-    author: "Geoffroy Streit",
-    description: "Guide pratique pour créer et déployer un modèle de machine learning de A à Z. Ce cours détaille chaque étape du processus : préparation des données, feature engineering, entraînement du modèle, évaluation des performances, et mise en production, avec des exemples concrets.",
-    link: "/premier-modele-ml",
-    type: "cours",
-    year: 2024,
-    tags: ["machine learning", "modélisation", "data science", "scikit-learn", "déploiement", "pas à pas", "prédiction"]
   }
 ];
 
