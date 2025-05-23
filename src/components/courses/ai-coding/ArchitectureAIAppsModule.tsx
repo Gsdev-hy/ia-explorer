@@ -1,4 +1,3 @@
-
 import React from 'react';
 import CodeExample from '@/components/courses/CodeExample';
 import ZoomOn from '@/components/courses/ZoomOn';
@@ -183,7 +182,7 @@ const ArchitectureAIAppsModule: React.FC = () => {
                   <ul className="list-disc pl-5 text-sm mt-1 space-y-1">
                     <li>Mise à l'échelle automatique pour gérer des charges variables</li>
                     <li>Réduction des coûts pour les workloads intermittents</li>
-                    <li>Simplicité de déploiement et de gestion</li>
+                    <li>Simplification de déploiement et de gestion</li>
                     <li>Concentration sur la logique métier plutôt que l'infrastructure</li>
                   </ul>
                 </div>
@@ -309,7 +308,7 @@ services:
     environment:
       - NER_MODEL_PATH=/models/ner-model
       - REDIS_URL=redis://redis:6379
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_API_KEY=\${OPENAI_API_KEY}
       - USE_HYBRID_APPROACH=true
     volumes:
       - ./models:/models

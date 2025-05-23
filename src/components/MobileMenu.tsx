@@ -222,7 +222,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
         </Button>
       </div>
 
-      <style jsx>{`
+      <style>
+        {`
         .space-y-2 > * {
           animation: slideInFromRight 0.3s ease-out;
         }
@@ -243,7 +244,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
             animation: none;
           }
         }
-      `}</style>
+        `}
+      </style>
     </div>
   );
 };

@@ -44,7 +44,8 @@ const AnimatedLogo: React.FC<AnimatedLogoProps> = ({ compact = false, className 
         })}
       </span>
       
-      <style jsx>{`
+      <style>
+        {`
         .logo-container:hover .logo-letter {
           transform: translateY(-2px);
         }
@@ -107,7 +108,8 @@ const AnimatedLogo: React.FC<AnimatedLogoProps> = ({ compact = false, className 
             display: none;
           }
         }
-      `}</style>
+        `}
+      </style>
     </div>
   );
 };
