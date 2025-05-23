@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
@@ -28,6 +27,8 @@ import PythonIA from './pages/PythonIA';
 import DeepLearning from './pages/DeepLearning';
 import NLPConcepts from './pages/NLPConcepts';
 import PremierModeleML from './pages/PremierModeleML';
+import SimulateurIA from "./pages/SimulateurIA";
+import CalculateurCoutsIA from "./pages/CalculateurCoutsIA";
 
 /**
  * Application principale
@@ -63,6 +64,8 @@ const App = () => {
           <Route path="deep-learning" element={<DeepLearning />} />
           <Route path="nlp-concepts" element={<NLPConcepts />} />
           <Route path="premier-modele-ml" element={<PremierModeleML />} />
+          <Route path="/simulateur-ia" element={<SimulateurIA />} />
+          <Route path="/calculateur-couts-ia" element={<CalculateurCoutsIA />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

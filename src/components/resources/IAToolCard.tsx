@@ -6,7 +6,7 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, User } from 'lucide-react';
 import { IAToolResource } from './resourcesData';
 
 interface IAToolCardProps {
@@ -14,19 +14,34 @@ interface IAToolCardProps {
 }
 
 export const IAToolCard: React.FC<IAToolCardProps> = ({ tool }) => {
+  const isInternalTool = tool.url.startsWith('/');
+  
   return (
     <Card className="overflow-hidden hover:shadow-md transition-shadow h-full">
       <CardContent className="p-6 flex flex-col h-full">
         <div className="flex justify-between items-start mb-3">
           <Badge>{tool.category}</Badge>
+          {tool.author && (
+            <div className="flex items-center gap-1 text-xs text-muted-foreground">
+              <User className="h-3 w-3" />
+              <span>{tool.author}</span>
+            </div>
+          )}
         </div>
         <h3 className="text-lg font-medium mb-2">{tool.name}</h3>
         <p className="text-sm text-muted-foreground mb-4 flex-grow">{tool.description}</p>
         <Button variant="outline" size="sm" className="w-full gap-2 mt-auto" asChild>
-          <a href={tool.url} target="_blank" rel="noopener noreferrer">
-            <ExternalLink className="h-4 w-4" />
-            Visiter
-          </a>
+          {isInternalTool ? (
+            <a href={tool.url}>
+              <ExternalLink className="h-4 w-4" />
+              Utiliser l'outil
+            </a>
+          ) : (
+            <a href={tool.url} target="_blank" rel="noopener noreferrer">
+              <ExternalLink className="h-4 w-4" />
+              Visiter
+            </a>
+          )}
         </Button>
       </CardContent>
     </Card>
