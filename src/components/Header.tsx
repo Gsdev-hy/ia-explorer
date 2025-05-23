@@ -4,9 +4,11 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ThemeToggle from './ThemeToggle';
+import AnimatedLogo from './AnimatedLogo';
+import MobileMenu from './MobileMenu';
 
 /**
- * Composant d'en-tête avec navigation responsive
+ * Composant d'en-tête avec navigation responsive améliorée
  * @returns {JSX.Element} Le composant Header
  */
 const Header = () => {
@@ -44,68 +46,74 @@ const Header = () => {
     { text: 'À propos', href: '/a-propos' }
   ];
 
+  const handleMenuToggle = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border/40 bg-background/80 backdrop-blur-lg">
-      <div className="container flex items-center justify-between h-16 mx-auto px-4">
-        <Link to="/" className="flex items-center gap-2">
-          <span className="text-xl font-bold text-primary">IA Explorer</span>
-        </Link>
-
-        {/* Navigation desktop */}
-        <nav className="hidden md:flex items-center space-x-1">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              to={link.href}
-              className={`px-3 py-2 text-sm rounded-md transition-colors ${
-                pathname === link.href
-                  ? 'bg-primary/10 text-primary font-medium'
-                  : 'hover:bg-muted hover:text-foreground'
-              }`}
-            >
-              {link.text}
-            </Link>
-          ))}
-          <ThemeToggle />
-        </nav>
-
-        {/* Boutons mobile */}
-        <div className="flex items-center md:hidden">
-          <ThemeToggle />
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label="Menu"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="ml-2"
+    <>
+      <header className="sticky top-0 z-40 w-full border-b border-border/40 bg-background/80 backdrop-blur-lg">
+        <div className="container flex items-center justify-between h-16 mx-auto px-4">
+          <Link 
+            to="/" 
+            className="flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:rounded-md"
+            aria-label="Accueil - IA Explorer"
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </Button>
-        </div>
-      </div>
+            <div className="hidden sm:block">
+              <AnimatedLogo />
+            </div>
+            <div className="block sm:hidden">
+              <AnimatedLogo compact />
+            </div>
+          </Link>
 
-      {/* Menu mobile */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 z-50 bg-background pt-16 md:hidden animate-fade-in">
-          <nav className="container flex flex-col p-4 space-y-3">
+          {/* Navigation desktop */}
+          <nav 
+            className="hidden md:flex items-center space-x-1"
+            role="navigation"
+            aria-label="Navigation principale"
+          >
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
-                className={`px-4 py-3 rounded-lg ${
+                className={`px-3 py-2 text-sm rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
                   pathname === link.href
                     ? 'bg-primary/10 text-primary font-medium'
-                    : 'hover:bg-muted'
+                    : 'hover:bg-muted hover:text-foreground'
                 }`}
-                onClick={() => setIsMenuOpen(false)}
+                aria-current={pathname === link.href ? 'page' : undefined}
               >
                 {link.text}
               </Link>
             ))}
+            <ThemeToggle />
           </nav>
+
+          {/* Boutons mobile */}
+          <div className="flex items-center md:hidden">
+            <ThemeToggle />
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
+              onClick={handleMenuToggle}
+              className="ml-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </Button>
+          </div>
         </div>
-      )}
-    </header>
+      </header>
+
+      {/* Menu mobile amélioré */}
+      <MobileMenu 
+        isOpen={isMenuOpen} 
+        onClose={() => setIsMenuOpen(false)} 
+      />
+    </>
   );
 };
 

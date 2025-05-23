@@ -64,7 +64,47 @@
     overflow-x: hidden;
   }
 
-  /* Transition des pages */
+  /* Amélioration des focus indicators pour l'accessibilité */
+  *:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+    border-radius: calc(var(--radius) - 2px);
+  }
+
+  /* Classes d'accessibilité */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .skip-link {
+    @apply transition-all duration-200 ease-out;
+  }
+
+  /* Transitions des pages améliorées */
+  .page-transition {
+    animation: pageEnter 0.4s ease-out;
+  }
+
+  @keyframes pageEnter {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Legacy page transition classes for compatibility */
   .page-transition-enter {
     opacity: 0;
     transform: translateY(20px);
@@ -130,5 +170,48 @@
 
   .content-reveal > *.reveal {
     @apply opacity-100 translate-y-0;
+  }
+
+  /* Responsive typography improvements */
+  @media (max-width: 768px) {
+    .heading-xl {
+      @apply text-3xl md:text-4xl lg:text-5xl;
+    }
+    
+    .heading-lg {
+      @apply text-2xl md:text-3xl;
+    }
+    
+    .body-lg {
+      @apply text-base leading-relaxed;
+    }
+  }
+
+  /* Respecter les préférences de réduction de mouvement */
+  @media (prefers-reduced-motion: reduce) {
+    .page-transition,
+    .page-transition-enter-active,
+    .page-transition-exit-active {
+      animation: none;
+      transition: none;
+    }
+    
+    .content-reveal > * {
+      transition: none;
+    }
+    
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Améliorations pour les éléments interactifs sur mobile */
+  @media (max-width: 768px) {
+    button, a[role="button"], [role="button"] {
+      min-height: 44px;
+      min-width: 44px;
+    }
   }
 }
