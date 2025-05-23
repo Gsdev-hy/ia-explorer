@@ -64,19 +64,6 @@
     overflow-x: hidden;
   }
 
-  /* Améliorations pour l'accessibilité au clavier */
-  .user-is-tabbing :focus:not(.focus-visible) {
-    @apply outline-none ring-2 ring-primary ring-offset-2;
-  }
-  
-  .user-is-tabbing button:focus-visible,
-  .user-is-tabbing a:focus-visible,
-  .user-is-tabbing input:focus-visible,
-  .user-is-tabbing select:focus-visible,
-  .user-is-tabbing textarea:focus-visible {
-    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
-  }
-
   /* Transition des pages */
   .page-transition-enter {
     opacity: 0;
@@ -109,52 +96,34 @@
     @apply max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20;
   }
 
-  /* Améliorations responsive des typographies */
   .heading-xl {
-    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight;
+    @apply text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight;
   }
 
   .heading-lg {
-    @apply text-2xl sm:text-3xl md:text-4xl font-display font-bold tracking-tight;
+    @apply text-3xl md:text-4xl font-display font-bold tracking-tight;
   }
 
   .heading-md {
-    @apply text-xl sm:text-2xl md:text-3xl font-display font-bold tracking-tight;
+    @apply text-2xl md:text-3xl font-display font-bold tracking-tight;
   }
 
   .heading-sm {
-    @apply text-lg sm:text-xl md:text-2xl font-display font-semibold;
+    @apply text-xl md:text-2xl font-display font-semibold;
   }
 
   .body-lg {
-    @apply text-base sm:text-lg leading-relaxed;
+    @apply text-lg leading-relaxed;
   }
 
   .body-md {
-    @apply text-sm sm:text-base leading-relaxed;
+    @apply text-base leading-relaxed;
   }
 
   .body-sm {
-    @apply text-xs sm:text-sm leading-relaxed;
+    @apply text-sm leading-relaxed;
   }
 
-  /* Améliorations pour les affichages mobiles */
-  @media (max-width: 640px) {
-    .container {
-      @apply px-4;
-    }
-    
-    .section-container {
-      @apply py-8 px-4;
-    }
-    
-    /* Ajustements pour les grilles et cards sur mobile */
-    .grid {
-      @apply gap-4;
-    }
-  }
-
-  /* Animations de révélation de contenu */
   .content-reveal > * {
     @apply opacity-0 translate-y-4 transition-all duration-500;
   }
@@ -162,31 +131,4 @@
   .content-reveal > *.reveal {
     @apply opacity-100 translate-y-0;
   }
-  
-  /* Animation pour le logo */
-  @keyframes logo-pulse {
-    0%, 100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.8;
-      transform: scale(1.05);
-    }
-  }
-
-  .animate-logo {
-    animation: logo-pulse 3s ease-in-out infinite;
-  }
-
-  /* Améliorations d'accessibilité supplémentaires */
-  @media (prefers-reduced-motion: reduce) {
-    *, ::before, ::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
 }
-

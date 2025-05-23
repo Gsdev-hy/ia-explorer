@@ -309,7 +309,7 @@ services:
     environment:
       - NER_MODEL_PATH=/models/ner-model
       - REDIS_URL=redis://redis:6379
-      - OPENAI_API_KEY=\${OPENAI_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
       - USE_HYBRID_APPROACH=true
     volumes:
       - ./models:/models
