@@ -5,7 +5,7 @@ Une plateforme éducative interactive sur l'intelligence artificielle, ses conce
 
 ## À propos du projet
 
-IA Explorer est une application web conçue pour rendre les concepts de l'intelligence artificielle accessibles à tous. Ce projet vise à démystifier l'IA à travers des explications claires, des visualisations interactives et des exemples concrets.
+IA Explorer est une application web conçue pour rendre les concepts de l'intelligence artificielle accessibles à tous. Ce projet vise à démystifier l'IA à travers des explications claires, des visualisations interactives et des exemples concrets, tout en encourageant une approche réfléchie et éthique de ces technologies.
 
 ## Capture d'écran
 
@@ -15,6 +15,10 @@ IA Explorer est une application web conçue pour rendre les concepts de l'intell
 
 - **Contenu éducatif structuré** sur les différents types d'intelligence artificielle
 - **Visualisations interactives** pour comprendre les concepts complexes
+- **Design responsive** avec menu mobile optimisé et navigation accessible
+- **Accessibilité renforcée** avec support clavier complet et attributs ARIA
+- **Logo animé** avec effets de transition fluides
+- **Animations et transitions** entre pages pour une expérience utilisateur agréable
 - **Glossaire** des termes techniques avec définitions claires et section dédiée à la mémoire en IA
 - **Section histoire** retraçant l'évolution de l'IA depuis ses débuts
 - **Exemples pratiques** d'applications de l'IA dans différents domaines
@@ -22,6 +26,21 @@ IA Explorer est une application web conçue pour rendre les concepts de l'intell
 - **Ressources externes** pour approfondir ses connaissances
 - **Guide de prompting** pour maîtriser l'art de communiquer avec les IA génératives
 - **Exemples multimodaux** pour explorer le potentiel créatif des IA modernes
+
+## Améliorations récentes
+
+### Design et accessibilité
+- **Menu mobile restructuré** avec catégories organisées et animations fluides
+- **Navigation au clavier** complète avec indicateurs de focus et support ARIA
+- **Logo IA Explorer animé** avec animation séquentielle des lettres et effets au survol
+- **Transitions entre pages** pour une navigation plus agréable
+- **Skip link** pour accéder directement au contenu principal
+- **Respect des préférences** de réduction de mouvement (prefers-reduced-motion)
+
+### Contenu enrichi
+- **Page À propos** mise à jour avec informations détaillées sur l'auteur
+- **Mission élargie** avec approche pédagogique et éthique renforcée
+- **Section recherche de projets** pour opportunités professionnelles
 
 ## Pages principales
 
@@ -44,7 +63,7 @@ IA Explorer est une application web conçue pour rendre les concepts de l'intell
 
 - **React** avec **TypeScript** pour le front-end
 - **Vite** pour le build et le développement
-- **Tailwind CSS** pour le styling responsive
+- **Tailwind CSS** pour le styling responsive et les animations
 - **Shadcn/UI** pour les composants UI accessibles et personnalisables
 - **Framer Motion** pour les animations et transitions fluides
 - **Recharts** pour les graphiques et visualisations de données
@@ -150,7 +169,12 @@ Consultez le [CHANGELOG.md](CHANGELOG.md) pour l'historique détaillé des versi
 
 ## Contact
 
-Pour toute question ou suggestion, n'hésitez pas à ouvrir une issue sur le dépôt GitHub.
+**Geoffroy Streit** - Créateur d'IA Explorer  
+📧 Email : geoffroy.streit@gmail.com
+
+Ancien ingénieur optronique et commercial en reconversion IT, passionné d'IA et d'éducation numérique. Actuellement à la recherche de projets techniques innovants dans les domaines des nouvelles énergies, de l'optique/électronique, ou ayant un impact humain positif.
+
+Pour toute question, suggestion ou opportunité professionnelle, n'hésitez pas à me contacter !
 
 ## Licence
 

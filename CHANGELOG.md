@@ -4,9 +4,30 @@
 Ce fichier documente les changements et améliorations apportés au projet IA Explorer, une ressource éducative sur l'intelligence artificielle.
 
 ## [Unreleased]
-- Refactorisation majeure de la page Ressources pour une architecture plus modulaire et maintenable
-- Correction de l'accès à la page "À propos" depuis le menu de navigation
-- Mise à jour de la documentation de la structure de l'application
+
+### Ajouté
+- **Logo IA Explorer animé** avec animation séquentielle des lettres et effets au survol
+- **Menu mobile restructuré** avec navigation hiérarchique par catégories
+- **Navigation au clavier complète** avec indicateurs de focus et attributs ARIA
+- **Skip link** pour accéder directement au contenu principal
+- **Transitions entre pages** pour une expérience utilisateur fluide
+- **Section recherche de projets** dans la page À propos pour opportunités professionnelles
+- **Respect des préférences** de réduction de mouvement (prefers-reduced-motion)
+
+### Amélioré
+- **Page À propos** enrichie avec informations détaillées sur l'auteur Geoffroy Streit
+- **Mission du projet** élargie avec approche pédagogique et éthique renforcée
+- **Photo de profil** mise à jour avec image LinkedIn de l'auteur
+- **Biographie de l'auteur** précisant son parcours d'ingénieur optronique en reconversion IT
+- **Accessibilité générale** avec trap focus, navigation clavier et attributs ARIA
+- **Animation du menu mobile** avec effets de cascade et transitions fluides
+- **Désactivation des liens GitHub/LinkedIn** tout en conservant les icônes pour l'affichage
+
+### Technique
+- Correction des erreurs TypeScript liées aux balises `<style jsx>`
+- Optimisation des animations CSS avec gestion des préférences utilisateur
+- Amélioration de la structure des composants pour une meilleure maintenabilité
+- Refactorisation du code pour respecter les bonnes pratiques d'accessibilité
 
 ## [0.6.2] - 2025-04-10
 
