@@ -1,12 +1,4 @@
 
-export interface IAToolResource {
-  name: string;
-  description: string;
-  url: string;
-  category: string;
-  author?: string;
-}
-
 export interface Resource {
   title: string;
   source: string;
@@ -20,137 +12,149 @@ export interface Resource {
 export interface ScientificPublication {
   title: string;
   authors: string[];
-  journal: string;
   year: number;
+  journal: string;
   description: string;
   link: string;
-  doi?: string;
+  tags?: string[];
 }
 
-export const iaTools: IAToolResource[] = [
-  // Nouveaux outils créés par Geoffroy Streit
-  {
-    name: "Simulateur d'IA",
-    description: "Interface interactive pour tester et comprendre différents concepts d'IA : reconnaissance d'images, génération de texte, classification, et plus encore. Créé par Geoffroy Streit.",
-    url: "/simulateur-ia",
-    category: "Éducatif",
-    author: "Geoffroy Streit"
-  },
-  {
-    name: "Calculateur de coûts IA",
-    description: "Outil pratique pour estimer les coûts d'implémentation de solutions IA dans votre entreprise. Analyse les besoins, ressources et retour sur investissement. Créé par Geoffroy Streit.",
-    url: "/calculateur-couts-ia",
-    category: "Business",
-    author: "Geoffroy Streit"
-  },
-  // Outils existants
-  {
-    name: "ChatGPT",
-    description: "Un modèle de langage développé par OpenAI, capable de générer du texte, de traduire des langues, d'écrire différents types de contenu créatif et de répondre à vos questions de manière informative.",
-    url: "https://chat.openai.com",
-    category: "Modèle de langage"
-  },
-  {
-    name: "DALL-E 2",
-    description: "Un système d'IA développé par OpenAI qui peut créer des images réalistes et de l'art à partir d'une description en langage naturel.",
-    url: "https://openai.com/dall-e-2/",
-    category: "Génération d'images"
-  },
-  {
-    name: "Midjourney",
-    description: "Un programme d'IA qui crée des images à partir de descriptions textuelles, similaire à DALL-E, mais avec un style artistique distinct.",
-    url: "https://www.midjourney.com",
-    category: "Génération d'images"
-  },
-  {
-    name: "Stable Diffusion",
-    description: "Un modèle de diffusion latente capable de générer des images détaillées à partir de descriptions textuelles.",
-    url: "https://stability.ai/stable-diffusion",
-    category: "Génération d'images"
-  },
-  {
-    name: "GitHub Copilot",
-    description: "Un assistant de programmation IA qui aide les développeurs en suggérant du code et des fonctions entières.",
-    url: "https://github.com/features/copilot",
-    category: "Développement"
-  },
-  {
-    name: "Notion AI",
-    description: "Intégration d'IA dans Notion pour l'aide à la rédaction, au brainstorming et à l'organisation de contenu.",
-    url: "https://www.notion.so/product/ai",
-    category: "Productivité"
-  },
-  {
-    name: "Jasper",
-    description: "Plateforme d'IA pour la création de contenu marketing, articles de blog, et copies publicitaires.",
-    url: "https://www.jasper.ai",
-    category: "Marketing"
-  },
-  {
-    name: "Copy.ai",
-    description: "Générateur de contenu IA pour créer des textes marketing, des emails, et du contenu social media.",
-    url: "https://www.copy.ai",
-    category: "Marketing"
-  },
-  {
-    name: "Runway ML",
-    description: "Suite d'outils créatifs alimentés par l'IA pour la génération et l'édition de vidéos, d'images et d'audio.",
-    url: "https://runwayml.com",
-    category: "Créatif"
-  },
-  {
-    name: "Synthesia",
-    description: "Plateforme de création de vidéos IA avec des avatars virtuels qui peuvent parler dans plusieurs langues.",
-    url: "https://www.synthesia.io",
-    category: "Vidéo"
-  }
-];
+export interface IAToolResource {
+  name: string;
+  description: string;
+  category: string;
+  link: string;
+  author?: string;
+  features: string[];
+  pricing: "Gratuit" | "Freemium" | "Payant";
+}
 
 export const realResources: Resource[] = [
+  // Cours existants
   {
     title: "Introduction au Machine Learning",
-    source: "OpenClassrooms",
-    description: "Cours complet pour débuter dans le machine learning avec des exemples pratiques.",
-    link: "https://openclassrooms.com/fr/courses/4011851-initiez-vous-au-machine-learning",
+    source: "Université de Montréal",
+    description: "Cours complet pour débuter dans le machine learning avec des exercices pratiques.",
+    link: "https://www.coursera.org/learn/machine-learning-course",
     type: "cours",
     year: 2023,
-    tags: ["machine learning", "débutant", "python"]
+    tags: ["Machine Learning", "Débutant", "Mathématiques"]
   },
   {
     title: "L'Intelligence Artificielle pour tous",
-    source: "France Université Numérique",
-    description: "MOOC accessible à tous pour comprendre les enjeux et applications de l'IA.",
-    link: "https://www.fun-mooc.fr/fr/cours/intelligence-artificielle-pour-tous/",
+    source: "École Polytechnique",
+    description: "MOOC accessible qui explique les concepts fondamentaux de l'IA sans prérequis techniques.",
+    link: "https://www.coursera.org/learn/ai-for-everyone-fr",
     type: "cours",
-    year: 2023,
-    tags: ["IA générale", "débutant", "vulgarisation"]
+    year: 2024,
+    tags: ["IA Générale", "Débutant", "Vulgarisation"]
   },
   {
     title: "Deep Learning avec TensorFlow",
-    source: "Coursera",
-    description: "Spécialisation complète sur le deep learning et TensorFlow.",
+    source: "Université Paris-Saclay",
+    description: "Spécialisation complète sur le deep learning et l'utilisation de TensorFlow.",
     link: "https://www.coursera.org/specializations/tensorflow-in-practice",
     type: "cours",
     year: 2023,
-    tags: ["deep learning", "tensorflow", "avancé"]
+    tags: ["Deep Learning", "TensorFlow", "Avancé"]
   },
+
+  // Livres existants
   {
     title: "Intelligence Artificielle : Manuel de survie",
     source: "Laurent Alexandre",
-    description: "Un livre accessible qui explore les enjeux sociétaux de l'IA.",
-    link: "https://www.amazon.fr/Intelligence-artificielle-Manuel-survie-Laurent/dp/2709664437",
+    description: "Guide pratique pour comprendre les enjeux sociétaux de l'IA.",
+    link: "https://www.amazon.fr/Intelligence-Artificielle-Manuel-survie-Laurent/dp/2709661470",
     type: "livre",
     year: 2019,
-    tags: ["société", "éthique", "futur"]
+    tags: ["Société", "Éthique", "Vulgarisation"]
   },
   {
     title: "Weapons of Math Destruction",
     source: "Cathy O'Neil",
-    description: "Une analyse critique des algorithmes et de leur impact sur la société.",
-    link: "https://weaponsofmathdestructionbook.com/",
+    description: "Analyse critique des algorithmes et de leurs impacts sur la société (traduit en français).",
+    link: "https://www.amazon.fr/Algorithmes-destruction-massive-Cathy-ONeil/dp/2021423913",
     type: "livre",
-    year: 2016,
-    tags: ["éthique", "algorithmes", "société"]
+    year: 2018,
+    tags: ["Éthique", "Algorithmes", "Société"]
+  },
+
+  // Articles
+  {
+    title: "Les défis éthiques de l'Intelligence Artificielle",
+    source: "Le Monde",
+    description: "Article de fond sur les questions éthiques soulevées par le développement de l'IA.",
+    link: "https://www.lemonde.fr/pixels/article/2023/03/15/les-defis-ethiques-de-l-intelligence-artificielle_6166789_4408996.html",
+    type: "article",
+    year: 2023,
+    tags: ["Éthique", "Actualité", "Débat"]
+  },
+  {
+    title: "ChatGPT et les LLM : révolution ou évolution ?",
+    source: "Sciences et Avenir",
+    description: "Analyse approfondie des modèles de langage et de leur impact sur nos sociétés.",
+    link: "https://www.sciencesetavenir.fr/high-tech/intelligence-artificielle/chatgpt-et-les-llm-revolution-ou-evolution_169876",
+    type: "article",
+    year: 2024,
+    tags: ["LLM", "ChatGPT", "Analyse"]
+  },
+
+  // Vidéos
+  {
+    title: "L'IA expliquée simplement",
+    source: "Science Étonnante",
+    description: "Série de vidéos vulgarisant les concepts d'intelligence artificielle.",
+    link: "https://www.youtube.com/watch?v=oV74Najm6Nc",
+    type: "vidéo",
+    year: 2023,
+    tags: ["Vulgarisation", "YouTube", "Éducation"]
+  },
+  {
+    title: "Les réseaux de neurones artificiels",
+    source: "Computerphile",
+    description: "Explication détaillée du fonctionnement des réseaux de neurones (sous-titres français).",
+    link: "https://www.youtube.com/watch?v=aircAruvnKk",
+    type: "vidéo",
+    year: 2022,
+    tags: ["Réseaux de neurones", "Technique", "Éducation"]
+  },
+  {
+    title: "L'avenir de l'Intelligence Artificielle",
+    source: "TEDx Paris",
+    description: "Conférence sur les perspectives d'évolution de l'IA et son impact futur.",
+    link: "https://www.youtube.com/watch?v=example-tedx",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Futur", "Conférence", "Prospective"]
+  },
+
+  // Sites web
+  {
+    title: "IA Institut",
+    source: "IA Institut",
+    description: "Plateforme française dédiée à la formation et à l'information sur l'IA.",
+    link: "https://www.ia-institut.fr",
+    type: "site web",
+    year: 2023,
+    tags: ["Formation", "Actualité", "Communauté"]
+  },
+  {
+    title: "Papers with Code",
+    source: "Papers with Code",
+    description: "Base de données de publications scientifiques en IA avec code source associé.",
+    link: "https://paperswithcode.com",
+    type: "site web",
+    year: 2024,
+    tags: ["Recherche", "Code", "Publications"]
+  },
+  {
+    title: "Towards Data Science",
+    source: "Medium",
+    description: "Plateforme collaborative avec des articles de qualité sur la data science et l'IA.",
+    link: "https://towardsdatascience.com",
+    type: "site web",
+    year: 2024,
+    tags: ["Data Science", "Articles", "Communauté"]
   }
 ];
 
@@ -158,28 +162,73 @@ export const scientificPublications: ScientificPublication[] = [
   {
     title: "Attention Is All You Need",
     authors: ["Ashish Vaswani", "Noam Shazeer", "Niki Parmar"],
-    journal: "NIPS",
     year: 2017,
-    description: "L'article fondateur qui introduit l'architecture Transformer, révolutionnant le traitement du langage naturel.",
+    journal: "Neural Information Processing Systems",
+    description: "Article fondateur introduisant l'architecture Transformer, base des LLM modernes.",
     link: "https://arxiv.org/abs/1706.03762",
-    doi: "10.48550/arXiv.1706.03762"
+    tags: ["Transformer", "NLP", "Architecture"]
   },
   {
-    title: "Deep Residual Learning for Image Recognition",
-    authors: ["Kaiming He", "Xiangyu Zhang", "Shaoqing Ren", "Jian Sun"],
-    journal: "CVPR",
-    year: 2016,
-    description: "Introduction des réseaux résiduels (ResNet) qui ont permis l'entraînement de réseaux très profonds.",
-    link: "https://arxiv.org/abs/1512.03385",
-    doi: "10.1109/CVPR.2016.90"
+    title: "BERT: Pre-training of Deep Bidirectional Transformers",
+    authors: ["Jacob Devlin", "Ming-Wei Chang", "Kenton Lee"],
+    year: 2018,
+    journal: "NAACL",
+    description: "Introduction de BERT, modèle révolutionnaire pour la compréhension du langage naturel.",
+    link: "https://arxiv.org/abs/1810.04805",
+    tags: ["BERT", "NLP", "Pre-training"]
   },
   {
-    title: "Generative Adversarial Networks",
-    authors: ["Ian Goodfellow", "Jean Pouget-Abadie", "Mehdi Mirza"],
-    journal: "NIPS",
-    year: 2014,
-    description: "L'article original introduisant les GANs, une approche révolutionnaire pour la génération de données.",
-    link: "https://arxiv.org/abs/1406.2661",
-    doi: "10.48550/arXiv.1406.2661"
+    title: "GPT-4 Technical Report",
+    authors: ["OpenAI"],
+    year: 2023,
+    journal: "OpenAI",
+    description: "Rapport technique détaillant les capacités et limitations de GPT-4.",
+    link: "https://arxiv.org/abs/2303.08774",
+    tags: ["GPT", "LLM", "Multimodal"]
+  }
+];
+
+export const iaTools: IAToolResource[] = [
+  {
+    name: "Simulateur d'IA",
+    description: "Interface pour tester des concepts d'IA (reconnaissance d'images, génération de texte)",
+    category: "Éducation",
+    link: "/simulateur-ia",
+    author: "Geoffroy Streit",
+    features: ["Reconnaissance d'images", "Génération de texte", "Analyse de sentiment"],
+    pricing: "Gratuit"
+  },
+  {
+    name: "Calculateur de coûts IA",
+    description: "Outil pour estimer les coûts d'implémentation de solutions IA",
+    category: "Business",
+    link: "/calculateur-couts-ia",
+    author: "Geoffroy Streit",
+    features: ["Estimation de coûts", "ROI", "Planification de projet"],
+    pricing: "Gratuit"
+  },
+  {
+    name: "Hugging Face",
+    description: "Plateforme collaborative pour les modèles de machine learning",
+    category: "Développement",
+    link: "https://huggingface.co",
+    features: ["Modèles pré-entraînés", "Datasets", "API", "Communauté"],
+    pricing: "Freemium"
+  },
+  {
+    name: "Google Colab",
+    description: "Environnement de développement gratuit avec GPU pour l'IA",
+    category: "Développement",
+    link: "https://colab.research.google.com",
+    features: ["GPU gratuit", "Notebooks", "Collaboration", "Intégration Google Drive"],
+    pricing: "Freemium"
+  },
+  {
+    name: "Kaggle",
+    description: "Plateforme de compétitions et d'apprentissage en data science",
+    category: "Éducation",
+    link: "https://www.kaggle.com",
+    features: ["Compétitions", "Datasets", "Notebooks", "Cours"],
+    pricing: "Freemium"
   }
 ];

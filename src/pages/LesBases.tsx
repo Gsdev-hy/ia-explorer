@@ -20,6 +20,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import Hero from '@/components/Hero';
+import { AIMemoryTypes } from '@/components/memory/AIMemoryTypes';
 
 const LesBases = () => {
   return (
@@ -370,6 +371,11 @@ const LesBases = () => {
               </div>
             </TabsContent>
           </Tabs>
+
+          {/* Section Mémoire dans les systèmes d'IA déplacée depuis Ressources */}
+          <div className="mb-8">
+            <AIMemoryTypes />
+          </div>
 
           {/* Concepts clés à retenir */}
           <Card className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-950/20 dark:to-blue-950/20">

@@ -1,14 +1,13 @@
 
 import React, { useState, useRef } from 'react';
 import Hero from '@/components/Hero';
-import { ExternalResources } from '@/components';
 import { AddResourceForm } from '@/components/resources/AddResourceForm';
 import { QuizDialog } from '@/components/resources/QuizDialog';
 
 // Composants refactorisés
 import ResourcesHeader from '@/components/resources/ResourcesHeader';
 import ResourceFilters from '@/components/resources/ResourceFilters';
-import ResourcesTabsSection from '@/components/resources/ResourcesTabsSection';
+import UnifiedResourcesTabsSection from '@/components/resources/UnifiedResourcesTabsSection';
 import ContinueLearningSection from '@/components/resources/ContinueLearningSection';
 
 // Données
@@ -115,15 +114,13 @@ const Ressources = () => {
             allYears={allYears}
           />
           
-          <ResourcesTabsSection 
+          <UnifiedResourcesTabsSection 
             activeTab={activeTab}
             setActiveTab={setActiveTab}
             filteredResources={filteredResources}
             filteredScientificPublications={filteredScientificPublications}
             filteredIATools={filteredIATools}
           />
-          
-          <ExternalResources />
         </div>
       </section>
 
