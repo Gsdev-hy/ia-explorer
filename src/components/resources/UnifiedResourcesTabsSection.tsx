@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ResourceCard from './ResourceCard';
@@ -126,7 +125,7 @@ export const UnifiedResourcesTabsSection: React.FC<UnifiedResourcesTabsSectionPr
       
       <TabsContent value="quiz" className="mt-6">
         <div className="max-w-2xl mx-auto">
-          <IAQuiz />
+          <IAQuiz onClose={() => {}} />
         </div>
       </TabsContent>
       
