@@ -43,8 +43,8 @@ const Ressources = () => {
   )).sort();
   
   const allYears = Array.from(new Set(
-    realResources.filter(r => r.year).map(r => r.year)
-  )).sort((a, b) => b! - a!);
+    realResources.filter(r => r.year).map(r => r.year!)
+  )).sort((a, b) => b - a);
   
   // Ressources filtrées
   const filteredResources = realResources.filter(resource => {
@@ -54,7 +54,7 @@ const Ressources = () => {
       (resource.source && resource.source.toLowerCase().includes(searchTerm.toLowerCase()));
     
     const matchesLevel = selectedLevel === 'all';
-    const matchesTopic = selectedTopic === 'all' || resource.tags?.includes(selectedTopic);
+    const matchesTopic = selectedTopic === 'all' || (resource.tags && resource.tags.includes(selectedTopic));
     const matchesYear = selectedYear === 'all' || resource.year === parseInt(selectedYear);
     const matchesLanguage = selectedLanguage === 'all';
 
