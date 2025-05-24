@@ -36,6 +36,8 @@ import GeminiChatPage from "./pages/GeminiChatPage";
 import MentionsLegales from "./pages/MentionsLegales";
 import Confidentialite from "./pages/Confidentialite";
 import UtiliserIAQuotidien from "./pages/UtiliserIAQuotidien";
+import UtiliserIATravail from "./pages/UtiliserIATravail";
+import OrganiserServicesIA from "./pages/OrganiserServicesIA";
 
 const queryClient = new QueryClient();
 
@@ -72,6 +74,8 @@ function App() {
                 <Route path="glossaire" element={<Glossaire />} />
                 <Route path="ressources" element={<Ressources />} />
                 <Route path="cours/utiliser-ia-quotidien" element={<UtiliserIAQuotidien />} />
+                <Route path="cours/utiliser-ia-travail" element={<UtiliserIATravail />} />
+                <Route path="cours/organiser-services-ia" element={<OrganiserServicesIA />} />
                 <Route path="about" element={<About />} />
                 <Route path="simulateur-ia" element={<SimulateurIA />} />
                 <Route path="calculateur-couts-ia" element={<CalculateurCoutsIA />} />

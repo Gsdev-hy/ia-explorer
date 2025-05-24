@@ -29,7 +29,27 @@ export interface IAToolResource {
 }
 
 export const realResources: Resource[] = [
-  // Nouveau cours ajouté
+  // Nouveaux cours en tête de liste
+  {
+    title: "Comment utiliser intelligemment les intelligences artificielles au travail",
+    source: "Geoffroy Streit",
+    description: "Guide complet pour intégrer efficacement l'IA dans votre environnement professionnel. Découvrez les meilleures pratiques, outils et stratégies pour optimiser votre productivité au travail avec l'IA.",
+    link: "/cours/utiliser-ia-travail",
+    type: "cours",
+    year: 2024,
+    tags: ["Usage professionnel", "Productivité", "Stratégie", "Outils IA", "Gestion", "Collaboration", "Workflow", "Efficacité", "Management"]
+  },
+  {
+    title: "Comment organiser les différents types de services IA que l'on utilise ?",
+    source: "Geoffroy Streit",
+    description: "Méthode structurée pour organiser, catégoriser et gérer efficacement tous vos outils et services IA. Apprenez à créer votre écosystème IA personnel optimal.",
+    link: "/cours/organiser-services-ia",
+    type: "cours",
+    year: 2024,
+    tags: ["Organisation", "Gestion", "Services IA", "Catégorisation", "Écosystème", "Planification", "Optimisation", "Structure", "Méthode"]
+  },
+
+  // Cours existant
   {
     title: "Comment utiliser intelligemment les intelligences artificielles au quotidien",
     source: "Geoffroy Streit",
