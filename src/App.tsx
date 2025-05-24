@@ -1,8 +1,10 @@
+
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
 import About from './pages/About';
+import LesBases from './pages/LesBases';
 import MachineLearning from './pages/MachineLearning';
 import TypesIA from './pages/TypesIA';
 import LLMDetails from './pages/LLMDetails';
@@ -41,6 +43,7 @@ const App = () => {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path="a-propos" element={<About />} />
+          <Route path="les-bases" element={<LesBases />} />
           <Route path="machine-learning" element={<MachineLearning />} />
           <Route path="types-ia" element={<TypesIA />} />
           <Route path="llm" element={<LLMDetails />} />

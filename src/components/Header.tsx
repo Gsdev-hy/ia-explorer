@@ -33,6 +33,7 @@ const Header = () => {
   }, [isMenuOpen]);
 
   const navLinks = [
+    { text: 'Les bases', href: '/les-bases' },
     { text: 'Types d\'IA', href: '/types-ia' },
     { text: 'Niveaux d\'IA', href: '/niveaux-ia' },
     { text: 'Machine Learning', href: '/machine-learning' },
