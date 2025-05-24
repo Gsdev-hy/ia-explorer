@@ -1,4 +1,3 @@
-
 export interface Resource {
   title: string;
   source: string;
@@ -30,6 +29,17 @@ export interface IAToolResource {
 }
 
 export const realResources: Resource[] = [
+  // Nouveau cours ajouté
+  {
+    title: "Comment utiliser intelligemment les intelligences artificielles au quotidien",
+    source: "Geoffroy Streit",
+    description: "Guide pratique pour intégrer efficacement l'IA dans votre vie personnelle et professionnelle. Apprenez à optimiser votre productivité tout en évitant les pièges.",
+    link: "/cours/utiliser-ia-quotidien",
+    type: "cours",
+    year: 2024,
+    tags: ["Usage quotidien", "Productivité", "Pratique", "Débutant", "Guide", "Assistant IA", "Optimisation", "Éthique", "Bonnes pratiques"]
+  },
+
   // Cours existants
   {
     title: "Introduction au Machine Learning",
