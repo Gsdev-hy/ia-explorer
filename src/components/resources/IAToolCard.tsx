@@ -14,7 +14,7 @@ interface IAToolCardProps {
 }
 
 export const IAToolCard: React.FC<IAToolCardProps> = ({ tool }) => {
-  const isInternalTool = tool.url.startsWith('/');
+  const isInternalTool = tool.link.startsWith('/');
   
   return (
     <Card className="overflow-hidden hover:shadow-md transition-shadow h-full">
@@ -32,12 +32,12 @@ export const IAToolCard: React.FC<IAToolCardProps> = ({ tool }) => {
         <p className="text-sm text-muted-foreground mb-4 flex-grow">{tool.description}</p>
         <Button variant="outline" size="sm" className="w-full gap-2 mt-auto" asChild>
           {isInternalTool ? (
-            <a href={tool.url}>
+            <a href={tool.link}>
               <ExternalLink className="h-4 w-4" />
               Utiliser l'outil
             </a>
           ) : (
-            <a href={tool.url} target="_blank" rel="noopener noreferrer">
+            <a href={tool.link} target="_blank" rel="noopener noreferrer">
               <ExternalLink className="h-4 w-4" />
               Visiter
             </a>

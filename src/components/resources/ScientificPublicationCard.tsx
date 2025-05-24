@@ -24,9 +24,6 @@ export const ScientificPublicationCard: React.FC<ScientificPublicationCardProps>
           <p>{publication.authors.join(", ")}</p>
         </div>
         <p className="text-sm text-muted-foreground mb-4 flex-grow">{publication.description}</p>
-        {publication.doi && (
-          <p className="text-xs text-muted-foreground mb-2">DOI: {publication.doi}</p>
-        )}
         <Button variant="outline" size="sm" className="w-full gap-2 mt-auto" asChild>
           <a href={publication.link} target="_blank" rel="noopener noreferrer">
             <ExternalLink className="h-4 w-4" />

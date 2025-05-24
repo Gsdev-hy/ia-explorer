@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ResourceCard from './ResourceCard';
 import ScientificPublicationCard from './ScientificPublicationCard';
 import IAToolCard from './IAToolCard';
-import { IAQuiz } from './IAQuiz';
+import IAQuiz from './IAQuiz';
 import { FileText } from 'lucide-react';
 import { Resource, ScientificPublication, IAToolResource } from './resourcesData';
 

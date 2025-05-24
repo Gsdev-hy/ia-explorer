@@ -20,7 +20,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import Hero from '@/components/Hero';
-import { AIMemoryTypes } from '@/components/memory/AIMemoryTypes';
+import AIMemoryTypes from '@/components/memory/AIMemoryTypes';
 
 const LesBases = () => {
   return (
