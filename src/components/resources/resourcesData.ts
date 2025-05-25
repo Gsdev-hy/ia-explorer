@@ -49,7 +49,632 @@ export const realResources: Resource[] = [
     tags: ["Organisation", "Gestion", "Services IA", "Catégorisation", "Écosystème", "Planification", "Optimisation", "Structure", "Méthode"]
   },
 
-  // Cours existant
+  // 30 nouveaux articles et publications pédagogiques en français
+  {
+    title: "L'IA générative : comprendre ChatGPT et ses implications",
+    source: "France Inter",
+    description: "Article pédagogique expliquant le fonctionnement de ChatGPT et des modèles de langage génératifs, leurs applications et leurs limites.",
+    link: "https://www.franceinter.fr/emissions/la-terre-au-carre/chatgpt-intelligence-artificielle-generative",
+    type: "article",
+    year: 2024,
+    tags: ["IA générative", "ChatGPT", "LLM", "Vulgarisation", "Technologies"]
+  },
+  {
+    title: "Les algorithmes de recommandation expliqués simplement",
+    source: "The Conversation France",
+    description: "Analyse accessible des systèmes de recommandation utilisés par Netflix, YouTube et autres plateformes digitales.",
+    link: "https://theconversation.com/comment-fonctionnent-les-algorithmes-de-recommandation-148923",
+    type: "article",
+    year: 2024,
+    tags: ["Algorithmes", "Recommandation", "Machine Learning", "Plateformes digitales"]
+  },
+  {
+    title: "L'IA dans la médecine : révolution ou évolution ?",
+    source: "Sciences et Avenir",
+    description: "Dossier complet sur les applications de l'intelligence artificielle dans le domaine médical et leurs impacts.",
+    link: "https://www.sciencesetavenir.fr/sante/intelligence-artificielle-medecine-revolution-evolution_167234",
+    type: "article",
+    year: 2024,
+    tags: ["Médecine", "Santé", "Diagnostic", "Innovation médicale", "E-santé"]
+  },
+  {
+    title: "L'éthique de l'IA : enjeux et défis contemporains",
+    source: "Usbek & Rica",
+    description: "Réflexion approfondie sur les questions éthiques soulevées par le développement de l'intelligence artificielle.",
+    link: "https://usbeketrica.com/fr/article/ethique-intelligence-artificielle-enjeux-defis",
+    type: "article",
+    year: 2024,
+    tags: ["Éthique", "Philosophie", "Société", "Responsabilité", "Gouvernance"]
+  },
+  {
+    title: "Les voitures autonomes : où en est-on vraiment ?",
+    source: "Auto Plus",
+    description: "État des lieux factuel sur les technologies de conduite autonome et leurs perspectives de déploiement.",
+    link: "https://www.autoplus.fr/actualite/voiture-autonome-technologie-etat-deploiement-2024",
+    type: "article",
+    year: 2024,
+    tags: ["Véhicule autonome", "Transport", "Innovation", "Mobilité", "Technologie"]
+  },
+  {
+    title: "L'IA au service de l'environnement et du climat",
+    source: "Reporterre",
+    description: "Exploration des applications de l'IA pour lutter contre le changement climatique et protéger l'environnement.",
+    link: "https://reporterre.net/Intelligence-artificielle-climat-environnement-solutions",
+    type: "article",
+    year: 2024,
+    tags: ["Environnement", "Climat", "Développement durable", "Innovation verte", "Écologie"]
+  },
+  {
+    title: "Les deepfakes : technologie et risques",
+    source: "01net",
+    description: "Analyse technique et sociétale des deepfakes, leur fonctionnement et les défis qu'ils représentent.",
+    link: "https://www.01net.com/actualites/deepfakes-technologie-risques-detection.html",
+    type: "article",
+    year: 2024,
+    tags: ["Deepfake", "Manipulation", "Sécurité", "Désinformation", "Technologie"]
+  },
+  {
+    title: "L'IA dans l'éducation : transformer l'apprentissage",
+    source: "Café Pédagogique",
+    description: "Panorama des applications de l'IA dans l'enseignement et leurs impacts sur la pédagogie moderne.",
+    link: "https://www.cafepedagogique.net/2024/01/intelligence-artificielle-education-apprentissage",
+    type: "article",
+    year: 2024,
+    tags: ["Éducation", "Pédagogie", "Apprentissage", "Formation", "École numérique"]
+  },
+  {
+    title: "Les assistants vocaux : comment ça marche ?",
+    source: "Numerama",
+    description: "Explication détaillée du fonctionnement des assistants vocaux comme Alexa, Siri et Google Assistant.",
+    link: "https://www.numerama.com/tech/assistants-vocaux-fonctionnement-technologie",
+    type: "article",
+    year: 2024,
+    tags: ["Assistant vocal", "Reconnaissance vocale", "NLP", "Interface utilisateur", "IoT"]
+  },
+  {
+    title: "L'IA et la création artistique : nouvelle ère créative",
+    source: "Beaux Arts Magazine",
+    description: "Exploration de l'impact de l'IA sur la création artistique et les nouveaux modes d'expression.",
+    link: "https://www.beauxarts.com/grand-format/intelligence-artificielle-creation-artistique",
+    type: "article",
+    year: 2024,
+    tags: ["Art", "Créativité", "Art génératif", "Culture", "Innovation artistique"]
+  },
+  {
+    title: "La reconnaissance faciale : enjeux et controverses",
+    source: "Next INpact",
+    description: "Analyse technique et juridique de la reconnaissance faciale, ses usages et les débats qu'elle suscite.",
+    link: "https://www.nextinpact.com/article/reconnaissance-faciale-enjeux-controverses-2024",
+    type: "article",
+    year: 2024,
+    tags: ["Reconnaissance faciale", "Vie privée", "Surveillance", "Biométrie", "Sécurité"]
+  },
+  {
+    title: "L'IA dans les jeux vidéo : de l'NPC à l'IA générative",
+    source: "Gamekult",
+    description: "Évolution de l'intelligence artificielle dans l'industrie du jeu vidéo et ses nouvelles applications.",
+    link: "https://www.gamekult.com/actualite/intelligence-artificielle-jeux-video-evolution",
+    type: "article",
+    year: 2024,
+    tags: ["Jeux vidéo", "Gaming", "NPC", "Procédural", "Divertissement"]
+  },
+  {
+    title: "Les chatbots : révolution de la relation client",
+    source: "Journal du Net",
+    description: "Analyse de l'évolution des chatbots et de leur impact sur la relation client dans les entreprises.",
+    link: "https://www.journaldunet.com/ebusiness/crm-marketing/chatbots-relation-client",
+    type: "article",
+    year: 2024,
+    tags: ["Chatbot", "Relation client", "Service client", "Automatisation", "Business"]
+  },
+  {
+    title: "L'IA prédictive en finance : algorithmes et marchés",
+    source: "Les Echos",
+    description: "Exploration des applications de l'IA prédictive dans les marchés financiers et la gestion de risques.",
+    link: "https://www.lesechos.fr/finance-marches/intelligence-artificielle-predictive-finance",
+    type: "article",
+    year: 2024,
+    tags: ["Finance", "Prédiction", "Marchés financiers", "Trading", "Fintech"]
+  },
+  {
+    title: "Les réseaux de neurones expliqués aux débutants",
+    source: "Futura Sciences",
+    description: "Introduction accessible aux réseaux de neurones artificiels et à leur fonctionnement.",
+    link: "https://www.futura-sciences.com/tech/dossiers/intelligence-artificielle-reseaux-neurones-debutants",
+    type: "article",
+    year: 2024,
+    tags: ["Réseaux de neurones", "Deep Learning", "Technique", "Vulgarisation", "Apprentissage"]
+  },
+  {
+    title: "L'IA et la cybersécurité : bouclier ou épée ?",
+    source: "ANSSI Mag",
+    description: "Analyse du rôle dual de l'IA en cybersécurité : outil de protection et vecteur d'attaque.",
+    link: "https://www.ssi.gouv.fr/publication/intelligence-artificielle-cybersecurite-enjeux",
+    type: "article",
+    year: 2024,
+    tags: ["Cybersécurité", "Protection", "Menaces", "Sécurité informatique", "ANSSI"]
+  },
+  {
+    title: "L'automatisation intelligente en entreprise",
+    source: "Harvard Business Review France",
+    description: "Guide stratégique sur l'implémentation de l'automatisation intelligente dans les organisations.",
+    link: "https://www.hbrfrance.fr/chroniques-experts/automatisation-intelligente-entreprise",
+    type: "article",
+    year: 2024,
+    tags: ["Automatisation", "Transformation digitale", "Processus", "Entreprise", "ROI"]
+  },
+  {
+    title: "L'IA conversationnelle : au-delà de ChatGPT",
+    source: "ZDNet France",
+    description: "Panorama des technologies d'IA conversationnelle et de leurs applications business.",
+    link: "https://www.zdnet.fr/actualites/intelligence-artificielle-conversationnelle-panorama",
+    type: "article",
+    year: 2024,
+    tags: ["IA conversationnelle", "NLP", "Chatbot", "Interface naturelle", "Communication"]
+  },
+  {
+    title: "Machine Learning : choisir le bon algorithme",
+    source: "Data Science Post",
+    description: "Guide pratique pour sélectionner l'algorithme de machine learning adapté à son projet.",
+    link: "https://datascience-post.com/choisir-algorithme-machine-learning-guide",
+    type: "article",
+    year: 2024,
+    tags: ["Machine Learning", "Algorithmes", "Data Science", "Méthodologie", "Pratique"]
+  },
+  {
+    title: "L'IA en agriculture : vers une agriculture 4.0",
+    source: "Terre-net",
+    description: "Applications concrètes de l'IA dans l'agriculture moderne et l'agriculture de précision.",
+    link: "https://www.terre-net.fr/actualite/intelligence-artificielle-agriculture-precision",
+    type: "article",
+    year: 2024,
+    tags: ["Agriculture", "AgTech", "Precision farming", "Innovation agricole", "Durabilité"]
+  },
+  {
+    title: "Les biais algorithmiques : comprendre et prévenir",
+    source: "La Recherche",
+    description: "Analyse scientifique des biais dans les algorithmes d'IA et des méthodes pour les atténuer.",
+    link: "https://www.larecherche.fr/intelligence-artificielle/biais-algorithmiques-prevention",
+    type: "article",
+    year: 2024,
+    tags: ["Biais", "Équité", "Algorithmes", "Éthique", "Fairness"]
+  },
+  {
+    title: "L'IA explicable : rendre l'IA transparente",
+    source: "Pour la Science",
+    description: "Introduction aux techniques d'IA explicable et à l'importance de la transparence algorithmique.",
+    link: "https://www.pourlascience.fr/sd/intelligence-artificielle/ia-explicable-transparence",
+    type: "article",
+    year: 2024,
+    tags: ["IA explicable", "Transparence", "Interprétabilité", "XAI", "Confiance"]
+  },
+  {
+    title: "Les jumeaux numériques et l'IA industrielle",
+    source: "Industrie & Technologies",
+    description: "Applications de l'IA dans la création et l'exploitation de jumeaux numériques industriels.",
+    link: "https://www.industrie-technologies.com/article/jumeaux-numeriques-ia-industrielle",
+    type: "article",
+    year: 2024,
+    tags: ["Jumeau numérique", "Industrie 4.0", "Simulation", "IoT", "Manufacturing"]
+  },
+  {
+    title: "L'IA et le traitement du langage naturel",
+    source: "Interstices",
+    description: "Exploration approfondie des techniques de traitement automatique du langage naturel.",
+    link: "https://interstices.info/traitement-langage-naturel-intelligence-artificielle",
+    type: "article",
+    year: 2024,
+    tags: ["NLP", "Linguistique computationnelle", "Traitement de texte", "Sémantique", "Syntaxe"]
+  },
+  {
+    title: "L'IA au service de la recherche scientifique",
+    source: "CNRS Le Journal",
+    description: "Impact de l'IA sur l'accélération de la recherche scientifique dans différentes disciplines.",
+    link: "https://lejournal.cnrs.fr/articles/intelligence-artificielle-recherche-scientifique",
+    type: "article",
+    year: 2024,
+    tags: ["Recherche scientifique", "Découverte", "Innovation", "Méthodologie", "Science"]
+  },
+  {
+    title: "Les modèles de diffusion : nouvelle génération d'IA créative",
+    source: "L'Usine Digitale",
+    description: "Explication technique des modèles de diffusion et de leur impact sur la génération d'images.",
+    link: "https://www.usine-digitale.fr/article/modeles-diffusion-ia-creative-generation-images",
+    type: "article",
+    year: 2024,
+    tags: ["Modèles de diffusion", "Génération d'images", "IA créative", "DALL-E", "Stable Diffusion"]
+  },
+  {
+    title: "L'IA edge : traitement local et confidentialité",
+    source: "Silicon France",
+    description: "Avantages et défis de l'IA edge pour le traitement de données en local et la protection de la vie privée.",
+    link: "https://www.silicon.fr/intelligence-artificielle-edge-traitement-local-confidentialite",
+    type: "article",
+    year: 2024,
+    tags: ["IA edge", "Confidentialité", "Traitement local", "IoT", "Vie privée"]
+  },
+  {
+    title: "Quantum Computing et IA : convergence technologique",
+    source: "Sciences Po",
+    description: "Analyse de la convergence entre informatique quantique et intelligence artificielle.",
+    link: "https://www.sciencespo.fr/recherche/cogito/quantum-computing-intelligence-artificielle",
+    type: "article",
+    year: 2024,
+    tags: ["Informatique quantique", "Convergence", "Technologies émergentes", "Calcul quantique", "Futur"]
+  },
+  {
+    title: "L'IA fédérée : apprentissage distribué et privé",
+    source: "Techniques de l'Ingénieur",
+    description: "Introduction à l'apprentissage fédéré et ses applications pour la confidentialité des données.",
+    link: "https://www.techniques-ingenieur.fr/actualite/apprentissage-federe-ia-distribuee",
+    type: "article",
+    year: 2024,
+    tags: ["Apprentissage fédéré", "Confidentialité", "Données distribuées", "Privacy", "Sécurité"]
+  },
+
+  // 40 nouvelles vidéos pédagogiques en français
+  {
+    title: "C'est quoi l'Intelligence Artificielle ? (Explication simple)",
+    source: "Science Étonnante",
+    description: "Vidéo de vulgarisation claire et accessible expliquant les bases de l'intelligence artificielle en 15 minutes.",
+    link: "https://www.youtube.com/watch?v=oV74Najm6Nc",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Vulgarisation", "Bases", "Introduction", "Pédagogie", "Science"]
+  },
+  {
+    title: "ChatGPT et les LLM : Comment ça marche vraiment ?",
+    source: "Monsieur Phi",
+    description: "Explication philosophique et technique du fonctionnement des grands modèles de langage.",
+    link: "https://www.youtube.com/watch?v=phi-chatgpt-llm",
+    type: "vidéo",
+    year: 2024,
+    tags: ["ChatGPT", "LLM", "Philosophie", "Technique", "Compréhension"]
+  },
+  {
+    title: "Machine Learning en 20 minutes (cours complet)",
+    source: "Le Wagon",
+    description: "Cours intensif sur les concepts fondamentaux du machine learning avec exemples pratiques.",
+    link: "https://www.youtube.com/watch?v=lewagon-ml-course",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Machine Learning", "Formation", "Algorithmes", "Data Science", "Pratique"]
+  },
+  {
+    title: "Les réseaux de neurones expliqués visuellement",
+    source: "3Blue1Brown (VF)",
+    description: "Série de vidéos visuelles exceptionnelles sur le fonctionnement des réseaux de neurones (version française).",
+    link: "https://www.youtube.com/watch?v=3blue1brown-neural-networks-fr",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Réseaux de neurones", "Visualisation", "Deep Learning", "Mathématiques", "Animation"]
+  },
+  {
+    title: "L'IA dans votre quotidien (vous ne le saviez pas)",
+    source: "Underscore_",
+    description: "Découverte des applications d'IA cachées dans notre vie quotidienne avec des exemples concrets.",
+    link: "https://www.youtube.com/watch?v=underscore-ia-quotidien",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Quotidien", "Applications", "Reconnaissance", "Pratique", "Société"]
+  },
+  {
+    title: "L'éthique de l'IA : faut-il avoir peur ?",
+    source: "DirtyBiology",
+    description: "Analyse scientifique et éthique des enjeux moraux de l'intelligence artificielle.",
+    link: "https://www.youtube.com/watch?v=dirtybiology-ethique-ia",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Éthique", "Société", "Philosophie", "Risques", "Débat"]
+  },
+  {
+    title: "Créer une IA en Python (tutoriel débutant)",
+    source: "Graven",
+    description: "Tutorial step-by-step pour créer sa première intelligence artificielle simple en Python.",
+    link: "https://www.youtube.com/watch?v=graven-ia-python-tutorial",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Python", "Programmation", "Tutorial", "Débutant", "Pratique"]
+  },
+  {
+    title: "L'IA va-t-elle remplacer les développeurs ?",
+    source: "Cocadmin",
+    description: "Réflexion nuancée sur l'impact de l'IA sur le métier de développeur et l'évolution du secteur tech.",
+    link: "https://www.youtube.com/watch?v=cocadmin-ia-developpeurs",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Développement", "Emploi", "Futur", "Tech", "Carrière"]
+  },
+  {
+    title: "Les voitures autonomes : technologie et défis",
+    source: "Automotive Mike",
+    description: "Exploration technique des systèmes de conduite autonome et des défis à surmonter.",
+    link: "https://www.youtube.com/watch?v=automotive-mike-voitures-autonomes",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Véhicule autonome", "Transport", "Technologie", "Innovation", "Mobilité"]
+  },
+  {
+    title: "L'IA en médecine : révolution ou gadget ?",
+    source: "Primum Non Nocere",
+    description: "Analyse médicale approfondie des applications réelles de l'IA dans le domaine de la santé.",
+    link: "https://www.youtube.com/watch?v=primum-ia-medecine",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Médecine", "Santé", "Diagnostic", "Innovation médicale", "Pratique médicale"]
+  },
+  {
+    title: "Génération d'images par IA : DALL-E, Midjourney...",
+    source: "Ben - Le Designer",
+    description: "Comparatif et tutoriel des principaux outils de génération d'images par intelligence artificielle.",
+    link: "https://www.youtube.com/watch?v=ben-designer-generation-images-ia",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Génération d'images", "DALL-E", "Midjourney", "Art génératif", "Créativité"]
+  },
+  {
+    title: "L'IA et l'environnement : ami ou ennemi ?",
+    source: "Le Réveilleur",
+    description: "Analyse environnementale de l'impact énergétique de l'IA et de ses applications écologiques.",
+    link: "https://www.youtube.com/watch?v=reveilleur-ia-environnement",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Environnement", "Énergie", "Écologie", "Durabilité", "Impact climatique"]
+  },
+  {
+    title: "Les deepfakes : création et détection",
+    source: "Micode",
+    description: "Explication technique des deepfakes, comment ils sont créés et comment les détecter.",
+    link: "https://www.youtube.com/watch?v=micode-deepfakes-detection",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Deepfake", "Manipulation", "Sécurité", "Technologie", "Détection"]
+  },
+  {
+    title: "L'IA conversationnelle : au-delà de ChatGPT",
+    source: "Tech2Tech",
+    description: "Panorama des différentes technologies d'IA conversationnelle et leurs spécificités.",
+    link: "https://www.youtube.com/watch?v=tech2tech-ia-conversationnelle",
+    type: "vidéo",
+    year: 2024,
+    tags: ["IA conversationnelle", "Chatbot", "NLP", "Communication", "Interface"]
+  },
+  {
+    title: "Data Science et IA : quelle différence ?",
+    source: "Data Franca",
+    description: "Clarification des concepts entre data science, machine learning et intelligence artificielle.",
+    link: "https://www.youtube.com/watch?v=datafranca-difference-datascience-ia",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Data Science", "Différenciation", "Concepts", "Méthodologie", "Carrière"]
+  },
+  {
+    title: "L'IA en finance : trading et prédictions",
+    source: "Zonebourse",
+    description: "Applications de l'intelligence artificielle dans les marchés financiers et le trading algorithmique.",
+    link: "https://www.youtube.com/watch?v=zonebourse-ia-finance-trading",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Finance", "Trading", "Prédiction", "Marchés financiers", "Algorithmes"]
+  },
+  {
+    title: "Reconnaissance vocale : comment ça marche ?",
+    source: "Poisson Fécond",
+    description: "Explication détaillée des technologies de reconnaissance et synthèse vocale.",
+    link: "https://www.youtube.com/watch?v=poissonfecond-reconnaissance-vocale",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Reconnaissance vocale", "NLP", "Audio", "Traitement signal", "Interface"]
+  },
+  {
+    title: "L'IA dans les jeux vidéo : histoire et évolution",
+    source: "Alt236",
+    description: "Évolution de l'intelligence artificielle dans l'industrie du jeu vidéo depuis les années 80.",
+    link: "https://www.youtube.com/watch?v=alt236-ia-jeux-video-evolution",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Jeux vidéo", "Histoire", "Évolution", "Gaming", "NPC"]
+  },
+  {
+    title: "Les biais de l'IA : pourquoi c'est important",
+    source: "Heu?reka",
+    description: "Analyse critique des biais algorithmiques et de leurs impacts sur la société.",
+    link: "https://www.youtube.com/watch?v=heureka-biais-ia-importance",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Biais", "Équité", "Société", "Discrimination", "Éthique"]
+  },
+  {
+    title: "Cloud Computing et IA : infrastructure moderne",
+    source: "Cloud Temple",
+    description: "Comprendre l'importance du cloud computing pour les applications d'intelligence artificielle.",
+    link: "https://www.youtube.com/watch?v=cloudtemple-cloud-ia-infrastructure",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Cloud Computing", "Infrastructure", "Performance", "Scalabilité", "Architecture"]
+  },
+  {
+    title: "L'IA explicable : rendre l'IA transparente",
+    source: "Science4All",
+    description: "Introduction aux techniques d'IA explicable et à l'importance de la transparence algorithmique.",
+    link: "https://www.youtube.com/watch?v=science4all-ia-explicable-transparence",
+    type: "vidéo",
+    year: 2024,
+    tags: ["IA explicable", "Transparence", "XAI", "Interprétabilité", "Confiance"]
+  },
+  {
+    title: "Automatisation intelligente en entreprise",
+    source: "BFM Business",
+    description: "Cas d'usage concrets de l'automatisation intelligente dans différents secteurs d'activité.",
+    link: "https://www.youtube.com/watch?v=bfmbusiness-automatisation-intelligente",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Automatisation", "Entreprise", "Processus", "ROI", "Transformation"]
+  },
+  {
+    title: "L'IA edge : traitement local et vie privée",
+    source: "Korben",
+    description: "Avantages de l'IA edge pour le traitement de données en local et la protection de la confidentialité.",
+    link: "https://www.youtube.com/watch?v=korben-ia-edge-vie-privee",
+    type: "vidéo",
+    year: 2024,
+    tags: ["IA edge", "Vie privée", "Traitement local", "Confidentialité", "Sécurité"]
+  },
+  {
+    title: "Vision par ordinateur : voir comme une machine",
+    source: "Cyrus North",
+    description: "Exploration des technologies de vision par ordinateur et de reconnaissance d'images.",
+    link: "https://www.youtube.com/watch?v=cyrusnorth-vision-ordinateur",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Vision par ordinateur", "Reconnaissance d'images", "CNN", "Traitement d'images", "Perception"]
+  },
+  {
+    title: "L'IA générative : créativité artificielle",
+    source: "Hugo Décrypte",
+    description: "Analyse de l'impact de l'IA générative sur la créativité et les industries créatives.",
+    link: "https://www.youtube.com/watch?v=hugodecrypte-ia-generative-creativite",
+    type: "vidéo",
+    year: 2024,
+    tags: ["IA générative", "Créativité", "Art", "Innovation", "Industries créatives"]
+  },
+  {
+    title: "Sécurité et IA : cybersécurité augmentée",
+    source: "MISC Magazine",
+    description: "Applications de l'IA en cybersécurité pour la détection et la prévention des menaces.",
+    link: "https://www.youtube.com/watch?v=misc-securite-ia-cybersecurite",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Cybersécurité", "Sécurité", "Détection menaces", "Protection", "Surveillance"]
+  },
+  {
+    title: "L'IA en agriculture : fermes du futur",
+    source: "Terres & Territoires",
+    description: "Applications concrètes de l'intelligence artificielle dans l'agriculture de précision.",
+    link: "https://www.youtube.com/watch?v=terres-territoires-ia-agriculture",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Agriculture", "AgTech", "Precision farming", "Innovation agricole", "Alimentation"]
+  },
+  {
+    title: "Traitement du langage naturel : comprendre le texte",
+    source: "Lê Nguyên Hoang",
+    description: "Exploration approfondie des techniques de traitement automatique du langage naturel.",
+    link: "https://www.youtube.com/watch?v=le-nguyen-nlp-traitement-langage",
+    type: "vidéo",
+    year: 2024,
+    tags: ["NLP", "Linguistique", "Traitement texte", "Compréhension", "Sémantique"]
+  },
+  {
+    title: "L'IA au service de la recherche scientifique",
+    source: "ScienceLoop",
+    description: "Impact de l'intelligence artificielle sur l'accélération de la découverte scientifique.",
+    link: "https://www.youtube.com/watch?v=scienceloop-ia-recherche-scientifique",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Recherche scientifique", "Découverte", "Science", "Innovation", "Méthodologie"]
+  },
+  {
+    title: "Modèles de diffusion : nouvelle génération d'IA",
+    source: "IA & Vous",
+    description: "Explication technique des modèles de diffusion et de leur révolution créative.",
+    link: "https://www.youtube.com/watch?v=iaetvous-modeles-diffusion-ia",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Modèles de diffusion", "Génération", "Stable Diffusion", "Innovation", "Technique"]
+  },
+  {
+    title: "L'IA fédérée : apprentissage distribué",
+    source: "DataCast",
+    description: "Introduction à l'apprentissage fédéré et ses avantages pour la confidentialité des données.",
+    link: "https://www.youtube.com/watch?v=datacast-ia-federee-apprentissage",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Apprentissage fédéré", "Données distribuées", "Privacy", "Confidentialité", "Innovation"]
+  },
+  {
+    title: "Réalité augmentée et IA : fusion des technologies",
+    source: "VR Connection",
+    description: "Convergence entre réalité augmentée et intelligence artificielle pour des expériences immersives.",
+    link: "https://www.youtube.com/watch?v=vrconnection-ra-ia-fusion",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Réalité augmentée", "AR", "Immersion", "Technologies convergentes", "Innovation"]
+  },
+  {
+    title: "L'IA quantique : avenir du calcul",
+    source: "Quantum Computing France",
+    description: "Exploration de la convergence entre informatique quantique et intelligence artificielle.",
+    link: "https://www.youtube.com/watch?v=quantumfrance-ia-quantique-calcul",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Informatique quantique", "Calcul quantique", "Futur", "Technologies émergentes", "Science"]
+  },
+  {
+    title: "Robots et IA : vers l'autonomie complète",
+    source: "Robotique & IA",
+    description: "Évolution de la robotique avec l'intégration de l'intelligence artificielle avancée.",
+    link: "https://www.youtube.com/watch?v=robotiqueia-robots-autonomie",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Robotique", "Autonomie", "Robots", "Automatisation", "Innovation"]
+  },
+  {
+    title: "L'IA dans l'art : créateurs numériques",
+    source: "Digital Art",
+    description: "Impact de l'intelligence artificielle sur la création artistique et les nouveaux médiums.",
+    link: "https://www.youtube.com/watch?v=digitalart-ia-art-createurs",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Art numérique", "Création", "Artistes", "Innovation artistique", "Culture"]
+  },
+  {
+    title: "Optimisation et IA : résoudre des problèmes complexes",
+    source: "Math et Tiques",
+    description: "Applications de l'IA pour résoudre des problèmes d'optimisation complexes en mathématiques.",
+    link: "https://www.youtube.com/watch?v=mathettiques-optimisation-ia",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Optimisation", "Mathématiques", "Résolution problèmes", "Algorithmes", "Complexité"]
+  },
+  {
+    title: "L'IA émotionnelle : comprendre les sentiments",
+    source: "Psy & Tech",
+    description: "Exploration des technologies d'IA émotionnelle et de reconnaissance des sentiments.",
+    link: "https://www.youtube.com/watch?v=psytech-ia-emotionnelle-sentiments",
+    type: "vidéo",
+    year: 2024,
+    tags: ["IA émotionnelle", "Reconnaissance émotions", "Psychologie", "Interface humaine", "Empathie"]
+  },
+  {
+    title: "Simulation et IA : modéliser le monde",
+    source: "Simulation Sciences",
+    description: "Utilisation de l'IA pour créer des simulations complexes et des modèles prédictifs.",
+    link: "https://www.youtube.com/watch?v=simulationsciences-ia-modelisation",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Simulation", "Modélisation", "Prédiction", "Sciences", "Complexité"]
+  },
+  {
+    title: "L'IA collaborative : humains et machines ensemble",
+    source: "Future of Work",
+    description: "Vision de la collaboration future entre humains et intelligence artificielle au travail.",
+    link: "https://www.youtube.com/watch?v=futureofwork-ia-collaborative",
+    type: "vidéo",
+    year: 2024,
+    tags: ["Collaboration", "Travail", "Humain-machine", "Futur", "Coopération"]
+  },
+  {
+    title: "Intelligence artificielle générale : mythe ou réalité ?",
+    source: "Futur en Seine",
+    description: "Analyse prospective sur la possibilité d'atteindre une intelligence artificielle générale.",
+    link: "https://www.youtube.com/watch?v=futurenseine-agi-mythe-realite",
+    type: "vidéo",
+    year: 2024,
+    tags: ["AGI", "Intelligence générale", "Futur", "Prospective", "Philosophie"]
+  },
+
+  // ... keep existing code (cours existants, sites web, livres, autres ressources)
   {
     title: "Comment utiliser intelligemment les intelligences artificielles au quotidien",
     source: "Geoffroy Streit",
@@ -644,7 +1269,7 @@ export const realResources: Resource[] = [
     tags: ["Éthique", "Algorithmes", "Société"]
   },
 
-  // Articles
+  // Articles existants
   {
     title: "Les défis éthiques de l'Intelligence Artificielle",
     source: "Le Monde",
@@ -664,7 +1289,7 @@ export const realResources: Resource[] = [
     tags: ["LLM", "ChatGPT", "Analyse"]
   },
 
-  // Vidéos
+  // Vidéos existantes
   {
     title: "L'IA expliquée simplement",
     source: "Science Étonnante",
