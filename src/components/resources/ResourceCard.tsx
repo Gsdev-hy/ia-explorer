@@ -23,6 +23,7 @@ interface ResourceCardProps {
   type: string;
   year?: number;
   tags?: string[];
+  videoId?: string;
 }
 
 export const ResourceCard: React.FC<ResourceCardProps> = ({
@@ -32,7 +33,8 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({
   link,
   type,
   year,
-  tags
+  tags,
+  videoId
 }) => {
   const getIcon = () => {
     switch (type) {
@@ -44,10 +46,30 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({
       default: return <Link2 className="h-5 w-5" />;
     }
   };
+
+  // Fonction pour générer l'URL de la miniature YouTube
+  const getYouTubeThumbnail = (videoId: string) => {
+    return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+  };
   
   return (
     <Card className="overflow-hidden hover:shadow-md transition-shadow h-full">
       <CardContent className="p-6 flex flex-col h-full">
+        {/* Miniature pour les vidéos YouTube */}
+        {type === 'vidéo' && videoId && (
+          <div className="mb-4 -mx-6 -mt-6">
+            <img 
+              src={getYouTubeThumbnail(videoId)}
+              alt={`Miniature de ${title}`}
+              className="w-full h-48 object-cover"
+              onError={(e) => {
+                // Fallback si l'image ne charge pas
+                e.currentTarget.style.display = 'none';
+              }}
+            />
+          </div>
+        )}
+        
         <div className="flex justify-between items-start mb-3">
           <Badge variant="outline" className="mb-2">{type}</Badge>
           {year && <Badge variant="secondary">{year}</Badge>}
