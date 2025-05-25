@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import SectionHeading from "@/components/SectionHeading";
-import { ChevronRight, BookOpen, Lightbulb, Sparkles, BarChart3, Brain } from "lucide-react";
+import { ChevronRight, BookOpen, Lightbulb, Sparkles, BarChart3, Brain, Code, Zap, TrendingUp, Users, Shield, Rocket, Globe, Star } from "lucide-react";
 
 /**
  * Page d'accueil du site AI Avenir
@@ -14,66 +14,145 @@ const Index = () => {
       icon: <Brain className="w-12 h-12 text-primary" />,
       title: "Niveaux d'IA",
       description: "Découvrez les 7 niveaux d'intelligence artificielle, de l'IA réactive aux systèmes conscients.",
-      link: "/niveaux-ia"
+      link: "/niveaux-ia",
+      gradient: "from-blue-500 to-purple-600"
     },
     {
       icon: <Lightbulb className="w-12 h-12 text-primary" />,
       title: "Types d'IA",
       description: "Explorez les différentes technologies d'IA comme les LLM, RAG, CNN, NLP et plus encore.",
-      link: "/types-ia"
+      link: "/types-ia",
+      gradient: "from-amber-500 to-orange-600"
     },
     {
       icon: <BarChart3 className="w-12 h-12 text-primary" />,
       title: "Machine Learning",
       description: "Comprenez les principes fondamentaux du machine learning et ses différentes approches.",
-      link: "/machine-learning"
+      link: "/machine-learning",
+      gradient: "from-green-500 to-teal-600"
     },
     {
       icon: <Sparkles className="w-12 h-12 text-primary" />,
       title: "Cas d'usage",
       description: "Découvrez comment l'IA révolutionne différents domaines comme la génération de code, la musique, et plus.",
-      link: "/cas-usage"
+      link: "/cas-usage",
+      gradient: "from-pink-500 to-rose-600"
     },
     {
       icon: <BookOpen className="w-12 h-12 text-primary" />,
       title: "Éthique",
       description: "Explorez les questions éthiques liées au développement et à l'utilisation de l'IA.",
-      link: "/ethique"
+      link: "/ethique",
+      gradient: "from-indigo-500 to-blue-600"
+    },
+    {
+      icon: <Code className="w-12 h-12 text-primary" />,
+      title: "Coder avec l'IA",
+      description: "Apprenez à utiliser l'IA pour améliorer votre productivité en développement.",
+      link: "/coder-avec-ia",
+      gradient: "from-cyan-500 to-blue-600"
+    }
+  ];
+
+  const stats = [
+    { number: "50+", label: "Concepts expliqués", icon: <Brain className="w-6 h-6" /> },
+    { number: "100+", label: "Ressources validées", icon: <BookOpen className="w-6 h-6" /> },
+    { number: "25+", label: "Cas d'usage concrets", icon: <Sparkles className="w-6 h-6" /> },
+    { number: "10+", label: "Outils interactifs", icon: <Zap className="w-6 h-6" /> }
+  ];
+
+  const benefits = [
+    {
+      icon: <TrendingUp className="w-8 h-8 text-green-600" />,
+      title: "Restez à la pointe",
+      description: "Suivez les dernières évolutions de l'IA avec nos contenus mis à jour régulièrement"
+    },
+    {
+      icon: <Users className="w-8 h-8 text-blue-600" />,
+      title: "Communauté active",
+      description: "Rejoignez une communauté passionnée d'apprenants et d'experts en IA"
+    },
+    {
+      icon: <Shield className="w-8 h-8 text-purple-600" />,
+      title: "Approche éthique",
+      description: "Comprenez les enjeux éthiques pour un développement responsable de l'IA"
+    },
+    {
+      icon: <Rocket className="w-8 h-8 text-orange-600" />,
+      title: "Carrière boostée",
+      description: "Développez les compétences IA les plus recherchées sur le marché"
     }
   ];
 
   return (
     <div className="animate-fade-in">
-      {/* Hero section */}
-      <section className="relative py-20 md:py-28 bg-gradient-to-br from-background to-secondary/20">
-        <div className="container px-4 mx-auto max-w-6xl">
+      {/* Hero section with enhanced visuals */}
+      <section className="relative py-20 md:py-32 bg-gradient-to-br from-background via-primary/5 to-secondary/20 overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        
+        <div className="container px-4 mx-auto max-w-6xl relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold !leading-tight animate-slide-up">
-                Comprendre l'IA <span className="text-primary">simplement</span>
+            <div className="space-y-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-sm font-medium text-primary animate-fade-in">
+                <Star className="w-4 h-4" />
+                Plateforme #1 pour apprendre l'IA
+              </div>
+              
+              <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold !leading-tight animate-slide-up">
+                Maîtrisez l'IA 
+                <span className="block bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  du concept à la pratique
+                </span>
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground animate-slide-up" style={{ animationDelay: '100ms' }}>
-                Explorez le monde fascinant de l'intelligence artificielle à travers nos ressources pédagogiques accessibles à tous.
+              
+              <p className="text-lg md:text-xl text-muted-foreground animate-slide-up leading-relaxed" style={{ animationDelay: '100ms' }}>
+                Explorez le monde fascinant de l'intelligence artificielle à travers nos ressources pédagogiques 
+                interactives, nos outils pratiques et notre communauté d'experts.
               </p>
-              <div className="flex flex-wrap gap-4 pt-2 animate-slide-up" style={{ animationDelay: '200ms' }}>
-                <Button asChild size="lg">
-                  <Link to="/niveaux-ia">
-                    Explorer les niveaux d'IA
-                    <ChevronRight className="ml-1 h-4 w-4" />
+              
+              <div className="flex flex-wrap gap-4 pt-4 animate-slide-up" style={{ animationDelay: '200ms' }}>
+                <Button asChild size="lg" className="group relative overflow-hidden">
+                  <Link to="/niveaux-ia" className="flex items-center gap-2">
+                    <span className="relative z-10">Commencer l'exploration</span>
+                    <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   </Link>
                 </Button>
-                <Button variant="outline" size="lg" asChild>
-                  <Link to="/ressources">
-                    Consulter nos ressources
+                <Button variant="outline" size="lg" asChild className="group hover:shadow-lg transition-all duration-300 hover:scale-105">
+                  <Link to="/ressources" className="flex items-center gap-2">
+                    <BookOpen className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+                    Parcourir les ressources
                   </Link>
                 </Button>
               </div>
+
+              {/* Stats section */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 animate-fade-in" style={{ animationDelay: '300ms' }}>
+                {stats.map((stat, index) => (
+                  <div key={index} className="text-center group cursor-pointer">
+                    <div className="flex items-center justify-center mb-2 text-primary group-hover:scale-110 transition-transform">
+                      {stat.icon}
+                    </div>
+                    <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+                      {stat.number}
+                    </div>
+                    <div className="text-xs md:text-sm text-muted-foreground">
+                      {stat.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="relative h-64 md:h-auto rounded-lg bg-gradient-to-tr from-primary/10 to-primary/30 p-1 animate-fade-in">
-              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1677442135072-d406c3ce761a')] bg-cover bg-center rounded-lg opacity-70 mix-blend-overlay"></div>
-              <div className="relative h-full w-full rounded-lg border border-primary/20 backdrop-blur-sm flex items-center justify-center p-6">
+            
+            <div className="relative h-64 md:h-96 rounded-2xl bg-gradient-to-tr from-primary/20 to-purple-600/20 p-1 animate-fade-in group">
+              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1677442135072-d406c3ce761a')] bg-cover bg-center rounded-2xl opacity-70 mix-blend-overlay group-hover:opacity-90 transition-opacity"></div>
+              <div className="relative h-full w-full rounded-xl border border-primary/20 backdrop-blur-sm flex items-center justify-center p-6 group-hover:border-primary/40 transition-colors">
                 <div className="text-center">
-                  <h3 className="text-xl font-semibold mb-2">L'avenir est IA</h3>
+                  <Globe className="w-12 h-12 mx-auto mb-4 text-primary animate-spin-slow" />
+                  <h3 className="text-xl md:text-2xl font-semibold mb-2">L'avenir est IA</h3>
                   <p className="text-muted-foreground">Préparez-vous aux technologies qui transforment notre monde</p>
                 </div>
               </div>
@@ -82,7 +161,38 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Key topics section */}
+      {/* Benefits section */}
+      <section className="py-20 bg-background/50 backdrop-blur-sm">
+        <div className="container px-4 mx-auto max-w-6xl">
+          <SectionHeading 
+            pretitle="Pourquoi nous choisir"
+            title="Votre réussite, notre mission"
+            description="Découvrez les avantages uniques de notre plateforme d'apprentissage de l'IA"
+            center={true}
+          />
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
+            {benefits.map((benefit, index) => (
+              <div 
+                key={index} 
+                className="relative group bg-card/50 backdrop-blur-sm rounded-xl border p-6 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer animate-fade-in"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="relative z-10">
+                  <div className="mb-4 transform group-hover:scale-110 transition-transform">
+                    {benefit.icon}
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">{benefit.title}</h3>
+                  <p className="text-muted-foreground text-sm">{benefit.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Enhanced key topics section */}
       <section className="py-20 bg-background">
         <div className="container px-4 mx-auto max-w-6xl">
           <SectionHeading 
@@ -96,38 +206,76 @@ const Index = () => {
             {keyFeatures.map((feature, index) => (
               <div 
                 key={index} 
-                className="relative group bg-card rounded-lg border p-6 hover:shadow-md transition-all animate-fade-in"
+                className="relative group bg-card rounded-xl border p-6 hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 cursor-pointer animate-fade-in overflow-hidden"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="mb-4">
-                  {feature.icon}
+                {/* Gradient background */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+                
+                {/* Animated border */}
+                <div className="absolute inset-0 border-2 border-transparent group-hover:border-primary/20 rounded-xl transition-colors duration-500"></div>
+                
+                <div className="relative z-10">
+                  <div className="mb-4 transform group-hover:scale-125 group-hover:rotate-6 transition-all duration-500">
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors duration-300">{feature.title}</h3>
+                  <p className="text-muted-foreground mb-4">{feature.description}</p>
+                  <Button variant="link" className="p-0 group-hover:gap-2 transition-all duration-300" asChild>
+                    <Link to={feature.link} className="flex items-center gap-1">
+                      En savoir plus 
+                      <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </Button>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-muted-foreground mb-4">{feature.description}</p>
-                <Button variant="link" className="p-0" asChild>
-                  <Link to={feature.link} className="flex items-center gap-1">
-                    En savoir plus <ChevronRight className="h-4 w-4" />
-                  </Link>
-                </Button>
+                
+                {/* Floating particles effect */}
+                <div className="absolute top-4 right-4 w-2 h-2 bg-primary/30 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping"></div>
+                <div className="absolute bottom-4 left-4 w-1 h-1 bg-secondary/30 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping" style={{ animationDelay: '0.5s' }}></div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA section */}
-      <section className="py-16 bg-primary/5 border-y">
-        <div className="container px-4 mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-fade-in">Prêt à explorer le monde de l'IA ?</h2>
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '100ms' }}>
-            Commencez votre voyage à travers les différents niveaux et types d'intelligence artificielle, et découvrez comment cette technologie révolutionne notre monde.
+      {/* Enhanced CTA section */}
+      <section className="py-20 bg-gradient-to-br from-primary/10 via-purple-500/5 to-pink-500/10 border-y relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 bg-dot-pattern opacity-10"></div>
+        <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+        
+        <div className="container px-4 mx-auto max-w-4xl text-center relative z-10">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 rounded-full text-sm font-medium text-primary mb-6 animate-fade-in">
+            <Rocket className="w-4 h-4" />
+            Rejoignez plus de 10,000 apprenants
+          </div>
+          
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 animate-fade-in bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            Prêt à maîtriser l'IA ?
+          </h2>
+          
+          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in leading-relaxed" style={{ animationDelay: '100ms' }}>
+            Commencez votre voyage à travers les différents niveaux et types d'intelligence artificielle. 
+            Découvrez comment cette technologie révolutionne notre monde et comment vous pouvez en faire partie.
           </p>
-          <Button size="lg" asChild className="animate-fade-in" style={{ animationDelay: '200ms' }}>
-            <Link to="/niveaux-ia">
-              Commencer l'exploration
-              <ChevronRight className="ml-1 h-4 w-4" />
-            </Link>
-          </Button>
+          
+          <div className="flex flex-wrap gap-4 justify-center animate-fade-in" style={{ animationDelay: '200ms' }}>
+            <Button size="lg" asChild className="group relative overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <Link to="/niveaux-ia" className="flex items-center gap-2">
+                <span className="relative z-10">Commencer maintenant</span>
+                <ChevronRight className="w-4 h-4 group-hover:translate-x-2 transition-transform relative z-10" />
+                <div className="absolute inset-0 bg-gradient-to-r from-primary to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              </Link>
+            </Button>
+            
+            <Button variant="outline" size="lg" asChild className="group hover:shadow-lg transition-all duration-300 hover:scale-105 hover:border-primary/50">
+              <Link to="/cas-usage" className="flex items-center gap-2">
+                <Sparkles className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
+                Voir les applications
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
     </div>
