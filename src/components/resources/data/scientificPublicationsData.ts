@@ -57,5 +57,61 @@ export const scientificPublications: ScientificPublication[] = [
     year: 2022,
     description: "Méthodes RLHF utilisées pour aligner les modèles comme ChatGPT",
     link: "https://arxiv.org/abs/2203.02155"
+  },
+  {
+    title: "Constitutional AI: Harmlessness from AI Feedback",
+    authors: ["Yuntao Bai", "Andy Jones", "Kamal Ndousse", "Amanda Askell"],
+    journal: "arXiv preprint",
+    year: 2022,
+    description: "Méthode Constitutional AI pour entraîner des assistants IA plus sûrs",
+    link: "https://arxiv.org/abs/2212.08073"
+  },
+  {
+    title: "PaLM: Scaling Language Modeling with Pathways",
+    authors: ["Aakanksha Chowdhery", "Sharan Narang", "Jacob Devlin", "Maarten Bosma"],
+    journal: "Journal of Machine Learning Research",
+    year: 2022,
+    description: "Présentation du modèle PaLM de 540B paramètres et ses capacités émergentes",
+    link: "https://arxiv.org/abs/2204.02311"
+  },
+  {
+    title: "Flamingo: a Visual Language Model for Few-Shot Learning",
+    authors: ["Jean-Baptiste Alayrac", "Jeff Donahue", "Pauline Luc", "Antoine Miech"],
+    journal: "Advances in Neural Information Processing Systems",
+    year: 2022,
+    description: "Modèle multimodal pour l'apprentissage few-shot vision-langage",
+    link: "https://arxiv.org/abs/2204.14198"
+  },
+  {
+    title: "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+    authors: ["Jason Wei", "Xuezhi Wang", "Dale Schuurmans", "Maarten Bosma"],
+    journal: "Advances in Neural Information Processing Systems",
+    year: 2022,
+    description: "Technique de prompting chain-of-thought pour améliorer le raisonnement des LLMs",
+    link: "https://arxiv.org/abs/2201.11903"
+  },
+  {
+    title: "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+    authors: ["Patrick Lewis", "Ethan Perez", "Aleksandra Piktus", "Fabio Petroni"],
+    journal: "Advances in Neural Information Processing Systems",
+    year: 2020,
+    description: "Introduction du RAG pour combiner génération et récupération d'informations",
+    link: "https://arxiv.org/abs/2005.11401"
+  },
+  {
+    title: "Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks",
+    authors: ["Chelsea Finn", "Pieter Abbeel", "Sergey Levine"],
+    journal: "International Conference on Machine Learning",
+    year: 2017,
+    description: "MAML : apprentissage méta pour l'adaptation rapide des réseaux de neurones",
+    link: "https://arxiv.org/abs/1703.03400"
+  },
+  {
+    title: "Diffusion Models Beat GANs on Image Synthesis",
+    authors: ["Prafulla Dhariwal", "Alexander Quinn Nichol"],
+    journal: "Advances in Neural Information Processing Systems",
+    year: 2021,
+    description: "Démonstration de la supériorité des modèles de diffusion sur les GANs",
+    link: "https://arxiv.org/abs/2105.05233"
   }
 ];
