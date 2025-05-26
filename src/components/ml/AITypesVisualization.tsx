@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Brain, MessageSquare, EyeIcon, Bot, BarChart3, HelpCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -38,6 +39,26 @@ const AITypesVisualization: React.FC = () => {
       title: "IA Explicable (XAI)",
       content: "Des techniques pour comprendre et expliquer pourquoi une IA a pris une décision particulière.",
       example: "💡 Comme avoir un détective qui peut expliquer le raisonnement derrière chaque déduction de Sherlock Holmes."
+    },
+    "transformers": {
+      title: "Architecture Transformers",
+      content: "Révolution en IA permettant de traiter tout le texte en parallèle grâce au mécanisme d'attention.",
+      example: "💡 Comme lire une phrase entière d'un coup au lieu de mot par mot, en se concentrant sur les parties importantes."
+    },
+    "attention": {
+      title: "Mécanisme d'attention",
+      content: "Permet aux modèles de se concentrer sur les parties les plus importantes de l'information d'entrée.",
+      example: "💡 Comme surligner automatiquement les mots-clés dans un texte en comprenant leur importance relative."
+    },
+    "multimodal": {
+      title: "IA Multimodale",
+      content: "Systèmes capables de traiter simultanément différents types de données (texte, image, audio).",
+      example: "💡 Comme un humain qui peut comprendre une blague en regardant une image et en lisant le texte qui l'accompagne."
+    },
+    "embeddings": {
+      title: "Embeddings (Plongements)",
+      content: "Représentations vectorielles qui capturent la signification et les relations entre les mots ou concepts.",
+      example: "💡 Comme une carte où les mots similaires (chat/félin) sont placés près les uns des autres."
     }
   };
 
@@ -70,10 +91,11 @@ const AITypesVisualization: React.FC = () => {
 
   // Animation variants for enhanced interactivity
   const cardVariants = {
-    initial: { scale: 1, y: 0 },
+    initial: { scale: 1, y: 0, rotateY: 0 },
     hover: { 
-      scale: 1.02, 
-      y: -5,
+      scale: 1.03, 
+      y: -8,
+      rotateY: 2,
       transition: {
         type: "spring",
         stiffness: 400,
@@ -85,10 +107,10 @@ const AITypesVisualization: React.FC = () => {
   const iconVariants = {
     initial: { rotate: 0, scale: 1 },
     hover: { 
-      rotate: [0, -5, 5, 0], 
-      scale: 1.1,
+      rotate: [0, -8, 8, -4, 4, 0], 
+      scale: [1, 1.1, 1.2, 1.1, 1],
       transition: {
-        duration: 0.4,
+        duration: 0.6,
         ease: "easeInOut"
       }
     }
@@ -97,8 +119,8 @@ const AITypesVisualization: React.FC = () => {
   const listItemVariants = {
     initial: { x: 0, backgroundColor: "transparent" },
     hover: { 
-      x: 8,
-      backgroundColor: "rgba(var(--primary), 0.05)",
+      x: 12,
+      backgroundColor: "rgba(var(--primary), 0.08)",
       transition: {
         type: "spring",
         stiffness: 300,
@@ -106,17 +128,31 @@ const AITypesVisualization: React.FC = () => {
       }
     }
   };
+
+  const pulseVariants = {
+    initial: { scale: 1 },
+    hover: {
+      scale: [1, 1.05, 1],
+      transition: {
+        duration: 1,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
   
   return (
     <div className="w-full mt-8">
       <motion.div 
-        className="relative w-full h-[450px] mb-12 border rounded-xl bg-gradient-to-b from-secondary/20 to-secondary/5 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-500"
-        whileHover={{ scale: 1.005 }}
+        className="relative w-full h-[450px] mb-12 border rounded-xl bg-gradient-to-b from-secondary/20 to-secondary/5 overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700"
+        whileHover={{ scale: 1.008 }}
+        variants={pulseVariants}
+        initial="initial"
       >
         <AINodeGraph onNodeSelect={setSelectedType} />
         <motion.div 
-          className="absolute bottom-3 right-3 text-xs text-muted-foreground bg-background/70 px-2 py-1 rounded-md hover:bg-background/90 transition-colors"
-          whileHover={{ scale: 1.05 }}
+          className="absolute bottom-3 right-3 text-xs text-muted-foreground bg-background/70 px-3 py-2 rounded-lg hover:bg-background/90 transition-all duration-300 border border-primary/20"
+          whileHover={{ scale: 1.05, y: -2 }}
         >
           Cliquez sur un nœud pour voir les détails
         </motion.div>
@@ -126,7 +162,7 @@ const AITypesVisualization: React.FC = () => {
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
         <motion.div variants={cardVariants} whileHover="hover" initial="initial">
-          <Card className="h-full hover:shadow-xl transition-all duration-300 border-primary/10 hover:border-primary/20">
+          <Card className="h-full hover:shadow-2xl transition-all duration-500 border-primary/10 hover:border-primary/30 bg-gradient-to-br from-background to-secondary/5">
             <CardContent className="p-6">
               <motion.h3 
                 className="heading-sm mb-4 hover:text-primary transition-colors duration-300"
@@ -136,7 +172,7 @@ const AITypesVisualization: React.FC = () => {
               </motion.h3>
               <ul className="space-y-4">
                 <motion.li 
-                  className="flex items-start gap-3 p-2 rounded-lg hover:bg-secondary/30 transition-all duration-200"
+                  className="flex items-start gap-3 p-3 rounded-lg hover:bg-secondary/40 transition-all duration-300 border border-transparent hover:border-primary/20"
                   variants={listItemVariants}
                   whileHover="hover"
                 >
@@ -152,11 +188,16 @@ const AITypesVisualization: React.FC = () => {
                         Modèles de Langage (LLM)
                       </TooltipTerm>
                     </p>
-                    <p className="text-sm text-muted-foreground">Spécialisés dans le traitement et la génération de texte</p>
+                    <p className="text-sm text-muted-foreground">
+                      Basés sur l'architecture{' '}
+                      <TooltipTerm term="transformers">Transformers</TooltipTerm>
+                      {' '}avec mécanisme d'{' '}
+                      <TooltipTerm term="attention">attention</TooltipTerm>
+                    </p>
                   </div>
                 </motion.li>
                 <motion.li 
-                  className="flex items-start gap-3 p-2 rounded-lg hover:bg-secondary/30 transition-all duration-200"
+                  className="flex items-start gap-3 p-3 rounded-lg hover:bg-secondary/40 transition-all duration-300 border border-transparent hover:border-primary/20"
                   variants={listItemVariants}
                   whileHover="hover"
                 >
@@ -176,7 +217,7 @@ const AITypesVisualization: React.FC = () => {
                   </div>
                 </motion.li>
                 <motion.li 
-                  className="flex items-start gap-3 p-2 rounded-lg hover:bg-secondary/30 transition-all duration-200"
+                  className="flex items-start gap-3 p-3 rounded-lg hover:bg-secondary/40 transition-all duration-300 border border-transparent hover:border-primary/20"
                   variants={listItemVariants}
                   whileHover="hover"
                 >
@@ -196,7 +237,7 @@ const AITypesVisualization: React.FC = () => {
                   </div>
                 </motion.li>
                 <motion.li 
-                  className="flex items-start gap-3 p-2 rounded-lg hover:bg-secondary/30 transition-all duration-200"
+                  className="flex items-start gap-3 p-3 rounded-lg hover:bg-secondary/40 transition-all duration-300 border border-transparent hover:border-primary/20"
                   variants={listItemVariants}
                   whileHover="hover"
                 >
@@ -226,7 +267,7 @@ const AITypesVisualization: React.FC = () => {
           whileHover="hover" 
           initial="initial"
         >
-          <Card className="h-full hover:shadow-xl transition-all duration-300 border-primary/10 hover:border-primary/20">
+          <Card className="h-full hover:shadow-2xl transition-all duration-500 border-primary/10 hover:border-primary/30 bg-gradient-to-br from-background to-secondary/5">
             <CardContent className="p-6">
               <TooltipProvider>
                 <Tooltip>
@@ -270,37 +311,49 @@ const AITypesVisualization: React.FC = () => {
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Systèmes capables de résoudre des problèmes nouveaux dans de multiples domaines, 
+                    <motion.p 
+                      className="text-sm text-muted-foreground mt-1 hover:text-foreground transition-colors"
+                      whileHover={{ x: 4 }}
+                    >
+                      Systèmes{' '}
+                      <TooltipTerm term="multimodal">multimodaux</TooltipTerm>
+                      {' '}capables de résoudre des problèmes nouveaux dans de multiples domaines, 
                       avec des capacités comparables ou supérieures à l'intelligence humaine.
-                    </p>
+                    </motion.p>
                   </motion.div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <motion.div 
-                      className="p-4 bg-secondary/5 rounded-lg border border-primary/5 hover:border-primary/10 hover:bg-secondary/10 transition-all duration-300"
-                      whileHover={{ scale: 1.01, y: -2 }}
+                      className="p-4 bg-secondary/5 rounded-lg border border-primary/5 hover:border-primary/15 hover:bg-secondary/15 transition-all duration-300"
+                      whileHover={{ scale: 1.02, y: -3 }}
                     >
                       <h4 className="font-medium">IA spécialisée par domaine</h4>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        Systèmes experts conçus pour exceller dans des domaines spécifiques 
-                        comme la médecine, la finance ou le droit.
-                      </p>
+                      <motion.p 
+                        className="text-sm text-muted-foreground mt-1 hover:text-foreground transition-colors"
+                        whileHover={{ x: 2 }}
+                      >
+                        Systèmes experts utilisant des{' '}
+                        <TooltipTerm term="embeddings">embeddings</TooltipTerm>
+                        {' '}spécialisés pour exceller dans des domaines comme la médecine, la finance ou le droit.
+                      </motion.p>
                     </motion.div>
                     <motion.div 
-                      className="p-4 bg-secondary/5 rounded-lg border border-primary/5 hover:border-primary/10 hover:bg-secondary/10 transition-all duration-300"
-                      whileHover={{ scale: 1.01, y: -2 }}
+                      className="p-4 bg-secondary/5 rounded-lg border border-primary/5 hover:border-primary/15 hover:bg-secondary/15 transition-all duration-300"
+                      whileHover={{ scale: 1.02, y: -3 }}
                     >
                       <h4 className="font-medium">IA spécialisée par tâche</h4>
-                      <p className="text-sm text-muted-foreground mt-1">
+                      <motion.p 
+                        className="text-sm text-muted-foreground mt-1 hover:text-foreground transition-colors"
+                        whileHover={{ x: 2 }}
+                      >
                         Systèmes conçus pour exceller dans des tâches spécifiques comme la vision par ordinateur, 
                         le traitement du langage ou la planification.
-                      </p>
+                      </motion.p>
                     </motion.div>
                   </div>
                   
                   <motion.div 
-                    className="p-4 bg-secondary/5 rounded-lg border border-primary/5 hover:border-primary/10 hover:bg-secondary/10 transition-all duration-300"
+                    className="p-4 bg-secondary/5 rounded-lg border border-primary/5 hover:border-primary/15 hover:bg-secondary/15 transition-all duration-300"
                     whileHover={{ scale: 1.01, y: -2 }}
                   >
                     <TooltipProvider>
@@ -322,10 +375,13 @@ const AITypesVisualization: React.FC = () => {
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
-                    <p className="text-sm text-muted-foreground mt-1">
+                    <motion.p 
+                      className="text-sm text-muted-foreground mt-1 hover:text-foreground transition-colors"
+                      whileHover={{ x: 4 }}
+                    >
                       Algorithmes qui apprennent à partir de données et s'améliorent avec l'expérience
                       (apprentissage supervisé, non supervisé, par renforcement).
-                    </p>
+                    </motion.p>
                   </motion.div>
                 </div>
               </div>
@@ -372,8 +428,9 @@ const AITypesVisualization: React.FC = () => {
         </motion.p>
         
         <motion.div
-          whileHover={{ scale: 1.01, y: -2 }}
+          whileHover={{ scale: 1.01, y: -4 }}
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          className="rounded-2xl border border-primary/10 hover:border-primary/20 bg-gradient-to-br from-background to-secondary/5 p-4 hover:shadow-xl transition-all duration-500"
         >
           <AICapabilitiesChart />
         </motion.div>
