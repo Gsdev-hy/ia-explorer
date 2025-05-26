@@ -32,24 +32,36 @@ const Ethique = () => {
   ];
 
   return (
-    <>
+    <div className="animate-fade-in">
       <Hero
         title="Éthique de l'IA"
         subtitle="Explorer les enjeux éthiques et sociétaux soulevés par le développement et l'utilisation de l'intelligence artificielle."
       />
 
-      <EthicalPrinciplesSection />
+      <div className="transform transition-all duration-500 hover:scale-[1.001]">
+        <EthicalPrinciplesSection />
+      </div>
       
-      <EthicalChallengesSection />
+      <div className="transform transition-all duration-500 hover:scale-[1.001]">
+        <EthicalChallengesSection />
+      </div>
       
-      <RegulatoryFrameworkSection />
+      <div className="transform transition-all duration-500 hover:scale-[1.001]">
+        <RegulatoryFrameworkSection />
+      </div>
       
-      <EthicalExamplesSection />
+      <div className="transform transition-all duration-500 hover:scale-[1.001]">
+        <EthicalExamplesSection />
+      </div>
       
-      <QuizSection />
+      <div className="transform transition-all duration-500 hover:scale-[1.001]">
+        <QuizSection />
+      </div>
       
-      <ExploreMoreSection links={exploreLinks} />
-    </>
+      <div className="transform transition-all duration-500 hover:scale-[1.001]">
+        <ExploreMoreSection links={exploreLinks} />
+      </div>
+    </div>
   );
 };
 

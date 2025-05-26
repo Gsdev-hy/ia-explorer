@@ -1,13 +1,7 @@
 import { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { BookOpen, Search, BookMarked, Brain } from 'lucide-react';
-import { 
-  Tabs, 
-  TabsContent, 
-  TabsList, 
-  TabsTrigger 
-} from "@/components/ui/tabs";
+import { BookOpen, Search, BookMarked } from 'lucide-react';
 
 interface GlossaryTerm {
   term: string;
@@ -549,123 +543,73 @@ const TermsGlossary = () => {
 
   return (
     <div className="w-full">
-      <div className="flex flex-col space-y-6 mb-8">
-        <div className="bg-card border rounded-xl p-6 shadow-sm">
-          <div className="flex items-start space-x-4">
-            <div className="bg-primary/10 p-3 rounded-full">
-              <Brain className="h-6 w-6 text-primary" />
-            </div>
-            <div>
-              <h3 className="text-lg font-medium mb-2">Comprendre les mémoires en IA</h3>
-              <p className="text-muted-foreground text-sm">
-                Les différents types de mémoire en IA permettent de stocker et traiter 
-                l'information de manière temporaire ou permanente, similaire à la cognition humaine.
-              </p>
-              
-              <div className="mt-4 p-4 bg-muted/50 rounded-lg border border-border">
-                <div className="w-full h-[200px] bg-card flex items-center justify-center rounded-md overflow-hidden">
-                  <svg width="90%" height="180" viewBox="0 0 800 300" className="mx-auto">
-                    {/* Mémoire à court terme */}
-                    <rect x="50" y="50" width="200" height="80" rx="10" fill="rgba(var(--primary), 0.2)" stroke="rgb(var(--primary))" strokeWidth="2" />
-                    <text x="150" y="95" textAnchor="middle" fill="currentColor" fontSize="16" fontWeight="bold">Mémoire à court terme</text>
-                    
-                    {/* Mémoire à long terme */}
-                    <rect x="550" y="50" width="200" height="200" rx="10" fill="rgba(var(--primary), 0.1)" stroke="rgb(var(--primary))" strokeWidth="2" />
-                    <text x="650" y="80" textAnchor="middle" fill="currentColor" fontSize="16" fontWeight="bold">Mémoire à long terme</text>
-                    
-                    {/* Sous-types de mémoire à long terme */}
-                    <rect x="570" y="100" width="160" height="40" rx="5" fill="rgba(var(--primary), 0.3)" stroke="rgb(var(--primary))" strokeWidth="1" />
-                    <text x="650" y="125" textAnchor="middle" fill="currentColor" fontSize="14">Sémantique</text>
-                    
-                    <rect x="570" y="150" width="160" height="40" rx="5" fill="rgba(var(--primary), 0.3)" stroke="rgb(var(--primary))" strokeWidth="1" />
-                    <text x="650" y="175" textAnchor="middle" fill="currentColor" fontSize="14">Épisodique</text>
-                    
-                    <rect x="570" y="200" width="160" height="40" rx="5" fill="rgba(var(--primary), 0.3)" stroke="rgb(var(--primary))" strokeWidth="1" />
-                    <text x="650" y="225" textAnchor="middle" fill="currentColor" fontSize="14">Procédurale</text>
-                    
-                    {/* Mémoire de contexte */}
-                    <rect x="300" y="150" width="200" height="80" rx="10" fill="rgba(var(--primary), 0.15)" stroke="rgb(var(--primary))" strokeWidth="2" />
-                    <text x="400" y="195" textAnchor="middle" fill="currentColor" fontSize="16" fontWeight="bold">Mémoire de contexte</text>
-                    
-                    {/* Flèches */}
-                    <path d="M250 90 L300 90 L300 150" fill="none" stroke="rgb(var(--primary))" strokeWidth="2" strokeDasharray="5,5" />
-                    <path d="M500 190 L550 190" fill="none" stroke="rgb(var(--primary))" strokeWidth="2" strokeDasharray="5,5" />
-                    <path d="M150 130 L150 150 L300 150" fill="none" stroke="rgb(var(--primary))" strokeWidth="2" strokeDasharray="5,5" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
       <div className="flex flex-col md:flex-row gap-4 mb-6">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+          <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground transition-colors duration-200" />
           <Input
             placeholder="Rechercher un terme..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-9"
+            className="pl-9 transition-all duration-300 focus:shadow-lg hover:shadow-md border-2 hover:border-primary/50 focus:border-primary"
           />
         </div>
         <div className="flex overflow-x-auto py-1 gap-2">
           <button
             onClick={() => setActiveCategory('all')}
-            className={`px-3 py-1.5 rounded-full text-sm whitespace-nowrap ${
+            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all duration-300 transform hover:scale-105 ${
               activeCategory === 'all' 
-                ? 'bg-primary text-primary-foreground' 
-                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                ? 'bg-primary text-primary-foreground shadow-lg' 
+                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:shadow-md'
             }`}
           >
             Tous
           </button>
           <button
             onClick={() => setActiveCategory('general')}
-            className={`px-3 py-1.5 rounded-full text-sm whitespace-nowrap ${
+            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all duration-300 transform hover:scale-105 ${
               activeCategory === 'general' 
-                ? 'bg-primary text-primary-foreground' 
-                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                ? 'bg-primary text-primary-foreground shadow-lg' 
+                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:shadow-md'
             }`}
           >
             Généraux
           </button>
           <button
             onClick={() => setActiveCategory('technical')}
-            className={`px-3 py-1.5 rounded-full text-sm whitespace-nowrap ${
+            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all duration-300 transform hover:scale-105 ${
               activeCategory === 'technical' 
-                ? 'bg-primary text-primary-foreground' 
-                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                ? 'bg-primary text-primary-foreground shadow-lg' 
+                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:shadow-md'
             }`}
           >
             Techniques
           </button>
           <button
             onClick={() => setActiveCategory('ethical')}
-            className={`px-3 py-1.5 rounded-full text-sm whitespace-nowrap ${
+            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all duration-300 transform hover:scale-105 ${
               activeCategory === 'ethical' 
-                ? 'bg-primary text-primary-foreground' 
-                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                ? 'bg-primary text-primary-foreground shadow-lg' 
+                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:shadow-md'
             }`}
           >
             Éthiques
           </button>
           <button
             onClick={() => setActiveCategory('memory')}
-            className={`px-3 py-1.5 rounded-full text-sm whitespace-nowrap ${
+            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all duration-300 transform hover:scale-105 ${
               activeCategory === 'memory' 
-                ? 'bg-primary text-primary-foreground' 
-                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                ? 'bg-primary text-primary-foreground shadow-lg' 
+                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:shadow-md'
             }`}
           >
             Mémoire
           </button>
           <button
             onClick={() => setActiveCategory('advanced')}
-            className={`px-3 py-1.5 rounded-full text-sm whitespace-nowrap ${
+            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all duration-300 transform hover:scale-105 ${
               activeCategory === 'advanced' 
-                ? 'bg-primary text-primary-foreground' 
-                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                ? 'bg-primary text-primary-foreground shadow-lg' 
+                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:shadow-md'
             }`}
           >
             Avancés
@@ -673,9 +617,9 @@ const TermsGlossary = () => {
         </div>
       </div>
 
-      <div className="mb-4 p-4 bg-yellow-50 dark:bg-yellow-950/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
+      <div className="mb-4 p-4 bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-950/20 dark:to-amber-950/20 rounded-lg border border-yellow-200 dark:border-yellow-800 transform hover:scale-[1.01] transition-all duration-300 hover:shadow-lg">
         <div className="flex items-start gap-3">
-          <BookMarked className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mt-0.5" />
+          <BookMarked className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mt-0.5 animate-pulse" />
           <div>
             <h3 className="font-medium text-yellow-800 dark:text-yellow-400">Glossaire enrichi</h3>
             <p className="text-sm text-yellow-700 dark:text-yellow-300/80">
@@ -688,27 +632,30 @@ const TermsGlossary = () => {
 
       {sortedTerms.length === 0 ? (
         <div className="text-center py-10">
-          <BookOpen className="mx-auto h-12 w-12 text-muted-foreground/50" />
+          <BookOpen className="mx-auto h-12 w-12 text-muted-foreground/50 animate-bounce" />
           <h3 className="mt-4 text-lg font-medium">Aucun terme trouvé</h3>
           <p className="text-muted-foreground">Essayez une autre recherche ou catégorie</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {sortedTerms.map((item, index) => (
-            <Card key={index} className="overflow-hidden">
+            <Card 
+              key={index} 
+              className="overflow-hidden group transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-2 hover:border-primary/50 cursor-pointer"
+            >
               <CardHeader className="pb-2">
-                <CardTitle className="text-lg flex justify-between items-start">
-                  <span>{item.term}</span>
-                  <span className={`text-xs px-2 py-1 rounded-full ${
+                <CardTitle className="text-lg flex justify-between items-start group-hover:text-primary transition-colors duration-200">
+                  <span className="group-hover:scale-105 transition-transform duration-200">{item.term}</span>
+                  <span className={`text-xs px-3 py-1 rounded-full transition-all duration-300 group-hover:scale-110 ${
                     item.category === 'general' 
-                      ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300' 
+                      ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 group-hover:bg-blue-200 dark:group-hover:bg-blue-900/50' 
                       : item.category === 'technical' 
-                        ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300' 
+                        ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 group-hover:bg-purple-200 dark:group-hover:bg-purple-900/50' 
                         : item.category === 'ethical'
-                          ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300'
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300 group-hover:bg-green-200 dark:group-hover:bg-green-900/50'
                           : item.category === 'memory'
-                            ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300'
-                            : 'bg-pink-100 text-pink-800 dark:bg-pink-900/30 dark:text-pink-300'
+                            ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300 group-hover:bg-amber-200 dark:group-hover:bg-amber-900/50'
+                            : 'bg-pink-100 text-pink-800 dark:bg-pink-900/30 dark:text-pink-300 group-hover:bg-pink-200 dark:group-hover:bg-pink-900/50'
                   }`}>
                     {item.category === 'general' 
                       ? 'Général' 
@@ -723,7 +670,7 @@ const TermsGlossary = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">{item.definition}</p>
+                <p className="text-muted-foreground group-hover:text-foreground transition-colors duration-200">{item.definition}</p>
               </CardContent>
             </Card>
           ))}
