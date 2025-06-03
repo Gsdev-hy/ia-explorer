@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -660,6 +659,7 @@ const IAQuiz = ({ onClose }: { onClose: () => void }) => {
 
     setShowFeedback(true);
 
+    // Temps d'affichage doublé : de 2000ms à 4000ms
     setTimeout(() => {
       setShowFeedback(false);
       setSelectedOption(null);
@@ -669,7 +669,7 @@ const IAQuiz = ({ onClose }: { onClose: () => void }) => {
       } else {
         setShowResults(true);
       }
-    }, 2000);
+    }, 4000); // Augmenté de 2000 à 4000ms
   };
 
   const resetQuiz = () => {
