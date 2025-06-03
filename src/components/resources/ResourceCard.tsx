@@ -1,145 +1,118 @@
-
 import React from 'react';
-import { 
-  Card, 
-  CardContent 
-} from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Badge } from "@/components/ui/badge";
-import { 
-  Book, 
-  FileText, 
-  Video, 
-  Pencil, 
-  Link2, 
-  ExternalLink,
-  Youtube,
-  Play
-} from 'lucide-react';
+import { ExternalLink, BookOpen, Video, Globe, FileText, Newspaper, Wrench } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface ResourceCardProps {
   title: string;
-  source: string;
+  source?: string;
   description: string;
   link: string;
   type: string;
   year?: number;
   tags?: string[];
-  videoId?: string;
+  isInternal?: boolean;
 }
 
-export const ResourceCard: React.FC<ResourceCardProps> = ({
-  title,
-  source,
-  description,
-  link,
-  type,
-  year,
+const ResourceCard: React.FC<ResourceCardProps> = ({ 
+  title, 
+  source, 
+  description, 
+  link, 
+  type, 
+  year, 
   tags,
-  videoId
+  isInternal = false
 }) => {
-  const getIcon = () => {
-    switch (type) {
-      case 'cours': return <Book className="h-5 w-5" />;
-      case 'livre': return <Book className="h-5 w-5" />;
-      case 'article': return <FileText className="h-5 w-5" />;
-      case 'vidéo': return <Video className="h-5 w-5" />;
-      case 'podcast': return <Pencil className="h-5 w-5" />;
-      default: return <Link2 className="h-5 w-5" />;
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (isInternal) {
+      // Navigation interne
+      navigate(link);
+    } else {
+      // Ouverture dans un nouvel onglet pour les ressources externes
+      window.open(link, '_blank', 'noopener,noreferrer');
     }
   };
 
-  // Fonction pour générer l'URL de la miniature YouTube
-  const getYouTubeThumbnail = (videoId: string) => {
-    return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  const getTypeIcon = (type: string) => {
+    switch (type.toLowerCase()) {
+      case 'cours':
+        return <BookOpen className="h-4 w-4 text-primary" />;
+      case 'vidéo':
+        return <Video className="h-4 w-4 text-primary" />;
+      case 'site web':
+        return <Globe className="h-4 w-4 text-primary" />;
+      case 'livre':
+        return <FileText className="h-4 w-4 text-primary" />;
+      case 'article':
+        return <Newspaper className="h-4 w-4 text-primary" />;
+      case 'outil':
+        return <Wrench className="h-4 w-4 text-primary" />;
+      default:
+        return <FileText className="h-4 w-4 text-primary" />;
+    }
   };
-  
+
   return (
-    <Card className="overflow-hidden hover:shadow-xl transition-all duration-500 h-full group hover:-translate-y-2 cursor-pointer">
-      <CardContent className="p-0 flex flex-col h-full">
-        {/* Miniature pour les vidéos YouTube avec effets améliorés */}
-        {type === 'vidéo' && videoId && (
-          <div className="relative overflow-hidden">
-            <img 
-              src={getYouTubeThumbnail(videoId)}
-              alt={`Miniature de ${title}`}
-              className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-              onError={(e) => {
-                const target = e.currentTarget as HTMLImageElement;
-                if (!target.src.includes('mqdefault')) {
-                  target.src = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
-                } else {
-                  target.style.display = 'none';
-                }
-              }}
-            />
-            
-            {/* Overlay avec bouton play animé */}
-            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
-              <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
-                <Play className="w-6 h-6 text-white ml-1" />
-              </div>
-            </div>
-            
-            {/* Badge YouTube */}
-            <div className="absolute top-3 right-3 bg-red-600 text-white px-3 py-1 rounded-full text-xs flex items-center gap-1 shadow-lg group-hover:scale-105 transition-transform">
-              <Youtube className="h-3 w-3" />
-              YouTube
-            </div>
-            
-            {/* Durée simulée */}
-            <div className="absolute bottom-3 right-3 bg-black/80 text-white px-2 py-1 rounded text-xs font-medium backdrop-blur-sm">
-              {Math.floor(Math.random() * 20) + 5}:{Math.floor(Math.random() * 60).toString().padStart(2, '0')}
-            </div>
-          </div>
-        )}
-        
-        <div className="p-6 flex flex-col flex-grow">
-          <div className="flex justify-between items-start mb-3">
-            <Badge variant="outline" className="mb-2 flex items-center gap-1 group-hover:border-primary/50 transition-colors">
-              {getIcon()}
+    <Card className="h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+      <CardContent className="p-6 h-full flex flex-col">
+        <div className="flex items-start justify-between mb-4">
+          <div className="flex items-center gap-2">
+            {getTypeIcon(type)}
+            <Badge variant="secondary" className="text-xs">
               {type}
             </Badge>
-            {year && (
-              <Badge variant="secondary" className="group-hover:bg-primary/10 transition-colors">
-                {year}
+            {isInternal && (
+              <Badge variant="default" className="text-xs bg-primary/10 text-primary">
+                Interne
               </Badge>
             )}
           </div>
-          
-          <h3 className="text-lg font-medium mb-2 line-clamp-2 group-hover:text-primary transition-colors duration-300">
-            {title}
-          </h3>
-          <p className="text-sm text-muted-foreground mb-1 font-medium">{source}</p>
-          <p className="text-sm text-muted-foreground mb-4 flex-grow line-clamp-3">{description}</p>
-          
-          {tags && tags.length > 0 && (
-            <div className="mb-4 flex flex-wrap gap-2">
-              {tags.slice(0, 3).map((tag, idx) => (
-                <Badge key={idx} variant="outline" className="text-xs hover:bg-primary/10 transition-colors">
-                  {tag}
-                </Badge>
-              ))}
-              {tags.length > 3 && (
-                <Badge variant="outline" className="text-xs hover:bg-primary/10 transition-colors">
-                  +{tags.length - 3}
-                </Badge>
-              )}
-            </div>
+          {year && (
+            <span className="text-xs text-muted-foreground">{year}</span>
           )}
-          
-          <Button 
-            variant="outline" 
-            size="sm" 
-            className="w-full gap-2 mt-auto group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300 hover:shadow-lg" 
-            asChild
-          >
-            <a href={link} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="h-4 w-4 group-hover:scale-110 transition-transform" />
-              {type === 'vidéo' ? 'Regarder' : 'Consulter'}
-            </a>
-          </Button>
         </div>
+        
+        <h3 className="font-semibold mb-2 group-hover:text-primary transition-colors">
+          {title}
+        </h3>
+        
+        {source && (
+          <p className="text-sm text-primary mb-2 font-medium">{source}</p>
+        )}
+        
+        <p className="text-sm text-muted-foreground mb-4 flex-grow">
+          {description}
+        </p>
+        
+        {tags && tags.length > 0 && (
+          <div className="flex flex-wrap gap-1 mb-4">
+            {tags.slice(0, 3).map((tag, index) => (
+              <Badge key={index} variant="outline" className="text-xs">
+                {tag}
+              </Badge>
+            ))}
+            {tags.length > 3 && (
+              <Badge variant="outline" className="text-xs">
+                +{tags.length - 3}
+              </Badge>
+            )}
+          </div>
+        )}
+        
+        <Button 
+          onClick={handleClick}
+          variant="outline" 
+          size="sm" 
+          className="mt-auto group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
+        >
+          {isInternal ? 'Suivre le cours' : 'Accéder au cours'}
+          <ExternalLink className="ml-2 h-3 w-3" />
+        </Button>
       </CardContent>
     </Card>
   );

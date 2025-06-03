@@ -1,106 +1,157 @@
+import { Resource } from './resourcesData';
 
-import { Resource } from '../resourcesData';
-
-export const courses: Resource[] = [
-  // Cours internes à développer (en tête de liste)
+export const coursesData: Resource[] = [
+  // Cours internes (développés dans l'app)
   {
     title: "Maîtriser les Prompts : Guide Complet du Prompt Engineering",
-    source: "Geoffroy Streit - IA Explorer",
-    description: "Cours approfondi sur l'art du prompt engineering : techniques avancées, structures optimales, et exemples pratiques pour maximiser l'efficacité de vos interactions avec l'IA",
+    source: "IA Explorer",
+    description: "Guide complet pour apprendre l'art du prompt engineering. Découvrez les techniques avancées, les bonnes pratiques et les méthodes pour optimiser vos interactions avec l'IA.",
     link: "/cours/prompt-engineering",
     type: "cours",
     year: 2024,
-    tags: ["prompt engineering", "pratique", "techniques", "interne", "à développer"]
+    tags: ["Prompt Engineering", "Communication IA", "Pratique", "Interne"],
+    isInternal: true
   },
   {
     title: "IA et Créativité : Révolutionner votre Processus Créatif",
-    source: "Geoffroy Streit - IA Explorer",
-    description: "Guide pratique pour intégrer l'IA dans vos projets créatifs : génération d'idées, co-création, outils spécialisés et méthodologies innovantes",
+    source: "IA Explorer", 
+    description: "Explorez comment l'IA transforme la créativité dans tous les domaines. Apprenez à utiliser les outils d'IA générative pour amplifier votre potentiel créatif.",
     link: "/cours/ia-creativite",
     type: "cours",
     year: 2024,
-    tags: ["créativité", "design", "innovation", "interne", "à développer"]
+    tags: ["Créativité", "Design", "Art numérique", "Innovation", "Interne"],
+    isInternal: true
   },
   {
-    title: "Automatisation Intelligente : IA au Service de la Productivité",
-    source: "Geoffroy Streit - IA Explorer",
-    description: "Formation complète sur l'automatisation avec l'IA : workflows intelligents, intégrations d'outils, et optimisation des processus métiers",
-    link: "/cours/automatisation-ia",
+    title: "Deep Learning Pratique : De la Théorie à l'Application",
+    source: "IA Explorer",
+    description: "Cours pratique sur le deep learning avec des projets concrets. Apprenez à construire, entraîner et déployer vos premiers modèles de deep learning.",
+    link: "/cours/deep-learning-pratique", 
     type: "cours",
     year: 2024,
-    tags: ["automatisation", "productivité", "workflows", "interne", "à développer"]
+    tags: ["Deep Learning", "Pratique", "Projets", "Neural Networks", "Interne"],
+    isInternal: true
   },
   {
-    title: "IA Éthique en Pratique : Développer de Manière Responsable",
-    source: "Geoffroy Streit - IA Explorer",
-    description: "Cours pratique sur l'implémentation de l'éthique IA : évaluation des biais, conception inclusive, et frameworks de développement responsable",
-    link: "/cours/ia-ethique-pratique",
+    title: "IA Éthique et Responsable : Guide Pratique",
+    source: "IA Explorer",
+    description: "Formation complète sur les enjeux éthiques de l'IA. Apprenez à développer et utiliser l'IA de manière responsable et éthique.",
+    link: "/cours/ia-ethique-responsable",
+    type: "cours", 
+    year: 2024,
+    tags: ["Éthique", "Responsabilité", "Gouvernance", "Société", "Interne"],
+    isInternal: true
+  },
+  {
+    title: "IA pour l'Entreprise : Stratégie et Implémentation",
+    source: "IA Explorer",
+    description: "Guide stratégique pour intégrer l'IA en entreprise. De l'analyse des besoins au déploiement, découvrez les meilleures pratiques.",
+    link: "/cours/ia-entreprise-strategie",
+    type: "cours",
+    year: 2024, 
+    tags: ["Entreprise", "Stratégie", "Transformation", "ROI", "Interne"],
+    isInternal: true
+  },
+  {
+    title: "NLP et LLM : Comprendre le Traitement du Langage",
+    source: "IA Explorer",
+    description: "Cours approfondi sur le NLP et les LLM. Comprenez le fonctionnement des modèles de langage et leurs applications pratiques.",
+    link: "/cours/nlp-llm-comprehension",
     type: "cours",
     year: 2024,
-    tags: ["éthique", "responsable", "biais", "interne", "à développer"]
+    tags: ["NLP", "LLM", "Langage", "Transformers", "Interne"], 
+    isInternal: true
   },
+
+  // Cours externes existants
   {
-    title: "Construire son Premier Chatbot Intelligent",
-    source: "Geoffroy Streit - IA Explorer",
-    description: "Tutoriel step-by-step pour créer un chatbot personnalisé : choix des technologies, entraînement, déploiement et bonnes pratiques",
-    link: "/cours/chatbot-creation",
+    title: "Machine Learning A-Z™: Hands-On Python & R In Data Science",
+    source: "Udemy",
+    description: "Learn to create Machine Learning Algorithms in Python and R from two Data Science experts. Code Included.",
+    link: "https://www.udemy.com/course/machinelearning/",
     type: "cours",
-    year: 2024,
-    tags: ["chatbot", "développement", "pratique", "interne", "à développer"]
+    year: 2020,
+    tags: ["Machine Learning", "Python", "R", "Data Science"]
   },
   {
-    title: "IA et Analyse de Données : De l'Insight à l'Action",
-    source: "Geoffroy Streit - IA Explorer",
-    description: "Formation sur l'utilisation de l'IA pour l'analyse de données : préparation, modélisation, visualisation et prise de décision data-driven",
-    link: "/cours/ia-analyse-donnees",
-    type: "cours",
-    year: 2024,
-    tags: ["données", "analyse", "insights", "interne", "à développer"]
-  },
-  // Cours existants
-  {
-    title: "Introduction à l'Intelligence Artificielle",
-    source: "France Université Numérique",
-    description: "MOOC gratuit couvrant les bases de l'IA, ses applications et enjeux sociétaux",
-    link: "https://www.fun-mooc.fr/fr/cours/intelligence-artificielle/",
-    type: "cours",
-    year: 2024,
-    tags: ["MOOC", "gratuit", "bases", "enjeux"]
-  },
-  {
-    title: "Machine Learning par Stanford (sous-titré français)",
+    title: "Deep Learning Specialization",
     source: "Coursera",
-    description: "Cours de référence d'Andrew Ng traduit en français",
-    link: "https://fr.coursera.org/learn/machine-learning",
+    description: "Master Deep Learning, and Break into AI. Build and train neural network architectures such as CNNs, RNNs, LSTMs, Transformers and more.",
+    link: "https://www.coursera.org/specializations/deep-learning",
     type: "cours",
-    year: 2024,
-    tags: ["Stanford", "machine learning", "référence"]
+    year: 2018,
+    tags: ["Deep Learning", "Neural Networks", "CNN", "RNN"]
   },
   {
-    title: "IA pour tous - Cours d'Andrew Ng",
+    title: "AI For Everyone",
     source: "Coursera",
-    description: "Introduction non-technique à l'IA accessible à tous",
-    link: "https://fr.coursera.org/learn/ai-for-everyone-fr",
+    description: "This course is a non-technical introduction to AI. It cuts through the hype to explain what AI is, what it can do, how it works, and how to spot opportunities to apply AI to problems.",
+    link: "https://www.coursera.org/learn/ai-for-everyone",
     type: "cours",
-    year: 2024,
-    tags: ["débutant", "non-technique", "accessible"]
+    year: 2019,
+    tags: ["AI", "Non-Technical", "Introduction"]
   },
   {
-    title: "Deep Learning",
-    source: "France Université Numérique",
-    description: "MOOC sur l'apprentissage profond et les réseaux de neurones",
-    link: "https://www.fun-mooc.fr/fr/cours/deep-learning/",
+    title: "TensorFlow in Practice Specialization",
+    source: "Coursera",
+    description: "Learn how to use TensorFlow to build scalable AI-powered applications with deep learning.",
+    link: "https://www.coursera.org/specializations/tensorflow-in-practice",
     type: "cours",
-    year: 2024,
-    tags: ["deep learning", "réseaux de neurones"]
+    year: 2020,
+    tags: ["TensorFlow", "AI", "Deep Learning", "Python"]
   },
   {
-    title: "IA et Société",
-    source: "Le Wagon",
-    description: "Formation sur les enjeux sociétaux de l'intelligence artificielle",
-    link: "https://www.lewagon.com/fr/data-science-course/part-time",
+    title: "Mathematics for Machine Learning Specialization",
+    source: "Coursera",
+    description: "Learn the mathematics behind machine learning. Master linear algebra, calculus, and probability, and see how to apply it in Python.",
+    link: "https://www.coursera.org/specializations/mathematics-machine-learning",
     type: "cours",
-    year: 2024,
-    tags: ["société", "enjeux", "formation"]
+    year: 2020,
+    tags: ["Mathematics", "Machine Learning", "Linear Algebra", "Calculus", "Probability", "Python"]
+  },
+  {
+    title: "IBM AI Engineering Professional Certificate",
+    source: "Coursera",
+    description: "Start your journey to becoming an AI Engineer. No degree or prior experience required.",
+    link: "https://www.coursera.org/professional-certificates/ibm-ai-engineering",
+    type: "cours",
+    year: 2020,
+    tags: ["AI Engineering", "Professional Certificate"]
+  },
+  {
+    title: "Google AI Platform: From Start to Scale",
+    source: "Coursera",
+    description: "Learn how to build and deploy production-ready AI models on Google Cloud Platform (GCP).",
+    link: "https://www.coursera.org/specializations/google-ai-platform",
+    type: "cours",
+    year: 2020,
+    tags: ["Google Cloud", "AI", "Deployment"]
+  },
+  {
+    title: "Advanced Machine Learning Specialization",
+    source: "Coursera",
+    description: "Go beyond the foundations of Machine Learning, and master advanced techniques.",
+    link: "https://www.coursera.org/specializations/advanced-machine-learning",
+    type: "cours",
+    year: 2015,
+    tags: ["Machine Learning", "Advanced Techniques"]
+  },
+  {
+    title: "Natural Language Processing Specialization",
+    source: "Coursera",
+    description: "Learn how to use natural language processing to build innovative products.",
+    link: "https://www.coursera.org/specializations/natural-language-processing",
+    type: "cours",
+    year: 2018,
+    tags: ["Natural Language Processing"]
+  },
+  {
+    title: "AWS Machine Learning Specialization",
+    source: "Coursera",
+    description: "Learn how to use Amazon Web Services (AWS) to build, train, and deploy machine learning models at scale.",
+    link: "https://www.coursera.org/specializations/aws-machine-learning",
+    type: "cours",
+    year: 2019,
+    tags: ["AWS", "Machine Learning"]
   }
 ];

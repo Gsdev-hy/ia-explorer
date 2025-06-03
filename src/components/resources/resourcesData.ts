@@ -1,14 +1,13 @@
-
 // Types de données
 export interface Resource {
   title: string;
-  source: string;
+  source?: string;
   description: string;
   link: string;
   type: string;
   year?: number;
   tags?: string[];
-  videoId?: string; // Ajout pour les miniatures YouTube
+  isInternal?: boolean;
 }
 
 export interface ScientificPublication {
