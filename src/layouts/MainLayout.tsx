@@ -1,16 +1,20 @@
 
 import { useEffect } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FloatingChatButton from '../components/chat/FloatingChatButton';
 import SkipLink from '../components/SkipLink';
 
+interface MainLayoutProps {
+  children: React.ReactNode;
+}
+
 /**
  * Layout principal de l'application avec améliorations d'accessibilité
  * @returns {JSX.Element} Le layout avec header, contenu principal et footer
  */
-const MainLayout = () => {
+const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const location = useLocation();
 
   // Défilement vers le haut à chaque changement de page
@@ -29,7 +33,7 @@ const MainLayout = () => {
         role="main"
       >
         <div className="page-transition">
-          <Outlet />
+          {children}
         </div>
       </main>
       <Footer author="Geoffroy Streit" email="geoffroy.streit@gmail.com" />
