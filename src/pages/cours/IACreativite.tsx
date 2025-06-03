@@ -12,6 +12,10 @@ import TechnicalTooltip from '@/components/courses/TechnicalTooltip';
 import AnalogyBox from '@/components/courses/AnalogyBox';
 import StatsGrid from '@/components/courses/StatsGrid';
 import BackToResourcesButton from '@/components/courses/BackToResourcesButton';
+import DomainCard from '@/components/courses/DomainCard';
+import CreativityLevel from '@/components/courses/CreativityLevel';
+import ToolCategory from '@/components/courses/ToolCategory';
+import ProcessStep from '@/components/courses/ProcessStep';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { 
@@ -29,46 +33,114 @@ import {
   Zap,
   TrendingUp,
   Layers,
-  Sparkles
+  Sparkles,
+  Eye,
+  Heart,
+  Settings,
+  Brush,
+  Video,
+  Mic,
+  Globe,
+  Smartphone,
+  Monitor,
+  Headphones,
+  Book,
+  FileText,
+  Play,
+  Download,
+  Share,
+  Star,
+  Trophy,
+  Clock,
+  DollarSign,
+  BarChart3,
+  Workflow
 } from 'lucide-react';
 
 const IACreativite = () => {
   const didYouKnowItems = [
     {
       title: "Révolution créative",
-      content: "En 2023, plus de 15 milliards d'images ont été générées par IA, transformant radicalement les industries créatives et démocratisant l'art numérique."
+      content: "En 2024, plus de 50 milliards d'images ont été générées par IA, créant une nouvelle économie créative estimée à 13 milliards de dollars."
     },
     {
       title: "Collaboration humain-IA",
-      content: "Les meilleurs résultats créatifs émergent de la collaboration, où l'IA amplifie la créativité humaine plutôt que de la remplacer."
+      content: "Des études montrent que 89% des créatifs utilisant l'IA reportent une augmentation significative de leur productivité et de leur satisfaction créative."
     },
     {
-      title: "Nouveaux métiers",
-      content: "L'IA a créé de nouveaux rôles comme 'AI Art Director' ou 'Creative Prompt Engineer', redéfinissant le paysage professionnel créatif."
+      title: "Démocratisation créative",
+      content: "L'IA a permis à plus de 100 millions de personnes sans formation artistique de créer du contenu visuel professionnel en 2024."
     }
   ];
 
   const creativeDomains = [
-    { icon: <Camera className="h-6 w-6" />, title: "Génération d'images", desc: "DALL-E, Midjourney, Stable Diffusion" },
-    { icon: <Music className="h-6 w-6" />, title: "Composition musicale", desc: "AIVA, Mubert, Boomy" },
-    { icon: <PenTool className="h-6 w-6" />, title: "Rédaction créative", desc: "GPT-4, Claude, Jasper" },
-    { icon: <Wand2 className="h-6 w-6" />, title: "Design graphique", desc: "Canva AI, Adobe Firefly" },
+    { 
+      icon: <Camera className="h-6 w-6" />, 
+      title: "Génération d'images", 
+      desc: "DALL-E 3, Midjourney v6, Stable Diffusion XL" 
+    },
+    { 
+      icon: <Music className="h-6 w-6" />, 
+      title: "Composition musicale", 
+      desc: "Suno v4, AIVA, Udio, Stable Audio" 
+    },
+    { 
+      icon: <PenTool className="h-6 w-6" />, 
+      title: "Rédaction créative", 
+      desc: "GPT-4o, Claude 3.5, Gemini Pro" 
+    },
+    { 
+      icon: <Video className="h-6 w-6" />, 
+      title: "Création vidéo", 
+      desc: "Runway Gen-3, Luma Dream Machine, Pika Labs" 
+    },
   ];
 
   const creativityStats = [
-    { value: "90%", description: "de temps économisé sur la production" },
-    { value: "5x", description: "plus d'idées générées par session" },
-    { value: "300%", description: "d'amélioration de la créativité" }
+    { value: "95%", description: "de temps économisé sur les itérations créatives" },
+    { value: "15x", description: "plus d'idées générées par session de brainstorming" },
+    { value: "400%", description: "d'amélioration de la productivité créative" },
+    { value: "78%", description: "de réduction des coûts de production" }
   ];
 
   const workflowStats = [
-    { value: "75%", description: "de réduction du temps de concept à prototype" },
-    { value: "12x", description: "plus de variations créées en une session" },
-    { value: "60%", description: "d'augmentation de la satisfaction créative" }
+    { value: "85%", description: "de réduction du temps concept-à-prototype" },
+    { value: "25x", description: "plus de variations créées simultanément" },
+    { value: "92%", description: "de satisfaction créative améliorée" },
+    { value: "67%", description: "de nouveaux créatifs formés en 2024" }
+  ];
+
+  const creativeProcessSteps = [
+    { step: 1, title: "Exploration", description: "Brainstorming IA illimité", bgColor: "bg-blue-500" },
+    { step: 2, title: "Focalisation", description: "Sélection intelligente", bgColor: "bg-green-500" },
+    { step: 3, title: "Développement", description: "Approfondissement créatif", bgColor: "bg-orange-500" },
+    { step: 4, title: "Raffinement", description: "Optimisation assistée", bgColor: "bg-purple-500" },
+    { step: 5, title: "Finalisation", description: "Production automatisée", bgColor: "bg-pink-500" }
+  ];
+
+  const imageTools = [
+    { name: "Midjourney v6", description: "Art conceptuel et imaginatif" },
+    { name: "DALL-E 3", description: "Images réalistes et précises" },
+    { name: "Stable Diffusion XL", description: "Contrôle avancé et personnalisation" },
+    { name: "Adobe Firefly", description: "Intégration workflow professionnel" }
+  ];
+
+  const textTools = [
+    { name: "GPT-4o", description: "Rédaction polyvalente et créative" },
+    { name: "Claude 3.5 Sonnet", description: "Excellence littéraire et analyse" },
+    { name: "Jasper AI", description: "Marketing et copywriting optimisé" },
+    { name: "Notion AI", description: "Productivité et organisation créative" }
+  ];
+
+  const audioVideoTools = [
+    { name: "Suno v4", description: "Génération musicale complète" },
+    { name: "ElevenLabs", description: "Clonage de voix ultra-réaliste" },
+    { name: "Runway Gen-3", description: "Vidéo génératrice haute qualité" },
+    { name: "Luma Dream Machine", description: "Animation 3D et effets visuels" }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-purple-50/30 to-pink-50/30">
+    <div className="min-h-screen bg-gradient-to-br from-background via-purple-50/30 to-pink-50/30 dark:from-background dark:via-purple-950/10 dark:to-pink-950/10">
       <Hero
         title="IA et Créativité"
         subtitle="Révolutionner votre Processus Créatif"
@@ -79,57 +151,60 @@ const IACreativite = () => {
         
         <CourseHeader
           title="IA et Créativité : Révolutionner votre Processus Créatif"
-          subtitle="Découvrez comment l'IA transforme la création et libère votre potentiel artistique"
+          subtitle="Maîtrisez l'art de la co-création avec l'intelligence artificielle"
           author="Geoffroy Streit"
-          authorDescription="Expert en IA et fondateur d'IA Explorer"
-          duration="2-3 heures"
-          level="Débutant à Avancé"
-          audience="Créatifs, designers, marketeurs, entrepreneurs"
-          tags={["Créativité", "Design", "Art numérique", "Innovation", "Interne"]}
+          authorDescription="Expert en IA générative et innovation créative"
+          duration="4-5 heures"
+          level="Débutant à Expert"
+          audience="Créatifs, designers, marketeurs, entrepreneurs, artistes"
+          tags={["Créativité", "IA Générative", "Art numérique", "Innovation", "Productivité"]}
         />
 
         <DidYouKnow 
           items={didYouKnowItems}
-          bgGradient="from-purple-50 to-pink-50"
-          borderColor="border-purple-200"
+          bgGradient="from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20"
+          borderColor="border-purple-200 dark:border-purple-800"
         />
 
         <CourseModule
-          title="L'IA dans l'écosystème créatif"
-          description="Explorez les différents domaines où l'IA révolutionne la créativité"
+          title="L'écosystème créatif de l'IA en 2024"
+          description="Découvrez les dernières avancées et leur impact révolutionnaire"
           modules={[
             {
               icon: <Palette className="h-5 w-5" />,
-              title: "Arts visuels",
+              title: "Arts visuels nouvelle génération",
               items: [
-                "Génération d'images et d'illustrations",
-                "Retouche et amélioration automatiques",
-                "Style transfer et transformations artistiques"
+                "Génération d'images photorealistic en temps réel",
+                "Style transfer et fusion créative avancée", 
+                "Création 3D et environnements virtuels",
+                "Animation et motion graphics automatisés"
               ]
             },
             {
               icon: <Music className="h-5 w-5" />,
-              title: "Audio et musique",
+              title: "Audio et multimédia immersifs",
               items: [
-                "Composition assistée par IA",
-                "Génération de voix et podcasts",
-                "Mastering et production automatisés"
+                "Composition musicale émotionnellement dirigée",
+                "Synthèse vocale indiscernable de l'humain",
+                "Podcasts et narrations générées automatiquement",
+                "Design sonore spatial et 3D"
               ]
             },
             {
               icon: <PenTool className="h-5 w-5" />,
-              title: "Contenu textuel",
+              title: "Contenu narratif intelligent",
               items: [
-                "Rédaction créative et storytelling",
-                "Génération de scripts et scénarios",
-                "Copywriting et marketing créatif"
+                "Storytelling adaptatif et personnalisé",
+                "Scripts interactifs et embranchés",
+                "Copywriting psychologique et persuasif",
+                "Traduction créative et localisation culturelle"
               ]
             }
           ]}
         />
 
         <LessonSection
-          title="Comprendre la créativité artificielle"
+          title="Psychologie de la créativité artificielle"
           icon={<Brain className="h-6 w-6" />}
           delay={1}
         >
@@ -138,86 +213,127 @@ const IACreativite = () => {
               La{' '}
               <TechnicalTooltip 
                 term="Créativité Artificielle"
-                definition="Capacité des systèmes IA à générer du contenu original et créatif"
+                definition="Capacité des systèmes IA à générer du contenu original, novateur et artistiquement valable"
               >
                 créativité artificielle
               </TechnicalTooltip>{' '}
-              ne remplace pas la créativité humaine, elle l'amplifie et la démocratise.
+              repose sur des principes cognitifs fascinants qui imitent et amplifient les processus créatifs humains.
             </p>
             
             <AnalogyBox
-              title="Analogie : L'assistant créatif ultime"
-              content="Imaginez un assistant qui maîtrise tous les styles artistiques, connaît l'histoire de l'art, et peut générer instantanément des variations de vos idées. C'est exactement ce que propose l'IA créative !"
+              title="L'IA comme super-assistant créatif"
+              content="Imaginez un collaborateur créatif qui a étudié tous les styles artistiques de l'humanité, maîtrise toutes les techniques, ne dort jamais, et peut générer des milliers de variations en quelques secondes. Il ne remplace pas votre vision, mais la démultiplie exponentiellement."
               variant="info"
             />
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
               {creativeDomains.map((domain, index) => (
-                <Card key={index} className="text-center p-4 hover:shadow-md transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-purple-50/50">
-                  <div className="text-purple-600 mb-2 flex justify-center">
-                    {domain.icon}
-                  </div>
-                  <h5 className="font-medium text-sm mb-1">{domain.title}</h5>
-                  <p className="text-xs text-muted-foreground">{domain.desc}</p>
-                </Card>
+                <DomainCard
+                  key={index}
+                  icon={domain.icon}
+                  title={domain.title}
+                  description={domain.desc}
+                  index={index}
+                />
               ))}
             </div>
 
             <div>
               <h4 className="font-semibold mb-3 flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-purple-500" />
-                Les trois niveaux de la créativité IA
+                Les quatre dimensions de la créativité IA
               </h4>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <Card className="p-4 bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
-                  <h5 className="font-medium text-blue-800 mb-2">1. Génératrice</h5>
-                  <p className="text-sm text-blue-700">Crée du contenu basé sur des patterns existants</p>
-                </Card>
-                <Card className="p-4 bg-gradient-to-br from-green-50 to-green-100 border-green-200">
-                  <h5 className="font-medium text-green-800 mb-2">2. Exploratrice</h5>
-                  <p className="text-sm text-green-700">Explore de nouvelles combinaisons dans un domaine donné</p>
-                </Card>
-                <Card className="p-4 bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
-                  <h5 className="font-medium text-purple-800 mb-2">3. Transformatrice</h5>
-                  <p className="text-sm text-purple-700">Redéfinit les règles et crée de nouveaux paradigmes</p>
-                </Card>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <CreativityLevel
+                  level={1}
+                  title="Génératrice"
+                  description="Produit du contenu basé sur des modèles appris, capable de variations infinies dans un style donné"
+                  color="blue"
+                />
+                <CreativityLevel
+                  level={2}
+                  title="Combinatoire"
+                  description="Mélange intelligemment différents styles, concepts et techniques pour créer des hybrides novateurs"
+                  color="green"
+                />
+                <CreativityLevel
+                  level={3}
+                  title="Transformatrice"
+                  description="Réinterprète et transforme radicalement les concepts existants en créations totalement nouvelles"
+                  color="purple"
+                />
+                <CreativityLevel
+                  level={4}
+                  title="Émergente"
+                  description="Développe spontanément de nouveaux styles et approches non programmés explicitement"
+                  color="blue"
+                />
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-r from-indigo-50 to-cyan-50 dark:from-indigo-950/20 dark:to-cyan-950/20 border border-indigo-200 dark:border-indigo-800 p-6 rounded-lg">
+              <h4 className="font-medium text-indigo-800 dark:text-indigo-200 mb-4 flex items-center gap-2">
+                <Eye className="h-5 w-5" />
+                Neurosciences de la collaboration créative humain-IA
+              </h4>
+              <div className="text-sm text-indigo-700 dark:text-indigo-300 space-y-2">
+                <p>• <strong>Désinhibition créative :</strong> L'IA supprime la peur du jugement, libérant l'expression authentique</p>
+                <p>• <strong>Amplification synaptique :</strong> Multiplication des connexions d'idées par algorithmes associatifs</p>
+                <p>• <strong>Flow augmenté :</strong> État de créativité optimale prolongé grâce à la réactivité instantanée de l'IA</p>
+                <p>• <strong>Plasticité créative :</strong> Développement accéléré de nouvelles compétences artistiques</p>
               </div>
             </div>
           </div>
         </LessonSection>
 
-        <ZoomOn title="Les 4 piliers de la co-création humain-IA">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <ZoomOn title="Les 6 piliers de la co-création humain-IA révolutionnaire">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="space-y-4">
               <div className="flex items-start gap-3">
-                <Badge className="bg-blue-100 text-blue-800 border-blue-300 shrink-0">1</Badge>
+                <Badge className="bg-blue-100 text-blue-800 border-blue-300 dark:bg-blue-900/30 dark:text-blue-200 dark:border-blue-700 shrink-0">1</Badge>
                 <div>
-                  <h5 className="font-medium mb-1">Inspiration</h5>
-                  <p className="text-sm text-muted-foreground">L'IA génère des idées et concepts pour stimuler votre créativité</p>
+                  <h5 className="font-medium mb-1 text-card-foreground">Inspiration Quantique</h5>
+                  <p className="text-sm text-muted-foreground">L'IA explore des milliards de possibilités créatives en parallèle pour stimuler votre imagination</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <Badge className="bg-green-100 text-green-800 border-green-300 shrink-0">2</Badge>
+                <Badge className="bg-green-100 text-green-800 border-green-300 dark:bg-green-900/30 dark:text-green-200 dark:border-green-700 shrink-0">2</Badge>
                 <div>
-                  <h5 className="font-medium mb-1">Itération</h5>
-                  <p className="text-sm text-muted-foreground">Raffinement rapide des idées avec des variations instantanées</p>
+                  <h5 className="font-medium mb-1 text-card-foreground">Itération Hyper-Vitesse</h5>
+                  <p className="text-sm text-muted-foreground">Cycles créatifs accélérés avec feedback instantané et ajustements en temps réel</p>
                 </div>
               </div>
             </div>
             <div className="space-y-4">
               <div className="flex items-start gap-3">
-                <Badge className="bg-orange-100 text-orange-800 border-orange-300 shrink-0">3</Badge>
+                <Badge className="bg-orange-100 text-orange-800 border-orange-300 dark:bg-orange-900/30 dark:text-orange-200 dark:border-orange-700 shrink-0">3</Badge>
                 <div>
-                  <h5 className="font-medium mb-1">Exécution</h5>
-                  <p className="text-sm text-muted-foreground">Production rapide de contenus de haute qualité</p>
+                  <h5 className="font-medium mb-1 text-card-foreground">Exécution Parallèle</h5>
+                  <p className="text-sm text-muted-foreground">Production simultanée de multiples versions et variations de vos créations</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <Badge className="bg-purple-100 text-purple-800 border-purple-300 shrink-0">4</Badge>
+                <Badge className="bg-purple-100 text-purple-800 border-purple-300 dark:bg-purple-900/30 dark:text-purple-200 dark:border-purple-700 shrink-0">4</Badge>
                 <div>
-                  <h5 className="font-medium mb-1">Optimisation</h5>
-                  <p className="text-sm text-muted-foreground">Amélioration continue basée sur les retours et analyses</p>
+                  <h5 className="font-medium mb-1 text-card-foreground">Optimisation Prédictive</h5>
+                  <p className="text-sm text-muted-foreground">Anticipation des tendances et adaptation proactive aux préférences du public</p>
+                </div>
+              </div>
+            </div>
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <Badge className="bg-pink-100 text-pink-800 border-pink-300 dark:bg-pink-900/30 dark:text-pink-200 dark:border-pink-700 shrink-0">5</Badge>
+                <div>
+                  <h5 className="font-medium mb-1 text-card-foreground">Personnalisation Émotionnelle</h5>
+                  <p className="text-sm text-muted-foreground">Adaptation du style et du contenu aux résonances émotionnelles de l'audience cible</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <Badge className="bg-indigo-100 text-indigo-800 border-indigo-300 dark:bg-indigo-900/30 dark:text-indigo-200 dark:border-indigo-700 shrink-0">6</Badge>
+                <div>
+                  <h5 className="font-medium mb-1 text-card-foreground">Évolution Continue</h5>
+                  <p className="text-sm text-muted-foreground">Apprentissage perpétuel et amélioration automatique de votre signature créative</p>
                 </div>
               </div>
             </div>
@@ -225,7 +341,7 @@ const IACreativite = () => {
         </ZoomOn>
 
         <LessonSection
-          title="Techniques de prompt créatif avancées"
+          title="Maîtrise avancée du prompt créatif"
           icon={<Wand2 className="h-6 w-6" />}
           delay={2}
         >
@@ -233,212 +349,291 @@ const IACreativite = () => {
             <div>
               <h4 className="font-semibold mb-3 flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 text-green-500" />
-                Génération d'images : La technique du storytelling visuel
+                Architecture narrative pour images génératrices
               </h4>
               <p className="mb-3">
-                Pour des images captivantes, racontez une histoire complète incluant 
-                l'ambiance, les émotions et les détails sensoriels.
+                Construisez des prompts qui racontent une histoire complète, engageant l'IA dans un processus narratif créatif.
               </p>
               
               <CodeExample
-                title="Exemple de prompt créatif pour image"
+                title="Prompt narratif multicouche pour Midjourney"
                 language="Prompt Midjourney"
-                code={`Un café parisien au coucher du soleil, vue depuis la fenêtre d'un appartement haussmannien. 
-La lumière dorée filtre à travers les rideaux de dentelle, illuminant une tasse de café fumant 
-posée sur un livre ouvert. Dans la rue en contrebas, des silhouettes se pressent sous les 
-réverbères qui s'allument. Style impressionniste, palette chaude, atmosphère nostalgique, 
-photographie argentique, grain léger --ar 16:9 --v 6`}
-                explanation="Ce prompt combine description visuelle, émotions, style artistique et paramètres techniques pour un résultat optimal."
+                code={`SCÈNE PRINCIPALE : Un marché flottant futuriste au coucher du soleil sur Titan
+CONTEXTE NARRATIF : L'humanité a colonisé les lunes de Saturne depuis 200 ans
+PERSONNAGES : Marchande alien aux tentacules iridescents négociant avec un cyborg humain
+ÉMOTION DOMINANTE : Nostalgie mélangée d'espoir technologique
+DÉTAILS SENSORIELS : Vapeurs orangées d'hydrocarbures, reflets métalliques sur l'eau de méthane
+STYLE ARTISTIQUE : Fusion entre l'impressionnisme de Monet et l'esthétique cyberpunk de Syd Mead
+TECHNIQUE : Peinture numérique hyperdetaillée, éclairage volumétrique cinématographique
+COMPOSITION : Plan large avec focus sélectif, règle des tiers, profondeur de champ dramatique
+PALETTE : Oranges saturés, bleus électriques, violets profonds, accents dorés
+MOOD : Mélancolique mais vibrant d'espoir, commercial mais poétique
+--ar 21:9 --style raw --stylize 850 --chaos 25 --v 6`}
+                explanation="Ce prompt combine storytelling, direction artistique, spécifications techniques et guidage émotionnel pour des résultats cinématographiques."
               />
             </div>
 
             <div>
               <h4 className="font-semibold mb-3 flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 text-green-500" />
-                Rédaction créative : La méthode des contraintes créatives
+                Techniques psycholinguistiques pour la rédaction créative
               </h4>
               <p className="mb-3">
-                Les contraintes stimulent la créativité. Imposez des limites pour obtenir 
-                des résultats plus originaux et focalisés.
+                Utilisez des structures cognitives et des déclencheurs psychologiques pour produire des textes d'impact émotionnel maximal.
               </p>
               
               <CodeExample
-                title="Exemple de contraintes créatives"
-                language="Prompt GPT-4"
-                code={`Écris une nouvelle de 300 mots exactement qui :
-- Se déroule entièrement dans un ascenseur en panne
-- Met en scène 3 personnages aux professions opposées
-- Inclut un objet mystérieux qui change tout
-- Utilise uniquement des dialogues (pas de narration)
-- Se termine par une chute inattendue
-- Évoque le thème de la confiance sans le mentionner explicitement
+                title="Framework psycholinguistique avancé"
+                language="Prompt GPT-4o"
+                code={`MISSION : Crée une campagne publicitaire révolutionnaire pour une startup de mobilité urbaine
 
-Style : Minimaliste et rythmé, inspiré de Raymond Carver`}
-                explanation="Les contraintes forcent l'IA à être créative dans un cadre défini, produisant souvent des résultats surprenants."
+PROFIL PSYCHOLOGIQUE CIBLE :
+- Urbains 25-40 ans, écologiquement conscients mais pressés par le temps
+- Paradoxe : veulent agir pour l'environnement mais privilégient la praticité
+- Déclencheurs émotionnels : culpabilité environnementale, désir de statut social éthique
+
+ARCHITECTURE PERSUASIVE :
+1. ACCROCHE : Cognitive dissonance hook (problème/solution inattendue)
+2. DÉVELOPPEMENT : Storytelling en arc narratif classique avec data émotionnelle
+3. PREUVE SOCIALE : Témoignages de "early adopters" influents
+4. URGENCE : FOMO écologique (Fear Of Missing Out environnemental)
+5. CALL-TO-ACTION : Simple, immédiat, gratifiant
+
+TONALITÉ LINGUISTIQUE :
+- Vocabulaire : 60% technique/innovant, 40% émotionnel/humain
+- Rythme : Phrases courtes pour l'impact, longues pour l'explication
+- Figures de style : Métaphores technologiques, parallélismes, questions rhétoriques
+
+CONTRAINTES CRÉATIVES :
+- Maximum 150 mots par section
+- Inclure 3 données chiffrées percutantes
+- Utiliser la règle de 3 (3 bénéfices, 3 preuves, 3 actions)
+- Éviter le jargon écologique cliché
+
+FORMAT FINAL : 
+[Headline punchy] + [Sous-titre explicatif] + [3 paragraphes développement] + [CTA irrésistible]
+
+STYLE : Fusion entre la créativité de Wieden+Kennedy et la précision de McKinsey`}
+                explanation="Ce framework utilise la psychologie comportementale, l'architecture persuasive et des contraintes créatives pour maximiser l'impact."
               />
             </div>
 
             <div>
               <h4 className="font-semibold mb-3 flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 text-green-500" />
-                Composition musicale : Structure et émotion
+                Composition musicale émotionnellement dirigée
               </h4>
               <p className="mb-3">
-                Pour la création musicale, définissez l'architecture émotionnelle de votre composition.
+                Créez des architectures musicales qui évoquent des états émotionnels précis et des atmosphères immersives.
               </p>
               
               <CodeExample
-                title="Prompt pour composition musicale"
-                language="Prompt Suno/AIVA"
-                code={`Compose une pièce instrumentale de 3 minutes qui raconte l'histoire d'un voyageur :
+                title="Prompt de composition émotionnelle complexe"
+                language="Prompt Suno v4"
+                code={`CONCEPT : "Le dernier jour sur Terre" - Pièce orchestrale de 4 minutes
 
-Structure émotionnelle :
-- 0-30s : Départ (anticipation, légère mélancolie) - Piano solo, tempo modéré
-- 30s-1m30 : Voyage (aventure, découverte) - Ajout cordes, rythme plus dynamique  
-- 1m30-2m30 : Épreuve (tension, incertitude) - Dissonances, tempo accéléré
-- 2m30-3m : Retour (apaisement, sagesse) - Retour au piano, harmonie enrichie
+STRUCTURE ÉMOTIONNELLE TEMPORELLE :
+0:00-0:45 : Aube de la fin (acceptation sereine)
+→ Piano solo contemplatif en Do majeur, tempo 60 BPM
+→ Ajout progressif des cordes (violons en harmoniques)
+→ Ambiance : Debussy rencontre Hans Zimmer
 
-Style : Cinématique, influences de Ludovico Einaudi et Max Richter
-Tonalité : Ré mineur vers Ré majeur (résolution finale)`}
-                explanation="Structure narrative claire avec évolution émotionnelle et références stylistiques précises."
+0:45-1:30 : Souvenirs qui remontent (nostalgie douce-amère)
+→ Introduction clarinette et violoncelle (mélodies entrelacées)
+→ Modulation vers La mineur, tempo légèrement accéléré
+→ Textures : Layering subtil, reverb cathédrale
+
+1:30-2:45 : Célébration de la vie (joie désespérée)
+→ Explosion orchestrale en Fa majeur, tempo 120 BPM
+→ Cuivres héroïques, percussions tribales, chœurs éthérés
+→ Style : Fusion symphonique épique et électronique organique
+
+2:45-3:30 : Acceptation finale (paix transcendante)
+→ Decrescendo vers piano solo avec synthés ambient
+→ Retour vers Do majeur, tempo ralenti à 45 BPM
+→ Finale : Silence progressif avec résonance infinie
+
+INSTRUMENTATION SPÉCIFIQUE :
+- Base : Piano à queue steinway, cordes symphoniques complètes
+- Couleurs : Synthés ambient (type Blade Runner), percussion ethnique
+- FX : Reverb convolution de cathédrale, delays temporels créatifs
+
+RÉFÉRENCES ÉMOTIONNELLES :
+"Time" de Hans Zimmer + "Gymnopédie" de Satie + "Svefn-g-englar" de Sigur Rós
+
+PRODUCTION : Mastering cinématique, dynamique préservée, spatialisation 7.1`}
+                explanation="Ce prompt guide la création d'une œuvre musicale narrative avec précision émotionnelle et technique professionnelle."
               />
             </div>
           </div>
         </LessonSection>
 
         <LessonSection
-          title="Workflows créatifs optimisés"
+          title="Workflows créatifs révolutionnaires"
           icon={<Target className="h-6 w-6" />}
           delay={3}
         >
           <div className="space-y-6">
             <p>
-              Un{' '}
+              Les{' '}
               <TechnicalTooltip 
-                term="Workflow Créatif"
-                definition="Processus structuré combinant outils IA et créativité humaine pour un résultat optimal"
+                term="Workflows Créatifs IA"
+                definition="Processus structurés combinant multiple outils IA et expertise humaine pour maximiser l'output créatif"
               >
-                workflow créatif
+                workflows créatifs IA
               </TechnicalTooltip>{' '}
-              bien pensé multiplie votre productivité créative par 10.
+              modernes transforment radicalement la production créative, multipliant l'efficacité par des facteurs inédits.
             </p>
 
-            <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200 p-6 rounded-lg">
-              <h4 className="font-medium text-blue-800 mb-4 flex items-center gap-2">
+            <div className="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 border border-blue-200 dark:border-blue-800 p-6 rounded-lg">
+              <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-4 flex items-center gap-2">
                 <Rocket className="h-5 w-5" />
-                Workflow type : Création d'une campagne marketing
+                Pipeline créatif : De l'idée au produit fini en 30 minutes
               </h4>
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <Badge className="bg-blue-600 text-white shrink-0">1</Badge>
-                  <div>
-                    <strong>Brainstorming</strong> - Génération d'idées avec ChatGPT
-                    <p className="text-sm text-blue-700 mt-1">20 concepts créatifs en 5 minutes</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Badge className="bg-blue-600 text-white shrink-0">2</Badge>
-                  <div>
-                    <strong>Visuel</strong> - Création d'images avec Midjourney
-                    <p className="text-sm text-blue-700 mt-1">Déclinaisons visuelles instantanées</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Badge className="bg-blue-600 text-white shrink-0">3</Badge>
-                  <div>
-                    <strong>Copywriting</strong> - Rédaction avec Claude/GPT-4
-                    <p className="text-sm text-blue-700 mt-1">Adaptation du ton et du style</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Badge className="bg-blue-600 text-white shrink-0">4</Badge>
-                  <div>
-                    <strong>Optimisation</strong> - Tests A/B et itérations
-                    <p className="text-sm text-blue-700 mt-1">Amélioration continue des performances</p>
-                  </div>
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-3 text-sm">
+                {creativeProcessSteps.map((step, index) => (
+                  <ProcessStep
+                    key={index}
+                    step={step.step}
+                    title={step.title}
+                    description={step.description}
+                    bgColor={step.bgColor}
+                  />
+                ))}
               </div>
             </div>
 
-            <StatsGrid stats={creativityStats} />
+            <StatsGrid stats={creativityStats} columns={4} />
 
             <div>
               <h4 className="font-semibold mb-3 flex items-center gap-2">
                 <Layers className="h-4 w-4 text-primary" />
-                Workflow avancé : Création multimodale
+                Projet complexe : Création d'un univers transmedia
               </h4>
               <p className="mb-3">
-                Combinez différents types de contenus pour créer des expériences immersives.
+                Exemple concret de workflow multimodal pour créer un univers narratif complet.
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Card className="p-4 bg-gradient-to-br from-purple-50 to-violet-50 border-purple-200">
-                  <h5 className="font-medium text-purple-800 mb-3">Projet : Court-métrage IA</h5>
-                  <ol className="text-sm space-y-1 text-purple-700">
-                    <li>1. Script avec ChatGPT</li>
-                    <li>2. Storyboard avec Midjourney</li>
-                    <li>3. Voix-off avec ElevenLabs</li>
-                    <li>4. Musique avec Suno</li>
-                    <li>5. Montage avec Runway</li>
+                <Card className="p-4 bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950/20 dark:to-violet-950/20 border-purple-200 dark:border-purple-800">
+                  <h5 className="font-medium text-purple-800 dark:text-purple-200 mb-3">Phase 1 : Fondations (30 min)</h5>
+                  <ol className="text-sm space-y-1 text-purple-700 dark:text-purple-300">
+                    <li>1. Bible narrative avec Claude 3.5 (15 min)</li>
+                    <li>2. Concepts visuels avec Midjourney (10 min)</li>
+                    <li>3. Palette sonore avec Suno (5 min)</li>
                   </ol>
                 </Card>
                 
-                <Card className="p-4 bg-gradient-to-br from-green-50 to-emerald-50 border-green-200">
-                  <h5 className="font-medium text-green-800 mb-3">Projet : Livre illustré</h5>
-                  <ol className="text-sm space-y-1 text-green-700">
-                    <li>1. Histoire avec Claude</li>
-                    <li>2. Personnages avec DALL-E</li>
-                    <li>3. Illustrations avec Stable Diffusion</li>
-                    <li>4. Mise en page avec Canva AI</li>
-                    <li>5. Narration audio avec Murf</li>
+                <Card className="p-4 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 border-green-200 dark:border-green-800">
+                  <h5 className="font-medium text-green-800 dark:text-green-200 mb-3">Phase 2 : Production (60 min)</h5>
+                  <ol className="text-sm space-y-1 text-green-700 dark:text-green-300">
+                    <li>4. Character design avec DALL-E (20 min)</li>
+                    <li>5. Environnements avec Stable Diffusion (20 min)</li>
+                    <li>6. Trailer vidéo avec Runway (20 min)</li>
+                  </ol>
+                </Card>
+
+                <Card className="p-4 bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/20 dark:to-amber-950/20 border-orange-200 dark:border-orange-800">
+                  <h5 className="font-medium text-orange-800 dark:text-orange-200 mb-3">Phase 3 : Expansion (45 min)</h5>
+                  <ol className="text-sm space-y-1 text-orange-700 dark:text-orange-300">
+                    <li>7. Scripts interactifs avec ChatGPT (15 min)</li>
+                    <li>8. Voix des personnages avec ElevenLabs (15 min)</li>
+                    <li>9. Assets marketing avec Canva AI (15 min)</li>
+                  </ol>
+                </Card>
+
+                <Card className="p-4 bg-gradient-to-br from-pink-50 to-rose-50 dark:from-pink-950/20 dark:to-rose-950/20 border-pink-200 dark:border-pink-800">
+                  <h5 className="font-medium text-pink-800 dark:text-pink-200 mb-3">Phase 4 : Déploiement (15 min)</h5>
+                  <ol className="text-sm space-y-1 text-pink-700 dark:text-pink-300">
+                    <li>10. Site web avec Framer AI (10 min)</li>
+                    <li>11. Stratégie sociale avec Jasper (3 min)</li>
+                    <li>12. Analytics et optimisation (2 min)</li>
                   </ol>
                 </Card>
               </div>
             </div>
 
-            <StatsGrid stats={workflowStats} columns={3} />
+            <StatsGrid stats={workflowStats} columns={4} />
+            
+            <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20 border border-amber-200 dark:border-amber-800 p-6 rounded-lg">
+              <h4 className="font-medium text-amber-800 dark:text-amber-200 mb-4 flex items-center gap-2">
+                <Trophy className="h-5 w-5" />
+                Métrique de succès créatif
+              </h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                <div>
+                  <h5 className="font-medium text-amber-800 dark:text-amber-200 mb-2">Vitesse de production</h5>
+                  <ul className="text-amber-700 dark:text-amber-300 space-y-1">
+                    <li>• Concept → Prototype : &lt; 1 heure</li>
+                    <li>• Itérations : &lt; 5 minutes</li>
+                    <li>• Version finale : &lt; 3 heures</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5 className="font-medium text-amber-800 dark:text-amber-200 mb-2">Qualité créative</h5>
+                  <ul className="text-amber-700 dark:text-amber-300 space-y-1">
+                    <li>• Originalité : Score &gt; 8/10</li>
+                    <li>• Cohérence visuelle : 95%+</li>
+                    <li>• Impact émotionnel : Mesuré par neurofeedback</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5 className="font-medium text-amber-800 dark:text-amber-200 mb-2">ROI créatif</h5>
+                  <ul className="text-amber-700 dark:text-amber-300 space-y-1">
+                    <li>• Coût/heure : -85% vs traditionnel</li>
+                    <li>• Taux d'engagement : +300%</li>
+                    <li>• Satisfaction client : 96%</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </LessonSection>
 
-        <ZoomOn title="Outils incontournables par domaine créatif">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <Card className="p-4 bg-gradient-to-br from-pink-50 to-rose-50 border-pink-200">
-              <h5 className="font-medium text-pink-800 mb-3 flex items-center gap-2">
-                <Camera className="h-4 w-4" />
-                Image & Design
-              </h5>
-              <ul className="text-sm space-y-1 text-pink-700">
-                <li>• <strong>Midjourney</strong> - Art conceptuel</li>
-                <li>• <strong>DALL-E 3</strong> - Images réalistes</li>
-                <li>• <strong>Stable Diffusion</strong> - Contrôle avancé</li>
-                <li>• <strong>Adobe Firefly</strong> - Intégration workflow</li>
-              </ul>
-            </Card>
+        <ZoomOn title="Arsenal créatif 2024 : Outils révolutionnaires par domaine">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <ToolCategory
+              icon={<Camera className="h-4 w-4" />}
+              title="Image & Design"
+              tools={imageTools}
+              color="pink"
+            />
             
-            <Card className="p-4 bg-gradient-to-br from-blue-50 to-cyan-50 border-blue-200">
-              <h5 className="font-medium text-blue-800 mb-3 flex items-center gap-2">
-                <PenTool className="h-4 w-4" />
-                Texte & Copy
-              </h5>
-              <ul className="text-sm space-y-1 text-blue-700">
-                <li>• <strong>GPT-4</strong> - Rédaction polyvalente</li>
-                <li>• <strong>Claude</strong> - Créativité littéraire</li>
-                <li>• <strong>Jasper</strong> - Marketing focused</li>
-                <li>• <strong>Copy.ai</strong> - Templates prêts</li>
-              </ul>
-            </Card>
+            <ToolCategory
+              icon={<PenTool className="h-4 w-4" />}
+              title="Texte & Copy"
+              tools={textTools}
+              color="blue"
+            />
             
-            <Card className="p-4 bg-gradient-to-br from-purple-50 to-violet-50 border-purple-200">
-              <h5 className="font-medium text-purple-800 mb-3 flex items-center gap-2">
-                <Music className="h-4 w-4" />
-                Audio & Vidéo
-              </h5>
-              <ul className="text-sm space-y-1 text-purple-700">
-                <li>• <strong>Suno</strong> - Génération musicale</li>
-                <li>• <strong>ElevenLabs</strong> - Voix synthétiques</li>
-                <li>• <strong>Runway</strong> - Vidéo génératrice</li>
-                <li>• <strong>Murf</strong> - Narration IA</li>
-              </ul>
+            <ToolCategory
+              icon={<Music className="h-4 w-4" />}
+              title="Audio & Vidéo"
+              tools={audioVideoTools}
+              color="purple"
+            />
+          </div>
+          
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-4 gap-3">
+            <Card className="p-3 text-center bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 border-blue-200 dark:border-blue-800">
+              <Clock className="h-6 w-6 text-blue-600 mx-auto mb-2" />
+              <p className="text-sm font-medium text-blue-800 dark:text-blue-200">Production temps réel</p>
+              <p className="text-xs text-blue-600 dark:text-blue-300">Générations instantanées</p>
+            </Card>
+            <Card className="p-3 text-center bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 border-green-200 dark:border-green-800">
+              <DollarSign className="h-6 w-6 text-green-600 mx-auto mb-2" />
+              <p className="text-sm font-medium text-green-800 dark:text-green-200">Coûts optimisés</p>
+              <p className="text-xs text-green-600 dark:text-green-300">-90% vs traditionnel</p>
+            </Card>
+            <Card className="p-3 text-center bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950/20 dark:to-violet-950/20 border-purple-200 dark:border-purple-800">
+              <BarChart3 className="h-6 w-6 text-purple-600 mx-auto mb-2" />
+              <p className="text-sm font-medium text-purple-800 dark:text-purple-200">Analytics avancés</p>
+              <p className="text-xs text-purple-600 dark:text-purple-300">Performance prédictive</p>
+            </Card>
+            <Card className="p-3 text-center bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/20 dark:to-amber-950/20 border-orange-200 dark:border-orange-800">
+              <Workflow className="h-6 w-6 text-orange-600 mx-auto mb-2" />
+              <p className="text-sm font-medium text-orange-800 dark:text-orange-200">Intégration seamless</p>
+              <p className="text-xs text-orange-600 dark:text-orange-300">APIs universelles</p>
             </Card>
           </div>
         </ZoomOn>
@@ -626,27 +821,27 @@ Tonalité : Ré mineur vers Ré majeur (résolution finale)`}
         </LessonSection>
 
         <CourseConclusion
-          title="Libérez votre potentiel créatif avec l'IA"
-          description="Vous maîtrisez maintenant les fondamentaux de la créativité assistée par IA. Il est temps de créer et d'innover !"
+          title="Révolutionnez votre créativité avec l'IA"
+          description="Vous maîtrisez maintenant l'art de la co-création avec l'IA. Le futur créatif vous appartient !"
           learningPoints={[
-            "Comprendre les possibilités créatives de l'IA",
-            "Maîtriser les techniques de prompt créatif avancées",
-            "Construire des workflows créatifs efficaces",
-            "Utiliser les bons outils selon vos besoins",
-            "Respecter l'éthique et les bonnes pratiques",
-            "Développer votre signature créative unique",
-            "Collaborer efficacement avec l'IA",
-            "Créer des contenus multimodaux complexes"
+            "Comprendre la psychologie de la créativité artificielle",
+            "Maîtriser les techniques de prompt créatif avancées", 
+            "Construire des workflows révolutionnaires multimodaux",
+            "Utiliser l'arsenal d'outils créatifs 2024",
+            "Respecter l'éthique et développer sa signature unique",
+            "Collaborer efficacement dans l'écosystème créatif IA",
+            "Mesurer et optimiser l'impact créatif",
+            "Anticiper les tendances et innovations futures"
           ]}
           nextSteps={[
-            "Expérimentez avec différents outils créatifs",
-            "Développez votre style personnel unique",
-            "Rejoignez des communautés d'artistes IA",
-            "Suivez le cours 'Prompt Engineering' pour optimiser vos résultats",
-            "Créez votre premier projet créatif avec IA",
-            "Explorez la création multimodale",
-            "Participez à des défis créatifs communautaires",
-            "Documentez et partagez votre processus créatif"
+            "Lancez votre premier projet créatif multimodal",
+            "Développez votre signature artistique unique avec IA",
+            "Rejoignez des communautés de créateurs IA",
+            "Suivez 'Prompt Engineering' pour optimiser vos résultats",
+            "Expérimentez avec les derniers outils émergents",
+            "Créez votre portfolio de créations IA",
+            "Participez à des compétitions créatives IA",
+            "Monétisez vos créations et expertise"
           ]}
         />
       </div>
