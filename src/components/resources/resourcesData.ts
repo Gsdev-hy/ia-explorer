@@ -8,6 +8,7 @@ export interface Resource {
   year?: number;
   tags?: string[];
   isInternal?: boolean;
+  videoId?: string; // Ajout pour les vidéos YouTube
 }
 
 export interface ScientificPublication {

@@ -1,6 +1,6 @@
-import { Resource } from './resourcesData';
+import { Resource } from '../resourcesData';
 
-export const coursesData: Resource[] = [
+export const courses: Resource[] = [
   // Cours internes (développés dans l'app)
   {
     title: "Maîtriser les Prompts : Guide Complet du Prompt Engineering",
@@ -155,3 +155,6 @@ export const coursesData: Resource[] = [
     tags: ["AWS", "Machine Learning"]
   }
 ];
+
+// Export par défaut pour compatibilité
+export { courses as coursesData };
