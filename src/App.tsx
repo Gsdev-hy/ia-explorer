@@ -8,7 +8,7 @@ import Home from './pages/Home';
 import Ressources from './pages/Ressources';
 import Ethique from './pages/Ethique';
 import Glossaire from './pages/Glossaire';
-import TimelinePage from './pages/TimelinePage';
+import Timeline from './components/timeline/Timeline';
 import Memory from './pages/Memory';
 import Actualites from './pages/Actualites';
 import MachineLearning from './pages/MachineLearning';
@@ -38,7 +38,7 @@ function App() {
               <Route path="/ressources" element={<Ressources />} />
               <Route path="/ethique" element={<Ethique />} />
               <Route path="/glossaire" element={<Glossaire />} />
-              <Route path="/timeline" element={<TimelinePage />} />
+              <Route path="/timeline" element={<Timeline />} />
               <Route path="/memoire" element={<Memory />} />
               <Route path="/actualites" element={<Actualites />} />
               <Route path="/machine-learning" element={<MachineLearning />} />
