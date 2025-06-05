@@ -402,7 +402,6 @@ model.compile(
             <CourseQuiz 
               questions={quizQuestions}
               title="Quiz : Testez vos connaissances"
-              description="Évaluez votre compréhension des concepts de Deep Learning abordés dans ce cours"
             />
           </div>
 
@@ -410,6 +409,7 @@ model.compile(
           <div className="mt-16">
             <CourseConclusion
               title="Félicitations ! Vous maîtrisez maintenant les fondamentaux du Deep Learning"
+              description="Vous avez accompli un parcours remarquable dans l'apprentissage du Deep Learning. Voici ce que vous avez acquis et les prochaines étapes pour continuer votre progression."
               achievements={[
                 "Compréhension des réseaux de neurones et de leur fonctionnement",
                 "Maîtrise des architectures CNN pour la vision par ordinateur", 
@@ -417,21 +417,9 @@ model.compile(
                 "Capacité à implémenter des modèles avec TensorFlow/Keras"
               ]}
               nextSteps={[
-                {
-                  title: "Approfondissement",
-                  description: "Explorez les architectures avancées comme les Transformers",
-                  action: "Suivre le cours avancé"
-                },
-                {
-                  title: "Projet personnel",
-                  description: "Créez votre propre projet de classification d'images",
-                  action: "Démarrer un projet"
-                },
-                {
-                  title: "Communauté",
-                  description: "Rejoignez des communautés de Deep Learning pour échanger",
-                  action: "Rejoindre une communauté"
-                }
+                "Explorez les architectures avancées comme les Transformers",
+                "Créez votre propre projet de classification d'images",
+                "Rejoignez des communautés de Deep Learning pour échanger"
               ]}
               certificateEligible={true}
             />
