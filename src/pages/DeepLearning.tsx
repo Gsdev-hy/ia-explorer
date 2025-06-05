@@ -410,7 +410,7 @@ model.compile(
             <CourseConclusion
               title="Félicitations ! Vous maîtrisez maintenant les fondamentaux du Deep Learning"
               description="Vous avez accompli un parcours remarquable dans l'apprentissage du Deep Learning. Voici ce que vous avez acquis et les prochaines étapes pour continuer votre progression."
-              achievements={[
+              learningPoints={[
                 "Compréhension des réseaux de neurones et de leur fonctionnement",
                 "Maîtrise des architectures CNN pour la vision par ordinateur", 
                 "Connaissance des bonnes pratiques d'entraînement",
@@ -421,7 +421,6 @@ model.compile(
                 "Créez votre propre projet de classification d'images",
                 "Rejoignez des communautés de Deep Learning pour échanger"
               ]}
-              certificateEligible={true}
             />
           </div>
         </div>
