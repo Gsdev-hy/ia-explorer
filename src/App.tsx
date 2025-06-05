@@ -1,19 +1,20 @@
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "next-themes";
 import MainLayout from '@/layouts/MainLayout';
 import Home from './pages/Home';
-import Resources from './pages/Resources';
-import Ethics from './pages/Ethics';
-import Glossary from './pages/Glossary';
+import Ressources from './pages/Ressources';
+import Ethique from './pages/Ethique';
+import Glossaire from './pages/Glossaire';
 import TimelinePage from './pages/TimelinePage';
 import Memory from './pages/Memory';
-import News from './pages/News';
+import Actualites from './pages/Actualites';
 import MachineLearning from './pages/MachineLearning';
 import NotFound from './pages/NotFound';
-import PromptEngineering from './pages/PromptEngineering';
-import IACreativite from './pages/IACreativite';
+import PromptEngineering from './pages/cours/PromptEngineering';
+import IACreativite from './pages/cours/IACreativite';
 import DeepLearning from '@/pages/DeepLearning';
 import NLPComprehension from '@/pages/cours/NLPComprehension';
 
@@ -34,12 +35,12 @@ function App() {
           <MainLayout>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/ressources" element={<Resources />} />
-              <Route path="/ethique" element={<Ethics />} />
-              <Route path="/glossaire" element={<Glossary />} />
+              <Route path="/ressources" element={<Ressources />} />
+              <Route path="/ethique" element={<Ethique />} />
+              <Route path="/glossaire" element={<Glossaire />} />
               <Route path="/timeline" element={<TimelinePage />} />
               <Route path="/memoire" element={<Memory />} />
-              <Route path="/actualites" element={<News />} />
+              <Route path="/actualites" element={<Actualites />} />
               <Route path="/machine-learning" element={<MachineLearning />} />
               <Route path="*" element={<NotFound />} />
               
