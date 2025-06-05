@@ -1,135 +1,59 @@
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import FloatingChatButton from "@/components/chat/FloatingChatButton";
-import SkipLink from "@/components/SkipLink";
-import Index from "./pages/Index";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import LesBases from "./pages/LesBases";
-import MachineLearning from "./pages/MachineLearning";
-import DeepLearning from "./pages/DeepLearning";
-import TypesIA from "./pages/TypesIA";
-import CasUsage from "./pages/CasUsage";
-import Ethique from "./pages/Ethique";
-import Ressources from "./pages/Ressources";
-import Glossaire from "./pages/Glossaire";
-import HistoireIA from "./pages/HistoireIA";
-import NiveauxIA from "./pages/NiveauxIA";
-import Actualites from "./pages/Actualites";
-import NotFound from "./pages/NotFound";
-import MentionsLegales from "./pages/MentionsLegales";
-import Confidentialite from "./pages/Confidentialite";
-import EthiqueGouvernance from "./pages/EthiqueGouvernance";
-import IAMarketingVente from "./pages/IAMarketingVente";
-import IAEnvironnement from "./pages/IAEnvironnement";
-import UtiliserIAQuotidien from "./pages/UtiliserIAQuotidien";
-import UtiliserIATravail from "./pages/UtiliserIATravail";
-import OrganiserServicesIA from "./pages/OrganiserServicesIA";
-import CalculateurCoutsIA from "./pages/CalculateurCoutsIA";
-import IAExpliqueeAuxEnfants from "./pages/IAExpliqueeAuxEnfants";
-import SimulateurIA from "./pages/SimulateurIA";
-import IAMultimodale from "./pages/IAMultimodale";
-import NLPConcepts from "./pages/NLPConcepts";
-import LLMDetails from "./pages/LLMDetails";
-import PremierModeleML from "./pages/PremierModeleML";
-import CoderAvecIA from "./pages/CoderAvecIA";
-import PythonIA from "./pages/PythonIA";
-import GeminiChatPage from "./pages/GeminiChatPage";
+import MainLayout from '@/layouts/MainLayout';
+import Home from './pages/Home';
+import Resources from './pages/Resources';
+import Ethics from './pages/Ethics';
+import Glossary from './pages/Glossary';
+import TimelinePage from './pages/TimelinePage';
+import Memory from './pages/Memory';
+import News from './pages/News';
+import MachineLearning from './pages/MachineLearning';
+import NotFound from './pages/NotFound';
+import PromptEngineering from './pages/PromptEngineering';
+import IACreativite from './pages/IACreativite';
+import DeepLearning from '@/pages/DeepLearning';
+import NLPComprehension from '@/pages/cours/NLPComprehension';
 
-// Pages de cours
-import PromptEngineering from "./pages/cours/PromptEngineering";
-import IACreativite from "./pages/cours/IACreativite";
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-
-const queryClient = new QueryClient();
-
-const Layout = () => {
-  const location = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
-
-  return (
-    <div className="flex flex-col min-h-screen transition-colors duration-300">
-      <SkipLink />
-      <Header />
-      <main 
-        id="main-content"
-        className="flex-grow focus:outline-none" 
-        tabIndex={-1}
-        role="main"
-      >
-        <div className="page-transition">
-          <Outlet />
-        </div>
-      </main>
-      <Footer author="Geoffroy Streit" email="geoffroy.streit@gmail.com" />
-      <FloatingChatButton />
-    </div>
-  );
-};
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      retry: 1,
+    },
+  },
+});
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-        <TooltipProvider>
-          <Toaster />
-          <BrowserRouter>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <MainLayout>
             <Routes>
-              <Route path="/" element={<Layout />}>
-                <Route index element={<Index />} />
-                <Route path="accueil" element={<Home />} />
-                <Route path="about" element={<About />} />
-                <Route path="les-bases" element={<LesBases />} />
-                <Route path="machine-learning" element={<MachineLearning />} />
-                <Route path="deep-learning" element={<DeepLearning />} />
-                <Route path="types-ia" element={<TypesIA />} />
-                <Route path="cas-usage" element={<CasUsage />} />
-                <Route path="ethique" element={<Ethique />} />
-                <Route path="ressources" element={<Ressources />} />
-                <Route path="glossaire" element={<Glossaire />} />
-                <Route path="histoire-ia" element={<HistoireIA />} />
-                <Route path="niveaux-ia" element={<NiveauxIA />} />
-                <Route path="actualites" element={<Actualites />} />
-                <Route path="mentions-legales" element={<MentionsLegales />} />
-                <Route path="confidentialite" element={<Confidentialite />} />
-                <Route path="ethique-gouvernance" element={<EthiqueGouvernance />} />
-                <Route path="ia-marketing-vente" element={<IAMarketingVente />} />
-                <Route path="ia-environnement" element={<IAEnvironnement />} />
-                <Route path="utiliser-ia-quotidien" element={<UtiliserIAQuotidien />} />
-                <Route path="utiliser-ia-travail" element={<UtiliserIATravail />} />
-                <Route path="organiser-services-ia" element={<OrganiserServicesIA />} />
-                <Route path="calculateur-couts-ia" element={<CalculateurCoutsIA />} />
-                <Route path="ia-expliquee-aux-enfants" element={<IAExpliqueeAuxEnfants />} />
-                <Route path="simulateur-ia" element={<SimulateurIA />} />
-                <Route path="ia-multimodale" element={<IAMultimodale />} />
-                <Route path="nlp-concepts" element={<NLPConcepts />} />
-                <Route path="llm-details" element={<LLMDetails />} />
-                <Route path="premier-modele-ml" element={<PremierModeleML />} />
-                <Route path="coder-avec-ia" element={<CoderAvecIA />} />
-                <Route path="python-ia" element={<PythonIA />} />
-                <Route path="gemini-chat" element={<GeminiChatPage />} />
-                
-                {/* Routes pour les cours */}
-                <Route path="cours/prompt-engineering" element={<PromptEngineering />} />
-                <Route path="cours/ia-creativite" element={<IACreativite />} />
-                
-                <Route path="*" element={<NotFound />} />
-              </Route>
+              <Route path="/" element={<Home />} />
+              <Route path="/ressources" element={<Resources />} />
+              <Route path="/ethique" element={<Ethics />} />
+              <Route path="/glossaire" element={<Glossary />} />
+              <Route path="/timeline" element={<TimelinePage />} />
+              <Route path="/memoire" element={<Memory />} />
+              <Route path="/actualites" element={<News />} />
+              <Route path="/machine-learning" element={<MachineLearning />} />
+              <Route path="*" element={<NotFound />} />
+              
+              {/* Cours routes */}
+              <Route path="/cours/prompt-engineering" element={<PromptEngineering />} />
+              <Route path="/cours/ia-creativite" element={<IACreativite />} />
+              <Route path="/cours/deep-learning-pratique" element={<DeepLearning />} />
+              <Route path="/cours/nlp-llm-comprehension" element={<NLPComprehension />} />
             </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
+          </MainLayout>
+        </Router>
+        <Toaster />
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 }
 
