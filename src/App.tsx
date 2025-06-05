@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -45,6 +44,8 @@ import GeminiChatPage from "./pages/GeminiChatPage";
 // Pages de cours
 import PromptEngineering from "./pages/cours/PromptEngineering";
 import IACreativite from "./pages/cours/IACreativite";
+import DeepLearningPratique from "./pages/cours/DeepLearningPratique";
+import NLPComprehension from "./pages/cours/NLPComprehension";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -122,6 +123,8 @@ function App() {
                 {/* Routes pour les cours */}
                 <Route path="cours/prompt-engineering" element={<PromptEngineering />} />
                 <Route path="cours/ia-creativite" element={<IACreativite />} />
+                <Route path="cours/deep-learning-pratique" element={<DeepLearningPratique />} />
+                <Route path="cours/nlp-llm-comprehension" element={<NLPComprehension />} />
                 
                 <Route path="*" element={<NotFound />} />
               </Route>
