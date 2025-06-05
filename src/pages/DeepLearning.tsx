@@ -832,7 +832,7 @@ if __name__ == "__main__":
     # Évaluation finale
     resultats = classificateur.evaluer_performance(x_test, y_test)
     
-    print(f"\\n🎉 Entraînement terminé !")
+    print(f"\\nEntraînement terminé !")
     print(f"Précision finale: {resultats['test_accuracy']:.3f}")`}
               explanation="Ce code montre une implémentation complète et professionnelle d'un classificateur d'images avec toutes les bonnes pratiques : augmentation de données, callbacks, régularisation, et évaluation complète."
             />
@@ -1179,7 +1179,7 @@ if __name__ == "__main__":
     # Visualisation des résultats
     entraineur.visualiser_resultats()
     
-    print("\\n🎉 Entraînement terminé !")`}
+    print("\\nEntraînement terminé !")`}
               explanation="Cette implémentation montre la puissance de PyTorch avec une architecture ResNet personnalisée, incluant les connexions résiduelles, la normalisation par batch, et un système d'entraînement complet avec suivi des métriques."
             />
 
