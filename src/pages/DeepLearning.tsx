@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Hero from '@/components/Hero';
 import SectionHeading from '@/components/SectionHeading';
@@ -505,12 +504,12 @@ if __name__ == "__main__":
     y_test_labels = np.argmax(y_test, axis=1)
     precision = np.mean(predictions == y_test_labels)
     
-    print(f"\\nPrécision sur l'ensemble de test: {precision:.3f}")
+    print(f"\nPrécision sur l'ensemble de test: {precision:.3f}")
     
     # Visualisation de l'apprentissage
     plt.figure(figsize=(10, 6))
     plt.plot(range(0, 1000, 100), historique)
-    plt.title('Évolution du coût pendant l\\'entraînement')
+    plt.title('Évolution du coût pendant l\'entraînement')
     plt.xlabel('Epochs')
     plt.ylabel('Coût (Entropie croisée)')
     plt.grid(True, alpha=0.3)
@@ -706,7 +705,7 @@ class ClassificateurImages:
         print(f"Top-5 Accuracy: {test_top5:.4f}")
         
         # Rapport de classification détaillé
-        print("\\nRapport de classification:")
+        print("\nRapport de classification:")
         print(classification_report(true_classes, predicted_classes))
         
         # Matrice de confusion
@@ -754,7 +753,7 @@ class ClassificateurImages:
         # Learning rate (si disponible)
         if 'lr' in self.history.history:
             axes[1, 0].plot(self.history.history['lr'])
-            axes[1, 0].set_title('Taux d\\'apprentissage')
+            axes[1, 0].set_title('Taux d\'apprentissage')
             axes[1, 0].set_xlabel('Epoch')
             axes[1, 0].set_ylabel('Learning Rate')
             axes[1, 0].set_yscale('log')
@@ -815,7 +814,7 @@ if __name__ == "__main__":
     classificateur.compiler_modele(learning_rate=0.001)
     
     # Affichage de l'architecture
-    print("\\nArchitecture du modèle:")
+    print("\nArchitecture du modèle:")
     model.summary()
     
     # Entraînement
@@ -832,8 +831,8 @@ if __name__ == "__main__":
     # Évaluation finale
     resultats = classificateur.evaluer_performance(x_test, y_test)
     
-    print(f"\\nEntraînement terminé !")
-    print(f"Précision finale: {resultats['test_accuracy']:.3f}")`}
+    print(f"\nEntraînement terminé !")
+    print(f"Précision finale: {resultats['test_accuracy']:.3f}`)}
               explanation="Ce code montre une implémentation complète et professionnelle d'un classificateur d'images avec toutes les bonnes pratiques : augmentation de données, callbacks, régularisation, et évaluation complète."
             />
           </LessonSection>
@@ -1088,7 +1087,7 @@ class EntraineurResNet:
         print(f"Nombre de paramètres: {sum(p.numel() for p in self.model.parameters())}")
         
         for epoch in range(num_epochs):
-            print(f'\\nEpoch {epoch+1}/{num_epochs}')
+            print(f'\nEpoch {epoch+1}/{num_epochs}')
             
             # Entraînement
             train_loss, train_acc = self.entrainer_une_epoch(train_loader)
@@ -1179,163 +1178,8 @@ if __name__ == "__main__":
     # Visualisation des résultats
     entraineur.visualiser_resultats()
     
-    print("\\nEntraînement terminé !")`}
-              explanation="Cette implémentation montre la puissance de PyTorch avec une architecture ResNet personnalisée, incluant les connexions résiduelles, la normalisation par batch, et un système d'entraînement complet avec suivi des métriques."
-            />
-
-            <AnalogyBox
-              title="Les connexions résiduelles : comme les escaliers d'un immeuble"
-              content="Imaginez grimper au 50ème étage d'un immeuble. Sans ascenseur (connexions résiduelles), vous devez monter chaque marche. Avec un ascenseur, vous pouvez 'sauter' directement à l'étage voulu. Les connexions résiduelles permettent au gradient de 'sauter' des couches, évitant le problème de disparition du gradient dans les réseaux très profonds."
-              variant="tip"
-            />
-          </LessonSection>
-
-          {/* Module 5: CNN pour la vision */}
-          <LessonSection title="Module 5 : Vision par Ordinateur avec les CNN" icon={<BarChart size={24} />} delay={5}>
-            <p className="text-lg mb-4">
-              Les <TechnicalTooltip term="Réseaux de Neurones Convolutifs (CNN)" definition="Architecture spécialisée pour traiter des données avec une topologie en grille comme les images, utilisant des opérations de convolution pour détecter des motifs locaux">Réseaux de Neurones Convolutifs</TechnicalTooltip> 
-              ont révolutionné la vision par ordinateur. Découvrons comment ils fonctionnent et pourquoi ils sont si efficaces.
-            </p>
-
-            <ZoomOn title="Pourquoi les CNN sont-ils révolutionnaires ?">
-              <div className="space-y-3">
-                <p>Les CNN exploitent trois propriétés fondamentales des images :</p>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="bg-purple-50 dark:bg-purple-950/30 p-3 rounded">
-                    <h5 className="font-semibold text-purple-800 dark:text-purple-200">🔍 Localité spatiale</h5>
-                    <p className="text-sm text-purple-700 dark:text-purple-300">Les pixels voisins sont plus corrélés</p>
-                  </div>
-                  <div className="bg-blue-50 dark:bg-blue-950/30 p-3 rounded">
-                    <h5 className="font-semibold text-blue-800 dark:text-blue-200">🔄 Invariance par translation</h5>
-                    <p className="text-sm text-blue-700 dark:text-blue-300">Un chat reste un chat, qu'il soit à gauche ou à droite</p>
-                  </div>
-                  <div className="bg-green-50 dark:bg-green-950/30 p-3 rounded">
-                    <h5 className="font-semibold text-green-800 dark:text-green-200">📊 Hiérarchie de caractéristiques</h5>
-                    <p className="text-sm text-green-700 dark:text-green-300">Des bords simples aux objets complexes</p>
-                  </div>
-                </div>
-              </div>
-            </ZoomOn>
-
-            <Illustration 
-              src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80" 
-              alt="Visualisation d'un réseau de neurones convolutif"
-              caption="Les CNN traitent les images couche par couche, extrayant progressivement des caractéristiques de plus en plus complexes"
-              width="full"
-            />
-
-            <p className="mt-4">
-              La beauté des CNN réside dans leur capacité à apprendre automatiquement la hiérarchie de caractéristiques : 
-              des bords et textures simples dans les premières couches, jusqu'aux objets complexes dans les couches profondes.
-            </p>
-          </LessonSection>
-
-          {/* Module 6: Transfer Learning */}
-          <LessonSection title="Module 6 : Transfer Learning et Fine-tuning" icon={<Zap size={24} />} delay={6}>
-            <p className="text-lg mb-4">
-              Le <TechnicalTooltip term="Transfer Learning" definition="Technique qui utilise un modèle préentraîné sur une grande base de données et l'adapte à une nouvelle tâche avec moins de données">Transfer Learning</TechnicalTooltip> 
-              est l'une des techniques les plus puissantes en Deep Learning pratique. Pourquoi réinventer la roue quand on peut adapter l'existant ?
-            </p>
-
-            <AnalogyBox
-              title="Le Transfer Learning, c'est comme apprendre une nouvelle langue"
-              content="Si vous parlez déjà français, apprendre l'italien sera beaucoup plus facile que d'apprendre le chinois. De même, un modèle qui a appris à reconnaître des formes et objets généraux peut être facilement adapté à des tâches spécifiques comme la détection de maladies en imagerie médicale."
-            />
-
-            <ZoomOn title="Stratégies de Transfer Learning">
-              <div className="space-y-4">
-                <div className="border-l-4 border-blue-400 pl-4">
-                  <h5 className="font-semibold text-blue-800 dark:text-blue-200">1. Feature Extraction (Extraction de caractéristiques)</h5>
-                  <p className="text-sm">Gel des couches préentraînées, entraînement uniquement du classificateur final</p>
-                  <p className="text-xs text-muted-foreground">📊 Recommandé : Dataset petit et similaire aux données d'origine</p>
-                </div>
-                <div className="border-l-4 border-green-400 pl-4">
-                  <h5 className="font-semibold text-green-800 dark:text-green-200">2. Fine-tuning (Ajustement fin)</h5>
-                  <p className="text-sm">Ajustement de toutes les couches avec un learning rate très faible</p>
-                  <p className="text-xs text-muted-foreground">📊 Recommandé : Dataset de taille moyenne</p>
-                </div>
-                <div className="border-l-4 border-purple-400 pl-4">
-                  <h5 className="font-semibold text-purple-800 dark:text-purple-200">3. Progressive Unfreezing</h5>
-                  <p className="text-sm">Dégel progressif des couches, des plus profondes aux plus superficielles</p>
-                  <p className="text-xs text-muted-foreground">📊 Recommandé : Dataset large ou très différent</p>
-                </div>
-              </div>
-            </ZoomOn>
-          </LessonSection>
-
-          {/* Module 7: Déploiement */}
-          <LessonSection title="Module 7 : Optimisation et Déploiement en Production" icon={<Target size={24} />} delay={7}>
-            <p className="text-lg mb-4">
-              Créer un modèle qui fonctionne en laboratoire est une chose, le déployer en production en est une autre. 
-              Découvrons les techniques d'optimisation et les bonnes pratiques pour le déploiement.
-            </p>
-
-            <ZoomOn title="Défis du déploiement en production">
-              <ul className="space-y-2">
-                <li className="flex items-start gap-2">
-                  <span className="text-red-500 font-bold">⚡</span>
-                  <div>
-                    <strong>Latence :</strong> Réponse en temps réel (< 100ms pour beaucoup d'applications)
-                  </div>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-orange-500 font-bold">💾</span>
-                  <div>
-                    <strong>Mémoire :</strong> Modèles compacts pour appareils mobiles et edge computing
-                  </div>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-500 font-bold">📊</span>
-                  <div>
-                    <strong>Débit :</strong> Traiter des milliers de requêtes par seconde
-                  </div>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-500 font-bold">🔄</span>
-                  <div>
-                    <strong>Mise à jour :</strong> Déploiement continu sans interruption de service
-                  </div>
-                </li>
-              </ul>
-            </ZoomOn>
-
-            <p className="mt-4">
-              Les techniques comme la quantification, la distillation de modèles, et la parallélisation permettent 
-              de surmonter ces défis tout en maintenant la qualité des prédictions.
-            </p>
-          </LessonSection>
-
-          {/* Quiz du cours */}
-          <CourseQuiz
-            title="Quiz : Deep Learning Pratique"
-            questions={quizQuestions}
-          />
-
-          {/* Conclusion du cours */}
-          <CourseConclusion
-            title="Félicitations ! Vous maîtrisez maintenant le Deep Learning pratique"
-            description="Ce voyage à travers le Deep Learning vous a donné les outils théoriques et pratiques pour créer des solutions d'IA performantes."
-            learningPoints={[
-              "Compréhension approfondie des réseaux de neurones et de la rétropropagation",
-              "Maîtrise de TensorFlow/Keras pour le développement rapide de prototypes",
-              "Expertise PyTorch pour la recherche et l'innovation",
-              "Techniques avancées : CNN, Transfer Learning, régularisation",
-              "Bonnes pratiques pour l'optimisation et le déploiement en production",
-              "Capacité à déboguer et optimiser des modèles complexes"
-            ]}
-            nextSteps={[
-              "Explorez les architectures Transformer pour le traitement du langage naturel",
-              "Approfondissez les techniques de Computer Vision avec YOLO et Detectron2",
-              "Découvrez les GAN (Generative Adversarial Networks) pour la génération d'images",
-              "Étudiez l'apprentissage par renforcement avec Stable Baselines3",
-              "Participez à des compétitions Kaggle pour affiner vos compétences",
-              "Contribuez à des projets open source comme PyTorch ou TensorFlow"
-            ]}
-          />
-        </div>
-      </section>
-    </>
-  );
+    print("\nEntraînement terminé !")
+  </>);
 };
 
 export default DeepLearning;
