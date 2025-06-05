@@ -9,7 +9,6 @@ import Ressources from './pages/Ressources';
 import Ethique from './pages/Ethique';
 import Glossaire from './pages/Glossaire';
 import Timeline from './components/timeline/Timeline';
-import Memory from './pages/Memory';
 import Actualites from './pages/Actualites';
 import MachineLearning from './pages/MachineLearning';
 import NotFound from './pages/NotFound';
@@ -39,7 +38,6 @@ function App() {
               <Route path="/ethique" element={<Ethique />} />
               <Route path="/glossaire" element={<Glossaire />} />
               <Route path="/timeline" element={<Timeline />} />
-              <Route path="/memoire" element={<Memory />} />
               <Route path="/actualites" element={<Actualites />} />
               <Route path="/machine-learning" element={<MachineLearning />} />
               <Route path="*" element={<NotFound />} />
