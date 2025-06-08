@@ -1,3 +1,4 @@
+
 import { Resource } from '../resourcesData';
 
 export const courses: Resource[] = [
@@ -156,7 +157,8 @@ export const courses: Resource[] = [
   }
 ];
 
-export const coursesData = [
+// Structure détaillée pour les cours internes seulement
+export const internalCoursesData = [
   {
     id: 'prompt-engineering',
     title: 'Prompt Engineering : Maîtriser l\'art de la communication avec l\'IA',
@@ -237,5 +239,5 @@ export const coursesData = [
   }
 ];
 
-// Export par défaut pour compatibilité
-export { courses as coursesData };
+// Export principal - utilisé par les autres composants
+export const coursesData = courses;
