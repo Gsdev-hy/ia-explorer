@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Hero from '@/components/Hero';
 import CourseHeader from '@/components/courses/CourseHeader';
@@ -14,6 +13,7 @@ import TransformerVisualizer from '@/components/courses/nlp/TransformerVisualize
 import ProcessFlow from '@/components/courses/nlp/ProcessFlow';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { 
   MessageSquare, 
   Brain, 
@@ -42,7 +42,8 @@ import {
   Database,
   ChartBar,
   Clock,
-  Rocket
+  Rocket,
+  ChevronDown
 } from 'lucide-react';
 
 const NLPComprehension = () => {
@@ -57,7 +58,7 @@ const NLPComprehension = () => {
     tags: ["NLP", "LLM", "Transformers", "Deep Learning", "IA Générative", "2024"]
   };
 
-  // Données pour les modules restructurés
+  // Données pour les modules restructurés avec explications dépliables
   const module1Data = [
     {
       icon: <Languages className="h-5 w-5 text-primary" />,
@@ -69,6 +70,32 @@ const NLPComprehension = () => {
         "Histoire des premières tentatives automatiques",
         "Échecs et leçons des systèmes symboliques",
         "L'évolution vers l'approche statistique"
+      ],
+      expandedExplanations: [
+        {
+          title: "Pourquoi le langage humain est-il si complexe ?",
+          content: "Le langage humain n'est pas qu'un simple système de symboles. Il porte en lui des millénaires d'évolution culturelle et cognitive. Contrairement aux langages de programmation qui sont précis et sans ambiguïté, le langage naturel regorge d'implicites, de références contextuelles et de sous-entendus. Chaque phrase peut avoir plusieurs interprétations selon le contexte, l'intonation, ou même le silence qui l'entoure."
+        },
+        {
+          title: "Ambiguïté, contexte et nuances culturelles",
+          content: "L'ambiguïté est omniprésente dans le langage. Le mot 'avocat' peut désigner un fruit ou un juriste. La phrase 'Il a vu l'homme avec les jumelles' peut signifier que l'homme avait des jumelles ou que la personne utilisait des jumelles pour le voir. Les nuances culturelles ajoutent une complexité supplémentaire : l'ironie, le sarcasme, les références culturelles partagées, les expressions idiomatiques qui n'ont aucun sens littéral."
+        },
+        {
+          title: "Différences entre communication humaine et machine",
+          content: "Les humains communiquent avec tout leur être : gestes, expressions faciales, ton de voix, contexte situationnel. Nous inférons constamment les intentions, comblons les blancs, et adaptons notre interprétation en temps réel. Les machines, elles, ont longtemps été limitées à des règles explicites et des correspondances directes, incapables de cette flexibilité naturelle."
+        },
+        {
+          title: "Histoire des premières tentatives automatiques",
+          content: "Dès les années 1950, les pionniers de l'informatique rêvaient de machines capables de comprendre et traduire les langues. Les premiers systèmes étaient basés sur des dictionnaires bilingues et des règles grammaticales simples. L'optimisme était énorme : on pensait résoudre la traduction automatique en quelques années. La réalité s'est avérée bien plus complexe."
+        },
+        {
+          title: "Échecs et leçons des systèmes symboliques",
+          content: "Les approches symboliques des années 60-80 tentaient de codifier toutes les règles du langage. Résultat : des systèmes fragiles, incapables de gérer les exceptions, les néologismes, ou les usages créatifs. Chaque nouvelle règle créait de nouveaux cas particuliers. Cette approche, bien que logique, s'est heurtée à la nature fondamentalement statistique et évolutive du langage."
+        },
+        {
+          title: "L'évolution vers l'approche statistique",
+          content: "Les années 90 marquent un tournant : plutôt que d'essayer de programmer toutes les règles, pourquoi ne pas laisser les machines apprendre des patterns dans d'énormes corpus de texte ? Cette révolution statistique, puis neuronale, a ouvert la voie aux succès actuels du NLP. Les machines ont commencé à 'sentir' le langage plutôt qu'à le disséquer."
+        }
       ]
     },
     {
@@ -81,6 +108,32 @@ const NLPComprehension = () => {
         "Limitations des approches symboliques",
         "Transition vers l'apprentissage automatique",
         "Naissance du NLP moderne"
+      ],
+      expandedExplanations: [
+        {
+          title: "Systèmes à base de règles grammaticales",
+          content: "Les premiers systèmes NLP tentaient de reproduire l'analyse grammaticale humaine. Ils utilisaient des grammaires formelles, des arbres syntaxiques, et des règles de transformation. Chaque langue nécessitait des années de travail linguistique pour établir toutes les règles. Ces systèmes étaient précis sur les cas qu'ils connaissaient, mais cassants face à l'inattendu."
+        },
+        {
+          title: "Dictionnaires et ontologies",
+          content: "L'idée était séduisante : créer des dictionnaires exhaustifs reliant chaque mot à son sens, ses synonymes, ses relations sémantiques. Des projets comme WordNet ont tenté de cartographier tout le savoir humain en réseaux de concepts. Mais le sens d'un mot dépend tellement de son contexte que ces approches restaient limitées."
+        },
+        {
+          title: "Analyse syntaxique et sémantique",
+          content: "Ces systèmes décomposaient méticuleusement chaque phrase : identification du sujet, verbe, complément, puis interprétation du sens global. L'approche était logique mais butait sur la complexité réelle du langage. Une phrase simple comme 'Time flies like an arrow' peut avoir plusieurs analyses syntaxiques valides."
+        },
+        {
+          title: "Limitations des approches symboliques",
+          content: "Le principal problème était la rigidité. Ces systèmes ne savaient pas gérer l'ambiguïté, les fautes de frappe, les néologismes, ou les usages créatifs. Ils demandaient des années de développement pour chaque langue et domaine. Pire, ils ne s'amélioraient pas avec l'usage, contrairement aux humains."
+        },
+        {
+          title: "Transition vers l'apprentissage automatique",
+          content: "Les années 90 voient l'émergence d'approches statistiques. Au lieu de programmer des règles, on laisse les algorithmes découvrir des patterns dans de grandes quantités de texte. Les modèles de n-grammes, puis les méthodes d'apprentissage supervisé, commencent à montrer des résultats prometteurs sur des tâches spécifiques."
+        },
+        {
+          title: "Naissance du NLP moderne",
+          content: "L'avènement d'internet fournit soudain d'énormes corpus de texte. Les algorithmes d'apprentissage automatique deviennent plus sophistiqués. Les réseaux de neurones font leur retour. Cette convergence de données massives, d'algorithmes puissants et de capacité de calcul accrue donne naissance au NLP moderne que nous connaissons."
+        }
       ]
     },
     {
@@ -93,6 +146,32 @@ const NLPComprehension = () => {
         "Interaction naturelle homme-machine",
         "Analyse de sentiment et d'émotion",
         "Résumé et synthèse automatiques"
+      ],
+      expandedExplanations: [
+        {
+          title: "Compréhension du sens et de l'intention",
+          content: "L'objectif ultime n'est plus seulement de reconnaître des mots, mais de saisir ce que la personne veut vraiment dire. Cela implique de comprendre les intentions cachées, les émotions sous-jacentes, et même ce qui n'est pas dit explicitement. Les modèles modernes commencent à développer une forme de 'théorie de l'esprit' artificielle."
+        },
+        {
+          title: "Génération de texte cohérent et créatif",
+          content: "Aller au-delà de la simple restitution d'informations pour créer du contenu original, cohérent et adapté au contexte. Cela inclut l'écriture créative, la génération de code, la création de contenus marketing personnalisés, ou même la composition poétique. L'IA devient un partenaire créatif."
+        },
+        {
+          title: "Traduction fidèle et nuancée",
+          content: "Dépasser la traduction mot-à-mot pour capturer les nuances culturelles, les jeux de mots, les références implicites. Une bonne traduction moderne préserve non seulement le sens, mais aussi le ton, le style et l'intention de l'auteur original. C'est un défi qui touche à l'essence même de la communication interculturelle."
+        },
+        {
+          title: "Interaction naturelle homme-machine",
+          content: "Créer des interfaces où parler à une machine se rapproche de parler à un humain compréhensif. Cela implique de gérer les interruptions, les changements de sujet, les références à des conversations précédentes, et même les silences significatifs. L'objectif est une fluidité conversationnelle naturelle."
+        },
+        {
+          title: "Analyse de sentiment et d'émotion",
+          content: "Identifier non seulement ce qui est dit, mais comment c'est dit. Détecter la frustration dans un email de service client, l'enthousiasme dans un avis produit, ou la nostalgie dans un post sur les réseaux sociaux. Cette capacité ouvre des applications en psychologie, marketing, et relations humaines."
+        },
+        {
+          title: "Résumé et synthèse automatiques",
+          content: "Face à l'explosion informationnelle, les systèmes doivent savoir extraire l'essentiel de documents volumineux, synthétiser des points de vue multiples, et présenter l'information de manière structurée et accessible. C'est devenu crucial pour la gestion des connaissances et la prise de décision."
+        }
       ]
     }
   ];
@@ -246,6 +325,51 @@ const NLPComprehension = () => {
     }
   ];
 
+  // Composant pour les sections dépliables
+  const ExpandableSection = ({ title, content }: { title: string; content: string }) => (
+    <Collapsible className="border rounded-lg">
+      <CollapsibleTrigger className="flex items-center justify-between w-full p-4 text-left hover:bg-muted/50 transition-colors">
+        <span className="font-medium text-foreground">{title}</span>
+        <ChevronDown className="h-4 w-4 transition-transform ui-open:rotate-180" />
+      </CollapsibleTrigger>
+      <CollapsibleContent className="px-4 pb-4">
+        <p className="text-muted-foreground leading-relaxed">{content}</p>
+      </CollapsibleContent>
+    </Collapsible>
+  );
+
+  // Composant pour les modules avec sections dépliables
+  const ModuleWithExpandable = ({ module }: { module: any }) => (
+    <div className="space-y-4">
+      <div className="flex items-start gap-4">
+        <div className="flex-shrink-0 mt-1">{module.icon}</div>
+        <div className="flex-1">
+          <h4 className="font-semibold text-lg mb-3">{module.title}</h4>
+          <ul className="space-y-2 mb-4">
+            {module.items.map((item: string, index: number) => (
+              <li key={index} className="flex items-start gap-2">
+                <span className="text-primary mt-1">•</span>
+                <span className="text-foreground">{item}</span>
+              </li>
+            ))}
+          </ul>
+          {module.expandedExplanations && (
+            <div className="space-y-3">
+              <h5 className="font-medium text-primary">Explications détaillées :</h5>
+              {module.expandedExplanations.map((explanation: any, index: number) => (
+                <ExpandableSection 
+                  key={index}
+                  title={explanation.title}
+                  content={explanation.content}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <>
       <Hero
@@ -264,7 +388,7 @@ const NLPComprehension = () => {
           <Card>
             <CardContent className="pt-6">
               <div className="space-y-6">
-                <p className="text-lg leading-relaxed">
+                <p className="text-lg leading-relaxed text-foreground">
                   Imaginez un monde où vous pourriez discuter avec votre ordinateur comme avec votre meilleur ami, 
                   lui demander d'analyser des milliers de documents en quelques secondes, de traduire 
                   instantanément n'importe quel texte, ou encore de créer des histoires captivantes sur commande. 
@@ -278,7 +402,7 @@ const NLPComprehension = () => {
                       <Brain className="h-5 w-5 text-primary" />
                       Le défi titanesque
                     </h4>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-muted-foreground">
                       Le langage humain est l'une des capacités les plus complexes de notre espèce. 
                       Nous jonglons naturellement avec l'ambiguïté, les métaphores, l'ironie, 
                       les références culturelles... Enseigner cette maîtrise à une machine représente 
@@ -290,7 +414,7 @@ const NLPComprehension = () => {
                       <Rocket className="h-5 w-5 text-primary" />
                       L'évolution fulgurante
                     </h4>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-muted-foreground">
                       En seulement quelques décennies, nous sommes passés de simples correcteurs 
                       orthographiques à des IA capables de converser, créer, analyser et comprendre 
                       le langage avec une sophistication qui rivalise parfois avec les humains.
@@ -311,8 +435,8 @@ const NLPComprehension = () => {
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                     <div>
-                      <h5 className="font-medium mb-2">Ce que vous découvrirez :</h5>
-                      <ul className="space-y-1">
+                      <h5 className="font-medium mb-2 text-foreground">Ce que vous découvrirez :</h5>
+                      <ul className="space-y-1 text-muted-foreground">
                         <li>• Comment une machine "lit" et "comprend" un texte</li>
                         <li>• Les étapes de transformation du langage en nombres</li>
                         <li>• L'évolution des correcteurs aux IA conversationnelles</li>
@@ -320,8 +444,8 @@ const NLPComprehension = () => {
                       </ul>
                     </div>
                     <div>
-                      <h5 className="font-medium mb-2">Compétences acquises :</h5>
-                      <ul className="space-y-1">
+                      <h5 className="font-medium mb-2 text-foreground">Compétences acquises :</h5>
+                      <ul className="space-y-1 text-muted-foreground">
                         <li>• Comprendre les enjeux du NLP moderne</li>
                         <li>• Maîtriser les concepts clés (tokens, embeddings, attention)</li>
                         <li>• Saisir le fonctionnement des Transformers</li>
@@ -335,30 +459,35 @@ const NLPComprehension = () => {
           </Card>
         </CourseModule>
 
-        {/* Module 1 étendu */}
+        {/* Module 1 étendu avec sections dépliables */}
         <CourseModule
           title="Module 1 : Comprendre le défi de la compréhension automatique"
           description="Plongez dans la complexité fascinante du langage humain et découvrez pourquoi il est si difficile à automatiser"
-          modules={module1Data}
-        />
+        >
+          <div className="space-y-8">
+            {module1Data.map((module, index) => (
+              <ModuleWithExpandable key={index} module={module} />
+            ))}
+          </div>
+        </CourseModule>
 
         <ZoomOn title="L'exemple révélateur de la traduction automatique">
           <div className="space-y-4">
-            <p>
+            <p className="text-foreground">
               En 1954, lors de la première démonstration publique de traduction automatique, 
               IBM traduit avec fierté 60 phrases du russe vers l'anglais. Les chercheurs prédisent 
               alors que le problème sera résolu "dans trois à cinq ans au maximum"...
             </p>
             
-            <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-400">
-              <h5 className="font-medium text-red-800 mb-2">Exemple d'échec historique :</h5>
+            <div className="bg-red-50 dark:bg-red-950/20 p-4 rounded-lg border-l-4 border-red-400">
+              <h5 className="font-medium text-red-900 dark:text-red-100 mb-2">Exemple d'échec historique :</h5>
               <div className="space-y-2 text-sm">
-                <p><strong>Phrase originale (anglais) :</strong> "The spirit is willing, but the flesh is weak."</p>
-                <p><strong>Traduction en russe puis retour en anglais :</strong> "The vodka is good, but the meat is rotten."</p>
+                <p className="text-red-800 dark:text-red-200"><strong>Phrase originale (anglais) :</strong> "The spirit is willing, but the flesh is weak."</p>
+                <p className="text-red-800 dark:text-red-200"><strong>Traduction en russe puis retour en anglais :</strong> "The vodka is good, but the meat is rotten."</p>
               </div>
             </div>
 
-            <p>
+            <p className="text-foreground">
               Soixante-dix ans plus tard, nous avons DeepL et Google Translate qui traduisent 
               instantanément dans plus de 100 langues avec une qualité remarquable. Mais le chemin 
               a été semé d'embûches qui nous ont appris énormément sur la nature du langage :
@@ -366,24 +495,54 @@ const NLPComprehension = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <h5 className="font-medium">Défis identifiés :</h5>
-                <ul className="text-sm space-y-1">
-                  <li>• <TechnicalTooltip term="Ambiguïté lexicale" definition="Un même mot peut avoir plusieurs sens selon le contexte">Ambiguïté lexicale</TechnicalTooltip></li>
-                  <li>• Références contextuelles</li>
-                  <li>• Expressions idiomatiques</li>
-                  <li>• Nuances culturelles</li>
-                  <li>• Sous-entendus et implicites</li>
-                </ul>
+                <h5 className="font-medium text-foreground">Défis identifiés :</h5>
+                <div className="space-y-2">
+                  <ExpandableSection 
+                    title="Ambiguïté lexicale"
+                    content="Un même mot peut avoir plusieurs sens selon le contexte. Par exemple, 'bank' peut signifier 'banque' ou 'rive'. Les systèmes doivent comprendre le contexte pour choisir la bonne interprétation, ce qui nécessite une compréhension sémantique profonde."
+                  />
+                  <ExpandableSection 
+                    title="Références contextuelles"
+                    content="Les pronoms, les références temporelles ('hier', 'maintenant'), et les références situationnelles ('ici', 'là-bas') nécessitent de maintenir un modèle du contexte conversationnel et situationnel pour être correctement interprétées."
+                  />
+                  <ExpandableSection 
+                    title="Expressions idiomatiques"
+                    content="Des expressions comme 'il pleut des cordes' ne peuvent pas être traduites littéralement. Chaque culture a ses propres expressions idiomatiques qui nécessitent une connaissance culturelle profonde pour être comprises et traduites appropriément."
+                  />
+                  <ExpandableSection 
+                    title="Nuances culturelles"
+                    content="Les niveaux de politesse, les références culturelles implicites, et les connotations varient énormément entre les cultures. Une traduction fidèle doit capturer non seulement le sens, mais aussi le ton et les implications culturelles."
+                  />
+                  <ExpandableSection 
+                    title="Sous-entendus et implicites"
+                    content="Beaucoup de communication humaine repose sur ce qui n'est pas dit explicitement. L'ironie, le sarcasme, les sous-entendus nécessitent une compréhension du contexte social et des intentions du locuteur."
+                  />
+                </div>
               </div>
               <div className="space-y-2">
-                <h5 className="font-medium">Solutions développées :</h5>
-                <ul className="text-sm space-y-1">
-                  <li>• Approches statistiques</li>
-                  <li>• Modèles neuronaux</li>
-                  <li>• Attention et contexte</li>
-                  <li>• Apprentissage sur corpus massifs</li>
-                  <li>• Architectures Transformer</li>
-                </ul>
+                <h5 className="font-medium text-foreground">Solutions développées :</h5>
+                <div className="space-y-2">
+                  <ExpandableSection 
+                    title="Approches statistiques"
+                    content="L'utilisation de corpus parallèles massifs pour apprendre les correspondances statistiques entre les langues. Cette approche capture automatiquement les patterns de traduction sans programmation explicite de règles."
+                  />
+                  <ExpandableSection 
+                    title="Modèles neuronaux"
+                    content="Les réseaux de neurones permettent de capturer des relations complexes et non-linéaires entre les mots et concepts. Ils peuvent apprendre des représentations distribuées qui capturent la sémantique de manière plus flexible."
+                  />
+                  <ExpandableSection 
+                    title="Attention et contexte"
+                    content="Les mécanismes d'attention permettent aux modèles de se concentrer sur les parties pertinentes du contexte lors de la traduction. Cela résout en partie le problème des références contextuelles et de l'ambiguïté."
+                  />
+                  <ExpandableSection 
+                    title="Apprentissage sur corpus massifs"
+                    content="L'utilisation de téraoctets de texte parallèle permet aux modèles d'apprendre automatiquement les nuances, expressions idiomatiques et variations culturelles sans programmation explicite."
+                  />
+                  <ExpandableSection 
+                    title="Architectures Transformer"
+                    content="Ces architectures révolutionnaires permettent de traiter l'ensemble du contexte simultanément, capturant des dépendances à long terme et améliorant considérablement la qualité de la traduction."
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -432,7 +591,7 @@ const NLPComprehension = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <p className="text-lg">
+                  <p className="text-lg text-foreground">
                     Le 12 juin 2017, une équipe de Google publie un article de 11 pages qui va 
                     révolutionner l'intelligence artificielle. Le titre, provocateur, annonce 
                     que l'attention est tout ce dont on a besoin. Cette déclaration audacieuse 
@@ -445,18 +604,18 @@ const NLPComprehension = () => {
                   />
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="bg-red-50 p-4 rounded-lg">
-                      <h5 className="font-medium text-red-800 mb-3">Avant les Transformers (RNN/LSTM)</h5>
-                      <ul className="text-sm text-red-700 space-y-2">
+                    <div className="bg-red-50 dark:bg-red-950/20 p-4 rounded-lg">
+                      <h5 className="font-medium text-red-900 dark:text-red-100 mb-3">Avant les Transformers (RNN/LSTM)</h5>
+                      <ul className="text-red-800 dark:text-red-200 space-y-2 text-sm">
                         <li>• <strong>Traitement séquentiel</strong> : mot par mot, lentement</li>
                         <li>• <strong>Mémoire limitée</strong> : oubli des éléments distants</li>
                         <li>• <strong>Pas de parallélisation</strong> : impossible d'accélérer</li>
                         <li>• <strong>Gradient vanishing</strong> : difficultés d'apprentissage</li>
                       </ul>
                     </div>
-                    <div className="bg-green-50 p-4 rounded-lg">
-                      <h5 className="font-medium text-green-800 mb-3">Avec les Transformers</h5>
-                      <ul className="text-sm text-green-700 space-y-2">
+                    <div className="bg-green-50 dark:bg-green-950/20 p-4 rounded-lg">
+                      <h5 className="font-medium text-green-900 dark:text-green-100 mb-3">Avec les Transformers</h5>
+                      <ul className="text-green-800 dark:text-green-200 space-y-2 text-sm">
                         <li>• <strong>Traitement parallèle</strong> : tous les mots simultanément</li>
                         <li>• <strong>Attention globale</strong> : chaque mot "voit" tous les autres</li>
                         <li>• <strong>Scalabilité</strong> : plus de données = meilleures performances</li>
@@ -487,7 +646,7 @@ const NLPComprehension = () => {
             <Card>
               <CardContent className="pt-6">
                 <div className="space-y-6">
-                  <p className="text-lg">
+                  <p className="text-lg text-foreground">
                     Les <TechnicalTooltip 
                       term="Large Language Models" 
                       definition="Modèles de langage entraînés sur d'énormes quantités de texte avec des milliards de paramètres"
@@ -499,15 +658,15 @@ const NLPComprehension = () => {
                     les "capacités émergentes".
                   </p>
 
-                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-lg border">
+                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 p-6 rounded-lg border">
                     <h4 className="font-semibold mb-4 flex items-center gap-2">
                       <Sparkles className="h-5 w-5 text-primary" />
                       Capacités émergentes des LLM
                     </h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
                       <div>
-                        <h5 className="font-medium mb-2">Raisonnement</h5>
-                        <ul className="space-y-1">
+                        <h5 className="font-medium mb-2 text-foreground">Raisonnement</h5>
+                        <ul className="space-y-1 text-muted-foreground">
                           <li>• Logique déductive</li>
                           <li>• Résolution de problèmes</li>
                           <li>• Mathématiques</li>
@@ -515,8 +674,8 @@ const NLPComprehension = () => {
                         </ul>
                       </div>
                       <div>
-                        <h5 className="font-medium mb-2">Créativité</h5>
-                        <ul className="space-y-1">
+                        <h5 className="font-medium mb-2 text-foreground">Créativité</h5>
+                        <ul className="space-y-1 text-muted-foreground">
                           <li>• Écriture créative</li>
                           <li>• Poésie et littérature</li>
                           <li>• Humour et jeux de mots</li>
@@ -524,8 +683,8 @@ const NLPComprehension = () => {
                         </ul>
                       </div>
                       <div>
-                        <h5 className="font-medium mb-2">Technique</h5>
-                        <ul className="space-y-1">
+                        <h5 className="font-medium mb-2 text-foreground">Technique</h5>
+                        <ul className="space-y-1 text-muted-foreground">
                           <li>• Programmation</li>
                           <li>• Debugging</li>
                           <li>• Architecture logicielle</li>
@@ -537,7 +696,7 @@ const NLPComprehension = () => {
 
                   {/* Timeline évolutive des LLM */}
                   <div className="space-y-4">
-                    <h4 className="font-semibold text-lg">L'escalade vers l'intelligence</h4>
+                    <h4 className="font-semibold text-lg text-foreground">L'escalade vers l'intelligence</h4>
                     <div className="space-y-4">
                       {[
                         {
@@ -546,7 +705,7 @@ const NLPComprehension = () => {
                           params: "117M",
                           achievement: "Preuve de concept du pre-training",
                           icon: <Brain className="h-6 w-6" />,
-                          color: "bg-blue-100 border-blue-300"
+                          color: "bg-blue-100 border-blue-300 dark:bg-blue-950/20 dark:border-blue-700"
                         },
                         {
                           name: "GPT-2",
@@ -554,7 +713,7 @@ const NLPComprehension = () => {
                           params: "1.5B",
                           achievement: "Génération de texte cohérent",
                           icon: <FileText className="h-6 w-6" />,
-                          color: "bg-green-100 border-green-300"
+                          color: "bg-green-100 border-green-300 dark:bg-green-950/20 dark:border-green-700"
                         },
                         {
                           name: "GPT-3",
@@ -562,7 +721,7 @@ const NLPComprehension = () => {
                           params: "175B",
                           achievement: "Capacités émergentes, few-shot learning",
                           icon: <Lightbulb className="h-6 w-6" />,
-                          color: "bg-yellow-100 border-yellow-300"
+                          color: "bg-yellow-100 border-yellow-300 dark:bg-yellow-950/20 dark:border-yellow-700"
                         },
                         {
                           name: "ChatGPT",
@@ -570,7 +729,7 @@ const NLPComprehension = () => {
                           params: "~175B",
                           achievement: "Interface conversationnelle grand public",
                           icon: <MessageSquare className="h-6 w-6" />,
-                          color: "bg-purple-100 border-purple-300"
+                          color: "bg-purple-100 border-purple-300 dark:bg-purple-950/20 dark:border-purple-700"
                         },
                         {
                           name: "GPT-4",
@@ -578,7 +737,7 @@ const NLPComprehension = () => {
                           params: "~1.8T",
                           achievement: "Multimodalité, raisonnement avancé",
                           icon: <Eye className="h-6 w-6" />,
-                          color: "bg-red-100 border-red-300"
+                          color: "bg-red-100 border-red-300 dark:bg-red-950/20 dark:border-red-700"
                         }
                       ].map((model, index) => (
                         <div key={index} className={`p-4 rounded-lg border-2 ${model.color}`}>
@@ -586,7 +745,7 @@ const NLPComprehension = () => {
                             <div className="text-primary">{model.icon}</div>
                             <div className="flex-1">
                               <div className="flex items-center gap-2 mb-1">
-                                <h5 className="font-semibold">{model.name}</h5>
+                                <h5 className="font-semibold text-foreground">{model.name}</h5>
                                 <Badge variant="outline">{model.year}</Badge>
                                 <Badge>{model.params} paramètres</Badge>
                               </div>
@@ -603,16 +762,16 @@ const NLPComprehension = () => {
 
             <ZoomOn title="L'effet d'échelle : quand la quantité devient qualité">
               <div className="space-y-4">
-                <p>
+                <p className="text-foreground">
                   Une découverte fascinante du deep learning est que certaines capacités 
                   n'apparaissent qu'au-delà d'une taille critique. C'est le phénomène des 
                   "capacités émergentes" : des aptitudes qui surgissent soudainement sans 
                   avoir été explicitement programmées.
                 </p>
                 
-                <div className="bg-amber-50 p-4 rounded-lg border-l-4 border-amber-400">
-                  <h5 className="font-medium text-amber-800 mb-2">Exemple concret :</h5>
-                  <p className="text-amber-700 text-sm">
+                <div className="bg-amber-50 dark:bg-amber-950/20 p-4 rounded-lg border-l-4 border-amber-400">
+                  <h5 className="font-medium text-amber-900 dark:text-amber-100 mb-2">Exemple concret :</h5>
+                  <p className="text-amber-800 dark:text-amber-200 text-sm">
                     GPT-3 avec 175 milliards de paramètres peut résoudre des problèmes 
                     mathématiques complexes, alors que GPT-2 avec 1.5 milliards ne le pouvait pas. 
                     Cette capacité n'a pas été programmée : elle a émergé naturellement de l'échelle.
@@ -621,8 +780,8 @@ const NLPComprehension = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <h5 className="font-medium mb-2">Facteurs d'émergence :</h5>
-                    <ul className="text-sm space-y-1">
+                    <h5 className="font-medium mb-2 text-foreground">Facteurs d'émergence :</h5>
+                    <ul className="text-sm space-y-1 text-muted-foreground">
                       <li>• Taille du modèle (paramètres)</li>
                       <li>• Quantité de données d'entraînement</li>
                       <li>• Qualité et diversité du corpus</li>
@@ -630,8 +789,8 @@ const NLPComprehension = () => {
                     </ul>
                   </div>
                   <div>
-                    <h5 className="font-medium mb-2">Capacités émergentes typiques :</h5>
-                    <ul className="text-sm space-y-1">
+                    <h5 className="font-medium mb-2 text-foreground">Capacités émergentes typiques :</h5>
+                    <ul className="text-sm space-y-1 text-muted-foreground">
                       <li>• Raisonnement multi-étapes</li>
                       <li>• Programmation et debugging</li>
                       <li>• Créativité et originalité</li>
@@ -686,7 +845,7 @@ const NLPComprehension = () => {
                       }
                     ].map((section, index) => (
                       <div key={index} className="space-y-2">
-                        <h5 className="font-medium flex items-center gap-2">
+                        <h5 className="font-medium flex items-center gap-2 text-foreground">
                           {section.icon}
                           {section.category}
                         </h5>
@@ -734,7 +893,7 @@ const NLPComprehension = () => {
                       }
                     ].map((section, index) => (
                       <div key={index} className="space-y-2">
-                        <h5 className="font-medium flex items-center gap-2">
+                        <h5 className="font-medium flex items-center gap-2 text-foreground">
                           {section.icon}
                           {section.category}
                         </h5>
@@ -753,16 +912,16 @@ const NLPComprehension = () => {
             {/* Section spéciale sur les hallucinations */}
             <ZoomOn title="Les hallucinations des LLM : quand l'IA invente">
               <div className="space-y-4">
-                <p>
+                <p className="text-foreground">
                   Un phénomène fascinant et problématique des LLM est leur tendance à "halluciner" : 
                   générer des informations plausibles mais factuellement incorrectes. Ces modèles 
                   excellent à produire du texte cohérent, mais ils ne "savent" pas vraiment 
                   distinguer le vrai du faux.
                 </p>
                 
-                <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-400">
-                  <h5 className="font-medium text-red-800 mb-2">Exemple d'hallucination :</h5>
-                  <p className="text-red-700 text-sm">
+                <div className="bg-red-50 dark:bg-red-950/20 p-4 rounded-lg border-l-4 border-red-400">
+                  <h5 className="font-medium text-red-900 dark:text-red-100 mb-2">Exemple d'hallucination :</h5>
+                  <p className="text-red-800 dark:text-red-200 text-sm">
                     <strong>Question :</strong> "Qui a écrit 'Le Guide Galactique de l'IA' ?"<br/>
                     <strong>Réponse hallucinée :</strong> "Ce livre a été écrit par Douglas Neural en 2019, 
                     s'inspirant de Douglas Adams. Il explore les implications philosophiques de l'IA..."
@@ -773,8 +932,8 @@ const NLPComprehension = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <h5 className="font-medium mb-2">Causes des hallucinations :</h5>
-                    <ul className="text-sm space-y-1">
+                    <h5 className="font-medium mb-2 text-foreground">Causes des hallucinations :</h5>
+                    <ul className="text-sm space-y-1 text-muted-foreground">
                       <li>• Données d'entraînement incomplètes</li>
                       <li>• Pression pour générer du contenu</li>
                       <li>• Confusion entre patterns et faits</li>
@@ -782,8 +941,8 @@ const NLPComprehension = () => {
                     </ul>
                   </div>
                   <div>
-                    <h5 className="font-medium mb-2">Solutions en développement :</h5>
-                    <ul className="text-sm space-y-1">
+                    <h5 className="font-medium mb-2 text-foreground">Solutions en développement :</h5>
+                    <ul className="text-sm space-y-1 text-muted-foreground">
                       <li>• Retrieval-Augmented Generation (RAG)</li>
                       <li>• Fact-checking automatique</li>
                       <li>• Fine-tuning sur données vérifiées</li>
@@ -805,7 +964,7 @@ const NLPComprehension = () => {
             <Card>
               <CardContent className="pt-6">
                 <div className="space-y-6">
-                  <p className="text-lg">
+                  <p className="text-lg text-foreground">
                     Le NLP moderne n'en est qu'à ses débuts. Les prochaines années promettent 
                     des avancées révolutionnaires qui transformeront encore davantage notre 
                     rapport au langage et à l'information.
@@ -853,7 +1012,7 @@ const NLPComprehension = () => {
                       <Card key={index} className="border-primary/20">
                         <CardContent className="p-4">
                           <div className="text-primary mb-3">{trend.icon}</div>
-                          <h4 className="font-semibold mb-2">{trend.title}</h4>
+                          <h4 className="font-semibold mb-2 text-foreground">{trend.title}</h4>
                           <p className="text-sm text-muted-foreground mb-3">{trend.description}</p>
                           <div className="space-y-1">
                             {trend.trends.map((t, i) => (
