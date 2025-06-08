@@ -1,4 +1,5 @@
 
+
 import { Resource } from '../resourcesData';
 
 export const courses: Resource[] = [
@@ -37,7 +38,7 @@ export const courses: Resource[] = [
     title: "IA Éthique et Responsable : Guide Pratique",
     source: "IA Explorer",
     description: "Formation complète sur les enjeux éthiques de l'IA. Apprenez à développer et utiliser l'IA de manière responsable et éthique.",
-    link: "/cours/ia-ethique-responsable",
+    link: "/cours/ia-ethique",
     type: "cours", 
     year: 2024,
     tags: ["Éthique", "Responsabilité", "Gouvernance", "Société", "Interne"],
@@ -47,7 +48,7 @@ export const courses: Resource[] = [
     title: "IA pour l'Entreprise : Stratégie et Implémentation",
     source: "IA Explorer",
     description: "Guide stratégique pour intégrer l'IA en entreprise. De l'analyse des besoins au déploiement, découvrez les meilleures pratiques.",
-    link: "/cours/ia-entreprise-strategie",
+    link: "/cours/ia-entreprise",
     type: "cours",
     year: 2024, 
     tags: ["Entreprise", "Stratégie", "Transformation", "ROI", "Interne"],
@@ -241,3 +242,4 @@ export const internalCoursesData = [
 
 // Export principal - utilisé par les autres composants
 export const coursesData = courses;
+
