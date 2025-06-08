@@ -156,5 +156,86 @@ export const courses: Resource[] = [
   }
 ];
 
+export const coursesData = [
+  {
+    id: 'prompt-engineering',
+    title: 'Prompt Engineering : Maîtriser l\'art de la communication avec l\'IA',
+    description: 'Apprenez à formuler des instructions efficaces pour maximiser les performances des modèles de langage comme ChatGPT, Claude ou Gemini.',
+    link: '/cours/prompt-engineering',
+    category: 'Pratique',
+    level: 'Débutant',
+    duration: '2h',
+    tags: ['Prompt Engineering', 'LLM', 'ChatGPT', 'Communication IA'],
+    author: 'Geoffroy Streit',
+    year: 2024,
+    language: 'Français'
+  },
+  {
+    id: 'ia-creativite',
+    title: 'IA et Créativité : Révolutionner les processus créatifs',
+    description: 'Découvrez comment l\'intelligence artificielle transforme les domaines créatifs : art, musique, écriture, design et innovation.',
+    link: '/cours/ia-creativite',
+    category: 'Créativité',
+    level: 'Intermédiaire',
+    duration: '3h',
+    tags: ['IA Créative', 'Art génératif', 'Design', 'Innovation'],
+    author: 'Geoffroy Streit',
+    year: 2024,
+    language: 'Français'
+  },
+  {
+    id: 'deep-learning-pratique',
+    title: 'Deep Learning Pratique : De la théorie à l\'implémentation',
+    description: 'Maîtrisez les réseaux de neurones profonds par la pratique avec des projets concrets et des exemples de code.',
+    link: '/cours/deep-learning-pratique',
+    category: 'Technique',
+    level: 'Avancé',
+    duration: '5h',
+    tags: ['Deep Learning', 'Réseaux de neurones', 'TensorFlow', 'PyTorch'],
+    author: 'Geoffroy Streit',
+    year: 2024,
+    language: 'Français'
+  },
+  {
+    id: 'nlp-llm-comprehension',
+    title: 'Comprendre le Traitement du Langage Naturel (NLP) et les LLM',
+    description: 'Plongez dans l\'univers du traitement automatique du langage et comprenez le fonctionnement des grands modèles de langage.',
+    link: '/cours/nlp-llm-comprehension',
+    category: 'Théorique',
+    level: 'Intermédiaire',
+    duration: '4h',
+    tags: ['NLP', 'LLM', 'Transformer', 'Linguistique computationnelle'],
+    author: 'Geoffroy Streit',
+    year: 2024,
+    language: 'Français'
+  },
+  {
+    id: 'ia-entreprise',
+    title: 'IA pour l\'Entreprise : Stratégie et Implémentation',
+    description: 'Guide complet pour transformer votre organisation avec l\'intelligence artificielle : de la stratégie au déploiement.',
+    link: '/cours/ia-entreprise',
+    category: 'Business',
+    level: 'Intermédiaire',
+    duration: '4h',
+    tags: ['IA Entreprise', 'Stratégie', 'Transformation digitale', 'ROI'],
+    author: 'Geoffroy Streit',
+    year: 2024,
+    language: 'Français'
+  },
+  {
+    id: 'ia-ethique',
+    title: 'IA Éthique et Responsable : Guide Pratique',
+    description: 'Apprenez à développer et déployer des systèmes d\'IA éthiques, transparents et respectueux des droits humains.',
+    link: '/cours/ia-ethique',
+    category: 'Éthique',
+    level: 'Intermédiaire',
+    duration: '3h',
+    tags: ['IA Éthique', 'Responsabilité', 'Biais', 'Transparence', 'RGPD'],
+    author: 'Geoffroy Streit',
+    year: 2024,
+    language: 'Français'
+  }
+];
+
 // Export par défaut pour compatibilité
 export { courses as coursesData };

@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -46,6 +47,8 @@ import PromptEngineering from "./pages/cours/PromptEngineering";
 import IACreativite from "./pages/cours/IACreativite";
 import DeepLearningPratique from "./pages/cours/DeepLearningPratique";
 import NLPComprehension from "./pages/cours/NLPComprehension";
+import IAEntreprise from "./pages/cours/IAEntreprise";
+import IAEthique from "./pages/cours/IAEthique";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -125,6 +128,8 @@ function App() {
                 <Route path="cours/ia-creativite" element={<IACreativite />} />
                 <Route path="cours/deep-learning-pratique" element={<DeepLearningPratique />} />
                 <Route path="cours/nlp-llm-comprehension" element={<NLPComprehension />} />
+                <Route path="cours/ia-entreprise" element={<IAEntreprise />} />
+                <Route path="cours/ia-ethique" element={<IAEthique />} />
                 
                 <Route path="*" element={<NotFound />} />
               </Route>
