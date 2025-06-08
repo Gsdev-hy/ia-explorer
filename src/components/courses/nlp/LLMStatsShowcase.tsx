@@ -144,7 +144,7 @@ const LLMStatsShowcase: React.FC = () => {
               <li>• GPT-1 : ~$1,000</li>
               <li>• GPT-2 : ~$50,000</li>
               <li>• GPT-3 : ~$4.6M</li>
-              <li>• GPT-4 : >$100M (estimé)</li>
+              <li>• GPT-4 : {'>'}$100M (estimé)</li>
             </ul>
           </div>
           <div>
