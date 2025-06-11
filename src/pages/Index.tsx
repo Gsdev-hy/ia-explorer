@@ -1,8 +1,7 @@
-
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import SectionHeading from "@/components/SectionHeading";
-import { ChevronRight, BookOpen, Lightbulb, Sparkles, BarChart3, Brain, Code, Zap, TrendingUp, Users, Shield, Rocket, Globe, Star } from "lucide-react";
+import { ChevronRight, BookOpen, Lightbulb, Sparkles, BarChart3, Brain, Code, Zap, TrendingUp, Users, Shield, Rocket, Globe, Star, GraduationCap, Target, Palette } from "lucide-react";
 
 /**
  * Page d'accueil du site AI Avenir
@@ -51,6 +50,49 @@ const Index = () => {
       description: "Apprenez à utiliser l'IA pour améliorer votre productivité en développement.",
       link: "/coder-avec-ia",
       gradient: "from-cyan-500 to-blue-600"
+    },
+    // Nouvelles cards pour les cours internes
+    {
+      icon: <GraduationCap className="w-12 h-12 text-primary" />,
+      title: "Prompt Engineering",
+      description: "Maîtrisez l'art de la communication avec l'IA. Guide complet pour optimiser vos interactions.",
+      link: "/cours/prompt-engineering",
+      gradient: "from-violet-500 to-purple-600"
+    },
+    {
+      icon: <Palette className="w-12 h-12 text-primary" />,
+      title: "IA et Créativité",
+      description: "Révolutionnez votre processus créatif avec les outils d'IA générative.",
+      link: "/cours/ia-creativite",
+      gradient: "from-rose-500 to-pink-600"
+    },
+    {
+      icon: <Target className="w-12 h-12 text-primary" />,
+      title: "IA pour l'Entreprise",
+      description: "Stratégie et implémentation de l'IA en entreprise. De l'analyse au déploiement.",
+      link: "/cours/ia-entreprise",
+      gradient: "from-emerald-500 to-green-600"
+    },
+    {
+      icon: <Shield className="w-12 h-12 text-primary" />,
+      title: "IA Éthique",
+      description: "Développez et utilisez l'IA de manière responsable et éthique.",
+      link: "/cours/ia-ethique",
+      gradient: "from-slate-500 to-gray-600"
+    },
+    {
+      icon: <Brain className="w-12 h-12 text-primary" />,
+      title: "NLP et LLM",
+      description: "Comprenez le traitement du langage naturel et les grands modèles de langage.",
+      link: "/cours/nlp-llm-comprehension",
+      gradient: "from-teal-500 to-cyan-600"
+    },
+    {
+      icon: <Zap className="w-12 h-12 text-primary" />,
+      title: "Deep Learning Pratique",
+      description: "De la théorie à l'application : construisez vos premiers modèles de deep learning.",
+      link: "/cours/deep-learning-pratique",
+      gradient: "from-orange-500 to-red-600"
     }
   ];
 

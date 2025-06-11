@@ -6,6 +6,15 @@ Ce fichier documente les changements et améliorations apportés au projet IA Ex
 ## [Unreleased]
 
 ### Ajouté
+- **Pages de cours internes enrichies** avec contenu pédagogique approfondi :
+  - IA pour l'Entreprise : Stratégie et Implémentation
+  - IA Éthique et Responsable : Guide Pratique
+- **Nouveaux composants réutilisables** pour les cours :
+  - `ExpandableSection` pour sections dépliables avec animations
+  - `InteractiveExample` pour exemples pas-à-pas interactifs
+  - `QuickFactBox` pour affichage de métriques et faits rapides
+  - `InfoTooltip` pour informations contextuelles
+- **Info cards enrichies** sur la page d'accueil avec liens vers tous les cours internes
 - **Logo IA Explorer animé** avec animation séquentielle des lettres et effets au survol
 - **Menu mobile restructuré** avec navigation hiérarchique par catégories
 - **Navigation au clavier complète** avec indicateurs de focus et attributs ARIA
@@ -15,6 +24,9 @@ Ce fichier documente les changements et améliorations apportés au projet IA Ex
 - **Respect des préférences** de réduction de mouvement (prefers-reduced-motion)
 
 ### Amélioré
+- **Correction du lien 404** pour "Coder avec l'IA" depuis la page d'accueil
+- **Page d'accueil** avec 12 info cards incluant les 6 cours internes
+- **Accessibilité des cours** via les info cards dédiées avec navigation directe
 - **Page À propos** enrichie avec informations détaillées sur l'auteur Geoffroy Streit
 - **Mission du projet** élargie avec approche pédagogique et éthique renforcée
 - **Photo de profil** mise à jour avec image LinkedIn de l'auteur
@@ -23,11 +35,25 @@ Ce fichier documente les changements et améliorations apportés au projet IA Ex
 - **Animation du menu mobile** avec effets de cascade et transitions fluides
 - **Désactivation des liens GitHub/LinkedIn** tout en conservant les icônes pour l'affichage
 
+### À faire
+- **Refactorisation des fichiers longs** :
+  - `src/pages/Index.tsx` (actuellement 286 lignes) nécessite une restructuration
+  - `src/components/resources/data/coursesData.ts` (actuellement 246 lignes) à découper
+- **Pages non accessibles** depuis le menu principal à intégrer :
+  - Pages de cours : `/cours/*` (6 pages)
+  - Pages spécialisées : `/ia-multimodale`, `/nlp-concepts`, `/llm-details`
+  - Outils pratiques : `/calculateur-couts-ia`, `/simulateur-ia`
+  - Pages thématiques : `/ethique-gouvernance`, `/ia-marketing-vente`, `/ia-environnement`
+  - Pages utilitaires : `/utiliser-ia-quotidien`, `/utiliser-ia-travail`, `/organiser-services-ia`
+  - Pages éducatives : `/ia-expliquee-aux-enfants`, `/premier-modele-ml`
+  - Outils développement : `/coder-avec-ia`, `/python-ia`, `/gemini-chat`
+
 ### Technique
-- Correction des erreurs TypeScript liées aux balises `<style jsx>`
+- Correction des erreurs TypeScript liées aux caractères non échappés en JSX
 - Optimisation des animations CSS avec gestion des préférences utilisateur
 - Amélioration de la structure des composants pour une meilleure maintenabilité
 - Refactorisation du code pour respecter les bonnes pratiques d'accessibilité
+- Ajout de nouvelles icônes Lucide pour les cours (GraduationCap, Target, Palette)
 
 ## [0.6.2] - 2025-04-10
 
