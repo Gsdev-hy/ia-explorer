@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import SectionHeading from "@/components/SectionHeading";
-import { ChevronRight, BookOpen, Lightbulb, Sparkles, BarChart3, Brain, Code, Zap, TrendingUp, Users, Shield, Rocket, Globe, Star, GraduationCap, Target, Palette } from "lucide-react";
+import { ChevronRight, BookOpen, Lightbulb, Sparkles, BarChart3, Brain, Code, Zap, TrendingUp, Users, Shield, Rocket, Globe, Star, GraduationCap, Target, Palette, Clock, Cpu, Database, Calculator, Microscope, FlaskConical, FileText, Settings, Smartphone, Monitor } from "lucide-react";
 
 /**
  * Page d'accueil du site AI Avenir
@@ -93,6 +93,80 @@ const Index = () => {
       description: "De la théorie à l'application : construisez vos premiers modèles de deep learning.",
       link: "/cours/deep-learning-pratique",
       gradient: "from-orange-500 to-red-600"
+    }
+  ];
+
+  // Nouvelles cards pour les pages spécialisées non accessibles depuis le menu
+  const specializedPages = [
+    {
+      icon: <Clock className="w-12 h-12 text-primary" />,
+      title: "Histoire de l'IA",
+      description: "Explorez l'évolution fascinante de l'intelligence artificielle depuis ses origines.",
+      link: "/histoire-ia",
+      gradient: "from-amber-500 to-yellow-600"
+    },
+    {
+      icon: <Cpu className="w-12 h-12 text-primary" />,
+      title: "IA Multimodale",
+      description: "Découvrez les modèles qui combinent texte, image, audio et vidéo pour des expériences immersives.",
+      link: "/ia-multimodale",
+      gradient: "from-purple-500 to-indigo-600"
+    },
+    {
+      icon: <Database className="w-12 h-12 text-primary" />,
+      title: "Concepts NLP",
+      description: "Approfondissez votre compréhension du traitement du langage naturel et de ses applications.",
+      link: "/nlp-concepts",
+      gradient: "from-blue-500 to-cyan-600"
+    },
+    {
+      icon: <Calculator className="w-12 h-12 text-primary" />,
+      title: "Calculateur Coûts IA",
+      description: "Estimez les coûts d'implémentation et d'utilisation des solutions d'IA pour vos projets.",
+      link: "/calculateur-couts-ia",
+      gradient: "from-green-500 to-emerald-600"
+    },
+    {
+      icon: <Microscope className="w-12 h-12 text-primary" />,
+      title: "Simulateur IA",
+      description: "Expérimentez avec différents modèles d'IA dans un environnement de simulation interactive.",
+      link: "/simulateur-ia",
+      gradient: "from-red-500 to-pink-600"
+    },
+    {
+      icon: <FlaskConical className="w-12 h-12 text-primary" />,
+      title: "Premier Modèle ML",
+      description: "Guide pas à pas pour créer et entraîner votre premier modèle de machine learning.",
+      link: "/premier-modele-ml",
+      gradient: "from-violet-500 to-purple-600"
+    },
+    {
+      icon: <FileText className="w-12 h-12 text-primary" />,
+      title: "Utiliser l'IA au Travail",
+      description: "Stratégies pratiques pour intégrer l'IA dans votre environnement professionnel quotidien.",
+      link: "/utiliser-ia-travail",
+      gradient: "from-orange-500 to-red-600"
+    },
+    {
+      icon: <Settings className="w-12 h-12 text-primary" />,
+      title: "Organiser Services IA",
+      description: "Architecture et organisation des services d'IA en entreprise pour une efficacité optimale.",
+      link: "/organiser-services-ia",
+      gradient: "from-slate-500 to-gray-600"
+    },
+    {
+      icon: <Smartphone className="w-12 h-12 text-primary" />,
+      title: "IA au Quotidien",
+      description: "Découvrez comment l'IA transforme déjà votre vie quotidienne et comment en tirer parti.",
+      link: "/utiliser-ia-quotidien",
+      gradient: "from-pink-500 to-rose-600"
+    },
+    {
+      icon: <Monitor className="w-12 h-12 text-primary" />,
+      title: "IA Expliquée aux Enfants",
+      description: "Ressources pédagogiques pour faire découvrir l'IA aux plus jeunes de manière ludique.",
+      link: "/ia-expliquee-aux-enfants",
+      gradient: "from-yellow-500 to-orange-600"
     }
   ];
 
@@ -266,6 +340,52 @@ const Index = () => {
                   <Button variant="link" className="p-0 group-hover:gap-2 transition-all duration-300" asChild>
                     <Link to={feature.link} className="flex items-center gap-1">
                       En savoir plus 
+                      <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </Button>
+                </div>
+                
+                {/* Floating particles effect */}
+                <div className="absolute top-4 right-4 w-2 h-2 bg-primary/30 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping"></div>
+                <div className="absolute bottom-4 left-4 w-1 h-1 bg-secondary/30 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping" style={{ animationDelay: '0.5s' }}></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Nouvelle section pour les pages spécialisées */}
+      <section className="py-20 bg-gradient-to-br from-muted/30 to-background">
+        <div className="container px-4 mx-auto max-w-6xl">
+          <SectionHeading 
+            pretitle="Explorez plus en profondeur"
+            title="Ressources spécialisées et outils avancés"
+            description="Découvrez nos pages dédiées aux aspects spécialisés de l'IA, outils pratiques et guides approfondis pour aller plus loin."
+            center={true}
+          />
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+            {specializedPages.map((page, index) => (
+              <div 
+                key={index} 
+                className="relative group bg-card rounded-xl border p-6 hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 cursor-pointer animate-fade-in overflow-hidden"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                {/* Gradient background */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${page.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+                
+                {/* Animated border */}
+                <div className="absolute inset-0 border-2 border-transparent group-hover:border-primary/20 rounded-xl transition-colors duration-500"></div>
+                
+                <div className="relative z-10">
+                  <div className="mb-4 transform group-hover:scale-125 group-hover:rotate-6 transition-all duration-500">
+                    {page.icon}
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors duration-300">{page.title}</h3>
+                  <p className="text-muted-foreground mb-4">{page.description}</p>
+                  <Button variant="link" className="p-0 group-hover:gap-2 transition-all duration-300" asChild>
+                    <Link to={page.link} className="flex items-center gap-1">
+                      Découvrir 
                       <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </Button>
