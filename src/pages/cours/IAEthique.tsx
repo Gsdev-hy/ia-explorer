@@ -42,7 +42,7 @@ const IAEthique = () => {
     title: "IA Éthique et Responsable : Guide Pratique",
     subtitle: "Développer et déployer l'IA de manière éthique et responsable",
     author: "Geoffroy Streit",
-    authorDescription: "Expert en éthique de l'IA et gouvernance technologique",
+    authorDescription: "Educateur en IA",
     duration: "3-4 heures",
     level: "Intermédiaire",
     audience: "Développeurs, managers, décideurs et juristes",

@@ -99,7 +99,7 @@ const PromptEngineering = () => {
           title="Maîtriser les Prompts : Guide Complet du Prompt Engineering"
           subtitle="De l'art de communiquer avec l'IA à la maîtrise des techniques d'optimisation avancées"
           author="Geoffroy Streit"
-          authorDescription="Expert en IA et spécialiste en optimisation des LLM"
+          authorDescription="Expert en IA"
           duration="5-6 heures"
           level="Débutant à Expert"
           audience="Développeurs, analystes, consultants, entrepreneurs, chercheurs"

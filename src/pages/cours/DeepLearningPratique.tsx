@@ -47,7 +47,7 @@ const DeepLearningPratique = () => {
     title: "Deep Learning Pratique",
     subtitle: "De la théorie aux applications industrielles : maîtrisez les réseaux de neurones profonds",
     author: "Dr. Geoffroy Streit",
-    authorDescription: "Expert en IA industrielle et architecte de solutions deep learning - 15 ans d'expérience R&D",
+    authorDescription: "Expert en IA",
     duration: "12-16 semaines (8-10h/semaine)",
     level: "Intermédiaire à Expert",
     audience: "Développeurs, Data Scientists, Ingénieurs ML, Chercheurs",

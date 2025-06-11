@@ -55,7 +55,7 @@ const NLPComprehension = () => {
     title: "Comprendre le Traitement du Langage Naturel (NLP) et les LLM",
     subtitle: "Du texte brut aux modèles de langage les plus avancés : un voyage au cœur de la compréhension artificielle",
     author: "Geoffroy Streit",
-    authorDescription: "Expert en intelligence artificielle et traitement du langage",
+    authorDescription: "Educateur en intelligence artificielle",
     duration: "6-8 heures",
     level: "Intermédiaire à Avancé",
     audience: "Curieux de technologie, développeurs, étudiants",

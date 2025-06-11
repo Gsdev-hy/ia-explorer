@@ -44,7 +44,7 @@ const IAEntreprise = () => {
     title: "IA pour l'Entreprise : Stratégie et Implémentation",
     subtitle: "Transformez votre organisation avec l'intelligence artificielle",
     author: "Geoffroy Streit",
-    authorDescription: "Expert en transformation digitale et IA d'entreprise",
+    authorDescription: "Promoteur de transformation digitale et IA d'entreprise",
     duration: "4-5 heures",
     level: "Intermédiaire à Avancé",
     audience: "Dirigeants, managers, consultants et chefs de projet",
