@@ -335,7 +335,7 @@ const IAEthique = () => {
                     <div className="space-y-1">
                       <p><strong>Métriques :</strong> LIME scores, SHAP values, feature importance</p>
                       <p><strong>Tests :</strong> Compréhensibilité utilisateur, cohérence explications</p>
-                      <p><strong>Exigences :</strong> Explications en langage naturel < 30 secondes</p>
+                      <p><strong>Exigences :</strong> Explications en langage naturel &lt; 30 secondes</p>
                     </div>
                   </CardContent>
                 </Card>
