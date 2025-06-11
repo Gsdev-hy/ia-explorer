@@ -1,5 +1,4 @@
 
-
 import { Resource } from '../resourcesData';
 
 export const courses: Resource[] = [
@@ -12,6 +11,16 @@ export const courses: Resource[] = [
     type: "cours",
     year: 2024,
     tags: ["Prompt Engineering", "Communication IA", "Pratique", "Interne"],
+    isInternal: true
+  },
+  {
+    title: "Chain of Prompts : Maîtriser l'Art de l'Enchaînement d'Invites",
+    source: "IA Explorer",
+    description: "Apprenez à construire des conversations complexes avec l'IA en enchaînant des requêtes successives. Technique essentielle pour résoudre des problèmes complexes et obtenir des résultats précis.",
+    link: "/cours/chain-of-prompts",
+    type: "cours",
+    year: 2024,
+    tags: ["Chain of Prompts", "Conversation IA", "Technique avancée", "Productivité", "Interne"],
     isInternal: true
   },
   {
@@ -174,6 +183,19 @@ export const internalCoursesData = [
     language: 'Français'
   },
   {
+    id: 'chain-of-prompts',
+    title: 'Chain of Prompts : Maîtriser l\'Art de l\'Enchaînement d\'Invites',
+    description: 'Technique avancée pour construire des conversations complexes avec l\'IA en enchaînant des requêtes successives pour des résultats optimaux.',
+    link: '/cours/chain-of-prompts',
+    category: 'Technique',
+    level: 'Intermédiaire',
+    duration: '3h',
+    tags: ['Chain of Prompts', 'Conversation IA', 'Technique avancée', 'Optimisation'],
+    author: 'Geoffroy Streit',
+    year: 2024,
+    language: 'Français'
+  },
+  {
     id: 'ia-creativite',
     title: 'IA et Créativité : Révolutionner les processus créatifs',
     description: 'Découvrez comment l\'intelligence artificielle transforme les domaines créatifs : art, musique, écriture, design et innovation.',
@@ -242,4 +264,3 @@ export const internalCoursesData = [
 
 // Export principal - utilisé par les autres composants
 export const coursesData = courses;
-
