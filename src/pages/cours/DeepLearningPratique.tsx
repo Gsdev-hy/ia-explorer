@@ -253,13 +253,30 @@ const DeepLearningPratique = () => {
                 <CardContent>
                   <InteractiveExample
                     title="Calculateur de configuration optimale"
+                    description="Déterminez la configuration idéale pour vos projets deep learning"
                     steps={[
-                      "Évaluez votre budget disponible",
-                      "Définissez vos objectifs (recherche/production)",
-                      "Choisissez entre GPU local ou cloud",
-                      "Configurez votre environnement automatiquement"
+                      {
+                        title: "Évaluation du budget",
+                        description: "Définissez votre budget disponible pour hardware/cloud",
+                        result: "Budget optimisé selon vos contraintes"
+                      },
+                      {
+                        title: "Définition des objectifs",
+                        description: "Précisez si c'est pour recherche, prototypage ou production",
+                        result: "Objectifs clarifiés et priorisés"
+                      },
+                      {
+                        title: "Choix GPU local vs cloud",
+                        description: "Comparez les options selon vos besoins",
+                        result: "Recommandation personnalisée"
+                      },
+                      {
+                        title: "Configuration automatique",
+                        description: "Génération des scripts d'installation",
+                        result: "Environnement prêt à l'emploi"
+                      }
                     ]}
-                    outcome="Configuration personnalisée avec scripts d'installation"
+                    finalMessage="Configuration personnalisée avec scripts d'installation automatique générés selon vos besoins spécifiques."
                   />
                 </CardContent>
               </Card>
@@ -463,13 +480,30 @@ volumes:
                 <CardContent>
                   <InteractiveExample
                     title="Déploiement automatisé avec MLflow"
+                    description="Apprenez à mettre en place un pipeline complet de déploiement"
                     steps={[
-                      "Versioning automatique des modèles",
-                      "Tests de régression et performance", 
-                      "Déploiement graduel (blue-green)",
-                      "Monitoring en temps réel"
+                      {
+                        title: "Versioning automatique",
+                        description: "Configuration du versioning automatique des modèles",
+                        result: "Modèles versionnés et traçables"
+                      },
+                      {
+                        title: "Tests de régression",
+                        description: "Mise en place de tests automatisés de performance",
+                        result: "Validation automatique des performances"
+                      },
+                      {
+                        title: "Déploiement graduel",
+                        description: "Configuration du déploiement blue-green",
+                        result: "Déploiement sans interruption de service"
+                      },
+                      {
+                        title: "Monitoring temps réel",
+                        description: "Configuration des alertes et métriques",
+                        result: "Surveillance continue avec rollback automatique"
+                      }
                     ]}
-                    outcome="Pipeline production-ready avec rollback automatique"
+                    finalMessage="Pipeline production-ready avec rollback automatique et monitoring complet configuré."
                   />
                 </CardContent>
               </Card>
