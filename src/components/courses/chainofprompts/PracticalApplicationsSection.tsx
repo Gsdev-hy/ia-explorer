@@ -244,11 +244,11 @@ Include les variables d'environnement et healthchecks."`}
               <div className="text-xs text-emerald-700 dark:text-emerald-300">étapes maximum</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">> 85%</div>
+              <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">&gt; 85%</div>
               <div className="text-xs text-emerald-700 dark:text-emerald-300">taux de validation</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">< 3s</div>
+              <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">&lt; 3s</div>
               <div className="text-xs text-emerald-700 dark:text-emerald-300">temps/itération</div>
             </div>
             <div>
