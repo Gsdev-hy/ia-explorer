@@ -24,6 +24,16 @@ export const courses: Resource[] = [
     isInternal: true
   },
   {
+    title: "Paramètres des LLM : Comprendre et Optimiser les Modèles de Langage",
+    source: "IA Explorer",
+    description: "Découvrez tous les paramètres qui caractérisent un LLM : architecture, hyperparamètres, optimisations et métriques. Apprenez à choisir et configurer le bon modèle selon vos besoins.",
+    link: "/cours/parametres-llm",
+    type: "cours",
+    year: 2024,
+    tags: ["LLM", "Paramètres", "Architecture", "Optimisation", "Technique", "Interne"],
+    isInternal: true
+  },
+  {
     title: "IA et Créativité : Révolutionner votre Processus Créatif",
     source: "IA Explorer", 
     description: "Explorez comment l'IA transforme la créativité dans tous les domaines. Apprenez à utiliser les outils d'IA générative pour amplifier votre potentiel créatif.",
@@ -191,6 +201,19 @@ export const internalCoursesData = [
     level: 'Intermédiaire',
     duration: '3h',
     tags: ['Chain of Prompts', 'Conversation IA', 'Technique avancée', 'Optimisation'],
+    author: 'Geoffroy Streit',
+    year: 2024,
+    language: 'Français'
+  },
+  {
+    id: 'parametres-llm',
+    title: 'Paramètres des LLM : Comprendre et Optimiser les Modèles de Langage',
+    description: 'Cartographie complète des paramètres techniques et fonctionnels des LLM. Apprenez à choisir et configurer le bon modèle selon vos besoins.',
+    link: '/cours/parametres-llm',
+    category: 'Technique',
+    level: 'Intermédiaire',
+    duration: '4h',
+    tags: ['LLM', 'Architecture', 'Hyperparamètres', 'Optimisation'],
     author: 'Geoffroy Streit',
     year: 2024,
     language: 'Français'

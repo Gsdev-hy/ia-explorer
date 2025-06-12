@@ -50,6 +50,7 @@ import DeepLearningPratique from "./pages/cours/DeepLearningPratique";
 import NLPComprehension from "./pages/cours/NLPComprehension";
 import IAEntreprise from "./pages/cours/IAEntreprise";
 import IAEthique from "./pages/cours/IAEthique";
+import ParametresLLM from "./pages/cours/ParametresLLM";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -127,6 +128,7 @@ function App() {
                 {/* Routes pour les cours */}
                 <Route path="cours/prompt-engineering" element={<PromptEngineering />} />
                 <Route path="cours/chain-of-prompts" element={<ChainOfPrompts />} />
+                <Route path="cours/parametres-llm" element={<ParametresLLM />} />
                 <Route path="cours/ia-creativite" element={<IACreativite />} />
                 <Route path="cours/deep-learning-pratique" element={<DeepLearningPratique />} />
                 <Route path="cours/nlp-llm-comprehension" element={<NLPComprehension />} />
