@@ -13,7 +13,8 @@ import {
   Play,
   Lightbulb,
   Code,
-  Palette
+  Palette,
+  Target
 } from 'lucide-react';
 import LessonSection from '@/components/courses/LessonSection';
 import TechnicalTooltip from '@/components/courses/TechnicalTooltip';
