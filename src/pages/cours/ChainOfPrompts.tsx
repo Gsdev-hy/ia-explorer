@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Hero from '@/components/Hero';
 import CourseHeader from '@/components/courses/CourseHeader';
@@ -197,8 +196,9 @@ const ChainOfPrompts = () => {
 
             <InteractiveExample
               title="Exemple concret : Création d'une stratégie marketing"
+              description="Démonstration étape par étape d'un chain of prompts efficace"
               steps={exampleSteps}
-              finalOutput="Stratégie marketing complète et personnalisée avec plan d'action détaillé"
+              finalMessage="Stratégie marketing complète et personnalisée avec plan d'action détaillé"
             />
           </div>
         </LessonSection>
