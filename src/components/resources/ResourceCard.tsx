@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -28,7 +29,10 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
 }) => {
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
     if (isInternal) {
       // Navigation interne
       navigate(link);
@@ -108,7 +112,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
           onClick={handleClick}
           variant="outline" 
           size="sm" 
-          className="mt-auto group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
+          className="mt-auto group-hover:bg-primary group-hover:text-primary-foreground transition-colors w-full"
         >
           {isInternal ? 'Suivre le cours' : 'Accéder au cours'}
           <ExternalLink className="ml-2 h-3 w-3" />
