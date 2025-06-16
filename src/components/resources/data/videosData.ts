@@ -3,6 +3,136 @@ import { Resource } from '../resourcesData';
 
 export const videos: Resource[] = [
   {
+    title: "Dossier : l'intelligence artificielle",
+    source: "ARTE Family",
+    description: "Documentaire complet d'ARTE sur l'intelligence artificielle en français",
+    link: "https://www.youtube.com/watch?v=TfL-H8goDF0",
+    type: "vidéo",
+    year: 2024,
+    tags: ["documentaire", "français", "arte"],
+    videoId: "TfL-H8goDF0"
+  },
+  {
+    title: "Intelligence artificielle, une révolution : entre fascination et inquiétude",
+    source: "FRANCE 24",
+    description: "Analyse approfondie de la révolution IA par France 24",
+    link: "https://www.youtube.com/watch?v=YIUnMOM-nI4",
+    type: "vidéo",
+    year: 2024,
+    tags: ["actualité", "français", "révolution"],
+    videoId: "YIUnMOM-nI4"
+  },
+  {
+    title: "FORMATION INTELLIGENCE ARTIFICIELLE : Le Cours COMPLET pour Tout Savoir ! - 2025",
+    source: "Vincent OG",
+    description: "Formation complète en français sur l'intelligence artificielle",
+    link: "https://www.youtube.com/watch?v=uJZ4kycF8bc",
+    type: "vidéo",
+    year: 2025,
+    tags: ["formation", "français", "complet"],
+    videoId: "uJZ4kycF8bc"
+  },
+  {
+    title: "Quels sont les risques de l'intelligence artificielle pour les enfants ?",
+    source: "FRANCE 24",
+    description: "Analyse des risques de l'IA pour les plus jeunes par France 24",
+    link: "https://www.youtube.com/watch?v=W96zBFEqTDY",
+    type: "vidéo",
+    year: 2024,
+    tags: ["enfants", "risques", "français"],
+    videoId: "W96zBFEqTDY"
+  },
+  {
+    title: "Le B.A.-BA de l'intelligence artificielle | Une leçon de géopolitique",
+    source: "ARTE",
+    description: "Les bases de l'IA expliquées dans une perspective géopolitique par ARTE",
+    link: "https://www.youtube.com/watch?v=Zjr1bqE8Bg0",
+    type: "vidéo",
+    year: 2024,
+    tags: ["géopolitique", "bases", "arte"],
+    videoId: "Zjr1bqE8Bg0"
+  },
+  {
+    title: "Comment ces IA inventent-elles des images ?",
+    source: "ScienceEtonnante",
+    description: "Explication du fonctionnement des IA génératives d'images en français",
+    link: "https://www.youtube.com/watch?v=tdelUss-5hY",
+    type: "vidéo",
+    year: 2023,
+    tags: ["génération", "images", "science"],
+    videoId: "tdelUss-5hY"
+  },
+  {
+    title: "Une intelligence artificielle peut-elle être créative ?",
+    source: "ScienceEtonnante",
+    description: "Exploration de la créativité artificielle par David Louapre",
+    link: "https://www.youtube.com/watch?v=xuBzQ38DNhE",
+    type: "vidéo",
+    year: 2023,
+    tags: ["créativité", "philosophie", "science"],
+    videoId: "xuBzQ38DNhE"
+  },
+  {
+    title: "Le deep learning",
+    source: "ScienceEtonnante",
+    description: "Introduction claire au deep learning en français",
+    link: "https://www.youtube.com/watch?v=trWrEWfhTVg",
+    type: "vidéo",
+    year: 2022,
+    tags: ["deep learning", "technique", "vulgarisation"],
+    videoId: "trWrEWfhTVg"
+  },
+  {
+    title: "Comment les I.A. font-elles pour comprendre notre langue ?",
+    source: "ScienceEtonnante",
+    description: "Explication du traitement du langage naturel par les IA",
+    link: "https://www.youtube.com/watch?v=CsQNF9s78Nc",
+    type: "vidéo",
+    year: 2023,
+    tags: ["nlp", "langage", "compréhension"],
+    videoId: "CsQNF9s78Nc"
+  },
+  {
+    title: "Ce qui se cache derrière le fonctionnement de ChatGPT",
+    source: "ScienceEtonnante",
+    description: "Analyse technique du fonctionnement de ChatGPT en français",
+    link: "https://www.youtube.com/watch?v=7ell8KEbhJo",
+    type: "vidéo",
+    year: 2023,
+    tags: ["chatgpt", "llm", "explication"],
+    videoId: "7ell8KEbhJo"
+  },
+  {
+    title: "Les 4 étapes pour entrainer un LLM",
+    source: "ScienceEtonnante",
+    description: "Guide complet de l'entraînement des modèles de langage",
+    link: "https://www.youtube.com/watch?v=YcIbZGTRMjI",
+    type: "vidéo",
+    year: 2024,
+    tags: ["entraînement", "llm", "technique"],
+    videoId: "YcIbZGTRMjI"
+  },
+  {
+    title: "[REPLAY] - La carte de l'IA",
+    source: "Machine Learnia",
+    description: "Vue d'ensemble complète du paysage de l'intelligence artificielle",
+    link: "https://www.youtube.com/watch?v=mT6NnslbNLM",
+    type: "vidéo",
+    year: 2024,
+    tags: ["panorama", "carte", "formation"],
+    videoId: "mT6NnslbNLM"
+  },
+  {
+    title: "FORMATION MACHINE LEARNING",
+    source: "Machine Learnia",
+    description: "Formation complète en machine learning en français",
+    link: "https://www.youtube.com/watch?v=EUD07IiviJg",
+    type: "vidéo",
+    year: 2023,
+    tags: ["machine learning", "formation", "français"],
+    videoId: "EUD07IiviJg"
+  },
+  {
     title: "But what is a neural network?",
     source: "3Blue1Brown",
     description: "Explication visuelle exceptionnelle des réseaux de neurones avec animations claires",
@@ -11,16 +141,6 @@ export const videos: Resource[] = [
     year: 2017,
     tags: ["réseaux de neurones", "visuel", "fondamentaux"],
     videoId: "aircAruvnKk"
-  },
-  {
-    title: "Machine Learning Explained",
-    source: "Zach Star",
-    description: "Introduction accessible au machine learning avec exemples concrets",
-    link: "https://www.youtube.com/watch?v=ukzFI9rgwfU",
-    type: "vidéo",
-    year: 2020,
-    tags: ["machine learning", "introduction", "exemples"],
-    videoId: "ukzFI9rgwfU"
   },
   {
     title: "Transformer Neural Networks Explained",
@@ -33,36 +153,6 @@ export const videos: Resource[] = [
     videoId: "4Bdc55j80l8"
   },
   {
-    title: "GPT-3 Demo: Amazing AI",
-    source: "OpenAI",
-    description: "Démonstration officielle des capacités impressionnantes de GPT-3",
-    link: "https://www.youtube.com/watch?v=8psgEDhT1MM",
-    type: "vidéo",
-    year: 2020,
-    tags: ["GPT-3", "démonstration", "capacités"],
-    videoId: "8psgEDhT1MM"
-  },
-  {
-    title: "AlphaGo - The Movie",
-    source: "DeepMind",
-    description: "Documentaire sur la victoire historique d'AlphaGo contre le champion de Go",
-    link: "https://www.youtube.com/watch?v=WXuK6gekU1Y",
-    type: "vidéo",
-    year: 2017,
-    tags: ["AlphaGo", "jeu", "histoire"],
-    videoId: "WXuK6gekU1Y"
-  },
-  {
-    title: "Deep Learning State of the Art",
-    source: "Lex Fridman",
-    description: "Aperçu de l'état de l'art en deep learning par un expert MIT",
-    link: "https://www.youtube.com/watch?v=0VH1Lim8gL8",
-    type: "vidéo",
-    year: 2020,
-    tags: ["état de l'art", "deep learning", "MIT"],
-    videoId: "0VH1Lim8gL8"
-  },
-  {
     title: "How Large Language Models Work",
     source: "Andrej Karpathy",
     description: "Explication technique des LLM par l'ex-directeur IA de Tesla",
@@ -71,95 +161,5 @@ export const videos: Resource[] = [
     year: 2023,
     tags: ["LLM", "technique", "expert"],
     videoId: "zjkBMFhNj_g"
-  },
-  {
-    title: "The Future of AI",
-    source: "TED",
-    description: "Conférence TED sur l'avenir de l'intelligence artificielle",
-    link: "https://www.youtube.com/watch?v=8nt3edWLgIg",
-    type: "vidéo",
-    year: 2023,
-    tags: ["futur", "vision", "TED"],
-    videoId: "8nt3edWLgIg"
-  },
-  {
-    title: "AI Ethics and Safety",
-    source: "Two Minute Papers",
-    description: "Exploration des enjeux éthiques et de sécurité de l'IA moderne",
-    link: "https://www.youtube.com/watch?v=LqjP7O9SxOM",
-    type: "vidéo",
-    year: 2023,
-    tags: ["éthique", "sécurité", "enjeux"],
-    videoId: "LqjP7O9SxOM"
-  },
-  {
-    title: "Stanford CS229: Machine Learning",
-    source: "Stanford University",
-    description: "Cours complet de machine learning de Stanford par Andrew Ng",
-    link: "https://www.youtube.com/watch?v=jGwO_UgTS7I&list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU",
-    type: "vidéo",
-    year: 2018,
-    tags: ["cours", "stanford", "complet"],
-    videoId: "jGwO_UgTS7I"
-  },
-  {
-    title: "Intelligence Artificielle expliquée simplement",
-    source: "Science Étonnante",
-    description: "Vulgarisation excellente de l'IA en français par David Louapre",
-    link: "https://www.youtube.com/watch?v=oV74Najm6Nc",
-    type: "vidéo",
-    year: 2023,
-    tags: ["vulgarisation", "français", "concepts"],
-    videoId: "oV74Najm6Nc"
-  },
-  {
-    title: "ChatGPT : Comment ça marche vraiment ?",
-    source: "Monsieur Phi",
-    description: "Explication claire et pédagogique du fonctionnement de ChatGPT en français",
-    link: "https://www.youtube.com/watch?v=3wLVBjt7m_8",
-    type: "vidéo",
-    year: 2023,
-    tags: ["ChatGPT", "explication", "français"],
-    videoId: "3wLVBjt7m_8"
-  },
-  {
-    title: "L'IA va-t-elle détruire l'humanité ?",
-    source: "Le Réveilleur",
-    description: "Analyse équilibrée des risques et opportunités de l'IA en français",
-    link: "https://www.youtube.com/watch?v=gHx_XUYiVaU",
-    type: "vidéo",
-    year: 2023,
-    tags: ["risques", "analyse", "français"],
-    videoId: "gHx_XUYiVaU"
-  },
-  {
-    title: "Deep Learning : Les bases expliquées",
-    source: "Machine Learnia",
-    description: "Introduction complète au deep learning en français avec exemples pratiques",
-    link: "https://www.youtube.com/watch?v=bPFNxD3Yuwk",
-    type: "vidéo",
-    year: 2022,
-    tags: ["deep learning", "formation", "français"],
-    videoId: "bPFNxD3Yuwk"
-  },
-  {
-    title: "L'IA dans notre quotidien",
-    source: "Arte",
-    description: "Documentaire Arte sur l'impact de l'IA dans la vie quotidienne",
-    link: "https://www.youtube.com/watch?v=Kqjy8LxKoZ0",
-    type: "vidéo",
-    year: 2024,
-    tags: ["quotidien", "documentaire", "société"],
-    videoId: "Kqjy8LxKoZ0"
-  },
-  {
-    title: "Cédric Villani explique l'IA",
-    source: "France Inter",
-    description: "Interview du mathématicien Cédric Villani sur les enjeux de l'IA",
-    link: "https://www.youtube.com/watch?v=QvKMwLjdK-s",
-    type: "vidéo",
-    year: 2024,
-    tags: ["expert", "politique", "enjeux"],
-    videoId: "QvKMwLjdK-s"
   }
 ];

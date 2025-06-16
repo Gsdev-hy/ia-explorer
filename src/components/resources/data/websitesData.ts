@@ -6,10 +6,64 @@ export const websites: Resource[] = [
     title: "France IA",
     source: "France IA",
     description: "Hub français de l'intelligence artificielle avec actualités, formations et ressources",
-    link: "https://www.franceia.com/",
+    link: "https://franceia.com/",
     type: "site web",
     year: 2024,
     tags: ["actualités", "formation", "communauté"]
+  },
+  {
+    title: "Intelligence artificielle - Wikipédia",
+    source: "Wikipédia",
+    description: "Article encyclopédique complet sur l'intelligence artificielle en français",
+    link: "https://fr.wikipedia.org/wiki/Intelligence_artificielle",
+    type: "site web",
+    year: 2024,
+    tags: ["encyclopédie", "référence", "français"]
+  },
+  {
+    title: "Objectif IA - Initiez-vous à l'intelligence artificielle",
+    source: "France Num",
+    description: "Formation gratuite du gouvernement français pour s'initier à l'IA",
+    link: "https://www.francenum.gouv.fr/formations/objectif-ia-initiez-vous-lintelligence-artificielle",
+    type: "site web",
+    year: 2024,
+    tags: ["formation", "gouvernement", "gratuit"]
+  },
+  {
+    title: "Yiaho - L'IA au service de votre créativité",
+    source: "Yiaho",
+    description: "Plateforme française dédiée aux outils d'IA créative et productive",
+    link: "https://www.yiaho.com/",
+    type: "site web",
+    year: 2024,
+    tags: ["créativité", "outils", "français"]
+  },
+  {
+    title: "Mistral AI",
+    source: "Mistral AI",
+    description: "Champion français de l'IA générative avec des modèles open source",
+    link: "https://mistral.ai/fr/",
+    type: "site web",
+    year: 2024,
+    tags: ["français", "modèles", "open source"]
+  },
+  {
+    title: "Comment l'intelligence artificielle va changer nos vies",
+    source: "CNRS Le Journal",
+    description: "Dossier complet du CNRS sur l'impact de l'IA dans notre société",
+    link: "https://lejournal.cnrs.fr/dossiers/comment-lintelligence-artificielle-va-changer-nos-vies",
+    type: "site web",
+    year: 2024,
+    tags: ["recherche", "cnrs", "société"]
+  },
+  {
+    title: "Intelligence artificielle - Le Monde",
+    source: "Le Monde",
+    description: "Section dédiée à l'IA du quotidien français Le Monde",
+    link: "https://www.lemonde.fr/intelligence-artificielle/",
+    type: "site web",
+    year: 2024,
+    tags: ["actualités", "presse", "français"]
   },
   {
     title: "OpenAI",

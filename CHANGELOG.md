@@ -1,4 +1,3 @@
-
 # Changelog - IA Explorer
 
 Ce fichier documente les changements et améliorations apportés au projet IA Explorer, une ressource éducative sur l'intelligence artificielle.
@@ -6,75 +5,28 @@ Ce fichier documente les changements et améliorations apportés au projet IA Ex
 ## [Unreleased]
 
 ### Ajouté
-- **Enrichissement majeur des ressources françaises** :
-  - 6 nouveaux sites web français spécialisés en IA (ActuIA, IA France, Les Numériques IA, etc.)
-  - 6 nouvelles vidéos éducatives en français (Science Étonnante, Monsieur Phi, Le Réveilleur, etc.)
-  - Ressources gouvernementales françaises (AI for Humanity)
-- **Pages de cours internes enrichies** avec contenu pédagogique approfondi :
-  - IA pour l'Entreprise : Stratégie et Implémentation
-  - IA Éthique et Responsable : Guide Pratique
-- **Nouveaux composants réutilisables** pour les cours :
-  - `ExpandableSection` pour sections dépliables avec animations
-  - `InteractiveExample` pour exemples pas-à-pas interactifs
-  - `QuickFactBox` pour affichage de métriques et faits rapides
-  - `InfoTooltip` pour informations contextuelles
-- **Info cards enrichies** sur la page d'accueil avec liens vers tous les cours internes
-- **Logo IA Explorer animé** avec animation séquentielle des lettres et effets au survol
-- **Menu mobile restructuré** avec navigation hiérarchique par catégories
-- **Navigation au clavier complète** avec indicateurs de focus et attributs ARIA
-- **Skip link** pour accéder directement au contenu principal
-- **Transitions entre pages** pour une expérience utilisateur fluide
-- **Section recherche de projets** dans la page À propos pour opportunités professionnelles
-- **Respect des préférences** de réduction de mouvement (prefers-reduced-motion)
-
-### Amélioré
-- **Audit complet des liens de ressources** :
-  - Correction du lien France IA (franceia.com → franceia.com)
-  - Vérification et mise à jour de tous les liens sites web, livres et vidéos
-  - Remplacement des liens morts par des alternatives pertinentes
-  - Validation de la correspondance contenu/description pour chaque ressource
-- **Correction du lien 404** pour "Coder avec l'IA" depuis la page d'accueil
-- **Page d'accueil** avec 12 info cards incluant les 6 cours internes
-- **Accessibilité des cours** via les info cards dédiées avec navigation directe
-- **Page À propos** enrichie avec informations détaillées sur l'auteur Geoffroy Streit
-- **Mission du projet** élargie avec approche pédagogique et éthique renforcée
-- **Photo de profil** mise à jour avec image LinkedIn de l'auteur
-- **Biographie de l'auteur** précisant son parcours d'ingénieur optronique en reconversion IT
-- **Accessibilité générale** avec trap focus, navigation clavier et attributs ARIA
-- **Animation du menu mobile** avec effets de cascade et transitions fluides
-- **Désactivation des liens GitHub/LinkedIn** tout en conservant les icônes pour l'affichage
+- **Audit complet et correction manuelle des ressources** :
+  - Remplacement de toutes les vidéos par des contenus français vérifiés
+  - Ajout de 13 nouvelles vidéos françaises de qualité (ARTE, France 24, ScienceEtonnante, Machine Learnia)
+  - Ajout de 7 nouveaux sites web français (Wikipédia IA, France Num, Yiaho, Mistral AI, CNRS, Le Monde IA)
+  - Correction du lien France IA (franceia.com)
+  - Vérification manuelle de tous les liens de ressources
 
 ### Corrigé
-- **Erreur TypeScript** dans `InferenceParametersSection.tsx` (import manquant pour `Target`)
-- **Liens de ressources défaillants** dans toutes les catégories (sites web, livres, vidéos)
-- **Descriptions non-correspondantes** aux contenus réels des ressources
-- **Liens YouTube** avec videoId corrects pour l'affichage des miniatures
+- **Route de la page À propos** : correction de `/about` vers `/a-propos` dans App.tsx
+- **Liens vidéos morts** supprimés et remplacés par des contenus français vérifiés
+- **Correspondance description/contenu** : toutes les ressources correspondent maintenant à leur description
 
-### À faire
+### À faire prochainement
 - **Système d'audit automatique des liens** :
   - Script de vérification périodique des URLs (status HTTP, redirections)
   - Validation automatique du contenu par mots-clés
   - Interface de signalement pour les utilisateurs
   - Système de notation qualité des ressources
+- **Intégration des miniatures YouTube** : récupération automatique des covers pictures pour les info cards vidéos
 - **Refactorisation des fichiers longs** :
   - `src/pages/Index.tsx` (actuellement 286 lignes) nécessite une restructuration
   - `src/components/resources/data/coursesData.ts` (actuellement 246 lignes) à découper
-- **Pages non accessibles** depuis le menu principal à intégrer :
-  - Pages de cours : `/cours/*` (6 pages)
-  - Pages spécialisées : `/ia-multimodale`, `/nlp-concepts`, `/llm-details`
-  - Outils pratiques : `/calculateur-couts-ia`, `/simulateur-ia`
-  - Pages thématiques : `/ethique-gouvernance`, `/ia-marketing-vente`, `/ia-environnement`
-  - Pages utilitaires : `/utiliser-ia-quotidien`, `/utiliser-ia-travail`, `/organiser-services-ia`
-  - Pages éducatives : `/ia-expliquee-aux-enfants`, `/premier-modele-ml`
-  - Outils développement : `/coder-avec-ia`, `/python-ia`, `/gemini-chat`
-
-### Technique
-- Correction des erreurs TypeScript liées aux caractères non échappés en JSX
-- Optimisation des animations CSS avec gestion des préférences utilisateur
-- Amélioration de la structure des composants pour une meilleure maintenabilité
-- Refactorisation du code pour respecter les bonnes pratiques d'accessibilité
-- Ajout de nouvelles icônes Lucide pour les cours (GraduationCap, Target, Palette)
-- Validation manuelle et correction de 100% des liens de ressources externes
 
 ## [0.6.2] - 2025-04-10
 

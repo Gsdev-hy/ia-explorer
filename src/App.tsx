@@ -94,7 +94,7 @@ function App() {
               <Route path="/" element={<Layout />}>
                 <Route index element={<Index />} />
                 <Route path="accueil" element={<Home />} />
-                <Route path="about" element={<About />} />
+                <Route path="a-propos" element={<About />} />
                 <Route path="les-bases" element={<LesBases />} />
                 <Route path="machine-learning" element={<MachineLearning />} />
                 <Route path="deep-learning" element={<DeepLearning />} />
