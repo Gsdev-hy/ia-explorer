@@ -1,7 +1,8 @@
 
 import { Resource } from '../resourcesData';
+import { extractVideoId } from '@/services/youtubeService';
 
-export const videos: Resource[] = [
+const videoResources = [
   {
     title: "Dossier : l'intelligence artificielle",
     source: "ARTE Family",
@@ -9,8 +10,7 @@ export const videos: Resource[] = [
     link: "https://www.youtube.com/watch?v=TfL-H8goDF0",
     type: "vidéo",
     year: 2024,
-    tags: ["documentaire", "français", "arte"],
-    videoId: "TfL-H8goDF0"
+    tags: ["documentaire", "français", "arte"]
   },
   {
     title: "Intelligence artificielle, une révolution : entre fascination et inquiétude",
@@ -19,8 +19,7 @@ export const videos: Resource[] = [
     link: "https://www.youtube.com/watch?v=YIUnMOM-nI4",
     type: "vidéo",
     year: 2024,
-    tags: ["actualité", "français", "révolution"],
-    videoId: "YIUnMOM-nI4"
+    tags: ["actualité", "français", "révolution"]
   },
   {
     title: "FORMATION INTELLIGENCE ARTIFICIELLE : Le Cours COMPLET pour Tout Savoir ! - 2025",
@@ -29,8 +28,7 @@ export const videos: Resource[] = [
     link: "https://www.youtube.com/watch?v=uJZ4kycF8bc",
     type: "vidéo",
     year: 2025,
-    tags: ["formation", "français", "complet"],
-    videoId: "uJZ4kycF8bc"
+    tags: ["formation", "français", "complet"]
   },
   {
     title: "Quels sont les risques de l'intelligence artificielle pour les enfants ?",
@@ -39,8 +37,7 @@ export const videos: Resource[] = [
     link: "https://www.youtube.com/watch?v=W96zBFEqTDY",
     type: "vidéo",
     year: 2024,
-    tags: ["enfants", "risques", "français"],
-    videoId: "W96zBFEqTDY"
+    tags: ["enfants", "risques", "français"]
   },
   {
     title: "Le B.A.-BA de l'intelligence artificielle | Une leçon de géopolitique",
@@ -49,8 +46,7 @@ export const videos: Resource[] = [
     link: "https://www.youtube.com/watch?v=Zjr1bqE8Bg0",
     type: "vidéo",
     year: 2024,
-    tags: ["géopolitique", "bases", "arte"],
-    videoId: "Zjr1bqE8Bg0"
+    tags: ["géopolitique", "bases", "arte"]
   },
   {
     title: "Comment ces IA inventent-elles des images ?",
@@ -59,8 +55,7 @@ export const videos: Resource[] = [
     link: "https://www.youtube.com/watch?v=tdelUss-5hY",
     type: "vidéo",
     year: 2023,
-    tags: ["génération", "images", "science"],
-    videoId: "tdelUss-5hY"
+    tags: ["génération", "images", "science"]
   },
   {
     title: "Une intelligence artificielle peut-elle être créative ?",
@@ -69,8 +64,7 @@ export const videos: Resource[] = [
     link: "https://www.youtube.com/watch?v=xuBzQ38DNhE",
     type: "vidéo",
     year: 2023,
-    tags: ["créativité", "philosophie", "science"],
-    videoId: "xuBzQ38DNhE"
+    tags: ["créativité", "philosophie", "science"]
   },
   {
     title: "Le deep learning",
@@ -79,8 +73,7 @@ export const videos: Resource[] = [
     link: "https://www.youtube.com/watch?v=trWrEWfhTVg",
     type: "vidéo",
     year: 2022,
-    tags: ["deep learning", "technique", "vulgarisation"],
-    videoId: "trWrEWfhTVg"
+    tags: ["deep learning", "technique", "vulgarisation"]
   },
   {
     title: "Comment les I.A. font-elles pour comprendre notre langue ?",
@@ -89,8 +82,7 @@ export const videos: Resource[] = [
     link: "https://www.youtube.com/watch?v=CsQNF9s78Nc",
     type: "vidéo",
     year: 2023,
-    tags: ["nlp", "langage", "compréhension"],
-    videoId: "CsQNF9s78Nc"
+    tags: ["nlp", "langage", "compréhension"]
   },
   {
     title: "Ce qui se cache derrière le fonctionnement de ChatGPT",
@@ -99,8 +91,7 @@ export const videos: Resource[] = [
     link: "https://www.youtube.com/watch?v=7ell8KEbhJo",
     type: "vidéo",
     year: 2023,
-    tags: ["chatgpt", "llm", "explication"],
-    videoId: "7ell8KEbhJo"
+    tags: ["chatgpt", "llm", "explication"]
   },
   {
     title: "Les 4 étapes pour entrainer un LLM",
@@ -109,8 +100,7 @@ export const videos: Resource[] = [
     link: "https://www.youtube.com/watch?v=YcIbZGTRMjI",
     type: "vidéo",
     year: 2024,
-    tags: ["entraînement", "llm", "technique"],
-    videoId: "YcIbZGTRMjI"
+    tags: ["entraînement", "llm", "technique"]
   },
   {
     title: "[REPLAY] - La carte de l'IA",
@@ -119,8 +109,7 @@ export const videos: Resource[] = [
     link: "https://www.youtube.com/watch?v=mT6NnslbNLM",
     type: "vidéo",
     year: 2024,
-    tags: ["panorama", "carte", "formation"],
-    videoId: "mT6NnslbNLM"
+    tags: ["panorama", "carte", "formation"]
   },
   {
     title: "FORMATION MACHINE LEARNING",
@@ -129,8 +118,7 @@ export const videos: Resource[] = [
     link: "https://www.youtube.com/watch?v=EUD07IiviJg",
     type: "vidéo",
     year: 2023,
-    tags: ["machine learning", "formation", "français"],
-    videoId: "EUD07IiviJg"
+    tags: ["machine learning", "formation", "français"]
   },
   {
     title: "But what is a neural network?",
@@ -139,8 +127,7 @@ export const videos: Resource[] = [
     link: "https://www.youtube.com/watch?v=aircAruvnKk",
     type: "vidéo",
     year: 2017,
-    tags: ["réseaux de neurones", "visuel", "fondamentaux"],
-    videoId: "aircAruvnKk"
+    tags: ["réseaux de neurones", "visuel", "fondamentaux"]
   },
   {
     title: "Transformer Neural Networks Explained",
@@ -149,8 +136,7 @@ export const videos: Resource[] = [
     link: "https://www.youtube.com/watch?v=4Bdc55j80l8",
     type: "vidéo",
     year: 2021,
-    tags: ["transformer", "architecture", "NLP"],
-    videoId: "4Bdc55j80l8"
+    tags: ["transformer", "architecture", "NLP"]
   },
   {
     title: "How Large Language Models Work",
@@ -159,7 +145,12 @@ export const videos: Resource[] = [
     link: "https://www.youtube.com/watch?v=zjkBMFhNj_g",
     type: "vidéo",
     year: 2023,
-    tags: ["LLM", "technique", "expert"],
-    videoId: "zjkBMFhNj_g"
+    tags: ["LLM", "technique", "expert"]
   }
 ];
+
+// Génération automatique des videoId pour toutes les vidéos
+export const videos: Resource[] = videoResources.map(video => ({
+  ...video,
+  videoId: extractVideoId(video.link) || undefined
+}));

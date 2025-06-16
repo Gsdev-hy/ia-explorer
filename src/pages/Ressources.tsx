@@ -9,6 +9,7 @@ import ResourcesHeader from '@/components/resources/ResourcesHeader';
 import ResourceFilters from '@/components/resources/ResourceFilters';
 import UnifiedResourcesTabsSection from '@/components/resources/UnifiedResourcesTabsSection';
 import ContinueLearningSection from '@/components/resources/ContinueLearningSection';
+import { QualityControlSection } from '@/components/resources/QualityControlSection';
 
 // Données
 import { 
@@ -16,6 +17,9 @@ import {
   scientificPublications, 
   iaTools 
 } from '@/components/resources/resourcesData';
+
+// Hook pour l'audit
+import { useResourceAudit } from '@/hooks/useResourceAudit';
 
 /**
  * Page présentant des ressources externes pour approfondir les connaissances en IA
@@ -80,6 +84,15 @@ const Ressources = () => {
     return matchesSearch;
   });
   
+  // Hook d'audit pour toutes les ressources
+  const {
+    auditResults,
+    qualityScores,
+    isAuditing,
+    auditAllResources,
+    auditResource
+  } = useResourceAudit(filteredResources);
+  
   // Fonction pour défiler vers les ressources
   const scrollToResources = () => {
     resourcesRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -128,6 +141,17 @@ const Ressources = () => {
         onOpenQuiz={() => setShowQuizDialog(true)}
         onOpenAddResourceForm={() => setShowAddResourceForm(true)}
       />
+
+      {/* Section de contrôle qualité déplacée en bas de page */}
+      <section className="section-container">
+        <QualityControlSection
+          auditResults={auditResults}
+          qualityScores={qualityScores}
+          isAuditing={isAuditing}
+          onAuditAll={auditAllResources}
+          resources={filteredResources}
+        />
+      </section>
       
       <AddResourceForm 
         isOpen={showAddResourceForm} 

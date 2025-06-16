@@ -46,14 +46,45 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
 
   // Récupération de la miniature YouTube
   useEffect(() => {
-    if (type.toLowerCase() === 'vidéo' && (videoId || link.includes('youtube.com') || link.includes('youtu.be'))) {
+    const isVideoType = type.toLowerCase() === 'vidéo';
+    const isYouTubeLink = link.includes('youtube.com') || link.includes('youtu.be');
+    
+    if (isVideoType && isYouTubeLink) {
       const id = videoId || extractVideoId(link);
+      console.log('Extracting video ID for:', title, 'ID:', id, 'Original link:', link);
+      
       if (id) {
-        const thumbnail = getYouTubeThumbnail(id, 'medium');
-        setThumbnailUrl(thumbnail);
+        // Essaie d'abord la qualité moyenne, puis fait un fallback
+        const qualities = ['mqdefault', 'hqdefault', 'default'];
+        let currentQualityIndex = 0;
+        
+        const tryThumbnail = (qualityIndex: number) => {
+          if (qualityIndex >= qualities.length) {
+            console.warn('Aucune miniature disponible pour:', title);
+            return;
+          }
+          
+          const quality = qualities[qualityIndex];
+          const thumbnailUrl = `https://img.youtube.com/vi/${id}/${quality}.jpg`;
+          
+          // Test de l'existence de la miniature
+          const img = new Image();
+          img.onload = () => {
+            setThumbnailUrl(thumbnailUrl);
+            setThumbnailError(false);
+            console.log('Miniature chargée pour:', title, thumbnailUrl);
+          };
+          img.onerror = () => {
+            console.warn('Miniature non disponible:', thumbnailUrl);
+            tryThumbnail(qualityIndex + 1);
+          };
+          img.src = thumbnailUrl;
+        };
+        
+        tryThumbnail(currentQualityIndex);
       }
     }
-  }, [videoId, link, type]);
+  }, [videoId, link, type, title]);
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -115,7 +146,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
         <CardContent className="p-6 h-full flex flex-col">
           {/* Miniature YouTube pour les vidéos */}
           {thumbnailUrl && !thumbnailError && (
-            <div className="mb-4 rounded-lg overflow-hidden">
+            <div className="mb-4 rounded-lg overflow-hidden bg-gray-100">
               <img 
                 src={thumbnailUrl}
                 alt={`Miniature de ${title}`}

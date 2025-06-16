@@ -4,7 +4,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import ResourceCard from './ResourceCard';
 import { ScientificPublicationCard } from './ScientificPublicationCard';
 import { IAToolCard } from './IAToolCard';
-import { AuditControlPanel } from './AuditControlPanel';
 import { Resource, ScientificPublication, IAToolResource } from './resourcesData';
 import { useResourceAudit } from '@/hooks/useResourceAudit';
 
@@ -33,15 +32,6 @@ const UnifiedResourcesTabsSection: React.FC<UnifiedResourcesTabsSectionProps> = 
 
   return (
     <div className="space-y-6">
-      {/* Panneau de contrôle d'audit */}
-      <AuditControlPanel
-        auditResults={auditResults}
-        qualityScores={qualityScores}
-        isAuditing={isAuditing}
-        onAuditAll={auditAllResources}
-        totalResources={filteredResources.length}
-      />
-
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="toutes">Toutes ({filteredResources.length})</TabsTrigger>
