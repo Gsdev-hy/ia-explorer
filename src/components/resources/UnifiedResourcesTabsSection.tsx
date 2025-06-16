@@ -5,7 +5,7 @@ import ResourceCard from './ResourceCard';
 import { ScientificPublicationCard } from './ScientificPublicationCard';
 import { IAToolCard } from './IAToolCard';
 import { AuditControlPanel } from './AuditControlPanel';
-import { Resource, ScientificPublication, IAToolResource } from '../resourcesData';
+import { Resource, ScientificPublication, IAToolResource } from './resourcesData';
 import { useResourceAudit } from '@/hooks/useResourceAudit';
 
 interface UnifiedResourcesTabsSectionProps {
@@ -77,12 +77,7 @@ const UnifiedResourcesTabsSection: React.FC<UnifiedResourcesTabsSectionProps> = 
             {filteredScientificPublications.map((publication, index) => (
               <ScientificPublicationCard
                 key={`${publication.link}-${index}`}
-                title={publication.title}
-                authors={publication.authors}
-                journal={publication.journal}
-                year={publication.year}
-                description={publication.description}
-                link={publication.link}
+                publication={publication}
               />
             ))}
           </div>
@@ -93,12 +88,7 @@ const UnifiedResourcesTabsSection: React.FC<UnifiedResourcesTabsSectionProps> = 
             {filteredIATools.map((tool, index) => (
               <IAToolCard
                 key={`${tool.link}-${index}`}
-                name={tool.name}
-                description={tool.description}
-                link={tool.link}
-                category={tool.category}
-                pricing={tool.pricing}
-                features={tool.features}
+                tool={tool}
               />
             ))}
           </div>
