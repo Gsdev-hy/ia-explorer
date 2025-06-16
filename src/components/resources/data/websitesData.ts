@@ -6,7 +6,7 @@ export const websites: Resource[] = [
     title: "France IA",
     source: "France IA",
     description: "Hub français de l'intelligence artificielle avec actualités, formations et ressources",
-    link: "https://www.france-ia.com/",
+    link: "https://www.franceia.com/",
     type: "site web",
     year: 2024,
     tags: ["actualités", "formation", "communauté"]
@@ -91,5 +91,59 @@ export const websites: Resource[] = [
     type: "site web",
     year: 2024,
     tags: ["sécurité", "claude", "recherche"]
+  },
+  {
+    title: "ActuIA",
+    source: "ActuIA",
+    description: "Média français spécialisé dans l'actualité de l'intelligence artificielle",
+    link: "https://www.actuia.com/",
+    type: "site web",
+    year: 2024,
+    tags: ["actualités", "france", "média"]
+  },
+  {
+    title: "IA France",
+    source: "IA France",
+    description: "Communauté française dédiée à l'intelligence artificielle et ses applications",
+    link: "https://ia-france.com/",
+    type: "site web",
+    year: 2024,
+    tags: ["communauté", "france", "applications"]
+  },
+  {
+    title: "Les Numériques - IA",
+    source: "Les Numériques",
+    description: "Section dédiée à l'IA du magazine tech français Les Numériques",
+    link: "https://www.lesnumeriques.com/tag/intelligence-artificielle",
+    type: "site web",
+    year: 2024,
+    tags: ["actualités", "tests", "france"]
+  },
+  {
+    title: "Siècle Digital - IA",
+    source: "Siècle Digital",
+    description: "Actualités et analyses sur l'intelligence artificielle en français",
+    link: "https://siecledigital.fr/tag/intelligence-artificielle/",
+    type: "site web",
+    year: 2024,
+    tags: ["actualités", "analyses", "digital"]
+  },
+  {
+    title: "Journal du Net - IA",
+    source: "Journal du Net",
+    description: "Section IA du JDN avec actualités tech et business en français",
+    link: "https://www.journaldunet.com/intelligence-artificielle/",
+    type: "site web",
+    year: 2024,
+    tags: ["business", "actualités", "tech"]
+  },
+  {
+    title: "AI for Humanity",
+    source: "Gouvernement français",
+    description: "Initiative française pour une IA éthique et responsable",
+    link: "https://www.aiforhumanity.fr/",
+    type: "site web",
+    year: 2024,
+    tags: ["éthique", "gouvernement", "stratégie"]
   }
 ];

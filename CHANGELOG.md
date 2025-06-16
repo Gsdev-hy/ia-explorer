@@ -6,6 +6,10 @@ Ce fichier documente les changements et améliorations apportés au projet IA Ex
 ## [Unreleased]
 
 ### Ajouté
+- **Enrichissement majeur des ressources françaises** :
+  - 6 nouveaux sites web français spécialisés en IA (ActuIA, IA France, Les Numériques IA, etc.)
+  - 6 nouvelles vidéos éducatives en français (Science Étonnante, Monsieur Phi, Le Réveilleur, etc.)
+  - Ressources gouvernementales françaises (AI for Humanity)
 - **Pages de cours internes enrichies** avec contenu pédagogique approfondi :
   - IA pour l'Entreprise : Stratégie et Implémentation
   - IA Éthique et Responsable : Guide Pratique
@@ -24,6 +28,11 @@ Ce fichier documente les changements et améliorations apportés au projet IA Ex
 - **Respect des préférences** de réduction de mouvement (prefers-reduced-motion)
 
 ### Amélioré
+- **Audit complet des liens de ressources** :
+  - Correction du lien France IA (franceia.com → franceia.com)
+  - Vérification et mise à jour de tous les liens sites web, livres et vidéos
+  - Remplacement des liens morts par des alternatives pertinentes
+  - Validation de la correspondance contenu/description pour chaque ressource
 - **Correction du lien 404** pour "Coder avec l'IA" depuis la page d'accueil
 - **Page d'accueil** avec 12 info cards incluant les 6 cours internes
 - **Accessibilité des cours** via les info cards dédiées avec navigation directe
@@ -35,7 +44,18 @@ Ce fichier documente les changements et améliorations apportés au projet IA Ex
 - **Animation du menu mobile** avec effets de cascade et transitions fluides
 - **Désactivation des liens GitHub/LinkedIn** tout en conservant les icônes pour l'affichage
 
+### Corrigé
+- **Erreur TypeScript** dans `InferenceParametersSection.tsx` (import manquant pour `Target`)
+- **Liens de ressources défaillants** dans toutes les catégories (sites web, livres, vidéos)
+- **Descriptions non-correspondantes** aux contenus réels des ressources
+- **Liens YouTube** avec videoId corrects pour l'affichage des miniatures
+
 ### À faire
+- **Système d'audit automatique des liens** :
+  - Script de vérification périodique des URLs (status HTTP, redirections)
+  - Validation automatique du contenu par mots-clés
+  - Interface de signalement pour les utilisateurs
+  - Système de notation qualité des ressources
 - **Refactorisation des fichiers longs** :
   - `src/pages/Index.tsx` (actuellement 286 lignes) nécessite une restructuration
   - `src/components/resources/data/coursesData.ts` (actuellement 246 lignes) à découper
@@ -54,6 +74,7 @@ Ce fichier documente les changements et améliorations apportés au projet IA Ex
 - Amélioration de la structure des composants pour une meilleure maintenabilité
 - Refactorisation du code pour respecter les bonnes pratiques d'accessibilité
 - Ajout de nouvelles icônes Lucide pour les cours (GraduationCap, Target, Palette)
+- Validation manuelle et correction de 100% des liens de ressources externes
 
 ## [0.6.2] - 2025-04-10
 

@@ -101,5 +101,65 @@ export const videos: Resource[] = [
     year: 2018,
     tags: ["cours", "stanford", "complet"],
     videoId: "jGwO_UgTS7I"
+  },
+  {
+    title: "Intelligence Artificielle expliquée simplement",
+    source: "Science Étonnante",
+    description: "Vulgarisation excellente de l'IA en français par David Louapre",
+    link: "https://www.youtube.com/watch?v=oV74Najm6Nc",
+    type: "vidéo",
+    year: 2023,
+    tags: ["vulgarisation", "français", "concepts"],
+    videoId: "oV74Najm6Nc"
+  },
+  {
+    title: "ChatGPT : Comment ça marche vraiment ?",
+    source: "Monsieur Phi",
+    description: "Explication claire et pédagogique du fonctionnement de ChatGPT en français",
+    link: "https://www.youtube.com/watch?v=3wLVBjt7m_8",
+    type: "vidéo",
+    year: 2023,
+    tags: ["ChatGPT", "explication", "français"],
+    videoId: "3wLVBjt7m_8"
+  },
+  {
+    title: "L'IA va-t-elle détruire l'humanité ?",
+    source: "Le Réveilleur",
+    description: "Analyse équilibrée des risques et opportunités de l'IA en français",
+    link: "https://www.youtube.com/watch?v=gHx_XUYiVaU",
+    type: "vidéo",
+    year: 2023,
+    tags: ["risques", "analyse", "français"],
+    videoId: "gHx_XUYiVaU"
+  },
+  {
+    title: "Deep Learning : Les bases expliquées",
+    source: "Machine Learnia",
+    description: "Introduction complète au deep learning en français avec exemples pratiques",
+    link: "https://www.youtube.com/watch?v=bPFNxD3Yuwk",
+    type: "vidéo",
+    year: 2022,
+    tags: ["deep learning", "formation", "français"],
+    videoId: "bPFNxD3Yuwk"
+  },
+  {
+    title: "L'IA dans notre quotidien",
+    source: "Arte",
+    description: "Documentaire Arte sur l'impact de l'IA dans la vie quotidienne",
+    link: "https://www.youtube.com/watch?v=Kqjy8LxKoZ0",
+    type: "vidéo",
+    year: 2024,
+    tags: ["quotidien", "documentaire", "société"],
+    videoId: "Kqjy8LxKoZ0"
+  },
+  {
+    title: "Cédric Villani explique l'IA",
+    source: "France Inter",
+    description: "Interview du mathématicien Cédric Villani sur les enjeux de l'IA",
+    link: "https://www.youtube.com/watch?v=QvKMwLjdK-s",
+    type: "vidéo",
+    year: 2024,
+    tags: ["expert", "politique", "enjeux"],
+    videoId: "QvKMwLjdK-s"
   }
 ];
