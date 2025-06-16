@@ -12,84 +12,84 @@ export const websites: Resource[] = [
     tags: ["actualités", "formation", "communauté"]
   },
   {
-    title: "AI France",
-    source: "AI France",
-    description: "Association française pour le développement de l'IA, événements et formations",
-    link: "https://www.ai-france.fr/",
+    title: "OpenAI",
+    source: "OpenAI",
+    description: "Site officiel d'OpenAI avec documentations, API et dernières innovations en IA",
+    link: "https://openai.com/",
     type: "site web",
     year: 2024,
-    tags: ["association", "événements", "formation"]
+    tags: ["recherche", "API", "LLM"]
   },
   {
-    title: "Institut des Algorithmes",
-    source: "Institut des Algorithmes",
-    description: "Centre de recherche français sur les algorithmes et l'IA",
-    link: "https://www.institutdesalgorithmes.fr/",
+    title: "Hugging Face",
+    source: "Hugging Face",
+    description: "Plateforme collaborative pour le machine learning avec modèles et datasets open source",
+    link: "https://huggingface.co/",
     type: "site web",
     year: 2024,
-    tags: ["recherche", "algorithmes"]
+    tags: ["modèles", "open source", "communauté"]
   },
   {
-    title: "IA et Société - INRIA",
+    title: "INRIA - Intelligence Artificielle",
     source: "INRIA",
-    description: "Réflexions sur l'impact sociétal de l'intelligence artificielle par l'INRIA",
+    description: "Recherches et publications de l'INRIA sur l'intelligence artificielle",
     link: "https://www.inria.fr/fr/intelligence-artificielle",
     type: "site web",
     year: 2024,
-    tags: ["recherche", "société", "éthique"]
+    tags: ["recherche", "publications", "france"]
   },
   {
-    title: "Hub France IA",
-    source: "Hub France IA",
-    description: "Écosystème français de l'IA avec ressources et actualités",
-    link: "https://www.hub-franceia.fr/",
+    title: "Papers With Code",
+    source: "Meta Research",
+    description: "Base de données de publications scientifiques en IA avec code source associé",
+    link: "https://paperswithcode.com/",
     type: "site web",
     year: 2024,
-    tags: ["écosystème", "actualités"]
+    tags: ["recherche", "publications", "code"]
   },
   {
-    title: "IA School",
-    source: "IA School",
-    description: "École spécialisée en intelligence artificielle avec ressources pédagogiques",
-    link: "https://www.intelligence-artificielle-school.com/",
+    title: "Towards Data Science",
+    source: "Medium",
+    description: "Publication Medium avec articles de qualité sur l'IA et data science",
+    link: "https://towardsdatascience.com/",
     type: "site web",
     year: 2024,
-    tags: ["formation", "école"]
+    tags: ["articles", "tutoriels", "communauté"]
   },
   {
-    title: "Le Journal de l'IA",
-    source: "Journal de l'IA",
-    description: "Magazine en ligne dédié à l'actualité de l'intelligence artificielle",
-    link: "https://lejournaldelai.fr/",
+    title: "MIT Technology Review AI",
+    source: "MIT Technology Review",
+    description: "Actualités et analyses approfondies sur l'IA par le MIT",
+    link: "https://www.technologyreview.com/topic/artificial-intelligence/",
     type: "site web",
     year: 2024,
-    tags: ["actualités", "magazine"]
+    tags: ["actualités", "analyses", "MIT"]
   },
   {
-    title: "IA pour tous - CNAM",
-    source: "CNAM",
-    description: "Cours et ressources du CNAM sur l'intelligence artificielle",
-    link: "https://www.cnam.fr/intelligence-artificielle/",
+    title: "Google AI",
+    source: "Google",
+    description: "Recherches et innovations de Google en intelligence artificielle",
+    link: "https://ai.google/",
     type: "site web",
     year: 2024,
-    tags: ["formation", "cours"]
+    tags: ["recherche", "google", "innovations"]
   },
   {
-    title: "OpenClassrooms IA",
-    source: "OpenClassrooms",
-    description: "Parcours et cours gratuits sur l'intelligence artificielle",
-    link: "https://openclassrooms.com/fr/paths/intelligence-artificielle",
+    title: "Stanford HAI",
+    source: "Stanford University",
+    description: "Institute for Human-Centered AI de Stanford avec recherches et publications",
+    link: "https://hai.stanford.edu/",
     type: "site web",
     year: 2024,
-    tags: ["formation", "gratuit", "cours"]
+    tags: ["recherche", "stanford", "éthique"]
   },
   {
-    title: "Simplon IA",
-    source: "Simplon",
-    description: "Formations inclusives en intelligence artificielle et data science",
-    link: "https://simplon.co/formation-intelligence-artificielle/",
+    title: "Anthropic",
+    source: "Anthropic",
+    description: "Recherche en sécurité de l'IA et développement de Claude",
+    link: "https://www.anthropic.com/",
     type: "site web",
     year: 2024,
-    tags: ["formation", "inclusif"]
+    tags: ["sécurité", "claude", "recherche"]
   }
 ];

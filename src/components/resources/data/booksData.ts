@@ -3,111 +3,111 @@ import { Resource } from '../resourcesData';
 
 export const books: Resource[] = [
   {
-    title: "L'Intelligence Artificielle pour les Nuls",
-    source: "First Interactive",
-    description: "Guide accessible pour comprendre l'IA sans prérequis techniques",
-    link: "https://www.amazon.fr/Intelligence-Artificielle-pour-Nuls/dp/2412037434",
+    title: "Artificial Intelligence: A Modern Approach",
+    source: "Stuart Russell & Peter Norvig",
+    description: "Référence mondiale en IA, couvrant tous les aspects fondamentaux avec approche moderne",
+    link: "https://www.amazon.fr/Artificial-Intelligence-Modern-Approach-Global/dp/1292401133",
     type: "livre",
     year: 2020,
-    tags: ["débutant", "guide", "accessible"]
+    tags: ["référence", "fondamentaux", "algorithmes"]
   },
   {
-    title: "IA : La Plus Grande Mutation de l'Histoire",
-    source: "Flammarion",
-    description: "Analyse de l'impact de l'IA sur notre société par Kai-Fu Lee",
-    link: "https://www.amazon.fr/Plus-Grande-Mutation-lHistoire/dp/2081491354",
+    title: "Deep Learning",
+    source: "Ian Goodfellow, Yoshua Bengio, Aaron Courville",
+    description: "Bible du deep learning par les pionniers du domaine, disponible gratuitement en ligne",
+    link: "https://www.deeplearningbook.org/",
+    type: "livre",
+    year: 2016,
+    tags: ["deep learning", "gratuit", "technique"]
+  },
+  {
+    title: "The Hundred-Page Machine Learning Book",
+    source: "Andriy Burkov",
+    description: "Introduction concise et pratique au machine learning en 100 pages",
+    link: "https://themlbook.com/",
     type: "livre",
     year: 2019,
-    tags: ["société", "impact", "futur"]
+    tags: ["concis", "pratique", "débutant"]
   },
   {
-    title: "L'Intelligence Artificielle Expliquée à Mon Boss",
-    source: "Kawa",
-    description: "Démystifier l'IA pour les dirigeants et managers",
-    link: "https://www.amazon.fr/Intelligence-Artificielle-Expliquée-Mon-Boss/dp/2367781567",
+    title: "Pattern Recognition and Machine Learning",
+    source: "Christopher Bishop",
+    description: "Approche mathématique rigoureuse du machine learning et reconnaissance de formes",
+    link: "https://www.microsoft.com/en-us/research/people/cmbishop/prml-book/",
     type: "livre",
-    year: 2021,
-    tags: ["management", "business", "vulgarisation"]
+    year: 2006,
+    tags: ["mathématiques", "théorie", "avancé"]
   },
   {
-    title: "Algorithmes : La Bombe à Retardement",
-    source: "Seuil",
-    description: "Réflexion critique sur l'impact des algorithmes dans notre société",
-    link: "https://www.amazon.fr/Algorithmes-bombe-retardement-Cathy-ONeil/dp/2021341690",
+    title: "Hands-On Machine Learning",
+    source: "Aurélien Géron",
+    description: "Guide pratique avec Python, Scikit-Learn, Keras et TensorFlow",
+    link: "https://www.oreilly.com/library/view/hands-on-machine-learning/9781098125967/",
+    type: "livre",
+    year: 2022,
+    tags: ["pratique", "python", "tensorflow"]
+  },
+  {
+    title: "Life 3.0: Being Human in the Age of Artificial Intelligence",
+    source: "Max Tegmark",
+    description: "Réflexion sur l'avenir de l'humanité à l'ère de l'intelligence artificielle",
+    link: "https://www.amazon.fr/Life-3-0-Being-Artificial-Intelligence/dp/1101946598",
+    type: "livre",
+    year: 2017,
+    tags: ["philosophie", "futur", "société"]
+  },
+  {
+    title: "Superintelligence",
+    source: "Nick Bostrom",
+    description: "Analyse des risques et opportunités de l'intelligence artificielle générale",
+    link: "https://www.amazon.fr/Superintelligence-Paths-Dangers-Strategies/dp/0198739834",
+    type: "livre",
+    year: 2014,
+    tags: ["AGI", "risques", "stratégie"]
+  },
+  {
+    title: "The Master Algorithm",
+    source: "Pedro Domingos",
+    description: "Quête du machine learning ultime qui unifiera toutes les approches",
+    link: "https://www.amazon.fr/Master-Algorithm-Ultimate-Learning-Machine/dp/0465065708",
+    type: "livre",
+    year: 2015,
+    tags: ["algorithmes", "unification", "vision"]
+  },
+  {
+    title: "Human Compatible",
+    source: "Stuart Russell",
+    description: "Comment assurer que l'IA reste bénéfique pour l'humanité",
+    link: "https://www.amazon.fr/Human-Compatible-Artificial-Intelligence-Problem/dp/0525558616",
+    type: "livre",
+    year: 2019,
+    tags: ["sécurité", "alignement", "éthique"]
+  },
+  {
+    title: "The Elements of Statistical Learning",
+    source: "Trevor Hastie, Robert Tibshirani, Jerome Friedman",
+    description: "Référence mathématique pour l'apprentissage statistique, disponible gratuitement",
+    link: "https://hastie.su.stanford.edu/ElemStatLearn/",
+    type: "livre",
+    year: 2009,
+    tags: ["statistiques", "gratuit", "mathématiques"]
+  },
+  {
+    title: "AI for the Real World",
+    source: "Neil Sahota & Michael Ashley",
+    description: "Guide pratique pour implémenter l'IA dans les entreprises",
+    link: "https://www.amazon.fr/AI-Real-World-Practical-Artificial/dp/1260458253",
+    type: "livre",
+    year: 2020,
+    tags: ["entreprise", "implémentation", "pratique"]
+  },
+  {
+    title: "Machine Learning Yearning",
+    source: "Andrew Ng",
+    description: "Stratégies pour structurer les projets de machine learning, gratuit",
+    link: "https://www.mlyearning.org/",
     type: "livre",
     year: 2018,
-    tags: ["algorithmes", "critique", "société"]
-  },
-  {
-    title: "L'IA va-t-elle aussi tuer la démocratie ?",
-    source: "Seuil",
-    description: "Analyse des risques de l'IA pour nos institutions démocratiques",
-    link: "https://www.amazon.fr/lIA-va-t-elle-aussi-démocratie/dp/2021428699",
-    type: "livre",
-    year: 2020,
-    tags: ["démocratie", "politique", "risques"]
-  },
-  {
-    title: "Machine Learning pour les Nuls",
-    source: "First Interactive",
-    description: "Introduction accessible au machine learning et à ses applications",
-    link: "https://www.amazon.fr/Machine-Learning-pour-Nuls/dp/2412043345",
-    type: "livre",
-    year: 2021,
-    tags: ["machine learning", "débutant", "pratique"]
-  },
-  {
-    title: "L'Intelligence Artificielle, pas sans elles !",
-    source: "Belin",
-    description: "Le rôle des femmes dans le développement de l'IA",
-    link: "https://www.amazon.fr/LIntelligence-Artificielle-pas-sans-elles/dp/2701197937",
-    type: "livre",
-    year: 2019,
-    tags: ["femmes", "diversité", "histoire"]
-  },
-  {
-    title: "Révolution IA : Comment l'intelligence artificielle va changer le monde",
-    source: "Dunod",
-    description: "Vision prospective de l'impact de l'IA sur différents secteurs",
-    link: "https://www.amazon.fr/Révolution-intelligence-artificielle-changer-monde/dp/2100789317",
-    type: "livre",
-    year: 2020,
-    tags: ["prospective", "transformation", "secteurs"]
-  },
-  {
-    title: "L'IA et nous : Cohabiter avec les algorithmes",
-    source: "Flammarion",
-    description: "Guide pratique pour comprendre et vivre avec l'IA au quotidien",
-    link: "https://www.amazon.fr/LIA-nous-Cohabiter-avec-algorithmes/dp/2081489295",
-    type: "livre",
-    year: 2021,
-    tags: ["quotidien", "cohabitation", "pratique"]
-  },
-  {
-    title: "Intelligence Artificielle : Enquête sur ces technologies qui changent nos vies",
-    source: "Flammarion",
-    description: "Enquête journalistique sur l'IA et ses applications concrètes",
-    link: "https://www.amazon.fr/Intelligence-Artificielle-technologies-changent-vies/dp/2081436639",
-    type: "livre",
-    year: 2019,
-    tags: ["enquête", "applications", "impact"]
-  },
-  {
-    title: "L'Intelligence Artificielle : Vers une domination programmée ?",
-    source: "Le Cavalier Bleu",
-    description: "Analyse critique des enjeux géopolitiques de l'IA",
-    link: "https://www.amazon.fr/LIntelligence-Artificielle-domination-programmée/dp/2846706271",
-    type: "livre",
-    year: 2020,
-    tags: ["géopolitique", "domination", "critique"]
-  },
-  {
-    title: "IA et Éthique : Les défis de demain",
-    source: "Presses Universitaires",
-    description: "Réflexions éthiques sur le développement de l'intelligence artificielle",
-    link: "https://www.amazon.fr/IA-Éthique-défis-demain/dp/2130827659",
-    type: "livre",
-    year: 2021,
-    tags: ["éthique", "philosophie", "défis"]
+    tags: ["stratégie", "projets", "gratuit"]
   }
 ];
