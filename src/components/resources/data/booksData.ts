@@ -1,7 +1,24 @@
-
 import { Resource } from '../resourcesData';
 
 export const books: Resource[] = [
+  {
+    title: "Intelligence artificielle : Enquête sur ces technologies qui changent nos vies",
+    source: "Flammarion",
+    description: "Livre accessible en français sur l'impact de l'IA dans notre société",
+    link: "https://www.lisez.com/livre-grand-format/intelligence-artificielle/9782081515914",
+    type: "livre",
+    year: 2023,
+    tags: ["français", "société", "vulgarisation"]
+  },
+  {
+    title: "L'Intelligence Artificielle pour les Nuls",
+    source: "First Interactive",
+    description: "Guide complet et accessible pour comprendre l'IA en français",
+    link: "https://www.pourlesnuls.fr/livres/informatique/intelligence-artificielle-pour-les-nuls-9782412047439",
+    type: "livre",
+    year: 2023,
+    tags: ["français", "débutant", "guide"]
+  },
   {
     title: "Artificial Intelligence: A Modern Approach",
     source: "Stuart Russell & Peter Norvig",

@@ -30,49 +30,49 @@ const IANews = () => {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("all");
 
-  // Liste des flux RSS à suivre
+  // Liste des flux RSS français et internationaux de qualité
   const rssFeeds: RssFeed[] = [
     {
-      id: "mit",
-      name: "MIT News AI",
-      url: "https://api.rss2json.com/v1/api.json?rss_url=https://news.mit.edu/rss/topic/artificial-intelligence",
-      logo: "https://news.mit.edu/sites/default/files/favicon.ico"
+      id: "interstices",
+      name: "Interstices",
+      url: "https://api.rss2json.com/v1/api.json?rss_url=https://interstices.info/feed/",
+      logo: "https://interstices.info/favicon.ico"
     },
     {
-      id: "deepmind",
-      name: "DeepMind Blog",
-      url: "https://api.rss2json.com/v1/api.json?rss_url=https://deepmind.com/blog/feed/basic",
-      logo: "https://deepmind.google/static/favicon.ico"
+      id: "inria",
+      name: "INRIA Actualités",
+      url: "https://api.rss2json.com/v1/api.json?rss_url=https://www.inria.fr/rss.xml",
+      logo: "https://www.inria.fr/favicon.ico"
     },
     {
-      id: "openai",
-      name: "OpenAI Blog",
-      url: "https://api.rss2json.com/v1/api.json?rss_url=https://openai.com/blog/rss/",
-      logo: "https://openai.com/favicon.ico"
+      id: "usbek-rica",
+      name: "Usbek & Rica",
+      url: "https://api.rss2json.com/v1/api.json?rss_url=https://usbeketrica.com/feed",
+      logo: "https://usbeketrica.com/favicon.ico"
     },
     {
-      id: "google-ai",
-      name: "Google AI",
-      url: "https://api.rss2json.com/v1/api.json?rss_url=https://ai.googleblog.com/feeds/posts/default",
-      logo: "https://ai.google/static/images/favicon.ico"
+      id: "siecle-digital",
+      name: "Siècle Digital",
+      url: "https://api.rss2json.com/v1/api.json?rss_url=https://siecledigital.fr/feed/",
+      logo: "https://siecledigital.fr/favicon.ico"
     },
     {
-      id: "berkeley",
-      name: "BAIR Blog",
-      url: "https://api.rss2json.com/v1/api.json?rss_url=https://bair.berkeley.edu/blog/feed.xml",
-      logo: "https://bair.berkeley.edu/favicon.ico"
+      id: "hal-science",
+      name: "HAL Science",
+      url: "https://api.rss2json.com/v1/api.json?rss_url=https://hal.science/search/index/q/*/fq/docType_s:ART/fq/submitType_s:notice/fq/keyword_s:intelligence%20artificielle/sort/submittedDate_tdate%20desc/rss",
+      logo: "https://hal.science/favicon.ico"
     },
     {
-      id: "marktechpost",
-      name: "MarkTechPost",
-      url: "https://api.rss2json.com/v1/api.json?rss_url=https://www.marktechpost.com/feed/",
-      logo: "https://www.marktechpost.com/favicon.ico"
+      id: "numerama",
+      name: "Numerama IA",
+      url: "https://api.rss2json.com/v1/api.json?rss_url=https://www.numerama.com/tag/intelligence-artificielle/feed/",
+      logo: "https://www.numerama.com/favicon.ico"
     },
     {
-      id: "kdnuggets",
-      name: "KDNuggets",
-      url: "https://api.rss2json.com/v1/api.json?rss_url=https://www.kdnuggets.com/feed",
-      logo: "https://www.kdnuggets.com/favicon.ico"
+      id: "futura-sciences",
+      name: "Futura Sciences",
+      url: "https://api.rss2json.com/v1/api.json?rss_url=https://www.futura-sciences.com/rss/tech/actualites.xml",
+      logo: "https://www.futura-sciences.com/favicon.ico"
     }
   ];
 
@@ -86,33 +86,40 @@ const IANews = () => {
     });
   };
 
-  // Fonction pour parser un flux RSS via l'API rss2json
+  // Fonction améliorée pour parser un flux RSS
   const parseRSS = async (feed: RssFeed) => {
     try {
+      console.log(`Tentative de chargement du flux: ${feed.name}`);
       const response = await fetch(feed.url);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
       const data = await response.json();
       
       if (data.status !== 'ok') {
-        throw new Error(`Erreur de flux: ${data.message || 'Erreur inconnue'}`);
+        console.warn(`Flux ${feed.name} non disponible:`, data.message);
+        return [];
       }
       
-      const parsedItems: NewsItem[] = data.items.map((item: any) => ({
-        title: item.title || "Sans titre",
-        link: item.link || "#",
-        pubDate: item.pubDate || new Date().toUTCString(),
-        description: item.description || "",
-        source: feed.name,
-        categories: item.categories || undefined
-      }));
+      const parsedItems: NewsItem[] = data.items
+        .filter((item: any) => item && item.title) // Filtrer les éléments valides
+        .slice(0, 10) // Limiter à 10 articles par flux
+        .map((item: any) => ({
+          title: item.title || "Sans titre",
+          link: item.link || "#",
+          pubDate: item.pubDate || new Date().toISOString(),
+          description: item.description ? item.description.replace(/<[^>]*>/g, '').substring(0, 200) + '...' : "",
+          source: feed.name,
+          categories: item.categories || []
+        }));
       
+      console.log(`Flux ${feed.name} chargé avec succès: ${parsedItems.length} articles`);
       return parsedItems;
+      
     } catch (error) {
-      console.error(`Erreur lors du parsing du flux ${feed.name}:`, error);
-      toast({
-        title: "Erreur de chargement",
-        description: `Impossible de charger le flux ${feed.name}`,
-        variant: "destructive"
-      });
+      console.warn(`Impossible de charger le flux ${feed.name}:`, error);
       return [];
     }
   };
@@ -123,19 +130,30 @@ const IANews = () => {
       setLoading(true);
       try {
         const allPromises = rssFeeds.map(feed => parseRSS(feed));
-        const results = await Promise.all(allPromises);
+        const results = await Promise.allSettled(allPromises);
         
-        // Fusion et tri des résultats par date (plus récent en premier)
-        const allItems = results.flat().sort((a, b) => {
-          return new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime();
-        });
+        // Traiter les résultats réussis uniquement
+        const allItems = results
+          .filter((result): result is PromisedResolvedResult<NewsItem[]> => result.status === 'fulfilled')
+          .flatMap(result => result.value)
+          .sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
         
+        console.log(`Total d'articles chargés: ${allItems.length}`);
         setNewsItems(allItems);
+        
+        if (allItems.length === 0) {
+          toast({
+            title: "Aucune actualité disponible",
+            description: "Tous les flux RSS sont temporairement indisponibles.",
+            variant: "destructive"
+          });
+        }
+        
       } catch (error) {
         console.error("Erreur lors du chargement des flux:", error);
         toast({
-          title: "Erreur",
-          description: "Impossible de charger les actualités. Veuillez réessayer plus tard.",
+          title: "Erreur de chargement",
+          description: "Impossible de charger les actualités pour le moment.",
           variant: "destructive"
         });
       } finally {
@@ -163,13 +181,16 @@ const IANews = () => {
       </div>
       
       <Tabs defaultValue="all" onValueChange={setActiveTab}>
-        <TabsList className="mb-4">
-          <TabsTrigger value="all">Tous les flux</TabsTrigger>
-          {rssFeeds.map(feed => (
-            <TabsTrigger key={feed.id} value={feed.id}>
-              {feed.name}
-            </TabsTrigger>
-          ))}
+        <TabsList className="mb-4 flex-wrap h-auto">
+          <TabsTrigger value="all">Tous les flux ({newsItems.length})</TabsTrigger>
+          {rssFeeds.map(feed => {
+            const count = newsItems.filter(item => item.source === feed.name).length;
+            return (
+              <TabsTrigger key={feed.id} value={feed.id}>
+                {feed.name} ({count})
+              </TabsTrigger>
+            );
+          })}
         </TabsList>
 
         <TabsContent value={activeTab} className="mt-0">
@@ -195,7 +216,7 @@ const IANews = () => {
                 </div>
                 <h3 className="mt-4 text-lg font-semibold">Aucune actualité disponible</h3>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Nous n'avons pas pu récupérer d'actualités pour le moment. Veuillez réessayer plus tard.
+                  Les flux RSS sont temporairement indisponibles. Veuillez réessayer plus tard.
                 </p>
               </CardContent>
             </Card>
@@ -203,7 +224,7 @@ const IANews = () => {
             <ScrollArea className="h-[600px] pr-4">
               <div className="grid gap-4">
                 {filteredNews.map((item, index) => (
-                  <Card key={index} className="group overflow-hidden">
+                  <Card key={`${item.source}-${index}`} className="group overflow-hidden">
                     <CardHeader className="pb-2">
                       <div className="flex items-center justify-between mb-1">
                         <Badge variant="outline" className="text-xs">
@@ -221,10 +242,9 @@ const IANews = () => {
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="pb-2">
-                      <div 
-                        className="text-sm text-muted-foreground line-clamp-3"
-                        dangerouslySetInnerHTML={{ __html: item.description }}
-                      />
+                      <p className="text-sm text-muted-foreground line-clamp-3">
+                        {item.description}
+                      </p>
                     </CardContent>
                     <CardFooter className="pt-0 flex justify-between items-center">
                       {item.categories && item.categories.length > 0 && (
