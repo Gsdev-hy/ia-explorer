@@ -30,14 +30,19 @@ const UnifiedResourcesTabsSection: React.FC<UnifiedResourcesTabsSectionProps> = 
     auditResource
   } = useResourceAudit(filteredResources);
 
+  // Calculs pour les compteurs d'onglets
+  const coursesCount = filteredResources.filter(r => r.type === 'cours').length;
+  const videosCount = filteredResources.filter(r => r.type === 'vidéo').length;
+
   return (
     <div className="space-y-6">
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-5">
           <TabsTrigger value="toutes">Toutes ({filteredResources.length})</TabsTrigger>
+          <TabsTrigger value="cours">Cours ({coursesCount})</TabsTrigger>
           <TabsTrigger value="publications">Publications ({filteredScientificPublications.length})</TabsTrigger>
           <TabsTrigger value="outils">Outils IA ({filteredIATools.length})</TabsTrigger>
-          <TabsTrigger value="videos">Vidéos ({filteredResources.filter(r => r.type === 'vidéo').length})</TabsTrigger>
+          <TabsTrigger value="videos">Vidéos ({videosCount})</TabsTrigger>
         </TabsList>
 
         <TabsContent value="toutes" className="space-y-6">
@@ -59,6 +64,30 @@ const UnifiedResourcesTabsSection: React.FC<UnifiedResourcesTabsSectionProps> = 
                 onAuditRequest={() => auditResource(resource)}
               />
             ))}
+          </div>
+        </TabsContent>
+
+        <TabsContent value="cours" className="space-y-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredResources
+              .filter(resource => resource.type === 'cours')
+              .map((resource, index) => (
+                <ResourceCard
+                  key={`${resource.link}-${index}`}
+                  title={resource.title}
+                  source={resource.source}
+                  description={resource.description}
+                  link={resource.link}
+                  type={resource.type}
+                  year={resource.year}
+                  tags={resource.tags}
+                  isInternal={resource.isInternal}
+                  videoId={resource.videoId}
+                  auditResult={auditResults.get(resource.link)}
+                  qualityScore={qualityScores.get(resource.link)}
+                  onAuditRequest={() => auditResource(resource)}
+                />
+              ))}
           </div>
         </TabsContent>
 
