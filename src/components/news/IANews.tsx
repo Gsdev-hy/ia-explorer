@@ -134,7 +134,7 @@ const IANews = () => {
         
         // Traiter les résultats réussis uniquement
         const allItems = results
-          .filter((result): result is PromisedResolvedResult<NewsItem[]> => result.status === 'fulfilled')
+          .filter((result): result is PromiseSettledResult<NewsItem[]> & { status: 'fulfilled' } => result.status === 'fulfilled')
           .flatMap(result => result.value)
           .sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
         
