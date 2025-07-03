@@ -1,8 +1,17 @@
-
 import { Resource } from '../resourcesData';
 
 export const courses: Resource[] = [
   // Cours internes (développés dans l'app)
+  {
+    title: "Les Bases de l'Apprentissage Supervisé : Guide Pratique et Interactif",
+    source: "IA Explorer",
+    description: "Découvrez les fondamentaux de l'apprentissage supervisé avec des exemples concrets, des analogies simples et des visualisations interactives. Parfait pour débuter en machine learning.",
+    link: "/cours/apprentissage-supervise",
+    type: "cours",
+    year: 2024,
+    tags: ["Apprentissage Supervisé", "Machine Learning", "Débutant", "Interactif", "Interne"],
+    isInternal: true
+  },
   {
     title: "Maîtriser les Prompts : Guide Complet du Prompt Engineering",
     source: "IA Explorer",
@@ -179,6 +188,19 @@ export const courses: Resource[] = [
 
 // Structure détaillée pour les cours internes seulement
 export const internalCoursesData = [
+  {
+    id: 'apprentissage-supervise',
+    title: 'Les Bases de l\'Apprentissage Supervisé : Guide Pratique et Interactif',
+    description: 'Découvrez les fondamentaux de l\'apprentissage supervisé avec des exemples concrets, des analogies simples et des visualisations interactives.',
+    link: '/cours/apprentissage-supervise',
+    category: 'Machine Learning',
+    level: 'Débutant',
+    duration: '3h',
+    tags: ['Apprentissage Supervisé', 'Machine Learning', 'Classification', 'Régression'],
+    author: 'Geoffroy Streit',
+    year: 2024,
+    language: 'Français'
+  },
   {
     id: 'prompt-engineering',
     title: 'Prompt Engineering : Maîtriser l\'art de la communication avec l\'IA',
