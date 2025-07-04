@@ -26,6 +26,10 @@ const GeminiChatPage = lazy(() => import('./pages/GeminiChatPage'));
 const Confidentialite = lazy(() => import('./pages/Confidentialite'));
 const CalculateurCoutsIA = lazy(() => import('./pages/CalculateurCoutsIA'));
 
+// Pages Histoire et Niveaux IA restaurées
+const HistoireIA = lazy(() => import('./pages/HistoireIA'));
+const NiveauxIA = lazy(() => import('./pages/NiveauxIA'));
+
 // Cours
 const PromptEngineering = lazy(() => import('./pages/cours/PromptEngineering'));
 const ChainOfPrompts = lazy(() => import('./pages/cours/ChainOfPrompts'));
@@ -54,6 +58,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/les-bases" element={<LesBases />} />
                     <Route path="/types-ia" element={<TypesIA />} />
+                    <Route path="/niveaux-ia" element={<NiveauxIA />} />
                     <Route path="/machine-learning" element={<MachineLearning />} />
                     <Route path="/deep-learning" element={<DeepLearning />} />
                     <Route path="/cas-usage" element={<CasUsage />} />
@@ -69,6 +74,10 @@ function App() {
                     <Route path="/chat" element={<GeminiChatPage />} />
                     <Route path="/confidentialite" element={<Confidentialite />} />
                     <Route path="/calculateur-couts-ia" element={<CalculateurCoutsIA />} />
+                    
+                    {/* Pages Histoire et Niveaux IA restaurées */}
+                    <Route path="/histoire-ia" element={<HistoireIA />} />
+                    <Route path="/histoire" element={<HistoireIA />} />
                     
                     {/* Cours */}
                     <Route path="/cours/prompt-engineering" element={<PromptEngineering />} />
