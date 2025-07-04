@@ -113,17 +113,17 @@ const TypesSection: React.FC = () => {
         <div className="grid md:grid-cols-3 gap-4">
           <QuickFactBox
             title="Métrique de Classification"
-            content="On mesure le % de bonnes prédictions (accuracy). Ex: 95% des emails correctement classifiés."
+            description="On mesure le % de bonnes prédictions (accuracy). Ex: 95% des emails correctement classifiés."
             icon="🎯"
           />
           <QuickFactBox
             title="Métrique de Régression"
-            content="On mesure l'erreur moyenne entre prédiction et réalité. Ex: erreur de ±5000€ sur le prix des maisons."
+            description="On mesure l'erreur moyenne entre prédiction et réalité. Ex: erreur de ±5000€ sur le prix des maisons."
             icon="📏"
           />
           <QuickFactBox
             title="Astuce Pratique"
-            content="Posez-vous la question : 'Qu'est-ce que je veux prédire ?' Si c'est une catégorie → Classification. Si c'est un nombre → Régression."
+            description="Posez-vous la question : 'Qu'est-ce que je veux prédire ?' Si c'est une catégorie → Classification. Si c'est un nombre → Régression."
             icon="💡"
           />
         </div>

@@ -30,7 +30,7 @@ const ChallengesSection: React.FC = () => {
               <AnalogyBox
                 title="Analogie : L'étudiant qui apprend par cœur"
                 content="Imaginez un étudiant qui mémorise parfaitement tous les exercices du manuel, mais échoue à l'examen car les questions sont légèrement différentes. C'est exactement le sur-apprentissage : le modèle 'connaît par cœur' les données d'entraînement mais ne généralise pas."
-                variant="warning"
+                variant="info"
               />
 
               <div className="grid md:grid-cols-2 gap-6">
@@ -57,9 +57,9 @@ const ChallengesSection: React.FC = () => {
 
               <QuickFactBox
                 title="Règle d'or"
-                content="Toujours séparer vos données : 60% entraînement, 20% validation, 20% test. Ne JAMAIS toucher aux données de test avant la fin !"
+                description="Toujours séparer vos données : 60% entraînement, 20% validation, 20% test. Ne JAMAIS toucher aux données de test avant la fin !"
                 icon="🔒"
-                variant="warning"
+                variant="default"
               />
             </div>
           </ExpandableSection>
@@ -125,7 +125,7 @@ const ChallengesSection: React.FC = () => {
               <AnalogyBox
                 title="Analogie : Le miroir déformant"
                 content="Si vous apprenez à reconnaître les visages en ne regardant que des photos d'hommes blancs, vous aurez du mal à reconnaître les femmes ou les personnes d'autres origines. L'IA reflète les biais présents dans ses données d'entraînement."
-                variant="warning"
+                variant="info"
               />
 
               <div className="grid md:grid-cols-2 gap-6">
@@ -166,14 +166,14 @@ const ChallengesSection: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-6">
           <QuickFactBox
             title="Checklist Qualité"
-            content="Avant de déployer : Données propres ✓ Validation croisée ✓ Test sur groupes divers ✓ Performance stable ✓ Explicabilité ✓"
+            description="Avant de déployer : Données propres ✓ Validation croisée ✓ Test sur groupes divers ✓ Performance stable ✓ Explicabilité ✓"
             icon="📋"
             variant="success"
           />
           
           <QuickFactBox
             title="Amélioration Continue"
-            content="Un modèle n'est jamais fini ! Surveillez ses performances, collectez feedback, et réentraînez régulièrement avec nouvelles données."
+            description="Un modèle n'est jamais fini ! Surveillez ses performances, collectez feedback, et réentraînez régulièrement avec nouvelles données."
             icon="🔄"
             variant="default"
           />

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import LessonSection from '@/components/courses/LessonSection';
 import QuickFactBox from '@/components/courses/QuickFactBox';
@@ -62,7 +63,7 @@ const ApplicationsSection: React.FC = () => {
 
               <QuickFactBox
                 title="Révolution en cours"
-                content="D'ici 2030, on estime que l'IA permettra de diagnostiquer 85% des maladies rares actuellement non détectées, réduisant de 10 ans le délai moyen de diagnostic."
+                description="D'ici 2030, on estime que l'IA permettra de diagnostiquer 85% des maladies rares actuellement non détectées, réduisant de 10 ans le délai moyen de diagnostic."
                 icon="🚀"
                 variant="success"
               />
@@ -168,21 +169,21 @@ const ApplicationsSection: React.FC = () => {
               <div className="grid md:grid-cols-3 gap-4">
                 <QuickFactBox
                   title="Détection de Fraude"
-                  content="Analyse en temps réel de millions de transactions. PayPal détecte 99.5% des fraudes avec moins de 0.1% de faux positifs."
+                  description="Analyse en temps réel de millions de transactions. PayPal détecte 99.5% des fraudes avec moins de 0.1% de faux positifs."
                   icon="🛡️"
                   variant="warning"
                 />
                 
                 <QuickFactBox
                   title="Scoring Crédit"
-                  content="Évaluation automatique du risque emprunteur en analysant 1000+ variables en quelques secondes."
+                  description="Évaluation automatique du risque emprunteur en analysant 1000+ variables en quelques secondes."
                   icon="📊"
                   variant="success"
                 />
                 
                 <QuickFactBox
                   title="Trading Algorithmique"
-                  content="75% des transactions boursières sont automatisées. Les algorithmes analysent news, tendances, sentiments en millisecondes."
+                  description="75% des transactions boursières sont automatisées. Les algorithmes analysent news, tendances, sentiments en millisecondes."
                   icon="📈"
                   variant="default"
                 />

@@ -61,7 +61,7 @@ const ConceptsSection: React.FC = () => {
 
           <QuickFactBox
             title="Pourquoi 'Supervisé' ?"
-            content="On appelle cela 'supervisé' car nous fournissons la 'supervision' - c'est-à-dire les bonnes réponses - pendant l'apprentissage. C'est comme avoir un professeur qui corrige chaque exercice."
+            description="On appelle cela 'supervisé' car nous fournissons la 'supervision' - c'est-à-dire les bonnes réponses - pendant l'apprentissage. C'est comme avoir un professeur qui corrige chaque exercice."
             icon="👨‍🏫"
             variant="success"
           />

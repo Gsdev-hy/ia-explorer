@@ -55,7 +55,7 @@ const AlgorithmsSection: React.FC = () => {
               
               <QuickFactBox
                 title="Exemple Pratique"
-                content="Prédire le prix d'une maison selon sa surface : chaque m² supplémentaire ajoute environ 2000€ au prix. Simple et efficace !"
+                description="Prédire le prix d'une maison selon sa surface : chaque m² supplémentaire ajoute environ 2000€ au prix. Simple et efficace !"
                 icon="🏡"
               />
             </div>
@@ -85,13 +85,13 @@ const AlgorithmsSection: React.FC = () => {
               <div className="grid md:grid-cols-2 gap-4">
                 <QuickFactBox
                   title="Avantages"
-                  content="Très facile à comprendre et expliquer. Pas besoin de préparer les données. Gère automatiquement les interactions complexes."
+                  description="Très facile à comprendre et expliquer. Pas besoin de préparer les données. Gère automatiquement les interactions complexes."
                   icon="👍"
                   variant="success"
                 />
                 <QuickFactBox
                   title="Inconvénients"
-                  content="Peut facilement sur-apprendre. Instable (petit changement = arbre différent). Biais vers certains types de variables."
+                  description="Peut facilement sur-apprendre. Instable (petit changement = arbre différent). Biais vers certains types de variables."
                   icon="⚠️"
                   variant="warning"
                 />
@@ -122,7 +122,7 @@ const AlgorithmsSection: React.FC = () => {
               
               <QuickFactBox
                 title="Pourquoi c'est magique ?"
-                content="Random Forest corrige les erreurs individuelles de chaque arbre grâce à la diversité. C'est le principe 'l'union fait la force' appliqué au machine learning !"
+                description="Random Forest corrige les erreurs individuelles de chaque arbre grâce à la diversité. C'est le principe 'l'union fait la force' appliqué au machine learning !"
                 icon="✨"
                 variant="success"
               />
@@ -167,13 +167,13 @@ const AlgorithmsSection: React.FC = () => {
               <div className="grid md:grid-cols-2 gap-4">
                 <QuickFactBox
                   title="Superpouvoir"
-                  content="Capable d'apprendre des patterns très complexes et non-linéaires. Excellent pour images, texte, sons."
+                  description="Capable d'apprendre des patterns très complexes et non-linéaires. Excellent pour images, texte, sons."
                   icon="🚀"
                   variant="success"
                 />
                 <QuickFactBox
                   title="Le prix à payer"
-                  content="Besoin de beaucoup de données et de puissance de calcul. Difficile à interpréter ('boîte noire')."
+                  description="Besoin de beaucoup de données et de puissance de calcul. Difficile à interpréter ('boîte noire')."
                   icon="💰"
                   variant="warning"
                 />
