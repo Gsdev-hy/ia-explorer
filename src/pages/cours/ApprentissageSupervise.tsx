@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Hero from '@/components/Hero';
 import CourseHeader from '@/components/courses/CourseHeader';
@@ -17,7 +16,10 @@ import LessonSection from '@/components/courses/LessonSection';
 import DidYouKnow from '@/components/courses/DidYouKnow';
 import CourseConclusion from '@/components/courses/CourseConclusion';
 import BackToResourcesButton from '@/components/courses/BackToResourcesButton';
-import { Brain, Lightbulb, BookOpen, Zap, Target } from 'lucide-react';
+import { Brain, Lightbulb, BookOpen, Zap, Target, TreePine } from 'lucide-react';
+import DecisionTreeInteractive from '@/components/courses/supervised-learning/DecisionTreeInteractive';
+import RandomForestVisualization from '@/components/courses/supervised-learning/RandomForestVisualization';
+import NeuralNetworkVisualization from '@/components/courses/supervised-learning/NeuralNetworkVisualization';
 
 const ApprentissageSupervise = () => {
   const didYouKnowFacts = [
@@ -91,6 +93,134 @@ const ApprentissageSupervise = () => {
               grâce à cette simulation interactive étape par étape.
             </p>
             <AlgorithmInteractiveSchema />
+          </div>
+        </LessonSection>
+
+        {/* NOUVEAUX COMPOSANTS INTERACTIFS DÉTAILLÉS */}
+        
+        {/* Arbre de Décision Interactif */}
+        <LessonSection
+          title="🌳 Arbre de Décision - Démonstration Interactive Complète"
+          icon={<TreePine className="h-6 w-6" />}
+        >
+          <div className="space-y-6">
+            <p className="text-lg leading-relaxed">
+              Plongez dans le fonctionnement d'un arbre de décision avec cet exemple concret 
+              d'approbation de crédit. Observez comment l'algorithme construit ses règles de décision 
+              en analysant les données étape par étape.
+            </p>
+            <DecisionTreeInteractive />
+            
+            <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 p-6 rounded-lg border border-green-200 dark:border-green-800">
+              <h4 className="font-semibold text-green-800 dark:text-green-200 mb-4">
+                💡 Points clés à retenir sur les Arbres de Décision
+              </h4>
+              <div className="grid md:grid-cols-2 gap-4 text-sm">
+                <div className="space-y-2">
+                  <div className="font-medium text-green-700 dark:text-green-300">Avantages majeurs :</div>
+                  <ul className="space-y-1 text-green-600 dark:text-green-400">
+                    <li>• Parfaitement interprétable et explicable</li>
+                    <li>• Gère naturellement les variables catégorielles</li>
+                    <li>• Détecte automatiquement les interactions</li>
+                    <li>• Pas besoin de normaliser les données</li>
+                  </ul>
+                </div>
+                <div className="space-y-2">
+                  <div className="font-medium text-green-700 dark:text-green-300">Applications idéales :</div>
+                  <ul className="space-y-1 text-green-600 dark:text-green-400">
+                    <li>• Systèmes d'aide à la décision médicale</li>
+                    <li>• Scoring de crédit et risque financier</li>
+                    <li>• Systèmes de recommandation simples</li>
+                    <li>• Analyse de règles métier</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </LessonSection>
+
+        {/* Random Forest Interactif */}
+        <LessonSection
+          title="🌲 Random Forest - La Puissance de la Collaboration"
+          icon={<TreePine className="h-6 w-6" />}
+        >
+          <div className="space-y-6">
+            <p className="text-lg leading-relaxed">
+              Découvrez la magie du Random Forest : comment des dizaines d'arbres de décision 
+              travaillent ensemble pour créer un modèle plus robuste et précis que chacun individuellement. 
+              Expérimentez avec différents nombres d'arbres et observez l'impact sur les performances.
+            </p>
+            <RandomForestVisualization />
+            
+            <div className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 p-6 rounded-lg border border-emerald-200 dark:border-emerald-800">
+              <h4 className="font-semibold text-emerald-800 dark:text-emerald-200 mb-4">
+                🌟 Pourquoi Random Forest révolutionne le Machine Learning
+              </h4>
+              <div className="grid md:grid-cols-3 gap-4 text-sm">
+                <div className="space-y-2">
+                  <div className="font-medium text-emerald-700 dark:text-emerald-300">Technique du Bagging :</div>
+                  <div className="text-emerald-600 dark:text-emerald-400">
+                    Chaque arbre s'entraîne sur un échantillon différent des données, 
+                    créant de la diversité et réduisant le sur-apprentissage.
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="font-medium text-emerald-700 dark:text-emerald-300">Sélection de Features :</div>
+                  <div className="text-emerald-600 dark:text-emerald-400">
+                    À chaque division, seul un sous-ensemble aléatoire des variables est considéré, 
+                    forçant les arbres à explorer différentes stratégies.
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="font-medium text-emerald-700 dark:text-emerald-300">Vote Intelligent :</div>
+                  <div className="text-emerald-600 dark:text-emerald-400">
+                    La décision finale combine les avis de tous les arbres, 
+                    souvent pondérés par leur niveau de confiance.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </LessonSection>
+
+        {/* Réseau de Neurones Interactif */}
+        <LessonSection
+          title="🧠 Réseaux de Neurones - L'Intelligence Artificielle en Action"
+          icon={<Brain className="h-6 w-6" />}
+        >
+          <div className="space-y-6">
+            <p className="text-lg leading-relaxed">
+              Assistez à l'entraînement d'un véritable réseau de neurones ! Observez comment 
+              les connexions s'ajustent au fil des époques, comment l'erreur diminue et la précision augmente. 
+              Modifiez l'architecture pour voir l'impact sur les performances.
+            </p>
+            <NeuralNetworkVisualization />
+            
+            <div className="bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-950/30 dark:to-indigo-950/30 p-6 rounded-lg border border-purple-200 dark:border-purple-800">
+              <h4 className="font-semibold text-purple-800 dark:text-purple-200 mb-4">
+                🚀 Les Réseaux de Neurones : Frontière de l'IA Moderne
+              </h4>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-3">
+                  <div className="font-medium text-purple-700 dark:text-purple-300">Capacités exceptionnelles :</div>
+                  <ul className="space-y-1 text-sm text-purple-600 dark:text-purple-400">
+                    <li>• <strong>Approximation universelle :</strong> Peut apprendre n'importe quelle fonction</li>
+                    <li>• <strong>Patterns complexes :</strong> Détecte des relations non-linéaires subtiles</li>
+                    <li>• <strong>Représentations automatiques :</strong> Crée ses propres features optimales</li>
+                    <li>• <strong>Scalabilité :</strong> Performance s'améliore avec plus de données</li>
+                  </ul>
+                </div>
+                <div className="space-y-3">
+                  <div className="font-medium text-purple-700 dark:text-purple-300">Applications révolutionnaires :</div>
+                  <ul className="space-y-1 text-sm text-purple-600 dark:text-purple-400">
+                    <li>• <strong>Vision par ordinateur :</strong> Reconnaissance d'images médicales</li>
+                    <li>• <strong>Traitement du langage :</strong> Traduction automatique, ChatGPT</li>
+                    <li>• <strong>Jeux stratégiques :</strong> AlphaGo, échecs, poker</li>
+                    <li>• <strong>Sciences :</strong> Découverte de médicaments, prévision météo</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </LessonSection>
 
