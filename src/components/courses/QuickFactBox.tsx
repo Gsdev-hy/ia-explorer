@@ -13,13 +13,17 @@ interface QuickFact {
 
 interface QuickFactBoxProps {
   title: string;
-  facts: QuickFact[];
+  description?: string;
+  icon?: string;
+  facts?: QuickFact[];
   variant?: 'default' | 'success' | 'warning' | 'destructive';
 }
 
 const QuickFactBox: React.FC<QuickFactBoxProps> = ({ 
   title, 
-  facts, 
+  description,
+  icon,
+  facts = [], 
   variant = 'default' 
 }) => {
   const getTrendIcon = (trend?: string) => {
@@ -51,18 +55,26 @@ const QuickFactBox: React.FC<QuickFactBoxProps> = ({
   return (
     <Card className={`${getVariantStyles()}`}>
       <CardContent className="pt-4">
-        <h4 className="font-medium mb-3">{title}</h4>
-        <div className="space-y-2">
-          {facts.map((fact, index) => (
-            <div key={index} className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">{fact.label}</span>
-              <div className="flex items-center gap-1">
-                <Badge variant="outline">{fact.value}</Badge>
-                {getTrendIcon(fact.trend)}
-              </div>
-            </div>
-          ))}
+        <div className="flex items-center gap-2 mb-3">
+          {icon && <span className="text-2xl">{icon}</span>}
+          <h4 className="font-medium">{title}</h4>
         </div>
+        {description && (
+          <p className="text-sm text-muted-foreground mb-3">{description}</p>
+        )}
+        {facts.length > 0 && (
+          <div className="space-y-2">
+            {facts.map((fact, index) => (
+              <div key={index} className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">{fact.label}</span>
+                <div className="flex items-center gap-1">
+                  <Badge variant="outline">{fact.value}</Badge>
+                  {getTrendIcon(fact.trend)}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
         {facts.some(f => f.context) && (
           <div className="mt-3 pt-3 border-t text-xs text-muted-foreground">
             {facts.find(f => f.context)?.context}

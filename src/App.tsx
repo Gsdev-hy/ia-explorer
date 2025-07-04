@@ -1,3 +1,4 @@
+
 import { Suspense, lazy } from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -16,7 +17,6 @@ const CasUsage = lazy(() => import('./pages/CasUsage'));
 const Ressources = lazy(() => import('./pages/Ressources'));
 const Ethique = lazy(() => import('./pages/Ethique'));
 const Actualites = lazy(() => import('./pages/Actualites'));
-const ChatPage = lazy(() => import('./pages/ChatPage'));
 
 // Cours
 const PromptEngineering = lazy(() => import('./pages/cours/PromptEngineering'));
@@ -54,7 +54,6 @@ function App() {
                     <Route path="/ressources" element={<Ressources />} />
                     <Route path="/ethique" element={<Ethique />} />
                     <Route path="/actualites" element={<Actualites />} />
-                    <Route path="/chat" element={<ChatPage />} />
                     
                     {/* Cours */}
                     <Route path="/cours/prompt-engineering" element={<PromptEngineering />} />

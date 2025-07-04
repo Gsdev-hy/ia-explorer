@@ -10,16 +10,21 @@ interface DidYouKnowItem {
 }
 
 interface DidYouKnowProps {
-  items: DidYouKnowItem[];
+  fact?: string;
+  items?: DidYouKnowItem[];
   bgGradient?: string;
   borderColor?: string;
 }
 
 const DidYouKnow: React.FC<DidYouKnowProps> = ({ 
-  items, 
+  fact,
+  items = [], 
   bgGradient = "from-primary/5 to-primary/10",
   borderColor = "border-primary/20"
 }) => {
+  // If a single fact is provided, convert it to items format
+  const displayItems = fact ? [{ title: "Le saviez-vous ?", content: fact }] : items;
+
   return (
     <motion.div 
       className="mb-12"
@@ -33,7 +38,7 @@ const DidYouKnow: React.FC<DidYouKnowProps> = ({
         Le saviez-vous ?
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {items.map((item, index) => (
+        {displayItems.map((item, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, scale: 0.9 }}
