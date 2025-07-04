@@ -95,7 +95,7 @@ const ApprentissageSupervise = () => {
                 Prédire une <strong>catégorie</strong> ou une <strong>classe</strong>
               </p>
               <div className="space-y-2 text-sm">
-                <div><strong>Exemples :</strong></p>
+                <div><strong>Exemples :</strong></div>
                 <ul className="list-disc pl-4 space-y-1 text-blue-600 dark:text-blue-300">
                   <li>Email spam ou non-spam</li>
                   <li>Diagnostic médical (maladie A, B ou C)</li>
@@ -114,7 +114,7 @@ const ApprentissageSupervise = () => {
                 Prédire une <strong>valeur numérique</strong> continue
               </p>
               <div className="space-y-2 text-sm">
-                <div><strong>Exemples :</strong></p>
+                <div><strong>Exemples :</strong></div>
                 <ul className="list-disc pl-4 space-y-1 text-green-600 dark:text-green-300">
                   <li>Prix d'une maison</li>
                   <li>Température demain</li>
