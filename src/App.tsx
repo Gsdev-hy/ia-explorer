@@ -18,6 +18,14 @@ const Ressources = lazy(() => import('./pages/Ressources'));
 const Ethique = lazy(() => import('./pages/Ethique'));
 const Actualites = lazy(() => import('./pages/Actualites'));
 
+// Pages manquantes restaurées
+const Glossaire = lazy(() => import('./pages/Glossaire'));
+const About = lazy(() => import('./pages/About'));
+const IAMultimodale = lazy(() => import('./pages/IAMultimodale'));
+const GeminiChatPage = lazy(() => import('./pages/GeminiChatPage'));
+const Confidentialite = lazy(() => import('./pages/Confidentialite'));
+const CalculateurCoutsIA = lazy(() => import('./pages/CalculateurCoutsIA'));
+
 // Cours
 const PromptEngineering = lazy(() => import('./pages/cours/PromptEngineering'));
 const ChainOfPrompts = lazy(() => import('./pages/cours/ChainOfPrompts'));
@@ -27,8 +35,6 @@ const DeepLearningPratique = lazy(() => import('./pages/cours/DeepLearningPratiq
 const IAEthique = lazy(() => import('./pages/cours/IAEthique'));
 const IAEntreprise = lazy(() => import('./pages/cours/IAEntreprise'));
 const NLPComprehension = lazy(() => import('./pages/cours/NLPComprehension'));
-
-// Import du nouveau cours
 const ApprentissageSupervise = lazy(() => import('./pages/cours/ApprentissageSupervise'));
 
 const queryClient = new QueryClient();
@@ -55,6 +61,15 @@ function App() {
                     <Route path="/ethique" element={<Ethique />} />
                     <Route path="/actualites" element={<Actualites />} />
                     
+                    {/* Pages restaurées */}
+                    <Route path="/glossaire" element={<Glossaire />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/a-propos" element={<About />} />
+                    <Route path="/ia-multimodale" element={<IAMultimodale />} />
+                    <Route path="/chat" element={<GeminiChatPage />} />
+                    <Route path="/confidentialite" element={<Confidentialite />} />
+                    <Route path="/calculateur-couts-ia" element={<CalculateurCoutsIA />} />
+                    
                     {/* Cours */}
                     <Route path="/cours/prompt-engineering" element={<PromptEngineering />} />
                     <Route path="/cours/chain-of-prompts" element={<ChainOfPrompts />} />
@@ -67,7 +82,7 @@ function App() {
                     <Route path="/cours/apprentissage-supervise" element={<ApprentissageSupervise />} />
                     
                     {/* NotFound */}
-                    <Route path="*" element={<div>Not Found</div>} />
+                    <Route path="*" element={<div className="flex items-center justify-center min-h-screen"><div className="text-center"><h1 className="text-4xl font-bold mb-4">404</h1><p className="text-muted-foreground">Page non trouvée</p></div></div>} />
                   </Routes>
                 </Suspense>
               </MainLayout>
