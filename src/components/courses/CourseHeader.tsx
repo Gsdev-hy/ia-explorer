@@ -5,19 +5,25 @@ import { User, Clock, Target, Globe } from 'lucide-react';
 
 interface CourseHeaderProps {
   title: string;
+  subtitle?: string;
   description: string;
   author: string;
+  authorDescription?: string;
   duration: string;
   level: string;
+  audience?: string;
   tags: string[];
 }
 
 const CourseHeader: React.FC<CourseHeaderProps> = ({
   title,
+  subtitle,
   description,
   author,
+  authorDescription,
   duration,
   level,
+  audience,
   tags
 }) => {
   return (
@@ -35,7 +41,7 @@ const CourseHeader: React.FC<CourseHeaderProps> = ({
           <User className="h-6 w-6 text-primary" />
           <div>
             <p className="font-medium">Auteur : {author}</p>
-            <p className="text-sm text-muted-foreground">{description}</p>
+            <p className="text-sm text-muted-foreground">{authorDescription || description}</p>
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
@@ -47,6 +53,12 @@ const CourseHeader: React.FC<CourseHeaderProps> = ({
             <Target className="h-4 w-4 text-primary" />
             <span>Niveau : {level}</span>
           </div>
+          {audience && (
+            <div className="flex items-center gap-2">
+              <Globe className="h-4 w-4 text-primary" />
+              <span>Audience : {audience}</span>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -5,14 +5,16 @@ import { Lightbulb, Info } from 'lucide-react';
 
 interface AnalogyBoxProps {
   title: string;
-  description: string;
+  description?: string;
+  content?: string;
   icon?: React.ReactNode;
   variant?: 'default' | 'info' | 'tip';
 }
 
 const AnalogyBox: React.FC<AnalogyBoxProps> = ({ 
   title, 
-  description, 
+  description,
+  content,
   icon,
   variant = 'default'
 }) => {
@@ -39,6 +41,7 @@ const AnalogyBox: React.FC<AnalogyBoxProps> = ({
 
   const styles = variantStyles[variant];
   const defaultIcon = variant === 'info' ? <Info className="h-5 w-5" /> : <Lightbulb className="h-5 w-5" />;
+  const displayContent = content || description;
 
   return (
     <div className={`${styles.bg} p-4 rounded-r-lg`}>
@@ -48,7 +51,7 @@ const AnalogyBox: React.FC<AnalogyBoxProps> = ({
         </div>
         <div>
           <h4 className={`font-medium ${styles.titleColor} mb-1`}>{title}</h4>
-          <p className={`${styles.contentColor} text-sm`}>{description}</p>
+          <p className={`${styles.contentColor} text-sm`}>{displayContent}</p>
         </div>
       </div>
     </div>
