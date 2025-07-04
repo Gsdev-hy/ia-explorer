@@ -2,235 +2,201 @@
 import React from 'react';
 import Hero from '@/components/Hero';
 import CourseHeader from '@/components/courses/CourseHeader';
-import LessonSection from '@/components/courses/LessonSection';
-import AnalogyBox from '@/components/courses/AnalogyBox';
-import InteractiveExample from '@/components/courses/InteractiveExample';
+import ConceptsSection from '@/components/courses/supervised-learning/ConceptsSection';
+import TypesSection from '@/components/courses/supervised-learning/TypesSection';
 import InteractiveChart from '@/components/courses/supervised-learning/InteractiveChart';
-import QuickFactBox from '@/components/courses/QuickFactBox';
+import LessonSection from '@/components/courses/LessonSection';
+import InteractiveExample from '@/components/courses/InteractiveExample';
+import AlgorithmsSection from '@/components/courses/supervised-learning/AlgorithmsSection';
+import ApplicationsSection from '@/components/courses/supervised-learning/ApplicationsSection';
+import ChallengesSection from '@/components/courses/supervised-learning/ChallengesSection';
 import DidYouKnow from '@/components/courses/DidYouKnow';
 import CourseConclusion from '@/components/courses/CourseConclusion';
 import BackToResourcesButton from '@/components/courses/BackToResourcesButton';
-import { Lightbulb, Target, TrendingUp, Users, BookOpen, Brain } from 'lucide-react';
+import { Brain, Lightbulb, BookOpen } from 'lucide-react';
 
 const ApprentissageSupervise = () => {
   const exampleSteps = [
     {
-      title: "Collecte des données",
-      description: "Rassembler des exemples avec leurs réponses connues (ex: photos de chats et chiens étiquetées)",
-      result: "Dataset de 1000 photos : 500 chats + 500 chiens"
+      title: "📸 Collecte et étiquetage des données",
+      description: "Rassembler 10,000 photos de chats et chiens, chacune étiquetée manuellement par des experts",
+      result: "Dataset équilibré : 5,000 chats + 5,000 chiens avec labels de qualité"
     },
     {
-      title: "Entraînement du modèle",
-      description: "L'algorithme apprend à reconnaître les patterns dans les données",
-      result: "Modèle capable de distinguer les caractéristiques des chats vs chiens"
+      title: "🔍 Préparation et nettoyage",
+      description: "Redimensionner images, supprimer doublons, vérifier qualité des étiquettes",
+      result: "9,500 images nettoyées et standardisées (500×500 pixels)"
     },
     {
-      title: "Test et validation",
-      description: "Vérifier les performances sur de nouvelles données non vues",
-      result: "Précision de 95% sur 200 nouvelles photos"
+      title: "⚖️ Division des données",
+      description: "Séparer intelligemment : 70% entraînement, 15% validation, 15% test",
+      result: "6,650 train / 1,425 validation / 1,425 test - équilibrés par classe"
     },
     {
-      title: "Utilisation en production",
-      description: "Déployer le modèle pour classifier de nouvelles images",
-      result: "Application mobile qui identifie automatiquement chats et chiens"
+      title: "🧠 Entraînement du modèle",
+      description: "Utiliser un réseau de neurones convolutionnel pendant 50 époques",
+      result: "Modèle capable de distinguer chats vs chiens avec 94% de précision"
+    },
+    {
+      title: "✅ Validation et optimisation",
+      description: "Tester sur données de validation, ajuster hyperparamètres",
+      result: "Précision optimisée à 96.5% avec réduction du sur-apprentissage"
+    },
+    {
+      title: "🎯 Test final et évaluation",
+      description: "Évaluation finale sur données jamais vues par le modèle",
+      result: "Performance confirmée : 96% précision, 97% rappel sur données test"
+    },
+    {
+      title: "🚀 Déploiement en production",
+      description: "Intégrer le modèle dans une application mobile avec API",
+      result: "App 'PetDetector' : identification instantanée avec confiance affichée"
+    }
+  ];
+
+  const didYouKnowFacts = [
+    {
+      title: "Le coût de l'erreur",
+      content: "En finance, une erreur de classification de 1% peut coûter des millions. C'est pourquoi les banques investissent massivement dans la qualité des données et la validation des modèles."
+    },
+    {
+      title: "La malédiction de la dimensionnalité", 
+      content: "Avec plus de 10,000 variables, il faut des millions d'exemples pour entraîner correctement. C'est pourquoi la sélection de variables est cruciale !"
+    },
+    {
+      title: "L'effet réseau des données",
+      content: "Google utilise 4 milliards de recherches par jour pour améliorer ses algorithmes. Plus d'utilisateurs = plus de données = meilleurs modèles = plus d'utilisateurs !"
     }
   ];
 
   return (
     <>
       <Hero
-        title="Les Bases de l'Apprentissage Supervisé"
-        subtitle="Découvrez les fondamentaux du machine learning avec des exemples concrets et des visualisations interactives"
+        title="Maîtriser l'Apprentissage Supervisé"
+        subtitle="Le guide complet et interactif pour comprendre, appliquer et exceller dans l'apprentissage supervisé - de la théorie à la pratique professionnelle"
       />
 
       <div className="section-container">
         <BackToResourcesButton />
         
         <CourseHeader
-          title="Maîtriser l'Apprentissage Supervisé"
-          description="Un guide complet et accessible pour comprendre comment les machines apprennent à partir d'exemples"
-          level="Débutant"
-          duration="3 heures"
-          tags={['Machine Learning', 'Classification', 'Régression', 'Algorithmes']}
+          title="L'Apprentissage Supervisé : De Débutant à Expert"
+          subtitle="Votre parcours complet vers la maîtrise du Machine Learning"
           author="Geoffroy Streit"
+          authorDescription="Expert en Intelligence Artificielle et Machine Learning, 10+ ans d'expérience"
+          level="Débutant à Intermédiaire"
+          duration="6-8 heures"
+          audience="Étudiants, professionnels, curieux de tech"
+          tags={['Machine Learning', 'Classification', 'Régression', 'Algorithmes', 'IA Pratique', 'Data Science']}
         />
 
-        {/* Introduction accessible */}
+        {/* Introduction enrichie avec nouveaux concepts */}
+        <ConceptsSection />
+
+        {/* Types détaillés avec exemples avancés */}
+        <TypesSection />
+
+        {/* Visualisation interactive améliorée */}
         <LessonSection
-          title="Introduction : Qu'est-ce que l'apprentissage supervisé ?"
-          icon={<Lightbulb className="h-6 w-6" />}
+          title="Visualisation Interactive : Voir l'IA Apprendre"
+          icon={<Brain className="h-6 w-6" />}
         >
           <div className="space-y-6">
             <p className="text-lg leading-relaxed">
-              Imaginez que vous apprenez à un enfant à reconnaître des animaux. Vous lui montrez des photos en disant 
-              "Ça, c'est un chat" ou "Ça, c'est un chien". Après avoir vu de nombreux exemples, l'enfant devient capable 
-              de reconnaître ces animaux par lui-même sur de nouvelles photos.
+              Rien ne vaut l'expérience visuelle pour comprendre ! Cette démonstration interactive 
+              vous montre en temps réel comment un algorithme apprend à classifier et faire des régressions.
             </p>
             
-            <p className="leading-relaxed">
-              L'<strong>apprentissage supervisé</strong> fonctionne exactement de la même manière : nous montrons à un 
-              algorithme de nombreux exemples avec leurs "bonnes réponses" (appelées étiquettes), et il apprend à faire 
-              des prédictions sur de nouvelles données qu'il n'a jamais vues.
-            </p>
-
-            <AnalogyBox
-              title="Analogie : Le professeur et l'élève"
-              description="L'apprentissage supervisé, c'est comme avoir un professeur très patient qui corrige chaque exercice. L'algorithme (l'élève) s'améliore en voyant ses erreurs et en ajustant sa compréhension jusqu'à donner les bonnes réponses."
-            />
-          </div>
-        </LessonSection>
-
-        {/* Les deux types principaux */}
-        <LessonSection
-          title="Les deux familles de l'apprentissage supervisé"
-          icon={<Target className="h-6 w-6" />}
-        >
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-blue-50 dark:bg-blue-950/30 p-6 rounded-lg border border-blue-200 dark:border-blue-800">
-              <div className="flex items-center gap-2 mb-3">
-                <Users className="h-5 w-5 text-blue-600" />
-                <h3 className="text-lg font-semibold text-blue-800 dark:text-blue-200">Classification</h3>
+            <InteractiveChart />
+            
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="bg-blue-50 dark:bg-blue-950/30 p-4 rounded-lg border border-blue-200">
+                <h4 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">💡 Dans la classification :</h4>
+                <p className="text-sm text-blue-700 dark:text-blue-300">
+                  L'algorithme trace une frontière de décision (ligne jaune) qui sépare au mieux 
+                  les deux classes. Chaque nouveau point sera classé selon sa position par rapport à cette ligne.
+                </p>
               </div>
-              <p className="text-sm text-blue-700 dark:text-blue-300 mb-3">
-                Prédire une <strong>catégorie</strong> ou une <strong>classe</strong>
-              </p>
-              <div className="space-y-2 text-sm">
-                <div><strong>Exemples :</strong></div>
-                <ul className="list-disc pl-4 space-y-1 text-blue-600 dark:text-blue-300">
-                  <li>Email spam ou non-spam</li>
-                  <li>Diagnostic médical (maladie A, B ou C)</li>
-                  <li>Reconnaissance d'images (chat, chien, oiseau)</li>
-                  <li>Sentiment d'un commentaire (positif, négatif, neutre)</li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="bg-green-50 dark:bg-green-950/30 p-6 rounded-lg border border-green-200 dark:border-green-800">
-              <div className="flex items-center gap-2 mb-3">
-                <TrendingUp className="h-5 w-5 text-green-600" />
-                <h3 className="text-lg font-semibold text-green-800 dark:text-green-200">Régression</h3>
-              </div>
-              <p className="text-sm text-green-700 dark:text-green-300 mb-3">
-                Prédire une <strong>valeur numérique</strong> continue
-              </p>
-              <div className="space-y-2 text-sm">
-                <div><strong>Exemples :</strong></div>
-                <ul className="list-disc pl-4 space-y-1 text-green-600 dark:text-green-300">
-                  <li>Prix d'une maison</li>
-                  <li>Température demain</li>
-                  <li>Nombre de ventes prévisionnelles</li>
-                  <li>Note d'un film (1 à 10)</li>
-                </ul>
+              <div className="bg-green-50 dark:bg-green-950/30 p-4 rounded-lg border border-green-200">
+                <h4 className="font-semibold text-green-800 dark:text-green-200 mb-2">📈 Dans la régression :</h4>
+                <p className="text-sm text-green-700 dark:text-green-300">
+                  L'algorithme trace la ligne qui passe le plus près possible de tous les points. 
+                  Cette ligne permet de prédire la valeur Y pour n'importe quelle valeur X.
+                </p>
               </div>
             </div>
           </div>
         </LessonSection>
 
-        {/* Visualisation interactive */}
+        {/* Processus détaillé étape par étape */}
         <LessonSection
-          title="Visualisation Interactive"
-          icon={<Brain className="h-6 w-6" />}
-        >
-          <InteractiveChart />
-          <div className="mt-4 p-4 bg-amber-50 dark:bg-amber-950/30 rounded-lg border border-amber-200 dark:border-amber-800">
-            <p className="text-sm text-amber-800 dark:text-amber-200">
-              <strong>💡 Astuce :</strong> Basculez entre les onglets "Classification" et "Régression" pour voir 
-              la différence entre prédire une catégorie et prédire une valeur numérique.
-            </p>
-          </div>
-        </LessonSection>
-
-        {/* Processus étape par étape */}
-        <LessonSection
-          title="Le processus complet : De l'idée au modèle fonctionnel"
+          title="Projet Complet : Créer un Classificateur Professionnel"
           icon={<BookOpen className="h-6 w-6" />}
         >
-          <InteractiveExample
-            title="Exemple pratique : Créer un classificateur de photos"
-            description="Suivez les étapes pour comprendre comment construire un système de reconnaissance d'images"
-            steps={exampleSteps}
-            finalMessage="Félicitations ! Vous avez créé votre premier modèle d'apprentissage supervisé. Ce processus est la base de nombreuses applications IA que nous utilisons quotidiennement."
-          />
-        </LessonSection>
-
-        {/* Algorithmes populaires */}
-        <LessonSection
-          title="Les algorithmes stars de l'apprentissage supervisé"
-          icon={<Target className="h-6 w-6" />}
-        >
-          <div className="grid gap-4">
-            <div className="grid md:grid-cols-3 gap-4">
-              <QuickFactBox
-                title="Régression Linéaire"
-                description="L'algorithme le plus simple pour prédire des valeurs numériques. Comme tracer la meilleure ligne droite dans un nuage de points."
-                icon="📈"
-              />
-              <QuickFactBox
-                title="Arbres de Décision"
-                description="Fonctionne comme un questionnaire : 'Si âge > 30 ET salaire > 50k, alors crédit accordé'. Très intuitif !"
-                icon="🌳"
-              />
-              <QuickFactBox
-                title="Réseaux de Neurones"
-                description="Inspirés du cerveau humain, ils excellent pour les tâches complexes comme la reconnaissance d'images."
-                icon="🧠"
-              />
-            </div>
+          <div className="space-y-6">
+            <p className="text-lg leading-relaxed">
+              Suivons ensemble la création d'un vrai projet de machine learning, depuis l'idée 
+              jusqu'au déploiement en production. Chaque étape révèle les défis réels 
+              et les solutions pratiques utilisées par les professionnels.
+            </p>
             
-            <DidYouKnow
-              fact="Random Forest utilise des centaines d'arbres de décision qui 'votent' ensemble pour donner une prédiction plus fiable. C'est le pouvoir de l'intelligence collective !"
+            <InteractiveExample
+              title="🎯 Mission : Créer 'PetDetector' - L'app qui reconnaît chats et chiens"
+              description="Découvrez les 7 étapes cruciales pour transformer une idée en application IA fonctionnelle"
+              steps={exampleSteps}
+              finalMessage="🎉 Félicitations ! Vous venez de découvrir le cycle complet de développement d'un projet d'IA. Ce processus rigoureux est utilisé par toutes les entreprises tech pour créer des solutions fiables et performantes."
             />
-          </div>
-        </LessonSection>
-
-        {/* Applications dans la vraie vie */}
-        <LessonSection
-          title="Applications dans la vraie vie"
-          icon={<Lightbulb className="h-6 w-6" />}
-        >
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold">💰 Finance & Économie</h3>
-              <ul className="space-y-2 text-sm">
-                <li>• <strong>Détection de fraude :</strong> Identifier les transactions suspectes</li>
-                <li>• <strong>Scoring crédit :</strong> Évaluer le risque d'un emprunteur</li>
-                <li>• <strong>Trading algorithmique :</strong> Prédire les mouvements de marché</li>
-              </ul>
-              
-              <h3 className="text-lg font-semibold mt-6">🏥 Santé & Médecine</h3>
-              <ul className="space-y-2 text-sm">
-                <li>• <strong>Diagnostic médical :</strong> Détecter des maladies sur des images</li>
-                <li>• <strong>Découverte de médicaments :</strong> Prédire l'efficacité des molécules</li>
-                <li>• <strong>Personnalisation des traitements :</strong> Adapter les soins au patient</li>
-              </ul>
-            </div>
             
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold">🛒 E-commerce & Marketing</h3>
-              <ul className="space-y-2 text-sm">
-                <li>• <strong>Systèmes de recommandation :</strong> "Les clients ayant acheté ceci..."</li>
-                <li>• <strong>Optimisation des prix :</strong> Ajuster les tarifs en temps réel</li>
-                <li>• <strong>Personnalisation :</strong> Adapter le contenu à chaque utilisateur</li>
-              </ul>
-              
-              <h3 className="text-lg font-semibold mt-6">🚗 Transport & Mobilité</h3>
-              <ul className="space-y-2 text-sm">
-                <li>• <strong>Véhicules autonomes :</strong> Reconnaître panneaux et obstacles</li>
-                <li>• <strong>Optimisation de routes :</strong> Calculer les meilleurs itinéraires</li>
-                <li>• <strong>Maintenance prédictive :</strong> Anticiper les pannes</li>
-              </ul>
+            <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 p-6 rounded-lg border border-purple-200 dark:border-purple-800">
+              <h4 className="font-semibold text-purple-800 dark:text-purple-200 mb-3">🚀 Prochaines évolutions possibles :</h4>
+              <div className="grid md:grid-cols-2 gap-4 text-sm">
+                <ul className="space-y-1 text-purple-700 dark:text-purple-300">
+                  <li>• Ajouter plus d'espèces (oiseaux, reptiles...)</li>
+                  <li>• Détecter races spécifiques</li>
+                  <li>• Analyse de comportement animal</li>
+                </ul>
+                <ul className="space-y-1 text-purple-700 dark:text-purple-300">
+                  <li>• Version temps réel (vidéo)</li>
+                  <li>• Intégration réseaux sociaux</li>
+                  <li>• Mode hors ligne pour téléphones</li>
+                </ul>
+              </div>
             </div>
           </div>
         </LessonSection>
 
+        {/* Algorithmes détaillés avec nouveau composant */}
+        <AlgorithmsSection />
+
+        {/* Applications avec cas d'études réels */}
+        <ApplicationsSection />
+
+        {/* Nouveaux défis et bonnes pratiques */}
+        <ChallengesSection />
+
+        {/* Faits fascinants enrichis */}
+        <DidYouKnow items={didYouKnowFacts} />
+
+        {/* Conclusion enrichie avec parcours d'apprentissage */}
         <CourseConclusion
-          title="Félicitations ! Vous maîtrisez maintenant les bases"
-          summary="Vous avez découvert les principes fondamentaux de l'apprentissage supervisé, les différences entre classification et régression, et vu des exemples concrets d'applications. Vous êtes maintenant prêt à approfondir avec des cours plus techniques !"
+          title="🎓 Félicitations ! Vous êtes maintenant un Expert en Apprentissage Supervisé"
+          summary="Vous maîtrisez maintenant les concepts fondamentaux, les algorithmes principaux, les applications réelles et les bonnes pratiques de l'apprentissage supervisé. Vous êtes prêt à tackle des projets concrets et à continuer votre montée en compétences !"
           nextSteps={[
-            "Explorez les algorithmes spécifiques en détail",
-            "Apprenez Python et les bibliothèques de machine learning",
-            "Pratiquez avec des datasets réels sur Kaggle",
-            "Découvrez le deep learning pour des tâches plus complexes"
+            "🐍 Apprenez Python et les bibliothèques essentielles (scikit-learn, pandas, matplotlib)",
+            "📊 Pratiquez sur des datasets réels via Kaggle, Google Colab ou GitHub",
+            "🧠 Explorez le Deep Learning avec TensorFlow ou PyTorch",
+            "☁️ Découvrez le MLOps et le déploiement sur AWS/GCP/Azure",
+            "📚 Approfondissez avec des cours avancés (Andrew Ng, Fast.ai)",
+            "🤝 Rejoignez des communautés (Reddit r/MachineLearning, Discord AI)",
+            "💼 Construisez un portfolio avec 3-5 projets complets sur GitHub"
+          ]}
+          learningPoints={[
+            "Les concepts fondamentaux et la différence classification/régression",
+            "Les algorithmes principaux : forces, faiblesses, cas d'usage",
+            "Le processus complet de développement d'un projet ML",
+            "Les applications révolutionnaires dans tous les secteurs",
+            "Les défis (sur-apprentissage, biais) et comment les surmonter",
+            "Les bonnes pratiques pour des projets IA responsables et efficaces"
           ]}
         />
       </div>
