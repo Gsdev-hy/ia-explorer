@@ -4,68 +4,38 @@ import Hero from '@/components/Hero';
 import CourseHeader from '@/components/courses/CourseHeader';
 import ConceptsSection from '@/components/courses/supervised-learning/ConceptsSection';
 import TypesSection from '@/components/courses/supervised-learning/TypesSection';
-import InteractiveChart from '@/components/courses/supervised-learning/InteractiveChart';
-import LessonSection from '@/components/courses/LessonSection';
-import InteractiveExample from '@/components/courses/InteractiveExample';
 import AlgorithmsSection from '@/components/courses/supervised-learning/AlgorithmsSection';
 import ApplicationsSection from '@/components/courses/supervised-learning/ApplicationsSection';
 import ChallengesSection from '@/components/courses/supervised-learning/ChallengesSection';
+import AlgorithmInteractiveSchema from '@/components/courses/supervised-learning/AlgorithmInteractiveSchema';
+import ConceptIllustration from '@/components/courses/supervised-learning/ConceptIllustration';
+import DetailedProcessExample from '@/components/courses/supervised-learning/DetailedProcessExample';
+import PerformanceVisualizer from '@/components/courses/supervised-learning/PerformanceVisualizer';
+import DataTrainingSimulator from '@/components/courses/supervised-learning/DataTrainingSimulator';
+import InteractiveChart from '@/components/courses/supervised-learning/InteractiveChart';
+import LessonSection from '@/components/courses/LessonSection';
 import DidYouKnow from '@/components/courses/DidYouKnow';
 import CourseConclusion from '@/components/courses/CourseConclusion';
 import BackToResourcesButton from '@/components/courses/BackToResourcesButton';
-import { Brain, Lightbulb, BookOpen } from 'lucide-react';
+import { Brain, Lightbulb, BookOpen, Zap, Target } from 'lucide-react';
 
 const ApprentissageSupervise = () => {
-  const exampleSteps = [
-    {
-      title: "📸 Collecte et étiquetage des données",
-      description: "Rassembler 10,000 photos de chats et chiens, chacune étiquetée manuellement par des experts",
-      result: "Dataset équilibré : 5,000 chats + 5,000 chiens avec labels de qualité"
-    },
-    {
-      title: "🔍 Préparation et nettoyage",
-      description: "Redimensionner images, supprimer doublons, vérifier qualité des étiquettes",
-      result: "9,500 images nettoyées et standardisées (500×500 pixels)"
-    },
-    {
-      title: "⚖️ Division des données",
-      description: "Séparer intelligemment : 70% entraînement, 15% validation, 15% test",
-      result: "6,650 train / 1,425 validation / 1,425 test - équilibrés par classe"
-    },
-    {
-      title: "🧠 Entraînement du modèle",
-      description: "Utiliser un réseau de neurones convolutionnel pendant 50 époques",
-      result: "Modèle capable de distinguer chats vs chiens avec 94% de précision"
-    },
-    {
-      title: "✅ Validation et optimisation",
-      description: "Tester sur données de validation, ajuster hyperparamètres",
-      result: "Précision optimisée à 96.5% avec réduction du sur-apprentissage"
-    },
-    {
-      title: "🎯 Test final et évaluation",
-      description: "Évaluation finale sur données jamais vues par le modèle",
-      result: "Performance confirmée : 96% précision, 97% rappel sur données test"
-    },
-    {
-      title: "🚀 Déploiement en production",
-      description: "Intégrer le modèle dans une application mobile avec API",
-      result: "App 'PetDetector' : identification instantanée avec confiance affichée"
-    }
-  ];
-
   const didYouKnowFacts = [
     {
-      title: "Le coût de l'erreur",
-      content: "En finance, une erreur de classification de 1% peut coûter des millions. C'est pourquoi les banques investissent massivement dans la qualité des données et la validation des modèles."
+      title: "L'apprentissage supervisé représente 70% des applications IA actuelles",
+      content: "De la reconnaissance vocale aux recommandations Netflix, l'apprentissage supervisé alimente la majorité des services IA que nous utilisons quotidiennement."
     },
     {
-      title: "La malédiction de la dimensionnalité", 
-      content: "Avec plus de 10,000 variables, il faut des millions d'exemples pour entraîner correctement. C'est pourquoi la sélection de variables est cruciale !"
+      title: "Un modèle peut apprendre de millions d'exemples en quelques heures", 
+      content: "Grâce aux GPU modernes, des algorithmes peuvent traiter des téraoctets de données étiquetées en un temps record, révolutionnant la vitesse de développement."
     },
     {
-      title: "L'effet réseau des données",
-      content: "Google utilise 4 milliards de recherches par jour pour améliorer ses algorithmes. Plus d'utilisateurs = plus de données = meilleurs modèles = plus d'utilisateurs !"
+      title: "80% du temps d'un projet IA est consacré aux données",
+      content: "Nettoyer, labelliser et préparer les données représente la majorité du travail. Les algorithmes ne sont que la pointe de l'iceberg !"
+    },
+    {
+      title: "Certains modèles atteignent des performances surhumaines",
+      content: "En imagerie médicale, les IA détectent certains cancers avec une précision supérieure aux radiologues experts, sauvant des milliers de vies."
     }
   ];
 
@@ -73,7 +43,7 @@ const ApprentissageSupervise = () => {
     <>
       <Hero
         title="Maîtriser l'Apprentissage Supervisé"
-        subtitle="Le guide complet et interactif pour comprendre, appliquer et exceller dans l'apprentissage supervisé - de la théorie à la pratique professionnelle"
+        subtitle="Le guide complet et interactif pour comprendre, pratiquer et exceller dans l'apprentissage supervisé - de la théorie à la pratique professionnelle"
       />
 
       <div className="section-container">
@@ -81,22 +51,78 @@ const ApprentissageSupervise = () => {
         
         <CourseHeader
           title="L'Apprentissage Supervisé : De Débutant à Expert"
-          subtitle="Votre parcours complet vers la maîtrise du Machine Learning"
+          subtitle="Votre parcours complet vers la maîtrise du Machine Learning avec simulations interactives"
           author="Geoffroy Streit"
           authorDescription="Expert en Intelligence Artificielle et Machine Learning, 10+ ans d'expérience"
           level="Débutant à Intermédiaire"
-          duration="6-8 heures"
+          duration="8-10 heures"
           audience="Étudiants, professionnels, curieux de tech"
           tags={['Machine Learning', 'Classification', 'Régression', 'Algorithmes', 'IA Pratique', 'Data Science']}
         />
 
-        {/* Introduction enrichie avec nouveaux concepts */}
+        {/* Introduction avec illustrations conceptuelles */}
         <ConceptsSection />
 
-        {/* Types détaillés avec exemples avancés */}
+        {/* Illustrations interactives des concepts */}
+        <LessonSection
+          title="Concepts Visuels Interactifs"
+          icon={<Lightbulb className="h-6 w-6" />}
+        >
+          <div className="space-y-6">
+            <p className="text-lg leading-relaxed">
+              Les concepts abstraits deviennent concrets grâce à ces illustrations interactives. 
+              Explorez visuellement les fondamentaux de l'apprentissage supervisé !
+            </p>
+            <ConceptIllustration />
+          </div>
+        </LessonSection>
+
+        {/* Types avec exemples enrichis */}
         <TypesSection />
 
-        {/* Visualisation interactive améliorée */}
+        {/* Schémas interactifs des algorithmes stars */}
+        <LessonSection
+          title="Algorithmes en Action - Simulation Interactive"
+          icon={<Zap className="h-6 w-6" />}
+        >
+          <div className="space-y-6">
+            <p className="text-lg leading-relaxed">
+              Découvrez comment fonctionnent réellement les algorithmes d'apprentissage supervisé 
+              grâce à cette simulation interactive étape par étape.
+            </p>
+            <AlgorithmInteractiveSchema />
+          </div>
+        </LessonSection>
+
+        {/* Visualisation comparative des performances */}
+        <LessonSection
+          title="Comparateur de Performance"
+          icon={<Target className="h-6 w-6" />}
+        >
+          <div className="space-y-6">
+            <p className="text-lg leading-relaxed">
+              Comparez objectivement les forces et faiblesses de chaque algorithme 
+              pour faire le bon choix selon votre projet.
+            </p>
+            <PerformanceVisualizer />
+          </div>
+        </LessonSection>
+
+        {/* Simulateur d'entraînement de données */}
+        <LessonSection
+          title="Laboratoire d'Entraînement"
+          icon={<Brain className="h-6 w-6" />}
+        >
+          <div className="space-y-6">
+            <p className="text-lg leading-relaxed">
+              Expérimentez avec différents paramètres et observez en temps réel 
+              comment un modèle apprend à partir de vos données.
+            </p>
+            <DataTrainingSimulator />
+          </div>
+        </LessonSection>
+
+        {/* Visualisation interactive classique */}
         <LessonSection
           title="Visualisation Interactive : Voir l'IA Apprendre"
           icon={<Brain className="h-6 w-6" />}
@@ -130,7 +156,7 @@ const ApprentissageSupervise = () => {
 
         {/* Processus détaillé étape par étape */}
         <LessonSection
-          title="Projet Complet : Créer un Classificateur Professionnel"
+          title="Projet Complet : De l'Idée à la Production"
           icon={<BookOpen className="h-6 w-6" />}
         >
           <div className="space-y-6">
@@ -139,48 +165,26 @@ const ApprentissageSupervise = () => {
               jusqu'au déploiement en production. Chaque étape révèle les défis réels 
               et les solutions pratiques utilisées par les professionnels.
             </p>
-            
-            <InteractiveExample
-              title="🎯 Mission : Créer 'PetDetector' - L'app qui reconnaît chats et chiens"
-              description="Découvrez les 7 étapes cruciales pour transformer une idée en application IA fonctionnelle"
-              steps={exampleSteps}
-              finalMessage="🎉 Félicitations ! Vous venez de découvrir le cycle complet de développement d'un projet d'IA. Ce processus rigoureux est utilisé par toutes les entreprises tech pour créer des solutions fiables et performantes."
-            />
-            
-            <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 p-6 rounded-lg border border-purple-200 dark:border-purple-800">
-              <h4 className="font-semibold text-purple-800 dark:text-purple-200 mb-3">🚀 Prochaines évolutions possibles :</h4>
-              <div className="grid md:grid-cols-2 gap-4 text-sm">
-                <ul className="space-y-1 text-purple-700 dark:text-purple-300">
-                  <li>• Ajouter plus d'espèces (oiseaux, reptiles...)</li>
-                  <li>• Détecter races spécifiques</li>
-                  <li>• Analyse de comportement animal</li>
-                </ul>
-                <ul className="space-y-1 text-purple-700 dark:text-purple-300">
-                  <li>• Version temps réel (vidéo)</li>
-                  <li>• Intégration réseaux sociaux</li>
-                  <li>• Mode hors ligne pour téléphones</li>
-                </ul>
-              </div>
-            </div>
+            <DetailedProcessExample />
           </div>
         </LessonSection>
 
-        {/* Algorithmes détaillés avec nouveau composant */}
+        {/* Algorithmes détaillés */}
         <AlgorithmsSection />
 
         {/* Applications avec cas d'études réels */}
         <ApplicationsSection />
 
-        {/* Nouveaux défis et bonnes pratiques */}
+        {/* Défis et bonnes pratiques */}
         <ChallengesSection />
 
         {/* Faits fascinants enrichis */}
         <DidYouKnow items={didYouKnowFacts} />
 
-        {/* Conclusion enrichie avec parcours d'apprentissage */}
+        {/* Conclusion enrichie */}
         <CourseConclusion
           title="🎓 Félicitations ! Vous êtes maintenant un Expert en Apprentissage Supervisé"
-          summary="Vous maîtrisez maintenant les concepts fondamentaux, les algorithmes principaux, les applications réelles et les bonnes pratiques de l'apprentissage supervisé. Vous êtes prêt à tackle des projets concrets et à continuer votre montée en compétences !"
+          summary="Vous maîtrisez maintenant les concepts fondamentaux, les algorithmes principaux, les applications réelles et les bonnes pratiques de l'apprentissage supervisé. Grâce aux simulations interactives, vous avez une compréhension pratique et visuelle des processus d'apprentissage."
           nextSteps={[
             "🐍 Apprenez Python et les bibliothèques essentielles (scikit-learn, pandas, matplotlib)",
             "📊 Pratiquez sur des datasets réels via Kaggle, Google Colab ou GitHub",
@@ -188,15 +192,17 @@ const ApprentissageSupervise = () => {
             "☁️ Découvrez le MLOps et le déploiement sur AWS/GCP/Azure",
             "📚 Approfondissez avec des cours avancés (Andrew Ng, Fast.ai)",
             "🤝 Rejoignez des communautés (Reddit r/MachineLearning, Discord AI)",
-            "💼 Construisez un portfolio avec 3-5 projets complets sur GitHub"
+            "💼 Construisez un portfolio avec 3-5 projets complets sur GitHub",
+            "🔬 Expérimentez avec les simulateurs de ce cours pour solidifier vos connaissances"
           ]}
           learningPoints={[
-            "Les concepts fondamentaux et la différence classification/régression",
-            "Les algorithmes principaux : forces, faiblesses, cas d'usage",
+            "Les concepts fondamentaux avec visualisations interactives",
+            "La différence pratique entre classification et régression", 
+            "Le fonctionnement interne des algorithmes principaux",
             "Le processus complet de développement d'un projet ML",
             "Les applications révolutionnaires dans tous les secteurs",
-            "Les défis (sur-apprentissage, biais) et comment les surmonter",
-            "Les bonnes pratiques pour des projets IA responsables et efficaces"
+            "Les défis réels et comment les surmonter en pratique",
+            "L'expérience hands-on grâce aux simulations et visualisations"
           ]}
         />
       </div>
