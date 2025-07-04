@@ -6,7 +6,7 @@ import { User, Clock, Target, Globe } from 'lucide-react';
 interface CourseHeaderProps {
   title: string;
   subtitle?: string;
-  description: string;
+  description?: string;
   author: string;
   authorDescription?: string;
   duration: string;
@@ -41,7 +41,7 @@ const CourseHeader: React.FC<CourseHeaderProps> = ({
           <User className="h-6 w-6 text-primary" />
           <div>
             <p className="font-medium">Auteur : {author}</p>
-            <p className="text-sm text-muted-foreground">{authorDescription || description}</p>
+            <p className="text-sm text-muted-foreground">{authorDescription || description || "Expert en Intelligence Artificielle"}</p>
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
