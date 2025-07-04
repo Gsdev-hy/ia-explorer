@@ -187,7 +187,7 @@ const ChallengesSection: React.FC = () => {
           <div className="grid md:grid-cols-3 gap-4 text-sm">
             <div className="space-y-2">
               <div className="font-medium text-green-700 dark:text-green-300">🎯 Commencer Simple</div>
-              <div className="text-green-600 dark:text-green-400">Modèle simple qui marche > Modèle complexe qui échoue</div>
+              <div className="text-green-600 dark:text-green-400">Modèle simple qui marche {'>'}  Modèle complexe qui échoue</div>
             </div>
             <div className="space-y-2">
               <div className="font-medium text-green-700 dark:text-green-300">📊 Mesurer Constamment</div>

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import LessonSection from '@/components/courses/LessonSection';
 import QuickFactBox from '@/components/courses/QuickFactBox';
@@ -31,7 +30,7 @@ const ApplicationsSection: React.FC = () => {
                 <div className="space-y-4">
                   <h4 className="font-semibold text-red-700">🔬 Diagnostic Médical</h4>
                   <ul className="space-y-2 text-sm">
-                    <li>• <strong>Radiologie :</strong> Détecter cancers sur scanners (précision > médecins)</li>
+                    <li>• <strong>Radiologie :</strong> Détecter cancers sur scanners (précision {'>'}  médecins)</li>
                     <li>• <strong>Dermatologie :</strong> Identifier mélanomes sur photos de peau</li>
                     <li>• <strong>Ophtalmologie :</strong> Dépister rétinopathie diabétique</li>
                     <li>• <strong>Cardiologie :</strong> Analyser ECG pour arythmies</li>
