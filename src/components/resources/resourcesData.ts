@@ -1,5 +1,4 @@
 
-
 // Types de données
 export interface Resource {
   title: string;
@@ -40,14 +39,26 @@ import { articles } from './data/articlesData';
 import { scientificPublications } from './data/scientificPublicationsData';
 import { iaTools } from './data/toolsData';
 
-// Combine toutes les ressources (excluding courses which are handled separately)
+// Convertir les cours en ressources pour l'affichage unifié
+const coursesAsResources: Resource[] = coursesData.map(course => ({
+  title: course.title,
+  source: `Par ${course.author}`,
+  description: course.description,
+  link: course.link,
+  type: 'cours',
+  year: parseInt(course.lastUpdated.split('-')[0]),
+  tags: course.tags,
+  isInternal: true
+}));
+
+// Combine toutes les ressources (y compris les cours convertis)
 export const realResources: Resource[] = [
   ...websites,
   ...books,
+  ...coursesAsResources,
   ...videos,
   ...articles
 ];
 
 // Export des données spécifiques
 export { scientificPublications, iaTools, coursesData };
-
