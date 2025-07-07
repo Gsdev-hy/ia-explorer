@@ -1,9 +1,13 @@
+
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from 'next-themes';
-import MainLayout from '@/layouts/MainLayout';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import FloatingChatButton from '@/components/chat/FloatingChatButton';
+import SkipLink from '@/components/SkipLink';
 
 // Pages
 import Home from '@/pages/Home';
@@ -30,9 +34,30 @@ import IACreativite from '@/pages/cours/IACreativite';
 import DeepLearningPratique from '@/pages/cours/DeepLearningPratique';
 import IAEthique from '@/pages/cours/IAEthique';
 import IAEntreprise from '@/pages/cours/IAEntreprise';
-import NLPLlmComprehension from '@/pages/cours/NLPLlmComprehension';
+import NLPComprehension from '@/pages/cours/NLPComprehension';
 
 const queryClient = new QueryClient();
+
+const MainLayout = () => {
+  return (
+    <div className="flex flex-col min-h-screen transition-colors duration-300">
+      <SkipLink />
+      <Header />
+      <main 
+        id="main-content"
+        className="flex-grow focus:outline-none" 
+        tabIndex={-1}
+        role="main"
+      >
+        <div className="page-transition">
+          <Outlet />
+        </div>
+      </main>
+      <Footer author="Geoffroy Streit" email="geoffroy.streit@gmail.com" />
+      <FloatingChatButton />
+    </div>
+  );
+};
 
 function App() {
   return (
@@ -64,7 +89,7 @@ function App() {
               <Route path="cours/deep-learning-pratique" element={<DeepLearningPratique />} />
               <Route path="cours/ia-ethique" element={<IAEthique />} />
               <Route path="cours/ia-entreprise" element={<IAEntreprise />} />
-              <Route path="cours/nlp-llm-comprehension" element={<NLPLlmComprehension />} />
+              <Route path="cours/nlp-comprehension" element={<NLPComprehension />} />
               
               <Route path="*" element={<NotFound />} />
             </Route>
