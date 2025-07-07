@@ -16,7 +16,7 @@ const Glossaire = () => {
       />
 
       <section className="section-container">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-full mx-auto">
           <div className="mb-12 rounded-2xl overflow-hidden shadow-lg transform hover:scale-[1.02] transition-all duration-500 group">
             <img 
               src="/pics/actu.jpg" 
