@@ -13,6 +13,16 @@ export const courses: Resource[] = [
     isInternal: true
   },
   {
+    title: "Apprentissage Non Supervisé : Découvrir les Structures Cachées",
+    source: "IA Explorer",
+    description: "Explorez les techniques d'apprentissage non supervisé : clustering, réduction de dimensionnalité et règles d'association. Apprenez à identifier des patterns cachés dans vos données sans exemples étiquetés.",
+    link: "/cours/apprentissage-non-supervise",
+    type: "cours",
+    year: 2024,
+    tags: ["Apprentissage Non Supervisé", "Clustering", "Machine Learning", "Analyse de Données", "Interne"],
+    isInternal: true
+  },
+  {
     title: "Maîtriser les Prompts : Guide Complet du Prompt Engineering",
     source: "IA Explorer",
     description: "Guide complet pour apprendre l'art du prompt engineering. Découvrez les techniques avancées, les bonnes pratiques et les méthodes pour optimiser vos interactions avec l'IA.",
@@ -197,6 +207,19 @@ export const internalCoursesData = [
     level: 'Débutant',
     duration: '3h',
     tags: ['Apprentissage Supervisé', 'Machine Learning', 'Classification', 'Régression'],
+    author: 'Geoffroy Streit',
+    year: 2024,
+    language: 'Français'
+  },
+  {
+    id: 'apprentissage-non-supervise',
+    title: 'Apprentissage Non Supervisé : Découvrir les Structures Cachées',
+    description: 'Explorez les techniques d\'apprentissage non supervisé : clustering, réduction de dimensionnalité et règles d\'association.',
+    link: '/cours/apprentissage-non-supervise',
+    category: 'Machine Learning', 
+    level: 'Débutant à Intermédiaire',
+    duration: '2h30',
+    tags: ['Apprentissage Non Supervisé', 'Clustering', 'Réduction de Dimensionnalité', 'Analyse de Données'],
     author: 'Geoffroy Streit',
     year: 2024,
     language: 'Français'
