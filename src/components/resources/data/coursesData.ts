@@ -1,311 +1,231 @@
-import { Resource } from '../resourcesData';
 
-export const courses: Resource[] = [
-  // Cours internes (développés dans l'app)
-  {
-    title: "Les Bases de l'Apprentissage Supervisé : Guide Pratique et Interactif",
-    source: "IA Explorer",
-    description: "Découvrez les fondamentaux de l'apprentissage supervisé avec des exemples concrets, des analogies simples et des visualisations interactives. Parfait pour débuter en machine learning.",
-    link: "/cours/apprentissage-supervise",
-    type: "cours",
-    year: 2024,
-    tags: ["Apprentissage Supervisé", "Machine Learning", "Débutant", "Interactif", "Interne"],
-    isInternal: true
-  },
-  {
-    title: "Maîtriser les Prompts : Guide Complet du Prompt Engineering",
-    source: "IA Explorer",
-    description: "Guide complet pour apprendre l'art du prompt engineering. Découvrez les techniques avancées, les bonnes pratiques et les méthodes pour optimiser vos interactions avec l'IA.",
-    link: "/cours/prompt-engineering",
-    type: "cours",
-    year: 2024,
-    tags: ["Prompt Engineering", "Communication IA", "Pratique", "Interne"],
-    isInternal: true
-  },
-  {
-    title: "Chain of Prompts : Maîtriser l'Art de l'Enchaînement d'Invites",
-    source: "IA Explorer",
-    description: "Apprenez à construire des conversations complexes avec l'IA en enchaînant des requêtes successives. Technique essentielle pour résoudre des problèmes complexes et obtenir des résultats précis.",
-    link: "/cours/chain-of-prompts",
-    type: "cours",
-    year: 2024,
-    tags: ["Chain of Prompts", "Conversation IA", "Technique avancée", "Productivité", "Interne"],
-    isInternal: true
-  },
-  {
-    title: "Paramètres des LLM : Comprendre et Optimiser les Modèles de Langage",
-    source: "IA Explorer",
-    description: "Découvrez tous les paramètres qui caractérisent un LLM : architecture, hyperparamètres, optimisations et métriques. Apprenez à choisir et configurer le bon modèle selon vos besoins.",
-    link: "/cours/parametres-llm",
-    type: "cours",
-    year: 2024,
-    tags: ["LLM", "Paramètres", "Architecture", "Optimisation", "Technique", "Interne"],
-    isInternal: true
-  },
-  {
-    title: "IA et Créativité : Révolutionner votre Processus Créatif",
-    source: "IA Explorer", 
-    description: "Explorez comment l'IA transforme la créativité dans tous les domaines. Apprenez à utiliser les outils d'IA générative pour amplifier votre potentiel créatif.",
-    link: "/cours/ia-creativite",
-    type: "cours",
-    year: 2024,
-    tags: ["Créativité", "Design", "Art numérique", "Innovation", "Interne"],
-    isInternal: true
-  },
-  {
-    title: "Deep Learning Pratique : De la Théorie à l'Application",
-    source: "IA Explorer",
-    description: "Cours pratique sur le deep learning avec des projets concrets. Apprenez à construire, entraîner et déployer vos premiers modèles de deep learning.",
-    link: "/cours/deep-learning-pratique", 
-    type: "cours",
-    year: 2024,
-    tags: ["Deep Learning", "Pratique", "Projets", "Neural Networks", "Interne"],
-    isInternal: true
-  },
-  {
-    title: "IA Éthique et Responsable : Guide Pratique",
-    source: "IA Explorer",
-    description: "Formation complète sur les enjeux éthiques de l'IA. Apprenez à développer et utiliser l'IA de manière responsable et éthique.",
-    link: "/cours/ia-ethique",
-    type: "cours", 
-    year: 2024,
-    tags: ["Éthique", "Responsabilité", "Gouvernance", "Société", "Interne"],
-    isInternal: true
-  },
-  {
-    title: "IA pour l'Entreprise : Stratégie et Implémentation",
-    source: "IA Explorer",
-    description: "Guide stratégique pour intégrer l'IA en entreprise. De l'analyse des besoins au déploiement, découvrez les meilleures pratiques.",
-    link: "/cours/ia-entreprise",
-    type: "cours",
-    year: 2024, 
-    tags: ["Entreprise", "Stratégie", "Transformation", "ROI", "Interne"],
-    isInternal: true
-  },
-  {
-    title: "NLP et LLM : Comprendre le Traitement du Langage",
-    source: "IA Explorer",
-    description: "Cours approfondi sur le NLP et les LLM. Comprenez le fonctionnement des modèles de langage et leurs applications pratiques.",
-    link: "/cours/nlp-llm-comprehension",
-    type: "cours",
-    year: 2024,
-    tags: ["NLP", "LLM", "Langage", "Transformers", "Interne"], 
-    isInternal: true
-  },
+export interface Course {
+  id: string;
+  title: string;
+  description: string;
+  duration: string;
+  level: 'Débutant' | 'Intermédiaire' | 'Avancé';
+  category: string;
+  tags: string[];
+  link: string;
+  author: string;
+  rating: number;
+  enrolled: number;
+  lastUpdated: string;
+  image?: string;
+  prerequisites?: string[];
+  learningObjectives?: string[];
+}
 
-  // Cours externes existants
-  {
-    title: "Machine Learning A-Z™: Hands-On Python & R In Data Science",
-    source: "Udemy",
-    description: "Learn to create Machine Learning Algorithms in Python and R from two Data Science experts. Code Included.",
-    link: "https://www.udemy.com/course/machinelearning/",
-    type: "cours",
-    year: 2020,
-    tags: ["Machine Learning", "Python", "R", "Data Science"]
-  },
-  {
-    title: "Deep Learning Specialization",
-    source: "Coursera",
-    description: "Master Deep Learning, and Break into AI. Build and train neural network architectures such as CNNs, RNNs, LSTMs, Transformers and more.",
-    link: "https://www.coursera.org/specializations/deep-learning",
-    type: "cours",
-    year: 2018,
-    tags: ["Deep Learning", "Neural Networks", "CNN", "RNN"]
-  },
-  {
-    title: "AI For Everyone",
-    source: "Coursera",
-    description: "This course is a non-technical introduction to AI. It cuts through the hype to explain what AI is, what it can do, how it works, and how to spot opportunities to apply AI to problems.",
-    link: "https://www.coursera.org/learn/ai-for-everyone",
-    type: "cours",
-    year: 2019,
-    tags: ["AI", "Non-Technical", "Introduction"]
-  },
-  {
-    title: "TensorFlow in Practice Specialization",
-    source: "Coursera",
-    description: "Learn how to use TensorFlow to build scalable AI-powered applications with deep learning.",
-    link: "https://www.coursera.org/specializations/tensorflow-in-practice",
-    type: "cours",
-    year: 2020,
-    tags: ["TensorFlow", "AI", "Deep Learning", "Python"]
-  },
-  {
-    title: "Mathematics for Machine Learning Specialization",
-    source: "Coursera",
-    description: "Learn the mathematics behind machine learning. Master linear algebra, calculus, and probability, and see how to apply it in Python.",
-    link: "https://www.coursera.org/specializations/mathematics-machine-learning",
-    type: "cours",
-    year: 2020,
-    tags: ["Mathematics", "Machine Learning", "Linear Algebra", "Calculus", "Probability", "Python"]
-  },
-  {
-    title: "IBM AI Engineering Professional Certificate",
-    source: "Coursera",
-    description: "Start your journey to becoming an AI Engineer. No degree or prior experience required.",
-    link: "https://www.coursera.org/professional-certificates/ibm-ai-engineering",
-    type: "cours",
-    year: 2020,
-    tags: ["AI Engineering", "Professional Certificate"]
-  },
-  {
-    title: "Google AI Platform: From Start to Scale",
-    source: "Coursera",
-    description: "Learn how to build and deploy production-ready AI models on Google Cloud Platform (GCP).",
-    link: "https://www.coursera.org/specializations/google-ai-platform",
-    type: "cours",
-    year: 2020,
-    tags: ["Google Cloud", "AI", "Deployment"]
-  },
-  {
-    title: "Advanced Machine Learning Specialization",
-    source: "Coursera",
-    description: "Go beyond the foundations of Machine Learning, and master advanced techniques.",
-    link: "https://www.coursera.org/specializations/advanced-machine-learning",
-    type: "cours",
-    year: 2015,
-    tags: ["Machine Learning", "Advanced Techniques"]
-  },
-  {
-    title: "Natural Language Processing Specialization",
-    source: "Coursera",
-    description: "Learn how to use natural language processing to build innovative products.",
-    link: "https://www.coursera.org/specializations/natural-language-processing",
-    type: "cours",
-    year: 2018,
-    tags: ["Natural Language Processing"]
-  },
-  {
-    title: "AWS Machine Learning Specialization",
-    source: "Coursera",
-    description: "Learn how to use Amazon Web Services (AWS) to build, train, and deploy machine learning models at scale.",
-    link: "https://www.coursera.org/specializations/aws-machine-learning",
-    type: "cours",
-    year: 2019,
-    tags: ["AWS", "Machine Learning"]
-  }
-];
-
-// Structure détaillée pour les cours internes seulement
-export const internalCoursesData = [
+export const coursesData: Course[] = [
   {
     id: 'apprentissage-supervise',
-    title: 'Les Bases de l\'Apprentissage Supervisé : Guide Pratique et Interactif',
-    description: 'Découvrez les fondamentaux de l\'apprentissage supervisé avec des exemples concrets, des analogies simples et des visualisations interactives.',
-    link: '/cours/apprentissage-supervise',
-    category: 'Machine Learning',
+    title: 'Apprentissage supervisé : Fondamentaux et pratique',
+    description: 'Découvrez les bases de l\'apprentissage supervisé avec des exemples pratiques et des visualisations interactives.',
+    duration: '2h30',
     level: 'Débutant',
-    duration: '3h',
-    tags: ['Apprentissage Supervisé', 'Machine Learning', 'Classification', 'Régression'],
+    category: 'Machine Learning',
+    tags: ['Machine Learning', 'Algorithmes', 'Classification', 'Régression'],
+    link: '/cours/apprentissage-supervise',
     author: 'Geoffroy Streit',
-    year: 2024,
-    language: 'Français'
+    rating: 4.8,
+    enrolled: 1250,
+    lastUpdated: '2024-01-15',
+    prerequisites: ['Bases de l\'IA', 'Statistiques de base'],
+    learningObjectives: [
+      'Comprendre les principes de l\'apprentissage supervisé',
+      'Distinguer classification et régression',
+      'Implémenter des algorithmes de base',
+      'Évaluer les performances d\'un modèle'
+    ]
+  },
+  {
+    id: 'apprentissage-non-supervise',
+    title: 'Apprentissage non supervisé : Explorer les structures cachées',
+    description: 'Maîtrisez le clustering, la réduction de dimensionnalité et les règles d\'association avec des démonstrations interactives.',
+    duration: '2h15',
+    level: 'Débutant',
+    category: 'Machine Learning',
+    tags: ['Machine Learning', 'Clustering', 'PCA', 'Règles d\'association'],
+    link: '/cours/apprentissage-non-supervise',
+    author: 'Geoffroy Streit',
+    rating: 4.9,
+    enrolled: 950,
+    lastUpdated: '2024-01-20',
+    prerequisites: ['Bases de l\'IA', 'Mathématiques de base'],
+    learningObjectives: [
+      'Comprendre les défis de l\'apprentissage non supervisé',
+      'Maîtriser les techniques de clustering',
+      'Appliquer la réduction de dimensionnalité',
+      'Découvrir des règles d\'association'
+    ]
+  },
+  {
+    id: 'nlp-comprehension',
+    title: 'NLP et compréhension du langage naturel',
+    description: 'Explorez le traitement du langage naturel, des bases aux modèles de langage modernes.',
+    duration: '3h15',
+    level: 'Intermédiaire',
+    category: 'NLP',
+    tags: ['NLP', 'Transformers', 'BERT', 'GPT'],
+    link: '/cours/nlp-comprehension',
+    author: 'Geoffroy Streit',
+    rating: 4.7,
+    enrolled: 890,
+    lastUpdated: '2024-01-10',
+    prerequisites: ['Machine Learning de base', 'Python'],
+    learningObjectives: [
+      'Comprendre les enjeux du NLP',
+      'Maîtriser les techniques de preprocessing',
+      'Utiliser les modèles de langage pré-entraînés',
+      'Implémenter des applications NLP'
+    ]
   },
   {
     id: 'prompt-engineering',
-    title: 'Prompt Engineering : Maîtriser l\'art de la communication avec l\'IA',
-    description: 'Apprenez à formuler des instructions efficaces pour maximiser les performances des modèles de langage comme ChatGPT, Claude ou Gemini.',
-    link: '/cours/prompt-engineering',
-    category: 'Pratique',
+    title: 'Prompt Engineering : L\'art de communiquer avec l\'IA',
+    description: 'Apprenez à formuler des prompts efficaces pour maximiser les performances des modèles de langage.',
+    duration: '1h45',
     level: 'Débutant',
-    duration: '2h',
-    tags: ['Prompt Engineering', 'LLM', 'ChatGPT', 'Communication IA'],
+    category: 'LLM',
+    tags: ['Prompt Engineering', 'ChatGPT', 'LLM', 'Communication'],
+    link: '/cours/prompt-engineering',
     author: 'Geoffroy Streit',
-    year: 2024,
-    language: 'Français'
-  },
-  {
-    id: 'chain-of-prompts',
-    title: 'Chain of Prompts : Maîtriser l\'Art de l\'Enchaînement d\'Invites',
-    description: 'Technique avancée pour construire des conversations complexes avec l\'IA en enchaînant des requêtes successives pour des résultats optimaux.',
-    link: '/cours/chain-of-prompts',
-    category: 'Technique',
-    level: 'Intermédiaire',
-    duration: '3h',
-    tags: ['Chain of Prompts', 'Conversation IA', 'Technique avancée', 'Optimisation'],
-    author: 'Geoffroy Streit',
-    year: 2024,
-    language: 'Français'
+    rating: 4.6,
+    enrolled: 1680,
+    lastUpdated: '2024-01-12',
+    prerequisites: ['Bases de l\'IA'],
+    learningObjectives: [
+      'Comprendre les principes du prompt engineering',
+      'Maîtriser les techniques de formulation',
+      'Optimiser les interactions avec les LLM',
+      'Éviter les pièges courants'
+    ]
   },
   {
     id: 'parametres-llm',
-    title: 'Paramètres des LLM : Comprendre et Optimiser les Modèles de Langage',
-    description: 'Cartographie complète des paramètres techniques et fonctionnels des LLM. Apprenez à choisir et configurer le bon modèle selon vos besoins.',
-    link: '/cours/parametres-llm',
-    category: 'Technique',
+    title: 'Paramètres des LLM : Optimisation et configuration',
+    description: 'Découvrez comment ajuster les paramètres des grands modèles de langage pour obtenir les meilleurs résultats.',
+    duration: '2h00',
     level: 'Intermédiaire',
-    duration: '4h',
-    tags: ['LLM', 'Architecture', 'Hyperparamètres', 'Optimisation'],
+    category: 'LLM',
+    tags: ['LLM', 'Paramètres', 'Optimisation', 'Configuration'],
+    link: '/cours/parametres-llm',
     author: 'Geoffroy Streit',
-    year: 2024,
-    language: 'Français'
+    rating: 4.5,
+    enrolled: 720,
+    lastUpdated: '2024-01-08',
+    prerequisites: ['Bases des LLM', 'Prompt Engineering'],
+    learningObjectives: [
+      'Comprendre l\'impact des différents paramètres',
+      'Optimiser la température et le top-p',
+      'Configurer les paramètres selon le contexte',
+      'Mesurer l\'effet des ajustements'
+    ]
   },
   {
-    id: 'ia-creativite',
-    title: 'IA et Créativité : Révolutionner les processus créatifs',
-    description: 'Découvrez comment l\'intelligence artificielle transforme les domaines créatifs : art, musique, écriture, design et innovation.',
-    link: '/cours/ia-creativite',
-    category: 'Créativité',
-    level: 'Intermédiaire',
-    duration: '3h',
-    tags: ['IA Créative', 'Art génératif', 'Design', 'Innovation'],
+    id: 'chain-of-prompts',
+    title: 'Chain of Prompts : Techniques avancées',
+    description: 'Maîtrisez les chaînes de prompts pour résoudre des problèmes complexes avec les LLM.',
+    duration: '1h30',
+    level: 'Avancé',
+    category: 'LLM',
+    tags: ['Chain of Prompts', 'LLM', 'Techniques avancées', 'Raisonnement'],
+    link: '/cours/chain-of-prompts',
     author: 'Geoffroy Streit',
-    year: 2024,
-    language: 'Français'
+    rating: 4.8,
+    enrolled: 540,
+    lastUpdated: '2024-01-05',
+    prerequisites: ['Prompt Engineering', 'Paramètres des LLM'],
+    learningObjectives: [
+      'Comprendre le concept de chaînes de prompts',
+      'Implémenter des raisonnements complexes',
+      'Optimiser les séquences d\'interactions',
+      'Gérer la cohérence entre les prompts'
+    ]
   },
   {
     id: 'deep-learning-pratique',
-    title: 'Deep Learning Pratique : De la théorie à l\'implémentation',
-    description: 'Maîtrisez les réseaux de neurones profonds par la pratique avec des projets concrets et des exemples de code.',
-    link: '/cours/deep-learning-pratique',
-    category: 'Technique',
+    title: 'Deep Learning pratique : De la théorie à l\'implémentation',
+    description: 'Formation complète sur les réseaux de neurones profonds avec des projets pratiques.',
+    duration: '4h00',
     level: 'Avancé',
-    duration: '5h',
+    category: 'Deep Learning',
     tags: ['Deep Learning', 'Réseaux de neurones', 'TensorFlow', 'PyTorch'],
+    link: '/cours/deep-learning-pratique',
     author: 'Geoffroy Streit',
-    year: 2024,
-    language: 'Français'
+    rating: 4.9,
+    enrolled: 680,
+    lastUpdated: '2024-01-18',
+    prerequisites: ['Machine Learning', 'Python avancé', 'Mathématiques'],
+    learningObjectives: [
+      'Maîtriser l\'architecture des réseaux profonds',
+      'Implémenter des CNN et RNN',
+      'Optimiser l\'entraînement des modèles',
+      'Déployer des modèles en production'
+    ]
   },
   {
-    id: 'nlp-llm-comprehension',
-    title: 'Comprendre le Traitement du Langage Naturel (NLP) et les LLM',
-    description: 'Plongez dans l\'univers du traitement automatique du langage et comprenez le fonctionnement des grands modèles de langage.',
-    link: '/cours/nlp-llm-comprehension',
-    category: 'Théorique',
+    id: 'ia-creativite',
+    title: 'IA et créativité : Art, musique et design génératifs',
+    description: 'Explorez les applications créatives de l\'IA : génération d\'art, de musique et de designs.',
+    duration: '2h45',
     level: 'Intermédiaire',
-    duration: '4h',
-    tags: ['NLP', 'LLM', 'Transformer', 'Linguistique computationnelle'],
+    category: 'IA Générative',
+    tags: ['IA Générative', 'Art', 'Créativité', 'GAN'],
+    link: '/cours/ia-creativite',
     author: 'Geoffroy Streit',
-    year: 2024,
-    language: 'Français'
+    rating: 4.7,
+    enrolled: 920,
+    lastUpdated: '2024-01-14',
+    prerequisites: ['Bases de l\'IA', 'Deep Learning de base'],
+    learningObjectives: [
+      'Comprendre l\'IA générative',
+      'Utiliser des outils de création assistée',
+      'Générer du contenu créatif',
+      'Évaluer la qualité artistique'
+    ]
   },
   {
     id: 'ia-entreprise',
-    title: 'IA pour l\'Entreprise : Stratégie et Implémentation',
-    description: 'Guide complet pour transformer votre organisation avec l\'intelligence artificielle : de la stratégie au déploiement.',
-    link: '/cours/ia-entreprise',
-    category: 'Business',
+    title: 'IA en entreprise : Stratégie et mise en œuvre',
+    description: 'Guide complet pour intégrer l\'IA dans l\'entreprise, de la stratégie à l\'implémentation.',
+    duration: '3h30',
     level: 'Intermédiaire',
-    duration: '4h',
-    tags: ['IA Entreprise', 'Stratégie', 'Transformation digitale', 'ROI'],
+    category: 'IA Business',
+    tags: ['IA Entreprise', 'Stratégie', 'ROI', 'Management'],
+    link: '/cours/ia-entreprise',
     author: 'Geoffroy Streit',
-    year: 2024,
-    language: 'Français'
+    rating: 4.6,
+    enrolled: 760,
+    lastUpdated: '2024-01-16',
+    prerequisites: ['Bases de l\'IA', 'Bases du management'],
+    learningObjectives: [
+      'Développer une stratégie IA',
+      'Identifier les cas d\'usage prioritaires',
+      'Gérer les projets IA',
+      'Mesurer le ROI des initiatives IA'
+    ]
   },
   {
     id: 'ia-ethique',
-    title: 'IA Éthique et Responsable : Guide Pratique',
-    description: 'Apprenez à développer et déployer des systèmes d\'IA éthiques, transparents et respectueux des droits humains.',
+    title: 'IA et éthique : Enjeux et bonnes pratiques',
+    description: 'Formation sur les aspects éthiques de l\'IA, les biais et les pratiques responsables.',
+    duration: '2h00',
+    level: 'Débutant',
+    category: 'Éthique IA',
+    tags: ['Éthique', 'Biais', 'IA Responsable', 'Réglementation'],
     link: '/cours/ia-ethique',
-    category: 'Éthique',
-    level: 'Intermédiaire',
-    duration: '3h',
-    tags: ['IA Éthique', 'Responsabilité', 'Biais', 'Transparence', 'RGPD'],
     author: 'Geoffroy Streit',
-    year: 2024,
-    language: 'Français'
+    rating: 4.8,
+    enrolled: 1340,
+    lastUpdated: '2024-01-20',
+    prerequisites: ['Bases de l\'IA'],
+    learningObjectives: [
+      'Comprendre les enjeux éthiques de l\'IA',
+      'Identifier et réduire les biais',
+      'Implémenter des pratiques responsables',
+      'Naviguer dans le cadre réglementaire'
+    ]
   }
 ];
-
-// Export principal - utilisé par les autres composants
-export const coursesData = courses;

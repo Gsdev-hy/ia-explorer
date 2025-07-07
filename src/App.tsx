@@ -1,106 +1,140 @@
 
-import { Suspense, lazy } from 'react';
-import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ThemeProvider } from "next-themes";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import MainLayout from './layouts/MainLayout';
-import SkipLink from './components/SkipLink';
 
-const Home = lazy(() => import('./pages/Home'));
-const LesBases = lazy(() => import('./pages/LesBases'));
-const TypesIA = lazy(() => import('./pages/TypesIA'));
-const MachineLearning = lazy(() => import('./pages/MachineLearning'));
-const DeepLearning = lazy(() => import('./pages/DeepLearning'));
-const CasUsage = lazy(() => import('./pages/CasUsage'));
-const Ressources = lazy(() => import('./pages/Ressources'));
-const Ethique = lazy(() => import('./pages/Ethique'));
-const Actualites = lazy(() => import('./pages/Actualites'));
+// Pages principales
+import Home from './pages/Home';
+import LesBases from './pages/LesBases';
+import TypesIA from './pages/TypesIA';
+import NiveauxIA from './pages/NiveauxIA';
+import MachineLearning from './pages/MachineLearning';
+import Ethique from './pages/Ethique';
+import CasUsage from './pages/CasUsage';
+import Glossaire from './pages/Glossaire';
+import Histoire from './pages/Histoire';
+import HistoireIA from './pages/HistoireIA';
+import Actualites from './pages/Actualites';
 
-// Pages manquantes restaurées
-const Glossaire = lazy(() => import('./pages/Glossaire'));
-const About = lazy(() => import('./pages/About'));
-const IAMultimodale = lazy(() => import('./pages/IAMultimodale'));
-const GeminiChatPage = lazy(() => import('./pages/GeminiChatPage'));
-const Confidentialite = lazy(() => import('./pages/Confidentialite'));
-const CalculateurCoutsIA = lazy(() => import('./pages/CalculateurCoutsIA'));
+// Applications spécialisées
+import IAMultimodale from './pages/IAMultimodale';
+import IAMarketingVente from './pages/IAMarketingVente';
+import IAEnvironnement from './pages/IAEnvironnement';
+import CoderAvecIA from './pages/CoderAvecIA';
+import OrganiserServicesIA from './pages/OrganiserServicesIA';
+import UtiliserIAQuotidien from './pages/UtiliserIAQuotidien';
+import UtiliserIATravail from './pages/UtiliserIATravail';
+import IAExpliqueeAuxEnfants from './pages/IAExpliqueeAuxEnfants';
+import EthiqueGouvernance from './pages/EthiqueGouvernance';
 
-// Pages Histoire et Niveaux IA restaurées
-const HistoireIA = lazy(() => import('./pages/HistoireIA'));
-const NiveauxIA = lazy(() => import('./pages/NiveauxIA'));
+// Cours et formations
+import ApprentissageSupervise from './pages/cours/ApprentissageSupervise';
+import ApprentissageNonSupervise from './pages/cours/ApprentissageNonSupervise';
+import NLPComprehension from './pages/cours/NLPComprehension';
+import PromptEngineering from './pages/cours/PromptEngineering';
+import ParametresLLM from './pages/cours/ParametresLLM';
+import ChainOfPrompts from './pages/cours/ChainOfPrompts';
+import DeepLearningPratique from './pages/cours/DeepLearningPratique';
+import IACreativite from './pages/cours/IACreativite';
+import IAEntreprise from './pages/cours/IAEntreprise';
+import IAEthique from './pages/cours/IAEthique';
 
-// Cours
-const PromptEngineering = lazy(() => import('./pages/cours/PromptEngineering'));
-const ChainOfPrompts = lazy(() => import('./pages/cours/ChainOfPrompts'));
-const ParametresLLM = lazy(() => import('./pages/cours/ParametresLLM'));
-const IACreativite = lazy(() => import('./pages/cours/IACreativite'));
-const DeepLearningPratique = lazy(() => import('./pages/cours/DeepLearningPratique'));
-const IAEthique = lazy(() => import('./pages/cours/IAEthique'));
-const IAEntreprise = lazy(() => import('./pages/cours/IAEntreprise'));
-const NLPComprehension = lazy(() => import('./pages/cours/NLPComprehension'));
-const ApprentissageSupervise = lazy(() => import('./pages/cours/ApprentissageSupervise'));
+// Outils et ressources
+import Ressources from './pages/Ressources';
+import CalculateurCoutsIA from './pages/CalculateurCoutsIA';
+import SimulateurIA from './pages/SimulateurIA';
+import PremierModeleML from './pages/PremierModeleML';
+import PythonIA from './pages/PythonIA';
+import DeepLearning from './pages/DeepLearning';
+import LLMDetails from './pages/LLMDetails';
+import NLPConcepts from './pages/NLPConcepts';
+
+// Pages de communication
+import GeminiChatPage from './pages/GeminiChatPage';
+import About from './pages/About';
+import Confidentialite from './pages/Confidentialite';
+import MentionsLegales from './pages/MentionsLegales';
+import NotFound from './pages/NotFound';
 
 const queryClient = new QueryClient();
 
-function App() {
+function QueryClientWrapper({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <TooltipProvider>
-          <BrowserRouter>
-            <div className="min-h-screen bg-background">
-              <SkipLink />
-              <MainLayout>
-                <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Chargement...</div>}>
-                  <Routes>
-                    {/* Pages principales */}
-                    <Route path="/" element={<Home />} />
-                    <Route path="/les-bases" element={<LesBases />} />
-                    <Route path="/types-ia" element={<TypesIA />} />
-                    <Route path="/niveaux-ia" element={<NiveauxIA />} />
-                    <Route path="/machine-learning" element={<MachineLearning />} />
-                    <Route path="/deep-learning" element={<DeepLearning />} />
-                    <Route path="/cas-usage" element={<CasUsage />} />
-                    <Route path="/ressources" element={<Ressources />} />
-                    <Route path="/ethique" element={<Ethique />} />
-                    <Route path="/actualites" element={<Actualites />} />
-                    
-                    {/* Pages restaurées */}
-                    <Route path="/glossaire" element={<Glossaire />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/a-propos" element={<About />} />
-                    <Route path="/ia-multimodale" element={<IAMultimodale />} />
-                    <Route path="/chat" element={<GeminiChatPage />} />
-                    <Route path="/confidentialite" element={<Confidentialite />} />
-                    <Route path="/calculateur-couts-ia" element={<CalculateurCoutsIA />} />
-                    
-                    {/* Pages Histoire et Niveaux IA restaurées */}
-                    <Route path="/histoire-ia" element={<HistoireIA />} />
-                    <Route path="/histoire" element={<HistoireIA />} />
-                    
-                    {/* Cours */}
-                    <Route path="/cours/prompt-engineering" element={<PromptEngineering />} />
-                    <Route path="/cours/chain-of-prompts" element={<ChainOfPrompts />} />
-                    <Route path="/cours/parametres-llm" element={<ParametresLLM />} />
-                    <Route path="/cours/ia-creativite" element={<IACreativite />} />
-                    <Route path="/cours/deep-learning-pratique" element={<DeepLearningPratique />} />
-                    <Route path="/cours/ia-ethique" element={<IAEthique />} />
-                    <Route path="/cours/ia-entreprise" element={<IAEntreprise />} />
-                    <Route path="/cours/nlp-llm-comprehension" element={<NLPComprehension />} />
-                    <Route path="/cours/apprentissage-supervise" element={<ApprentissageSupervise />} />
-                    
-                    {/* NotFound */}
-                    <Route path="*" element={<div className="flex items-center justify-center min-h-screen"><div className="text-center"><h1 className="text-4xl font-bold mb-4">404</h1><p className="text-muted-foreground">Page non trouvée</p></div></div>} />
-                  </Routes>
-                </Suspense>
-              </MainLayout>
-            </div>
-            <Toaster />
-          </BrowserRouter>
-        </TooltipProvider>
-      </ThemeProvider>
+      {children}
     </QueryClientProvider>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <QueryClientWrapper>
+        <MainLayout>
+          <Routes>
+            {/* Pages principales */}
+            <Route path="/" element={<Home />} />
+            <Route path="/accueil" element={<Home />} />
+            
+            {/* Pages d'information */}
+            <Route path="/les-bases" element={<LesBases />} />
+            <Route path="/types-ia" element={<TypesIA />} />
+            <Route path="/niveaux-ia" element={<NiveauxIA />} />
+            <Route path="/machine-learning" element={<MachineLearning />} />
+            <Route path="/ethique" element={<Ethique />} />
+            <Route path="/cas-usage" element={<CasUsage />} />
+            <Route path="/glossaire" element={<Glossaire />} />
+            <Route path="/histoire" element={<Histoire />} />
+            <Route path="/histoire-ia" element={<HistoireIA />} />
+            <Route path="/actualites" element={<Actualites />} />
+            
+            {/* Applications spécialisées */}
+            <Route path="/ia-multimodale" element={<IAMultimodale />} />
+            <Route path="/ia-marketing-vente" element={<IAMarketingVente />} />
+            <Route path="/ia-environnement" element={<IAEnvironnement />} />
+            <Route path="/coder-avec-ia" element={<CoderAvecIA />} />
+            <Route path="/organiser-services-ia" element={<OrganiserServicesIA />} />
+            <Route path="/utiliser-ia-quotidien" element={<UtiliserIAQuotidien />} />
+            <Route path="/utiliser-ia-travail" element={<UtiliserIATravail />} />
+            <Route path="/ia-expliquee-aux-enfants" element={<IAExpliqueeAuxEnfants />} />
+            <Route path="/ethique-gouvernance" element={<EthiqueGouvernance />} />
+            
+            {/* Cours et formations */}
+            <Route path="/cours/apprentissage-supervise" element={<ApprentissageSupervise />} />
+            <Route path="/cours/apprentissage-non-supervise" element={<ApprentissageNonSupervise />} />
+            <Route path="/cours/nlp-comprehension" element={<NLPComprehension />} />
+            <Route path="/cours/prompt-engineering" element={<PromptEngineering />} />
+            <Route path="/cours/parametres-llm" element={<ParametresLLM />} />
+            <Route path="/cours/chain-of-prompts" element={<ChainOfPrompts />} />
+            <Route path="/cours/deep-learning-pratique" element={<DeepLearningPratique />} />
+            <Route path="/cours/ia-creativite" element={<IACreativite />} />
+            <Route path="/cours/ia-entreprise" element={<IAEntreprise />} />
+            <Route path="/cours/ia-ethique" element={<IAEthique />} />
+            
+            {/* Outils et ressources */}
+            <Route path="/ressources" element={<Ressources />} />
+            <Route path="/calculateur-couts-ia" element={<CalculateurCoutsIA />} />
+            <Route path="/simulateur-ia" element={<SimulateurIA />} />
+            <Route path="/premier-modele-ml" element={<PremierModeleML />} />
+            <Route path="/python-ia" element={<PythonIA />} />
+            <Route path="/deep-learning" element={<DeepLearning />} />
+            <Route path="/llm-details" element={<LLMDetails />} />
+            <Route path="/nlp-concepts" element={<NLPConcepts />} />
+            
+            {/* Pages de communication */}
+            <Route path="/chat" element={<GeminiChatPage />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/a-propos" element={<About />} />
+            <Route path="/confidentialite" element={<Confidentialite />} />
+            <Route path="/mentions-legales" element={<MentionsLegales />} />
+            
+            {/* Page 404 */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </MainLayout>
+      </QueryClientWrapper>
+    </Router>
   );
 }
 
