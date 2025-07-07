@@ -1,4 +1,5 @@
 
+
 // Types de données
 export interface Resource {
   title: string;
@@ -39,14 +40,14 @@ import { articles } from './data/articlesData';
 import { scientificPublications } from './data/scientificPublicationsData';
 import { iaTools } from './data/toolsData';
 
-// Combine toutes les ressources
+// Combine toutes les ressources (excluding courses which are handled separately)
 export const realResources: Resource[] = [
   ...websites,
   ...books,
-  ...coursesData,
   ...videos,
   ...articles
 ];
 
 // Export des données spécifiques
-export { scientificPublications, iaTools };
+export { scientificPublications, iaTools, coursesData };
+
