@@ -3,224 +3,212 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { TrendingDown, Eye, Layers } from 'lucide-react';
+import { Slider } from '@/components/ui/slider';
+import { Minimize2, Eye, EyeOff } from 'lucide-react';
 
 const DimensionalityReductionDemo: React.FC = () => {
-  const [currentView, setCurrentView] = useState<'3d' | '2d' | 'comparison'>('3d');
-  
-  // Données simulées pour la démonstration
-  const dataPoints3D = [
-    { x: 10, y: 8, z: 12, label: 'Point A' },
-    { x: 15, y: 12, z: 8, label: 'Point B' },
-    { x: 8, y: 15, z: 10, label: 'Point C' },
-    { x: 12, y: 10, z: 15, label: 'Point D' },
-    { x: 20, y: 5, z: 7, label: 'Point E' }
+  const [dimensions, setDimensions] = useState([3]);
+  const [showOriginal, setShowOriginal] = useState(true);
+
+  // Données d'exemple : maisons avec différentes caractéristiques
+  const originalData = [
+    { name: 'Maison A', surface: 120, prix: 300000, chambres: 3, jardin: 1, garage: 1, age: 5 },
+    { name: 'Maison B', surface: 80, prix: 200000, chambres: 2, jardin: 0, garage: 0, age: 15 },
+    { name: 'Maison C', surface: 200, prix: 500000, chambres: 5, jardin: 1, garage: 2, age: 2 },
+    { name: 'Maison D', surface: 95, prix: 250000, chambres: 2, jardin: 1, garage: 1, age: 10 },
+    { name: 'Maison E', surface: 150, prix: 380000, chambres: 4, jardin: 1, garage: 1, age: 8 }
   ];
 
-  // Projection PCA simulée (réduction 3D -> 2D)
-  const dataPoints2D = dataPoints3D.map(point => ({
-    x: point.x * 0.7 + point.y * 0.3,
-    y: point.z * 0.8 + point.x * 0.2,
-    label: point.label
-  }));
+  // Simulation de PCA - réduction progressive des dimensions
+  const getReducedData = (dims: number) => {
+    switch (dims) {
+      case 6:
+        return originalData.map(house => ({
+          name: house.name,
+          dimensions: [house.surface, house.prix/1000, house.chambres*20, house.jardin*50, house.garage*30, (20-house.age)*10]
+        }));
+      case 3:
+        return originalData.map(house => ({
+          name: house.name,
+          dimensions: [
+            house.surface * 0.8 + house.prix/5000, // Composante principale 1
+            house.chambres * 15 + house.jardin * 25, // Composante principale 2
+            house.garage * 20 + (20-house.age) * 5   // Composante principale 3
+          ]
+        }));
+      case 2:
+        return originalData.map(house => ({
+          name: house.name,
+          dimensions: [
+            house.surface * 0.7 + house.prix/6000 + house.chambres * 10, // PC1
+            house.jardin * 30 + house.garage * 25 + (20-house.age) * 8    // PC2
+          ]
+        }));
+      default:
+        return originalData.map(house => ({
+          name: house.name,
+          dimensions: [house.surface * 0.6 + house.prix/8000 + house.chambres * 12 + house.jardin * 20]
+        }));
+    }
+  };
 
-  const SVG3DView = () => (
-    <div className="relative">
-      <svg width="300" height="200" className="border rounded bg-gradient-to-br from-blue-50 to-purple-50">
-        <defs>
-          <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.1"/>
-            <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.3"/>
-          </linearGradient>
-        </defs>
-        
-        {/* Grille 3D simulée */}
-        <g stroke="#E5E7EB" strokeWidth="1" opacity="0.5">
-          <line x1="50" y1="50" x2="250" y2="50" />
-          <line x1="50" y1="100" x2="250" y2="100" />
-          <line x1="50" y1="150" x2="250" y2="150" />
-          <line x1="50" y1="50" x2="100" y2="150" />
-          <line x1="150" y1="50" x2="200" y2="150" />
-          <line x1="250" y1="50" x2="300" y2="150" />
-        </g>
-        
-        {/* Points 3D */}
-        {dataPoints3D.map((point, index) => (
-          <g key={index}>
-            <circle
-              cx={50 + point.x * 8}
-              cy={50 + point.y * 4 + point.z * 2}
-              r="6"
-              fill="#3B82F6"
-              opacity="0.8"
-              className="animate-pulse"
-            />
-            <text
-              x={50 + point.x * 8 + 10}
-              y={50 + point.y * 4 + point.z * 2 + 4}
-              fontSize="10"
-              fill="#1F2937"
-            >
-              {point.label}
-            </text>
-          </g>
-        ))}
-        
-        <text x="150" y="25" textAnchor="middle" className="text-sm font-medium fill-gray-600">
-          Vue 3D (X, Y, Z)
-        </text>
-      </svg>
-      <Badge className="absolute top-2 right-2 bg-blue-100 text-blue-800">
-        3 dimensions
-      </Badge>
-    </div>
-  );
-
-  const SVG2DView = () => (
-    <div className="relative">
-      <svg width="300" height="200" className="border rounded bg-gradient-to-br from-green-50 to-teal-50">
-        {/* Grille 2D */}
-        <g stroke="#E5E7EB" strokeWidth="1" opacity="0.5">
-          <line x1="50" y1="50" x2="250" y2="50" />
-          <line x1="50" y1="100" x2="250" y2="100" />
-          <line x1="50" y1="150" x2="250" y2="150" />
-          <line x1="50" y1="50" x2="50" y2="150" />
-          <line x1="150" y1="50" x2="150" y2="150" />
-          <line x1="250" y1="50" x2="250" y2="150" />
-        </g>
-        
-        {/* Points 2D projetés */}
-        {dataPoints2D.map((point, index) => (
-          <g key={index}>
-            <circle
-              cx={50 + point.x * 6}
-              cy={50 + point.y * 6}
-              r="6"
-              fill="#10B981"
-              opacity="0.8"
-              className="animate-pulse"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            />
-            <text
-              x={50 + point.x * 6 + 10}
-              y={50 + point.y * 6 + 4}
-              fontSize="10"
-              fill="#1F2937"
-            >
-              {point.label}
-            </text>
-          </g>
-        ))}
-        
-        <text x="150" y="25" textAnchor="middle" className="text-sm font-medium fill-gray-600">
-          Projection 2D (PCA)
-        </text>
-      </svg>
-      <Badge className="absolute top-2 right-2 bg-green-100 text-green-800">
-        2 dimensions
-      </Badge>
-    </div>
-  );
+  const reducedData = getReducedData(dimensions[0]);
+  const varianceExplained = dimensions[0] === 6 ? 100 : dimensions[0] === 3 ? 85 : dimensions[0] === 2 ? 70 : 55;
 
   return (
-    <Card className="w-full">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <TrendingDown className="h-5 w-5 text-primary" />
-          Démonstration de réduction de dimensionnalité
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-6">
-          <div className="flex gap-2 flex-wrap">
-            <Button
-              variant={currentView === '3d' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setCurrentView('3d')}
-            >
-              <Layers className="h-4 w-4 mr-2" />
-              Vue 3D originale
-            </Button>
-            <Button
-              variant={currentView === '2d' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setCurrentView('2d')}
-            >
-              <Eye className="h-4 w-4 mr-2" />
-              Projection 2D
-            </Button>
-            <Button
-              variant={currentView === 'comparison' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setCurrentView('comparison')}
-            >
-              Comparaison
-            </Button>
-          </div>
+    <div className="space-y-6">
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Minimize2 className="h-5 w-5" />
+            Simulation de réduction de dimensionnalité (PCA)
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div className="flex items-center gap-4">
+              <label className="text-sm font-medium">Nombre de dimensions finales:</label>
+              <div className="w-32">
+                <Slider
+                  value={dimensions}
+                  onValueChange={setDimensions}
+                  max={6}
+                  min={1}
+                  step={1}
+                  className="w-full"
+                />
+              </div>
+              <span className="text-sm text-muted-foreground">{dimensions[0]}D</span>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setShowOriginal(!showOriginal)}
+              >
+                {showOriginal ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                {showOriginal ? 'Masquer' : 'Voir'} original
+              </Button>
+            </div>
 
-          <div className="flex justify-center">
-            {currentView === '3d' && <SVG3DView />}
-            {currentView === '2d' && <SVG2DView />}
-            {currentView === 'comparison' && (
-              <div className="flex gap-8 items-center">
-                <SVG3DView />
-                <div className="flex flex-col items-center">
-                  <div className="text-2xl">→</div>
-                  <div className="text-xs text-muted-foreground">PCA</div>
+            <div className="bg-muted/50 p-4 rounded-lg">
+              <div className="flex justify-between items-center text-sm">
+                <span>Dimensions: 6D → {dimensions[0]}D</span>
+                <Badge variant={varianceExplained >= 80 ? "default" : varianceExplained >= 60 ? "secondary" : "destructive"}>
+                  {varianceExplained}% de variance conservée
+                </Badge>
+              </div>
+            </div>
+
+            {showOriginal && (
+              <div className="border-2 border-dashed border-muted-foreground/30 p-4 rounded-lg">
+                <h4 className="font-semibold mb-3">Données originales (6 dimensions)</h4>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b">
+                        <th className="text-left p-2">Maison</th>
+                        <th className="text-left p-2">Surface</th>
+                        <th className="text-left p-2">Prix (k€)</th>
+                        <th className="text-left p-2">Chambres</th>
+                        <th className="text-left p-2">Jardin</th>
+                        <th className="text-left p-2">Garage</th>
+                        <th className="text-left p-2">Âge</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {originalData.map((house, index) => (
+                        <tr key={index} className="border-b">
+                          <td className="p-2 font-medium">{house.name}</td>
+                          <td className="p-2">{house.surface}m²</td>
+                          <td className="p-2">{house.prix/1000}k€</td>
+                          <td className="p-2">{house.chambres}</td>
+                          <td className="p-2">{house.jardin ? '✓' : '✗'}</td>
+                          <td className="p-2">{house.garage}</td>
+                          <td className="p-2">{house.age} ans</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
-                <SVG2DView />
               </div>
             )}
-          </div>
 
-          <div className="bg-muted/50 p-4 rounded-lg">
-            <h4 className="font-medium mb-2">Qu'est-ce qui se passe ?</h4>
-            <div className="text-sm space-y-2">
-              {currentView === '3d' && (
-                <p>
-                  Nos données originales ont 3 dimensions (X, Y, Z). Imaginez que chaque point représente 
-                  un client avec 3 caractéristiques : âge, revenu, et fréquence d'achat.
-                </p>
-              )}
-              {currentView === '2d' && (
-                <p>
-                  Après application de l'ACP (Analyse en Composantes Principales), nous obtenons une projection 2D 
-                  qui préserve au maximum la variance des données originales. Les relations entre points sont maintenues !
-                </p>
-              )}
-              {currentView === 'comparison' && (
-                <div>
-                  <p className="mb-2">
-                    <strong>Avantages de la réduction :</strong>
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 text-xs">
-                    <li>Visualisation possible sur un graphique 2D</li>
-                    <li>Calculs plus rapides avec moins de dimensions</li>
-                    <li>Élimination du "bruit" dans les données</li>
-                    <li>Relations principales préservées</li>
-                  </ul>
+            <div className="bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-950/30 dark:to-blue-950/30 p-4 rounded-lg">
+              <h4 className="font-semibold mb-3">Données après PCA ({dimensions[0]} dimension{dimensions[0] > 1 ? 's' : ''})</h4>
+              
+              {dimensions[0] === 1 ? (
+                <div className="space-y-2">
+                  {reducedData.map((house, index) => (
+                    <div key={index} className="flex items-center gap-4">
+                      <span className="font-medium w-20">{house.name}</span>
+                      <div className="flex-1 bg-white dark:bg-gray-800 rounded-full h-6 relative">
+                        <div 
+                          className="bg-gradient-to-r from-blue-400 to-purple-500 h-full rounded-full flex items-center justify-end pr-2"
+                          style={{ width: `${Math.max(10, (house.dimensions[0] / Math.max(...reducedData.map(h => h.dimensions[0]))) * 100)}%` }}
+                        >
+                          <span className="text-white text-xs font-medium">
+                            {house.dimensions[0].toFixed(1)}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b">
+                        <th className="text-left p-2">Maison</th>
+                        {Array.from({ length: dimensions[0] }, (_, i) => (
+                          <th key={i} className="text-left p-2">PC{i + 1}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {reducedData.map((house, index) => (
+                        <tr key={index} className="border-b">
+                          <td className="p-2 font-medium">{house.name}</td>
+                          {house.dimensions.map((dim, dimIndex) => (
+                            <td key={dimIndex} className="p-2">{dim.toFixed(1)}</td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               )}
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="text-center p-4 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
-              <div className="text-2xl font-bold text-blue-600">3D → 2D</div>
-              <div className="text-sm text-blue-700 dark:text-blue-300">Réduction de 33%</div>
-            </div>
-            <div className="text-center p-4 bg-green-50 dark:bg-green-950/30 rounded-lg">
-              <div className="text-2xl font-bold text-green-600">95%</div>
-              <div className="text-sm text-green-700 dark:text-green-300">Variance préservée</div>
-            </div>
-            <div className="text-center p-4 bg-purple-50 dark:bg-purple-950/30 rounded-lg">
-              <div className="text-2xl font-bold text-purple-600">2x</div>
-              <div className="text-sm text-purple-700 dark:text-purple-300">Plus rapide</div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+              <div className="bg-blue-50 dark:bg-blue-950/30 p-3 rounded">
+                <h5 className="font-semibold mb-1">Avantages</h5>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>Visualisation simplifiée</li>
+                  <li>Réduction du bruit</li>
+                  <li>Performance améliorée</li>
+                </ul>
+              </div>
+              <div className="bg-orange-50 dark:bg-orange-950/30 p-3 rounded">
+                <h5 className="font-semibold mb-1">Inconvénients</h5>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>Perte d'information</li>
+                  <li>Interprétation complexe</li>
+                  <li>Choix du nombre de dimensions</li>
+                </ul>
+              </div>
+              <div className="bg-green-50 dark:bg-green-950/30 p-3 rounded">
+                <h5 className="font-semibold mb-1">Applications</h5>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>Compression d'images</li>
+                  <li>Analyse génomique</li>
+                  <li>Recommandations</li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 
