@@ -1,3 +1,4 @@
+
 // Types de données
 export interface Resource {
   title: string;
@@ -32,7 +33,7 @@ export interface IAToolResource {
 // Import des données depuis les fichiers séparés
 import { websites } from './data/websitesData';
 import { books } from './data/booksData';
-import { courses } from './data/coursesData';
+import { coursesData } from './data/coursesData';
 import { videos } from './data/videosData';
 import { articles } from './data/articlesData';
 import { scientificPublications } from './data/scientificPublicationsData';
@@ -42,7 +43,7 @@ import { iaTools } from './data/toolsData';
 export const realResources: Resource[] = [
   ...websites,
   ...books,
-  ...courses,
+  ...coursesData,
   ...videos,
   ...articles
 ];

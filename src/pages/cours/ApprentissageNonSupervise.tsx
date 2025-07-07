@@ -260,7 +260,7 @@ const ApprentissageNonSupervise = () => {
         <CourseConclusion
           title="Maîtriser l'art de la découverte"
           summary="L'apprentissage non supervisé est un outil puissant pour explorer et comprendre des données complexes. Bien qu'il présente des défis uniques, il offre des possibilités infinies de découverte et d'innovation."
-          keyTakeaways={[
+          learningPoints={[
             "Le clustering révèle des groupes naturels dans les données",
             "La réduction de dimensionnalité simplifie la complexité",
             "Les règles d'association découvrent des relations cachées",
