@@ -2,300 +2,262 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Brain, Camera, MessageSquare, Car, TrendingUp, Stethoscope } from 'lucide-react';
+import { Brain, Camera, MessageSquare, Car, Stethoscope, TrendingUp } from 'lucide-react';
+import ConceptIllustration from './ConceptIllustration';
+import DidYouKnow from '../DidYouKnow';
 
 const PracticalApplicationsSection: React.FC = () => {
-  const applications = [
-    {
-      icon: <Camera className="h-6 w-6" />,
-      title: "Vision par Ordinateur",
-      description: "Comment l'IA 'voit' et comprend les images",
-      mathConcepts: ["Convolution (algèbre)", "Backpropagation (calcul)", "Softmax (probabilités)"],
-      example: "Un réseau CNN utilise des convolutions (multiplication matricielle) pour détecter des contours, puis optimise ses filtres par descente de gradient.",
-      realWorld: "Reconnaissance faciale, diagnostic médical par imagerie, voitures autonomes"
-    },
-    {
-      icon: <MessageSquare className="h-6 w-6" />,
-      title: "Traitement du Langage",
-      description: "Comment l'IA comprend et génère du texte",
-      mathConcepts: ["Embeddings (vecteurs)", "Attention (algèbre)", "Transformers (matrices)"],
-      example: "ChatGPT encode chaque mot comme un vecteur de 4096 dimensions, puis utilise l'attention pour comprendre les relations entre les mots.",
-      realWorld: "Traduction automatique, chatbots, résumé de texte, génération d'articles"
-    },
-    {
-      icon: <TrendingUp className="h-6 w-6" />,
-      title: "Finance Algorithmique",
-      description: "Prédiction et optimisation financière",
-      mathConcepts: ["Séries temporelles", "Optimisation de portefeuille", "Monte Carlo"],
-      example: "Un algorithme utilise des statistiques pour détecter des patterns dans les cours, puis optimise le portefeuille selon le ratio de Sharpe.",
-      realWorld: "Trading haute fréquence, gestion de risque, détection de fraude"
-    },
-    {
-      icon: <Car className="h-6 w-6" />,
-      title: "Véhicules Autonomes",
-      description: "Navigation intelligente et sécurisée",
-      mathConcepts: ["Kalman Filter", "SLAM", "Reinforcement Learning"],
-      example: "Le filtre de Kalman combine les données GPS (probabilités) avec les capteurs (matrices de covariance) pour localiser précisément le véhicule.",
-      realWorld: "Tesla Autopilot, Waymo, livraison autonome de colis"
-    },
-    {
-      icon: <Stethoscope className="h-6 w-6" />,
-      title: "IA Médicale",
-      description: "Diagnostic et traitement assistés",
-      mathConcepts: ["Classification bayésienne", "Deep Learning", "Analyse d'images"],
-      example: "Un réseau analyse des millions de pixels d'une radio pulmonaire, calcule les probabilités de différentes pathologies selon Bayes.",
-      realWorld: "Détection du cancer, personnalisation des traitements, découverte de médicaments"
-    },
-    {
-      icon: <Brain className="h-6 w-6" />,
-      title: "Recommandation",
-      description: "Suggestions personnalisées intelligentes",
-      mathConcepts: ["Factorisation matricielle", "Clustering", "Collaborative filtering"],
-      example: "Netflix décompose la matrice utilisateurs×films pour trouver des patterns cachés, puis utilise la similarité cosinus pour recommander.",
-      realWorld: "Netflix, Spotify, Amazon, YouTube, réseaux sociaux"
-    }
-  ];
-
   return (
     <div className="space-y-8">
       {/* Introduction */}
-      <Card className="border-l-4 border-l-green-500">
+      <Card className="border-l-4 border-l-emerald-500 bg-gradient-to-r from-emerald-50/50 to-teal-50/50 dark:from-emerald-950/20 dark:to-teal-950/20">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Brain className="h-5 w-5 text-green-500" />
-            Voir les Mathématiques en Action
+          <CardTitle className="flex items-center gap-2 text-foreground">
+            <Brain className="h-5 w-5 text-emerald-500" />
+            Applications Concrètes : Les Maths au Service de l'IA
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-lg leading-relaxed mb-4">
-            Maintenant que nous avons exploré les concepts fondamentaux, voyons comment ces mathématiques 
-            se concrétisent dans des applications réelles d'IA qui transforment notre monde.
+          <p className="text-lg leading-relaxed mb-4 text-foreground">
+            Maintenant que vous maîtrisez les concepts mathématiques fondamentaux, découvrons comment 
+            ils se combinent pour créer des applications d'IA révolutionnaires qui transforment notre quotidien.
           </p>
           
-          <div className="bg-green-50 dark:bg-green-950/30 p-4 rounded-lg">
-            <h4 className="font-semibold text-green-800 dark:text-green-200 mb-2">🔗 Tout est Connecté</h4>
-            <p className="text-green-700 dark:text-green-300">
-              Chaque application IA combine tous les concepts mathématiques que nous avons vus. 
-              L'algèbre linéaire structure les données, le calcul optimise les paramètres, 
-              les probabilités gèrent l'incertitude, et l'optimisation trouve les meilleures solutions !
+          <div className="bg-emerald-100/50 dark:bg-emerald-900/30 p-4 rounded-lg border border-emerald-200 dark:border-emerald-800">
+            <h4 className="font-semibold text-emerald-800 dark:text-emerald-200 mb-2">🎯 L'Union fait la Force</h4>
+            <p className="text-emerald-700 dark:text-emerald-300">
+              Chaque application d'IA combine plusieurs domaines mathématiques. Par exemple, un système 
+              de reconnaissance vocale utilise l'algèbre linéaire pour traiter le signal, les probabilités 
+              pour gérer l'incertitude, et l'optimisation pour améliorer ses performances !
             </p>
           </div>
         </CardContent>
       </Card>
 
-      {/* Applications détaillées */}
-      <div className="space-y-6">
-        {applications.map((app, index) => (
-          <Card key={index} className="hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-primary/10 text-primary">
-                  {app.icon}
-                </div>
-                <div>
-                  <div className="text-xl">{app.title}</div>
-                  <div className="text-sm text-muted-foreground font-normal">{app.description}</div>
-                </div>
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="space-y-3">
-                  <div>
-                    <h5 className="font-semibold mb-2">🧮 Concepts Mathématiques Clés</h5>
-                    <div className="flex flex-wrap gap-2">
-                      {app.mathConcepts.map((concept, idx) => (
-                        <Badge key={idx} variant="secondary" className="text-xs">
-                          {concept}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <div className="bg-muted/50 p-3 rounded-lg">
-                    <h5 className="font-semibold mb-2">🔬 Exemple Technique</h5>
-                    <p className="text-sm">{app.example}</p>
-                  </div>
-                </div>
-                
-                <div className="space-y-3">
-                  <div>
-                    <h5 className="font-semibold mb-2">🌍 Applications Réelles</h5>
-                    <p className="text-sm text-muted-foreground">{app.realWorld}</p>
-                  </div>
-                  
-                  <div className="bg-blue-50 dark:bg-blue-950/30 p-3 rounded-lg">
-                    <h5 className="font-semibold text-blue-800 dark:text-blue-200 mb-1">💡 Impact</h5>
-                    <p className="text-sm text-blue-700 dark:text-blue-300">
-                      Ces mathématiques permettent de traiter des millions de données en temps réel 
-                      et d'apprendre automatiquement des patterns complexes.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+      {/* Applications par domaine */}
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <ConceptIllustration
+          icon={Camera}
+          title="Vision par Ordinateur"
+          description="Comment l'IA 'voit' et comprend les images"
+          examples={[
+            { label: "Matrice d'image", value: "RGB [255,128,0]", description: "Pixels → Vecteurs" },
+            { label: "Convolution", value: "f * g", description: "Détection de motifs" },
+            { label: "Softmax", value: "P(chat) = 0.85", description: "Classification probabiliste" }
+          ]}
+          bgColor="bg-gradient-to-br from-blue-50/50 to-indigo-50/50 dark:from-blue-950/20 dark:to-indigo-950/20"
+        />
+
+        <ConceptIllustration
+          icon={MessageSquare}
+          title="Traitement du Langage"
+          description="L'IA qui comprend et génère du texte"
+          examples={[
+            { label: "Word2Vec", value: "chat → [0.2, 0.8, ...]", description: "Mots → Vecteurs" },
+            { label: "Attention", value: "A = QK^T/√d", description: "Relations contextuelles" },
+            { label: "Backprop", value: "∂L/∂θ", description: "Apprentissage par gradient" }
+          ]}
+          bgColor="bg-gradient-to-br from-green-50/50 to-emerald-50/50 dark:from-green-950/20 dark:to-emerald-950/20"
+        />
+
+        <ConceptIllustration
+          icon={Car}
+          title="Véhicules Autonomes"
+          description="L'IA qui prend des décisions de conduite"
+          examples={[
+            { label: "Capteurs", value: "LIDAR → nuage 3D", description: "Données spatiales" },
+            { label: "Kalman Filter", value: "x = Ax + Bu", description: "Estimation d'état" },
+            { label: "Q-Learning", value: "Q(s,a)", description: "Décisions optimales" }
+          ]}
+          bgColor="bg-gradient-to-br from-purple-50/50 to-pink-50/50 dark:from-purple-950/20 dark:to-pink-950/20"
+        />
+
+        <ConceptIllustration
+          icon={Stethoscope}
+          title="IA Médicale"
+          description="Diagnostic et analyse médicale assistés"
+          examples={[
+            { label: "Imagerie", value: "CNN + Transfer", description: "Détection anomalies" },
+            { label: "Bayésien", value: "P(maladie|symptômes)", description: "Diagnostic probabiliste" },
+            { label: "Régression", value: "y = βx + ε", description: "Prédiction pronostic" }
+          ]}
+          bgColor="bg-gradient-to-br from-red-50/50 to-rose-50/50 dark:from-red-950/20 dark:to-rose-950/20"
+        />
+
+        <ConceptIllustration
+          icon={TrendingUp}
+          title="Finance Algorithmique"
+          description="Trading et analyse financière automatisés"
+          examples={[
+            { label: "Série temporelle", value: "LSTM/GRU", description: "Prédiction prix" },
+            { label: "Portfolio", value: "min σ², max μ", description: "Optimisation risque/rendement" },
+            { label: "Monte Carlo", value: "E[X] ≈ Σxi/n", description: "Simulation scénarios" }
+          ]}
+          bgColor="bg-gradient-to-br from-amber-50/50 to-orange-50/50 dark:from-amber-950/20 dark:to-orange-950/20"
+        />
+
+        <ConceptIllustration
+          icon={Brain}
+          title="IA Générative"
+          description="Création de contenu par l'IA"
+          examples={[
+            { label: "VAE", value: "KL(q||p)", description: "Espace latent" },
+            { label: "GAN", value: "min max V(D,G)", description: "Jeu antagoniste" },
+            { label: "Diffusion", value: "∇log p(x)", description: "Génération par bruit" }
+          ]}
+          bgColor="bg-gradient-to-br from-indigo-50/50 to-violet-50/50 dark:from-indigo-950/20 dark:to-violet-950/20"
+        />
       </div>
 
-      {/* Cas d'étude complexe */}
-      <Card className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20">
+      {/* Cas d'étude détaillé */}
+      <Card className="bg-gradient-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-950/20 dark:to-purple-950/20 border-blue-200 dark:border-blue-800">
         <CardHeader>
           <CardTitle className="text-lg text-blue-800 dark:text-blue-200">
-            🔍 Cas d'Étude : ChatGPT et les Transformers
+            🔬 Cas d'Étude : ChatGPT et les Mathématiques
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="mb-4 text-foreground">
+            Analysons comment ChatGPT utilise chacun des 4 piliers mathématiques :
+          </p>
+          
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="space-y-4">
+              <div className="bg-card/50 dark:bg-card/30 p-4 rounded-lg border border-border/50">
+                <h5 className="font-semibold text-foreground mb-2">🔢 Algèbre Linéaire</h5>
+                <ul className="text-sm space-y-1 text-muted-foreground">
+                  <li>• <strong>Embeddings :</strong> Chaque mot → vecteur de 12,288 dimensions</li>
+                  <li>• <strong>Attention :</strong> Matrices Q, K, V pour relations contextuelles</li>
+                  <li>• <strong>Transformations :</strong> Couches linéaires W × x + b</li>
+                </ul>
+              </div>
+              
+              <div className="bg-card/50 dark:bg-card/30 p-4 rounded-lg border border-border/50">
+                <h5 className="font-semibold text-foreground mb-2">📊 Probabilités</h5>
+                <ul className="text-sm space-y-1 text-muted-foreground">
+                  <li>• <strong>Prédiction :</strong> P(mot suivant | contexte)</li>
+                  <li>• <strong>Sampling :</strong> Temperature et top-k pour la créativité</li>
+                  <li>• <strong>Softmax :</strong> Conversion scores → probabilités</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="bg-card/50 dark:bg-card/30 p-4 rounded-lg border border-border/50">
+                <h5 className="font-semibold text-foreground mb-2">📈 Calcul Différentiel</h5>
+                <ul className="text-sm space-y-1 text-muted-foreground">
+                  <li>• <strong>Backpropagation :</strong> ∂L/∂θ pour tous les 175B paramètres</li>
+                  <li>• <strong>Adam :</strong> Optimiseur adaptatif avec momentum</li>
+                  <li>• <strong>Gradient clipping :</strong> Stabilisation de l'apprentissage</li>
+                </ul>
+              </div>
+              
+              <div className="bg-card/50 dark:bg-card/30 p-4 rounded-lg border border-border/50">
+                <h5 className="font-semibold text-foreground mb-2">📋 Statistiques</h5>
+                <ul className="text-sm space-y-1 text-muted-foreground">
+                  <li>• <strong>Layer Norm :</strong> Normalisation pour stabilité</li>
+                  <li>• <strong>Dropout :</strong> Régularisation stochastique</li>
+                  <li>• <strong>Perplexité :</strong> Métrique de qualité du modèle</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-4 p-3 bg-purple-100/50 dark:bg-purple-900/30 rounded-lg border border-purple-200 dark:border-purple-800">
+            <p className="text-sm font-medium text-purple-800 dark:text-purple-200">
+              💡 Résultat : Cette symphonie mathématique permet à ChatGPT de comprendre et générer 
+              du texte avec une fluidité quasi-humaine !
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Impact sociétal */}
+      <Card className="bg-gradient-to-r from-green-50/50 to-emerald-50/50 dark:from-green-950/20 dark:to-emerald-950/20 border-green-200 dark:border-green-800">
+        <CardHeader>
+          <CardTitle className="text-lg text-green-800 dark:text-green-200">
+            🌍 Impact Sociétal des Mathématiques en IA
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-3 gap-4">
-            <div className="bg-card p-4 rounded-lg border">
-              <div className="flex items-center gap-2 mb-2">
-                <MessageSquare className="h-5 w-5 text-blue-600" />
-                <h5 className="font-semibold">Architecture Transformer</h5>
-              </div>
+            <div className="p-4 bg-card/50 dark:bg-card/30 rounded-lg border border-border/50">
+              <h5 className="font-semibold text-foreground mb-2">🏥 Santé</h5>
               <p className="text-sm text-muted-foreground mb-2">
-                Utilise massivement l'algèbre linéaire pour l'attention multi-têtes
+                Diagnostic précoce du cancer, découverte de médicaments, personnalisation des traitements
               </p>
-              <p className="text-xs bg-blue-100 dark:bg-blue-900/30 p-2 rounded">
-                Matrices Q, K, V de taille [seq_len, d_model] calculées en parallèle
-              </p>
+              <Badge variant="outline" className="text-xs">Sauve des vies</Badge>
             </div>
             
-            <div className="bg-card p-4 rounded-lg border">
-              <div className="flex items-center gap-2 mb-2">
-                <TrendingUp className="h-5 w-5 text-green-600" />
-                <h5 className="font-semibold">Entraînement</h5>
-              </div>
+            <div className="p-4 bg-card/50 dark:bg-card/30 rounded-lg border border-border/50">
+              <h5 className="font-semibold text-foreground mb-2">🌱 Environnement</h5>
               <p className="text-sm text-muted-foreground mb-2">
-                Optimisation de 175 milliards de paramètres par descente de gradient
+                Optimisation énergétique, prédiction climatique, gestion des ressources
               </p>
-              <p className="text-xs bg-green-100 dark:bg-green-900/30 p-2 rounded">
-                Adam optimizer avec learning rate scheduling
-              </p>
+              <Badge variant="outline" className="text-xs">Protège la planète</Badge>
             </div>
             
-            <div className="bg-card p-4 rounded-lg border">
-              <div className="flex items-center gap-2 mb-2">
-                <Brain className="h-5 w-5 text-purple-600" />
-                <h5 className="font-semibold">Génération</h5>
-              </div>
+            <div className="p-4 bg-card/50 dark:bg-card/30 rounded-lg border border-border/50">
+              <h5 className="font-semibold text-foreground mb-2">🎓 Éducation</h5>
               <p className="text-sm text-muted-foreground mb-2">
-                Échantillonnage probabiliste pour générer du texte cohérent
+                Personnalisation de l'apprentissage, assistants pédagogiques, accessibilité
               </p>
-              <p className="text-xs bg-purple-100 dark:bg-purple-900/30 p-2 rounded">
-                Softmax + température pour contrôler la créativité
-              </p>
+              <Badge variant="outline" className="text-xs">Démocratise le savoir</Badge>
             </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Défis actuels */}
-      <Card className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20">
+      {/* Le saviez-vous */}
+      <DidYouKnow
+        items={[
+          {
+            title: "AlphaFold et les protéines",
+            content: "AlphaFold utilise l'algèbre linéaire pour prédire la structure 3D des protéines, révolutionnant la biologie"
+          },
+          {
+            title: "DALL-E et la créativité",
+            content: "DALL-E génère des images en navigant dans un espace latent de 512 dimensions grâce aux VAE"
+          },
+          {
+            title: "GPT-4 et la complexité",
+            content: "GPT-4 effectue environ 100 billions d'opérations mathématiques pour générer une seule phrase"
+          }
+        ]}
+      />
+
+      {/* Perspectives d'avenir */}
+      <Card className="bg-gradient-to-r from-violet-50/50 to-fuchsia-50/50 dark:from-violet-950/20 dark:to-fuchsia-950/20 border-violet-200 dark:border-violet-800">
         <CardHeader>
-          <CardTitle className="text-lg text-purple-800 dark:text-purple-200">
-            🚀 Défis Mathématiques de l'IA Moderne
+          <CardTitle className="text-lg text-violet-800 dark:text-violet-200">
+            🚀 L'Avenir : Nouvelles Frontières Mathématiques
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <h5 className="font-semibold">🎯 Défis Techniques</h5>
-              
-              <div className="space-y-3">
-                <div className="bg-card p-3 rounded-lg border">
-                  <h6 className="font-medium">Scalabilité</h6>
-                  <p className="text-sm text-muted-foreground">
-                    Comment optimiser des modèles avec des trilliards de paramètres ?
-                  </p>
-                </div>
-                
-                <div className="bg-card p-3 rounded-lg border">
-                  <h6 className="font-medium">Efficacité Énergétique</h6>
-                  <p className="text-sm text-muted-foreground">
-                    Réduire les calculs matriciels tout en gardant les performances
-                  </p>
-                </div>
-                
-                <div className="bg-card p-3 rounded-lg border">
-                  <h6 className="font-medium">Généralisation</h6>
-                  <p className="text-sm text-muted-foreground">
-                    Éviter le surapprentissage avec des fonctions de régularisation
-                  </p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="space-y-4">
-              <h5 className="font-semibold">🔬 Recherches Actuelles</h5>
-              
-              <div className="space-y-3">
-                <div className="bg-card p-3 rounded-lg border">
-                  <h6 className="font-medium">Calcul Quantique</h6>
-                  <p className="text-sm text-muted-foreground">
-                    Exploiter la superposition quantique pour l'optimisation
-                  </p>
-                </div>
-                
-                <div className="bg-card p-3 rounded-lg border">
-                  <h6 className="font-medium">IA Neurosymbolique</h6>
-                  <p className="text-sm text-muted-foreground">
-                    Combiner logique symbolique et apprentissage statistique
-                  </p>
-                </div>
-                
-                <div className="bg-card p-3 rounded-lg border">
-                  <h6 className="font-medium">Causalité</h6>
-                  <p className="text-sm text-muted-foreground">
-                    Aller au-delà des corrélations vers la compréhension causale
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Message final motivant */}
-      <Card className="bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-950/20 dark:to-green-950/20 border-2 border-primary/20">
-        <CardHeader>
-          <CardTitle className="text-xl text-center text-primary">
-            🎓 Félicitations ! Vous Maîtrisez les Bases
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="text-center space-y-4">
-          <p className="text-lg">
-            Vous comprenez maintenant les fondements mathématiques qui font fonctionner l'IA moderne. 
-            Ces concepts sont vos outils pour créer, comprendre et améliorer les systèmes intelligents de demain.
-          </p>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-            <div className="text-center">
-              <div className="text-2xl mb-2">🧮</div>
-              <div className="text-sm font-medium">Algèbre Linéaire</div>
-              <div className="text-xs text-muted-foreground">Maîtrisée</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl mb-2">📈</div>
-              <div className="text-sm font-medium">Calcul Différentiel</div>
-              <div className="text-xs text-muted-foreground">Maîtrisé</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl mb-2">🎲</div>
-              <div className="text-sm font-medium">Probabilités</div>
-              <div className="text-xs text-muted-foreground">Maîtrisées</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl mb-2">🎯</div>
-              <div className="text-sm font-medium">Optimisation</div>
-              <div className="text-xs text-muted-foreground">Maîtrisée</div>
-            </div>
-          </div>
-          
-          <div className="bg-primary/10 p-4 rounded-lg mt-6">
-            <p className="text-sm text-primary">
-              <strong>Prochaine étape :</strong> Appliquez ces connaissances dans des projets concrets ! 
-              L'IA n'aura plus de secrets mathématiques pour vous.
+          <div className="space-y-4">
+            <p className="text-foreground">
+              Les mathématiques continuent d'évoluer pour répondre aux défis de l'IA de demain :
             </p>
+            
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="space-y-3">
+                <h5 className="font-semibold text-foreground">🔬 Recherches Actuelles</h5>
+                <ul className="text-sm space-y-2 text-muted-foreground">
+                  <li>• <strong>Informatique quantique :</strong> Algorithmes exponentiellement plus rapides</li>
+                  <li>• <strong>Apprentissage fédéré :</strong> IA distribuée préservant la confidentialité</li>
+                  <li>• <strong>IA neuromorphique :</strong> Circuits inspirés du cerveau humain</li>
+                </ul>
+              </div>
+              
+              <div className="space-y-3">
+                <h5 className="font-semibold text-foreground">🎯 Défis Mathématiques</h5>
+                <ul className="text-sm space-y-2 text-muted-foreground">
+                  <li>• <strong>Interprétabilité :</strong> Comprendre les "boîtes noires"</li>
+                  <li>• <strong>Efficacité énergétique :</strong> IA verte et durable</li>
+                  <li>• <strong>AGI :</strong> Intelligence artificielle générale</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </CardContent>
       </Card>
