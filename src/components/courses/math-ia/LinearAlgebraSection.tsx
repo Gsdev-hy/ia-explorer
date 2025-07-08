@@ -6,7 +6,6 @@ import { Slider } from '@/components/ui/slider';
 import { Badge } from '@/components/ui/badge';
 import { Calculator, ArrowRight, RotateCw, Scale } from 'lucide-react';
 import InteractiveExample from '../InteractiveExample';
-import ZoomOn from '../ZoomOn';
 
 const LinearAlgebraSection: React.FC = () => {
   const [vectorA, setVectorA] = useState([3, 2]);
@@ -78,7 +77,7 @@ const LinearAlgebraSection: React.FC = () => {
             
             <div className="bg-muted/50 p-3 rounded-lg">
               <h5 className="font-medium mb-2">Une matrice d'image :</h5>
-              <div className="font-mono text-xs bg-background p-2 rounded border">
+              <div className="font-mono text-xs bg-card p-2 rounded border">
                 <div>255  128  64</div>
                 <div>192  255  128</div>
                 <div>64   192  255</div>
@@ -92,190 +91,76 @@ const LinearAlgebraSection: React.FC = () => {
       </div>
 
       {/* Visualisation interactive */}
-      <InteractiveExample title="Opérations sur les Vecteurs">
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="space-y-4">
-            <h4 className="font-semibold">Contrôles Interactifs</h4>
-            
-            <div className="space-y-3">
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Vecteur A : [{vectorA[0]}, {vectorA[1]}]
-                </label>
-                <div className="grid grid-cols-2 gap-2">
-                  <div>
-                    <label className="text-xs text-muted-foreground">X</label>
-                    <Slider
-                      value={[vectorA[0]]}
-                      onValueChange={(value) => setVectorA([value[0], vectorA[1]])}
-                      max={5}
-                      min={-5}
-                      step={0.5}
-                      className="w-full"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs text-muted-foreground">Y</label>
-                    <Slider
-                      value={[vectorA[1]]}
-                      onValueChange={(value) => setVectorA([vectorA[0], value[0]])}
-                      max={5}
-                      min={-5}
-                      step={0.5}
-                      className="w-full"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Vecteur B : [{vectorB[0]}, {vectorB[1]}]
-                </label>
-                <div className="grid grid-cols-2 gap-2">
-                  <div>
-                    <label className="text-xs text-muted-foreground">X</label>
-                    <Slider
-                      value={[vectorB[0]]}
-                      onValueChange={(value) => setVectorB([value[0], vectorB[1]])}
-                      max={5}
-                      min={-5}
-                      step={0.5}
-                      className="w-full"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs text-muted-foreground">Y</label>
-                    <Slider
-                      value={[vectorB[1]]}
-                      onValueChange={(value) => setVectorB([vectorB[0], value[0]])}
-                      max={5}
-                      min={-5}
-                      step={0.5}
-                      className="w-full"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Scalaire : {scalarValue[0]}
-                </label>
-                <Slider
-                  value={scalarValue}
-                  onValueChange={setScalarValue}
-                  max={4}
-                  min={0.5}
-                  step={0.5}
-                  className="w-full"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <h4 className="font-semibold">Visualisation</h4>
-            
-            <svg width="300" height="200" className="border rounded-lg bg-background dark:bg-card">
-              {/* Grille */}
-              <defs>
-                <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="hsl(var(--muted-foreground))" strokeOpacity="0.2" strokeWidth="1"/>
-                </pattern>
-              </defs>
-              <rect width="300" height="200" fill="url(#grid)" />
-              
-              {/* Axes */}
-              <line x1="150" y1="0" x2="150" y2="200" stroke="hsl(var(--muted-foreground))" strokeWidth="1" />
-              <line x1="0" y1="100" x2="300" y2="200" stroke="hsl(var(--muted-foreground))" strokeWidth="1" />
-              
-              {/* Vecteur A */}
-              <line 
-                x1="150" y1="100" 
-                x2={150 + vectorA[0] * 20} 
-                y2={100 - vectorA[1] * 20} 
-                stroke="#3B82F6" 
-                strokeWidth="2" 
-                markerEnd="url(#arrowhead-blue)"
-              />
-              
-              {/* Vecteur B */}
-              <line 
-                x1="150" y1="100" 
-                x2={150 + vectorB[0] * 20} 
-                y2={100 - vectorB[1] * 20} 
-                stroke="#EF4444" 
-                strokeWidth="2" 
-                markerEnd="url(#arrowhead-red)"
-              />
-              
-              {/* Somme A + B */}
-              <line 
-                x1="150" y1="100" 
-                x2={150 + vectorSum[0] * 20} 
-                y2={100 - vectorSum[1] * 20} 
-                stroke="#10B981" 
-                strokeWidth="2" 
-                strokeDasharray="5,5"
-                markerEnd="url(#arrowhead-green)"
-              />
-              
-              <defs>
-                <marker id="arrowhead-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                  <polygon points="0 0, 10 3.5, 0 7" fill="#3B82F6" />
-                </marker>
-                <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                  <polygon points="0 0, 10 3.5, 0 7" fill="#EF4444" />
-                </marker>
-                <marker id="arrowhead-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                  <polygon points="0 0, 10 3.5, 0 7" fill="#10B981" />
-                </marker>
-              </defs>
-            </svg>
-
-            <div className="space-y-2 text-sm">
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-0.5 bg-blue-500"></div>
-                <span>Vecteur A: [{vectorA[0]}, {vectorA[1]}]</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-0.5 bg-red-500"></div>
-                <span>Vecteur B: [{vectorB[0]}, {vectorB[1]}]</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-0.5 bg-green-500 border-dashed border"></div>
-                <span>A + B: [{vectorSum[0]}, {vectorSum[1]}]</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </InteractiveExample>
-
-      {/* Applications en IA */}
-      <ZoomOn
-        title="Applications Concrètes en IA"
-        items={[
+      <InteractiveExample 
+        title="Opérations sur les Vecteurs"
+        description="Explorez les opérations fondamentales de l'algèbre linéaire"
+        steps={[
           {
-            icon: <RotateCw className="h-5 w-5" />,
-            title: "Transformation d'images",
-            description: "Rotation, redimensionnement, filtres - tout est fait avec des matrices",
-            example: "Une matrice 3x3 peut faire tourner une image de 45°"
+            title: "Addition de vecteurs",
+            description: "Additionner deux vecteurs : [a,b] + [c,d] = [a+c, b+d]"
           },
           {
-            icon: <Scale className="h-5 w-5" />,
-            title: "Réduction de dimensionnalité",
-            description: "Passer de 1000 dimensions à 2 pour visualiser les données",
-            example: "PCA (Analyse en Composantes Principales) utilise la décomposition de matrices"
+            title: "Multiplication par un scalaire",
+            description: "Multiplier un vecteur par un nombre : k × [a,b] = [k×a, k×b]"
           },
           {
-            icon: <ArrowRight className="h-5 w-5" />,
-            title: "Réseaux de neurones",
-            description: "Chaque couche d'un réseau de neurones est une multiplication matricielle",
-            example: "Un réseau simple : Entrée × Poids + Biais = Sortie"
+            title: "Interprétation géométrique",
+            description: "Voir les vecteurs comme des flèches dans l'espace"
           }
         ]}
+        finalMessage="Ces opérations simples sont la base de tous les calculs en IA !"
       />
+
+      {/* Applications en IA */}
+      <Card className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-950/20 dark:to-blue-950/20">
+        <CardHeader>
+          <CardTitle className="text-lg text-green-800 dark:text-green-200">
+            🚀 Applications Concrètes en IA
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="p-4 bg-card rounded-lg border">
+              <div className="flex items-center gap-2 mb-2">
+                <RotateCw className="h-5 w-5 text-blue-600" />
+                <h5 className="font-semibold">Transformation d'images</h5>
+              </div>
+              <p className="text-sm text-muted-foreground mb-2">
+                Rotation, redimensionnement, filtres - tout est fait avec des matrices
+              </p>
+              <p className="text-xs bg-blue-100 dark:bg-blue-900/30 p-2 rounded">
+                Une matrice 3x3 peut faire tourner une image de 45°
+              </p>
+            </div>
+            
+            <div className="p-4 bg-card rounded-lg border">
+              <div className="flex items-center gap-2 mb-2">
+                <Scale className="h-5 w-5 text-green-600" />
+                <h5 className="font-semibold">Réduction de dimensionnalité</h5>
+              </div>
+              <p className="text-sm text-muted-foreground mb-2">
+                Passer de 1000 dimensions à 2 pour visualiser les données
+              </p>
+              <p className="text-xs bg-green-100 dark:bg-green-900/30 p-2 rounded">
+                PCA utilise la décomposition de matrices
+              </p>
+            </div>
+            
+            <div className="p-4 bg-card rounded-lg border">
+              <div className="flex items-center gap-2 mb-2">
+                <ArrowRight className="h-5 w-5 text-purple-600" />
+                <h5 className="font-semibold">Réseaux de neurones</h5>
+              </div>
+              <p className="text-sm text-muted-foreground mb-2">
+                Chaque couche est une multiplication matricielle
+              </p>
+              <p className="text-xs bg-purple-100 dark:bg-purple-900/30 p-2 rounded">
+                Entrée × Poids + Biais = Sortie
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Exercice pratique */}
       <Card className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-950/20 dark:to-blue-950/20">
@@ -290,7 +175,7 @@ const LinearAlgebraSection: React.FC = () => {
           </p>
           
           <div className="grid md:grid-cols-2 gap-4">
-            <div className="bg-background p-4 rounded-lg border">
+            <div className="bg-card p-4 rounded-lg border">
               <h5 className="font-medium mb-2">Matrice des Notes</h5>
               <div className="font-mono text-sm">
                 <div>      Math  Phys</div>
@@ -300,7 +185,7 @@ const LinearAlgebraSection: React.FC = () => {
               </div>
             </div>
             
-            <div className="bg-background p-4 rounded-lg border">
+            <div className="bg-card p-4 rounded-lg border">
               <h5 className="font-medium mb-2">Coefficients</h5>
               <div className="font-mono text-sm">
                 <div>Math: coefficient 2</div>

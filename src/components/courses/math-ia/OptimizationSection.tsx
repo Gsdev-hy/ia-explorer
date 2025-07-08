@@ -138,141 +138,45 @@ const OptimizationSection: React.FC = () => {
       </div>
 
       {/* Simulation interactive */}
-      <InteractiveExample title="Simulation : Descente de Gradient en Action">
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="space-y-4">
-            <h4 className="font-semibold">Contrôles de l'Optimisation</h4>
-            
-            <div>
-              <label className="block text-sm font-medium mb-2">
-                Taux d'apprentissage : {learningRate[0]}
-              </label>
-              <Slider
-                value={learningRate}
-                onValueChange={setLearningRate}
-                max={0.5}
-                min={0.01}
-                step={0.01}
-                className="w-full"
-              />
-              <p className="text-xs text-muted-foreground mt-1">
-                Influence la taille des "pas" vers l'optimum
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-2">
-              <Button onClick={step} disabled={Math.abs(currentPosition - 2) < 0.001}>
-                <Zap className="h-4 w-4 mr-2" />
-                Faire un pas
-              </Button>
-              <Button onClick={reset} variant="outline">
-                <RotateCcw className="h-4 w-4 mr-2" />
-                Recommencer
-              </Button>
-            </div>
-
-            <div className="bg-muted/50 p-3 rounded-lg text-sm">
-              <h5 className="font-medium mb-2">État actuel :</h5>
-              <div className="space-y-1">
-                <div>Position x = {currentPosition.toFixed(3)}</div>
-                <div>Valeur f(x) = {f(currentPosition).toFixed(3)}</div>
-                <div>Gradient = {derivative(currentPosition).toFixed(3)}</div>
-                <div>Itération = {iteration}</div>
-              </div>
-            </div>
-
-            <div className="text-xs text-muted-foreground bg-blue-50 dark:bg-blue-950/30 p-2 rounded">
-              💡 <strong>Objectif :</strong> Atteindre x = 2 où f(x) est minimale (f(2) = 1)
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <h4 className="font-semibold">Visualisation du Processus</h4>
-            
-            <svg width="300" height="250" className="border rounded-lg bg-background dark:bg-card">
-              {/* Grille */}
-              <defs>
-                <pattern id="opt-grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="hsl(var(--muted-foreground))" strokeOpacity="0.2" strokeWidth="1"/>
-                </pattern>
-              </defs>
-              <rect width="300" height="250" fill="url(#opt-grid)" />
-              
-              {/* Fonction */}
-              <path
-                d={`M ${generateFunctionPoints().map(p => `${p.x},${p.y}`).join(' L ')}`}
-                stroke="#3B82F6"
-                strokeWidth="2"
-                fill="none"
-              />
-              
-              {/* Historique des positions */}
-              {history.map((point, index) => (
-                <circle
-                  key={index}
-                  cx={point.x * 40 + 50}
-                  cy={200 - point.y * 30}
-                  r="2"
-                  fill="#10B981"
-                  opacity={0.6}
-                />
-              ))}
-              
-              {/* Position actuelle */}
-              <circle
-                cx={currentPosition * 40 + 50}
-                cy={200 - f(currentPosition) * 30}
-                r="5"
-                fill="#EF4444"
-                stroke="#FFFFFF"
-                strokeWidth="2"
-              />
-              
-              {/* Minimum global */}
-              <circle
-                cx={2 * 40 + 50}
-                cy={200 - 1 * 30}
-                r="4"
-                fill="#10B981"
-                stroke="#FFFFFF"
-                strokeWidth="2"
-              />
-              
-              {/* Labels */}
-              <text x="10" y="20" fill="hsl(var(--foreground))" fontSize="12">f(x) = (x-2)² + 1</text>
-              <text x="10" y="235" fill="hsl(var(--foreground))" fontSize="10">x</text>
-            </svg>
-
-            <div className="space-y-1 text-xs">
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-0.5 bg-blue-500"></div>
-                <span>Fonction à optimiser</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-1 bg-red-500 rounded-full"></div>
-                <span>Position actuelle</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-1 bg-green-500 rounded-full"></div>
-                <span>Optimum global (x=2, f=1)</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full opacity-60"></div>
-                <span>Historique des positions</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </InteractiveExample>
+      <InteractiveExample 
+        title="Simulation : Descente de Gradient en Action"
+        description="Observez comment l'algorithme trouve le minimum d'une fonction"
+        steps={[
+          {
+            title: "Position initiale",
+            description: "On démarre loin du minimum optimal (x = 4 au lieu de x = 2)"
+          },
+          {
+            title: "Calcul du gradient",
+            description: "La dérivée nous indique dans quelle direction descendre"
+          },
+          {
+            title: "Pas d'optimisation",
+            description: "On fait un pas proportionnel au learning rate dans la direction opposée au gradient"
+          },
+          {
+            title: "Convergence",
+            description: "On répète jusqu'à atteindre le minimum (gradient ≈ 0)"
+          }
+        ]}
+        finalMessage="Avec le bon learning rate, l'algorithme converge vers le minimum global !"
+      />
 
       {/* Le saviez-vous */}
       <DidYouKnow
-        title="Faits fascinants sur l'optimisation en IA"
-        facts={[
-          "GPT-3 a été optimisé avec 175 milliards de paramètres - imaginez la complexité !",
-          "La descente de gradient stochastique traite les données par petits lots pour accélérer l'apprentissage",
-          "Les GAN (réseaux antagonistes) font s'optimiser deux réseaux l'un contre l'autre",
-          "L'optimisation bayésienne peut trouver de bons hyperparamètres avec très peu d'essais"
+        items={[
+          {
+            title: "GPT-3 et l'optimisation",
+            content: "GPT-3 a été optimisé avec 175 milliards de paramètres - imaginez la complexité !"
+          },
+          {
+            title: "Descente de gradient stochastique",
+            content: "La descente de gradient stochastique traite les données par petits lots pour accélérer l'apprentissage"
+          },
+          {
+            title: "Réseaux antagonistes (GAN)",
+            content: "Les GAN font s'optimiser deux réseaux l'un contre l'autre"
+          }
         ]}
       />
 
@@ -288,21 +192,21 @@ const OptimizationSection: React.FC = () => {
             <div className="space-y-3">
               <h5 className="font-semibold">🚨 Problèmes Fréquents</h5>
               
-              <div className="bg-background p-3 rounded-lg border">
+              <div className="bg-card p-3 rounded-lg border">
                 <h6 className="font-medium text-red-600 dark:text-red-400">Explosion du Gradient</h6>
                 <p className="text-sm text-muted-foreground">
                   Les gradients deviennent énormes, l'apprentissage diverge
                 </p>
               </div>
               
-              <div className="bg-background p-3 rounded-lg border">
+              <div className="bg-card p-3 rounded-lg border">
                 <h6 className="font-medium text-yellow-600 dark:text-yellow-400">Vanishing Gradient</h6>
                 <p className="text-sm text-muted-foreground">
                   Les gradients deviennent minuscules, l'apprentissage s'arrête
                 </p>
               </div>
               
-              <div className="bg-background p-3 rounded-lg border">
+              <div className="bg-card p-3 rounded-lg border">
                 <h6 className="font-medium text-blue-600 dark:text-blue-400">Plateaux</h6>
                 <p className="text-sm text-muted-foreground">
                   Zones plates où le gradient est presque nul
@@ -313,21 +217,21 @@ const OptimizationSection: React.FC = () => {
             <div className="space-y-3">
               <h5 className="font-semibold">✅ Solutions Modernes</h5>
               
-              <div className="bg-background p-3 rounded-lg border">
+              <div className="bg-card p-3 rounded-lg border">
                 <h6 className="font-medium text-green-600 dark:text-green-400">Gradient Clipping</h6>
                 <p className="text-sm text-muted-foreground">
                   Limiter la taille maximale des gradients
                 </p>
               </div>
               
-              <div className="bg-background p-3 rounded-lg border">
+              <div className="bg-card p-3 rounded-lg border">
                 <h6 className="font-medium text-green-600 dark:text-green-400">Normalisation</h6>
                 <p className="text-sm text-muted-foreground">
                   Batch norm, layer norm pour stabiliser l'apprentissage
                 </p>
               </div>
               
-              <div className="bg-background p-3 rounded-lg border">
+              <div className="bg-card p-3 rounded-lg border">
                 <h6 className="font-medium text-green-600 dark:text-green-400">Architectures Modernes</h6>
                 <p className="text-sm text-muted-foreground">
                   ResNet, Transformers avec connexions résiduelles

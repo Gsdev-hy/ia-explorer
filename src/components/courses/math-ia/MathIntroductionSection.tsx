@@ -142,12 +142,19 @@ const MathIntroductionSection: React.FC = () => {
 
       {/* Le saviez-vous */}
       <DidYouKnow
-        title="Les mathématiques de l'IA ne sont pas nouvelles !"
-        facts={[
-          "L'algèbre linéaire date du 3ème siècle avec les mathématiciens chinois",
-          "Le calcul différentiel a été développé par Newton et Leibniz au 17ème siècle",
-          "Les probabilités sont nées avec les jeux de hasard au 16ème siècle",
-          "Ce qui est nouveau, c'est notre capacité à calculer rapidement avec ces outils !"
+        items={[
+          {
+            title: "Histoire des mathématiques",
+            content: "L'algèbre linéaire date du 3ème siècle avec les mathématiciens chinois"
+          },
+          {
+            title: "Calcul différentiel",
+            content: "Le calcul différentiel a été développé par Newton et Leibniz au 17ème siècle"
+          },
+          {
+            title: "Probabilités",
+            content: "Les probabilités sont nées avec les jeux de hasard au 16ème siècle"
+          }
         ]}
       />
 

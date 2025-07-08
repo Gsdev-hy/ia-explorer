@@ -124,133 +124,41 @@ const CalculusSection: React.FC = () => {
       </div>
 
       {/* Visualisation interactive */}
-      <InteractiveExample title="Explorer une Fonction et sa Dérivée">
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="space-y-4">
-            <h4 className="font-semibold">Fonction : f(x) = x² - 4x + 3</h4>
-            
-            <div>
-              <label className="block text-sm font-medium mb-2">
-                Position x = {xValue[0]}
-              </label>
-              <Slider
-                value={xValue}
-                onValueChange={setXValue}
-                max={5}
-                min={0}
-                step={0.1}
-                className="w-full"
-              />
-            </div>
-
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between p-2 bg-muted/50 rounded">
-                <span>f({xValue[0]}) =</span>
-                <span className="font-mono">{currentY.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between p-2 bg-muted/50 rounded">
-                <span>f'({xValue[0]}) =</span>
-                <span className="font-mono">{currentSlope.toFixed(2)}</span>
-              </div>
-              
-              <div className="mt-3 p-3 rounded-lg text-center">
-                {currentSlope > 0.1 ? (
-                  <div className="text-green-600 dark:text-green-400">
-                    <TrendingUp className="h-5 w-5 mx-auto mb-1" />
-                    <div className="font-medium">Fonction croissante</div>
-                    <div className="text-xs">La dérivée est positive</div>
-                  </div>
-                ) : currentSlope < -0.1 ? (
-                  <div className="text-red-600 dark:text-red-400">
-                    <TrendingDown className="h-5 w-5 mx-auto mb-1" />
-                    <div className="font-medium">Fonction décroissante</div>
-                    <div className="text-xs">La dérivée est négative</div>
-                  </div>
-                ) : (
-                  <div className="text-yellow-600 dark:text-yellow-400">
-                    <Target className="h-5 w-5 mx-auto mb-1" />
-                    <div className="font-medium">Point critique</div>
-                    <div className="text-xs">La dérivée est proche de zéro</div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <h4 className="font-semibold">Visualisation</h4>
-            
-            <svg width="300" height="250" className="border rounded-lg bg-background dark:bg-card">
-              {/* Grille */}
-              <defs>
-                <pattern id="calculus-grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="hsl(var(--muted-foreground))" strokeOpacity="0.2" strokeWidth="1"/>
-                </pattern>
-              </defs>
-              <rect width="300" height="250" fill="url(#calculus-grid)" />
-              
-              {/* Axes */}
-              <line x1="50" y1="0" x2="50" y2="250" stroke="hsl(var(--muted-foreground))" strokeWidth="1" />
-              <line x1="0" y1="200" x2="300" y2="200" stroke="hsl(var(--muted-foreground))" strokeWidth="1" />
-              
-              {/* Fonction */}
-              <path
-                d={`M ${generatePoints().map(p => `${p.x},${p.y}`).join(' L ')}`}
-                stroke="#3B82F6"
-                strokeWidth="2"
-                fill="none"
-              />
-              
-              {/* Point actuel */}
-              <circle
-                cx={xValue[0] * 40 + 50}
-                cy={200 - (currentY + 5) * 15}
-                r="4"
-                fill="#EF4444"
-              />
-              
-              {/* Tangente */}
-              <line
-                x1={xValue[0] * 40 + 50 - 30}
-                y1={200 - (currentY + 5) * 15 + currentSlope * 30 * 15}
-                x2={xValue[0] * 40 + 50 + 30}
-                y2={200 - (currentY + 5) * 15 - currentSlope * 30 * 15}
-                stroke="#10B981"
-                strokeWidth="2"
-                strokeDasharray="5,5"
-              />
-              
-              {/* Labels */}
-              <text x="60" y="15" fill="hsl(var(--foreground))" fontSize="12">f(x) = x² - 4x + 3</text>
-              <text x="10" y="190" fill="hsl(var(--foreground))" fontSize="10">0</text>
-            </svg>
-
-            <div className="space-y-1 text-xs">
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-0.5 bg-blue-500"></div>
-                <span>Fonction f(x)</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-1 bg-red-500 rounded-full"></div>
-                <span>Point actuel</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-0.5 bg-green-500 border-dashed border"></div>
-                <span>Tangente (pente = dérivée)</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </InteractiveExample>
+      <InteractiveExample 
+        title="Explorer une Fonction et sa Dérivée"
+        description="Manipulez les paramètres pour voir comment la dérivée indique la direction du changement"
+        steps={[
+          {
+            title: "Observer la fonction",
+            description: "f(x) = x² - 4x + 3 est une parabole avec un minimum en x = 2"
+          },
+          {
+            title: "Calculer la dérivée",
+            description: "f'(x) = 2x - 4 nous donne la pente en chaque point"
+          },
+          {
+            title: "Identifier les points critiques",
+            description: "Quand f'(x) = 0, on a x = 2 (le minimum de la fonction)"
+          }
+        ]}
+        finalMessage="La dérivée est l'outil fondamental qui permet à l'IA d'apprendre en indiquant la direction d'amélioration !"
+      />
 
       {/* Le saviez-vous */}
       <DidYouKnow
-        title="Pourquoi le calcul différentiel révolutionne l'IA ?"
-        facts={[
-          "Un réseau de neurones moderne peut avoir des milliards de paramètres à optimiser !",
-          "La rétropropagation utilise la règle de dérivation en chaîne pour calculer tous les gradients",
-          "Adam, l'optimiseur le plus populaire, combine gradient et momentum pour accélérer l'apprentissage",
-          "Le calcul automatique des dérivées (autodiff) permet de différencier n'importe quel programme !"
+        items={[
+          {
+            title: "Réseaux de neurones modernes",
+            content: "Un réseau de neurones moderne peut avoir des milliards de paramètres à optimiser !"
+          },
+          {
+            title: "Rétropropagation",
+            content: "La rétropropagation utilise la règle de dérivation en chaîne pour calculer tous les gradients"
+          },
+          {
+            title: "Optimiseur Adam",
+            content: "Adam, l'optimiseur le plus populaire, combine gradient et momentum pour accélérer l'apprentissage"
+          }
         ]}
       />
 
@@ -263,7 +171,7 @@ const CalculusSection: React.FC = () => {
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-3 gap-4">
-            <div className="p-4 bg-background rounded-lg border">
+            <div className="p-4 bg-card rounded-lg border">
               <h5 className="font-semibold mb-2">Reconnaissance d'Images</h5>
               <p className="text-sm text-muted-foreground mb-2">
                 Un réseau voit une photo de chat et prédit "chien". La dérivée lui montre comment ajuster 
@@ -274,7 +182,7 @@ const CalculusSection: React.FC = () => {
               </div>
             </div>
             
-            <div className="p-4 bg-background rounded-lg border">
+            <div className="p-4 bg-card rounded-lg border">
               <h5 className="font-semibold mb-2">Traduction Automatique</h5>
               <p className="text-sm text-muted-foreground mb-2">
                 Le modèle traduit mal une phrase. La descente de gradient optimise les poids pour 
@@ -285,7 +193,7 @@ const CalculusSection: React.FC = () => {
               </div>
             </div>
             
-            <div className="p-4 bg-background rounded-lg border">
+            <div className="p-4 bg-card rounded-lg border">
               <h5 className="font-semibold mb-2">Jeux Vidéo (IA)</h5>
               <p className="text-sm text-muted-foreground mb-2">
                 Une IA apprend à jouer aux échecs. Chaque défaite génère des gradients qui 

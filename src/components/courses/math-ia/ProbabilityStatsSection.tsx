@@ -6,7 +6,6 @@ import { Slider } from '@/components/ui/slider';
 import { Badge } from '@/components/ui/badge';
 import { BarChart3, TrendingUp, Dice6, AlertCircle } from 'lucide-react';
 import InteractiveExample from '../InteractiveExample';
-import ZoomOn from '../ZoomOn';
 
 const ProbabilityStatsSection: React.FC = () => {
   const [diceRolls, setDiceRolls] = useState(100);
@@ -111,98 +110,25 @@ const ProbabilityStatsSection: React.FC = () => {
       </div>
 
       {/* Simulation interactive */}
-      <InteractiveExample title="Simulation : Loi des Grands Nombres">
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="space-y-4">
-            <h4 className="font-semibold">Contrôles</h4>
-            
-            <div>
-              <label className="block text-sm font-medium mb-2">
-                Nombre de lancers de dé : {diceRolls}
-              </label>
-              <Slider
-                value={[diceRolls]}
-                onValueChange={(value) => setDiceRolls(value[0])}
-                max={10000}
-                min={10}
-                step={10}
-                className="w-full"
-              />
-            </div>
-
-            <Button onClick={updateSimulation} className="w-full">
-              <Dice6 className="h-4 w-4 mr-2" />
-              Lancer les dés !
-            </Button>
-
-            <div className="bg-muted/50 p-3 rounded-lg text-sm">
-              <h5 className="font-medium mb-2">Théorie vs Réalité</h5>
-              <p>Théoriquement, chaque face devrait apparaître 16.67% du temps (1/6).</p>
-              <p className="text-muted-foreground text-xs mt-1">
-                Plus vous lancez de dés, plus vous vous rapprochez de cette valeur !
-              </p>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <h4 className="font-semibold">Résultats de la Simulation</h4>
-            
-            <svg width="300" height="200" className="border rounded-lg bg-background dark:bg-card">
-              {/* Barres du graphique */}
-              {diceResults.map((percentage, index) => (
-                <g key={index}>
-                  <rect
-                    x={20 + index * 45}
-                    y={180 - percentage * 1.5}
-                    width={35}
-                    height={percentage * 1.5}
-                    fill={`hsl(${index * 60}, 70%, 50%)`}
-                    className="transition-all duration-500"
-                  />
-                  <text
-                    x={37 + index * 45}
-                    y={195}
-                    textAnchor="middle"
-                    fill="hsl(var(--foreground))"
-                    fontSize="12"
-                  >
-                    {index + 1}
-                  </text>
-                  <text
-                    x={37 + index * 45}
-                    y={175 - percentage * 1.5}
-                    textAnchor="middle"
-                    fill="hsl(var(--foreground))"
-                    fontSize="10"
-                  >
-                    {percentage.toFixed(1)}%
-                  </text>
-                </g>
-              ))}
-              
-              {/* Ligne théorique */}
-              <line
-                x1="20"
-                y1={180 - 16.67 * 1.5}
-                x2="290"
-                y2={180 - 16.67 * 1.5}
-                stroke="#EF4444"
-                strokeWidth="2"
-                strokeDasharray="5,5"
-              />
-              
-              <text x="250" y={175 - 16.67 * 1.5} fill="#EF4444" fontSize="10">
-                16.67% (théorique)
-              </text>
-            </svg>
-
-            <div className="text-xs text-muted-foreground">
-              <p><strong>Observation :</strong> Avec peu de lancers, les résultats sont aléatoires.</p>
-              <p>Avec beaucoup de lancers, ils se rapprochent de 16.67% !</p>
-            </div>
-          </div>
-        </div>
-      </InteractiveExample>
+      <InteractiveExample 
+        title="Simulation : Loi des Grands Nombres"
+        description="Découvrez comment les probabilités se comportent avec de nombreux essais"
+        steps={[
+          {
+            title: "Faible nombre d'essais",
+            description: "Avec peu de lancers, les résultats sont très aléatoires et éloignés de la théorie"
+          },
+          {
+            title: "Nombre modéré d'essais",
+            description: "On commence à voir une tendance vers les valeurs théoriques"
+          },
+          {
+            title: "Grand nombre d'essais",
+            description: "Les résultats convergent vers 16.67% pour chaque face du dé"
+          }
+        ]}
+        finalMessage="Plus on fait d'essais, plus on se rapproche de la probabilité théorique ! C'est la loi des grands nombres."
+      />
 
       {/* Théorème de Bayes */}
       <Card className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20">
@@ -217,7 +143,7 @@ const ProbabilityStatsSection: React.FC = () => {
           </p>
           
           <div className="grid md:grid-cols-2 gap-4">
-            <div className="bg-background p-4 rounded-lg border">
+            <div className="bg-card p-4 rounded-lg border">
               <h5 className="font-semibold mb-2">Exemple : Diagnostic Médical</h5>
               <ul className="text-sm space-y-1">
                 <li><strong>Question :</strong> "J'ai de la fièvre, quelle est la probabilité que j'aie la grippe ?"</li>
@@ -226,7 +152,7 @@ const ProbabilityStatsSection: React.FC = () => {
               </ul>
             </div>
             
-            <div className="bg-background p-4 rounded-lg border">
+            <div className="bg-card p-4 rounded-lg border">
               <h5 className="font-semibold mb-2">En IA :</h5>
               <ul className="text-sm space-y-1">
                 <li>🔍 <strong>Classification :</strong> "Cette email est-il un spam ?"</li>
@@ -240,29 +166,55 @@ const ProbabilityStatsSection: React.FC = () => {
       </Card>
 
       {/* Applications en IA */}
-      <ZoomOn
-        title="Applications Cruciales en IA"
-        items={[
-          {
-            icon: <AlertCircle className="h-5 w-5" />,
-            title: "Classification Bayésienne Naïve",
-            description: "Filtre anti-spam, analyse de sentiment, diagnostic médical",
-            example: "Gmail utilise Bayes pour détecter 99.9% des spams"
-          },
-          {
-            icon: <TrendingUp className="h-5 w-5" />,
-            title: "Réseaux Bayésiens",
-            description: "Modéliser des relations causales complexes avec incertitude",
-            example: "Voiture autonome : probabilité d'accident selon météo, trafic, etc."
-          },
-          {
-            icon: <BarChart3 className="h-5 w-5" />,
-            title: "Apprentissage par Renforcement",
-            description: "L'agent apprend dans un environnement incertain",
-            example: "AlphaGo évalue probabilités de victoire pour chaque coup"
-          }
-        ]}
-      />
+      <Card className="bg-gradient-to-r from-green-50 to-yellow-50 dark:from-green-950/20 dark:to-yellow-950/20">
+        <CardHeader>
+          <CardTitle className="text-lg text-green-800 dark:text-green-200">
+            🚀 Applications Cruciales en IA
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="p-4 bg-card rounded-lg border">
+              <div className="flex items-center gap-2 mb-2">
+                <AlertCircle className="h-5 w-5 text-red-600" />
+                <h5 className="font-semibold">Classification Bayésienne</h5>
+              </div>
+              <p className="text-sm text-muted-foreground mb-2">
+                Filtre anti-spam, analyse de sentiment, diagnostic médical
+              </p>
+              <p className="text-xs bg-red-100 dark:bg-red-900/30 p-2 rounded">
+                Gmail utilise Bayes pour détecter 99.9% des spams
+              </p>
+            </div>
+            
+            <div className="p-4 bg-card rounded-lg border">
+              <div className="flex items-center gap-2 mb-2">
+                <TrendingUp className="h-5 w-5 text-blue-600" />
+                <h5 className="font-semibold">Réseaux Bayésiens</h5>
+              </div>
+              <p className="text-sm text-muted-foreground mb-2">
+                Modéliser des relations causales complexes avec incertitude
+              </p>
+              <p className="text-xs bg-blue-100 dark:bg-blue-900/30 p-2 rounded">
+                Voiture autonome : probabilité d'accident selon météo, trafic, etc.
+              </p>
+            </div>
+            
+            <div className="p-4 bg-card rounded-lg border">
+              <div className="flex items-center gap-2 mb-2">
+                <BarChart3 className="h-5 w-5 text-green-600" />
+                <h5 className="font-semibold">Apprentissage par Renforcement</h5>
+              </div>
+              <p className="text-sm text-muted-foreground mb-2">
+                L'agent apprend dans un environnement incertain
+              </p>
+              <p className="text-xs bg-green-100 dark:bg-green-900/30 p-2 rounded">
+                AlphaGo évalue probabilités de victoire pour chaque coup
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Exercice pratique */}
       <Card className="bg-gradient-to-r from-green-50 to-yellow-50 dark:from-green-950/20 dark:to-yellow-950/20">
@@ -278,15 +230,15 @@ const ProbabilityStatsSection: React.FC = () => {
             </p>
             
             <div className="grid md:grid-cols-3 gap-4">
-              <div className="bg-background p-4 rounded-lg border text-center">
+              <div className="bg-card p-4 rounded-lg border text-center">
                 <div className="text-2xl font-bold text-red-500">2%</div>
                 <div className="text-sm">des emails sont des spams</div>
               </div>
-              <div className="bg-background p-4 rounded-lg border text-center">
+              <div className="bg-card p-4 rounded-lg border text-center">
                 <div className="text-2xl font-bold text-blue-500">80%</div>
                 <div className="text-sm">des spams contiennent "GRATUIT"</div>
               </div>
-              <div className="bg-background p-4 rounded-lg border text-center">
+              <div className="bg-card p-4 rounded-lg border text-center">
                 <div className="text-2xl font-bold text-green-500">5%</div>
                 <div className="text-sm">des emails normaux contiennent "GRATUIT"</div>
               </div>

@@ -3,7 +3,6 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Brain, Camera, MessageSquare, Car, TrendingUp, Stethoscope } from 'lucide-react';
-import ZoomOn from '../ZoomOn';
 
 const PracticalApplicationsSection: React.FC = () => {
   const applications = [
@@ -139,30 +138,56 @@ const PracticalApplicationsSection: React.FC = () => {
         ))}
       </div>
 
-      {/* Zoom sur un cas complexe */}
-      <ZoomOn
-        title="Cas d'Étude : ChatGPT et les Transformers"
-        items={[
-          {
-            icon: <MessageSquare className="h-5 w-5" />,
-            title: "Architecture Transformer",
-            description: "Utilise massivement l'algèbre linéaire pour l'attention multi-têtes",
-            example: "Matrices de Query, Key, Value de taille [seq_len, d_model] calculées en parallèle"
-          },
-          {
-            icon: <TrendingUp className="h-5 w-5" />,
-            title: "Entraînement",
-            description: "Optimisation de 175 milliards de paramètres par descente de gradient",
-            example: "Adam optimizer avec learning rate scheduling et gradient clipping"
-          },
-          {
-            icon: <Brain className="h-5 w-5" />,
-            title: "Génération de Texte",
-            description: "Échantillonnage probabiliste pour générer du texte cohérent",
-            example: "Softmax + température pour contrôler la créativité vs cohérence"
-          }
-        ]}
-      />
+      {/* Cas d'étude complexe */}
+      <Card className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20">
+        <CardHeader>
+          <CardTitle className="text-lg text-blue-800 dark:text-blue-200">
+            🔍 Cas d'Étude : ChatGPT et les Transformers
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="bg-card p-4 rounded-lg border">
+              <div className="flex items-center gap-2 mb-2">
+                <MessageSquare className="h-5 w-5 text-blue-600" />
+                <h5 className="font-semibold">Architecture Transformer</h5>
+              </div>
+              <p className="text-sm text-muted-foreground mb-2">
+                Utilise massivement l'algèbre linéaire pour l'attention multi-têtes
+              </p>
+              <p className="text-xs bg-blue-100 dark:bg-blue-900/30 p-2 rounded">
+                Matrices Q, K, V de taille [seq_len, d_model] calculées en parallèle
+              </p>
+            </div>
+            
+            <div className="bg-card p-4 rounded-lg border">
+              <div className="flex items-center gap-2 mb-2">
+                <TrendingUp className="h-5 w-5 text-green-600" />
+                <h5 className="font-semibold">Entraînement</h5>
+              </div>
+              <p className="text-sm text-muted-foreground mb-2">
+                Optimisation de 175 milliards de paramètres par descente de gradient
+              </p>
+              <p className="text-xs bg-green-100 dark:bg-green-900/30 p-2 rounded">
+                Adam optimizer avec learning rate scheduling
+              </p>
+            </div>
+            
+            <div className="bg-card p-4 rounded-lg border">
+              <div className="flex items-center gap-2 mb-2">
+                <Brain className="h-5 w-5 text-purple-600" />
+                <h5 className="font-semibold">Génération</h5>
+              </div>
+              <p className="text-sm text-muted-foreground mb-2">
+                Échantillonnage probabiliste pour générer du texte cohérent
+              </p>
+              <p className="text-xs bg-purple-100 dark:bg-purple-900/30 p-2 rounded">
+                Softmax + température pour contrôler la créativité
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Défis actuels */}
       <Card className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20">
@@ -177,21 +202,21 @@ const PracticalApplicationsSection: React.FC = () => {
               <h5 className="font-semibold">🎯 Défis Techniques</h5>
               
               <div className="space-y-3">
-                <div className="bg-background p-3 rounded-lg border">
+                <div className="bg-card p-3 rounded-lg border">
                   <h6 className="font-medium">Scalabilité</h6>
                   <p className="text-sm text-muted-foreground">
                     Comment optimiser des modèles avec des trilliards de paramètres ?
                   </p>
                 </div>
                 
-                <div className="bg-background p-3 rounded-lg border">
+                <div className="bg-card p-3 rounded-lg border">
                   <h6 className="font-medium">Efficacité Énergétique</h6>
                   <p className="text-sm text-muted-foreground">
                     Réduire les calculs matriciels tout en gardant les performances
                   </p>
                 </div>
                 
-                <div className="bg-background p-3 rounded-lg border">
+                <div className="bg-card p-3 rounded-lg border">
                   <h6 className="font-medium">Généralisation</h6>
                   <p className="text-sm text-muted-foreground">
                     Éviter le surapprentissage avec des fonctions de régularisation
@@ -204,21 +229,21 @@ const PracticalApplicationsSection: React.FC = () => {
               <h5 className="font-semibold">🔬 Recherches Actuelles</h5>
               
               <div className="space-y-3">
-                <div className="bg-background p-3 rounded-lg border">
+                <div className="bg-card p-3 rounded-lg border">
                   <h6 className="font-medium">Calcul Quantique</h6>
                   <p className="text-sm text-muted-foreground">
                     Exploiter la superposition quantique pour l'optimisation
                   </p>
                 </div>
                 
-                <div className="bg-background p-3 rounded-lg border">
+                <div className="bg-card p-3 rounded-lg border">
                   <h6 className="font-medium">IA Neurosymbolique</h6>
                   <p className="text-sm text-muted-foreground">
                     Combiner logique symbolique et apprentissage statistique
                   </p>
                 </div>
                 
-                <div className="bg-background p-3 rounded-lg border">
+                <div className="bg-card p-3 rounded-lg border">
                   <h6 className="font-medium">Causalité</h6>
                   <p className="text-sm text-muted-foreground">
                     Aller au-delà des corrélations vers la compréhension causale
