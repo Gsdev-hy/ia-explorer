@@ -27,6 +27,7 @@ import NotFound from '@/pages/NotFound';
 // Cours
 import ApprentissageSupervise from '@/pages/cours/ApprentissageSupervise';
 import ApprentissageNonSupervise from '@/pages/cours/ApprentissageNonSupervise';
+import BasesMathematiquesIA from '@/pages/cours/BasesMathematiquesIA';
 import PromptEngineering from '@/pages/cours/PromptEngineering';
 import ChainOfPrompts from '@/pages/cours/ChainOfPrompts';
 import ParametresLLM from '@/pages/cours/ParametresLLM';
@@ -82,6 +83,7 @@ function App() {
               {/* Routes des cours */}
               <Route path="cours/apprentissage-supervise" element={<ApprentissageSupervise />} />
               <Route path="cours/apprentissage-non-supervise" element={<ApprentissageNonSupervise />} />
+              <Route path="cours/bases-mathematiques-ia" element={<BasesMathematiquesIA />} />
               <Route path="cours/prompt-engineering" element={<PromptEngineering />} />
               <Route path="cours/chain-of-prompts" element={<ChainOfPrompts />} />
               <Route path="cours/parametres-llm" element={<ParametresLLM />} />

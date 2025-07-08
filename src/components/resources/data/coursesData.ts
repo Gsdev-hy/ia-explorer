@@ -23,6 +23,16 @@ export const courses: Resource[] = [
     isInternal: true
   },
   {
+    title: "Les Bases Mathématiques derrière l'Intelligence Artificielle",
+    source: "IA Explorer",
+    description: "Guide complet et accessible pour comprendre les fondements mathématiques de l'IA : algèbre linéaire, calcul différentiel, probabilités et statistiques. Avec des exemples concrets et des visualisations interactives.",
+    link: "/cours/bases-mathematiques-ia",
+    type: "cours",
+    year: 2024,
+    tags: ["Mathématiques", "Algèbre Linéaire", "Probabilités", "Statistiques", "Fondamentaux", "Interne"],
+    isInternal: true
+  },
+  {
     title: "Maîtriser les Prompts : Guide Complet du Prompt Engineering",
     source: "IA Explorer",
     description: "Guide complet pour apprendre l'art du prompt engineering. Découvrez les techniques avancées, les bonnes pratiques et les méthodes pour optimiser vos interactions avec l'IA.",
@@ -220,6 +230,19 @@ export const internalCoursesData = [
     level: 'Débutant à Intermédiaire',
     duration: '2h30',
     tags: ['Apprentissage Non Supervisé', 'Clustering', 'Réduction de Dimensionnalité', 'Analyse de Données'],
+    author: 'Geoffroy Streit',
+    year: 2024,
+    language: 'Français'
+  },
+  {
+    id: 'bases-mathematiques-ia',
+    title: 'Les Bases Mathématiques derrière l\'Intelligence Artificielle',
+    description: 'Guide complet et accessible pour comprendre les fondements mathématiques de l\'IA : algèbre linéaire, calcul différentiel, probabilités et statistiques.',
+    link: '/cours/bases-mathematiques-ia',
+    category: 'Fondamentaux',
+    level: 'Débutant à Intermédiaire',
+    duration: '4h',
+    tags: ['Mathématiques', 'Algèbre Linéaire', 'Probabilités', 'Statistiques', 'Calcul'],
     author: 'Geoffroy Streit',
     year: 2024,
     language: 'Français'
