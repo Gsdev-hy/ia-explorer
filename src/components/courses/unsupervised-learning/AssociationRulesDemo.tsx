@@ -159,7 +159,7 @@ const AssociationRulesDemo: React.FC = () => {
             </div>
             <div className="bg-muted/50 p-3 rounded">
               <h5 className="font-semibold mb-1">Lift</h5>
-              <p>Mesure la force réelle de l'association (>1 = association positive)</p>
+              <p>Mesure la force réelle de l'association ({'>'}1 = association positive)</p>
             </div>
           </div>
         </CardContent>
