@@ -36,6 +36,7 @@ import DeepLearningPratique from '@/pages/cours/DeepLearningPratique';
 import IAEthique from '@/pages/cours/IAEthique';
 import IAEntreprise from '@/pages/cours/IAEntreprise';
 import NLPComprehension from '@/pages/cours/NLPComprehension';
+import TestAPIIA from '@/pages/TestAPIIA';
 
 const queryClient = new QueryClient();
 
@@ -92,6 +93,9 @@ function App() {
               <Route path="cours/ia-ethique" element={<IAEthique />} />
               <Route path="cours/ia-entreprise" element={<IAEntreprise />} />
               <Route path="cours/nlp-comprehension" element={<NLPComprehension />} />
+              
+              {/* Outils */}
+              <Route path="test-api-ia" element={<TestAPIIA />} />
               
               <Route path="*" element={<NotFound />} />
             </Route>

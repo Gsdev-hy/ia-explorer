@@ -321,5 +321,13 @@ export const iaTools: IAToolResource[] = [
     category: "Vidéo",
     pricing: "Freemium",
     features: ["Vidéo", "Texte vers vidéo", "Courts métrages"]
+  },
+  {
+    name: "Test d'API IA",
+    description: "Outil pour tester différents modèles d'IA via API : LLM, génération d'images, musique et vidéo",
+    link: "/test-api-ia",
+    category: "Développement",
+    pricing: "Gratuit",
+    features: ["Test API", "LLM", "Images", "Audio", "Vidéo"]
   }
 ];
