@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -31,7 +30,6 @@ const ClusteringVisualization: React.FC = () => {
   const generateRandomPoints = () => {
     const newPoints: Point[] = [];
     
-    // Créer des clusters naturels
     const clusterCenters = [
       { x: 150, y: 150 },
       { x: 350, y: 150 },
@@ -76,7 +74,6 @@ const ClusteringVisualization: React.FC = () => {
   };
 
   const performKMeansStep = () => {
-    // Étape 1: Assigner les points aux centroids les plus proches
     const newPoints = points.map(point => {
       let closestCentroid = 0;
       let minDistance = distance(point, centroids[0]);
@@ -94,7 +91,6 @@ const ClusteringVisualization: React.FC = () => {
     
     setPoints(newPoints);
     
-    // Étape 2: Recalculer les centroids
     const newCentroids = centroids.map((centroid, i) => {
       const clusterPoints = newPoints.filter(p => p.cluster === i);
       
@@ -106,7 +102,6 @@ const ClusteringVisualization: React.FC = () => {
       return { ...centroid, x: avgX, y: avgY };
     });
     
-    // Vérifier la convergence
     const hasConverged = centroids.every((centroid, i) => 
       distance(centroid, newCentroids[i]) < 1
     );
@@ -201,8 +196,7 @@ const ClusteringVisualization: React.FC = () => {
           </div>
 
           <div className="relative">
-            <svg width="500" height="400" className="border rounded-lg bg-white">
-              {/* Points */}
+            <svg width="500" height="400" className="border rounded-lg bg-background dark:bg-card">
               {points.map((point) => (
                 <circle
                   key={point.id}
@@ -215,7 +209,6 @@ const ClusteringVisualization: React.FC = () => {
                 />
               ))}
               
-              {/* Centroids */}
               {centroids.map((centroid) => (
                 <g key={centroid.cluster}>
                   <circle
@@ -223,7 +216,7 @@ const ClusteringVisualization: React.FC = () => {
                     cy={centroid.y}
                     r="8"
                     fill={colors[centroid.cluster]}
-                    stroke="white"
+                    stroke="hsl(var(--background))"
                     strokeWidth="2"
                     className="transition-all duration-500"
                   />
@@ -231,7 +224,7 @@ const ClusteringVisualization: React.FC = () => {
                     x={centroid.x}
                     y={centroid.y + 2}
                     textAnchor="middle"
-                    fill="white"
+                    fill="hsl(var(--background))"
                     fontSize="10"
                     fontWeight="bold"
                   >
