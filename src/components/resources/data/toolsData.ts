@@ -3,6 +3,14 @@ import { IAToolResource } from '../resourcesData';
 
 export const iaTools: IAToolResource[] = [
   {
+    name: "Test d'API IA",
+    description: "Outil pour tester différents modèles d'IA via API : LLM, génération d'images, musique et vidéo. Créé par Geoffroy Streit.",
+    link: "/test-api-ia",
+    category: "Développement",
+    pricing: "Gratuit",
+    features: ["Test API", "LLM", "Images", "Audio", "Vidéo"]
+  },
+  {
     name: "ChatGPT",
     description: "Assistant conversationnel basé sur GPT pour diverses tâches de rédaction et d'analyse",
     link: "https://chat.openai.com/",
@@ -322,12 +330,4 @@ export const iaTools: IAToolResource[] = [
     pricing: "Freemium",
     features: ["Vidéo", "Texte vers vidéo", "Courts métrages"]
   },
-  {
-    name: "Test d'API IA",
-    description: "Outil pour tester différents modèles d'IA via API : LLM, génération d'images, musique et vidéo",
-    link: "/test-api-ia",
-    category: "Développement",
-    pricing: "Gratuit",
-    features: ["Test API", "LLM", "Images", "Audio", "Vidéo"]
-  }
 ];

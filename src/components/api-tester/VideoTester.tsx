@@ -6,6 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Save, Send, Download, Eye, EyeOff, Play, Pause, Video } from 'lucide-react';
+import { useToast } from "@/hooks/use-toast";
 
 interface VideoProvider {
   id: string;
@@ -71,6 +72,7 @@ const videoProviders: VideoProvider[] = [
 ];
 
 const VideoTester = () => {
+  const { toast } = useToast();
   const [selectedProvider, setSelectedProvider] = useState<string>('');
   const [selectedModel, setSelectedModel] = useState<string>('');
   const [apiKey, setApiKey] = useState<string>('');
@@ -100,6 +102,10 @@ const VideoTester = () => {
     localStorage.setItem('video-api-key', apiKey);
     localStorage.setItem('video-prompt', prompt);
     addLog('✅ Configuration sauvegardée dans le localStorage');
+    toast({
+      title: "Configuration sauvegardée",
+      description: "Vos paramètres ont été enregistrés dans le stockage local.",
+    });
   };
 
   const addLog = (message: string) => {
@@ -110,12 +116,21 @@ const VideoTester = () => {
   const testAPI = async () => {
     if (!selectedProvider || !apiKey || !prompt) {
       addLog('❌ Veuillez remplir tous les champs obligatoires');
+      toast({
+        title: "Champs manquants",
+        description: "Veuillez remplir tous les champs obligatoires.",
+        variant: "destructive",
+      });
       return;
     }
 
     setIsLoading(true);
     setVideoUrl('');
     addLog(`🚀 Début de la génération vidéo avec ${selectedProvider}`);
+    toast({
+      title: "Génération en cours",
+      description: `Génération de vidéo avec ${selectedProvider}...`,
+    });
 
     try {
       const provider = videoProviders.find(p => p.id === selectedProvider);
@@ -158,8 +173,18 @@ const VideoTester = () => {
         addLog('✅ Vidéo générée avec succès');
       }
 
+      toast({
+        title: "Vidéo générée",
+        description: "La vidéo a été générée avec succès.",
+      });
+
     } catch (error: any) {
       addLog(`❌ Erreur: ${error.message}`);
+      toast({
+        title: "Erreur de génération",
+        description: error.message,
+        variant: "destructive",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -191,8 +216,17 @@ const VideoTester = () => {
       document.body.removeChild(element);
       window.URL.revokeObjectURL(url);
       addLog('💾 Vidéo téléchargée');
+      toast({
+        title: "Téléchargement",
+        description: "La vidéo a été téléchargée avec succès.",
+      });
     } catch (error: any) {
       addLog(`❌ Erreur lors du téléchargement: ${error.message}`);
+      toast({
+        title: "Erreur de téléchargement",
+        description: error.message,
+        variant: "destructive",
+      });
     }
   };
 

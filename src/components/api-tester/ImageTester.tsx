@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Save, Send, Download, Eye, EyeOff, ZoomIn, ExternalLink } from 'lucide-react';
+import { useToast } from "@/hooks/use-toast";
 
 interface ImageProvider {
   id: string;
@@ -166,6 +167,7 @@ const ImageAPIKeysLinks = () => {
 };
 
 const ImageTester = () => {
+  const { toast } = useToast();
   const [selectedProvider, setSelectedProvider] = useState<string>('');
   const [selectedModel, setSelectedModel] = useState<string>('');
   const [apiKey, setApiKey] = useState<string>('');
@@ -193,6 +195,10 @@ const ImageTester = () => {
     localStorage.setItem('image-api-key', apiKey);
     localStorage.setItem('image-prompt', prompt);
     addLog('✅ Configuration sauvegardée dans le localStorage');
+    toast({
+      title: "Configuration sauvegardée",
+      description: "Vos paramètres ont été enregistrés dans le stockage local.",
+    });
   };
 
   const addLog = (message: string) => {
@@ -203,12 +209,21 @@ const ImageTester = () => {
   const testAPI = async () => {
     if (!selectedProvider || !apiKey || !prompt) {
       addLog('❌ Veuillez remplir tous les champs obligatoires');
+      toast({
+        title: "Champs manquants",
+        description: "Veuillez remplir tous les champs obligatoires.",
+        variant: "destructive",
+      });
       return;
     }
 
     setIsLoading(true);
     setImageUrl('');
     addLog(`🚀 Début de la génération avec ${selectedProvider}`);
+    toast({
+      title: "Génération en cours",
+      description: `Génération d'image avec ${selectedProvider}...`,
+    });
 
     try {
       const provider = imageProviders.find(p => p.id === selectedProvider);
@@ -247,8 +262,18 @@ const ImageTester = () => {
         addLog('✅ Image générée avec succès');
       }
 
+      toast({
+        title: "Image générée",
+        description: "L'image a été générée avec succès.",
+      });
+
     } catch (error: any) {
       addLog(`❌ Erreur: ${error.message}`);
+      toast({
+        title: "Erreur de génération",
+        description: error.message,
+        variant: "destructive",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -269,8 +294,17 @@ const ImageTester = () => {
       document.body.removeChild(element);
       window.URL.revokeObjectURL(url);
       addLog('💾 Image téléchargée');
+      toast({
+        title: "Téléchargement",
+        description: "L'image a été téléchargée avec succès.",
+      });
     } catch (error: any) {
       addLog(`❌ Erreur lors du téléchargement: ${error.message}`);
+      toast({
+        title: "Erreur de téléchargement",
+        description: error.message,
+        variant: "destructive",
+      });
     }
   };
 

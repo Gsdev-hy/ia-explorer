@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Save, Send, Copy, Download, Eye, EyeOff } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { ExternalLink } from 'lucide-react';
+import { useToast } from "@/hooks/use-toast";
 
 interface LLMProvider {
   id: string;
@@ -70,7 +71,7 @@ const llmProviders: LLMProvider[] = [
     id: 'deepseek',
     name: 'DeepSeek',
     apiUrl: 'https://api.deepseek.com/chat/completions',
-    models: ['deepseek-v3', 'deepseek-r1'],
+    models: ['deepseek-chat', 'deepseek-reasoner'],
     headers: (apiKey: string) => ({
       'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json'
@@ -264,6 +265,7 @@ const APIKeysLinks = () => {
 };
 
 const LLMTester = () => {
+  const { toast } = useToast();
   const [selectedProvider, setSelectedProvider] = useState<string>('');
   const [selectedModel, setSelectedModel] = useState<string>('');
   const [apiKey, setApiKey] = useState<string>('');
@@ -292,6 +294,10 @@ const LLMTester = () => {
     localStorage.setItem('llm-api-key', apiKey);
     localStorage.setItem('llm-prompt', prompt);
     addLog('✅ Configuration sauvegardée dans le localStorage');
+    toast({
+      title: "Configuration sauvegardée",
+      description: "Vos paramètres ont été enregistrés dans le stockage local.",
+    });
   };
 
   const addLog = (message: string) => {
@@ -302,12 +308,21 @@ const LLMTester = () => {
   const testAPI = async () => {
     if (!selectedProvider || !selectedModel || !apiKey || !prompt) {
       addLog('❌ Veuillez remplir tous les champs obligatoires');
+      toast({
+        title: "Champs manquants",
+        description: "Veuillez remplir tous les champs obligatoires.",
+        variant: "destructive",
+      });
       return;
     }
 
     setIsLoading(true);
     setResponse('');
     addLog(`🚀 Début du test avec ${selectedProvider} - ${selectedModel}`);
+    toast({
+      title: "Test en cours",
+      description: `Envoi de la requête vers ${selectedProvider}...`,
+    });
 
     try {
       const provider = llmProviders.find(p => p.id === selectedProvider);
@@ -343,10 +358,19 @@ const LLMTester = () => {
       const parsedResponse = provider.parseResponse(data);
       setResponse(parsedResponse);
       addLog('✅ Test terminé avec succès');
+      toast({
+        title: "Test réussi",
+        description: "La réponse de l'API a été reçue avec succès.",
+      });
 
     } catch (error: any) {
       addLog(`❌ Erreur: ${error.message}`);
       setResponse(`Erreur: ${error.message}`);
+      toast({
+        title: "Erreur API",
+        description: error.message,
+        variant: "destructive",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -355,6 +379,10 @@ const LLMTester = () => {
   const copyResponse = () => {
     navigator.clipboard.writeText(response);
     addLog('📋 Réponse copiée dans le presse-papiers');
+    toast({
+      title: "Copié",
+      description: "La réponse a été copiée dans le presse-papiers.",
+    });
   };
 
   const downloadResponse = () => {
@@ -366,6 +394,10 @@ const LLMTester = () => {
     element.click();
     document.body.removeChild(element);
     addLog('💾 Réponse téléchargée en format .md');
+    toast({
+      title: "Téléchargement",
+      description: "Le fichier a été téléchargé avec succès.",
+    });
   };
 
   const provider = llmProviders.find(p => p.id === selectedProvider);
