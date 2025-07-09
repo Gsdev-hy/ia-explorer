@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge';
 import { Save, Send, Copy, Download, Eye, EyeOff } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import { ExternalLink } from 'lucide-react';
 
 interface LLMProvider {
   id: string;
@@ -56,7 +57,7 @@ const llmProviders: LLMProvider[] = [
     id: 'google',
     name: 'Google Gemini',
     apiUrl: 'https://generativelanguage.googleapis.com/v1beta/models',
-    models: ['gemini-pro', 'gemini-pro-vision'],
+    models: ['gemini-2.5-pro', 'gemini-2.5-flash', 'gemini-pro', 'gemini-pro-vision'],
     headers: (apiKey: string) => ({
       'Content-Type': 'application/json'
     }),
@@ -64,6 +65,53 @@ const llmProviders: LLMProvider[] = [
       contents: [{ parts: [{ text: prompt }] }]
     }),
     parseResponse: (response: any) => response.candidates?.[0]?.content?.parts?.[0]?.text || 'Pas de réponse'
+  },
+  {
+    id: 'deepseek',
+    name: 'DeepSeek',
+    apiUrl: 'https://api.deepseek.com/chat/completions',
+    models: ['deepseek-v3', 'deepseek-r1'],
+    headers: (apiKey: string) => ({
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    }),
+    buildPayload: (prompt: string, model: string) => ({
+      model,
+      messages: [{ role: 'user', content: prompt }]
+    }),
+    parseResponse: (response: any) => response.choices?.[0]?.message?.content || 'Pas de réponse'
+  },
+  {
+    id: 'openrouter',
+    name: 'OpenRouter',
+    apiUrl: 'https://openrouter.ai/api/v1/chat/completions',
+    models: ['deepseek/deepseek-r1:free', 'google/gemini-2.0-flash-exp:free'],
+    headers: (apiKey: string) => ({
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+      'HTTP-Referer': window.location.origin,
+      'X-Title': 'Test API IA'
+    }),
+    buildPayload: (prompt: string, model: string) => ({
+      model,
+      messages: [{ role: 'user', content: prompt }]
+    }),
+    parseResponse: (response: any) => response.choices?.[0]?.message?.content || 'Pas de réponse'
+  },
+  {
+    id: 'xai',
+    name: 'X.AI / Grok',
+    apiUrl: 'https://api.x.ai/v1/chat/completions',
+    models: ['grok-3-beta', 'grok-3-mini-beta'],
+    headers: (apiKey: string) => ({
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    }),
+    buildPayload: (prompt: string, model: string) => ({
+      model,
+      messages: [{ role: 'user', content: prompt }]
+    }),
+    parseResponse: (response: any) => response.choices?.[0]?.message?.content || 'Pas de réponse'
   },
   {
     id: 'mistral',
@@ -172,6 +220,48 @@ const llmProviders: LLMProvider[] = [
     parseResponse: (response: any) => response.choices?.[0]?.message?.content || 'Pas de réponse'
   }
 ];
+
+const APIKeysLinks = () => {
+  const apiKeyLinks = [
+    { name: 'OpenAI', url: 'https://platform.openai.com/api-keys' },
+    { name: 'Anthropic', url: 'https://console.anthropic.com/keys' },
+    { name: 'Google Gemini', url: 'https://aistudio.google.com/app/apikey' },
+    { name: 'DeepSeek', url: 'https://platform.deepseek.com/api_keys' },
+    { name: 'OpenRouter', url: 'https://openrouter.ai/keys' },
+    { name: 'X.AI / Grok', url: 'https://console.x.ai/' },
+    { name: 'Mistral AI', url: 'https://console.mistral.ai/api-keys/' },
+    { name: 'Cohere', url: 'https://dashboard.cohere.com/api-keys' },
+    { name: 'Hugging Face', url: 'https://huggingface.co/settings/tokens' },
+    { name: 'Replicate', url: 'https://replicate.com/account/api-tokens' },
+    { name: 'Together AI', url: 'https://api.together.xyz/settings/api-keys' },
+    { name: 'Perplexity', url: 'https://www.perplexity.ai/settings/api' },
+    { name: 'Groq', url: 'https://console.groq.com/keys' }
+  ];
+
+  return (
+    <Card className="mb-4">
+      <CardHeader>
+        <CardTitle className="text-lg">Liens vers les pages de création de clés API</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+          {apiKeyLinks.map((link) => (
+            <Button
+              key={link.name}
+              variant="outline"
+              size="sm"
+              className="justify-start gap-2"
+              onClick={() => window.open(link.url, '_blank')}
+            >
+              <ExternalLink className="h-4 w-4" />
+              {link.name}
+            </Button>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
 
 const LLMTester = () => {
   const [selectedProvider, setSelectedProvider] = useState<string>('');
@@ -290,6 +380,8 @@ const LLMTester = () => {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
+          <APIKeysLinks />
+          
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <label className="text-sm font-medium mb-2 block">Fournisseur</label>

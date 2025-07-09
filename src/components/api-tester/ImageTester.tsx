@@ -6,7 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Save, Send, Download, Eye, EyeOff, ZoomIn } from 'lucide-react';
+import { Save, Send, Download, Eye, EyeOff, ZoomIn, ExternalLink } from 'lucide-react';
 
 interface ImageProvider {
   id: string;
@@ -73,8 +73,9 @@ const imageProviders: ImageProvider[] = [
   },
   {
     id: 'huggingface',
-    name: 'Hugging Face',
+    name: 'Hugging Face Inference',
     apiUrl: 'https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell',
+    models: ['black-forest-labs/FLUX.1-schnell', 'stabilityai/stable-diffusion-xl-base-1.0'],
     headers: (apiKey: string) => ({
       'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json'
@@ -86,6 +87,30 @@ const imageProviders: ImageProvider[] = [
       // HuggingFace retourne souvent un blob
       return URL.createObjectURL(response);
     }
+  },
+  {
+    id: 'huggingface-space1',
+    name: 'Hugging Face Space - FLUX.1-schnell',
+    apiUrl: 'https://black-forest-labs-flux-1-schnell.hf.space/api/predict',
+    headers: (apiKey: string) => ({
+      'Content-Type': 'application/json'
+    }),
+    buildPayload: (prompt: string) => ({
+      data: [prompt, 1024, 1024, 4, 1]
+    }),
+    parseResponse: (response: any) => response.data?.[0] || ''
+  },
+  {
+    id: 'huggingface-space2',
+    name: 'Hugging Face Space - evalstate/flux1_schnell',
+    apiUrl: 'https://evalstate-flux1-schnell.hf.space/api/predict',
+    headers: (apiKey: string) => ({
+      'Content-Type': 'application/json'
+    }),
+    buildPayload: (prompt: string) => ({
+      data: [prompt]
+    }),
+    parseResponse: (response: any) => response.data?.[0] || ''
   },
   {
     id: 'leonardo',
@@ -105,6 +130,40 @@ const imageProviders: ImageProvider[] = [
     parseResponse: (response: any) => response.sdGenerationJob?.generationId || ''
   }
 ];
+
+const ImageAPIKeysLinks = () => {
+  const apiKeyLinks = [
+    { name: 'OpenAI DALL-E', url: 'https://platform.openai.com/api-keys' },
+    { name: 'Stability AI', url: 'https://platform.stability.ai/account/keys' },
+    { name: 'Replicate', url: 'https://replicate.com/account/api-tokens' },
+    { name: 'Hugging Face', url: 'https://huggingface.co/settings/tokens' },
+    { name: 'Leonardo AI', url: 'https://app.leonardo.ai/api-access' }
+  ];
+
+  return (
+    <Card className="mb-4">
+      <CardHeader>
+        <CardTitle className="text-lg">Liens vers les pages de création de clés API</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+          {apiKeyLinks.map((link) => (
+            <Button
+              key={link.name}
+              variant="outline"
+              size="sm"
+              className="justify-start gap-2"
+              onClick={() => window.open(link.url, '_blank')}
+            >
+              <ExternalLink className="h-4 w-4" />
+              {link.name}
+            </Button>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
 
 const ImageTester = () => {
   const [selectedProvider, setSelectedProvider] = useState<string>('');
@@ -227,6 +286,8 @@ const ImageTester = () => {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
+          <ImageAPIKeysLinks />
+          
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <label className="text-sm font-medium mb-2 block">Fournisseur</label>
