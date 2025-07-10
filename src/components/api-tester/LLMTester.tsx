@@ -24,7 +24,7 @@ const llmProviders: LLMProvider[] = [
     id: 'openai',
     name: 'OpenAI',
     apiUrl: 'https://api.openai.com/v1/chat/completions',
-    models: ['gpt-4o', 'gpt-4o-mini', 'gpt-3.5-turbo'],
+    models: ['gpt-4o', 'gpt-4o-mini', 'gpt-3.5-turbo', 'o1-preview', 'o1-mini'],
     headers: (apiKey: string) => ({
       'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json'
@@ -85,11 +85,11 @@ const llmProviders: LLMProvider[] = [
     id: 'openrouter',
     name: 'OpenRouter',
     apiUrl: 'https://openrouter.ai/api/v1/chat/completions',
-    models: ['deepseek/deepseek-r1-distill-llama-70b', 'google/gemini-2.0-flash-exp:free'],
+    models: ['google/gemini-2.0-flash-exp:free', 'meta-llama/llama-3.2-3b-instruct:free', 'microsoft/phi-3-mini-128k-instruct:free'],
     headers: (apiKey: string) => ({
       'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json',
-      'HTTP-Referer': window.location.origin,
+      'HTTP-Referer': 'https://testapiai.com',
       'X-Title': 'Test API IA'
     }),
     buildPayload: (prompt: string, model: string) => ({
@@ -129,6 +129,89 @@ const llmProviders: LLMProvider[] = [
     parseResponse: (response: any) => response.choices?.[0]?.message?.content || 'Pas de réponse'
   },
   {
+    id: 'cerebras',
+    name: 'Cerebras',
+    apiUrl: 'https://api.cerebras.ai/v1/chat/completions',
+    models: ['llama3.1-8b', 'llama3.1-70b'],
+    headers: (apiKey: string) => ({
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    }),
+    buildPayload: (prompt: string, model: string) => ({
+      model,
+      messages: [{ role: 'user', content: prompt }]
+    }),
+    parseResponse: (response: any) => response.choices?.[0]?.message?.content || 'Pas de réponse'
+  },
+  {
+    id: 'sambanova',
+    name: 'SambaNova',
+    apiUrl: 'https://api.sambanova.ai/v1/chat/completions',
+    models: ['Meta-Llama-3.1-8B-Instruct', 'Meta-Llama-3.1-70B-Instruct'],
+    headers: (apiKey: string) => ({
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    }),
+    buildPayload: (prompt: string, model: string) => ({
+      model,
+      messages: [{ role: 'user', content: prompt }]
+    }),
+    parseResponse: (response: any) => response.choices?.[0]?.message?.content || 'Pas de réponse'
+  },
+  {
+    id: 'together',
+    name: 'Together AI',
+    apiUrl: 'https://api.together.xyz/v1/chat/completions',
+    models: ['meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo', 'meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo'],
+    headers: (apiKey: string) => ({
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    }),
+    buildPayload: (prompt: string, model: string) => ({
+      model,
+      messages: [{ role: 'user', content: prompt }]
+    }),
+    parseResponse: (response: any) => response.choices?.[0]?.message?.content || 'Pas de réponse'
+  },
+  {
+    id: 'fireworks',
+    name: 'Fireworks AI',
+    apiUrl: 'https://api.fireworks.ai/inference/v1/chat/completions',
+    models: ['accounts/fireworks/models/llama-v3p1-8b-instruct', 'accounts/fireworks/models/llama-v3p1-70b-instruct'],
+    headers: (apiKey: string) => ({
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    }),
+    buildPayload: (prompt: string, model: string) => ({
+      model,
+      messages: [{ role: 'user', content: prompt }]
+    }),
+    parseResponse: (response: any) => response.choices?.[0]?.message?.content || 'Pas de réponse'
+  },
+  {
+    id: 'replicate',
+    name: 'Replicate',
+    apiUrl: 'https://api.replicate.com/v1/predictions',
+    models: ['meta/meta-llama-3-8b-instruct', 'meta/meta-llama-3-70b-instruct'],
+    headers: (apiKey: string) => ({
+      'Authorization': `Token ${apiKey}`,
+      'Content-Type': 'application/json'
+    }),
+    buildPayload: (prompt: string, model: string) => ({
+      version: 'latest',
+      input: {
+        prompt: prompt,
+        max_new_tokens: 1024
+      }
+    }),
+    parseResponse: (response: any) => {
+      if (response.output) {
+        return Array.isArray(response.output) ? response.output.join('') : response.output;
+      }
+      return 'Pas de réponse';
+    }
+  },
+  {
     id: 'cohere',
     name: 'Cohere',
     apiUrl: 'https://api.cohere.ai/v1/generate',
@@ -143,51 +226,6 @@ const llmProviders: LLMProvider[] = [
       max_tokens: 1024
     }),
     parseResponse: (response: any) => response.generations?.[0]?.text || 'Pas de réponse'
-  },
-  {
-    id: 'huggingface',
-    name: 'Hugging Face',
-    apiUrl: 'https://api-inference.huggingface.co/models',
-    models: ['microsoft/DialoGPT-medium', 'facebook/blenderbot-400M-distill', 'microsoft/DialoGPT-large'],
-    headers: (apiKey: string) => ({
-      'Authorization': `Bearer ${apiKey}`,
-      'Content-Type': 'application/json'
-    }),
-    buildPayload: (prompt: string, model: string) => ({
-      inputs: prompt
-    }),
-    parseResponse: (response: any) => response.generated_text || response[0]?.generated_text || 'Pas de réponse'
-  },
-  {
-    id: 'replicate',
-    name: 'Replicate',
-    apiUrl: 'https://api.replicate.com/v1/predictions',
-    models: ['meta/llama-2-70b-chat', 'meta/llama-2-13b-chat', 'meta/llama-2-7b-chat'],
-    headers: (apiKey: string) => ({
-      'Authorization': `Token ${apiKey}`,
-      'Content-Type': 'application/json'
-    }),
-    buildPayload: (prompt: string, model: string) => ({
-      version: model,
-      input: { prompt }
-    }),
-    parseResponse: (response: any) => response.output?.join('') || 'Pas de réponse'
-  },
-  {
-    id: 'together',
-    name: 'Together AI',
-    apiUrl: 'https://api.together.xyz/inference',
-    models: ['togethercomputer/llama-2-70b-chat', 'togethercomputer/llama-2-13b-chat'],
-    headers: (apiKey: string) => ({
-      'Authorization': `Bearer ${apiKey}`,
-      'Content-Type': 'application/json'
-    }),
-    buildPayload: (prompt: string, model: string) => ({
-      model,
-      prompt,
-      max_tokens: 1024
-    }),
-    parseResponse: (response: any) => response.output?.choices?.[0]?.text || 'Pas de réponse'
   },
   {
     id: 'perplexity',
@@ -259,14 +297,24 @@ const APIKeysLinks = () => {
       docsUrl: 'https://docs.mistral.ai/'
     },
     { 
-      name: 'Cohere', 
-      keyUrl: 'https://dashboard.cohere.com/api-keys',
-      docsUrl: 'https://docs.cohere.com/docs'
+      name: 'Cerebras', 
+      keyUrl: 'https://cloud.cerebras.ai/platform',
+      docsUrl: 'https://docs.cerebras.ai/'
     },
     { 
-      name: 'Hugging Face', 
-      keyUrl: 'https://huggingface.co/settings/tokens',
-      docsUrl: 'https://huggingface.co/docs/api-inference'
+      name: 'SambaNova', 
+      keyUrl: 'https://cloud.sambanova.ai/',
+      docsUrl: 'https://docs.sambanova.ai/'
+    },
+    { 
+      name: 'Together AI', 
+      keyUrl: 'https://api.together.xyz/settings/api-keys',
+      docsUrl: 'https://docs.together.ai/'
+    },
+    { 
+      name: 'Fireworks AI', 
+      keyUrl: 'https://fireworks.ai/api-keys',
+      docsUrl: 'https://docs.fireworks.ai/'
     },
     { 
       name: 'Replicate', 
@@ -274,9 +322,9 @@ const APIKeysLinks = () => {
       docsUrl: 'https://replicate.com/docs'
     },
     { 
-      name: 'Together AI', 
-      keyUrl: 'https://api.together.xyz/settings/api-keys',
-      docsUrl: 'https://docs.together.ai/'
+      name: 'Cohere', 
+      keyUrl: 'https://dashboard.cohere.com/api-keys',
+      docsUrl: 'https://docs.cohere.com/docs'
     },
     { 
       name: 'Perplexity', 
@@ -301,7 +349,7 @@ const APIKeysLinks = () => {
       <CardContent>
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">Clés API</h3>
+            <h3 className="text-lg font-semibold mb-3">Clés API et Documentation</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
               {apiKeyLinks.map((link) => (
                 <div key={link.name} className="flex gap-2">
@@ -328,9 +376,14 @@ const APIKeysLinks = () => {
           </div>
           
           <div className="pt-4 border-t">
-            <p className="text-sm text-muted-foreground">
-              💡 <strong>Conseil :</strong> Consultez la documentation de chaque fournisseur pour connaître les limites de taux, les modèles disponibles et les bonnes pratiques d'utilisation.
-            </p>
+            <h4 className="font-semibold mb-2">💡 Conseils pratiques</h4>
+            <ul className="text-sm text-muted-foreground space-y-1">
+              <li>• <strong>OpenRouter :</strong> Agrégateur avec accès à de nombreux modèles, y compris des versions gratuites</li>
+              <li>• <strong>Cerebras & SambaNova :</strong> Inference ultra-rapide avec modèles Llama optimisés</li>
+              <li>• <strong>Together AI & Fireworks :</strong> Alternative économique avec bonne performance</li>
+              <li>• <strong>Groq :</strong> Spécialisé dans l'inference rapide avec hardware dédié</li>
+              <li>• Consultez les limites de taux et tarifs de chaque fournisseur</li>
+            </ul>
           </div>
         </div>
       </CardContent>
@@ -408,10 +461,6 @@ const LLMTester = () => {
       if (provider.id === 'google') {
         apiUrl = `${provider.apiUrl}/${selectedModel}:generateContent?key=${apiKey}`;
       }
-      // Configuration spéciale pour Hugging Face
-      else if (provider.id === 'huggingface') {
-        apiUrl = `${provider.apiUrl}/${selectedModel}`;
-      }
 
       const payload = provider.buildPayload(prompt, selectedModel);
       
@@ -474,7 +523,7 @@ const LLMTester = () => {
     document.body.removeChild(element);
     addLog('💾 Réponse téléchargée en format .md');
     toast({
-      title: "Téléchargement",
+      title: "Téléchargement réussi",
       description: "Le fichier a été téléchargé avec succès.",
     });
   };
