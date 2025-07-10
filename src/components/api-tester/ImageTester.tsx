@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -18,6 +17,7 @@ interface ImageProvider {
   headers: (apiKey: string) => Record<string, string>;
   buildPayload: (prompt: string, model?: string) => any;
   parseResponse: (response: any) => string;
+  requiresApiKey?: boolean;
 }
 
 const imageProviders: ImageProvider[] = [
@@ -26,6 +26,7 @@ const imageProviders: ImageProvider[] = [
     name: 'OpenAI DALL-E',
     apiUrl: 'https://api.openai.com/v1/images/generations',
     models: ['dall-e-3', 'dall-e-2'],
+    requiresApiKey: true,
     headers: (apiKey: string) => ({
       'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json'
@@ -42,6 +43,7 @@ const imageProviders: ImageProvider[] = [
     id: 'stability',
     name: 'Stability AI',
     apiUrl: 'https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image',
+    requiresApiKey: true,
     headers: (apiKey: string) => ({
       'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json'
@@ -63,6 +65,7 @@ const imageProviders: ImageProvider[] = [
     name: 'Replicate',
     apiUrl: 'https://api.replicate.com/v1/predictions',
     models: ['stability-ai/sdxl', 'black-forest-labs/flux-schnell'],
+    requiresApiKey: true,
     headers: (apiKey: string) => ({
       'Authorization': `Token ${apiKey}`,
       'Content-Type': 'application/json'
@@ -78,6 +81,7 @@ const imageProviders: ImageProvider[] = [
     name: 'Hugging Face Inference',
     apiUrl: 'https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell',
     models: ['black-forest-labs/FLUX.1-schnell', 'stabilityai/stable-diffusion-xl-base-1.0'],
+    requiresApiKey: true,
     headers: (apiKey: string) => ({
       'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json'
@@ -86,31 +90,51 @@ const imageProviders: ImageProvider[] = [
       inputs: prompt
     }),
     parseResponse: (response: any) => {
-      // HuggingFace retourne souvent un blob
       return URL.createObjectURL(response);
     }
   },
   {
-    id: 'huggingface-space1',
-    name: 'Hugging Face Space - FLUX.1-schnell',
-    apiUrl: 'https://black-forest-labs-flux-1-schnell.hf.space/api/predict',
-    headers: (apiKey: string) => ({
+    id: 'hf-flux-schnell',
+    name: 'HF Space - FLUX.1-schnell (Gratuit)',
+    apiUrl: 'https://black-forest-labs-flux-1-schnell.hf.space/queue/join',
+    requiresApiKey: false,
+    headers: () => ({
       'Content-Type': 'application/json'
     }),
     buildPayload: (prompt: string) => ({
-      data: [prompt, 1024, 1024, 4, 1]
+      data: [
+        prompt,
+        null,
+        1024,
+        1024,
+        4,
+        true,
+        1
+      ],
+      event_data: null,
+      fn_index: 3,
+      trigger_id: Math.floor(Math.random() * 1000000),
+      session_hash: Math.random().toString(36).substring(2)
     }),
-    parseResponse: (response: any) => response.data?.[0] || ''
+    parseResponse: (response: any) => {
+      // Pour les Gradio apps, l'image sera dans response.data[0]
+      return response.data?.[0] || '';
+    }
   },
   {
-    id: 'huggingface-space2',
-    name: 'Hugging Face Space - evalstate/flux1_schnell',
-    apiUrl: 'https://evalstate-flux1-schnell.hf.space/api/predict',
-    headers: (apiKey: string) => ({
+    id: 'hf-evalstate',
+    name: 'HF Space - Evalstate FLUX (Gratuit)',
+    apiUrl: 'https://evalstate-flux1-schnell.hf.space/queue/join',
+    requiresApiKey: false,
+    headers: () => ({
       'Content-Type': 'application/json'
     }),
     buildPayload: (prompt: string) => ({
-      data: [prompt]
+      data: [prompt],
+      event_data: null,
+      fn_index: 0,
+      trigger_id: Math.floor(Math.random() * 1000000),
+      session_hash: Math.random().toString(36).substring(2)
     }),
     parseResponse: (response: any) => response.data?.[0] || ''
   },
@@ -118,6 +142,7 @@ const imageProviders: ImageProvider[] = [
     id: 'leonardo',
     name: 'Leonardo AI',
     apiUrl: 'https://cloud.leonardo.ai/api/rest/v1/generations',
+    requiresApiKey: true,
     headers: (apiKey: string) => ({
       'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json'
@@ -275,11 +300,23 @@ const ImageTester = () => {
   };
 
   const testAPI = async () => {
-    if (!selectedProvider || !apiKey || !prompt) {
+    const provider = imageProviders.find(p => p.id === selectedProvider);
+    
+    if (!selectedProvider || !prompt) {
       addLog('❌ Veuillez remplir tous les champs obligatoires');
       toast({
         title: "Champs manquants",
         description: "Veuillez remplir tous les champs obligatoires.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (provider?.requiresApiKey && !apiKey) {
+      addLog('❌ Clé API requise pour ce fournisseur');
+      toast({
+        title: "Clé API manquante",
+        description: "Ce fournisseur nécessite une clé API.",
         variant: "destructive",
       });
       return;
@@ -294,13 +331,38 @@ const ImageTester = () => {
     });
 
     try {
-      const provider = imageProviders.find(p => p.id === selectedProvider);
       if (!provider) throw new Error('Fournisseur non trouvé');
 
       const payload = provider.buildPayload(prompt, selectedModel);
       
       addLog(`📡 Envoi de la requête vers ${provider.apiUrl}`);
       addLog(`📝 Payload: ${JSON.stringify(payload, null, 2)}`);
+
+      // Gestion spéciale pour les Hugging Face Spaces
+      if (provider.id.startsWith('hf-')) {
+        // Pour les spaces Gradio, on doit d'abord joindre la queue
+        const response = await fetch(provider.apiUrl, {
+          method: 'POST',
+          headers: provider.headers(apiKey),
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Erreur API: ${response.status} - ${errorText}`);
+        }
+
+        const queueResponse = await response.json();
+        addLog(`📦 Réponse queue: ${JSON.stringify(queueResponse, null, 2)}`);
+        
+        // Attendre le résultat (simplifié pour l'exemple)
+        toast({
+          title: "Génération en cours",
+          description: "Les Hugging Face Spaces gratuits peuvent prendre du temps...",
+        });
+        
+        throw new Error('Les Hugging Face Spaces gratuits nécessitent une implémentation WebSocket complète');
+      }
 
       const response = await fetch(provider.apiUrl, {
         method: 'POST',

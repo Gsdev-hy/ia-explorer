@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -58,7 +57,7 @@ const llmProviders: LLMProvider[] = [
     id: 'google',
     name: 'Google Gemini',
     apiUrl: 'https://generativelanguage.googleapis.com/v1beta/models',
-    models: ['gemini-2.5-pro', 'gemini-2.5-flash', 'gemini-pro', 'gemini-pro-vision'],
+    models: ['gemini-2.0-flash-exp', 'gemini-1.5-pro', 'gemini-1.5-flash'],
     headers: (apiKey: string) => ({
       'Content-Type': 'application/json'
     }),
@@ -86,7 +85,7 @@ const llmProviders: LLMProvider[] = [
     id: 'openrouter',
     name: 'OpenRouter',
     apiUrl: 'https://openrouter.ai/api/v1/chat/completions',
-    models: ['deepseek/deepseek-r1:free', 'google/gemini-2.0-flash-exp:free'],
+    models: ['deepseek/deepseek-r1-distill-llama-70b', 'google/gemini-2.0-flash-exp:free'],
     headers: (apiKey: string) => ({
       'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json',
@@ -103,7 +102,7 @@ const llmProviders: LLMProvider[] = [
     id: 'xai',
     name: 'X.AI / Grok',
     apiUrl: 'https://api.x.ai/v1/chat/completions',
-    models: ['grok-3-beta', 'grok-3-mini-beta'],
+    models: ['grok-beta', 'grok-vision-beta'],
     headers: (apiKey: string) => ({
       'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json'
@@ -403,11 +402,16 @@ const LLMTester = () => {
       const provider = llmProviders.find(p => p.id === selectedProvider);
       if (!provider) throw new Error('Fournisseur non trouvé');
 
-      const apiUrl = provider.id === 'google' 
-        ? `${provider.apiUrl}/${selectedModel}:generateContent?key=${apiKey}`
-        : provider.id === 'huggingface'
-        ? `${provider.apiUrl}/${selectedModel}`
-        : provider.apiUrl;
+      let apiUrl = provider.apiUrl;
+      
+      // Configuration spéciale pour Google Gemini
+      if (provider.id === 'google') {
+        apiUrl = `${provider.apiUrl}/${selectedModel}:generateContent?key=${apiKey}`;
+      }
+      // Configuration spéciale pour Hugging Face
+      else if (provider.id === 'huggingface') {
+        apiUrl = `${provider.apiUrl}/${selectedModel}`;
+      }
 
       const payload = provider.buildPayload(prompt, selectedModel);
       
