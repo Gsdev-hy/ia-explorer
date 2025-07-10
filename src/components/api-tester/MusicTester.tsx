@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { Save, Send, Download, Eye, EyeOff, Play, Pause, Volume2 } from 'lucide-react';
+import { Save, Send, Download, Eye, EyeOff, Play, Pause, Volume2, ExternalLink, BookOpen } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 
 interface MusicProvider {
@@ -71,6 +71,68 @@ const musicProviders: MusicProvider[] = [
     parseResponse: (response: any) => response.output || ''
   }
 ];
+
+const MusicAPIKeysLinks = () => {
+  const apiKeyLinks = [
+    { 
+      name: 'Suno AI', 
+      keyUrl: 'https://app.suno.ai/account',
+      docsUrl: 'https://docs.suno.ai/'
+    },
+    { 
+      name: 'Udio', 
+      keyUrl: 'https://www.udio.com/settings',
+      docsUrl: 'https://docs.udio.com/'
+    }
+  ];
+
+  return (
+    <Card className="mt-8">
+      <CardHeader>
+        <CardTitle className="text-xl flex items-center gap-2">
+          <ExternalLink className="h-5 w-5" />
+          Ressources pour les API Text-to-Music
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-lg font-semibold mb-3">Clés API</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {apiKeyLinks.map((link) => (
+                <div key={link.name} className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex-1 justify-start gap-2"
+                    onClick={() => window.open(link.keyUrl, '_blank')}
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    {link.name}
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => window.open(link.docsUrl, '_blank')}
+                    title="Documentation"
+                  >
+                    <BookOpen className="h-4 w-4" />
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="pt-4 border-t">
+            <p className="text-sm text-muted-foreground">
+              💡 <strong>Conseil :</strong> La génération de musique par IA peut prendre plusieurs minutes. Consultez les limites de durée et de qualité dans la documentation de chaque fournisseur.
+            </p>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
 
 const MusicTester = () => {
   const { toast } = useToast();
@@ -312,11 +374,11 @@ const MusicTester = () => {
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <label className="text-sm font-medium mb-2 block">Prompt musical</label>
+            <label className="text-sm font-medium mb-2 block">Prompt de description</label>
             <Textarea
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
-              placeholder="Décrivez le style musical souhaité (ex: 'upbeat electronic dance music with synthesizers')"
+              placeholder="Décrivez la musique que vous souhaitez générer (ex: 'upbeat jazz with piano and saxophone')"
               rows={4}
             />
           </div>
@@ -350,19 +412,19 @@ const MusicTester = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex items-center justify-center p-8 bg-muted/30 dark:bg-muted/20 rounded-lg border border-border">
-              <div className="flex flex-col items-center gap-4">
-                <Volume2 className="h-12 w-12 text-primary" />
-                <p className="text-sm text-muted-foreground">Fichier audio généré</p>
+            <div className="flex justify-center">
+              <div className="w-full max-w-md">
                 <audio
                   ref={audioRef}
                   src={audioUrl}
                   controls
-                  className="w-full max-w-md"
+                  className="w-full"
                   onPlay={() => setIsPlaying(true)}
                   onPause={() => setIsPlaying(false)}
                   onEnded={() => setIsPlaying(false)}
-                />
+                >
+                  Votre navigateur ne supporte pas la lecture audio.
+                </audio>
               </div>
             </div>
           </CardContent>
@@ -383,6 +445,8 @@ const MusicTester = () => {
           />
         </CardContent>
       </Card>
+
+      <MusicAPIKeysLinks />
     </div>
   );
 };

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -5,9 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { Save, Send, Copy, Download, Eye, EyeOff } from 'lucide-react';
+import { Save, Send, Copy, Download, Eye, EyeOff, ExternalLink, BookOpen } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
-import { ExternalLink } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 
 interface LLMProvider {
@@ -224,40 +224,115 @@ const llmProviders: LLMProvider[] = [
 
 const APIKeysLinks = () => {
   const apiKeyLinks = [
-    { name: 'OpenAI', url: 'https://platform.openai.com/api-keys' },
-    { name: 'Anthropic', url: 'https://console.anthropic.com/keys' },
-    { name: 'Google Gemini', url: 'https://aistudio.google.com/app/apikey' },
-    { name: 'DeepSeek', url: 'https://platform.deepseek.com/api_keys' },
-    { name: 'OpenRouter', url: 'https://openrouter.ai/keys' },
-    { name: 'X.AI / Grok', url: 'https://console.x.ai/' },
-    { name: 'Mistral AI', url: 'https://console.mistral.ai/api-keys/' },
-    { name: 'Cohere', url: 'https://dashboard.cohere.com/api-keys' },
-    { name: 'Hugging Face', url: 'https://huggingface.co/settings/tokens' },
-    { name: 'Replicate', url: 'https://replicate.com/account/api-tokens' },
-    { name: 'Together AI', url: 'https://api.together.xyz/settings/api-keys' },
-    { name: 'Perplexity', url: 'https://www.perplexity.ai/settings/api' },
-    { name: 'Groq', url: 'https://console.groq.com/keys' }
+    { 
+      name: 'OpenAI', 
+      keyUrl: 'https://platform.openai.com/api-keys',
+      docsUrl: 'https://platform.openai.com/docs/api-reference'
+    },
+    { 
+      name: 'Anthropic', 
+      keyUrl: 'https://console.anthropic.com/keys',
+      docsUrl: 'https://docs.anthropic.com/claude/reference/getting-started'
+    },
+    { 
+      name: 'Google Gemini', 
+      keyUrl: 'https://aistudio.google.com/app/apikey',
+      docsUrl: 'https://ai.google.dev/gemini-api/docs'
+    },
+    { 
+      name: 'DeepSeek', 
+      keyUrl: 'https://platform.deepseek.com/api_keys',
+      docsUrl: 'https://platform.deepseek.com/api-docs'
+    },
+    { 
+      name: 'OpenRouter', 
+      keyUrl: 'https://openrouter.ai/keys',
+      docsUrl: 'https://openrouter.ai/docs'
+    },
+    { 
+      name: 'X.AI / Grok', 
+      keyUrl: 'https://console.x.ai/',
+      docsUrl: 'https://docs.x.ai/api'
+    },
+    { 
+      name: 'Mistral AI', 
+      keyUrl: 'https://console.mistral.ai/api-keys/',
+      docsUrl: 'https://docs.mistral.ai/'
+    },
+    { 
+      name: 'Cohere', 
+      keyUrl: 'https://dashboard.cohere.com/api-keys',
+      docsUrl: 'https://docs.cohere.com/docs'
+    },
+    { 
+      name: 'Hugging Face', 
+      keyUrl: 'https://huggingface.co/settings/tokens',
+      docsUrl: 'https://huggingface.co/docs/api-inference'
+    },
+    { 
+      name: 'Replicate', 
+      keyUrl: 'https://replicate.com/account/api-tokens',
+      docsUrl: 'https://replicate.com/docs'
+    },
+    { 
+      name: 'Together AI', 
+      keyUrl: 'https://api.together.xyz/settings/api-keys',
+      docsUrl: 'https://docs.together.ai/'
+    },
+    { 
+      name: 'Perplexity', 
+      keyUrl: 'https://www.perplexity.ai/settings/api',
+      docsUrl: 'https://docs.perplexity.ai/'
+    },
+    { 
+      name: 'Groq', 
+      keyUrl: 'https://console.groq.com/keys',
+      docsUrl: 'https://console.groq.com/docs'
+    }
   ];
 
   return (
-    <Card className="mb-4">
+    <Card className="mt-8">
       <CardHeader>
-        <CardTitle className="text-lg">Liens vers les pages de création de clés API</CardTitle>
+        <CardTitle className="text-xl flex items-center gap-2">
+          <ExternalLink className="h-5 w-5" />
+          Ressources pour les API LLM
+        </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-          {apiKeyLinks.map((link) => (
-            <Button
-              key={link.name}
-              variant="outline"
-              size="sm"
-              className="justify-start gap-2"
-              onClick={() => window.open(link.url, '_blank')}
-            >
-              <ExternalLink className="h-4 w-4" />
-              {link.name}
-            </Button>
-          ))}
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-lg font-semibold mb-3">Clés API</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+              {apiKeyLinks.map((link) => (
+                <div key={link.name} className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex-1 justify-start gap-2"
+                    onClick={() => window.open(link.keyUrl, '_blank')}
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    {link.name}
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => window.open(link.docsUrl, '_blank')}
+                    title="Documentation"
+                  >
+                    <BookOpen className="h-4 w-4" />
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="pt-4 border-t">
+            <p className="text-sm text-muted-foreground">
+              💡 <strong>Conseil :</strong> Consultez la documentation de chaque fournisseur pour connaître les limites de taux, les modèles disponibles et les bonnes pratiques d'utilisation.
+            </p>
+          </div>
         </div>
       </CardContent>
     </Card>
@@ -412,8 +487,6 @@ const LLMTester = () => {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <APIKeysLinks />
-          
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <label className="text-sm font-medium mb-2 block">Fournisseur</label>
@@ -545,6 +618,8 @@ const LLMTester = () => {
           />
         </CardContent>
       </Card>
+
+      <APIKeysLinks />
     </div>
   );
 };

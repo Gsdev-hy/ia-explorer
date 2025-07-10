@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -6,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Save, Send, Download, Eye, EyeOff, ZoomIn, ExternalLink } from 'lucide-react';
+import { Save, Send, Download, Eye, EyeOff, ZoomIn, ExternalLink, BookOpen } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 
 interface ImageProvider {
@@ -134,32 +135,99 @@ const imageProviders: ImageProvider[] = [
 
 const ImageAPIKeysLinks = () => {
   const apiKeyLinks = [
-    { name: 'OpenAI DALL-E', url: 'https://platform.openai.com/api-keys' },
-    { name: 'Stability AI', url: 'https://platform.stability.ai/account/keys' },
-    { name: 'Replicate', url: 'https://replicate.com/account/api-tokens' },
-    { name: 'Hugging Face', url: 'https://huggingface.co/settings/tokens' },
-    { name: 'Leonardo AI', url: 'https://app.leonardo.ai/api-access' }
+    { 
+      name: 'OpenAI DALL-E', 
+      keyUrl: 'https://platform.openai.com/api-keys',
+      docsUrl: 'https://platform.openai.com/docs/guides/images'
+    },
+    { 
+      name: 'Stability AI', 
+      keyUrl: 'https://platform.stability.ai/account/keys',
+      docsUrl: 'https://platform.stability.ai/docs/api-reference'
+    },
+    { 
+      name: 'Replicate', 
+      keyUrl: 'https://replicate.com/account/api-tokens',
+      docsUrl: 'https://replicate.com/docs/reference/http'
+    },
+    { 
+      name: 'Hugging Face', 
+      keyUrl: 'https://huggingface.co/settings/tokens',
+      docsUrl: 'https://huggingface.co/docs/api-inference'
+    },
+    { 
+      name: 'Leonardo AI', 
+      keyUrl: 'https://app.leonardo.ai/api-access',
+      docsUrl: 'https://docs.leonardo.ai/'
+    }
   ];
 
   return (
-    <Card className="mb-4">
+    <Card className="mt-8">
       <CardHeader>
-        <CardTitle className="text-lg">Liens vers les pages de création de clés API</CardTitle>
+        <CardTitle className="text-xl flex items-center gap-2">
+          <ExternalLink className="h-5 w-5" />
+          Ressources pour les API Text-to-Image
+        </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-          {apiKeyLinks.map((link) => (
-            <Button
-              key={link.name}
-              variant="outline"
-              size="sm"
-              className="justify-start gap-2"
-              onClick={() => window.open(link.url, '_blank')}
-            >
-              <ExternalLink className="h-4 w-4" />
-              {link.name}
-            </Button>
-          ))}
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-lg font-semibold mb-3">Clés API</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+              {apiKeyLinks.map((link) => (
+                <div key={link.name} className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex-1 justify-start gap-2"
+                    onClick={() => window.open(link.keyUrl, '_blank')}
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    {link.name}
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => window.open(link.docsUrl, '_blank')}
+                    title="Documentation"
+                  >
+                    <BookOpen className="h-4 w-4" />
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div>
+            <h3 className="text-lg font-semibold mb-3">Espaces Hugging Face gratuits</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <Button
+                variant="outline"
+                size="sm"
+                className="justify-start gap-2"
+                onClick={() => window.open('https://huggingface.co/spaces/black-forest-labs/FLUX.1-schnell', '_blank')}
+              >
+                <ExternalLink className="h-4 w-4" />
+                FLUX.1-schnell (Black Forest Labs)
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="justify-start gap-2"
+                onClick={() => window.open('https://huggingface.co/spaces/evalstate/flux1_schnell', '_blank')}
+              >
+                <ExternalLink className="h-4 w-4" />
+                FLUX1 Schnell (Evalstate)
+              </Button>
+            </div>
+          </div>
+          
+          <div className="pt-4 border-t">
+            <p className="text-sm text-muted-foreground">
+              💡 <strong>Conseil :</strong> Les espaces Hugging Face gratuits peuvent avoir des temps d'attente. Pour un usage professionnel, privilégiez les API payantes avec vos propres clés.
+            </p>
+          </div>
         </div>
       </CardContent>
     </Card>
@@ -320,8 +388,6 @@ const ImageTester = () => {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <ImageAPIKeysLinks />
-          
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <label className="text-sm font-medium mb-2 block">Fournisseur</label>
@@ -473,6 +539,8 @@ const ImageTester = () => {
           />
         </CardContent>
       </Card>
+
+      <ImageAPIKeysLinks />
     </div>
   );
 };

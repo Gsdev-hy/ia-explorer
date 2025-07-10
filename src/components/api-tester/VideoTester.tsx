@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { Save, Send, Download, Eye, EyeOff, Play, Pause, Video } from 'lucide-react';
+import { Save, Send, Download, Eye, EyeOff, Play, Pause, Video, ExternalLink, BookOpen } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 
 interface VideoProvider {
@@ -70,6 +70,73 @@ const videoProviders: VideoProvider[] = [
     parseResponse: (response: any) => response.output?.[0] || ''
   }
 ];
+
+const VideoAPIKeysLinks = () => {
+  const apiKeyLinks = [
+    { 
+      name: 'Runway ML', 
+      keyUrl: 'https://app.runwayml.com/account',
+      docsUrl: 'https://docs.runwayml.com/'
+    },
+    { 
+      name: 'Pika Labs', 
+      keyUrl: 'https://pika.art/account',
+      docsUrl: 'https://docs.pika.art/'
+    },
+    { 
+      name: 'Replicate', 
+      keyUrl: 'https://replicate.com/account/api-tokens',
+      docsUrl: 'https://replicate.com/docs/reference/http'
+    }
+  ];
+
+  return (
+    <Card className="mt-8">
+      <CardHeader>
+        <CardTitle className="text-xl flex items-center gap-2">
+          <ExternalLink className="h-5 w-5" />
+          Ressources pour les API Text-to-Video
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-lg font-semibold mb-3">Clés API</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {apiKeyLinks.map((link) => (
+                <div key={link.name} className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex-1 justify-start gap-2"
+                    onClick={() => window.open(link.keyUrl, '_blank')}
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    {link.name}
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => window.open(link.docsUrl, '_blank')}
+                    title="Documentation"
+                  >
+                    <BookOpen className="h-4 w-4" />
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="pt-4 border-t">
+            <p className="text-sm text-muted-foreground">
+              💡 <strong>Conseil :</strong> La génération de vidéos peut prendre plusieurs minutes et nécessite souvent des crédits. Vérifiez les coûts et les limites dans la documentation de chaque fournisseur.
+            </p>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
 
 const VideoTester = () => {
   const { toast } = useToast();
@@ -385,6 +452,8 @@ const VideoTester = () => {
           />
         </CardContent>
       </Card>
+
+      <VideoAPIKeysLinks />
     </div>
   );
 };
