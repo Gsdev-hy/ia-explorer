@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -57,7 +58,7 @@ const llmProviders: LLMProvider[] = [
     id: 'google',
     name: 'Google Gemini',
     apiUrl: 'https://generativelanguage.googleapis.com/v1beta/models',
-    models: ['gemini-2.0-flash-exp', 'gemini-1.5-pro', 'gemini-1.5-flash'],
+    models: ['gemini-2.0-flash-exp', 'gemini-2.5-flash', 'gemini-2.5-pro', 'gemini-1.5-pro', 'gemini-1.5-flash'],
     headers: (apiKey: string) => ({
       'Content-Type': 'application/json'
     }),

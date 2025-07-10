@@ -42,29 +42,27 @@ const imageProviders: ImageProvider[] = [
   {
     id: 'stability',
     name: 'Stability AI',
-    apiUrl: 'https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image',
+    apiUrl: 'https://api.stability.ai/v2beta/stable-image/generate/ultra',
     requiresApiKey: true,
     headers: (apiKey: string) => ({
       'Authorization': `Bearer ${apiKey}`,
-      'Content-Type': 'application/json'
+      'Accept': 'image/*'
     }),
-    buildPayload: (prompt: string) => ({
-      text_prompts: [{ text: prompt }],
-      cfg_scale: 7,
-      height: 1024,
-      width: 1024,
-      steps: 30
-    }),
+    buildPayload: (prompt: string) => {
+      const formData = new FormData();
+      formData.append('prompt', prompt);
+      formData.append('output_format', 'webp');
+      return formData;
+    },
     parseResponse: (response: any) => {
-      const base64 = response.artifacts?.[0]?.base64;
-      return base64 ? `data:image/png;base64,${base64}` : '';
+      return URL.createObjectURL(response);
     }
   },
   {
     id: 'replicate',
     name: 'Replicate',
     apiUrl: 'https://api.replicate.com/v1/predictions',
-    models: ['stability-ai/sdxl', 'black-forest-labs/flux-schnell'],
+    models: ['black-forest-labs/flux-1.1-pro', 'black-forest-labs/flux-schnell', 'stability-ai/sdxl'],
     requiresApiKey: true,
     headers: (apiKey: string) => ({
       'Authorization': `Token ${apiKey}`,
@@ -80,7 +78,7 @@ const imageProviders: ImageProvider[] = [
     id: 'huggingface',
     name: 'Hugging Face Inference',
     apiUrl: 'https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell',
-    models: ['black-forest-labs/FLUX.1-schnell', 'stabilityai/stable-diffusion-xl-base-1.0'],
+    models: ['black-forest-labs/FLUX.1-schnell', 'black-forest-labs/FLUX.1-dev', 'stabilityai/stable-diffusion-xl-base-1.0'],
     requiresApiKey: true,
     headers: (apiKey: string) => ({
       'Authorization': `Bearer ${apiKey}`,
@@ -94,54 +92,46 @@ const imageProviders: ImageProvider[] = [
     }
   },
   {
-    id: 'hf-flux-schnell',
-    name: 'HF Space - FLUX.1-schnell (Gratuit)',
-    apiUrl: 'https://black-forest-labs-flux-1-schnell.hf.space/queue/join',
-    requiresApiKey: false,
-    headers: () => ({
+    id: 'fal',
+    name: 'Fal.ai',
+    apiUrl: 'https://fal.run/fal-ai/flux/schnell',
+    models: ['flux-schnell', 'flux-dev', 'flux-pro'],
+    requiresApiKey: true,
+    headers: (apiKey: string) => ({
+      'Authorization': `Key ${apiKey}`,
       'Content-Type': 'application/json'
     }),
     buildPayload: (prompt: string) => ({
-      data: [
-        prompt,
-        null,
-        1024,
-        1024,
-        4,
-        true,
-        1
-      ],
-      event_data: null,
-      fn_index: 3,
-      trigger_id: Math.floor(Math.random() * 1000000),
-      session_hash: Math.random().toString(36).substring(2)
+      prompt,
+      num_images: 1,
+      image_size: 'square_hd'
     }),
-    parseResponse: (response: any) => {
-      // Pour les Gradio apps, l'image sera dans response.data[0]
-      return response.data?.[0] || '';
-    }
+    parseResponse: (response: any) => response.images?.[0]?.url || ''
   },
   {
-    id: 'hf-evalstate',
-    name: 'HF Space - Evalstate FLUX (Gratuit)',
-    apiUrl: 'https://evalstate-flux1-schnell.hf.space/queue/join',
-    requiresApiKey: false,
-    headers: () => ({
+    id: 'together',
+    name: 'Together AI',
+    apiUrl: 'https://api.together.xyz/v1/images/generations',
+    models: ['black-forest-labs/FLUX.1-schnell-Free', 'runwayml/stable-diffusion-v1-5'],
+    requiresApiKey: true,
+    headers: (apiKey: string) => ({
+      'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json'
     }),
-    buildPayload: (prompt: string) => ({
-      data: [prompt],
-      event_data: null,
-      fn_index: 0,
-      trigger_id: Math.floor(Math.random() * 1000000),
-      session_hash: Math.random().toString(36).substring(2)
+    buildPayload: (prompt: string, model: string = 'black-forest-labs/FLUX.1-schnell-Free') => ({
+      model,
+      prompt,
+      width: 1024,
+      height: 1024,
+      steps: 4,
+      n: 1
     }),
-    parseResponse: (response: any) => response.data?.[0] || ''
+    parseResponse: (response: any) => response.data?.[0]?.url || ''
   },
   {
-    id: 'leonardo',
-    name: 'Leonardo AI',
-    apiUrl: 'https://cloud.leonardo.ai/api/rest/v1/generations',
+    id: 'fireworks',
+    name: 'Fireworks AI',
+    apiUrl: 'https://api.fireworks.ai/inference/v1/image_generation/accounts/fireworks/models/flux-1-schnell',
     requiresApiKey: true,
     headers: (apiKey: string) => ({
       'Authorization': `Bearer ${apiKey}`,
@@ -149,12 +139,77 @@ const imageProviders: ImageProvider[] = [
     }),
     buildPayload: (prompt: string) => ({
       prompt,
-      modelId: 'aa77f04e-3eec-4034-9c07-d0f619684628',
       width: 1024,
       height: 1024,
-      num_images: 1
+      steps: 4
     }),
-    parseResponse: (response: any) => response.sdGenerationJob?.generationId || ''
+    parseResponse: (response: any) => response.images?.[0]?.url || ''
+  },
+  {
+    id: 'ideogram',
+    name: 'Ideogram',
+    apiUrl: 'https://api.ideogram.ai/generate',
+    models: ['V_2', 'V_2_TURBO'],
+    requiresApiKey: true,
+    headers: (apiKey: string) => ({
+      'Api-Key': apiKey,
+      'Content-Type': 'application/json'
+    }),
+    buildPayload: (prompt: string, model: string = 'V_2') => ({
+      image_request: {
+        prompt,
+        model,
+        magic_prompt_option: 'AUTO'
+      }
+    }),
+    parseResponse: (response: any) => response.data?.[0]?.url || ''
+  },
+  {
+    id: 'pollinations',
+    name: 'Pollinations AI (Gratuit)',
+    apiUrl: 'https://image.pollinations.ai/prompt',
+    requiresApiKey: false,
+    headers: () => ({}),
+    buildPayload: (prompt: string) => prompt,
+    parseResponse: (response: any) => response
+  },
+  {
+    id: 'dezgo',
+    name: 'DeZGO (Gratuit)',
+    apiUrl: 'https://api.dezgo.com/text2image',
+    requiresApiKey: false,
+    headers: () => ({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }),
+    buildPayload: (prompt: string) => {
+      const params = new URLSearchParams();
+      params.append('prompt', prompt);
+      params.append('model', 'flux');
+      params.append('width', '1024');
+      params.append('height', '1024');
+      return params;
+    },
+    parseResponse: (response: any) => {
+      return URL.createObjectURL(response);
+    }
+  },
+  {
+    id: 'prodia',
+    name: 'Prodia (Gratuit)',
+    apiUrl: 'https://api.prodia.com/v1/sd/generate',
+    requiresApiKey: false,
+    headers: () => ({
+      'Content-Type': 'application/json'
+    }),
+    buildPayload: (prompt: string) => ({
+      prompt,
+      model: 'sdxl',
+      steps: 25,
+      cfg_scale: 7,
+      width: 1024,
+      height: 1024
+    }),
+    parseResponse: (response: any) => response.imageUrl || ''
   }
 ];
 
@@ -181,9 +236,24 @@ const ImageAPIKeysLinks = () => {
       docsUrl: 'https://huggingface.co/docs/api-inference'
     },
     { 
-      name: 'Leonardo AI', 
-      keyUrl: 'https://app.leonardo.ai/api-access',
-      docsUrl: 'https://docs.leonardo.ai/'
+      name: 'Fal.ai', 
+      keyUrl: 'https://fal.ai/dashboard/keys',
+      docsUrl: 'https://fal.ai/docs'
+    },
+    { 
+      name: 'Together AI', 
+      keyUrl: 'https://api.together.xyz/settings/api-keys',
+      docsUrl: 'https://docs.together.ai/'
+    },
+    { 
+      name: 'Fireworks AI', 
+      keyUrl: 'https://fireworks.ai/api-keys',
+      docsUrl: 'https://docs.fireworks.ai/'
+    },
+    { 
+      name: 'Ideogram', 
+      keyUrl: 'https://ideogram.ai/api',
+      docsUrl: 'https://docs.ideogram.ai/'
     }
   ];
 
@@ -192,13 +262,13 @@ const ImageAPIKeysLinks = () => {
       <CardHeader>
         <CardTitle className="text-xl flex items-center gap-2">
           <ExternalLink className="h-5 w-5" />
-          Ressources pour les API Text-to-Image
+          Ressources pour les API Text-to-Image 2025
         </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">Clés API</h3>
+            <h3 className="text-lg font-semibold mb-3">Clés API et Documentation</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
               {apiKeyLinks.map((link) => (
                 <div key={link.name} className="flex gap-2">
@@ -225,33 +295,47 @@ const ImageAPIKeysLinks = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-3">Espaces Hugging Face gratuits</h3>
+            <h3 className="text-lg font-semibold mb-3">Services gratuits 2025</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <Button
                 variant="outline"
                 size="sm"
                 className="justify-start gap-2"
-                onClick={() => window.open('https://huggingface.co/spaces/black-forest-labs/FLUX.1-schnell', '_blank')}
+                onClick={() => window.open('https://pollinations.ai/', '_blank')}
               >
                 <ExternalLink className="h-4 w-4" />
-                FLUX.1-schnell (Black Forest Labs)
+                Pollinations AI (Illimité)
               </Button>
               <Button
                 variant="outline"
                 size="sm"
                 className="justify-start gap-2"
-                onClick={() => window.open('https://huggingface.co/spaces/evalstate/flux1_schnell', '_blank')}
+                onClick={() => window.open('https://dezgo.com/', '_blank')}
               >
                 <ExternalLink className="h-4 w-4" />
-                FLUX1 Schnell (Evalstate)
+                DeZGO (Flux gratuit)
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="justify-start gap-2"
+                onClick={() => window.open('https://prodia.com/', '_blank')}
+              >
+                <ExternalLink className="h-4 w-4" />
+                Prodia (SDXL gratuit)
               </Button>
             </div>
           </div>
           
           <div className="pt-4 border-t">
-            <p className="text-sm text-muted-foreground">
-              💡 <strong>Conseil :</strong> Les espaces Hugging Face gratuits peuvent avoir des temps d'attente. Pour un usage professionnel, privilégiez les API payantes avec vos propres clés.
-            </p>
+            <h4 className="font-semibold mb-2">💡 Nouveautés 2025</h4>
+            <ul className="text-sm text-muted-foreground space-y-1">
+              <li>• <strong>FLUX 1.1 Pro :</strong> Nouvelle version améliorée de Black Forest Labs</li>
+              <li>• <strong>Fal.ai :</strong> API rapide et économique pour FLUX</li>
+              <li>• <strong>Ideogram V2 :</strong> Excellent pour le texte dans les images</li>
+              <li>• <strong>Stability AI Ultra :</strong> Nouvelle version haute qualité</li>
+              <li>• Les services gratuits comme Pollinations offrent un excellent rapport qualité/prix</li>
+            </ul>
           </div>
         </div>
       </CardContent>
