@@ -4,10 +4,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Save, Send, Download, Eye, EyeOff, ZoomIn, ExternalLink, BookOpen } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
+import ImageProviderSelector from './ImageProviderSelector';
 
 interface ImageProvider {
   id: string;
@@ -526,77 +526,65 @@ const ImageTester = () => {
 
   return (
     <div className="space-y-6">
+      <ImageProviderSelector
+        selectedProvider={selectedProvider}
+        onProviderSelect={setSelectedProvider}
+      />
+
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            Configuration du fournisseur Text-to-Image
-            <Badge variant="secondary">{imageProviders.length} fournisseurs</Badge>
-          </CardTitle>
+          <CardTitle>Configuration du modèle</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid md:grid-cols-2 gap-4">
+          {provider?.models && (
             <div>
-              <label className="text-sm font-medium mb-2 block">Fournisseur</label>
-              <Select value={selectedProvider} onValueChange={setSelectedProvider}>
+              <label className="text-sm font-medium mb-2 block">Modèle</label>
+              <Select 
+                value={selectedModel} 
+                onValueChange={setSelectedModel}
+                disabled={!selectedProvider}
+              >
                 <SelectTrigger>
-                  <SelectValue placeholder="Choisir un fournisseur" />
+                  <SelectValue placeholder="Choisir un modèle" />
                 </SelectTrigger>
                 <SelectContent>
-                  {imageProviders.map(provider => (
-                    <SelectItem key={provider.id} value={provider.id}>
-                      {provider.name}
+                  {provider.models.map(model => (
+                    <SelectItem key={model} value={model}>
+                      {model}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
+          )}
 
-            {provider?.models && (
-              <div>
-                <label className="text-sm font-medium mb-2 block">Modèle</label>
-                <Select 
-                  value={selectedModel} 
-                  onValueChange={setSelectedModel}
-                  disabled={!selectedProvider}
+          {provider?.requiresApiKey && (
+            <div>
+              <label className="text-sm font-medium mb-2 block">
+                Clé API {!provider.requiresApiKey && <span className="text-muted-foreground">(optionnelle)</span>}
+              </label>
+              <div className="flex gap-2">
+                <Input
+                  type={showApiKey ? 'text' : 'password'}
+                  value={apiKey}
+                  onChange={(e) => setApiKey(e.target.value)}
+                  placeholder="Entrez votre clé API"
+                  className="flex-1"
+                />
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => setShowApiKey(!showApiKey)}
                 >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Choisir un modèle" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {provider.models.map(model => (
-                      <SelectItem key={model} value={model}>
-                        {model}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                  {showApiKey ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </Button>
+                <Button onClick={saveApiKey} className="gap-2">
+                  <Save className="h-4 w-4" />
+                  Sauvegarder
+                </Button>
               </div>
-            )}
-          </div>
-
-          <div>
-            <label className="text-sm font-medium mb-2 block">Clé API</label>
-            <div className="flex gap-2">
-              <Input
-                type={showApiKey ? 'text' : 'password'}
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-                placeholder="Entrez votre clé API"
-                className="flex-1"
-              />
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => setShowApiKey(!showApiKey)}
-              >
-                {showApiKey ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-              </Button>
-              <Button onClick={saveApiKey} className="gap-2">
-                <Save className="h-4 w-4" />
-                Sauvegarder
-              </Button>
             </div>
-          </div>
+          )}
         </CardContent>
       </Card>
 

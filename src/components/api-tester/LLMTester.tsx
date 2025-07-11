@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -9,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Save, Send, Copy, Download, Eye, EyeOff, ExternalLink, BookOpen } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { useToast } from "@/hooks/use-toast";
+import LLMProviderSelector from './LLMProviderSelector';
 
 interface LLMProvider {
   id: string;
@@ -403,7 +403,6 @@ const LLMTester = () => {
   const [logs, setLogs] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  // Charger les données depuis localStorage
   useEffect(() => {
     const savedProvider = localStorage.getItem('llm-provider');
     const savedModel = localStorage.getItem('llm-model');
@@ -533,50 +532,34 @@ const LLMTester = () => {
 
   return (
     <div className="space-y-6">
+      <LLMProviderSelector
+        selectedProvider={selectedProvider}
+        onProviderSelect={setSelectedProvider}
+      />
+
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            Configuration du fournisseur LLM
-            <Badge variant="secondary">{llmProviders.length} fournisseurs</Badge>
-          </CardTitle>
+          <CardTitle>Configuration du modèle</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <label className="text-sm font-medium mb-2 block">Fournisseur</label>
-              <Select value={selectedProvider} onValueChange={setSelectedProvider}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Choisir un fournisseur" />
-                </SelectTrigger>
-                <SelectContent>
-                  {llmProviders.map(provider => (
-                    <SelectItem key={provider.id} value={provider.id}>
-                      {provider.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div>
-              <label className="text-sm font-medium mb-2 block">Modèle</label>
-              <Select 
-                value={selectedModel} 
-                onValueChange={setSelectedModel}
-                disabled={!selectedProvider}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Choisir un modèle" />
-                </SelectTrigger>
-                <SelectContent>
-                  {provider?.models.map(model => (
-                    <SelectItem key={model} value={model}>
-                      {model}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+          <div>
+            <label className="text-sm font-medium mb-2 block">Modèle</label>
+            <Select 
+              value={selectedModel} 
+              onValueChange={setSelectedModel}
+              disabled={!selectedProvider}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Choisir un modèle" />
+              </SelectTrigger>
+              <SelectContent>
+                {provider?.models.map(model => (
+                  <SelectItem key={model} value={model}>
+                    {model}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
           <div>
