@@ -35,14 +35,14 @@ const TestAPIIA = () => {
       name: "Text-to-Music",
       icon: Music,
       description: "Créez de la musique à partir de prompts textuels",
-      badge: "6+ fournisseurs"
+      badge: "8+ fournisseurs"
     },
     {
       id: "video",
       name: "Text-to-Video",
       icon: Video,
       description: "Générez des vidéos courtes à partir de descriptions",
-      badge: "7+ fournisseurs"
+      badge: "10+ fournisseurs"
     }
   ];
 

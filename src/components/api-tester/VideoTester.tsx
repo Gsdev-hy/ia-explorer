@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -8,6 +7,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge';
 import { Save, Send, Download, Eye, EyeOff, Play, Pause, Video, ExternalLink, BookOpen } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
+import ProviderInfoCard from './ProviderInfoCard';
+import { videoProvidersInfo } from './videoProvidersData';
 
 interface VideoProvider {
   id: string;
@@ -207,6 +208,21 @@ const VideoAPIKeysLinks = () => {
       name: 'Haiper AI', 
       keyUrl: 'https://haiper.ai/api',
       docsUrl: 'https://docs.haiper.ai/'
+    },
+    { 
+      name: 'InVideo AI', 
+      keyUrl: 'https://invideo.io/api',
+      docsUrl: 'https://docs.invideo.io/'
+    },
+    { 
+      name: 'Synthesia', 
+      keyUrl: 'https://app.synthesia.io/account/api-keys',
+      docsUrl: 'https://docs.synthesia.io/'
+    },
+    { 
+      name: 'D-ID', 
+      keyUrl: 'https://studio.d-id.com/account/api-keys',
+      docsUrl: 'https://docs.d-id.com/'
     }
   ];
 
@@ -255,6 +271,30 @@ const VideoAPIKeysLinks = () => {
         </div>
       </CardContent>
     </Card>
+  );
+};
+
+const VideoProviderSelector = ({ 
+  selectedProvider, 
+  onProviderSelect 
+}: { 
+  selectedProvider: string;
+  onProviderSelect: (providerId: string) => void;
+}) => {
+  return (
+    <div className="space-y-4">
+      <h3 className="text-lg font-semibold">Choisissez un fournisseur Text-to-Video</h3>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {videoProvidersInfo.map((provider) => (
+          <ProviderInfoCard
+            key={provider.id}
+            provider={provider}
+            isSelected={selectedProvider === provider.id}
+            onClick={() => onProviderSelect(provider.id)}
+          />
+        ))}
+      </div>
+    </div>
   );
 };
 
@@ -431,41 +471,26 @@ const VideoTester = () => {
 
   return (
     <div className="space-y-6">
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            Configuration du fournisseur Text-to-Video
-            <Badge variant="secondary">{videoProviders.length} fournisseurs</Badge>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <label className="text-sm font-medium mb-2 block">Fournisseur</label>
-              <Select value={selectedProvider} onValueChange={setSelectedProvider}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Choisir un fournisseur" />
-                </SelectTrigger>
-                <SelectContent>
-                  {videoProviders.map(provider => (
-                    <SelectItem key={provider.id} value={provider.id}>
-                      <div className="flex flex-col">
-                        <span className="font-medium">{provider.name}</span>
-                        <span className="text-xs text-muted-foreground">{provider.description}</span>
-                      </div>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+      <VideoProviderSelector 
+        selectedProvider={selectedProvider}
+        onProviderSelect={setSelectedProvider}
+      />
 
+      {selectedProvider && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              Configuration du fournisseur
+              <Badge variant="secondary">{provider?.name}</Badge>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
             {provider?.models && (
               <div>
                 <label className="text-sm font-medium mb-2 block">Modèle</label>
                 <Select 
                   value={selectedModel} 
                   onValueChange={setSelectedModel}
-                  disabled={!selectedProvider}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Choisir un modèle" />
@@ -480,46 +505,33 @@ const VideoTester = () => {
                 </Select>
               </div>
             )}
-          </div>
 
-          {provider && (
-            <div className="p-3 bg-muted/50 rounded-lg">
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <span className="font-medium">Prix:</span> {provider.pricing}
-                </div>
-                <div>
-                  <span className="font-medium">Gratuit:</span> {provider.freeLimit}
-                </div>
+            <div>
+              <label className="text-sm font-medium mb-2 block">Clé API</label>
+              <div className="flex gap-2">
+                <Input
+                  type={showApiKey ? 'text' : 'password'}
+                  value={apiKey}
+                  onChange={(e) => setApiKey(e.target.value)}
+                  placeholder="Entrez votre clé API"
+                  className="flex-1"
+                />
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => setShowApiKey(!showApiKey)}
+                >
+                  {showApiKey ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </Button>
+                <Button onClick={saveApiKey} className="gap-2">
+                  <Save className="h-4 w-4" />
+                  Sauvegarder
+                </Button>
               </div>
             </div>
-          )}
-
-          <div>
-            <label className="text-sm font-medium mb-2 block">Clé API</label>
-            <div className="flex gap-2">
-              <Input
-                type={showApiKey ? 'text' : 'password'}
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-                placeholder="Entrez votre clé API"
-                className="flex-1"
-              />
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => setShowApiKey(!showApiKey)}
-              >
-                {showApiKey ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-              </Button>
-              <Button onClick={saveApiKey} className="gap-2">
-                <Save className="h-4 w-4" />
-                Sauvegarder
-              </Button>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      )}
 
       <Card>
         <CardHeader>

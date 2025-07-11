@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -8,6 +7,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge';
 import { Save, Send, Download, Eye, EyeOff, Play, Pause, Volume2, ExternalLink, BookOpen } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
+import ProviderInfoCard from './ProviderInfoCard';
+import { musicProvidersInfo } from './musicProvidersData';
 
 interface MusicProvider {
   id: string;
@@ -183,6 +184,11 @@ const MusicAPIKeysLinks = () => {
       name: 'Mubert', 
       keyUrl: 'https://mubert.com/api',
       docsUrl: 'https://mubert.com/api/docs'
+    },
+    { 
+      name: 'Beatoven.ai', 
+      keyUrl: 'https://beatoven.ai/dashboard/api',
+      docsUrl: 'https://docs.beatoven.ai/'
     }
   ];
 
@@ -231,6 +237,30 @@ const MusicAPIKeysLinks = () => {
         </div>
       </CardContent>
     </Card>
+  );
+};
+
+const MusicProviderSelector = ({ 
+  selectedProvider, 
+  onProviderSelect 
+}: { 
+  selectedProvider: string;
+  onProviderSelect: (providerId: string) => void;
+}) => {
+  return (
+    <div className="space-y-4">
+      <h3 className="text-lg font-semibold">Choisissez un fournisseur Text-to-Music</h3>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {musicProvidersInfo.map((provider) => (
+          <ProviderInfoCard
+            key={provider.id}
+            provider={provider}
+            isSelected={selectedProvider === provider.id}
+            onClick={() => onProviderSelect(provider.id)}
+          />
+        ))}
+      </div>
+    </div>
   );
 };
 
@@ -403,41 +433,26 @@ const MusicTester = () => {
 
   return (
     <div className="space-y-6">
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            Configuration du fournisseur Text-to-Music
-            <Badge variant="secondary">{musicProviders.length} fournisseurs</Badge>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <label className="text-sm font-medium mb-2 block">Fournisseur</label>
-              <Select value={selectedProvider} onValueChange={setSelectedProvider}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Choisir un fournisseur" />
-                </SelectTrigger>
-                <SelectContent>
-                  {musicProviders.map(provider => (
-                    <SelectItem key={provider.id} value={provider.id}>
-                      <div className="flex flex-col">
-                        <span className="font-medium">{provider.name}</span>
-                        <span className="text-xs text-muted-foreground">{provider.description}</span>
-                      </div>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+      <MusicProviderSelector 
+        selectedProvider={selectedProvider}
+        onProviderSelect={setSelectedProvider}
+      />
 
+      {selectedProvider && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              Configuration du fournisseur
+              <Badge variant="secondary">{provider?.name}</Badge>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
             {provider?.models && (
               <div>
                 <label className="text-sm font-medium mb-2 block">Modèle</label>
                 <Select 
                   value={selectedModel} 
                   onValueChange={setSelectedModel}
-                  disabled={!selectedProvider}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Choisir un modèle" />
@@ -452,46 +467,33 @@ const MusicTester = () => {
                 </Select>
               </div>
             )}
-          </div>
 
-          {provider && (
-            <div className="p-3 bg-muted/50 rounded-lg">
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <span className="font-medium">Prix:</span> {provider.pricing}
-                </div>
-                <div>
-                  <span className="font-medium">Gratuit:</span> {provider.freeLimit}
-                </div>
+            <div>
+              <label className="text-sm font-medium mb-2 block">Clé API</label>
+              <div className="flex gap-2">
+                <Input
+                  type={showApiKey ? 'text' : 'password'}
+                  value={apiKey}
+                  onChange={(e) => setApiKey(e.target.value)}
+                  placeholder="Entrez votre clé API"
+                  className="flex-1"
+                />
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => setShowApiKey(!showApiKey)}
+                >
+                  {showApiKey ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </Button>
+                <Button onClick={saveApiKey} className="gap-2">
+                  <Save className="h-4 w-4" />
+                  Sauvegarder
+                </Button>
               </div>
             </div>
-          )}
-
-          <div>
-            <label className="text-sm font-medium mb-2 block">Clé API</label>
-            <div className="flex gap-2">
-              <Input
-                type={showApiKey ? 'text' : 'password'}
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-                placeholder="Entrez votre clé API"
-                className="flex-1"
-              />
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => setShowApiKey(!showApiKey)}
-              >
-                {showApiKey ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-              </Button>
-              <Button onClick={saveApiKey} className="gap-2">
-                <Save className="h-4 w-4" />
-                Sauvegarder
-              </Button>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      )}
 
       <Card>
         <CardHeader>
