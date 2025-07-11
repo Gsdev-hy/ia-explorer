@@ -7,10 +7,18 @@ export interface LLMProviderInfo {
   name: string;
   description: string;
   models?: string[];
-  pricing: string;
-  freeLimit: string;
+  pricing: {
+    free?: string;
+    paid?: string;
+    unit?: string;
+  };
+  limits: {
+    rateLimit?: string;
+    dailyLimit?: string;
+    monthlyLimit?: string;
+  };
   speed: 'Très rapide' | 'Rapide' | 'Moyen' | 'Lent';
-  reliability: 'Excellent' | 'Très bon' | 'Bon' | 'Moyen';
+  reliability: 'experimental' | 'stable' | 'production';
   features: string[];
   website: string;
   docsUrl: string;
@@ -31,10 +39,18 @@ export const llmProvidersInfo: LLMProviderInfo[] = [
     name: 'OpenAI',
     description: 'Leader mondial des modèles de langage avec GPT-4 et o1',
     models: ['gpt-4o', 'gpt-4o-mini', 'gpt-3.5-turbo', 'o1-preview', 'o1-mini'],
-    pricing: '$20/mois pour usage Plus',
-    freeLimit: 'Limité gratuit via ChatGPT',
+    pricing: {
+      free: 'Limité gratuit via ChatGPT',
+      paid: '$20/mois pour usage Plus',
+      unit: 'par requête'
+    },
+    limits: {
+      rateLimit: '3 req/min (gratuit)',
+      dailyLimit: 'Variable selon plan',
+      monthlyLimit: 'Selon abonnement'
+    },
     speed: 'Rapide',
-    reliability: 'Excellent',
+    reliability: 'production',
     features: ['Multimodal', 'Code', 'Raisonnement', 'Vision', 'Audio'],
     website: 'https://openai.com',
     docsUrl: 'https://platform.openai.com/docs',
@@ -49,10 +65,18 @@ export const llmProvidersInfo: LLMProviderInfo[] = [
     name: 'Anthropic Claude',
     description: 'IA constitutionnelle avec Claude 3.5 Sonnet, excellent pour l\'analyse',
     models: ['claude-3-5-sonnet-20241022', 'claude-3-5-haiku-20241022', 'claude-3-opus-20240229'],
-    pricing: '$20/mois pour Pro',
-    freeLimit: 'Usage gratuit limité',
+    pricing: {
+      free: 'Usage gratuit limité',
+      paid: '$20/mois pour Pro',
+      unit: 'par token'
+    },
+    limits: {
+      rateLimit: '5 req/min (gratuit)',
+      dailyLimit: 'Variable selon plan',
+      monthlyLimit: 'Selon abonnement'
+    },
     speed: 'Rapide',
-    reliability: 'Excellent',
+    reliability: 'production',
     features: ['Analyse longue', 'Éthique', 'Code', 'Raisonnement'],
     website: 'https://anthropic.com',
     docsUrl: 'https://docs.anthropic.com',
@@ -67,10 +91,18 @@ export const llmProvidersInfo: LLMProviderInfo[] = [
     name: 'Google Gemini',
     description: 'Modèles multimodaux de Google avec Gemini 2.0 Flash',
     models: ['gemini-2.0-flash-exp', 'gemini-1.5-pro', 'gemini-1.5-flash'],
-    pricing: 'Gratuit puis payant',
-    freeLimit: '15 requêtes/min gratuit',
+    pricing: {
+      free: '15 requêtes/min gratuit',
+      paid: 'Payant après limites',
+      unit: 'par requête'
+    },
+    limits: {
+      rateLimit: '15 req/min (gratuit)',
+      dailyLimit: '1500 req/jour',
+      monthlyLimit: 'Variable'
+    },
     speed: 'Très rapide',
-    reliability: 'Très bon',
+    reliability: 'stable',
     features: ['Multimodal', 'Vision', 'Code', 'Intégration Google'],
     website: 'https://gemini.google.com',
     docsUrl: 'https://ai.google.dev/gemini-api/docs',
@@ -85,10 +117,18 @@ export const llmProvidersInfo: LLMProviderInfo[] = [
     name: 'DeepSeek',
     description: 'Modèles chinois performants avec DeepSeek V3 et Reasoner',
     models: ['deepseek-chat', 'deepseek-reasoner'],
-    pricing: 'Très économique',
-    freeLimit: 'Usage gratuit généreux',
+    pricing: {
+      free: 'Usage gratuit généreux',
+      paid: 'Très économique',
+      unit: 'par token'
+    },
+    limits: {
+      rateLimit: '60 req/min',
+      dailyLimit: 'Généreux',
+      monthlyLimit: 'Variable'
+    },
     speed: 'Rapide',
-    reliability: 'Bon',
+    reliability: 'stable',
     features: ['Raisonnement', 'Code', 'Mathématiques', 'Prix bas'],
     website: 'https://deepseek.com',
     docsUrl: 'https://platform.deepseek.com/api-docs',
@@ -107,12 +147,22 @@ export const llmProvidersInfo: LLMProviderInfo[] = [
       'openai/gpt-4o-mini',
       'meta-llama/llama-3.2-90b-vision',
       'google/gemini-flash-1.5',
-      'mistralai/mistral-large'
+      'mistralai/mistral-large',
+      'microsoft/phi-3-mini-128k-instruct',
+      'qwen/qwen-2.5-72b-instruct'
     ],
-    pricing: 'Variable selon modèle',
-    freeLimit: 'Certains modèles gratuits',
-    speed: 'Variable',
-    reliability: 'Bon',
+    pricing: {
+      free: 'Certains modèles gratuits',
+      paid: 'Variable selon modèle',
+      unit: 'par token'
+    },
+    limits: {
+      rateLimit: 'Variable par modèle',
+      dailyLimit: 'Selon fournisseur',
+      monthlyLimit: 'Variable'
+    },
+    speed: 'Moyen',
+    reliability: 'stable',
     features: ['Multi-fournisseurs', 'Prix transparents', 'Statistiques', 'Comparaison'],
     website: 'https://openrouter.ai',
     docsUrl: 'https://openrouter.ai/docs',
@@ -127,11 +177,19 @@ export const llmProvidersInfo: LLMProviderInfo[] = [
     id: 'xai',
     name: 'X.AI / Grok',
     description: 'IA de X (ex-Twitter) avec accès temps réel et style décontracté',
-    models: ['grok-beta', 'grok-vision-beta'],
-    pricing: '$16/mois via X Premium+',
-    freeLimit: 'Limité via X Premium',
+    models: ['grok-beta', 'grok-vision-beta', 'grok-2-latest'],
+    pricing: {
+      free: 'Limité via X Premium',
+      paid: '$16/mois via X Premium+',
+      unit: 'par requête'
+    },
+    limits: {
+      rateLimit: '10 req/min',
+      dailyLimit: 'Selon abonnement X',
+      monthlyLimit: 'Variable'
+    },
     speed: 'Rapide',
-    reliability: 'Bon',
+    reliability: 'stable',
     features: ['Temps réel', 'Données X', 'Style décontracté', 'Vision'],
     website: 'https://x.ai',
     docsUrl: 'https://docs.x.ai/api',
@@ -146,10 +204,18 @@ export const llmProvidersInfo: LLMProviderInfo[] = [
     name: 'Mistral AI',
     description: 'Startup française avec des modèles performants et ouverts',
     models: ['mistral-large-latest', 'mistral-medium-latest', 'mistral-small-latest'],
-    pricing: 'Freemium puis payant',
-    freeLimit: 'Tier gratuit disponible',
+    pricing: {
+      free: 'Tier gratuit disponible',
+      paid: 'Freemium puis payant',
+      unit: 'par token'
+    },
+    limits: {
+      rateLimit: '5 req/min (gratuit)',
+      dailyLimit: 'Variable',
+      monthlyLimit: 'Selon plan'
+    },
     speed: 'Rapide',
-    reliability: 'Très bon',
+    reliability: 'production',
     features: ['Open source', 'Multilingue', 'Code', 'Français natif'],
     website: 'https://mistral.ai',
     docsUrl: 'https://docs.mistral.ai/',
@@ -164,10 +230,18 @@ export const llmProvidersInfo: LLMProviderInfo[] = [
     name: 'Cerebras',
     description: 'Inférence ultra-rapide avec processeurs spécialisés WSE',
     models: ['llama3.1-8b', 'llama3.1-70b'],
-    pricing: 'Gratuit puis payant',
-    freeLimit: 'Usage gratuit généreux',
+    pricing: {
+      free: 'Usage gratuit généreux',
+      paid: 'Gratuit puis payant',
+      unit: 'par token'
+    },
+    limits: {
+      rateLimit: '30 req/min',
+      dailyLimit: 'Généreux',
+      monthlyLimit: 'Variable'
+    },
     speed: 'Très rapide',
-    reliability: 'Bon',
+    reliability: 'stable',
     features: ['Ultra-rapide', 'Llama optimisé', 'Hardware dédié', 'API simple'],
     website: 'https://cerebras.ai',
     docsUrl: 'https://docs.cerebras.ai/',
@@ -182,10 +256,18 @@ export const llmProvidersInfo: LLMProviderInfo[] = [
     name: 'SambaNova',
     description: 'Plateforme d\'IA avec modèles Llama optimisés pour l\'entreprise',
     models: ['Meta-Llama-3.1-8B-Instruct', 'Meta-Llama-3.1-70B-Instruct'],
-    pricing: 'Gratuit puis entreprise',
-    freeLimit: 'Usage développeur gratuit',
+    pricing: {
+      free: 'Usage développeur gratuit',
+      paid: 'Gratuit puis entreprise',
+      unit: 'par token'
+    },
+    limits: {
+      rateLimit: '10 req/min',
+      dailyLimit: 'Variable',
+      monthlyLimit: 'Selon plan'
+    },
     speed: 'Rapide',
-    reliability: 'Bon',
+    reliability: 'stable',
     features: ['Llama optimisé', 'Enterprise', 'API stable', 'Support complet'],
     website: 'https://sambanova.ai',
     docsUrl: 'https://docs.sambanova.ai/',
@@ -200,10 +282,18 @@ export const llmProvidersInfo: LLMProviderInfo[] = [
     name: 'Together AI',
     description: 'Plateforme collaborative pour modèles open source optimisés',
     models: ['meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo', 'meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo'],
-    pricing: 'Pay-per-use économique',
-    freeLimit: 'Crédits d\'essai gratuits',
+    pricing: {
+      free: 'Crédits d\'essai gratuits',
+      paid: 'Pay-per-use économique',
+      unit: 'par token'
+    },
+    limits: {
+      rateLimit: '600 req/min',
+      dailyLimit: 'Variable',
+      monthlyLimit: 'Selon crédits'
+    },
     speed: 'Rapide',
-    reliability: 'Bon',
+    reliability: 'stable',
     features: ['Open source', 'Optimisé', 'Prix transparents', 'Fine-tuning'],
     website: 'https://together.ai',
     docsUrl: 'https://docs.together.ai/',
@@ -218,10 +308,18 @@ export const llmProvidersInfo: LLMProviderInfo[] = [
     name: 'Fireworks AI',
     description: 'Inférence optimisée pour modèles open source avec focus performance',
     models: ['accounts/fireworks/models/llama-v3p1-8b-instruct', 'accounts/fireworks/models/llama-v3p1-70b-instruct'],
-    pricing: 'Pay-per-token économique',
-    freeLimit: 'Crédits gratuits au démarrage',
+    pricing: {
+      free: 'Crédits gratuits au démarrage',
+      paid: 'Pay-per-token économique',
+      unit: 'par token'
+    },
+    limits: {
+      rateLimit: '600 req/min',
+      dailyLimit: 'Variable',
+      monthlyLimit: 'Selon crédits'
+    },
     speed: 'Très rapide',
-    reliability: 'Bon',
+    reliability: 'stable',
     features: ['Performance optimisée', 'Latence faible', 'Open source', 'API simple'],
     website: 'https://fireworks.ai',
     docsUrl: 'https://docs.fireworks.ai/',
@@ -236,10 +334,18 @@ export const llmProvidersInfo: LLMProviderInfo[] = [
     name: 'Replicate',
     description: 'Plateforme pour exécuter des modèles ML en production facilement',
     models: ['meta/meta-llama-3-8b-instruct', 'meta/meta-llama-3-70b-instruct'],
-    pricing: 'Pay-per-second',
-    freeLimit: 'Crédits gratuits mensuels',
+    pricing: {
+      free: 'Crédits gratuits mensuels',
+      paid: 'Pay-per-second',
+      unit: 'par seconde'
+    },
+    limits: {
+      rateLimit: 'Variable',
+      dailyLimit: 'Selon crédits',
+      monthlyLimit: 'Variable'
+    },
     speed: 'Moyen',
-    reliability: 'Bon',
+    reliability: 'stable',
     features: ['Modèles variés', 'Scaling auto', 'API REST', 'Communauté'],
     website: 'https://replicate.com',
     docsUrl: 'https://replicate.com/docs',
@@ -254,10 +360,18 @@ export const llmProvidersInfo: LLMProviderInfo[] = [
     name: 'Cohere',
     description: 'Spécialiste NLP entreprise avec modèles Command optimisés',
     models: ['command', 'command-light', 'command-nightly'],
-    pricing: 'Freemium puis entreprise',
-    freeLimit: 'Usage gratuit limité',
+    pricing: {
+      free: 'Usage gratuit limité',
+      paid: 'Freemium puis entreprise',
+      unit: 'par token'
+    },
+    limits: {
+      rateLimit: '5 req/min (gratuit)',
+      dailyLimit: 'Variable',
+      monthlyLimit: 'Selon plan'
+    },
     speed: 'Rapide',
-    reliability: 'Très bon',
+    reliability: 'production',
     features: ['Enterprise NLP', 'RAG optimisé', 'Embeddings', 'Classification'],
     website: 'https://cohere.ai',
     docsUrl: 'https://docs.cohere.com/docs',
@@ -272,10 +386,18 @@ export const llmProvidersInfo: LLMProviderInfo[] = [
     name: 'Perplexity',
     description: 'Moteur de recherche IA avec sources et citations automatiques',
     models: ['llama-3.1-sonar-small-128k-online', 'llama-3.1-sonar-large-128k-online'],
-    pricing: '$20/mois pour Pro',
-    freeLimit: '5 requêtes/4h gratuit',
+    pricing: {
+      free: '5 requêtes/4h gratuit',
+      paid: '$20/mois pour Pro',
+      unit: 'par requête'
+    },
+    limits: {
+      rateLimit: '5 req/4h (gratuit)',
+      dailyLimit: 'Variable selon plan',
+      monthlyLimit: 'Selon abonnement'
+    },
     speed: 'Rapide',
-    reliability: 'Bon',
+    reliability: 'stable',
     features: ['Recherche temps réel', 'Citations', 'Sources vérifiées', 'Web access'],
     website: 'https://perplexity.ai',
     docsUrl: 'https://docs.perplexity.ai/',
@@ -290,10 +412,18 @@ export const llmProvidersInfo: LLMProviderInfo[] = [
     name: 'Groq',
     description: 'Inférence ultra-rapide avec processeurs LPU dédiés',
     models: ['llama3-8b-8192', 'llama3-70b-8192', 'mixtral-8x7b-32768'],
-    pricing: 'Gratuit puis payant',
-    freeLimit: '30 req/min gratuit',
+    pricing: {
+      free: '30 req/min gratuit',
+      paid: 'Gratuit puis payant',
+      unit: 'par token'
+    },
+    limits: {
+      rateLimit: '30 req/min (gratuit)',
+      dailyLimit: '14400 req/jour',
+      monthlyLimit: 'Variable'
+    },
     speed: 'Très rapide',
-    reliability: 'Bon',
+    reliability: 'stable',
     features: ['LPU hardware', 'Latence minimale', 'Débit élevé', 'API simple'],
     website: 'https://groq.com',
     docsUrl: 'https://console.groq.com/docs',
