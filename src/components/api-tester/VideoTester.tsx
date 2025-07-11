@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -16,6 +17,9 @@ interface VideoProvider {
   headers: (apiKey: string) => Record<string, string>;
   buildPayload: (prompt: string, model?: string) => any;
   parseResponse: (response: any) => string;
+  description?: string;
+  pricing?: string;
+  freeLimit?: string;
 }
 
 const videoProviders: VideoProvider[] = [
@@ -23,12 +27,17 @@ const videoProviders: VideoProvider[] = [
     id: 'runway',
     name: 'Runway ML',
     apiUrl: 'https://api.runwayml.com/v1/generate/video',
+    models: ['gen-3-alpha-turbo', 'gen-3-alpha', 'gen-2'],
+    description: 'Génération vidéo professionnelle haute qualité',
+    pricing: '$12/mois pour 625 crédits',
+    freeLimit: '125 crédits gratuits',
     headers: (apiKey: string) => ({
       'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json'
     }),
-    buildPayload: (prompt: string) => ({
+    buildPayload: (prompt: string, model?: string) => ({
       prompt,
+      model: model || 'gen-3-alpha-turbo',
       duration: 4,
       resolution: '1280x768',
       seed: Math.floor(Math.random() * 1000000)
@@ -39,35 +48,126 @@ const videoProviders: VideoProvider[] = [
     id: 'pika',
     name: 'Pika Labs',
     apiUrl: 'https://api.pika.art/v1/generate',
+    models: ['pika-1.0', 'pika-1.5', 'pika-2.0'],
+    description: 'Création vidéo IA avec contrôles créatifs',
+    pricing: '$10/mois pour 700 crédits',
+    freeLimit: '30 générations gratuites',
     headers: (apiKey: string) => ({
       'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json'
     }),
-    buildPayload: (prompt: string) => ({
+    buildPayload: (prompt: string, model?: string) => ({
       prompt,
+      model: model || 'pika-1.0',
       aspectRatio: '16:9',
-      frameRate: 24
+      frameRate: 24,
+      duration: 3
     }),
     parseResponse: (response: any) => response.videos?.[0]?.url || ''
+  },
+  {
+    id: 'stable-video',
+    name: 'Stable Video Diffusion',
+    apiUrl: 'https://api.stability.ai/v2alpha/generation/video',
+    models: ['svd-xt-1-1', 'svd-xt', 'svd'],
+    description: 'Modèle open-source de Stability AI',
+    pricing: '$20/mois pour 1000 crédits',
+    freeLimit: 'Crédits d\'essai gratuits',
+    headers: (apiKey: string) => ({
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    }),
+    buildPayload: (prompt: string, model?: string) => ({
+      prompt,
+      model: model || 'svd-xt-1-1',
+      aspect_ratio: '16:9',
+      seed: Math.floor(Math.random() * 1000000)
+    }),
+    parseResponse: (response: any) => response.video || ''
   },
   {
     id: 'replicate-zeroscope',
     name: 'Replicate ZeroScope',
     apiUrl: 'https://api.replicate.com/v1/predictions',
+    models: ['zeroscope-v2-xl', 'zeroscope-v2-576w', 'text2video-zero'],
+    description: 'Modèles vidéo open-source hébergés',
+    pricing: '$0.003/seconde',
+    freeLimit: 'Crédits d\'essai gratuits',
     headers: (apiKey: string) => ({
       'Authorization': `Token ${apiKey}`,
       'Content-Type': 'application/json'
     }),
-    buildPayload: (prompt: string) => ({
+    buildPayload: (prompt: string, model?: string) => ({
       version: 'anotherjesse/zeroscope-v2-xl:9f747673945c62801b13b84701c783929c0ee784e4748ec062204894dda1a351',
       input: {
         prompt,
+        model: model || 'zeroscope-v2-xl',
         num_frames: 24,
         width: 1024,
         height: 576
       }
     }),
     parseResponse: (response: any) => response.output?.[0] || ''
+  },
+  {
+    id: 'leonardo-motion',
+    name: 'Leonardo Motion',
+    apiUrl: 'https://cloud.leonardo.ai/api/rest/v1/generations-motion',
+    models: ['motion-v1', 'motion-v2'],
+    description: 'Animation d\'images avec IA générative',
+    pricing: '$12/mois pour 8500 tokens',
+    freeLimit: '150 tokens/jour gratuits',
+    headers: (apiKey: string) => ({
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    }),
+    buildPayload: (prompt: string, model?: string) => ({
+      prompt,
+      model: model || 'motion-v1',
+      motion_strength: 5,
+      num_inference_steps: 25
+    }),
+    parseResponse: (response: any) => response.generations?.[0]?.motion_mp4_url || ''
+  },
+  {
+    id: 'luma-dream-machine',
+    name: 'Luma Dream Machine',
+    apiUrl: 'https://api.lumalabs.ai/dream-machine/v1/generations',
+    models: ['dream-machine-v1', 'dream-machine-v1.5'],
+    description: 'Génération vidéo photorealistic',
+    pricing: '$30/mois pour 120 générations',
+    freeLimit: '30 générations gratuites',
+    headers: (apiKey: string) => ({
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    }),
+    buildPayload: (prompt: string, model?: string) => ({
+      prompt,
+      model: model || 'dream-machine-v1',
+      aspect_ratio: '16:9',
+      loop: false
+    }),
+    parseResponse: (response: any) => response.video_url || ''
+  },
+  {
+    id: 'haiper',
+    name: 'Haiper AI',
+    apiUrl: 'https://api.haiper.ai/v1/video/generations',
+    models: ['haiper-video-v1', 'haiper-video-v2'],
+    description: 'Création vidéo IA accessible',
+    pricing: '$10/mois pour 300 crédits',
+    freeLimit: '10 générations gratuites',
+    headers: (apiKey: string) => ({
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    }),
+    buildPayload: (prompt: string, model?: string) => ({
+      prompt,
+      model: model || 'haiper-video-v1',
+      duration: 4,
+      resolution: 'HD'
+    }),
+    parseResponse: (response: any) => response.video_url || ''
   }
 ];
 
@@ -84,9 +184,29 @@ const VideoAPIKeysLinks = () => {
       docsUrl: 'https://docs.pika.art/'
     },
     { 
+      name: 'Stability AI', 
+      keyUrl: 'https://platform.stability.ai/account/keys',
+      docsUrl: 'https://platform.stability.ai/docs/api-reference'
+    },
+    { 
       name: 'Replicate', 
       keyUrl: 'https://replicate.com/account/api-tokens',
       docsUrl: 'https://replicate.com/docs/reference/http'
+    },
+    { 
+      name: 'Leonardo AI', 
+      keyUrl: 'https://app.leonardo.ai/api-access-tokens',
+      docsUrl: 'https://docs.leonardo.ai/'
+    },
+    { 
+      name: 'Luma Labs', 
+      keyUrl: 'https://lumalabs.ai/dream-machine/api',
+      docsUrl: 'https://docs.lumalabs.ai/'
+    },
+    { 
+      name: 'Haiper AI', 
+      keyUrl: 'https://haiper.ai/api',
+      docsUrl: 'https://docs.haiper.ai/'
     }
   ];
 
@@ -162,6 +282,16 @@ const VideoTester = () => {
     if (savedApiKey) setApiKey(savedApiKey);
     if (savedPrompt) setPrompt(savedPrompt);
   }, []);
+
+  // Présélection automatique du premier modèle quand un fournisseur est choisi
+  useEffect(() => {
+    if (selectedProvider) {
+      const provider = videoProviders.find(p => p.id === selectedProvider);
+      if (provider?.models && provider.models.length > 0 && !selectedModel) {
+        setSelectedModel(provider.models[0]);
+      }
+    }
+  }, [selectedProvider, selectedModel]);
 
   const saveApiKey = () => {
     localStorage.setItem('video-provider', selectedProvider);
@@ -319,7 +449,10 @@ const VideoTester = () => {
                 <SelectContent>
                   {videoProviders.map(provider => (
                     <SelectItem key={provider.id} value={provider.id}>
-                      {provider.name}
+                      <div className="flex flex-col">
+                        <span className="font-medium">{provider.name}</span>
+                        <span className="text-xs text-muted-foreground">{provider.description}</span>
+                      </div>
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -348,6 +481,19 @@ const VideoTester = () => {
               </div>
             )}
           </div>
+
+          {provider && (
+            <div className="p-3 bg-muted/50 rounded-lg">
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <span className="font-medium">Prix:</span> {provider.pricing}
+                </div>
+                <div>
+                  <span className="font-medium">Gratuit:</span> {provider.freeLimit}
+                </div>
+              </div>
+            </div>
+          )}
 
           <div>
             <label className="text-sm font-medium mb-2 block">Clé API</label>

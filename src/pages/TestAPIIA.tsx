@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Hero from '@/components/Hero';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -20,28 +21,28 @@ const TestAPIIA = () => {
       name: "LLM (Text-to-Text)",
       icon: MessageSquare,
       description: "Testez les modèles de langage les plus populaires",
-      badge: "10+ fournisseurs"
+      badge: "15+ fournisseurs"
     },
     {
       id: "image",
       name: "Text-to-Image",
       icon: Image,
       description: "Générez des images à partir de descriptions textuelles",
-      badge: "5+ fournisseurs"
+      badge: "11+ fournisseurs"
     },
     {
       id: "music",
       name: "Text-to-Music",
       icon: Music,
       description: "Créez de la musique à partir de prompts textuels",
-      badge: "2+ fournisseurs"
+      badge: "6+ fournisseurs"
     },
     {
       id: "video",
       name: "Text-to-Video",
       icon: Video,
       description: "Générez des vidéos courtes à partir de descriptions",
-      badge: "2+ fournisseurs"
+      badge: "7+ fournisseurs"
     }
   ];
 

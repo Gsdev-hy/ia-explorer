@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -16,6 +17,9 @@ interface MusicProvider {
   headers: (apiKey: string) => Record<string, string>;
   buildPayload: (prompt: string, model?: string) => any;
   parseResponse: (response: any) => string;
+  description?: string;
+  pricing?: string;
+  freeLimit?: string;
 }
 
 const musicProviders: MusicProvider[] = [
@@ -23,14 +27,39 @@ const musicProviders: MusicProvider[] = [
     id: 'suno',
     name: 'Suno AI',
     apiUrl: 'https://api.sunoai.com/v1/generate',
+    models: ['v3.5', 'v4'],
+    description: 'Génération musicale haute qualité avec paroles',
+    pricing: '$10/mois pour 500 générations',
+    freeLimit: '50 générations/mois',
     headers: (apiKey: string) => ({
       'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json'
     }),
-    buildPayload: (prompt: string) => ({
+    buildPayload: (prompt: string, model?: string) => ({
       prompt,
+      model: model || 'v3.5',
       make_instrumental: false,
       wait_audio: true
+    }),
+    parseResponse: (response: any) => response.audio_url || ''
+  },
+  {
+    id: 'udio',
+    name: 'Udio',
+    apiUrl: 'https://api.udio.com/v1/generate',
+    models: ['v1.5', 'v2'],
+    description: 'Création musicale avec intelligence artificielle',
+    pricing: '$20/mois pour 1200 générations',
+    freeLimit: '10 générations/jour',
+    headers: (apiKey: string) => ({
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    }),
+    buildPayload: (prompt: string, model?: string) => ({
+      prompt,
+      model: model || 'v1.5',
+      duration: 30,
+      quality: 'high'
     }),
     parseResponse: (response: any) => response.audio_url || ''
   },
@@ -38,18 +67,22 @@ const musicProviders: MusicProvider[] = [
     id: 'musicgen',
     name: 'MusicGen (Meta)',
     apiUrl: 'https://api-inference.huggingface.co/models/facebook/musicgen-small',
+    models: ['musicgen-small', 'musicgen-medium', 'musicgen-large'],
+    description: 'Modèle open-source de Meta via HuggingFace',
+    pricing: 'Gratuit (HuggingFace)',
+    freeLimit: 'Illimité avec délais',
     headers: (apiKey: string) => ({
       'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json'
     }),
-    buildPayload: (prompt: string) => ({
+    buildPayload: (prompt: string, model?: string) => ({
       inputs: prompt,
       parameters: {
-        duration: 30
+        duration: 30,
+        model: model || 'musicgen-small'
       }
     }),
     parseResponse: (response: any) => {
-      // MusicGen via HuggingFace retourne souvent un blob audio
       return URL.createObjectURL(response);
     }
   },
@@ -57,18 +90,65 @@ const musicProviders: MusicProvider[] = [
     id: 'replicate-musicgen',
     name: 'Replicate MusicGen',
     apiUrl: 'https://api.replicate.com/v1/predictions',
+    models: ['musicgen-small', 'musicgen-medium', 'musicgen-large', 'musicgen-melody'],
+    description: 'MusicGen hébergé sur Replicate',
+    pricing: '$0.0023/seconde',
+    freeLimit: 'Crédits d\'essai gratuits',
     headers: (apiKey: string) => ({
       'Authorization': `Token ${apiKey}`,
       'Content-Type': 'application/json'
     }),
-    buildPayload: (prompt: string) => ({
+    buildPayload: (prompt: string, model?: string) => ({
       version: 'facebook/musicgen:7a76a8258b23fae65c5a22debb8841d1d7e816b75c2f24218cd2bd8573787906',
       input: {
         prompt,
+        model_version: model || 'musicgen-small',
         duration: 30
       }
     }),
     parseResponse: (response: any) => response.output || ''
+  },
+  {
+    id: 'elevenlabs-music',
+    name: 'ElevenLabs Music',
+    apiUrl: 'https://api.elevenlabs.io/v1/sound-generation',
+    models: ['eleven_multilingual_v2', 'eleven_turbo_v2_5'],
+    description: 'Génération de musique et effets sonores',
+    pricing: '$5/mois pour 10000 caractères',
+    freeLimit: '1000 caractères/mois',
+    headers: (apiKey: string) => ({
+      'xi-api-key': apiKey,
+      'Content-Type': 'application/json'
+    }),
+    buildPayload: (prompt: string, model?: string) => ({
+      text: prompt,
+      model_id: model || 'eleven_multilingual_v2',
+      voice_settings: {
+        stability: 0.5,
+        similarity_boost: 0.5
+      }
+    }),
+    parseResponse: (response: any) => response.audio_url || ''
+  },
+  {
+    id: 'mubert',
+    name: 'Mubert API',
+    apiUrl: 'https://api-b2b.mubert.com/v2/RecordTrack',
+    models: ['ambient', 'chill', 'electronic', 'rock', 'hip-hop'],
+    description: 'Musique générative en temps réel',
+    pricing: '$99/mois pour usage commercial',
+    freeLimit: 'Plan développeur gratuit',
+    headers: (apiKey: string) => ({
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    }),
+    buildPayload: (prompt: string, model?: string) => ({
+      mode: 'track',
+      pat: model || 'ambient',
+      prompt: prompt,
+      duration: 30
+    }),
+    parseResponse: (response: any) => response.download_link || ''
   }
 ];
 
@@ -83,6 +163,26 @@ const MusicAPIKeysLinks = () => {
       name: 'Udio', 
       keyUrl: 'https://www.udio.com/settings',
       docsUrl: 'https://docs.udio.com/'
+    },
+    { 
+      name: 'HuggingFace', 
+      keyUrl: 'https://huggingface.co/settings/tokens',
+      docsUrl: 'https://huggingface.co/docs/api-inference/'
+    },
+    { 
+      name: 'Replicate', 
+      keyUrl: 'https://replicate.com/account/api-tokens',
+      docsUrl: 'https://replicate.com/docs/reference/http'
+    },
+    { 
+      name: 'ElevenLabs', 
+      keyUrl: 'https://elevenlabs.io/app/settings/api-keys',
+      docsUrl: 'https://elevenlabs.io/docs/api-reference/sound-generation'
+    },
+    { 
+      name: 'Mubert', 
+      keyUrl: 'https://mubert.com/api',
+      docsUrl: 'https://mubert.com/api/docs'
     }
   ];
 
@@ -159,6 +259,16 @@ const MusicTester = () => {
     if (savedPrompt) setPrompt(savedPrompt);
   }, []);
 
+  // Présélection automatique du premier modèle quand un fournisseur est choisi
+  useEffect(() => {
+    if (selectedProvider) {
+      const provider = musicProviders.find(p => p.id === selectedProvider);
+      if (provider?.models && provider.models.length > 0 && !selectedModel) {
+        setSelectedModel(provider.models[0]);
+      }
+    }
+  }, [selectedProvider, selectedModel]);
+
   const saveApiKey = () => {
     localStorage.setItem('music-provider', selectedProvider);
     localStorage.setItem('music-model', selectedModel);
@@ -219,7 +329,6 @@ const MusicTester = () => {
 
       let data;
       if (selectedProvider === 'musicgen') {
-        // HuggingFace retourne un blob audio
         data = await response.blob();
         const audioUrl = URL.createObjectURL(data);
         setAudioUrl(audioUrl);
@@ -312,7 +421,10 @@ const MusicTester = () => {
                 <SelectContent>
                   {musicProviders.map(provider => (
                     <SelectItem key={provider.id} value={provider.id}>
-                      {provider.name}
+                      <div className="flex flex-col">
+                        <span className="font-medium">{provider.name}</span>
+                        <span className="text-xs text-muted-foreground">{provider.description}</span>
+                      </div>
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -341,6 +453,19 @@ const MusicTester = () => {
               </div>
             )}
           </div>
+
+          {provider && (
+            <div className="p-3 bg-muted/50 rounded-lg">
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <span className="font-medium">Prix:</span> {provider.pricing}
+                </div>
+                <div>
+                  <span className="font-medium">Gratuit:</span> {provider.freeLimit}
+                </div>
+              </div>
+            </div>
+          )}
 
           <div>
             <label className="text-sm font-medium mb-2 block">Clé API</label>
