@@ -129,27 +129,27 @@ const musicProviders: MusicProvider[] = [
         similarity_boost: 0.5
       }
     }),
-    parseResponse: (response: any) => response.audio_url || ''
+    parseResponse: (response: any) => response // Pour les blobs, on retourne directement
   },
   {
-    id: 'mubert',
-    name: 'Mubert API',
-    apiUrl: 'https://api-b2b.mubert.com/v2/RecordTrack',
-    models: ['ambient', 'chill', 'electronic', 'rock', 'hip-hop'],
-    description: 'Musique générative en temps réel',
-    pricing: '$99/mois pour usage commercial',
-    freeLimit: 'Plan développeur gratuit',
+    id: 'beatoven',
+    name: 'Beatoven.ai',
+    apiUrl: 'https://api.beatoven.ai/v1/generate',
+    models: ['pop', 'rock', 'jazz', 'classical', 'electronic', 'cinematic'],
+    description: 'Musique adaptative pour contenu avec synchronisation automatique',
+    pricing: '$6/mois pour 60 minutes',
+    freeLimit: '15 min/mois',
     headers: (apiKey: string) => ({
       'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json'
     }),
     buildPayload: (prompt: string, model?: string) => ({
-      mode: 'track',
-      pat: model || 'ambient',
-      prompt: prompt,
-      duration: 30
+      prompt,
+      genre: model || 'pop',
+      duration: 30,
+      mood: 'upbeat'
     }),
-    parseResponse: (response: any) => response.download_link || ''
+    parseResponse: (response: any) => response.audio_url || ''
   }
 ];
 
@@ -192,6 +192,29 @@ const MusicAPIKeysLinks = () => {
     }
   ];
 
+  const freeServices = [
+    {
+      name: 'Soundraw (Freemium)',
+      url: 'https://soundraw.io/',
+      description: '3 téléchargements gratuits/mois'
+    },
+    {
+      name: 'FreeSound (Gratuit)',
+      url: 'https://freesound.org/',
+      description: 'Échantillons audio Creative Commons'
+    },
+    {
+      name: 'AIVA (Gratuit)',
+      url: 'https://aiva.ai/',
+      description: '3 téléchargements gratuits/mois'
+    },
+    {
+      name: 'Amper Music',
+      url: 'https://score.ampermusic.com/',
+      description: 'Essai gratuit pour créateurs'
+    }
+  ];
+
   return (
     <Card className="mt-8">
       <CardHeader>
@@ -228,10 +251,29 @@ const MusicAPIKeysLinks = () => {
               ))}
             </div>
           </div>
+
+          <div>
+            <h3 className="text-lg font-semibold mb-3">Services gratuits 2025</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {freeServices.map((service) => (
+                <Button
+                  key={service.name}
+                  variant="outline"
+                  size="sm"
+                  className="justify-start gap-2"
+                  onClick={() => window.open(service.url, '_blank')}
+                  title={service.description}
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  {service.name}
+                </Button>
+              ))}
+            </div>
+          </div>
           
           <div className="pt-4 border-t">
             <p className="text-sm text-muted-foreground">
-              💡 <strong>Conseil :</strong> La génération de musique par IA peut prendre plusieurs minutes. Consultez les limites de durée et de qualité dans la documentation de chaque fournisseur.
+              💡 <strong>Conseil :</strong> Pour Suno et Udio, vous devez vous inscrire sur leurs sites web pour obtenir des clés API. La plupart nécessitent un abonnement payant pour l'accès API. Essayez d'abord les services gratuits ci-dessus.
             </p>
           </div>
         </div>
@@ -365,14 +407,19 @@ const MusicTester = () => {
         throw new Error(`Erreur API: ${response.status} - ${errorText}`);
       }
 
-      let data;
-      if (selectedProvider === 'musicgen') {
-        data = await response.blob();
-        const audioUrl = URL.createObjectURL(data);
+      // Gestion spéciale pour ElevenLabs qui retourne de l'audio binaire
+      if (selectedProvider === 'elevenlabs-music') {
+        const audioBlob = await response.blob();
+        const audioUrl = URL.createObjectURL(audioBlob);
+        setAudioUrl(audioUrl);
+        addLog('✅ Musique générée avec succès');
+      } else if (selectedProvider === 'musicgen') {
+        const audioBlob = await response.blob();
+        const audioUrl = URL.createObjectURL(audioBlob);
         setAudioUrl(audioUrl);
         addLog('✅ Musique générée avec succès');
       } else {
-        data = await response.json();
+        const data = await response.json();
         addLog(`📦 Réponse brute: ${JSON.stringify(data, null, 2)}`);
         
         const parsedAudioUrl = provider.parseResponse(data);

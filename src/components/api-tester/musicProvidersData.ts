@@ -121,7 +121,7 @@ export const musicProvidersInfo: ProviderInfo[] = [
   {
     id: 'beatoven',
     name: 'Beatoven.ai',
-    description: 'Musique adaptative pour contenu avec synchronisation automatique.',
+    description: 'Musique adaptative pour contenu avec synchronisation automatique et styles variés.',
     pricing: {
       free: '15 min/mois',
       paid: '$6 - $20/mois',
@@ -132,7 +132,39 @@ export const musicProvidersInfo: ProviderInfo[] = [
       monthlyLimit: 'Selon plan'
     },
     features: ['Adaptive Music', 'Content Sync', 'Multiple Moods', 'Copyright Free'],
-    speed: 'fast',
+    speed: 'Rapide',
+    reliability: 'stable'
+  },
+  {
+    id: 'freesound',
+    name: 'FreeSound API (Gratuit)',
+    description: 'Base de données collaborative de sons et échantillons audio libres.',
+    pricing: {
+      free: 'Gratuit',
+    },
+    limits: {
+      rateLimit: '2000 req/jour',
+      dailyLimit: 'Illimité'
+    },
+    features: ['Sound Samples', 'Creative Commons', 'Search API', 'Community'],
+    speed: 'Très rapide',
+    reliability: 'stable'
+  },
+  {
+    id: 'soundraw',
+    name: 'Soundraw (Freemium)',
+    description: 'Génération musicale avec interface simple et téléchargements gratuits limités.',
+    pricing: {
+      free: '3 téléchargements/mois',
+      paid: '$16 - $35/mois',
+      unit: 'usage illimité'
+    },
+    limits: {
+      rateLimit: '5 req/min',
+      monthlyLimit: 'Selon plan'
+    },
+    features: ['Simple Interface', 'Multiple Genres', 'Royalty Free', 'Instant Download'],
+    speed: 'Rapide',
     reliability: 'stable'
   }
 ];

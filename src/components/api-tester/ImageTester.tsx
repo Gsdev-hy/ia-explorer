@@ -448,36 +448,34 @@ const ImageTester = () => {
     try {
       if (!provider) throw new Error('Fournisseur non trouvé');
 
+      // Gestion spéciale pour Pollinations.ai (GET request)
+      if (provider.id === 'pollinations') {
+        const encodedPrompt = encodeURIComponent(prompt);
+        const imageUrl = `${provider.apiUrl}/${encodedPrompt}`;
+        
+        addLog(`📡 Requête GET vers ${imageUrl}`);
+        
+        // Test si l'image se charge correctement
+        const img = new Image();
+        img.onload = () => {
+          setImageUrl(imageUrl);
+          addLog('✅ Image générée avec succès');
+          toast({
+            title: "Image générée",
+            description: "L'image a été générée avec succès.",
+          });
+        };
+        img.onerror = () => {
+          throw new Error('Impossible de charger l\'image générée');
+        };
+        img.src = imageUrl;
+        return;
+      }
+
       const payload = provider.buildPayload(prompt, selectedModel);
       
       addLog(`📡 Envoi de la requête vers ${provider.apiUrl}`);
       addLog(`📝 Payload: ${JSON.stringify(payload, null, 2)}`);
-
-      // Gestion spéciale pour les Hugging Face Spaces
-      if (provider.id.startsWith('hf-')) {
-        // Pour les spaces Gradio, on doit d'abord joindre la queue
-        const response = await fetch(provider.apiUrl, {
-          method: 'POST',
-          headers: provider.headers(apiKey),
-          body: JSON.stringify(payload)
-        });
-
-        if (!response.ok) {
-          const errorText = await response.text();
-          throw new Error(`Erreur API: ${response.status} - ${errorText}`);
-        }
-
-        const queueResponse = await response.json();
-        addLog(`📦 Réponse queue: ${JSON.stringify(queueResponse, null, 2)}`);
-        
-        // Attendre le résultat (simplifié pour l'exemple)
-        toast({
-          title: "Génération en cours",
-          description: "Les Hugging Face Spaces gratuits peuvent prendre du temps...",
-        });
-        
-        throw new Error('Les Hugging Face Spaces gratuits nécessitent une implémentation WebSocket complète');
-      }
 
       const response = await fetch(provider.apiUrl, {
         method: 'POST',
@@ -493,7 +491,7 @@ const ImageTester = () => {
       }
 
       let data;
-      if (selectedProvider === 'huggingface') {
+      if (selectedProvider === 'huggingface' || selectedProvider === 'stability' || selectedProvider === 'dezgo') {
         data = await response.blob();
         const imageUrl = URL.createObjectURL(data);
         setImageUrl(imageUrl);

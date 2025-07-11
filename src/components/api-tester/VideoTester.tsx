@@ -27,23 +27,31 @@ const videoProviders: VideoProvider[] = [
   {
     id: 'runway',
     name: 'Runway ML',
-    apiUrl: 'https://api.runwayml.com/v1/generate/video',
+    apiUrl: 'https://api.runwayml.com/v1/tasks',
     models: ['gen-3-alpha-turbo', 'gen-3-alpha', 'gen-2'],
     description: 'Génération vidéo professionnelle haute qualité',
     pricing: '$12/mois pour 625 crédits',
     freeLimit: '125 crédits gratuits',
     headers: (apiKey: string) => ({
       'Authorization': `Bearer ${apiKey}`,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'X-Runway-Version': '2024-09-13'
     }),
     buildPayload: (prompt: string, model?: string) => ({
-      prompt,
-      model: model || 'gen-3-alpha-turbo',
-      duration: 4,
-      resolution: '1280x768',
-      seed: Math.floor(Math.random() * 1000000)
+      taskType: 'gen3a_turbo',
+      internal: false,
+      options: {
+        name: 'Generate video',
+        seconds: 5,
+        gen3a_turbo: {
+          mode: 'gen3a_turbo',
+          prompt,
+          duration: 'medium',
+          resolution: '1280x768'
+        }
+      }
     }),
-    parseResponse: (response: any) => response.video_url || ''
+    parseResponse: (response: any) => response.task?.artifacts?.[0]?.url || ''
   },
   {
     id: 'pika',
@@ -69,21 +77,22 @@ const videoProviders: VideoProvider[] = [
   {
     id: 'stable-video',
     name: 'Stable Video Diffusion',
-    apiUrl: 'https://api.stability.ai/v2alpha/generation/video',
+    apiUrl: 'https://api.stability.ai/v2beta/image-to-video',
     models: ['svd-xt-1-1', 'svd-xt', 'svd'],
     description: 'Modèle open-source de Stability AI',
     pricing: '$20/mois pour 1000 crédits',
     freeLimit: 'Crédits d\'essai gratuits',
     headers: (apiKey: string) => ({
       'Authorization': `Bearer ${apiKey}`,
-      'Content-Type': 'application/json'
+      'Content-Type': 'multipart/form-data'
     }),
-    buildPayload: (prompt: string, model?: string) => ({
-      prompt,
-      model: model || 'svd-xt-1-1',
-      aspect_ratio: '16:9',
-      seed: Math.floor(Math.random() * 1000000)
-    }),
+    buildPayload: (prompt: string, model?: string) => {
+      const formData = new FormData();
+      formData.append('seed', Math.floor(Math.random() * 1000000).toString());
+      formData.append('cfg_scale', '2.5');
+      formData.append('motion_bucket_id', '40');
+      return formData;
+    },
     parseResponse: (response: any) => response.video || ''
   },
   {
@@ -226,6 +235,24 @@ const VideoAPIKeysLinks = () => {
     }
   ];
 
+  const freeVideoServices = [
+    {
+      name: 'Kapwing AI Video',
+      url: 'https://kapwing.com/ai-video-generator',
+      description: 'Générateur vidéo gratuit avec limitations'
+    },
+    {
+      name: 'Canva Text-to-Video',  
+      url: 'https://canva.com/features/ai-video-generator/',
+      description: 'Générateur vidéo intégré à Canva'
+    },
+    {
+      name: 'InVideo AI (Gratuit)',
+      url: 'https://invideo.io/ai/',
+      description: '10 minutes gratuites par semaine'
+    }
+  ];
+
   return (
     <Card className="mt-8">
       <CardHeader>
@@ -262,10 +289,28 @@ const VideoAPIKeysLinks = () => {
               ))}
             </div>
           </div>
+
+          <div>
+            <h3 className="text-lg font-semibold mb-3">Services gratuits 2025</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {freeVideoServices.map((service) => (
+                <Button
+                  key={service.name}
+                  variant="outline"
+                  size="sm"
+                  className="justify-start gap-2"
+                  onClick={() => window.open(service.url, '_blank')}
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  {service.name}
+                </Button>
+              ))}
+            </div>
+          </div>
           
           <div className="pt-4 border-t">
             <p className="text-sm text-muted-foreground">
-              💡 <strong>Conseil :</strong> La génération de vidéos peut prendre plusieurs minutes et nécessite souvent des crédits. Vérifiez les coûts et les limites dans la documentation de chaque fournisseur.
+              💡 <strong>Conseil :</strong> La plupart des APIs vidéo sont payantes et coûteuses. Pour des tests gratuits, utilisez les services web ci-dessus. Les APIs nécessitent souvent des crédits prépayés.
             </p>
           </div>
         </div>
