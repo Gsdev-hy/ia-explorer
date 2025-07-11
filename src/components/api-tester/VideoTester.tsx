@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { Save, Send, Download, Eye, EyeOff, Play, Pause, Video, ExternalLink, BookOpen } from 'lucide-react';
+import { Save, Send, Download, Eye, EyeOff, Play, Pause, Video, ExternalLink, BookOpen, Trash2 } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import ProviderInfoCard from './ProviderInfoCard';
 import { videoProvidersInfo } from './videoProvidersData';
@@ -350,6 +350,14 @@ const VideoTester = () => {
     setLogs(prev => `${prev}[${timestamp}] ${message}\n`);
   };
 
+  const clearLogs = () => {
+    setLogs('');
+    toast({
+      title: "Logs effacés",
+      description: "Les logs de communication ont été effacés.",
+    });
+  };
+
   const testAPI = async () => {
     if (!selectedProvider || !apiKey || !prompt) {
       addLog('❌ Veuillez remplir tous les champs obligatoires');
@@ -598,7 +606,18 @@ const VideoTester = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle>Logs de communication</CardTitle>
+          <CardTitle className="flex items-center justify-between">
+            Logs de communication
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={clearLogs}
+              className="gap-2"
+            >
+              <Trash2 className="h-4 w-4" />
+              Effacer les logs
+            </Button>
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <Textarea

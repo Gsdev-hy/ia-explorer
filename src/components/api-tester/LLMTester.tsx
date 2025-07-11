@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { Save, Send, Copy, Download, Eye, EyeOff, ExternalLink, BookOpen } from 'lucide-react';
+import { Save, Send, Copy, Download, Eye, EyeOff, ExternalLink, BookOpen, Trash2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { useToast } from "@/hooks/use-toast";
 import LLMProviderSelector from './LLMProviderSelector';
@@ -58,7 +58,7 @@ const llmProviders: LLMProvider[] = [
     id: 'google',
     name: 'Google Gemini',
     apiUrl: 'https://generativelanguage.googleapis.com/v1beta/models',
-    models: ['gemini-2.0-flash-exp', 'gemini-2.5-flash', 'gemini-2.5-pro', 'gemini-1.5-pro', 'gemini-1.5-flash'],
+    models: ['gemini-2.0-flash-exp', 'gemini-1.5-pro', 'gemini-1.5-flash'],
     headers: (apiKey: string) => ({
       'Content-Type': 'application/json'
     }),
@@ -86,7 +86,13 @@ const llmProviders: LLMProvider[] = [
     id: 'openrouter',
     name: 'OpenRouter',
     apiUrl: 'https://openrouter.ai/api/v1/chat/completions',
-    models: ['google/gemini-2.0-flash-exp:free', 'meta-llama/llama-3.2-3b-instruct:free', 'microsoft/phi-3-mini-128k-instruct:free'],
+    models: [
+      'anthropic/claude-3.5-sonnet',
+      'openai/gpt-4o-mini',
+      'meta-llama/llama-3.2-90b-vision',
+      'google/gemini-flash-1.5',
+      'mistralai/mistral-large'
+    ],
     headers: (apiKey: string) => ({
       'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json',
@@ -415,6 +421,15 @@ const LLMTester = () => {
     if (savedPrompt) setPrompt(savedPrompt);
   }, []);
 
+  useEffect(() => {
+    if (selectedProvider) {
+      const provider = llmProviders.find(p => p.id === selectedProvider);
+      if (provider?.models && provider.models.length > 0 && !selectedModel) {
+        setSelectedModel(provider.models[0]);
+      }
+    }
+  }, [selectedProvider, selectedModel]);
+
   const saveApiKey = () => {
     localStorage.setItem('llm-provider', selectedProvider);
     localStorage.setItem('llm-model', selectedModel);
@@ -430,6 +445,14 @@ const LLMTester = () => {
   const addLog = (message: string) => {
     const timestamp = new Date().toLocaleTimeString();
     setLogs(prev => `${prev}[${timestamp}] ${message}\n`);
+  };
+
+  const clearLogs = () => {
+    setLogs('');
+    toast({
+      title: "Logs effacés",
+      description: "Les logs de communication ont été effacés.",
+    });
   };
 
   const testAPI = async () => {
@@ -537,56 +560,60 @@ const LLMTester = () => {
         onProviderSelect={setSelectedProvider}
       />
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Configuration du modèle</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div>
-            <label className="text-sm font-medium mb-2 block">Modèle</label>
-            <Select 
-              value={selectedModel} 
-              onValueChange={setSelectedModel}
-              disabled={!selectedProvider}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Choisir un modèle" />
-              </SelectTrigger>
-              <SelectContent>
-                {provider?.models.map(model => (
-                  <SelectItem key={model} value={model}>
-                    {model}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div>
-            <label className="text-sm font-medium mb-2 block">Clé API</label>
-            <div className="flex gap-2">
-              <Input
-                type={showApiKey ? 'text' : 'password'}
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-                placeholder="Entrez votre clé API"
-                className="flex-1"
-              />
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => setShowApiKey(!showApiKey)}
+      {selectedProvider && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              Configuration du modèle
+              <Badge variant="secondary">{provider?.name}</Badge>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <label className="text-sm font-medium mb-2 block">Modèle</label>
+              <Select 
+                value={selectedModel} 
+                onValueChange={setSelectedModel}
               >
-                {showApiKey ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-              </Button>
-              <Button onClick={saveApiKey} className="gap-2">
-                <Save className="h-4 w-4" />
-                Sauvegarder
-              </Button>
+                <SelectTrigger>
+                  <SelectValue placeholder="Choisir un modèle" />
+                </SelectTrigger>
+                <SelectContent>
+                  {provider?.models?.map(model => (
+                    <SelectItem key={model} value={model}>
+                      {model}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
-          </div>
-        </CardContent>
-      </Card>
+
+            <div>
+              <label className="text-sm font-medium mb-2 block">Clé API</label>
+              <div className="flex gap-2">
+                <Input
+                  type={showApiKey ? 'text' : 'password'}
+                  value={apiKey}
+                  onChange={(e) => setApiKey(e.target.value)}
+                  placeholder="Entrez votre clé API"
+                  className="flex-1"
+                />
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => setShowApiKey(!showApiKey)}
+                >
+                  {showApiKey ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </Button>
+                <Button onClick={saveApiKey} className="gap-2">
+                  <Save className="h-4 w-4" />
+                  Sauvegarder
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       <Card>
         <CardHeader>
@@ -643,7 +670,18 @@ const LLMTester = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle>Logs de communication</CardTitle>
+          <CardTitle className="flex items-center justify-between">
+            Logs de communication
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={clearLogs}
+              className="gap-2"
+            >
+              <Trash2 className="h-4 w-4" />
+              Effacer les logs
+            </Button>
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <Textarea

@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Save, Send, Download, Eye, EyeOff, ZoomIn, ExternalLink, BookOpen } from 'lucide-react';
+import { Save, Send, Download, Eye, EyeOff, ZoomIn, ExternalLink, BookOpen, Trash2 } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import ImageProviderSelector from './ImageProviderSelector';
 
@@ -343,6 +343,19 @@ const ImageAPIKeysLinks = () => {
   );
 };
 
+// Fonction utilitaire pour créer un slug à partir du prompt
+const createSlugFromPrompt = (prompt: string): string => {
+  return prompt
+    .split(' ')
+    .slice(0, 10) // Prendre max 10 mots
+    .join(' ')
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '') // Supprimer les caractères spéciaux
+    .replace(/\s+/g, '-') // Remplacer les espaces par des tirets
+    .replace(/-+/g, '-') // Éviter les tirets multiples
+    .trim();
+};
+
 const ImageTester = () => {
   const { toast } = useToast();
   const [selectedProvider, setSelectedProvider] = useState<string>('');
@@ -366,6 +379,16 @@ const ImageTester = () => {
     if (savedPrompt) setPrompt(savedPrompt);
   }, []);
 
+  // Présélection automatique du premier modèle quand un fournisseur est choisi
+  useEffect(() => {
+    if (selectedProvider) {
+      const provider = imageProviders.find(p => p.id === selectedProvider);
+      if (provider?.models && provider.models.length > 0 && !selectedModel) {
+        setSelectedModel(provider.models[0]);
+      }
+    }
+  }, [selectedProvider, selectedModel]);
+
   const saveApiKey = () => {
     localStorage.setItem('image-provider', selectedProvider);
     localStorage.setItem('image-model', selectedModel);
@@ -381,6 +404,14 @@ const ImageTester = () => {
   const addLog = (message: string) => {
     const timestamp = new Date().toLocaleTimeString();
     setLogs(prev => `${prev}[${timestamp}] ${message}\n`);
+  };
+
+  const clearLogs = () => {
+    setLogs('');
+    toast({
+      title: "Logs effacés",
+      description: "Les logs de communication ont été effacés.",
+    });
   };
 
   const testAPI = async () => {
@@ -502,7 +533,12 @@ const ImageTester = () => {
       const url = window.URL.createObjectURL(blob);
       const element = document.createElement('a');
       element.href = url;
-      element.download = `generated-image-${Date.now()}.png`;
+      
+      // Créer un nom de fichier basé sur le prompt
+      const slugifiedPrompt = createSlugFromPrompt(prompt);
+      const timestamp = Date.now();
+      element.download = `${slugifiedPrompt || 'generated-image'}-${timestamp}.webp`;
+      
       document.body.appendChild(element);
       element.click();
       document.body.removeChild(element);
@@ -531,62 +567,63 @@ const ImageTester = () => {
         onProviderSelect={setSelectedProvider}
       />
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Configuration du modèle</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          {provider?.models && (
-            <div>
-              <label className="text-sm font-medium mb-2 block">Modèle</label>
-              <Select 
-                value={selectedModel} 
-                onValueChange={setSelectedModel}
-                disabled={!selectedProvider}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Choisir un modèle" />
-                </SelectTrigger>
-                <SelectContent>
-                  {provider.models.map(model => (
-                    <SelectItem key={model} value={model}>
-                      {model}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          )}
-
-          {provider?.requiresApiKey && (
-            <div>
-              <label className="text-sm font-medium mb-2 block">
-                Clé API {!provider.requiresApiKey && <span className="text-muted-foreground">(optionnelle)</span>}
-              </label>
-              <div className="flex gap-2">
-                <Input
-                  type={showApiKey ? 'text' : 'password'}
-                  value={apiKey}
-                  onChange={(e) => setApiKey(e.target.value)}
-                  placeholder="Entrez votre clé API"
-                  className="flex-1"
-                />
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => setShowApiKey(!showApiKey)}
+      {selectedProvider && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Configuration du modèle</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {provider?.models && (
+              <div>
+                <label className="text-sm font-medium mb-2 block">Modèle</label>
+                <Select 
+                  value={selectedModel} 
+                  onValueChange={setSelectedModel}
                 >
-                  {showApiKey ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                </Button>
-                <Button onClick={saveApiKey} className="gap-2">
-                  <Save className="h-4 w-4" />
-                  Sauvegarder
-                </Button>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Choisir un modèle" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {provider.models.map(model => (
+                      <SelectItem key={model} value={model}>
+                        {model}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+            )}
+
+            {provider?.requiresApiKey && (
+              <div>
+                <label className="text-sm font-medium mb-2 block">
+                  Clé API {!provider.requiresApiKey && <span className="text-muted-foreground">(optionnelle)</span>}
+                </label>
+                <div className="flex gap-2">
+                  <Input
+                    type={showApiKey ? 'text' : 'password'}
+                    value={apiKey}
+                    onChange={(e) => setApiKey(e.target.value)}
+                    placeholder="Entrez votre clé API"
+                    className="flex-1"
+                  />
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => setShowApiKey(!showApiKey)}
+                  >
+                    {showApiKey ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </Button>
+                  <Button onClick={saveApiKey} className="gap-2">
+                    <Save className="h-4 w-4" />
+                    Sauvegarder
+                  </Button>
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      )}
 
       <Card>
         <CardHeader>
@@ -605,7 +642,7 @@ const ImageTester = () => {
 
           <Button 
             onClick={testAPI} 
-            disabled={isLoading || !selectedProvider || !apiKey || !prompt}
+            disabled={isLoading || !selectedProvider || (provider?.requiresApiKey && !apiKey) || !prompt}
             className="w-full gap-2"
           >
             <Send className="h-4 w-4" />
@@ -661,7 +698,18 @@ const ImageTester = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle>Logs de communication</CardTitle>
+          <CardTitle className="flex items-center justify-between">
+            Logs de communication
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={clearLogs}
+              className="gap-2"
+            >
+              <Trash2 className="h-4 w-4" />
+              Effacer les logs
+            </Button>
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <Textarea

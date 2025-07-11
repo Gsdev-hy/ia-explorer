@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { Save, Send, Download, Eye, EyeOff, Play, Pause, Volume2, ExternalLink, BookOpen } from 'lucide-react';
+import { Save, Send, Download, Eye, EyeOff, Play, Pause, Music, ExternalLink, BookOpen, Trash2 } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import ProviderInfoCard from './ProviderInfoCard';
 import { musicProvidersInfo } from './musicProvidersData';
@@ -316,6 +316,14 @@ const MusicTester = () => {
     setLogs(prev => `${prev}[${timestamp}] ${message}\n`);
   };
 
+  const clearLogs = () => {
+    setLogs('');
+    toast({
+      title: "Logs effacés",
+      description: "Les logs de communication ont été effacés.",
+    });
+  };
+
   const testAPI = async () => {
     if (!selectedProvider || !apiKey || !prompt) {
       addLog('❌ Veuillez remplir tous les champs obligatoires');
@@ -409,15 +417,15 @@ const MusicTester = () => {
       const url = window.URL.createObjectURL(blob);
       const element = document.createElement('a');
       element.href = url;
-      element.download = `generated-music-${Date.now()}.wav`;
+      element.download = `generated-music-${Date.now()}.mp3`;
       document.body.appendChild(element);
       element.click();
       document.body.removeChild(element);
       window.URL.revokeObjectURL(url);
-      addLog('💾 Fichier audio téléchargé');
+      addLog('💾 Audio téléchargé');
       toast({
         title: "Téléchargement",
-        description: "Le fichier audio a été téléchargé avec succès.",
+        description: "L'audio a été téléchargé avec succès.",
       });
     } catch (error: any) {
       addLog(`❌ Erreur lors du téléchargement: ${error.message}`);
@@ -525,7 +533,7 @@ const MusicTester = () => {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
-              Musique générée
+              Audio généré
               <div className="flex gap-2">
                 <Button variant="outline" size="sm" onClick={togglePlay}>
                   {isPlaying ? <Pause className="h-4 w-4 mr-2" /> : <Play className="h-4 w-4 mr-2" />}
@@ -540,19 +548,17 @@ const MusicTester = () => {
           </CardHeader>
           <CardContent>
             <div className="flex justify-center">
-              <div className="w-full max-w-md">
-                <audio
-                  ref={audioRef}
-                  src={audioUrl}
-                  controls
-                  className="w-full"
-                  onPlay={() => setIsPlaying(true)}
-                  onPause={() => setIsPlaying(false)}
-                  onEnded={() => setIsPlaying(false)}
-                >
-                  Votre navigateur ne supporte pas la lecture audio.
-                </audio>
-              </div>
+              <audio
+                ref={audioRef}
+                src={audioUrl}
+                controls
+                className="w-full max-w-lg"
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+                onEnded={() => setIsPlaying(false)}
+              >
+                Votre navigateur ne supporte pas la lecture audio.
+              </audio>
             </div>
           </CardContent>
         </Card>
@@ -560,7 +566,18 @@ const MusicTester = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle>Logs de communication</CardTitle>
+          <CardTitle className="flex items-center justify-between">
+            Logs de communication
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={clearLogs}
+              className="gap-2"
+            >
+              <Trash2 className="h-4 w-4" />
+              Effacer les logs
+            </Button>
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <Textarea
