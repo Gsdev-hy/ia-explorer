@@ -132,7 +132,7 @@ export const musicProvidersInfo: ProviderInfo[] = [
       monthlyLimit: 'Selon plan'
     },
     features: ['Adaptive Music', 'Content Sync', 'Multiple Moods', 'Copyright Free'],
-    speed: 'Rapide',
+    speed: 'fast',
     reliability: 'stable'
   },
   {
@@ -147,7 +147,7 @@ export const musicProvidersInfo: ProviderInfo[] = [
       dailyLimit: 'Illimité'
     },
     features: ['Sound Samples', 'Creative Commons', 'Search API', 'Community'],
-    speed: 'Très rapide',
+    speed: 'ultra-fast',
     reliability: 'stable'
   },
   {
@@ -164,7 +164,7 @@ export const musicProvidersInfo: ProviderInfo[] = [
       monthlyLimit: 'Selon plan'
     },
     features: ['Simple Interface', 'Multiple Genres', 'Royalty Free', 'Instant Download'],
-    speed: 'Rapide',
+    speed: 'fast',
     reliability: 'stable'
   }
 ];
