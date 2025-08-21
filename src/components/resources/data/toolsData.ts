@@ -1,4 +1,3 @@
-
 import { IAToolResource } from '../resourcesData';
 
 export const iaTools: IAToolResource[] = [
@@ -9,6 +8,46 @@ export const iaTools: IAToolResource[] = [
     category: "Développement",
     pricing: "Gratuit",
     features: ["Test API", "LLM", "Images", "Audio", "Vidéo"]
+  },
+  {
+    name: "Calculateur de Coûts IA",
+    description: "Estimez et comparez les coûts des différents services d'IA : OpenAI, Anthropic, Google, etc. Optimisez votre budget IA.",
+    link: "/calculateur-couts-ia",
+    category: "Développement",
+    pricing: "Gratuit",
+    features: ["Estimation coûts", "Comparaison", "Budget", "ROI"]
+  },
+  {
+    name: "Générateur de Prompts Intelligent",
+    description: "Créez des prompts optimisés pour tous vos cas d'usage avec des templates professionnels et un système d'optimisation automatique.",
+    link: "/generateur-prompts",
+    category: "Productivité",
+    pricing: "Gratuit", 
+    features: ["Templates", "Optimisation", "Test A/B", "Suggestions"]
+  },
+  {
+    name: "Simulateur d'Entraînement IA",
+    description: "Simulez et visualisez l'entraînement de modèles d'IA en temps réel. Comprenez les algorithmes d'apprentissage de manière interactive.",
+    link: "/simulateur-ia",
+    category: "Éducation",
+    pricing: "Gratuit",
+    features: ["Simulation", "Visualisation", "Pédagogie", "Algorithmes"]
+  },
+  {
+    name: "Détecteur de Contenu IA",
+    description: "Analysez et détectez si un contenu (texte, image, audio) a été généré par une IA. Outil de vérification et d'authentification.",
+    link: "/detecteur-contenu-ia",
+    category: "Sécurité",
+    pricing: "Freemium",
+    features: ["Détection", "Multi-modal", "Scores", "Rapports"]
+  },
+  {
+    name: "Optimiseur de Workflow IA",
+    description: "Créez et optimisez des chaînes de traitement IA complexes avec une interface visuelle. Automatisez vos processus métier avec l'IA.",
+    link: "/optimiseur-workflow-ia", 
+    category: "Automatisation",
+    pricing: "Freemium",
+    features: ["Drag & Drop", "Pipelines", "Monitoring", "Optimisation"]
   },
   {
     name: "ChatGPT",

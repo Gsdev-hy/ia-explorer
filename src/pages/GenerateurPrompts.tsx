@@ -2,20 +2,20 @@
 import React from 'react';
 import Hero from '@/components/Hero';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Play, BarChart3, BookOpen } from 'lucide-react';
+import { Zap, Target, Lightbulb } from 'lucide-react';
 
-const SimulateurIA = () => {
+const GenerateurPrompts = () => {
   return (
     <>
       <Hero
-        title="Simulateur d'Entraînement IA"
-        subtitle="Simulez et visualisez l'entraînement de modèles d'IA en temps réel. Comprenez les algorithmes d'apprentissage de manière interactive"
+        title="Générateur de Prompts Intelligent"
+        subtitle="Créez des prompts optimisés pour tous vos cas d'usage avec des templates professionnels et un système d'optimisation automatique"
       />
       
       <section className="section-container">
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-3 bg-primary/10 px-4 py-2 rounded-lg mb-4">
-            <Play className="h-5 w-5 text-primary" />
+            <Zap className="h-5 w-5 text-primary" />
             <span className="text-sm font-medium">Outil en cours de développement</span>
           </div>
         </div>
@@ -24,13 +24,13 @@ const SimulateurIA = () => {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <BarChart3 className="h-5 w-5" />
-                Visualisations interactives
+                <Target className="h-5 w-5" />
+                Templates professionnels
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Observez en temps réel l'évolution des métriques d'entraînement et la convergence des modèles.
+                Accédez à une bibliothèque de templates de prompts optimisés pour différents secteurs et cas d'usage.
               </p>
             </CardContent>
           </Card>
@@ -38,24 +38,24 @@ const SimulateurIA = () => {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <BookOpen className="h-5 w-5" />
-                Approche pédagogique
+                <Lightbulb className="h-5 w-5" />
+                Optimisation automatique
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Apprenez les concepts fondamentaux du machine learning à travers des simulations pratiques.
+                L'IA analyse et améliore vos prompts pour maximiser leur efficacité et leur précision.
               </p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>Comparaison d'algorithmes</CardTitle>
+              <CardTitle>Test A/B intégré</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Comparez les performances de différents algorithmes d'apprentissage sur le même dataset.
+                Testez différentes versions de vos prompts et comparez leurs performances en temps réel.
               </p>
             </CardContent>
           </Card>
@@ -65,4 +65,4 @@ const SimulateurIA = () => {
   );
 };
 
-export default SimulateurIA;
+export default GenerateurPrompts;

@@ -36,7 +36,16 @@ import DeepLearningPratique from '@/pages/cours/DeepLearningPratique';
 import IAEthique from '@/pages/cours/IAEthique';
 import IAEntreprise from '@/pages/cours/IAEntreprise';
 import NLPComprehension from '@/pages/cours/NLPComprehension';
+
+// Outils existants
 import TestAPIIA from '@/pages/TestAPIIA';
+
+// Nouveaux outils IA
+import CalculateurCoutsIA from '@/pages/CalculateurCoutsIA';
+import GenerateurPrompts from '@/pages/GenerateurPrompts';
+import SimulateurIA from '@/pages/SimulateurIA';
+import DetecteurContenuIA from '@/pages/DetecteurContenuIA';
+import OptimiseurWorkflowIA from '@/pages/OptimiseurWorkflowIA';
 
 const queryClient = new QueryClient();
 
@@ -94,8 +103,15 @@ function App() {
               <Route path="cours/ia-entreprise" element={<IAEntreprise />} />
               <Route path="cours/nlp-comprehension" element={<NLPComprehension />} />
               
-              {/* Outils */}
+              {/* Outils existants */}
               <Route path="test-api-ia" element={<TestAPIIA />} />
+              
+              {/* Nouveaux outils IA */}
+              <Route path="calculateur-couts-ia" element={<CalculateurCoutsIA />} />
+              <Route path="generateur-prompts" element={<GenerateurPrompts />} />
+              <Route path="simulateur-ia" element={<SimulateurIA />} />
+              <Route path="detecteur-contenu-ia" element={<DetecteurContenuIA />} />
+              <Route path="optimiseur-workflow-ia" element={<OptimiseurWorkflowIA />} />
               
               <Route path="*" element={<NotFound />} />
             </Route>
