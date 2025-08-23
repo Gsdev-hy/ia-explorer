@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Hero from '@/components/Hero';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -18,6 +17,11 @@ const SimulateurIA = () => {
 
   const handleDatasetGenerated = (dataset: DataPoint[]) => {
     setCurrentDataset(dataset);
+  };
+
+  const navigateToGenerator = () => {
+    const generatorTab = document.querySelector('[value="generator"]') as HTMLElement;
+    generatorTab?.click();
   };
 
   return (
@@ -68,7 +72,7 @@ const SimulateurIA = () => {
                 Observez l'évolution des métriques d'entraînement et la convergence des modèles en direct.
               </p>
               <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• Graphiques de loss et accuracy</li>
+                <li>• Graphiques de loss et accuracy en temps réel</li>
                 <li>• Animation du processus d'apprentissage</li>
                 <li>• Détection du surapprentissage</li>
               </ul>
@@ -173,7 +177,7 @@ const SimulateurIA = () => {
                     Générez d'abord un dataset dans l'onglet "Données" pour commencer l'entraînement.
                   </p>
                   <Button 
-                    onClick={() => document.querySelector('[value="generator"]')?.click()}
+                    onClick={navigateToGenerator}
                     size="sm"
                   >
                     Générer un Dataset
@@ -197,7 +201,7 @@ const SimulateurIA = () => {
                     Générez un dataset pour comparer les performances des différents algorithmes.
                   </p>
                   <Button 
-                    onClick={() => document.querySelector('[value="generator"]')?.click()}
+                    onClick={navigateToGenerator}
                     size="sm"
                   >
                     Générer un Dataset
