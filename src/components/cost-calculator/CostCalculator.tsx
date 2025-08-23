@@ -9,6 +9,7 @@ import { Calculator, DollarSign, TrendingUp } from 'lucide-react';
 import { aiProvidersData, AIProvider } from './aiProvidersData';
 import CostComparison from './CostComparison';
 import UsageEstimator from './UsageEstimator';
+import CostSaver from './CostSaver';
 
 interface CostCalculation {
   providerId: string;
@@ -52,6 +53,19 @@ const CostCalculator = () => {
     };
   }, [selectedModelData, inputTokens, outputTokens]);
 
+  const currentCalculation = useMemo(() => {
+    if (!calculateCost || !selectedProviderData) return null;
+    
+    return {
+      provider: selectedProviderData.name,
+      model: selectedModelData?.name || '',
+      inputTokens,
+      outputTokens,
+      totalCost: calculateCost.totalCost,
+      usageType
+    };
+  }, [calculateCost, selectedProviderData, selectedModelData, inputTokens, outputTokens, usageType]);
+
   const addToComparison = () => {
     if (!calculateCost || !selectedProviderData) return;
 
@@ -76,10 +90,11 @@ const CostCalculator = () => {
   return (
     <div className="space-y-6">
       <Tabs defaultValue="calculator" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="calculator">Calculateur</TabsTrigger>
           <TabsTrigger value="comparison">Comparaison</TabsTrigger>
           <TabsTrigger value="estimator">Estimateur d'usage</TabsTrigger>
+          <TabsTrigger value="history">Historique</TabsTrigger>
         </TabsList>
 
         <TabsContent value="calculator">
@@ -254,6 +269,10 @@ const CostCalculator = () => {
 
         <TabsContent value="estimator">
           <UsageEstimator />
+        </TabsContent>
+
+        <TabsContent value="history">
+          <CostSaver currentCalculation={currentCalculation} />
         </TabsContent>
       </Tabs>
     </div>
