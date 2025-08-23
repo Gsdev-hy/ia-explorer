@@ -4,6 +4,7 @@ import Hero from '@/components/Hero';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { 
   Workflow, 
   MousePointer, 
@@ -13,10 +14,15 @@ import {
   TrendingUp,
   Zap,
   Database,
-  GitBranch
+  GitBranch,
+  User,
+  Brain,
+  Rocket,
+  Shield
 } from 'lucide-react';
 import WorkflowEditor from '@/components/workflow/WorkflowEditor';
 import WorkflowOptimizer from '@/components/workflow/WorkflowOptimizer';
+import WorkflowCreator from '@/components/workflow/WorkflowCreator';
 import { Node, Edge } from '@xyflow/react';
 
 const OptimiseurWorkflowIA = () => {
@@ -36,19 +42,30 @@ const OptimiseurWorkflowIA = () => {
     <>
       <Hero
         title="Optimiseur de Workflow IA"
-        subtitle="Créez, optimisez et automatisez des chaînes de traitement IA complexes avec une interface visuelle intuitive"
+        subtitle="Créez, optimisez et automatisez des chaînes de traitement IA complexes avec une interface visuelle intuitive et des analyses avancées"
       />
       
       <section className="section-container">
+        {/* Header avec créateur */}
+        <div className="mb-6 flex justify-between items-center">
+          <div>
+            <h2 className="text-2xl font-bold mb-2">Interface d'Optimisation Avancée</h2>
+            <p className="text-muted-foreground">
+              Construisez des pipelines IA performants avec monitoring en temps réel
+            </p>
+          </div>
+          <WorkflowCreator />
+        </div>
+
         <Tabs defaultValue="editor" className="w-full">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="editor" className="flex items-center gap-2">
               <MousePointer className="h-4 w-4" />
-              Éditeur
+              Éditeur Visual
             </TabsTrigger>
             <TabsTrigger value="optimizer" className="flex items-center gap-2">
               <TrendingUp className="h-4 w-4" />
-              Optimisation
+              Analytics & Optimisation
             </TabsTrigger>
             <TabsTrigger value="features" className="flex items-center gap-2">
               <Settings className="h-4 w-4" />
@@ -61,8 +78,11 @@ const OptimiseurWorkflowIA = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Workflow className="h-5 w-5" />
-                  Éditeur de Workflow
+                  Éditeur de Workflow Avancé
                 </CardTitle>
+                <p className="text-sm text-muted-foreground">
+                  Interface drag & drop avec bibliothèque étendue de nœuds IA et presets prêts à l'emploi
+                </p>
               </CardHeader>
               <CardContent>
                 <WorkflowEditor 
@@ -85,7 +105,7 @@ const OptimiseurWorkflowIA = () => {
                   <BarChart4 className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
                   <h3 className="text-lg font-semibold mb-2">Aucun workflow à analyser</h3>
                   <p className="text-muted-foreground mb-4">
-                    Créez et sauvegardez un workflow dans l'éditeur pour accéder aux analyses et optimisations.
+                    Créez et sauvegardez un workflow dans l'éditeur pour accéder aux analyses avancées et suggestions d'optimisation IA.
                   </p>
                   <Button variant="outline">
                     Aller à l'éditeur
@@ -101,18 +121,18 @@ const OptimiseurWorkflowIA = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <MousePointer className="h-5 w-5" />
-                    Interface drag & drop
+                    Interface Visual Avancée
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground mb-4">
-                    Créez des pipelines IA complexes simplement en glissant-déposant des blocs fonctionnels.
+                    Créez des pipelines IA sophistiqués avec une interface intuitive et des outils professionnels.
                   </p>
                   <ul className="text-sm space-y-1">
-                    <li>• Nœuds IA pré-configurés</li>
-                    <li>• Connecteurs visuels</li>
+                    <li>• 15+ nœuds IA pré-configurés</li>
+                    <li>• Presets de workflows prêts</li>
                     <li>• Validation en temps réel</li>
-                    <li>• Templates prêts à l'emploi</li>
+                    <li>• Export/Import JSON</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -121,18 +141,18 @@ const OptimiseurWorkflowIA = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Play className="h-5 w-5" />
-                    Exécution & Monitoring
+                    Exécution & Monitoring Pro
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground mb-4">
-                    Surveillez l'exécution de vos workflows avec des métriques de performance détaillées.
+                    Surveillez l'exécution avec des métriques détaillées et une gestion d'erreurs avancée.
                   </p>
                   <ul className="text-sm space-y-1">
-                    <li>• Logs en temps réel</li>
-                    <li>• Métriques de performance</li>
-                    <li>• Gestion d'erreurs</li>
-                    <li>• Retry automatique</li>
+                    <li>• Logs détaillés en temps réel</li>
+                    <li>• Métriques de coût et performance</li>
+                    <li>• Retry automatique intelligent</li>
+                    <li>• Alertes et notifications</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -140,19 +160,19 @@ const OptimiseurWorkflowIA = () => {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <TrendingUp className="h-5 w-5" />
-                    Optimisation automatique
+                    <Brain className="h-5 w-5" />
+                    IA d'Optimisation
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground mb-4">
-                    Recevez des suggestions d'optimisation pour améliorer la vitesse et réduire les coûts.
+                    Suggestions automatiques pour optimiser performance, coûts et fiabilité.
                   </p>
                   <ul className="text-sm space-y-1">
-                    <li>• Analyse des coûts</li>
-                    <li>• Détection des goulots</li>
-                    <li>• Suggestions IA</li>
-                    <li>• Benchmarking</li>
+                    <li>• Analyse prédictive des coûts</li>
+                    <li>• Détection de goulots d'étranglement</li>
+                    <li>• Suggestions d'optimisation IA</li>
+                    <li>• Benchmarking automatique</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -161,17 +181,17 @@ const OptimiseurWorkflowIA = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Database className="h-5 w-5" />
-                    Connecteurs d'API
+                    Connecteurs IA Étendus
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground mb-4">
-                    Intégrez facilement différentes APIs et services IA dans vos workflows.
+                    Intégration native avec les principales plateformes IA et services cloud.
                   </p>
                   <ul className="text-sm space-y-1">
-                    <li>• OpenAI, Claude, Gemini</li>
-                    <li>• DALL-E, Midjourney</li>
-                    <li>• Services Azure, AWS</li>
+                    <li>• OpenAI (GPT-4, DALL-E, Whisper)</li>
+                    <li>• Anthropic Claude 3</li>
+                    <li>• Services Google, Azure, AWS</li>
                     <li>• APIs personnalisées</li>
                   </ul>
                 </CardContent>
@@ -180,19 +200,19 @@ const OptimiseurWorkflowIA = () => {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Zap className="h-5 w-5" />
-                    Déclencheurs automatiques
+                    <Rocket className="h-5 w-5" />
+                    Déploiement & Scaling
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground mb-4">
-                    Automatisez vos workflows avec différents types de déclencheurs.
+                    Déployez vos workflows avec mise à l'échelle automatique et haute disponibilité.
                   </p>
                   <ul className="text-sm space-y-1">
-                    <li>• Webhooks</li>
-                    <li>• Planification temporelle</li>
-                    <li>• Événements système</li>
-                    <li>• Déclenchement manuel</li>
+                    <li>• Auto-scaling intelligent</li>
+                    <li>• Load balancing</li>
+                    <li>• Déploiement multi-région</li>
+                    <li>• Monitoring 24/7</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -200,23 +220,51 @@ const OptimiseurWorkflowIA = () => {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <GitBranch className="h-5 w-5" />
-                    Versioning & Partage
+                    <Shield className="h-5 w-5" />
+                    Sécurité & Gouvernance
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground mb-4">
-                    Gérez les versions de vos workflows et partagez-les avec votre équipe.
+                    Sécurité enterprise avec contrôle d'accès, audit et conformité.
                   </p>
                   <ul className="text-sm space-y-1">
-                    <li>• Contrôle de version</li>
-                    <li>• Export/Import JSON</li>
-                    <li>• Collaboration équipe</li>
-                    <li>• Templates communautaires</li>
+                    <li>• Chiffrement end-to-end</li>
+                    <li>• Audit trails complets</li>
+                    <li>• RBAC granulaire</li>
+                    <li>• Conformité RGPD/SOC2</li>
                   </ul>
                 </CardContent>
               </Card>
             </div>
+
+            {/* Section créateur */}
+            <Card className="mt-8">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <User className="h-5 w-5" />
+                  À propos du créateur
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
+                    <User className="h-8 w-8 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-lg">Geoffroy Streit</h4>
+                    <p className="text-muted-foreground mb-2">
+                      Expert en Intelligence Artificielle et optimisation de workflows
+                    </p>
+                    <div className="flex gap-2">
+                      <Badge variant="secondary">IA & Machine Learning</Badge>
+                      <Badge variant="secondary">Optimisation de Performance</Badge>
+                      <Badge variant="secondary">Architecture Cloud</Badge>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
         </Tabs>
       </section>

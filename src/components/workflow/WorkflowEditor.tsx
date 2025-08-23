@@ -15,9 +15,12 @@ import {
 import '@xyflow/react/dist/style.css';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Play, Save, Download } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Play, Save, Download, FileTemplate } from 'lucide-react';
 import WorkflowNodeLibrary from './WorkflowNodeLibrary';
 import WorkflowMonitor from './WorkflowMonitor';
+import WorkflowPresets from './presets/WorkflowPresets';
+import WorkflowCreator from './WorkflowCreator';
 import { workflowNodes, workflowEdges } from './workflowData';
 
 interface WorkflowEditorProps {
@@ -44,8 +47,8 @@ const WorkflowEditor: React.FC<WorkflowEditorProps> = ({ onExecute, onSave }) =>
       if (onExecute) {
         await onExecute(nodes, edges);
       }
-      // Simulation d'exécution
-      await new Promise(resolve => setTimeout(resolve, 3000));
+      // Simulation d'exécution plus réaliste
+      await new Promise(resolve => setTimeout(resolve, 4000));
     } catch (error) {
       console.error('Erreur lors de l\'exécution du workflow:', error);
     } finally {
@@ -64,9 +67,11 @@ const WorkflowEditor: React.FC<WorkflowEditorProps> = ({ onExecute, onSave }) =>
       nodes,
       edges,
       metadata: {
-        name: 'Mon Workflow IA',
+        name: 'Workflow IA Personnalisé',
+        creator: 'Geoffroy Streit',
         created: new Date().toISOString(),
-        version: '1.0.0'
+        version: '2.0.0',
+        description: 'Workflow créé avec l\'Optimiseur de Workflow IA'
       }
     };
     
@@ -77,32 +82,53 @@ const WorkflowEditor: React.FC<WorkflowEditorProps> = ({ onExecute, onSave }) =>
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'workflow-ia.json';
+    a.download = `workflow-ia-${Date.now()}.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   }, [nodes, edges]);
 
+  const handleLoadPreset = useCallback((preset: any) => {
+    setNodes(preset.nodes);
+    setEdges(preset.edges);
+  }, [setNodes, setEdges]);
+
   return (
     <div className="h-[800px] flex gap-4">
-      {/* Bibliothèque de nœuds */}
+      {/* Sidebar gauche */}
       <Card className="w-80 flex-shrink-0">
-        <CardHeader>
-          <CardTitle>Bibliothèque de Nœuds</CardTitle>
+        <CardHeader className="pb-2">
+          <CardTitle className="text-base">Outils & Presets</CardTitle>
+          <WorkflowCreator />
         </CardHeader>
         <CardContent className="p-0">
-          <WorkflowNodeLibrary />
+          <Tabs defaultValue="library" className="w-full">
+            <TabsList className="grid w-full grid-cols-2 mx-4 mb-4">
+              <TabsTrigger value="library" className="text-xs">Nœuds</TabsTrigger>
+              <TabsTrigger value="presets" className="text-xs">Presets</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="library" className="mt-0">
+              <WorkflowNodeLibrary />
+            </TabsContent>
+            
+            <TabsContent value="presets" className="mt-0 max-h-[600px] overflow-y-auto">
+              <div className="p-4">
+                <WorkflowPresets onLoadPreset={handleLoadPreset} />
+              </div>
+            </TabsContent>
+          </Tabs>
         </CardContent>
       </Card>
 
       {/* Éditeur principal */}
       <div className="flex-1 flex flex-col">
-        {/* Barre d'outils */}
+        {/* Barre d'outils améliorée */}
         <div className="flex gap-2 mb-4">
           <Button onClick={handleExecute} disabled={isExecuting}>
             <Play className="h-4 w-4 mr-2" />
-            {isExecuting ? 'Exécution...' : 'Exécuter'}
+            {isExecuting ? 'Exécution...' : 'Exécuter le workflow'}
           </Button>
           <Button variant="outline" onClick={handleSave}>
             <Save className="h-4 w-4 mr-2" />
@@ -112,6 +138,10 @@ const WorkflowEditor: React.FC<WorkflowEditorProps> = ({ onExecute, onSave }) =>
             <Download className="h-4 w-4 mr-2" />
             Exporter
           </Button>
+          <div className="flex-1" />
+          <div className="text-sm text-muted-foreground flex items-center">
+            {nodes.length} nœuds • {edges.length} connexions
+          </div>
         </div>
 
         {/* Canvas React Flow */}
@@ -137,7 +167,7 @@ const WorkflowEditor: React.FC<WorkflowEditorProps> = ({ onExecute, onSave }) =>
       {showMonitor && (
         <Card className="w-80 flex-shrink-0">
           <CardHeader>
-            <CardTitle>Monitoring</CardTitle>
+            <CardTitle className="text-base">Monitoring & Logs</CardTitle>
           </CardHeader>
           <CardContent className="p-0">
             <WorkflowMonitor 
