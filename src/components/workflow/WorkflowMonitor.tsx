@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -70,12 +69,15 @@ const WorkflowMonitor: React.FC<WorkflowMonitorProps> = ({
       const node = nodes[i];
       const startTime = Date.now();
       
+      // Fix the type issue by ensuring nodeName is always a string
+      const nodeName = typeof node.data?.label === 'string' ? node.data.label : `Node ${i + 1}`;
+      
       // Log de début
       const startLog: ExecutionLog = {
         id: `${node.id}-start`,
         timestamp: new Date().toLocaleTimeString(),
         nodeId: node.id,
-        nodeName: node.data?.label || `Node ${i + 1}`,
+        nodeName,
         status: 'running',
         message: 'Exécution en cours...'
       };
