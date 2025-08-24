@@ -16,7 +16,7 @@ import '@xyflow/react/dist/style.css';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Play, Save, Download, FileTemplate } from 'lucide-react';
+import { Play, Save, Download, FileText } from 'lucide-react';
 import WorkflowNodeLibrary from './WorkflowNodeLibrary';
 import WorkflowMonitor from './WorkflowMonitor';
 import WorkflowPresets from './presets/WorkflowPresets';
