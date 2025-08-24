@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import Hero from '@/components/Hero';
 import { AddResourceForm } from '@/components/resources/AddResourceForm';
@@ -28,7 +27,12 @@ import { useResourceAudit } from '@/hooks/useResourceAudit';
 const Ressources = () => {
   const [showAddResourceForm, setShowAddResourceForm] = useState(false);
   const [showQuizDialog, setShowQuizDialog] = useState(false);
-  const [activeTab, setActiveTab] = useState("toutes");
+  
+  // Lire le paramètre tab depuis l'URL
+  const [activeTab, setActiveTab] = useState(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('tab') || 'toutes';
+  });
   
   // Filtres
   const [searchTerm, setSearchTerm] = useState('');
@@ -97,6 +101,28 @@ const Ressources = () => {
   const scrollToResources = () => {
     resourcesRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  // Écouter les événements de changement d'onglet
+  React.useEffect(() => {
+    const handleTabUpdate = (event: CustomEvent) => {
+      setActiveTab(event.detail);
+    };
+    
+    window.addEventListener('updateActiveTab', handleTabUpdate as EventListener);
+    return () => window.removeEventListener('updateActiveTab', handleTabUpdate as EventListener);
+  }, []);
+
+  // Mettre à jour l'URL quand l'onglet change
+  React.useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (activeTab !== 'toutes') {
+      urlParams.set('tab', activeTab);
+    } else {
+      urlParams.delete('tab');
+    }
+    const newUrl = `${window.location.pathname}${urlParams.toString() ? '?' + urlParams.toString() : ''}${window.location.hash}`;
+    window.history.replaceState(null, '', newUrl);
+  }, [activeTab]);
 
   return (
     <>

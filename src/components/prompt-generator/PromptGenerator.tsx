@@ -1,10 +1,12 @@
 
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Lightbulb, TestTube, History, TrendingUp } from 'lucide-react';
+import { Lightbulb, TestTube, History, TrendingUp, Zap } from 'lucide-react';
+import PromptGeneratorHeader from './PromptGeneratorHeader';
 import TemplateSelector from './TemplateSelector';
 import PromptEngine from './PromptEngine';
 import PromptTester from './PromptTester';
+import PromptOptimizer from './PromptOptimizer';
 import { PromptTemplate } from './promptTemplatesData';
 
 interface GeneratedPrompt {
@@ -50,10 +52,13 @@ const PromptGenerator: React.FC = () => {
 
   return (
     <div className="space-y-6">
+      <PromptGeneratorHeader />
+      
       <Tabs defaultValue="templates" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-5">
           <TabsTrigger value="templates">Templates</TabsTrigger>
           <TabsTrigger value="generator">Générateur</TabsTrigger>
+          <TabsTrigger value="optimizer">Optimiseur</TabsTrigger>
           <TabsTrigger value="tester">Testeur</TabsTrigger>
           <TabsTrigger value="history">Historique</TabsTrigger>
         </TabsList>
@@ -77,6 +82,23 @@ const PromptGenerator: React.FC = () => {
               <h3 className="text-lg font-semibold mb-2">Sélectionnez un template</h3>
               <p className="text-muted-foreground">
                 Choisissez un template dans l'onglet "Templates" pour commencer à générer des prompts.
+              </p>
+            </div>
+          )}
+        </TabsContent>
+
+        <TabsContent value="optimizer">
+          {currentPrompt ? (
+            <PromptOptimizer 
+              prompt={currentPrompt}
+              onOptimizedPrompt={setCurrentPrompt}
+            />
+          ) : (
+            <div className="text-center py-12">
+              <Zap className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
+              <h3 className="text-lg font-semibold mb-2">Générez un prompt d'abord</h3>
+              <p className="text-muted-foreground">
+                Créez un prompt dans l'onglet "Générateur" pour pouvoir l'optimiser ici.
               </p>
             </div>
           )}
