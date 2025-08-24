@@ -1,21 +1,22 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { Slider } from '@/components/ui/slider';
-import { Play, Pause, RotateCcw, Brain, TrendingUp, Target } from 'lucide-react';
+import { Brain, TrendingUp, Target } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { DataPoint } from './DatasetGenerator';
+import TrainingMetrics from './simulator/TrainingMetrics';
+import TrainingControls from './simulator/TrainingControls';
 
-interface TrainingMetrics {
+interface TrainingMetricsData {
   epoch: number;
   trainLoss: number;
   valLoss: number;
   trainAccuracy: number;
   valAccuracy: number;
   learningRate: number;
+  timeElapsed: number;
+  estimatedTimeRemaining: number;
 }
 
 interface TrainingSimulatorProps {
@@ -29,39 +30,78 @@ const TrainingSimulator: React.FC<TrainingSimulatorProps> = ({ dataset, algorith
   const [maxEpochs, setMaxEpochs] = useState<number[]>([100]);
   const [learningRate, setLearningRate] = useState<number[]>([1]);
   const [batchSize, setBatchSize] = useState<number[]>([32]);
-  const [metrics, setMetrics] = useState<TrainingMetrics[]>([]);
-  const [currentMetrics, setCurrentMetrics] = useState<TrainingMetrics | null>(null);
+  const [enableEarlyStopping, setEnableEarlyStopping] = useState(false);
+  const [enableRegularization, setEnableRegularization] = useState(false);
+  const [metrics, setMetrics] = useState<TrainingMetricsData[]>([]);
+  const [currentMetrics, setCurrentMetrics] = useState<TrainingMetricsData | null>(null);
+  const [startTime, setStartTime] = useState<number>(0);
 
-  // Simulation des métriques d'entraînement
-  const simulateTrainingStep = useCallback((epoch: number): TrainingMetrics => {
+  // Simulation des métriques d'entraînement améliorée
+  const simulateTrainingStep = useCallback((epoch: number): TrainingMetricsData => {
     const progress = epoch / maxEpochs[0];
     const lr = learningRate[0] * 0.01;
     
-    // Simulation réaliste de la convergence
-    const baseTrainLoss = Math.exp(-progress * 3) * 2;
-    const baseValLoss = Math.exp(-progress * 2.5) * 2.2;
+    // Simulation plus réaliste avec différents algorithmes
+    let baseTrainLoss, baseValLoss, convergenceRate;
     
-    // Ajout de bruit réaliste
-    const noise = () => (Math.random() - 0.5) * 0.1;
+    switch (algorithm) {
+      case 'neural_network':
+        convergenceRate = 3;
+        baseTrainLoss = Math.exp(-progress * convergenceRate) * 2.5;
+        baseValLoss = Math.exp(-progress * (convergenceRate * 0.8)) * 2.8;
+        break;
+      case 'svm':
+        convergenceRate = 4;
+        baseTrainLoss = Math.exp(-progress * convergenceRate) * 1.8;
+        baseValLoss = Math.exp(-progress * (convergenceRate * 0.9)) * 2.0;
+        break;
+      case 'random_forest':
+        convergenceRate = 2.5;
+        baseTrainLoss = Math.exp(-progress * convergenceRate) * 2.0;
+        baseValLoss = Math.exp(-progress * (convergenceRate * 0.95)) * 2.1;
+        break;
+      case 'knn':
+        convergenceRate = 5;
+        baseTrainLoss = Math.exp(-progress * convergenceRate) * 1.5;
+        baseValLoss = Math.exp(-progress * (convergenceRate * 0.85)) * 1.8;
+        break;
+      default:
+        convergenceRate = 3;
+        baseTrainLoss = Math.exp(-progress * convergenceRate) * 2;
+        baseValLoss = Math.exp(-progress * (convergenceRate * 0.8)) * 2.2;
+    }
     
-    const trainLoss = Math.max(0.05, baseTrainLoss + noise());
-    const valLoss = Math.max(0.08, baseValLoss + noise() + (progress > 0.7 ? progress * 0.1 : 0));
+    // Ajout de bruit réaliste et effets de régularisation
+    const noise = () => (Math.random() - 0.5) * 0.15;
+    const regularizationEffect = enableRegularization ? 0.95 : 1;
+    
+    const trainLoss = Math.max(0.05, baseTrainLoss * regularizationEffect + noise());
+    const valLoss = Math.max(0.08, baseValLoss * regularizationEffect + noise() + 
+      (progress > 0.7 && !enableRegularization ? progress * 0.2 : 0));
     
     // Calcul de l'accuracy basé sur la loss
-    const trainAccuracy = Math.min(98, (1 - trainLoss / 2) * 100);
-    const valAccuracy = Math.min(95, (1 - valLoss / 2) * 100);
+    const trainAccuracy = Math.min(98, (1 - trainLoss / 3) * 100 * regularizationEffect);
+    const valAccuracy = Math.min(96, (1 - valLoss / 3) * 100 * regularizationEffect);
     
+    // Calcul des temps
+    const currentTime = Date.now();
+    const timeElapsed = currentTime - startTime;
+    const timePerEpoch = epoch > 0 ? timeElapsed / epoch : 0;
+    const estimatedTimeRemaining = (maxEpochs[0] - epoch) * timePerEpoch;
+
     return {
       epoch,
       trainLoss: parseFloat(trainLoss.toFixed(4)),
       valLoss: parseFloat(valLoss.toFixed(4)),
       trainAccuracy: parseFloat(trainAccuracy.toFixed(2)),
       valAccuracy: parseFloat(valAccuracy.toFixed(2)),
-      learningRate: lr
+      learningRate: lr,
+      timeElapsed,
+      estimatedTimeRemaining
     };
-  }, [maxEpochs, learningRate]);
+  }, [maxEpochs, learningRate, algorithm, enableRegularization, startTime]);
 
-  // Boucle d'entraînement
+  // Boucle d'entraînement améliorée
   useEffect(() => {
     if (!isTraining || currentEpoch >= maxEpochs[0]) {
       if (currentEpoch >= maxEpochs[0]) {
@@ -73,22 +113,38 @@ const TrainingSimulator: React.FC<TrainingSimulatorProps> = ({ dataset, algorith
     const interval = setInterval(() => {
       const newMetrics = simulateTrainingStep(currentEpoch + 1);
       
+      // Arrêt précoce si activé
+      if (enableEarlyStopping && currentEpoch > 20) {
+        const recentMetrics = metrics.slice(-5);
+        if (recentMetrics.length >= 5) {
+          const improvementRate = recentMetrics[4].valAccuracy - recentMetrics[0].valAccuracy;
+          if (improvementRate < 0.5) {
+            console.log('Arrêt précoce déclenché - pas d\'amélioration significative');
+            setIsTraining(false);
+            return;
+          }
+        }
+      }
+      
       setMetrics(prev => [...prev, newMetrics]);
       setCurrentMetrics(newMetrics);
       setCurrentEpoch(prev => prev + 1);
       
-      // Simulation de la vitesse d'entraînement
-      const speed = Math.max(50, 200 - batchSize[0] * 2);
+      // Simulation de la vitesse d'entraînement variable
+      const speed = Math.max(80, 300 - batchSize[0] * 2);
       
       if (currentEpoch + 1 >= maxEpochs[0]) {
         setIsTraining(false);
       }
-    }, 100); // Animation rapide pour la démo
+    }, 150); // Animation plus lente pour meilleure visualisation
 
     return () => clearInterval(interval);
-  }, [isTraining, currentEpoch, maxEpochs, batchSize, simulateTrainingStep]);
+  }, [isTraining, currentEpoch, maxEpochs, batchSize, simulateTrainingStep, enableEarlyStopping, metrics]);
 
   const handleStartPause = () => {
+    if (!isTraining && currentEpoch === 0) {
+      setStartTime(Date.now());
+    }
     setIsTraining(!isTraining);
   };
 
@@ -97,6 +153,50 @@ const TrainingSimulator: React.FC<TrainingSimulatorProps> = ({ dataset, algorith
     setCurrentEpoch(0);
     setMetrics([]);
     setCurrentMetrics(null);
+    setStartTime(0);
+  };
+
+  const handleExportConfig = () => {
+    const config = {
+      algorithm,
+      hyperparameters: {
+        maxEpochs: maxEpochs[0],
+        learningRate: learningRate[0] * 0.01,
+        batchSize: batchSize[0],
+        enableEarlyStopping,
+        enableRegularization
+      },
+      dataset: {
+        size: dataset.length,
+        type: 'classification' // Simplification pour l'exemple
+      },
+      timestamp: new Date().toISOString()
+    };
+    
+    const blob = new Blob([JSON.stringify(config, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `training-config-${algorithm}-${Date.now()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleSaveProgress = () => {
+    const progress = {
+      algorithm,
+      currentEpoch,
+      metrics: metrics.slice(-10), // Dernières 10 époques
+      timestamp: new Date().toISOString()
+    };
+    
+    const blob = new Blob([JSON.stringify(progress, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `training-progress-${algorithm}-epoch-${currentEpoch}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   const getAlgorithmInfo = () => {
@@ -118,120 +218,45 @@ const TrainingSimulator: React.FC<TrainingSimulatorProps> = ({ dataset, algorith
 
   return (
     <div className="space-y-6">
-      {/* Panneau de contrôle */}
+      {/* En-tête avec informations sur l'algorithme */}
       <Card className="border-primary/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             {algoInfo.icon}
             Simulateur d'Entraînement - {algoInfo.name}
+            <Badge variant="secondary" className="ml-auto">
+              Dataset: {dataset.length} points
+            </Badge>
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
-          {/* Hyperparamètres */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <label className="text-sm font-medium">Nombre d'époques</label>
-                <Badge variant="secondary">{maxEpochs[0]}</Badge>
-              </div>
-              <Slider
-                value={maxEpochs}
-                onValueChange={setMaxEpochs}
-                min={50}
-                max={500}
-                step={50}
-                disabled={isTraining}
-              />
-            </div>
-
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <label className="text-sm font-medium">Taux d'apprentissage</label>
-                <Badge variant="secondary">{(learningRate[0] * 0.01).toFixed(3)}</Badge>
-              </div>
-              <Slider
-                value={learningRate}
-                onValueChange={setLearningRate}
-                min={1}
-                max={100}
-                step={1}
-                disabled={isTraining}
-              />
-            </div>
-
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <label className="text-sm font-medium">Taille de batch</label>
-                <Badge variant="secondary">{batchSize[0]}</Badge>
-              </div>
-              <Slider
-                value={batchSize}
-                onValueChange={setBatchSize}
-                min={16}
-                max={128}
-                step={16}
-                disabled={isTraining}
-              />
-            </div>
-          </div>
-
-          {/* Contrôles d'entraînement */}
-          <div className="flex items-center gap-4">
-            <Button onClick={handleStartPause} className="flex items-center gap-2">
-              {isTraining ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-              {isTraining ? 'Pause' : 'Démarrer'}
-            </Button>
-            
-            <Button variant="outline" onClick={handleReset} disabled={isTraining}>
-              <RotateCcw className="h-4 w-4 mr-2" />
-              Reset
-            </Button>
-
-            <div className="flex-1">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm">Progression</span>
-                <span className="text-sm text-muted-foreground">
-                  {currentEpoch} / {maxEpochs[0]}
-                </span>
-              </div>
-              <Progress value={(currentEpoch / maxEpochs[0]) * 100} />
-            </div>
-          </div>
-
-          {/* Métriques actuelles */}
-          {currentMetrics && (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="bg-muted/50 p-3 rounded-lg">
-                <div className="text-sm font-medium">Loss (Train)</div>
-                <div className="text-2xl font-bold text-blue-600">
-                  {currentMetrics.trainLoss.toFixed(4)}
-                </div>
-              </div>
-              
-              <div className="bg-muted/50 p-3 rounded-lg">
-                <div className="text-sm font-medium">Loss (Val)</div>
-                <div className="text-2xl font-bold text-orange-600">
-                  {currentMetrics.valLoss.toFixed(4)}
-                </div>
-              </div>
-              
-              <div className="bg-muted/50 p-3 rounded-lg">
-                <div className="text-sm font-medium">Accuracy (Train)</div>
-                <div className="text-2xl font-bold text-green-600">
-                  {currentMetrics.trainAccuracy.toFixed(1)}%
-                </div>
-              </div>
-              
-              <div className="bg-muted/50 p-3 rounded-lg">
-                <div className="text-sm font-medium">Accuracy (Val)</div>
-                <div className="text-2xl font-bold text-purple-600">
-                  {currentMetrics.valAccuracy.toFixed(1)}%
-                </div>
-              </div>
-            </div>
-          )}
-        </CardContent>
       </Card>
+
+      {/* Contrôles d'entraînement */}
+      <TrainingControls
+        isTraining={isTraining}
+        currentEpoch={currentEpoch}
+        maxEpochs={maxEpochs}
+        learningRate={learningRate}
+        batchSize={batchSize}
+        enableEarlyStopping={enableEarlyStopping}
+        enableRegularization={enableRegularization}
+        onStartPause={handleStartPause}
+        onReset={handleReset}
+        onMaxEpochsChange={setMaxEpochs}
+        onLearningRateChange={setLearningRate}
+        onBatchSizeChange={setBatchSize}
+        onEarlyStoppingToggle={setEnableEarlyStopping}
+        onRegularizationToggle={setEnableRegularization}
+        onExportConfig={handleExportConfig}
+        onSaveProgress={handleSaveProgress}
+      />
+
+      {/* Métriques de performance */}
+      <TrainingMetrics
+        currentMetrics={currentMetrics}
+        maxEpochs={maxEpochs[0]}
+        isTraining={isTraining}
+      />
 
       {/* Graphiques en temps réel */}
       {metrics.length > 0 && (
@@ -309,37 +334,6 @@ const TrainingSimulator: React.FC<TrainingSimulatorProps> = ({ dataset, algorith
           </Card>
         </div>
       )}
-
-      {/* Insights pédagogiques */}
-      <Card className="border-green-200 bg-green-50/50 dark:border-green-800 dark:bg-green-950/20">
-        <CardHeader>
-          <CardTitle className="text-green-800 dark:text-green-200">
-            💡 Observations pédagogiques
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="text-green-700 dark:text-green-300">
-          <div className="space-y-2 text-sm">
-            {currentEpoch === 0 && (
-              <p>• Cliquez sur "Démarrer" pour commencer la simulation d'entraînement</p>
-            )}
-            {currentEpoch > 0 && currentEpoch < 20 && (
-              <p>• Phase d'apprentissage initial : les métriques évoluent rapidement</p>
-            )}
-            {currentEpoch >= 20 && currentEpoch < 50 && (
-              <p>• Phase de stabilisation : l'algorithme affine sa compréhension des données</p>
-            )}
-            {currentEpoch >= 50 && (
-              <p>• Phase de convergence : les améliorations deviennent plus subtiles</p>
-            )}
-            {currentMetrics && currentMetrics.valLoss > currentMetrics.trainLoss * 1.2 && (
-              <p>• ⚠️ Possible surapprentissage détecté : la loss de validation diverge</p>
-            )}
-            {currentMetrics && currentMetrics.valAccuracy >= 90 && (
-              <p>• ✅ Excellentes performances ! Le modèle généralise bien</p>
-            )}
-          </div>
-        </CardContent>
-      </Card>
     </div>
   );
 };

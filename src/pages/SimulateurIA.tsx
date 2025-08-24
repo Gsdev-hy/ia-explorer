@@ -3,20 +3,47 @@ import Hero from '@/components/Hero';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
-import { Play, BarChart3, BookOpen, Zap, Database, Brain } from 'lucide-react';
+import { Play, BarChart3, BookOpen, Zap, Database, Brain, Settings } from 'lucide-react';
 import DatasetGenerator, { DataPoint } from '@/components/ml/DatasetGenerator';
 import TrainingSimulator from '@/components/ml/TrainingSimulator';
 import AlgorithmComparison from '@/components/ml/AlgorithmComparison';
 import InteractiveLearningModule from '@/components/ml/InteractiveLearningModule';
 import NeuralNetworkAnimation from '@/components/ml/NeuralNetworkAnimation';
 import DataTrainingSimulator from '@/components/courses/supervised-learning/DataTrainingSimulator';
+import SimulatorHeader from '@/components/ml/simulator/SimulatorHeader';
+import PresetSelector from '@/components/ml/simulator/PresetSelector';
+import { TrainingPreset } from '@/components/ml/simulator/TrainingPresets';
 
 const SimulateurIA = () => {
   const [currentDataset, setCurrentDataset] = useState<DataPoint[]>([]);
   const [selectedAlgorithm, setSelectedAlgorithm] = useState<'neural_network' | 'svm' | 'random_forest' | 'knn'>('neural_network');
+  const [selectedPreset, setSelectedPreset] = useState<string | null>(null);
+  const [useCustomConfig, setUseCustomConfig] = useState(false);
 
   const handleDatasetGenerated = (dataset: DataPoint[]) => {
     setCurrentDataset(dataset);
+  };
+
+  const handlePresetSelect = (preset: TrainingPreset) => {
+    setSelectedPreset(preset.id);
+    setSelectedAlgorithm(preset.algorithm);
+    
+    // Générer le dataset selon le preset
+    const syntheticDataset: DataPoint[] = [];
+    for (let i = 0; i < preset.dataset.size; i++) {
+      const x = (Math.random() - 0.5) * 10;
+      const y = (Math.random() - 0.5) * 10;
+      const label = Math.floor(Math.random() * (preset.dataset.numClasses || 2));
+      syntheticDataset.push({ x, y, label });
+    }
+    
+    setCurrentDataset(syntheticDataset);
+    setUseCustomConfig(false);
+  };
+
+  const handleCustomConfig = () => {
+    setSelectedPreset(null);
+    setUseCustomConfig(true);
   };
 
   const navigateToGenerator = () => {
@@ -32,76 +59,95 @@ const SimulateurIA = () => {
       />
       
       <section className="section-container">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-3 bg-primary/10 px-4 py-2 rounded-lg mb-4">
-            <Play className="h-5 w-5 text-primary" />
-            <span className="text-sm font-medium">Outil interactif maintenant disponible</span>
-          </div>
+        {/* En-tête avec créateur et lien retour */}
+        <SimulatorHeader />
+
+        {/* Présentation des fonctionnalités enrichies */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Settings className="h-5 w-5 text-blue-500" />
+                Presets Configurés
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground mb-4">
+                Configurations prêtes à l'emploi pour différents scénarios d'apprentissage.
+              </p>
+              <ul className="text-sm text-muted-foreground space-y-1">
+                <li>• Configurations pour débutants et experts</li>
+                <li>• Démonstrations de surapprentissage</li>
+                <li>• Paramètres optimisés par cas d'usage</li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Database className="h-5 w-5 text-green-500" />
+                Génération Avancée
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground mb-4">
+                Créez des datasets synthétiques complexes avec contrôle précis du bruit et de la distribution.
+              </p>
+              <ul className="text-sm text-muted-foreground space-y-1">
+                <li>• Datasets multi-classes et multi-dimensionnels</li>
+                <li>• Contrôle granulaire du bruit</li>
+                <li>• Export et sauvegarde des configurations</li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <BarChart3 className="h-5 w-5 text-purple-500" />
+                Métriques Enrichies
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground mb-4">
+                Observez des métriques détaillées avec alertes intelligentes et recommandations.
+              </p>
+              <ul className="text-sm text-muted-foreground space-y-1">
+                <li>• Détection automatique de surapprentissage</li>
+                <li>• Estimation du temps de convergence</li>
+                <li>• Alertes et conseils en temps réel</li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <BookOpen className="h-5 w-5 text-orange-500" />
+                Apprentissage Guidé
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground mb-4">
+                Modules interactifs avec explications contextuelles et recommandations personnalisées.
+              </p>
+              <ul className="text-sm text-muted-foreground space-y-1">
+                <li>• Explications adaptées au niveau</li>
+                <li>• Recommandations d'optimisation</li>
+                <li>• Historique et comparaisons</li>
+              </ul>
+            </CardContent>
+          </Card>
         </div>
 
-        {/* Présentation des fonctionnalités */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Database className="h-5 w-5 text-blue-500" />
-                Génération de Données
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-4">
-                Créez des datasets synthétiques pour tester différents algorithmes d'apprentissage automatique.
-              </p>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• Datasets de classification, régression et clustering</li>
-                <li>• Contrôle du bruit et de la complexité</li>
-                <li>• Export des données générées</li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <BarChart3 className="h-5 w-5 text-green-500" />
-                Visualisations en Temps Réel
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-4">
-                Observez l'évolution des métriques d'entraînement et la convergence des modèles en direct.
-              </p>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• Graphiques de loss et accuracy en temps réel</li>
-                <li>• Animation du processus d'apprentissage</li>
-                <li>• Détection du surapprentissage</li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <BookOpen className="h-5 w-5 text-purple-500" />
-                Apprentissage Interactif
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-4">
-                Apprenez les concepts fondamentaux du machine learning à travers des quiz et des explications.
-              </p>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• Quiz interactifs avec explications</li>
-                <li>• Comparaison d'algorithmes</li>
-                <li>• Modules pédagogiques détaillés</li>
-              </ul>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Interface principale avec onglets */}
-        <Tabs defaultValue="generator" className="w-full">
-          <TabsList className="grid w-full grid-cols-5">
+        {/* Interface principale avec onglets enrichis */}
+        <Tabs defaultValue="presets" className="w-full">
+          <TabsList className="grid w-full grid-cols-6">
+            <TabsTrigger value="presets" className="flex items-center gap-2">
+              <Settings className="h-4 w-4" />
+              <span className="hidden sm:inline">Presets</span>
+            </TabsTrigger>
             <TabsTrigger value="generator" className="flex items-center gap-2">
               <Database className="h-4 w-4" />
               <span className="hidden sm:inline">Données</span>
@@ -123,6 +169,14 @@ const SimulateurIA = () => {
               <span className="hidden sm:inline">Démo</span>
             </TabsTrigger>
           </TabsList>
+
+          <TabsContent value="presets" className="space-y-6">
+            <PresetSelector
+              selectedPreset={selectedPreset}
+              onPresetSelect={handlePresetSelect}
+              onCustomConfig={handleCustomConfig}
+            />
+          </TabsContent>
 
           <TabsContent value="generator" className="space-y-6">
             <DatasetGenerator onDatasetGenerated={handleDatasetGenerated} />
@@ -146,8 +200,21 @@ const SimulateurIA = () => {
           </TabsContent>
 
           <TabsContent value="training" className="space-y-6">
-            {currentDataset.length > 0 ? (
+            {currentDataset.length > 0 || selectedPreset ? (
               <>
+                {selectedPreset && (
+                  <Card className="border-blue-200 bg-blue-50/50 dark:border-blue-800 dark:bg-blue-950/20">
+                    <CardContent className="pt-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse" />
+                        <span className="font-medium text-blue-800 dark:text-blue-200">
+                          Preset actif: {selectedPreset}
+                        </span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+                
                 <div className="flex items-center gap-4 mb-6">
                   <span className="text-sm font-medium">Algorithme :</span>
                   <div className="flex gap-2">
@@ -171,17 +238,19 @@ const SimulateurIA = () => {
                 <CardContent className="pt-6 text-center">
                   <Database className="h-12 w-12 text-amber-500 mx-auto mb-4" />
                   <h3 className="font-medium text-amber-800 dark:text-amber-200 mb-2">
-                    Aucun dataset disponible
+                    Configuration requise
                   </h3>
                   <p className="text-amber-700 dark:text-amber-300 text-sm mb-4">
-                    Générez d'abord un dataset dans l'onglet "Données" pour commencer l'entraînement.
+                    Sélectionnez un preset ou générez un dataset personnalisé pour commencer l'entraînement.
                   </p>
-                  <Button 
-                    onClick={navigateToGenerator}
-                    size="sm"
-                  >
-                    Générer un Dataset
-                  </Button>
+                  <div className="flex gap-2 justify-center">
+                    <Button onClick={() => document.querySelector('[value="presets"]')?.click()} size="sm">
+                      Choisir un Preset
+                    </Button>
+                    <Button onClick={navigateToGenerator} size="sm" variant="outline">
+                      Créer un Dataset
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             )}
@@ -244,28 +313,34 @@ const SimulateurIA = () => {
           </TabsContent>
         </Tabs>
 
-        {/* Section informative */}
+        {/* Section informative mise à jour */}
         <div className="mt-16 text-center">
           <Card className="bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
             <CardContent className="pt-6">
-              <h3 className="text-2xl font-bold mb-4">🎯 Objectifs Pédagogiques</h3>
-              <div className="grid md:grid-cols-3 gap-6 text-left">
+              <h3 className="text-2xl font-bold mb-4">🎯 Fonctionnalités Avancées</h3>
+              <div className="grid md:grid-cols-4 gap-6 text-left">
                 <div>
-                  <h4 className="font-semibold mb-2">Compréhension Pratique</h4>
+                  <h4 className="font-semibold mb-2">Presets Intelligents</h4>
                   <p className="text-sm text-muted-foreground">
-                    Visualisez concrètement comment les algorithmes d'IA apprennent à partir de données.
+                    Configurations prêtes pour différents niveaux et objectifs pédagogiques.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-2">Expérimentation</h4>
+                  <h4 className="font-semibold mb-2">Détection Automatique</h4>
                   <p className="text-sm text-muted-foreground">
-                    Testez différents paramètres et observez leur impact sur les performances.
+                    Alertes en temps réel pour le surapprentissage et les problèmes de convergence.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-2">Apprentissage Actif</h4>
+                  <h4 className="font-semibold mb-2">Export & Sauvegarde</h4>
                   <p className="text-sm text-muted-foreground">
-                    Consolidez vos connaissances avec des quiz et des explications détaillées.
+                    Sauvegardez vos configurations et résultats pour analyse ultérieure.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">Recommandations</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Conseils personnalisés pour optimiser l'entraînement et les performances.
                   </p>
                 </div>
               </div>
