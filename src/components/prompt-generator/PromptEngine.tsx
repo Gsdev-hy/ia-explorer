@@ -13,7 +13,7 @@ import { PromptTemplate, PromptVariable } from './promptTemplatesData';
 
 interface PromptEngineProps {
   template: PromptTemplate;
-  onPromptGenerated: (prompt: string, template: PromptTemplate) => void;
+  onPromptGenerated: (prompt: string, template: PromptTemplate, variables: Record<string, string>) => void;
 }
 
 const PromptEngine: React.FC<PromptEngineProps> = ({ template, onPromptGenerated }) => {
@@ -59,7 +59,7 @@ const PromptEngine: React.FC<PromptEngineProps> = ({ template, onPromptGenerated
     setTimeout(() => {
       setGeneratedPrompt(prompt);
       setIsGenerating(false);
-      onPromptGenerated(prompt, template);
+      onPromptGenerated(prompt, template, variables);
       toast.success('Prompt généré avec succès !');
     }, 500);
   };

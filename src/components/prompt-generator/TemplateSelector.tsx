@@ -12,6 +12,7 @@ import {
   getTemplatesByCategory,
   searchTemplates 
 } from './promptTemplatesData';
+import { advancedPromptTemplates, advancedCategories } from './advancedTemplatesData';
 
 interface TemplateSelectorProps {
   onTemplateSelect: (template: PromptTemplate) => void;
@@ -26,12 +27,25 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'quality' | 'usage' | 'name'>('quality');
 
+  // Combiner tous les templates et catégories
+  const allTemplates = useMemo(() => {
+    return [...promptTemplates, ...advancedPromptTemplates];
+  }, []);
+
+  const allCategories = useMemo(() => {
+    return [...promptCategories, ...advancedCategories];
+  }, []);
+
   const filteredTemplates = useMemo(() => {
     let templates = searchQuery 
-      ? searchTemplates(searchQuery)
+      ? allTemplates.filter(template => 
+          template.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          template.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          template.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+        )
       : selectedCategory === 'all' 
-        ? promptTemplates 
-        : getTemplatesByCategory(selectedCategory);
+        ? allTemplates 
+        : allTemplates.filter(template => template.category === selectedCategory);
 
     // Tri
     templates.sort((a, b) => {
@@ -48,12 +62,16 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
     });
 
     return templates;
-  }, [searchQuery, selectedCategory, sortBy]);
+  }, [allTemplates, searchQuery, selectedCategory, sortBy]);
 
   const getQualityColor = (quality: number) => {
     if (quality >= 4.5) return 'text-green-600';
     if (quality >= 4.0) return 'text-yellow-600';
     return 'text-orange-600';
+  };
+
+  const getCategoryCount = (categoryId: string) => {
+    return allTemplates.filter(template => template.category === categoryId).length;
   };
 
   return (
@@ -63,7 +81,7 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Search className="h-5 w-5" />
-            Parcourir les templates
+            Parcourir les templates ({allTemplates.length})
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -92,10 +110,10 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
               size="sm"
               onClick={() => setSelectedCategory('all')}
             >
-              Tous ({promptTemplates.length})
+              Tous ({allTemplates.length})
             </Button>
-            {promptCategories.map(category => {
-              const count = getTemplatesByCategory(category.id).length;
+            {allCategories.map(category => {
+              const count = getCategoryCount(category.id);
               return (
                 <Button
                   key={category.id}
@@ -131,7 +149,12 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
               <CardContent className="p-4">
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex-1">
-                    <h3 className="font-semibold text-lg">{template.name}</h3>
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="font-semibold text-lg">{template.name}</h3>
+                      {advancedPromptTemplates.includes(template) && (
+                        <Badge variant="default" className="text-xs">Avancé</Badge>
+                      )}
+                    </div>
                     <p className="text-sm text-muted-foreground mb-2">
                       {template.description}
                     </p>

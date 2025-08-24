@@ -1,13 +1,15 @@
 
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Lightbulb, TestTube, History, TrendingUp, Zap } from 'lucide-react';
+import { Lightbulb, TestTube, History, TrendingUp, Zap, Save } from 'lucide-react';
 import PromptGeneratorHeader from './PromptGeneratorHeader';
 import TemplateSelector from './TemplateSelector';
 import PromptEngine from './PromptEngine';
 import PromptTester from './PromptTester';
 import PromptOptimizer from './PromptOptimizer';
+import PromptExportManager from './PromptExportManager';
 import { PromptTemplate } from './promptTemplatesData';
+import { advancedPromptTemplates, advancedCategories } from './advancedTemplatesData';
 
 interface GeneratedPrompt {
   id: string;
@@ -20,14 +22,16 @@ interface GeneratedPrompt {
 const PromptGenerator: React.FC = () => {
   const [selectedTemplate, setSelectedTemplate] = useState<PromptTemplate | undefined>();
   const [currentPrompt, setCurrentPrompt] = useState<string>('');
+  const [currentVariables, setCurrentVariables] = useState<Record<string, string>>({});
   const [generatedPrompts, setGeneratedPrompts] = useState<GeneratedPrompt[]>([]);
 
   const handleTemplateSelect = (template: PromptTemplate) => {
     setSelectedTemplate(template);
   };
 
-  const handlePromptGenerated = (prompt: string, template: PromptTemplate) => {
+  const handlePromptGenerated = (prompt: string, template: PromptTemplate, variables: Record<string, string>) => {
     setCurrentPrompt(prompt);
+    setCurrentVariables(variables);
     
     const newGenerated: GeneratedPrompt = {
       id: Date.now().toString(),
@@ -36,11 +40,10 @@ const PromptGenerator: React.FC = () => {
       timestamp: new Date()
     };
     
-    setGeneratedPrompts(prev => [newGenerated, ...prev.slice(0, 9)]); // Garder les 10 derniers
+    setGeneratedPrompts(prev => [newGenerated, ...prev.slice(0, 9)]);
   };
 
   const handleTestComplete = (result: any) => {
-    // Ajouter le résultat de test au prompt actuel
     setGeneratedPrompts(prev => 
       prev.map(prompt => 
         prompt.content === currentPrompt 
@@ -55,11 +58,12 @@ const PromptGenerator: React.FC = () => {
       <PromptGeneratorHeader />
       
       <Tabs defaultValue="templates" className="w-full">
-        <TabsList className="grid w-full grid-cols-5">
+        <TabsList className="grid w-full grid-cols-6">
           <TabsTrigger value="templates">Templates</TabsTrigger>
           <TabsTrigger value="generator">Générateur</TabsTrigger>
           <TabsTrigger value="optimizer">Optimiseur</TabsTrigger>
           <TabsTrigger value="tester">Testeur</TabsTrigger>
+          <TabsTrigger value="manager">Gestion</TabsTrigger>
           <TabsTrigger value="history">Historique</TabsTrigger>
         </TabsList>
 
@@ -119,6 +123,14 @@ const PromptGenerator: React.FC = () => {
               </p>
             </div>
           )}
+        </TabsContent>
+
+        <TabsContent value="manager">
+          <PromptExportManager 
+            currentPrompt={currentPrompt}
+            currentTemplate={selectedTemplate}
+            currentVariables={currentVariables}
+          />
         </TabsContent>
 
         <TabsContent value="history">

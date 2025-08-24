@@ -2,231 +2,328 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { Play, Loader2, Copy, ThumbsUp, ThumbsDown, BarChart3 } from 'lucide-react';
+import { Textarea } from '@/components/ui/textarea';
+import { Progress } from '@/components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { TestTube, Play, RotateCcw, CheckCircle, AlertCircle, TrendingUp, Clock, Target } from 'lucide-react';
 import { toast } from 'sonner';
 
-interface PromptTestResult {
+interface TestResult {
   id: string;
-  prompt: string;
-  model: string;
-  response: string;
   timestamp: Date;
-  rating?: number;
-  tokens: number;
-  responseTime: number;
+  prompt: string;
+  response: string;
+  score: number;
+  criteria: {
+    relevance: number;
+    clarity: number;
+    creativity: number;
+    completeness: number;
+  };
+  feedback: string;
+  duration: number;
 }
 
 interface PromptTesterProps {
   prompt: string;
-  onTestComplete: (result: PromptTestResult) => void;
+  onTestComplete: (result: TestResult) => void;
 }
 
 const PromptTester: React.FC<PromptTesterProps> = ({ prompt, onTestComplete }) => {
-  const [selectedModel, setSelectedModel] = useState('gpt-4o-mini');
-  const [testResults, setTestResults] = useState<PromptTestResult[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [currentResponse, setCurrentResponse] = useState('');
+  const [isRunning, setIsRunning] = useState(false);
+  const [currentTest, setCurrentTest] = useState<TestResult | null>(null);
+  const [testHistory, setTestHistory] = useState<TestResult[]>([]);
+  const [selectedTestType, setSelectedTestType] = useState('standard');
+  const [customInput, setCustomInput] = useState('');
 
-  const models = [
-    { id: 'gpt-4o-mini', name: 'GPT-4o Mini', provider: 'OpenAI' },
-    { id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo', provider: 'OpenAI' },
-    { id: 'claude-3-haiku', name: 'Claude 3 Haiku', provider: 'Anthropic' },
-    { id: 'gemini-flash', name: 'Gemini Flash', provider: 'Google' }
-  ];
+  const testScenarios = {
+    standard: {
+      name: 'Test Standard',
+      description: 'Évaluation générale de la qualité du prompt',
+      input: 'Utilisez ce prompt dans un contexte normal'
+    },
+    creative: {
+      name: 'Test Créatif',
+      description: 'Évalue la capacité créative du prompt',
+      input: 'Générez quelque chose de vraiment original et créatif'
+    },
+    technical: {
+      name: 'Test Technique',
+      description: 'Teste la précision technique du prompt',
+      input: 'Fournissez une réponse technique détaillée et précise'
+    },
+    edge_cases: {
+      name: 'Cas Limites',
+      description: 'Teste le comportement dans des situations extrêmes',
+      input: 'Répondez à cette demande complexe et ambiguë'
+    },
+    custom: {
+      name: 'Personnalisé',
+      description: 'Test avec votre propre scénario',
+      input: ''
+    }
+  };
 
-  const testPrompt = async () => {
+  const runTest = async () => {
     if (!prompt.trim()) {
-      toast.error('Aucun prompt à tester');
+      toast.error('Veuillez fournir un prompt à tester');
       return;
     }
 
-    setIsLoading(true);
-    setCurrentResponse('');
+    setIsRunning(true);
+    const startTime = Date.now();
 
-    try {
-      // Simulation d'appel API (à remplacer par de vrais appels)
-      const startTime = Date.now();
+    // Simulation du test
+    setTimeout(() => {
+      const testInput = selectedTestType === 'custom' ? customInput : testScenarios[selectedTestType as keyof typeof testScenarios].input;
+      const fullPrompt = `${prompt}\n\nContexte de test: ${testInput}`;
+
+      // Simulation d'évaluation basée sur la longueur et la structure du prompt
+      const baseScore = Math.min(90, 40 + prompt.length / 10);
+      const hasStructure = prompt.includes(':') || prompt.includes('-') || prompt.includes('\n');
+      const hasRole = prompt.toLowerCase().includes('tu es') || prompt.toLowerCase().includes('vous êtes');
+      const hasExamples = prompt.toLowerCase().includes('exemple');
       
-      // Simuler une réponse (en production, ici on ferait l'appel API réel)
-      await new Promise(resolve => setTimeout(resolve, 2000 + Math.random() * 3000));
-      
-      const mockResponses = [
-        "Voici une réponse détaillée à votre demande. L'IA a traité le prompt et généré ce contenu en fonction des instructions fournies.",
-        "Cette réponse simule ce qu'un modèle d'IA produirait pour votre prompt. Dans un environnement réel, vous obtiendriez la vraie réponse du modèle sélectionné.",
-        "Le prompt a été traité avec succès. Cette réponse démontre comment l'IA interpréterait et répondrait à vos instructions spécifiques.",
-        "Réponse générée par simulation. En intégrant de vraies APIs, vous pourriez tester vos prompts avec différents modèles d'IA en temps réel."
-      ];
-      
-      const response = mockResponses[Math.floor(Math.random() * mockResponses.length)];
-      const endTime = Date.now();
-      
-      const result: PromptTestResult = {
+      const relevance = Math.min(100, baseScore + (hasRole ? 15 : 0) + Math.random() * 10);
+      const clarity = Math.min(100, baseScore + (hasStructure ? 20 : 0) + Math.random() * 10);
+      const creativity = Math.min(100, baseScore + (hasExamples ? 10 : 0) + Math.random() * 15);
+      const completeness = Math.min(100, baseScore + (prompt.length > 200 ? 15 : 0) + Math.random() * 10);
+
+      const overallScore = (relevance + clarity + creativity + completeness) / 4;
+      const duration = Date.now() - startTime;
+
+      const result: TestResult = {
         id: Date.now().toString(),
-        prompt: prompt,
-        model: selectedModel,
-        response: response,
         timestamp: new Date(),
-        tokens: Math.floor(Math.random() * 500) + 100,
-        responseTime: endTime - startTime
+        prompt: fullPrompt,
+        response: generateMockResponse(overallScore),
+        score: Math.round(overallScore),
+        criteria: {
+          relevance: Math.round(relevance),
+          clarity: Math.round(clarity),
+          creativity: Math.round(creativity),
+          completeness: Math.round(completeness)
+        },
+        feedback: generateFeedback(overallScore, { relevance, clarity, creativity, completeness }),
+        duration
       };
 
-      setCurrentResponse(response);
-      setTestResults(prev => [result, ...prev.slice(0, 4)]); // Garder les 5 derniers résultats
+      setCurrentTest(result);
+      setTestHistory(prev => [result, ...prev.slice(0, 9)]);
+      setIsRunning(false);
       onTestComplete(result);
-      
-      toast.success('Test complété avec succès !');
-    } catch (error) {
-      toast.error('Erreur lors du test du prompt');
-      console.error('Test error:', error);
-    } finally {
-      setIsLoading(false);
+      toast.success('Test terminé avec succès !');
+    }, 2000 + Math.random() * 2000);
+  };
+
+  const generateMockResponse = (score: number): string => {
+    const responses = [
+      'Réponse excellente et détaillée qui répond parfaitement aux attentes.',
+      'Bonne réponse avec quelques éléments manquants.',
+      'Réponse correcte mais qui pourrait être améliorée.',
+      'Réponse basique qui nécessite des améliorations.',
+      'Réponse insuffisante qui ne répond pas aux attentes.'
+    ];
+    
+    const index = Math.min(4, Math.floor((100 - score) / 20));
+    return responses[index];
+  };
+
+  const generateFeedback = (score: number, criteria: any): string => {
+    const feedback: string[] = [];
+    
+    if (criteria.relevance < 70) {
+      feedback.push('• Améliorer la pertinence du contexte');
     }
+    if (criteria.clarity < 70) {
+      feedback.push('• Clarifier les instructions');
+    }
+    if (criteria.creativity < 70) {
+      feedback.push('• Ajouter des éléments créatifs');
+    }
+    if (criteria.completeness < 70) {
+      feedback.push('• Compléter les informations manquantes');
+    }
+    
+    if (feedback.length === 0) {
+      return 'Excellent prompt ! Tous les critères sont satisfaisants.';
+    }
+    
+    return `Améliorations suggérées:\n${feedback.join('\n')}`;
   };
 
-  const rateResponse = (resultId: string, rating: number) => {
-    setTestResults(prev => 
-      prev.map(result => 
-        result.id === resultId ? { ...result, rating } : result
-      )
-    );
-    toast.success(`Réponse notée ${rating}/5`);
+  const getScoreColor = (score: number) => {
+    if (score >= 80) return 'text-green-600';
+    if (score >= 60) return 'text-yellow-600';
+    return 'text-red-600';
   };
 
-  const copyResponse = (response: string) => {
-    navigator.clipboard.writeText(response);
-    toast.success('Réponse copiée');
+  const getScoreBgColor = (score: number) => {
+    if (score >= 80) return 'bg-green-100 dark:bg-green-900/20';
+    if (score >= 60) return 'bg-yellow-100 dark:bg-yellow-900/20';
+    return 'bg-red-100 dark:bg-red-900/20';
   };
-
-  const selectedModelInfo = models.find(m => m.id === selectedModel);
 
   return (
     <div className="space-y-6">
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Play className="h-5 w-5" />
-            Testeur de Prompt
+            <TestTube className="h-5 w-5" />
+            Testeur de Prompts
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Modèle d'IA</label>
-            <Select value={selectedModel} onValueChange={setSelectedModel}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {models.map(model => (
-                  <SelectItem key={model.id} value={model.id}>
-                    <div className="flex items-center gap-2">
-                      <span>{model.name}</span>
-                      <Badge variant="outline" className="text-xs">
-                        {model.provider}
-                      </Badge>
-                    </div>
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          <Tabs value={selectedTestType} onValueChange={setSelectedTestType}>
+            <TabsList className="grid w-full grid-cols-5">
+              <TabsTrigger value="standard">Standard</TabsTrigger>
+              <TabsTrigger value="creative">Créatif</TabsTrigger>
+              <TabsTrigger value="technical">Technique</TabsTrigger>
+              <TabsTrigger value="edge_cases">Cas limites</TabsTrigger>
+              <TabsTrigger value="custom">Personnalisé</TabsTrigger>
+            </TabsList>
 
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Prompt à tester</label>
-            <Textarea
-              value={prompt}
-              readOnly
-              className="min-h-[120px] bg-muted"
-              placeholder="Générez un prompt pour le tester ici..."
-            />
-          </div>
+            {Object.entries(testScenarios).map(([key, scenario]) => (
+              <TabsContent key={key} value={key} className="space-y-3">
+                <div className="p-3 bg-muted/50 rounded-lg">
+                  <h4 className="font-medium">{scenario.name}</h4>
+                  <p className="text-sm text-muted-foreground mb-2">{scenario.description}</p>
+                  {key === 'custom' ? (
+                    <Textarea
+                      placeholder="Décrivez votre scénario de test personnalisé..."
+                      value={customInput}
+                      onChange={(e) => setCustomInput(e.target.value)}
+                    />
+                  ) : (
+                    <p className="text-sm font-mono bg-background p-2 rounded border">
+                      {scenario.input}
+                    </p>
+                  )}
+                </div>
+              </TabsContent>
+            ))}
+          </Tabs>
 
           <Button 
-            onClick={testPrompt} 
-            disabled={!prompt.trim() || isLoading}
+            onClick={runTest} 
+            disabled={!prompt || isRunning || (selectedTestType === 'custom' && !customInput.trim())}
             className="w-full"
           >
-            {isLoading ? (
-              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+            {isRunning ? (
+              <>
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                Test en cours...
+              </>
             ) : (
-              <Play className="h-4 w-4 mr-2" />
+              <>
+                <Play className="h-4 w-4 mr-2" />
+                Lancer le test
+              </>
             )}
-            {isLoading ? 'Test en cours...' : `Tester avec ${selectedModelInfo?.name}`}
           </Button>
         </CardContent>
       </Card>
 
-      {/* Réponse actuelle */}
-      {currentResponse && (
+      {/* Résultats du test actuel */}
+      {currentTest && (
         <Card>
           <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-lg">Réponse du modèle</CardTitle>
+            <div className="flex justify-between items-start">
+              <CardTitle>Résultats du test</CardTitle>
               <div className="flex items-center gap-2">
-                <Badge>{selectedModelInfo?.name}</Badge>
-                <Button variant="outline" size="sm" onClick={() => copyResponse(currentResponse)}>
-                  <Copy className="h-4 w-4" />
-                </Button>
+                <Clock className="h-4 w-4 text-muted-foreground" />
+                <span className="text-sm text-muted-foreground">
+                  {currentTest.duration}ms
+                </span>
               </div>
             </div>
           </CardHeader>
-          <CardContent>
-            <div className="bg-muted p-4 rounded-lg mb-4">
-              <p className="whitespace-pre-wrap text-sm">{currentResponse}</p>
+          <CardContent className="space-y-4">
+            {/* Score global */}
+            <div className={`p-4 rounded-lg ${getScoreBgColor(currentTest.score)}`}>
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-medium">Score global</span>
+                <span className={`text-2xl font-bold ${getScoreColor(currentTest.score)}`}>
+                  {currentTest.score}/100
+                </span>
+              </div>
+              <Progress value={currentTest.score} className="w-full" />
             </div>
-            
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-muted-foreground">Noter cette réponse :</span>
-              {[1, 2, 3, 4, 5].map(rating => (
-                <Button
-                  key={rating}
-                  variant="outline"
-                  size="sm"
-                  onClick={() => rateResponse(testResults[0]?.id, rating)}
-                  className="p-1"
-                >
-                  {rating}
-                </Button>
+
+            {/* Détail des critères */}
+            <div className="grid grid-cols-2 gap-3">
+              {Object.entries(currentTest.criteria).map(([criterion, score]) => (
+                <div key={criterion} className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="capitalize">{criterion === 'relevance' ? 'Pertinence' : 
+                                                    criterion === 'clarity' ? 'Clarté' :
+                                                    criterion === 'creativity' ? 'Créativité' : 'Complétude'}</span>
+                    <span className={getScoreColor(score)}>{score}%</span>
+                  </div>
+                  <Progress value={score} className="h-2" />
+                </div>
               ))}
+            </div>
+
+            {/* Feedback */}
+            <div className="bg-muted/50 p-3 rounded-lg">
+              <h4 className="font-medium mb-2">Feedback détaillé</h4>
+              <pre className="text-sm whitespace-pre-wrap text-muted-foreground">
+                {currentTest.feedback}
+              </pre>
+            </div>
+
+            {/* Réponse générée */}
+            <div className="bg-muted/50 p-3 rounded-lg">
+              <h4 className="font-medium mb-2">Réponse générée</h4>
+              <p className="text-sm text-muted-foreground">
+                {currentTest.response}
+              </p>
             </div>
           </CardContent>
         </Card>
       )}
 
       {/* Historique des tests */}
-      {testResults.length > 0 && (
+      {testHistory.length > 0 && (
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <BarChart3 className="h-5 w-5" />
-              Historique des tests ({testResults.length})
+              <TrendingUp className="h-5 w-5" />
+              Historique des tests ({testHistory.length})
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
-            {testResults.map(result => (
-              <div key={result.id} className="border rounded-lg p-4 space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Badge variant="outline">{result.model}</Badge>
-                    <span className="text-sm text-muted-foreground">
-                      {result.timestamp.toLocaleTimeString()}
-                    </span>
+          <CardContent>
+            <div className="space-y-3">
+              {testHistory.map((test, index) => (
+                <div key={test.id} className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-sm font-medium">
+                        Test #{testHistory.length - index}
+                      </span>
+                      <Badge variant="outline" className="text-xs">
+                        {test.timestamp.toLocaleTimeString()}
+                      </Badge>
+                    </div>
+                    <p className="text-xs text-muted-foreground line-clamp-1">
+                      {test.prompt.substring(0, 100)}...
+                    </p>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <span>{result.tokens} tokens</span>
-                    <span>{result.responseTime}ms</span>
-                    {result.rating && (
-                      <Badge variant="secondary">{result.rating}/5</Badge>
+                  <div className="flex items-center gap-3">
+                    <span className={`text-sm font-bold ${getScoreColor(test.score)}`}>
+                      {test.score}/100
+                    </span>
+                    {test.score >= 80 ? (
+                      <CheckCircle className="h-4 w-4 text-green-600" />
+                    ) : (
+                      <AlertCircle className="h-4 w-4 text-yellow-600" />
                     )}
                   </div>
                 </div>
-                <p className="text-sm bg-muted p-2 rounded truncate">
-                  {result.response}
-                </p>
-              </div>
-            ))}
+              ))}
+            </div>
           </CardContent>
         </Card>
       )}
