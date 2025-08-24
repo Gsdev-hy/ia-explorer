@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
@@ -21,7 +20,8 @@ import {
   Loader2,
   Settings,
   ArrowLeft,
-  User
+  User,
+  Download
 } from 'lucide-react';
 
 export const AIContentDetector: React.FC = () => {
@@ -271,20 +271,27 @@ export const AIContentDetector: React.FC = () => {
                     key={result.id}
                     result={result}
                     onViewDetails={handleViewDetails}
-                    onViewDetailedAnalysis={handleViewDetailedAnalysis}
                     onExport={handleExportResult}
                   />
                 ))}
               </div>
+              {results.length > 0 && (
+                <div className="flex justify-center">
+                  <Button
+                    variant="outline"
+                    onClick={() => results.length > 0 && handleViewDetailedAnalysis(results[0])}
+                    className="flex items-center gap-2"
+                  >
+                    Voir l'analyse détaillée
+                  </Button>
+                </div>
+              )}
             </div>
           )}
         </TabsContent>
 
         <TabsContent value="text">
-          <TextAnalyzer 
-            onAnalysisComplete={handleAnalysisComplete}
-            selectedPreset={selectedPreset}
-          />
+          <TextAnalyzer onAnalysisComplete={handleAnalysisComplete} />
         </TabsContent>
 
         <TabsContent value="history">

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -11,19 +10,22 @@ import {
   Image, 
   Music, 
   Download,
-  Eye
+  Eye,
+  Search
 } from 'lucide-react';
 import { DetectionResult } from '@/services/aiDetectionService';
 
 interface AnalysisResultProps {
   result: DetectionResult;
   onViewDetails: (result: DetectionResult) => void;
+  onViewDetailedAnalysis?: (result: DetectionResult) => void;
   onExport: (result: DetectionResult) => void;
 }
 
 export const AnalysisResult: React.FC<AnalysisResultProps> = ({
   result,
   onViewDetails,
+  onViewDetailedAnalysis,
   onExport
 }) => {
   const getFileTypeIcon = (type: string) => {
@@ -125,6 +127,17 @@ export const AnalysisResult: React.FC<AnalysisResultProps> = ({
             <Eye className="h-4 w-4 mr-1" />
             Détails
           </Button>
+          {onViewDetailedAnalysis && (
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={() => onViewDetailedAnalysis(result)}
+              className="flex-1"
+            >
+              <Search className="h-4 w-4 mr-1" />
+              Analyse
+            </Button>
+          )}
           <Button 
             variant="outline" 
             size="sm" 

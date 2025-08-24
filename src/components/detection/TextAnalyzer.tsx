@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -16,10 +15,12 @@ import { DetectionResult, aiDetectionService } from '@/services/aiDetectionServi
 
 interface TextAnalyzerProps {
   onAnalysisComplete: (result: DetectionResult) => void;
+  selectedPreset?: string;
 }
 
 export const TextAnalyzer: React.FC<TextAnalyzerProps> = ({
-  onAnalysisComplete
+  onAnalysisComplete,
+  selectedPreset
 }) => {
   const [text, setText] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -33,7 +34,7 @@ export const TextAnalyzer: React.FC<TextAnalyzerProps> = ({
       // Simulation d'un délai d'analyse
       await new Promise(resolve => setTimeout(resolve, 2000));
       
-      const analysisResult = await aiDetectionService.detectText(text);
+      const analysisResult = await aiDetectionService.detectText(text, selectedPreset);
       setResult(analysisResult);
       aiDetectionService.saveAnalysis(analysisResult);
       onAnalysisComplete(analysisResult);
@@ -59,6 +60,11 @@ export const TextAnalyzer: React.FC<TextAnalyzerProps> = ({
           <CardTitle className="flex items-center gap-2">
             <FileText className="h-5 w-5" />
             Analyse de texte
+            {selectedPreset && (
+              <Badge variant="secondary" className="ml-auto">
+                Preset: {selectedPreset}
+              </Badge>
+            )}
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
