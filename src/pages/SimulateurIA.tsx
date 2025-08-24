@@ -7,11 +7,9 @@ import { DataPoint } from '@/components/ml/DatasetGenerator';
 const SimulateurIA: React.FC = () => {
   // Default dataset for demonstration
   const defaultDataset: DataPoint[] = Array.from({ length: 200 }, (_, i) => ({
-    id: i.toString(),
     x: Math.random() * 10,
     y: Math.random() * 10,
-    label: Math.random() > 0.5 ? 'Class A' : 'Class B',
-    category: Math.random() > 0.5 ? 'positive' : 'negative'
+    label: Math.random() > 0.5 ? 1 : 0, // Use numeric labels (0 or 1)
   }));
 
   return (
