@@ -1,8 +1,8 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { 
   Brain, 
   FileText, 
@@ -30,8 +30,10 @@ import {
   Users,
   Calendar,
   TrendingUp,
-  AlertTriangle
+  AlertTriangle,
+  ExternalLink
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface NodeCategory {
   id: string;
@@ -390,117 +392,153 @@ const WorkflowNodeLibrary: React.FC = () => {
   };
 
   return (
-    <div className="h-full overflow-y-auto p-4 space-y-4">
-      {/* Recherche et filtres */}
-      <div className="space-y-3">
-        <Input
-          placeholder="Rechercher un nœud..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full"
-        />
-        
-        <div className="flex flex-wrap gap-1">
-          <Badge
-            variant={selectedCategory === 'all' ? 'default' : 'secondary'}
-            className="cursor-pointer text-xs"
-            onClick={() => setSelectedCategory('all')}
-          >
-            Tous
-          </Badge>
-          {nodeCategories.map(category => (
+    <div className="h-full flex flex-col">
+      {/* Lien retour vers les ressources */}
+      <div className="mb-4 p-3 bg-primary/5 rounded-lg border border-primary/20 flex-shrink-0">
+        <div className="flex items-center gap-2 text-sm">
+          <Globe className="h-4 w-4 text-primary" />
+          <span className="text-muted-foreground">Découvrez plus d'outils IA dans</span>
+          <Button variant="link" className="p-0 h-auto text-primary font-medium" asChild>
+            <Link to="/ressources?tab=outils#resources" className="flex items-center gap-1">
+              la section Ressources
+              <ExternalLink className="h-3 w-3" />
+            </Link>
+          </Button>
+        </div>
+      </div>
+
+      {/* Container avec scroll pour le contenu principal */}
+      <div className="flex-1 overflow-y-auto space-y-4">
+        {/* Recherche et filtres */}
+        <div className="space-y-3 px-1">
+          <Input
+            placeholder="Rechercher un nœud..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full"
+          />
+          
+          <div className="flex flex-wrap gap-1">
             <Badge
-              key={category.id}
-              variant={selectedCategory === category.id ? 'default' : 'secondary'}
+              variant={selectedCategory === 'all' ? 'default' : 'secondary'}
               className="cursor-pointer text-xs"
-              onClick={() => setSelectedCategory(category.id)}
+              onClick={() => setSelectedCategory('all')}
             >
-              {category.name}
+              Tous
             </Badge>
-          ))}
-        </div>
-      </div>
-
-      {/* Statistiques */}
-      <div className="text-xs text-muted-foreground p-2 bg-secondary/20 rounded">
-        {workflowNodes.length} nœuds disponibles • {nodeCategories.length} catégories
-      </div>
-
-      {/* Nœuds par catégorie */}
-      {filteredCategories.map(category => {
-        const categoryNodes = filteredNodes(category.nodes);
-        if (categoryNodes.length === 0) return null;
-
-        return (
-          <div key={category.id} className="space-y-2">
-            <div className="flex items-center gap-2 font-medium text-sm">
-              {category.icon}
-              <span>{category.name}</span>
-              <Badge variant="outline" className="text-xs">
-                {categoryNodes.length}
+            {nodeCategories.map(category => (
+              <Badge
+                key={category.id}
+                variant={selectedCategory === category.id ? 'default' : 'secondary'}
+                className="cursor-pointer text-xs"
+                onClick={() => setSelectedCategory(category.id)}
+              >
+                {category.name}
               </Badge>
-            </div>
-            
-            <div className="space-y-2">
-              {categoryNodes.map(node => (
-                <Card key={node.id} className="cursor-move hover:shadow-sm transition-shadow border-l-4 border-l-primary/30">
-                  <CardContent className="p-3">
-                    <div className="flex items-start gap-2">
-                      <div className="p-1 rounded bg-primary/10 text-primary">
-                        {node.icon}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="font-medium text-sm mb-1">{node.name}</div>
-                        <p className="text-xs text-muted-foreground mb-2 line-clamp-2">
-                          {node.description}
-                        </p>
-                        
-                        <div className="flex flex-wrap gap-1 mb-2">
-                          <Badge 
-                            className={`text-xs ${getComplexityColor(node.complexity)}`}
-                            variant="secondary"
-                          >
-                            {node.complexity}
-                          </Badge>
-                          <Badge variant="outline" className="text-xs">
-                            {node.cost}
-                          </Badge>
-                        </div>
-
-                        <div className="text-xs text-muted-foreground">
-                          <div className="mb-1">
-                            <strong>Entrées:</strong> {node.inputs.join(', ')}
-                          </div>
-                          <div>
-                            <strong>Sorties:</strong> {node.outputs.join(', ')}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+            ))}
           </div>
-        );
-      })}
-
-      {filteredCategories.length === 0 && (
-        <div className="text-center py-8 text-muted-foreground">
-          <Search className="h-8 w-8 mx-auto mb-2" />
-          <p>Aucun nœud trouvé pour "{searchTerm}"</p>
         </div>
-      )}
 
-      {/* Section créateur */}
-      <div className="mt-6 p-3 bg-secondary/10 rounded border text-center">
-        <div className="flex items-center justify-center gap-2 mb-1">
-          <Users className="h-4 w-4 text-primary" />
-          <span className="text-sm font-medium">Geoffroy Streit</span>
+        {/* Statistiques */}
+        <div className="text-xs text-muted-foreground p-2 bg-secondary/20 rounded mx-1">
+          {workflowNodes.length} nœuds disponibles • {nodeCategories.length} catégories
         </div>
-        <p className="text-xs text-muted-foreground">
-          Architecte en workflows IA et automatisation
-        </p>
+
+        {/* Nœuds par catégorie - Container avec scroll interne */}
+        <div className="px-1 space-y-6">
+          {filteredCategories.map(category => {
+            const categoryNodes = filteredNodes(category.nodes);
+            if (categoryNodes.length === 0) return null;
+
+            return (
+              <div key={category.id} className="space-y-3">
+                <div className="flex items-center gap-2 font-medium text-sm">
+                  {category.icon}
+                  <span>{category.name}</span>
+                  <Badge variant="outline" className="text-xs">
+                    {categoryNodes.length}
+                  </Badge>
+                </div>
+                
+                <div className="space-y-3">
+                  {categoryNodes.map(node => (
+                    <Card 
+                      key={node.id} 
+                      className="cursor-move hover:shadow-sm transition-shadow border-l-4 border-l-primary/30 w-full"
+                      draggable
+                      onDragStart={(e) => {
+                        e.dataTransfer.setData('application/reactflow', JSON.stringify({
+                          type: 'custom',
+                          data: { 
+                            label: node.name,
+                            description: node.description,
+                            category: node.category,
+                            cost: node.cost
+                          }
+                        }));
+                      }}
+                    >
+                      <CardContent className="p-3">
+                        <div className="flex items-start gap-3">
+                          <div className="p-2 rounded bg-primary/10 text-primary flex-shrink-0">
+                            {node.icon}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="font-medium text-sm mb-1 break-words">{node.name}</div>
+                            <p className="text-xs text-muted-foreground mb-3 line-clamp-2 break-words">
+                              {node.description}
+                            </p>
+                            
+                            <div className="flex flex-wrap gap-1 mb-3">
+                              <Badge 
+                                className={`text-xs ${getComplexityColor(node.complexity)}`}
+                                variant="secondary"
+                              >
+                                {node.complexity}
+                              </Badge>
+                              <Badge variant="outline" className="text-xs break-words">
+                                {node.cost}
+                              </Badge>
+                            </div>
+
+                            <div className="text-xs text-muted-foreground space-y-1">
+                              <div>
+                                <strong>Entrées:</strong> 
+                                <span className="break-words ml-1">{node.inputs.join(', ')}</span>
+                              </div>
+                              <div>
+                                <strong>Sorties:</strong> 
+                                <span className="break-words ml-1">{node.outputs.join(', ')}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+
+          {filteredCategories.length === 0 && (
+            <div className="text-center py-8 text-muted-foreground">
+              <Search className="h-8 w-8 mx-auto mb-2" />
+              <p>Aucun nœud trouvé pour "{searchTerm}"</p>
+            </div>
+          )}
+        </div>
+
+        {/* Section créateur */}
+        <div className="mt-6 p-3 bg-secondary/10 rounded border text-center mx-1">
+          <div className="flex items-center justify-center gap-2 mb-1">
+            <Users className="h-4 w-4 text-primary" />
+            <span className="text-sm font-medium">Geoffroy Streit</span>
+          </div>
+          <p className="text-xs text-muted-foreground">
+            Architecte en workflows IA et automatisation
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -16,11 +16,13 @@ import '@xyflow/react/dist/style.css';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Play, Save, Download, FileText } from 'lucide-react';
+import { Play, Save, Download, FileText, Sparkles, Layers } from 'lucide-react';
 import WorkflowNodeLibrary from './WorkflowNodeLibrary';
 import WorkflowMonitor from './WorkflowMonitor';
 import WorkflowPresets from './presets/WorkflowPresets';
 import WorkflowCreator from './WorkflowCreator';
+import AutoOptimizer from './AutoOptimizer';
+import WorkflowTemplateLibrary from './templates/WorkflowTemplateLibrary';
 import { workflowNodes, workflowEdges } from './workflowData';
 
 interface WorkflowEditorProps {
@@ -94,28 +96,58 @@ const WorkflowEditor: React.FC<WorkflowEditorProps> = ({ onExecute, onSave }) =>
     setEdges(preset.edges);
   }, [setNodes, setEdges]);
 
+  const handleLoadTemplate = useCallback((template: any) => {
+    setNodes(template.nodes);
+    setEdges(template.edges);
+  }, [setNodes, setEdges]);
+
+  const handleOptimizationApplied = useCallback((optimizedNodes: Node[], optimizedEdges: Edge[]) => {
+    setNodes(optimizedNodes);
+    setEdges(optimizedEdges);
+  }, [setNodes, setEdges]);
+
   return (
     <div className="h-[800px] flex gap-4">
       {/* Sidebar gauche */}
       <Card className="w-80 flex-shrink-0">
         <CardHeader className="pb-2">
-          <CardTitle className="text-base">Outils & Presets</CardTitle>
+          <CardTitle className="text-base">Outils & Resources</CardTitle>
           <WorkflowCreator />
         </CardHeader>
         <CardContent className="p-0">
-          <Tabs defaultValue="library" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 mx-4 mb-4">
-              <TabsTrigger value="library" className="text-xs">Nœuds</TabsTrigger>
+          <Tabs defaultValue="nodes" className="w-full">
+            <TabsList className="grid w-full grid-cols-4 mx-4 mb-4">
+              <TabsTrigger value="nodes" className="text-xs">Nœuds</TabsTrigger>
               <TabsTrigger value="presets" className="text-xs">Presets</TabsTrigger>
+              <TabsTrigger value="templates" className="text-xs">Templates</TabsTrigger>
+              <TabsTrigger value="optimizer" className="text-xs">
+                <Sparkles className="h-3 w-3" />
+              </TabsTrigger>
             </TabsList>
             
-            <TabsContent value="library" className="mt-0">
+            <TabsContent value="nodes" className="mt-0">
               <WorkflowNodeLibrary />
             </TabsContent>
             
             <TabsContent value="presets" className="mt-0 max-h-[600px] overflow-y-auto">
               <div className="p-4">
                 <WorkflowPresets onLoadPreset={handleLoadPreset} />
+              </div>
+            </TabsContent>
+
+            <TabsContent value="templates" className="mt-0 max-h-[600px] overflow-y-auto">
+              <div className="p-4">
+                <WorkflowTemplateLibrary onLoadTemplate={handleLoadTemplate} />
+              </div>
+            </TabsContent>
+
+            <TabsContent value="optimizer" className="mt-0 max-h-[600px] overflow-y-auto">
+              <div className="p-4">
+                <AutoOptimizer 
+                  nodes={nodes} 
+                  edges={edges}
+                  onOptimizationApplied={handleOptimizationApplied}
+                />
               </div>
             </TabsContent>
           </Tabs>
@@ -139,8 +171,14 @@ const WorkflowEditor: React.FC<WorkflowEditorProps> = ({ onExecute, onSave }) =>
             Exporter
           </Button>
           <div className="flex-1" />
-          <div className="text-sm text-muted-foreground flex items-center">
-            {nodes.length} nœuds • {edges.length} connexions
+          <div className="text-sm text-muted-foreground flex items-center gap-4">
+            <div className="flex items-center gap-1">
+              <Layers className="h-4 w-4" />
+              {nodes.length} nœuds
+            </div>
+            <div>
+              {edges.length} connexions
+            </div>
           </div>
         </div>
 
@@ -155,6 +193,24 @@ const WorkflowEditor: React.FC<WorkflowEditorProps> = ({ onExecute, onSave }) =>
             fitView
             attributionPosition="top-right"
             style={{ backgroundColor: "#F7F9FB" }}
+            onDrop={(event) => {
+              event.preventDefault();
+              const data = event.dataTransfer.getData('application/reactflow');
+              if (data) {
+                const nodeData = JSON.parse(data);
+                const newNode = {
+                  id: `node-${Date.now()}`,
+                  type: 'default',
+                  position: { x: event.clientX - 200, y: event.clientY - 100 },
+                  data: { label: nodeData.data.label }
+                };
+                setNodes((nds) => [...nds, newNode]);
+              }
+            }}
+            onDragOver={(event) => {
+              event.preventDefault();
+              event.dataTransfer.dropEffect = 'move';
+            }}
           >
             <MiniMap zoomable pannable />
             <Controls />
