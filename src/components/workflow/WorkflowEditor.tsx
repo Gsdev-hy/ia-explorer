@@ -1,4 +1,3 @@
-
 import React, { useCallback, useState } from 'react';
 import {
   ReactFlow,
@@ -109,13 +108,13 @@ const WorkflowEditor: React.FC<WorkflowEditorProps> = ({ onExecute, onSave }) =>
   return (
     <div className="h-[800px] flex gap-4">
       {/* Sidebar gauche */}
-      <Card className="w-80 flex-shrink-0">
+      <Card className="w-80 flex-shrink-0 h-full flex flex-col overflow-hidden">
         <CardHeader className="pb-2">
           <CardTitle className="text-base">Outils & Resources</CardTitle>
           <WorkflowCreator />
         </CardHeader>
-        <CardContent className="p-0">
-          <Tabs defaultValue="nodes" className="w-full">
+        <CardContent className="p-0 flex-1 overflow-hidden min-h-0">
+          <Tabs defaultValue="nodes" className="w-full h-full flex flex-col">
             <TabsList className="grid w-full grid-cols-4 mx-4 mb-4">
               <TabsTrigger value="nodes" className="text-xs">Nœuds</TabsTrigger>
               <TabsTrigger value="presets" className="text-xs">Presets</TabsTrigger>
@@ -125,7 +124,7 @@ const WorkflowEditor: React.FC<WorkflowEditorProps> = ({ onExecute, onSave }) =>
               </TabsTrigger>
             </TabsList>
             
-            <TabsContent value="nodes" className="mt-0">
+            <TabsContent value="nodes" className="mt-0 flex-1 overflow-hidden min-h-0">
               <WorkflowNodeLibrary />
             </TabsContent>
             

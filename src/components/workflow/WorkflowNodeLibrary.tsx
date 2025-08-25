@@ -40,7 +40,7 @@ const WorkflowNodeLibrary: React.FC = () => {
   };
 
   return (
-    <div className="h-full flex flex-col overflow-hidden">
+    <div className="h-full min-h-0 flex flex-col overflow-hidden">
       {/* Lien retour vers les ressources */}
       <div className="mb-4 p-3 bg-primary/5 rounded-lg border border-primary/20 flex-shrink-0">
         <div className="flex items-center gap-2 text-sm">
