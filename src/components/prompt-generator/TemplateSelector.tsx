@@ -5,10 +5,12 @@ import { Search } from 'lucide-react';
 import { PromptTemplate } from './promptTemplatesData';
 import { 
   promptTemplates, 
-  promptCategories,
-  advancedPromptTemplates, 
-  advancedCategories 
+  promptCategories
 } from './promptTemplatesData';
+import { 
+  enhancedPromptTemplates, 
+  enhancedPromptCategories 
+} from './enhancedPromptTemplates';
 import { 
   allSpecializedTemplates, 
   allSpecializedCategories 
@@ -33,7 +35,7 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
   const allTemplates = useMemo(() => {
     return [
       ...promptTemplates, 
-      ...advancedPromptTemplates,
+      ...enhancedPromptTemplates,
       ...allSpecializedTemplates
     ];
   }, []);
@@ -41,7 +43,7 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
   const allCategories = useMemo(() => {
     return [
       ...promptCategories, 
-      ...advancedCategories,
+      ...enhancedPromptCategories,
       ...allSpecializedCategories
     ];
   }, []);
@@ -79,7 +81,7 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
   };
 
   const isAdvancedTemplate = (template: PromptTemplate) => {
-    return [...advancedPromptTemplates, ...allSpecializedTemplates].includes(template);
+    return [...enhancedPromptTemplates, ...allSpecializedTemplates].includes(template);
   };
 
   return (

@@ -11,7 +11,7 @@ import { llmTemplates, llmCategories } from './llmTemplates';
 import { imageTemplates, imageCategories } from './imageTemplates';
 import { audioTemplates, audioCategories } from './audioTemplates';
 import { videoTemplates, videoCategories } from './videoTemplates';
-export { ragTemplates, ragCategories } from './ragTemplates';
+import { ragTemplates, ragCategories } from './ragTemplates';
 
 export const allSpecializedTemplates = [
   ...llmTemplates,
