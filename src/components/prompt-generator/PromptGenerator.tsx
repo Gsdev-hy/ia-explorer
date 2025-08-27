@@ -1,15 +1,15 @@
 
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Lightbulb, TestTube, History, TrendingUp, Zap, Save } from 'lucide-react';
+import { Lightbulb, TestTube, History, Zap, Save, Sparkles } from 'lucide-react';
 import PromptGeneratorHeader from './PromptGeneratorHeader';
 import TemplateSelector from './TemplateSelector';
 import PromptEngine from './PromptEngine';
 import PromptTester from './PromptTester';
 import PromptOptimizer from './PromptOptimizer';
 import PromptExportManager from './PromptExportManager';
+import TemplateHistory from './TemplateHistory';
 import { PromptTemplate } from './promptTemplatesData';
-import { advancedPromptTemplates, advancedCategories } from './advancedTemplatesData';
 
 interface GeneratedPrompt {
   id: string;
@@ -24,9 +24,14 @@ const PromptGenerator: React.FC = () => {
   const [currentPrompt, setCurrentPrompt] = useState<string>('');
   const [currentVariables, setCurrentVariables] = useState<Record<string, string>>({});
   const [generatedPrompts, setGeneratedPrompts] = useState<GeneratedPrompt[]>([]);
+  const [activeTab, setActiveTab] = useState('templates');
 
   const handleTemplateSelect = (template: PromptTemplate) => {
     setSelectedTemplate(template);
+    // Auto-switch to generator tab when template is selected
+    if (activeTab === 'templates') {
+      setActiveTab('generator');
+    }
   };
 
   const handlePromptGenerated = (prompt: string, template: PromptTemplate, variables: Record<string, string>) => {
@@ -40,7 +45,7 @@ const PromptGenerator: React.FC = () => {
       timestamp: new Date()
     };
     
-    setGeneratedPrompts(prev => [newGenerated, ...prev.slice(0, 9)]);
+    setGeneratedPrompts(prev => [newGenerated, ...prev.slice(0, 19)]); // Keep last 20
   };
 
   const handleTestComplete = (result: any) => {
@@ -53,28 +58,56 @@ const PromptGenerator: React.FC = () => {
     );
   };
 
+  const handleTemplateReuse = (template: PromptTemplate) => {
+    setSelectedTemplate(template);
+    setActiveTab('generator');
+  };
+
+  const handlePromptTest = (prompt: string) => {
+    setCurrentPrompt(prompt);
+    setActiveTab('tester');
+  };
+
   return (
     <div className="space-y-6">
       <PromptGeneratorHeader />
       
-      <Tabs defaultValue="templates" className="w-full">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-6">
-          <TabsTrigger value="templates">Templates</TabsTrigger>
-          <TabsTrigger value="generator">Générateur</TabsTrigger>
-          <TabsTrigger value="optimizer">Optimiseur</TabsTrigger>
-          <TabsTrigger value="tester">Testeur</TabsTrigger>
-          <TabsTrigger value="manager">Gestion</TabsTrigger>
-          <TabsTrigger value="history">Historique</TabsTrigger>
+          <TabsTrigger value="templates" className="flex items-center gap-2">
+            <Sparkles className="h-4 w-4" />
+            Templates
+          </TabsTrigger>
+          <TabsTrigger value="generator" className="flex items-center gap-2">
+            <Lightbulb className="h-4 w-4" />
+            Générateur
+          </TabsTrigger>
+          <TabsTrigger value="optimizer" className="flex items-center gap-2">
+            <Zap className="h-4 w-4" />
+            Optimiseur
+          </TabsTrigger>
+          <TabsTrigger value="tester" className="flex items-center gap-2">
+            <TestTube className="h-4 w-4" />
+            Testeur
+          </TabsTrigger>
+          <TabsTrigger value="manager" className="flex items-center gap-2">
+            <Save className="h-4 w-4" />
+            Export
+          </TabsTrigger>
+          <TabsTrigger value="history" className="flex items-center gap-2">
+            <History className="h-4 w-4" />
+            Historique
+          </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="templates">
+        <TabsContent value="templates" className="mt-6">
           <TemplateSelector 
             onTemplateSelect={handleTemplateSelect}
             selectedTemplate={selectedTemplate}
           />
         </TabsContent>
 
-        <TabsContent value="generator">
+        <TabsContent value="generator" className="mt-6">
           {selectedTemplate ? (
             <PromptEngine 
               template={selectedTemplate}
@@ -82,16 +115,26 @@ const PromptGenerator: React.FC = () => {
             />
           ) : (
             <div className="text-center py-12">
-              <Lightbulb className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-              <h3 className="text-lg font-semibold mb-2">Sélectionnez un template</h3>
-              <p className="text-muted-foreground">
-                Choisissez un template dans l'onglet "Templates" pour commencer à générer des prompts.
-              </p>
+              <div className="max-w-md mx-auto">
+                <Lightbulb className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
+                <h3 className="text-xl font-semibold mb-3">Sélectionnez un template</h3>
+                <p className="text-muted-foreground mb-6">
+                  Choisissez parmi plus de {/* dynamic count */} templates professionnels pour LLM, 
+                  génération d'images, audio, vidéo et systèmes RAG.
+                </p>
+                <button 
+                  onClick={() => setActiveTab('templates')}
+                  className="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+                >
+                  <Sparkles className="h-4 w-4 mr-2" />
+                  Parcourir les templates
+                </button>
+              </div>
             </div>
           )}
         </TabsContent>
 
-        <TabsContent value="optimizer">
+        <TabsContent value="optimizer" className="mt-6">
           {currentPrompt ? (
             <PromptOptimizer 
               prompt={currentPrompt}
@@ -99,16 +142,25 @@ const PromptGenerator: React.FC = () => {
             />
           ) : (
             <div className="text-center py-12">
-              <Zap className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-              <h3 className="text-lg font-semibold mb-2">Générez un prompt d'abord</h3>
-              <p className="text-muted-foreground">
-                Créez un prompt dans l'onglet "Générateur" pour pouvoir l'optimiser ici.
-              </p>
+              <div className="max-w-md mx-auto">
+                <Zap className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
+                <h3 className="text-xl font-semibold mb-3">Générez un prompt d'abord</h3>
+                <p className="text-muted-foreground mb-6">
+                  Créez un prompt dans l'onglet "Générateur" pour pouvoir l'analyser et l'optimiser ici.
+                </p>
+                <button 
+                  onClick={() => setActiveTab('generator')}
+                  className="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+                >
+                  <Lightbulb className="h-4 w-4 mr-2" />
+                  Aller au générateur
+                </button>
+              </div>
             </div>
           )}
         </TabsContent>
 
-        <TabsContent value="tester">
+        <TabsContent value="tester" className="mt-6">
           {currentPrompt ? (
             <PromptTester 
               prompt={currentPrompt}
@@ -116,16 +168,25 @@ const PromptGenerator: React.FC = () => {
             />
           ) : (
             <div className="text-center py-12">
-              <TestTube className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-              <h3 className="text-lg font-semibold mb-2">Générez un prompt d'abord</h3>
-              <p className="text-muted-foreground">
-                Créez un prompt dans l'onglet "Générateur" pour pouvoir le tester ici.
-              </p>
+              <div className="max-w-md mx-auto">
+                <TestTube className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
+                <h3 className="text-xl font-semibold mb-3">Générez un prompt d'abord</h3>
+                <p className="text-muted-foreground mb-6">
+                  Créez un prompt dans l'onglet "Générateur" pour pouvoir le tester avec différents modèles d'IA.
+                </p>
+                <button 
+                  onClick={() => setActiveTab('generator')}
+                  className="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+                >
+                  <Lightbulb className="h-4 w-4 mr-2" />
+                  Aller au générateur
+                </button>
+              </div>
             </div>
           )}
         </TabsContent>
 
-        <TabsContent value="manager">
+        <TabsContent value="manager" className="mt-6">
           <PromptExportManager 
             currentPrompt={currentPrompt}
             currentTemplate={selectedTemplate}
@@ -133,69 +194,12 @@ const PromptGenerator: React.FC = () => {
           />
         </TabsContent>
 
-        <TabsContent value="history">
-          {generatedPrompts.length > 0 ? (
-            <div className="space-y-4">
-              <div className="flex items-center gap-2 mb-4">
-                <History className="h-5 w-5" />
-                <h3 className="text-lg font-semibold">Historique des prompts générés</h3>
-                <span className="text-sm text-muted-foreground">
-                  ({generatedPrompts.length})
-                </span>
-              </div>
-              
-              {generatedPrompts.map(prompt => (
-                <div key={prompt.id} className="border rounded-lg p-4 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <h4 className="font-medium">{prompt.template.name}</h4>
-                      <span className="text-sm text-muted-foreground">
-                        {prompt.timestamp.toLocaleString()}
-                      </span>
-                    </div>
-                    {prompt.testResults && prompt.testResults.length > 0 && (
-                      <div className="flex items-center gap-1">
-                        <TestTube className="h-4 w-4" />
-                        <span className="text-sm text-muted-foreground">
-                          {prompt.testResults.length} test{prompt.testResults.length > 1 ? 's' : ''}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                  
-                  <div className="bg-muted p-3 rounded text-sm">
-                    <p className="line-clamp-3">{prompt.content}</p>
-                  </div>
-                  
-                  <div className="flex gap-2">
-                    <button 
-                      className="text-sm text-primary hover:underline"
-                      onClick={() => {
-                        setSelectedTemplate(prompt.template);
-                        setCurrentPrompt(prompt.content);
-                      }}
-                    >
-                      Réutiliser ce template
-                    </button>
-                    <button 
-                      className="text-sm text-primary hover:underline"
-                      onClick={() => setCurrentPrompt(prompt.content)}
-                    >
-                      Tester ce prompt
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <History className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-              <h3 className="text-lg font-semibold mb-2">Aucun historique</h3>
-              <p className="text-muted-foreground">
-                Vos prompts générés apparaîtront ici pour un accès rapide.
-              </p>
-            </div>
-          )}
+        <TabsContent value="history" className="mt-6">
+          <TemplateHistory
+            generatedPrompts={generatedPrompts}
+            onTemplateReuse={handleTemplateReuse}
+            onPromptTest={handlePromptTest}
+          />
         </TabsContent>
       </Tabs>
     </div>

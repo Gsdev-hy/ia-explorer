@@ -1,18 +1,20 @@
 
 import React, { useState, useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Search, Filter, Star, Users, TrendingUp } from 'lucide-react';
+import { Search } from 'lucide-react';
+import { PromptTemplate } from './promptTemplatesData';
 import { 
   promptTemplates, 
-  promptCategories, 
-  PromptTemplate, 
-  getTemplatesByCategory,
-  searchTemplates 
+  promptCategories,
+  advancedPromptTemplates, 
+  advancedCategories 
 } from './promptTemplatesData';
-import { advancedPromptTemplates, advancedCategories } from './advancedTemplatesData';
+import { 
+  allSpecializedTemplates, 
+  allSpecializedCategories 
+} from './templates';
+import TemplateFilters from './TemplateFilters';
+import TemplateCard from './TemplateCard';
 
 interface TemplateSelectorProps {
   onTemplateSelect: (template: PromptTemplate) => void;
@@ -29,11 +31,19 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
 
   // Combiner tous les templates et catégories
   const allTemplates = useMemo(() => {
-    return [...promptTemplates, ...advancedPromptTemplates];
+    return [
+      ...promptTemplates, 
+      ...advancedPromptTemplates,
+      ...allSpecializedTemplates
+    ];
   }, []);
 
   const allCategories = useMemo(() => {
-    return [...promptCategories, ...advancedCategories];
+    return [
+      ...promptCategories, 
+      ...advancedCategories,
+      ...allSpecializedCategories
+    ];
   }, []);
 
   const filteredTemplates = useMemo(() => {
@@ -64,68 +74,39 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
     return templates;
   }, [allTemplates, searchQuery, selectedCategory, sortBy]);
 
-  const getQualityColor = (quality: number) => {
-    if (quality >= 4.5) return 'text-green-600';
-    if (quality >= 4.0) return 'text-yellow-600';
-    return 'text-orange-600';
-  };
-
   const getCategoryCount = (categoryId: string) => {
     return allTemplates.filter(template => template.category === categoryId).length;
   };
 
+  const isAdvancedTemplate = (template: PromptTemplate) => {
+    return [...advancedPromptTemplates, ...allSpecializedTemplates].includes(template);
+  };
+
   return (
     <div className="space-y-4">
-      {/* Barre de recherche et filtres */}
+      {/* En-tête avec statistiques */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Search className="h-5 w-5" />
-            Parcourir les templates ({allTemplates.length})
+            Bibliothèque de Templates IA ({allTemplates.length})
           </CardTitle>
+          <p className="text-sm text-muted-foreground">
+            Templates professionnels pour LLM, génération d'images, audio, vidéo et systèmes RAG
+          </p>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex gap-4">
-            <div className="flex-1">
-              <Input
-                placeholder="Rechercher un template..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full"
-              />
-            </div>
-            <Button
-              variant="outline"
-              onClick={() => setSortBy(sortBy === 'quality' ? 'usage' : sortBy === 'usage' ? 'name' : 'quality')}
-            >
-              <Filter className="h-4 w-4 mr-2" />
-              {sortBy === 'quality' ? 'Qualité' : sortBy === 'usage' ? 'Popularité' : 'Nom'}
-            </Button>
-          </div>
-
-          {/* Catégories */}
-          <div className="flex flex-wrap gap-2">
-            <Button
-              variant={selectedCategory === 'all' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setSelectedCategory('all')}
-            >
-              Tous ({allTemplates.length})
-            </Button>
-            {allCategories.map(category => {
-              const count = getCategoryCount(category.id);
-              return (
-                <Button
-                  key={category.id}
-                  variant={selectedCategory === category.id ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setSelectedCategory(category.id)}
-                >
-                  {category.name} ({count})
-                </Button>
-              );
-            })}
-          </div>
+        <CardContent>
+          <TemplateFilters
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            selectedCategory={selectedCategory}
+            onCategoryChange={setSelectedCategory}
+            sortBy={sortBy}
+            onSortChange={(sort) => setSortBy(sort as 'quality' | 'usage' | 'name')}
+            categories={allCategories}
+            getCategoryCount={getCategoryCount}
+            totalTemplates={allTemplates.length}
+          />
         </CardContent>
       </Card>
 
@@ -139,62 +120,23 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
           </Card>
         ) : (
           filteredTemplates.map(template => (
-            <Card 
-              key={template.id} 
-              className={`cursor-pointer transition-all hover:shadow-md ${
-                selectedTemplate?.id === template.id ? 'ring-2 ring-primary' : ''
-              }`}
-              onClick={() => onTemplateSelect(template)}
-            >
-              <CardContent className="p-4">
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h3 className="font-semibold text-lg">{template.name}</h3>
-                      {advancedPromptTemplates.includes(template) && (
-                        <Badge variant="default" className="text-xs">Avancé</Badge>
-                      )}
-                    </div>
-                    <p className="text-sm text-muted-foreground mb-2">
-                      {template.description}
-                    </p>
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                      <div className="flex items-center gap-1">
-                        <Star className={`h-4 w-4 ${getQualityColor(template.quality)}`} />
-                        <span className={getQualityColor(template.quality)}>
-                          {template.quality.toFixed(1)}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Users className="h-4 w-4" />
-                        <span>{template.usageCount.toLocaleString()}</span>
-                      </div>
-                      <Badge variant="outline">{template.domain}</Badge>
-                    </div>
-                  </div>
-                  {selectedTemplate?.id === template.id && (
-                    <div className="ml-2">
-                      <Badge>Sélectionné</Badge>
-                    </div>
-                  )}
-                </div>
-
-                <div className="flex flex-wrap gap-1">
-                  {template.tags.map(tag => (
-                    <Badge key={tag} variant="secondary" className="text-xs">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            <TemplateCard
+              key={template.id}
+              template={template}
+              isSelected={selectedTemplate?.id === template.id}
+              onSelect={onTemplateSelect}
+              isAdvanced={isAdvancedTemplate(template)}
+            />
           ))
         )}
       </div>
 
+      {/* Statistiques de recherche */}
       {filteredTemplates.length > 0 && (
         <div className="text-center text-sm text-muted-foreground">
           {filteredTemplates.length} template{filteredTemplates.length > 1 ? 's' : ''} trouvé{filteredTemplates.length > 1 ? 's' : ''}
+          {searchQuery && ` pour "${searchQuery}"`}
+          {selectedCategory !== 'all' && ` dans la catégorie sélectionnée`}
         </div>
       )}
     </div>
