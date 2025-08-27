@@ -5,6 +5,8 @@ export { imageTemplates, imageCategories } from './imageTemplates';
 export { audioTemplates, audioCategories } from './audioTemplates';
 export { videoTemplates, videoCategories } from './videoTemplates';
 export { ragTemplates, ragCategories } from './ragTemplates';
+export { businessTemplates, businessCategories } from './businessTemplates';
+export { educationTemplates, educationCategories } from './educationTemplates';
 
 // Export combiné pour faciliter l'utilisation
 import { llmTemplates, llmCategories } from './llmTemplates';
@@ -12,13 +14,17 @@ import { imageTemplates, imageCategories } from './imageTemplates';
 import { audioTemplates, audioCategories } from './audioTemplates';
 import { videoTemplates, videoCategories } from './videoTemplates';
 import { ragTemplates, ragCategories } from './ragTemplates';
+import { businessTemplates, businessCategories } from './businessTemplates';
+import { educationTemplates, educationCategories } from './educationTemplates';
 
 export const allSpecializedTemplates = [
   ...llmTemplates,
   ...imageTemplates,
   ...audioTemplates,
   ...videoTemplates,
-  ...ragTemplates
+  ...ragTemplates,
+  ...businessTemplates,
+  ...educationTemplates
 ];
 
 export const allSpecializedCategories = [
@@ -26,5 +32,7 @@ export const allSpecializedCategories = [
   ...imageCategories,
   ...audioCategories,
   ...videoCategories,
-  ...ragCategories
+  ...ragCategories,
+  ...businessCategories,
+  ...educationCategories
 ];
