@@ -1,7 +1,7 @@
 export interface PricingTier {
   name: string;
-  inputPrice: number; // prix par 1M de tokens d'entrée
-  outputPrice: number; // prix par 1M de tokens de sortie
+  inputPrice: number; // prix per 1M input tokens
+  outputPrice: number; // prix per 1M output tokens
   currency: string;
 }
 
@@ -12,7 +12,7 @@ export interface AIProvider {
   models: {
     id: string;
     name: string;
-    type: 'text' | 'image' | 'audio' | 'video' | 'embedding';
+    type: 'text' | 'image' | 'audio' | 'video' | 'embedding' | 'multimodal';
     pricing: PricingTier[];
     contextLength: number;
     features: string[];
@@ -38,11 +38,11 @@ export const aiProvidersData: AIProvider[] = [
       {
         id: 'gpt-4o',
         name: 'GPT-4o',
-        type: 'text',
+        type: 'multimodal',
         contextLength: 128000,
         features: ['Multimodal', 'Code', 'Vision', 'Audio'],
         recommended: true,
-        category: 'Premium',
+        category: 'Premium LLM',
         speed: 'rapide',
         quality: 'flagship',
         pricing: [
@@ -57,11 +57,11 @@ export const aiProvidersData: AIProvider[] = [
       {
         id: 'gpt-4o-mini',
         name: 'GPT-4o Mini',
-        type: 'text',
+        type: 'multimodal',
         contextLength: 128000,
         features: ['Rapide', 'Économique', 'Vision'],
         recommended: true,
-        category: 'Économique',
+        category: 'Économique LLM',
         speed: 'très-rapide',
         quality: 'premium',
         pricing: [
@@ -76,10 +76,10 @@ export const aiProvidersData: AIProvider[] = [
       {
         id: 'gpt-4-turbo',
         name: 'GPT-4 Turbo',
-        type: 'text',
+        type: 'multimodal',
         contextLength: 128000,
         features: ['Vision', 'JSON Mode', 'Function Calling'],
-        category: 'Premium',
+        category: 'Premium LLM',
         speed: 'rapide',
         quality: 'premium',
         pricing: [
@@ -97,7 +97,7 @@ export const aiProvidersData: AIProvider[] = [
         type: 'text',
         contextLength: 16385,
         features: ['Économique', 'Rapide', 'Function Calling'],
-        category: 'Économique',
+        category: 'Économique LLM',
         speed: 'très-rapide',
         quality: 'standard',
         pricing: [
@@ -151,7 +151,7 @@ export const aiProvidersData: AIProvider[] = [
         type: 'image',
         contextLength: 0,
         features: ['HD', 'Créatif', 'Style personnalisé'],
-        category: 'Image',
+        category: 'Text-to-Image',
         speed: 'modéré',
         quality: 'flagship',
         pricing: [
@@ -175,13 +175,67 @@ export const aiProvidersData: AIProvider[] = [
         type: 'image',
         contextLength: 0,
         features: ['Créatif', 'Artistique'],
-        category: 'Image',
+        category: 'Text-to-Image',
         speed: 'rapide',
         quality: 'standard',
         pricing: [
           {
             name: 'Standard (1024x1024)',
             inputPrice: 20.00,
+            outputPrice: 0,
+            currency: 'USD'
+          }
+        ]
+      },
+      {
+        id: 'whisper-1',
+        name: 'Whisper',
+        type: 'audio',
+        contextLength: 0,
+        features: ['Transcription', 'Multilingue', 'Précis'],
+        category: 'Audio-to-Text',
+        speed: 'rapide',
+        quality: 'premium',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 6.00,
+            outputPrice: 0,
+            currency: 'USD'
+          }
+        ]
+      },
+      {
+        id: 'tts-1',
+        name: 'TTS-1',
+        type: 'audio',
+        contextLength: 0,
+        features: ['Synthèse vocale', 'Naturel', 'Rapide'],
+        category: 'Text-to-Audio',
+        speed: 'très-rapide',
+        quality: 'standard',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 15.00,
+            outputPrice: 0,
+            currency: 'USD'
+          }
+        ]
+      },
+      {
+        id: 'tts-1-hd',
+        name: 'TTS-1 HD',
+        type: 'audio',
+        contextLength: 0,
+        features: ['Synthèse vocale HD', 'Très naturel', 'Qualité studio'],
+        category: 'Text-to-Audio',
+        speed: 'rapide',
+        quality: 'flagship',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 30.00,
             outputPrice: 0,
             currency: 'USD'
           }
@@ -218,11 +272,11 @@ export const aiProvidersData: AIProvider[] = [
       {
         id: 'claude-3-5-sonnet',
         name: 'Claude 3.5 Sonnet',
-        type: 'text',
+        type: 'multimodal',
         contextLength: 200000,
         features: ['Analyse longue', 'Raisonnement', 'Code', 'Vision'],
         recommended: true,
-        category: 'Premium',
+        category: 'Premium LLM',
         speed: 'rapide',
         quality: 'flagship',
         pricing: [
@@ -237,11 +291,11 @@ export const aiProvidersData: AIProvider[] = [
       {
         id: 'claude-3-5-haiku',
         name: 'Claude 3.5 Haiku',
-        type: 'text',
+        type: 'multimodal',
         contextLength: 200000,
         features: ['Très rapide', 'Économique', 'Vision'],
         recommended: true,
-        category: 'Économique',
+        category: 'Économique LLM',
         speed: 'très-rapide',
         quality: 'premium',
         pricing: [
@@ -256,10 +310,10 @@ export const aiProvidersData: AIProvider[] = [
       {
         id: 'claude-3-opus',
         name: 'Claude 3 Opus',
-        type: 'text',
+        type: 'multimodal',
         contextLength: 200000,
         features: ['Analyse complexe', 'Créativité', 'Raisonnement avancé'],
-        category: 'Premium',
+        category: 'Premium LLM',
         speed: 'modéré',
         quality: 'flagship',
         pricing: [
@@ -277,7 +331,7 @@ export const aiProvidersData: AIProvider[] = [
         type: 'text',
         contextLength: 200000,
         features: ['Rapide', 'Économique', 'Analyse de documents'],
-        category: 'Économique',
+        category: 'Économique LLM',
         speed: 'très-rapide',
         quality: 'standard',
         pricing: [
@@ -302,11 +356,11 @@ export const aiProvidersData: AIProvider[] = [
       {
         id: 'gemini-1-5-pro',
         name: 'Gemini 1.5 Pro',
-        type: 'text',
+        type: 'multimodal',
         contextLength: 2000000,
         features: ['Contexte très long', 'Multimodal', 'Code', 'Audio'],
         recommended: true,
-        category: 'Premium',
+        category: 'Premium LLM',
         speed: 'rapide',
         quality: 'flagship',
         pricing: [
@@ -321,11 +375,11 @@ export const aiProvidersData: AIProvider[] = [
       {
         id: 'gemini-1-5-flash',
         name: 'Gemini 1.5 Flash',
-        type: 'text',
+        type: 'multimodal',
         contextLength: 1000000,
         features: ['Très rapide', 'Économique', 'Multimodal'],
         recommended: true,
-        category: 'Économique',
+        category: 'Économique LLM',
         speed: 'très-rapide',
         quality: 'premium',
         pricing: [
@@ -340,10 +394,10 @@ export const aiProvidersData: AIProvider[] = [
       {
         id: 'gemini-1-0-pro',
         name: 'Gemini 1.0 Pro',
-        type: 'text',
+        type: 'multimodal',
         contextLength: 32768,
         features: ['Équilibré', 'Multimodal', 'Raisonnement'],
-        category: 'Standard',
+        category: 'Standard LLM',
         speed: 'rapide',
         quality: 'standard',
         pricing: [
@@ -351,6 +405,183 @@ export const aiProvidersData: AIProvider[] = [
             name: 'Standard',
             inputPrice: 0.50,
             outputPrice: 1.50,
+            currency: 'USD'
+          }
+        ]
+      },
+      {
+        id: 'gemini-vision-pro',
+        name: 'Gemini Vision Pro',
+        type: 'multimodal',
+        contextLength: 32768,
+        features: ['Vision avancée', 'OCR', 'Analyse d\'images'],
+        category: 'Vision',
+        speed: 'rapide',
+        quality: 'flagship',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 2.50,
+            outputPrice: 7.50,
+            currency: 'USD'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'stability',
+    name: 'Stability AI',
+    description: 'Spécialiste de la génération d\'images avec Stable Diffusion',
+    website: 'https://stability.ai',
+    apiUrl: 'https://api.stability.ai',
+    region: 'Global',
+    models: [
+      {
+        id: 'stable-diffusion-xl',
+        name: 'Stable Diffusion XL',
+        type: 'image',
+        contextLength: 0,
+        features: ['Haute résolution', 'Créatif', 'Style personnalisé'],
+        recommended: true,
+        category: 'Text-to-Image',
+        speed: 'modéré',
+        quality: 'flagship',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 30.00,
+            outputPrice: 0,
+            currency: 'USD'
+          }
+        ]
+      },
+      {
+        id: 'stable-video-diffusion',
+        name: 'Stable Video Diffusion',
+        type: 'video',
+        contextLength: 0,
+        features: ['Génération vidéo', 'Image-to-Video', 'Créatif'],
+        category: 'Text-to-Video',
+        speed: 'lent',
+        quality: 'premium',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 200.00,
+            outputPrice: 0,
+            currency: 'USD'
+          }
+        ]
+      },
+      {
+        id: 'stable-audio',
+        name: 'Stable Audio',
+        type: 'audio',
+        contextLength: 0,
+        features: ['Génération musicale', 'Effets sonores', 'Haute qualité'],
+        category: 'Text-to-Audio',
+        speed: 'modéré',
+        quality: 'premium',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 50.00,
+            outputPrice: 0,
+            currency: 'USD'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'runwayml',
+    name: 'RunwayML',
+    description: 'Outils IA créatifs pour la génération vidéo et image',
+    website: 'https://runwayml.com',
+    apiUrl: 'https://api.runwayml.com',
+    region: 'US',
+    models: [
+      {
+        id: 'gen-3-alpha',
+        name: 'Gen-3 Alpha',
+        type: 'video',
+        contextLength: 0,
+        features: ['Génération vidéo', 'Haute qualité', 'Contrôle temporel'],
+        recommended: true,
+        category: 'Text-to-Video',
+        speed: 'lent',
+        quality: 'flagship',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 500.00,
+            outputPrice: 0,
+            currency: 'USD'
+          }
+        ]
+      },
+      {
+        id: 'gen-2',
+        name: 'Gen-2',
+        type: 'video',
+        contextLength: 0,
+        features: ['Text-to-Video', 'Image-to-Video', 'Stylisation'],
+        category: 'Text-to-Video',
+        speed: 'modéré',
+        quality: 'premium',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 300.00,
+            outputPrice: 0,
+            currency: 'USD'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'eleven-labs',
+    name: 'ElevenLabs',
+    description: 'Synthèse vocale IA ultra-réaliste',
+    website: 'https://elevenlabs.io',
+    apiUrl: 'https://api.elevenlabs.io',
+    region: 'Global',
+    models: [
+      {
+        id: 'eleven-multilingual-v2',
+        name: 'Multilingual v2',
+        type: 'audio',
+        contextLength: 0,
+        features: ['29 langues', 'Voix naturelles', 'Clonage vocal'],
+        recommended: true,
+        category: 'Text-to-Audio',
+        speed: 'rapide',
+        quality: 'flagship',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 300.00,
+            outputPrice: 0,
+            currency: 'USD'
+          }
+        ]
+      },
+      {
+        id: 'eleven-turbo-v2',
+        name: 'Turbo v2',
+        type: 'audio',
+        contextLength: 0,
+        features: ['Ultra-rapide', 'Faible latence', 'Streaming'],
+        category: 'Text-to-Audio',
+        speed: 'très-rapide',
+        quality: 'premium',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 200.00,
+            outputPrice: 0,
             currency: 'USD'
           }
         ]
@@ -372,7 +603,7 @@ export const aiProvidersData: AIProvider[] = [
         contextLength: 128000,
         features: ['Français natif', 'Performant', 'Code', 'Function Calling'],
         recommended: true,
-        category: 'Premium',
+        category: 'Premium LLM',
         speed: 'rapide',
         quality: 'flagship',
         pricing: [
@@ -390,7 +621,7 @@ export const aiProvidersData: AIProvider[] = [
         type: 'text',
         contextLength: 32768,
         features: ['Équilibré', 'Français', 'Polyvalent'],
-        category: 'Standard',
+        category: 'Standard LLM',
         speed: 'rapide',
         quality: 'premium',
         pricing: [
@@ -409,7 +640,7 @@ export const aiProvidersData: AIProvider[] = [
         contextLength: 32768,
         features: ['Économique', 'Français', 'Rapide'],
         recommended: true,
-        category: 'Économique',
+        category: 'Économique LLM',
         speed: 'très-rapide',
         quality: 'standard',
         pricing: [
@@ -427,7 +658,7 @@ export const aiProvidersData: AIProvider[] = [
         type: 'text',
         contextLength: 32768,
         features: ['Code spécialisé', 'Programmation', 'Débogage'],
-        category: 'Spécialisé',
+        category: 'Code LLM',
         speed: 'rapide',
         quality: 'premium',
         pricing: [
@@ -438,13 +669,31 @@ export const aiProvidersData: AIProvider[] = [
             currency: 'USD'
           }
         ]
+      },
+      {
+        id: 'pixtral-large',
+        name: 'Pixtral Large',
+        type: 'multimodal',
+        contextLength: 128000,
+        features: ['Vision', 'Multimodal', 'Analyse d\'images'],
+        category: 'Vision',
+        speed: 'rapide',
+        quality: 'flagship',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 3.00,
+            outputPrice: 9.00,
+            currency: 'USD'
+          }
+        ]
       }
     ]
   },
   {
     id: 'cohere',
     name: 'Cohere',
-    description: 'Modèles spécialisés pour l\'entreprise',
+    description: 'Modèles spécialisés pour l\'entreprise et RAG',
     website: 'https://cohere.ai',
     apiUrl: 'https://api.cohere.ai',
     region: 'Global',
@@ -456,7 +705,7 @@ export const aiProvidersData: AIProvider[] = [
         contextLength: 128000,
         features: ['RAG optimisé', 'Multilingue', 'Entreprise'],
         recommended: true,
-        category: 'Premium',
+        category: 'RAG',
         speed: 'rapide',
         quality: 'flagship',
         pricing: [
@@ -475,7 +724,7 @@ export const aiProvidersData: AIProvider[] = [
         contextLength: 128000,
         features: ['RAG', 'Économique', 'Multilingue'],
         recommended: true,
-        category: 'Standard',
+        category: 'RAG',
         speed: 'rapide',
         quality: 'premium',
         pricing: [
@@ -504,6 +753,42 @@ export const aiProvidersData: AIProvider[] = [
             currency: 'USD'
           }
         ]
+      },
+      {
+        id: 'embed-multilingual-v3',
+        name: 'Embed Multilingual v3',
+        type: 'embedding',
+        contextLength: 512,
+        features: ['Embeddings', 'Multilingue', 'Recherche sémantique'],
+        category: 'Embedding',
+        speed: 'très-rapide',
+        quality: 'premium',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 0.10,
+            outputPrice: 0,
+            currency: 'USD'
+          }
+        ]
+      },
+      {
+        id: 'rerank-english-v3',
+        name: 'Rerank English v3',
+        type: 'text',
+        contextLength: 4096,
+        features: ['Reranking', 'RAG', 'Pertinence'],
+        category: 'RAG',
+        speed: 'très-rapide',
+        quality: 'premium',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 2.00,
+            outputPrice: 0,
+            currency: 'USD'
+          }
+        ]
       }
     ]
   },
@@ -522,7 +807,7 @@ export const aiProvidersData: AIProvider[] = [
         contextLength: 127072,
         features: ['Recherche web', 'Temps réel', 'Citations'],
         recommended: true,
-        category: 'Recherche',
+        category: 'RAG',
         speed: 'modéré',
         quality: 'premium',
         pricing: [
@@ -540,7 +825,7 @@ export const aiProvidersData: AIProvider[] = [
         type: 'text',
         contextLength: 127072,
         features: ['Recherche web', 'Économique', 'Rapide'],
-        category: 'Recherche',
+        category: 'RAG',
         speed: 'rapide',
         quality: 'standard',
         pricing: [
@@ -569,7 +854,7 @@ export const aiProvidersData: AIProvider[] = [
         contextLength: 131072,
         features: ['Temps réel', 'Twitter/X intégré', 'Humour'],
         recommended: true,
-        category: 'Premium',
+        category: 'Premium LLM',
         speed: 'rapide',
         quality: 'premium',
         pricing: [
@@ -577,6 +862,24 @@ export const aiProvidersData: AIProvider[] = [
             name: 'Standard',
             inputPrice: 5.00,
             outputPrice: 15.00,
+            currency: 'USD'
+          }
+        ]
+      },
+      {
+        id: 'grok-vision-beta',
+        name: 'Grok Vision Beta',
+        type: 'multimodal',
+        contextLength: 131072,
+        features: ['Vision', 'Analyse d\'images', 'Temps réel'],
+        category: 'Vision',
+        speed: 'rapide',
+        quality: 'premium',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 8.00,
+            outputPrice: 24.00,
             currency: 'USD'
           }
         ]
@@ -598,7 +901,7 @@ export const aiProvidersData: AIProvider[] = [
         contextLength: 128000,
         features: ['Open source', 'Très performant', 'Multilingue'],
         recommended: true,
-        category: 'Premium',
+        category: 'Premium LLM',
         speed: 'modéré',
         quality: 'flagship',
         pricing: [
@@ -617,7 +920,7 @@ export const aiProvidersData: AIProvider[] = [
         contextLength: 128000,
         features: ['Open source', 'Équilibré', 'Code'],
         recommended: true,
-        category: 'Standard',
+        category: 'Standard LLM',
         speed: 'rapide',
         quality: 'premium',
         pricing: [
@@ -635,7 +938,7 @@ export const aiProvidersData: AIProvider[] = [
         type: 'text',
         contextLength: 128000,
         features: ['Open source', 'Économique', 'Rapide'],
-        category: 'Économique',
+        category: 'Économique LLM',
         speed: 'très-rapide',
         quality: 'standard',
         pricing: [
@@ -643,6 +946,24 @@ export const aiProvidersData: AIProvider[] = [
             name: 'Standard',
             inputPrice: 0.18,
             outputPrice: 0.18,
+            currency: 'USD'
+          }
+        ]
+      },
+      {
+        id: 'llama-3-2-vision',
+        name: 'Llama 3.2 Vision',
+        type: 'multimodal',
+        contextLength: 128000,
+        features: ['Vision', 'Open source', 'Multimodal'],
+        category: 'Vision',
+        speed: 'rapide',
+        quality: 'premium',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 1.50,
+            outputPrice: 1.50,
             currency: 'USD'
           }
         ]
@@ -664,7 +985,7 @@ export const aiProvidersData: AIProvider[] = [
         contextLength: 131072,
         features: ['Ultra-rapide', 'Groq LPU', 'Versatile'],
         recommended: true,
-        category: 'Standard',
+        category: 'Standard LLM',
         speed: 'très-rapide',
         quality: 'premium',
         pricing: [
@@ -682,7 +1003,7 @@ export const aiProvidersData: AIProvider[] = [
         type: 'text',
         contextLength: 32768,
         features: ['Ultra-rapide', 'MoE', 'Multilingue'],
-        category: 'Standard',
+        category: 'Standard LLM',
         speed: 'très-rapide',
         quality: 'premium',
         pricing: [
@@ -690,6 +1011,24 @@ export const aiProvidersData: AIProvider[] = [
             name: 'Standard',
             inputPrice: 0.24,
             outputPrice: 0.24,
+            currency: 'USD'
+          }
+        ]
+      },
+      {
+        id: 'gemma2-9b-it',
+        name: 'Gemma2 9B IT',
+        type: 'text',
+        contextLength: 8192,
+        features: ['Ultra-rapide', 'Léger', 'Instruction-tuned'],
+        category: 'Économique LLM',
+        speed: 'très-rapide',
+        quality: 'standard',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 0.20,
+            outputPrice: 0.20,
             currency: 'USD'
           }
         ]
@@ -711,7 +1050,7 @@ export const aiProvidersData: AIProvider[] = [
         contextLength: 131072,
         features: ['Multilingue', 'Code', 'Math'],
         recommended: true,
-        category: 'Premium',
+        category: 'Premium LLM',
         speed: 'rapide',
         quality: 'flagship',
         pricing: [
@@ -729,7 +1068,7 @@ export const aiProvidersData: AIProvider[] = [
         type: 'text',
         contextLength: 16384,
         features: ['Code spécialisé', 'Programmation', 'Debug'],
-        category: 'Spécialisé',
+        category: 'Code LLM',
         speed: 'rapide',
         quality: 'premium',
         pricing: [
@@ -737,6 +1076,71 @@ export const aiProvidersData: AIProvider[] = [
             name: 'Standard',
             inputPrice: 0.80,
             outputPrice: 0.80,
+            currency: 'USD'
+          }
+        ]
+      },
+      {
+        id: 'llama-3-2-11b-vision',
+        name: 'Llama 3.2 11B Vision',
+        type: 'multimodal',
+        contextLength: 131072,
+        features: ['Vision', 'Multimodal', 'Open source'],
+        category: 'Vision',
+        speed: 'rapide',
+        quality: 'premium',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 0.18,
+            outputPrice: 0.18,
+            currency: 'USD'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'midjourney',
+    name: 'Midjourney',
+    description: 'Génération d\'images artistiques haut de gamme',
+    website: 'https://midjourney.com',
+    apiUrl: 'https://api.midjourney.com',
+    region: 'US',
+    models: [
+      {
+        id: 'midjourney-v6',
+        name: 'Midjourney v6',
+        type: 'image',
+        contextLength: 0,
+        features: ['Artistique', 'Haute qualité', 'Style unique'],
+        recommended: true,
+        category: 'Text-to-Image',
+        speed: 'modéré',
+        quality: 'flagship',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 100.00,
+            outputPrice: 0,
+            currency: 'USD'
+          }
+        ]
+      },
+      {
+        id: 'midjourney-niji',
+        name: 'Midjourney Niji',
+        type: 'image',
+        contextLength: 0,
+        features: ['Style anime', 'Manga', 'Illustration'],
+        category: 'Text-to-Image',
+        speed: 'modéré',
+        quality: 'premium',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 80.00,
+            outputPrice: 0,
             currency: 'USD'
           }
         ]
@@ -828,7 +1232,7 @@ export const getModelCategories = () => {
       }
     });
   });
-  return Array.from(categories);
+  return Array.from(categories).sort();
 };
 
 export const getModelTypes = () => {
