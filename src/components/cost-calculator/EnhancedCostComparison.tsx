@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, Area, AreaChart } from 'recharts';
-import { Trash2, TrendingUp, Award, Download, Calculator, DollarSign, Clock, Zap } from 'lucide-react';
+import { Trash2, TrendingUp, Award, Download, Calculator, DollarSign, Clock, Zap, Star } from 'lucide-react';
 import { aiProvidersData, getProviderById, getModelById } from './aiProvidersData';
 
 interface CostCalculation {
