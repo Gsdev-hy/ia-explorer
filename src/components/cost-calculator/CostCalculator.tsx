@@ -1,11 +1,10 @@
-
 import React, { useState, useMemo } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { aiProvidersData } from './aiProvidersData';
 import CostCalculatorHeader from './CostCalculatorHeader';
 import CalculatorConfiguration from './CalculatorConfiguration';
 import CostMetrics from './CostMetrics';
-import CostComparison from './CostComparison';
+import EnhancedCostComparison from './EnhancedCostComparison';
 import UsageEstimator from './UsageEstimator';
 import CostSaver from './CostSaver';
 
@@ -92,7 +91,7 @@ const CostCalculator = () => {
       <Tabs defaultValue="calculator" className="w-full">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="calculator">Calculateur</TabsTrigger>
-          <TabsTrigger value="comparison">Comparaison</TabsTrigger>
+          <TabsTrigger value="comparison">Comparaison avancée</TabsTrigger>
           <TabsTrigger value="estimator">Estimateur d'usage</TabsTrigger>
           <TabsTrigger value="history">Historique</TabsTrigger>
         </TabsList>
@@ -123,7 +122,7 @@ const CostCalculator = () => {
         </TabsContent>
 
         <TabsContent value="comparison">
-          <CostComparison calculations={calculations} setCalculations={setCalculations} />
+          <EnhancedCostComparison calculations={calculations} setCalculations={setCalculations} />
         </TabsContent>
 
         <TabsContent value="estimator">
