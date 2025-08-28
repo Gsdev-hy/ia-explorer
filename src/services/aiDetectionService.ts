@@ -2,6 +2,7 @@ import { TextDetectionEngine, TextIndicator } from './detection/textDetection';
 import { ImageDetectionEngine, ImageIndicator } from './detection/imageDetection';
 import { AudioDetectionEngine, AudioIndicator } from './detection/audioDetection';
 import { DetectionPreset, getPresetById } from './detection/detectionPresets';
+import { ExportService } from './exportService';
 
 export interface DetectionResult {
   id: string;
@@ -53,33 +54,26 @@ class AIDetectionService {
     const indicators = this.textEngine.analyzeTextIndicators(text);
     let confidence = this.textEngine.calculateConfidence(indicators);
     
-    // Appliquer les seuils du preset si défini
     if (preset?.settings.thresholds?.text) {
-      confidence = confidence * (preset.settings.sensitivity === 'high' ? 1.2 : preset.settings.sensitivity === 'low' ? 0.8 : 1);
+      confidence = confidence * this.getSensitivityMultiplier(preset.settings.sensitivity);
     }
     
     const isAIGenerated = confidence > (preset?.settings.thresholds?.text || 0.7);
     const processingTime = performance.now() - startTime;
 
-    return {
-      id: `text_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-      fileName: 'text_input.txt',
+    return this.createDetectionResult({
       fileType: 'text',
+      fileName: 'text_input.txt',
       isAIGenerated,
       confidence: Math.min(confidence, 0.95),
-      analysis: {
-        method: 'Advanced Statistical Analysis + Pattern Recognition + Linguistic Modeling',
-        details: `Analysé ${text.length} caractères, ${text.split(/\s+/).length} mots avec ${indicators.length} indicateurs détectés`,
-        indicators: indicators.map(i => i.description),
-        timestamp: new Date().toISOString(),
-        preset: preset?.name,
-        processingTime: Math.round(processingTime)
-      },
-      metadata: {
-        fileSize: text.length,
-      },
+      method: 'Advanced Statistical Analysis + Pattern Recognition + Linguistic Modeling',
+      details: `Analysé ${text.length} caractères, ${text.split(/\s+/).length} mots avec ${indicators.length} indicateurs détectés`,
+      indicators: indicators.map(i => i.description),
+      preset: preset?.name,
+      processingTime,
+      metadata: { fileSize: text.length },
       rawIndicators: indicators
-    };
+    });
   }
 
   async detectImage(file: File, presetId?: string): Promise<DetectionResult> {
@@ -90,32 +84,28 @@ class AIDetectionService {
     let confidence = this.imageEngine.calculateConfidence(indicators);
     
     if (preset?.settings.thresholds?.image) {
-      confidence = confidence * (preset.settings.sensitivity === 'high' ? 1.2 : preset.settings.sensitivity === 'low' ? 0.8 : 1);
+      confidence = confidence * this.getSensitivityMultiplier(preset.settings.sensitivity);
     }
     
     const isAIGenerated = confidence > (preset?.settings.thresholds?.image || 0.6);
     const processingTime = performance.now() - startTime;
 
-    return {
-      id: `image_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-      fileName: file.name,
+    return this.createDetectionResult({
       fileType: 'image',
+      fileName: file.name,
       isAIGenerated,
       confidence: Math.min(confidence, 0.92),
-      analysis: {
-        method: 'Deep Neural Network Analysis + EXIF Inspection + Visual Artifact Detection',
-        details: `Analyse complète des métadonnées, patterns visuels et signatures de génération IA`,
-        indicators: indicators.map(i => i.description),
-        timestamp: new Date().toISOString(),
-        preset: preset?.name,
-        processingTime: Math.round(processingTime)
-      },
+      method: 'Deep Neural Network Analysis + EXIF Inspection + Visual Artifact Detection',
+      details: 'Analyse complète des métadonnées, patterns visuels et signatures de génération IA',
+      indicators: indicators.map(i => i.description),
+      preset: preset?.name,
+      processingTime,
       metadata: {
         fileSize: file.size,
         dimensions: await this.getImageDimensions(file),
       },
       rawIndicators: indicators
-    };
+    });
   }
 
   async detectAudio(file: File, presetId?: string): Promise<DetectionResult> {
@@ -126,32 +116,68 @@ class AIDetectionService {
     let confidence = this.audioEngine.calculateConfidence(indicators);
     
     if (preset?.settings.thresholds?.audio) {
-      confidence = confidence * (preset.settings.sensitivity === 'high' ? 1.2 : preset.settings.sensitivity === 'low' ? 0.8 : 1);
+      confidence = confidence * this.getSensitivityMultiplier(preset.settings.sensitivity);
     }
     
     const isAIGenerated = confidence > (preset?.settings.thresholds?.audio || 0.65);
     const processingTime = performance.now() - startTime;
 
-    return {
-      id: `audio_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-      fileName: file.name,
+    return this.createDetectionResult({
       fileType: 'audio',
+      fileName: file.name,
       isAIGenerated,
       confidence: Math.min(confidence, 0.88),
-      analysis: {
-        method: 'Advanced Spectral Analysis + Voice Synthesis Detection + Acoustic Modeling',
-        details: `Analyse spectrale complète, détection de patterns synthétiques et modélisation acoustique`,
-        indicators: indicators.map(i => i.description),
-        timestamp: new Date().toISOString(),
-        preset: preset?.name,
-        processingTime: Math.round(processingTime)
-      },
+      method: 'Advanced Spectral Analysis + Voice Synthesis Detection + Acoustic Modeling',
+      details: 'Analyse spectrale complète, détection de patterns synthétiques et modélisation acoustique',
+      indicators: indicators.map(i => i.description),
+      preset: preset?.name,
+      processingTime,
       metadata: {
         fileSize: file.size,
         duration: await this.getAudioDuration(file),
       },
       rawIndicators: indicators
+    });
+  }
+
+  private createDetectionResult(params: {
+    fileType: 'text' | 'image' | 'audio';
+    fileName: string;
+    isAIGenerated: boolean;
+    confidence: number;
+    method: string;
+    details: string;
+    indicators: string[];
+    preset?: string;
+    processingTime: number;
+    metadata?: any;
+    rawIndicators?: any[];
+  }): DetectionResult {
+    return {
+      id: `${params.fileType}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      fileName: params.fileName,
+      fileType: params.fileType,
+      isAIGenerated: params.isAIGenerated,
+      confidence: params.confidence,
+      analysis: {
+        method: params.method,
+        details: params.details,
+        indicators: params.indicators,
+        timestamp: new Date().toISOString(),
+        preset: params.preset,
+        processingTime: Math.round(params.processingTime)
+      },
+      metadata: params.metadata,
+      rawIndicators: params.rawIndicators
     };
+  }
+
+  private getSensitivityMultiplier(sensitivity: 'low' | 'medium' | 'high'): number {
+    switch (sensitivity) {
+      case 'high': return 1.2;
+      case 'low': return 0.8;
+      default: return 1;
+    }
   }
 
   private async getImageDimensions(file: File): Promise<{ width: number; height: number }> {
@@ -191,15 +217,9 @@ class AIDetectionService {
   }
 
   exportResults(results: DetectionResult[], format: 'json' | 'csv'): string {
-    if (format === 'json') {
-      return JSON.stringify(results, null, 2);
-    } else {
-      const headers = 'Fichier,Type,IA Détectée,Confiance,Méthode,Preset,Temps de traitement,Timestamp\n';
-      const rows = results.map(r => 
-        `"${r.fileName}","${r.fileType}","${r.isAIGenerated}","${(r.confidence * 100).toFixed(1)}%","${r.analysis.method}","${r.analysis.preset || 'Aucun'}","${r.analysis.processingTime}ms","${r.analysis.timestamp}"`
-      ).join('\n');
-      return headers + rows;
-    }
+    return format === 'json' 
+      ? ExportService.exportToJson(results)
+      : ExportService.exportToCsv(results);
   }
 
   getProviders(): DetectionProvider[] {
