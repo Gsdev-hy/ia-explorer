@@ -9,13 +9,17 @@ import { mediaGenerationTemplates, mediaGenerationCategories } from './mediaGene
 import { audioAnalysisTemplates, audioAnalysisCategories } from './audioAnalysisTemplates';
 import { businessTemplates, businessCategories } from './businessTemplates';
 import { educationTemplates, educationCategories } from './educationTemplates';
-
-// Import des nouveaux templates
 import { researchTemplates, researchCategories } from './researchTemplates';
 import { automationTemplates, automationCategories } from './automationTemplates';
+import { creativeWritingTemplates, creativeWritingCategories } from './creativeWritingTemplates';
+import { socialMediaTemplates, socialMediaCategories } from './socialMediaTemplates';
+import { healthWellnessTemplates, healthWellnessCategories } from './healthWellnessTemplates';
+import { technicalTemplates, technicalCategories } from './technicalTemplates';
+import { gamingTemplates, gamingCategories } from './gamingTemplates';
+import { extraTemplates, extraCategories } from './extraTemplates';
 
-// Combinaison de tous les templates
-export const allPromptTemplates = [
+// Combinaison de tous les templates (150+ templates)
+export const allSpecializedTemplates = [
   ...llmTemplates,
   ...imageTemplates,
   ...videoTemplates,
@@ -27,11 +31,17 @@ export const allPromptTemplates = [
   ...businessTemplates,
   ...educationTemplates,
   ...researchTemplates,
-  ...automationTemplates
+  ...automationTemplates,
+  ...creativeWritingTemplates,
+  ...socialMediaTemplates,
+  ...healthWellnessTemplates,
+  ...technicalTemplates,
+  ...gamingTemplates,
+  ...extraTemplates
 ];
 
-// Combinaison de toutes les catégories
-export const allPromptCategories = [
+// Combinaison de toutes les catégories (15+ catégories)
+export const allSpecializedCategories = [
   ...llmCategories,
   ...imageCategories,
   ...videoCategories,
@@ -43,5 +53,26 @@ export const allPromptCategories = [
   ...businessCategories,
   ...educationCategories,
   ...researchCategories,
-  ...automationCategories
+  ...automationCategories,
+  ...creativeWritingCategories,
+  ...socialMediaCategories,
+  ...healthWellnessCategories,
+  ...technicalCategories,
+  ...gamingCategories,
+  ...extraCategories
 ];
+
+// Exports pour compatibilité
+export const allPromptTemplates = allSpecializedTemplates;
+export const allPromptCategories = allSpecializedCategories;
+
+// Export des statistiques pour vérification
+export const templateStats = {
+  totalTemplates: allSpecializedTemplates.length,
+  totalCategories: allSpecializedCategories.length,
+  categoriesBreakdown: allSpecializedCategories.map(cat => ({
+    name: cat.name,
+    id: cat.id,
+    count: allSpecializedTemplates.filter(t => t.category === cat.id).length
+  }))
+};
