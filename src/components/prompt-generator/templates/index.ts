@@ -82,11 +82,29 @@ export const validateTemplates = () => {
   const issues = [];
   
   allSpecializedTemplates.forEach((template, index) => {
-    if (!template.id || !template.name || !template.category || !template.domain || 
-        !template.description || !template.template || !Array.isArray(template.variables) || 
-        !Array.isArray(template.tags) || typeof template.quality !== 'number' || 
-        typeof template.usageCount !== 'number') {
-      issues.push(`Template ${index}: Missing required properties`);
+    // Vérification des propriétés requises
+    const requiredProps = ['id', 'name', 'category', 'domain', 'description', 'template', 'variables', 'tags', 'quality', 'usageCount'];
+    const missingProps = requiredProps.filter(prop => !(prop in template));
+    
+    if (missingProps.length > 0) {
+      issues.push(`Template ${index} (${template.id || 'unknown'}): Missing properties: ${missingProps.join(', ')}`);
+    }
+    
+    // Vérification des types
+    if (template.variables && !Array.isArray(template.variables)) {
+      issues.push(`Template ${index} (${template.id}): Variables should be an array`);
+    }
+    
+    if (template.tags && !Array.isArray(template.tags)) {
+      issues.push(`Template ${index} (${template.id}): Tags should be an array`);
+    }
+    
+    if (template.quality && typeof template.quality !== 'number') {
+      issues.push(`Template ${index} (${template.id}): Quality should be a number`);
+    }
+    
+    if (template.usageCount && typeof template.usageCount !== 'number') {
+      issues.push(`Template ${index} (${template.id}): UsageCount should be a number`);
     }
   });
   

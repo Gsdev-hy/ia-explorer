@@ -5,6 +5,7 @@ export const researchTemplates = [
     name: 'Recherche Académique',
     description: 'Analyse de littérature scientifique et synthèse de recherche',
     category: 'recherche',
+    domain: 'Recherche Académique',
     template: `Tu es un chercheur académique expert spécialisé en {domaine_recherche}.
 
 **CONTEXTE :**
@@ -36,14 +37,22 @@ Conduis une analyse approfondie de la littérature sur {sujet_specifique}
 - Axes de développement futurs
 
 Ton expertise en {domaine_recherche} doit transparaître dans chaque analyse.`,
-    variables: ['domaine_recherche', 'question_recherche', 'methodologie', 'sujet_specifique'],
-    tags: ['recherche', 'académique', 'analyse', 'littérature']
+    variables: [
+      { name: 'domaine_recherche', type: 'text', label: 'Domaine de recherche', placeholder: 'Intelligence artificielle, psychologie...', required: true },
+      { name: 'question_recherche', type: 'textarea', label: 'Question de recherche', placeholder: 'Question principale à explorer', required: true },
+      { name: 'methodologie', type: 'select', label: 'Méthodologie', options: ['Quantitative', 'Qualitative', 'Mixte', 'Méta-analyse'], required: true },
+      { name: 'sujet_specifique', type: 'text', label: 'Sujet spécifique', placeholder: 'Aspect particulier à analyser', required: true }
+    ],
+    tags: ['recherche', 'académique', 'analyse', 'littérature'],
+    quality: 4.8,
+    usageCount: 1247
   },
   {
     id: 'competitive-analysis',
     name: 'Analyse Concurrentielle',
     description: 'Étude approfondie de la concurrence et positionnement marché',
     category: 'recherche',
+    domain: 'Business Intelligence',
     template: `Tu es un analyste stratégique expert en intelligence économique et veille concurrentielle.
 
 **CONTEXTE DE L'ANALYSE :**
@@ -79,14 +88,22 @@ Réalise une analyse concurrentielle exhaustive de {entreprise} sur le marché {
 - Plan d'action différenciation
 
 Applique ton expertise en {secteur} pour des insights actionnables.`,
-    variables: ['secteur', 'entreprise', 'marche_geo', 'periode'],
-    tags: ['concurrence', 'stratégie', 'marché', 'business']
+    variables: [
+      { name: 'secteur', type: 'text', label: 'Secteur d\'activité', placeholder: 'Tech, automobile, finance...', required: true },
+      { name: 'entreprise', type: 'text', label: 'Entreprise étudiée', placeholder: 'Nom de l\'entreprise à analyser', required: true },
+      { name: 'marche_geo', type: 'select', label: 'Marché géographique', options: ['Local', 'National', 'Européen', 'International'], required: true },
+      { name: 'periode', type: 'select', label: 'Période d\'analyse', options: ['3 mois', '6 mois', '1 an', '2 ans'], required: true }
+    ],
+    tags: ['concurrence', 'stratégie', 'marché', 'business'],
+    quality: 4.7,
+    usageCount: 876
   },
   {
     id: 'trend-analysis',
     name: 'Analyse de Tendances',
     description: 'Identification et analyse des tendances émergentes',
     category: 'recherche',
+    domain: 'Prospective',
     template: `Tu es un futurologue et analyste de tendances expert en prospective stratégique.
 
 **PÉRIMÈTRE D'ANALYSE :**
@@ -129,8 +146,15 @@ Identifie et analyse les tendances émergentes impactant {secteur_focus} à hori
 - Recommandations stratégiques
 
 Mobilise ton expertise en prospective pour des analyses prédictives précises.`,
-    variables: ['secteur_focus', 'horizon_temporel', 'zone_geo', 'thematiques'],
-    tags: ['tendances', 'prospective', 'innovation', 'futur']
+    variables: [
+      { name: 'secteur_focus', type: 'text', label: 'Secteur focus', placeholder: 'Intelligence artificielle, mobilité...', required: true },
+      { name: 'horizon_temporel', type: 'select', label: 'Horizon temporel', options: ['1 an', '3 ans', '5 ans', '10 ans'], required: true },
+      { name: 'zone_geo', type: 'select', label: 'Zone géographique', options: ['France', 'Europe', 'Amérique du Nord', 'Mondial'], required: true },
+      { name: 'thematiques', type: 'textarea', label: 'Thématiques', placeholder: 'Technologies, usages, réglementations...', required: true }
+    ],
+    tags: ['tendances', 'prospective', 'innovation', 'futur'],
+    quality: 4.6,
+    usageCount: 543
   }
 ];
 

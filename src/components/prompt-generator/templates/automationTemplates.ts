@@ -5,6 +5,7 @@ export const automationTemplates = [
     name: 'Optimiseur de Workflow',
     description: 'Analyse et optimisation des processus métier',
     category: 'automatisation',
+    domain: 'Automatisation',
     template: `Tu es un expert en optimisation des processus et automatisation intelligente.
 
 **CONTEXTE DU PROCESSUS :**
@@ -50,14 +51,22 @@ Optimise le processus "{processus_nom}" pour maximiser l'efficacité et réduire
 - Estimation ROI et planning
 
 Concentre-toi sur des améliorations mesurables et implémentables dans {departement}.`,
-    variables: ['processus_nom', 'departement', 'frequence', 'parties_prenantes'],
-    tags: ['workflow', 'optimisation', 'processus', 'efficacité']
+    variables: [
+      { name: 'processus_nom', type: 'text', label: 'Nom du processus', placeholder: 'Gestion commandes, RH recrutement...', required: true },
+      { name: 'departement', type: 'text', label: 'Département', placeholder: 'Commercial, RH, Finance...', required: true },
+      { name: 'frequence', type: 'select', label: 'Fréquence', options: ['Quotidien', 'Hebdomadaire', 'Mensuel', 'Ponctuel'], required: true },
+      { name: 'parties_prenantes', type: 'text', label: 'Parties prenantes', placeholder: 'Équipes impliquées...', required: true }
+    ],
+    tags: ['workflow', 'optimisation', 'processus', 'efficacité'],
+    quality: 4.6,
+    usageCount: 892
   },
   {
     id: 'ai-integration-consultant',
     name: 'Consultant Intégration IA',
     description: 'Conseil pour l\'intégration d\'IA dans les processus métier',
     category: 'automatisation',
+    domain: 'Intelligence Artificielle',
     template: `Tu es un consultant expert en transformation digitale et intégration d'intelligence artificielle.
 
 **CONTEXTE DE LA MISSION :**
@@ -110,8 +119,16 @@ Conçois une stratégie d'intégration IA pour optimiser {processus_cible} chez 
 - Nouveaux revenus potentiels
 
 Adapte tes recommandations au secteur {secteur_activite} et aux spécificités de {entreprise}.`,
-    variables: ['entreprise', 'secteur_activite', 'processus_cible', 'objectifs_business', 'budget_range'],
-    tags: ['IA', 'transformation', 'conseil', 'intégration']
+    variables: [
+      { name: 'entreprise', type: 'text', label: 'Nom de l\'entreprise', placeholder: 'Nom de l\'entreprise', required: true },
+      { name: 'secteur_activite', type: 'select', label: 'Secteur d\'activité', options: ['Tech', 'Finance', 'Santé', 'Industrie', 'Commerce', 'Services'], required: true },
+      { name: 'processus_cible', type: 'text', label: 'Processus ciblé', placeholder: 'Service client, production...', required: true },
+      { name: 'objectifs_business', type: 'textarea', label: 'Objectifs business', placeholder: 'Réduire coûts, améliorer qualité...', required: true },
+      { name: 'budget_range', type: 'select', label: 'Budget disponible', options: ['< 50K€', '50K-200K€', '200K-500K€', '500K+€'], required: true }
+    ],
+    tags: ['IA', 'transformation', 'conseil', 'intégration'],
+    quality: 4.7,
+    usageCount: 654
   }
 ];
 
