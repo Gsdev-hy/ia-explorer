@@ -5,247 +5,487 @@ export const businessCategories: PromptCategory[] = [
   {
     id: 'business-strategy',
     name: 'Stratégie Business',
-    description: 'Templates pour la stratégie d\'entreprise',
-    icon: 'TrendingUp'
-  },
-  {
-    id: 'marketing-digital',
-    name: 'Marketing Digital',
-    description: 'Templates pour le marketing et la communication',
-    icon: 'Megaphone'
-  },
-  {
-    id: 'sales-enablement',
-    name: 'Support Vente',
-    description: 'Templates pour l\'aide à la vente',
+    description: 'Templates pour la planification stratégique',
     icon: 'Target'
   },
   {
-    id: 'customer-service',
-    name: 'Service Client',
-    description: 'Templates pour le support client',
-    icon: 'Headphones'
+    id: 'business-operations',
+    name: 'Opérations',
+    description: 'Templates pour l\'optimisation opérationnelle',
+    icon: 'Settings'
   },
   {
-    id: 'hr-recruitment',
-    name: 'RH & Recrutement',
-    description: 'Templates pour les ressources humaines',
-    icon: 'Users'
+    id: 'business-marketing',
+    name: 'Marketing & Ventes',
+    description: 'Templates pour le marketing et les ventes',
+    icon: 'TrendingUp'
   }
 ];
 
 export const businessTemplates: PromptTemplate[] = [
   {
-    id: 'business-plan-generator',
-    name: 'Générateur de Business Plan',
+    id: 'business-plan-creator',
+    name: 'Créateur de Business Plan',
     category: 'business-strategy',
-    domain: 'Stratégie',
-    description: 'Créé un business plan complet et structuré',
-    template: `Tu es un expert en stratégie d'entreprise. Crée un business plan détaillé pour : "{businessIdea}".
+    domain: 'Strategy',
+    description: 'Génère un business plan structuré et professionnel',
+    template: `Tu es un consultant en stratégie d'entreprise. Crée un business plan complet pour :
 
-## 1. Résumé Exécutif
-- Concept et proposition de valeur
-- Marché cible et opportunité
-- Avantage concurrentiel
+**INFORMATIONS DE BASE :**
+- Nom de l'entreprise : {company_name}
+- Secteur d'activité : {industry}
+- Modèle économique : {business_model}
+- Marché cible : {target_market}
+- Financement recherché : {funding_needed}
 
-## 2. Analyse de Marché
-- Taille du marché : {marketSize}
-- Segmentation client : {targetSegment}
+**STRUCTURE DU BUSINESS PLAN :**
+
+## 1. RÉSUMÉ EXÉCUTIF
+- Vision et mission
+- Proposition de valeur unique
+- Facteurs clés de succès
+- Demande de financement
+
+## 2. ANALYSE DE MARCHÉ
+- Taille du marché : {market_size}
+- Tendances sectorielles
 - Analyse concurrentielle
-
-## 3. Produit/Service
-- Description détaillée
-- Fonctionnalités clés
-- Roadmap de développement
-
-## 4. Modèle Économique
-- Revenus : {revenueModel}
-- Structure de coûts
-- Projections financières sur {timeframe}
-
-## 5. Stratégie Marketing
 - Positionnement
+
+## 3. OFFRE PRODUIT/SERVICE
+- Description détaillée
+- Avantages concurrentiels
+- Propriété intellectuelle
+- Roadmap développement
+
+## 4. STRATÉGIE MARKETING
+- Segmentation client : {customer_segments}
+- Stratégie de prix : {pricing_strategy}
 - Canaux de distribution
-- Plan de communication
+- Plan communication
 
-## 6. Équipe et Organisation
-- Profils recherchés
+## 5. ORGANISATION
+- Équipe fondatrice
 - Structure organisationnelle
-- Besoins en financement : {fundingNeeds}
+- Besoins en recrutement
+- Gouvernance
 
-## 7. Analyse des Risques
+## 6. PLAN FINANCIER
+- Projections sur {projection_years} ans
+- Compte de résultat prévisionnel
+- Plan de trésorerie
+- Hypothèses financières
+
+## 7. ANALYSE DES RISQUES
 - Risques identifiés
-- Stratégies de mitigation
+- Plans de mitigation
+- Scénarios alternatifs
 
-Secteur d'activité : {industry}
-Localisation : {location}`,
+**CONTEXTE SPÉCIFIQUE :**
+- Phase de développement : {development_stage}
+- Géographie : {geographic_scope}
+- Objectifs à 3 ans : {three_year_goals}`,
     variables: [
-      { name: 'businessIdea', type: 'textarea', label: 'Idée d\'entreprise', placeholder: 'Plateforme SaaS pour la gestion des stocks...', required: true },
-      { name: 'marketSize', type: 'select', label: 'Taille du marché', options: ['Local', 'National', 'International', 'Global'], required: true },
-      { name: 'targetSegment', type: 'text', label: 'Segment cible', placeholder: 'PME, B2B, Particuliers...', required: true },
-      { name: 'revenueModel', type: 'select', label: 'Modèle de revenus', options: ['Abonnement', 'Vente unique', 'Freemium', 'Commission', 'Publicité'], required: true },
-      { name: 'timeframe', type: 'select', label: 'Horizon temporel', options: ['1 an', '3 ans', '5 ans'], required: true },
-      { name: 'fundingNeeds', type: 'select', label: 'Besoins de financement', options: ['< 50k€', '50k-200k€', '200k-1M€', '> 1M€'], required: true },
-      { name: 'industry', type: 'text', label: 'Secteur', placeholder: 'Tech, E-commerce, Services...', required: true },
-      { name: 'location', type: 'text', label: 'Localisation', placeholder: 'France, Europe, Monde...', required: true }
+      { name: 'company_name', type: 'text', label: 'Nom de l\'entreprise', placeholder: 'TechStart, GreenSolutions...', required: true },
+      { name: 'industry', type: 'select', label: 'Secteur d\'activité', options: ['Technology', 'Healthcare', 'Finance', 'E-commerce', 'Manufacturing', 'Services', 'Food & Beverage'], required: true },
+      { name: 'business_model', type: 'select', label: 'Modèle économique', options: ['SaaS/Subscription', 'Marketplace', 'E-commerce', 'Service traditionnel', 'Freemium', 'License'], required: true },
+      { name: 'target_market', type: 'text', label: 'Marché cible', placeholder: 'PME françaises, particuliers 25-45 ans...', required: true },
+      { name: 'funding_needed', type: 'select', label: 'Financement recherché', options: ['< 100K€', '100K-500K€', '500K-1M€', '1M-5M€', '> 5M€'], required: true },
+      { name: 'market_size', type: 'text', label: 'Taille du marché', placeholder: '500M€ en France, croissance 15%/an', required: true },
+      { name: 'customer_segments', type: 'textarea', label: 'Segments clients', placeholder: 'Segment 1: PME tech, Segment 2: Grandes entreprises...', required: true },
+      { name: 'pricing_strategy', type: 'select', label: 'Stratégie de prix', options: ['Premium', 'Compétitif', 'Pénétration', 'Value-based', 'Freemium'], required: true },
+      { name: 'projection_years', type: 'select', label: 'Années de projection', options: ['3 ans', '5 ans'], required: true },
+      { name: 'development_stage', type: 'select', label: 'Phase de développement', options: ['Idée/Concept', 'MVP', 'Lancement', 'Croissance', 'Expansion'], required: true },
+      { name: 'geographic_scope', type: 'select', label: 'Portée géographique', options: ['Local', 'National', 'Européen', 'International'], required: true },
+      { name: 'three_year_goals', type: 'textarea', label: 'Objectifs à 3 ans', placeholder: 'CA de 5M€, 50 employés, leader sur le marché français...', required: true }
     ],
-    tags: ['Business', 'Stratégie', 'Plan', 'Financement'],
-    quality: 4.7,
-    usageCount: 892
+    tags: ['Business Plan', 'Stratégie', 'Financement', 'Startup'],
+    quality: 4.9,
+    usageCount: 2340
   },
   {
-    id: 'social-media-campaign',
-    name: 'Campagne Réseaux Sociaux',
-    category: 'marketing-digital',
-    domain: 'Social Media',
-    description: 'Planifie une campagne complète sur les réseaux sociaux',
-    template: `Tu es un expert en marketing digital. Crée une stratégie complète de campagne sur les réseaux sociaux pour : "{product}".
+    id: 'swot-analysis-expert',
+    name: 'Analyse SWOT Experte',
+    category: 'business-strategy',
+    domain: 'Strategic Analysis',
+    description: 'Analyse SWOT complète et actionnable',
+    template: `Tu es un analyste stratégique expert. Réalise une analyse SWOT approfondie pour :
 
-## 🎯 Objectifs de la Campagne
-- Objectif principal : {objective}
-- KPI à mesurer : {kpis}
-- Budget alloué : {budget}
-- Durée : {duration}
+**CONTEXTE DE L'ANALYSE :**
+- Organisation : {organization_name}
+- Secteur : {industry_sector}
+- Objectif d'analyse : {analysis_objective}
+- Horizon temporel : {time_horizon}
 
-## 👥 Public Cible
-- Démographie : {demographics}
-- Centres d'intérêt : {interests}
-- Comportements en ligne : {behaviors}
+**ANALYSE SWOT COMPLÈTE :**
 
-## 📱 Plateformes Sélectionnées
-{platforms}
+## 🔵 FORCES (Strengths)
+### Internes - Avantages actuels
+- **Opérationnelles :** {operational_strengths}
+- **Humaines :** {human_resources_strengths}
+- **Financières :** {financial_strengths}
+- **Technologiques :** {tech_strengths}
+- **Market position :** {market_position}
 
-## 📝 Stratégie de Contenu
-### Types de contenu :
-- Posts informatifs (30%)
-- Contenu engageant (40%) 
-- Contenu promotionnel (20%)
-- User Generated Content (10%)
+## 🔴 FAIBLESSES (Weaknesses)  
+### Internes - Points d'amélioration
+- **Lacunes opérationnelles**
+- **Contraintes ressources**
+- **Gaps compétences**
+- **Limitations technologiques**
+- **Positionnement marché**
 
-### Calendrier éditorial :
-- Fréquence de publication : {frequency}
-- Meilleurs créneaux : {timing}
+## 🟢 OPPORTUNITÉS (Opportunities)
+### Externes - Potentiel à saisir
+- **Évolutions marché :** {market_trends}
+- **Innovations technologiques**
+- **Changements réglementaires**
+- **Nouveaux segments**
+- **Partenariats potentiels**
 
-## 🎨 Ligne Éditoriale
-- Ton : {tone}
-- Style visuel : {visualStyle}
-- Hashtags stratégiques : #{hashtags}
+## 🟡 MENACES (Threats)
+### Externes - Risques à anticiper
+- **Concurrence :** {competitive_threats}
+- **Évolutions sectorielles**
+- **Risques économiques**
+- **Changements réglementaires**
+- **Disruptions technologiques**
 
-## 📊 Métriques et Suivi
-- Portée et impressions
-- Engagement (likes, commentaires, partages)
-- Taux de conversion
-- Coût par acquisition
+## 📊 MATRICE CROISÉE
+### Stratégies SO (Forces × Opportunités)
+- Maximiser les forces pour saisir les opportunités
 
-## 🚀 Actions Spécifiques
-1. Phase de lancement (semaine 1-2)
-2. Phase d'amplification (semaine 3-6)
-3. Phase d'optimisation (semaine 7+)
+### Stratégies WO (Faiblesses × Opportunités)  
+- Corriger les faiblesses pour exploiter les opportunités
 
-Industrie : {industry}
-Concurrents à surveiller : {competitors}`,
+### Stratégies ST (Forces × Menaces)
+- Utiliser les forces pour contrer les menaces
+
+### Stratégies WT (Faiblesses × Menaces)
+- Minimiser les faiblesses face aux menaces
+
+## 🎯 PLAN D'ACTION PRIORITAIRE
+- **Actions immédiates (0-3 mois)**
+- **Projets moyen terme (3-12 mois)**  
+- **Initiatives long terme (1-3 ans)**
+
+**FOCUS SECTORIEL :** {industry_focus}
+**CONTEXTE CONCURRENTIEL :** {competitive_context}`,
     variables: [
-      { name: 'product', type: 'text', label: 'Produit/Service', placeholder: 'Application mobile, cours en ligne...', required: true },
-      { name: 'objective', type: 'select', label: 'Objectif principal', options: ['Notoriété', 'Génération de leads', 'Ventes', 'Engagement communauté'], required: true },
-      { name: 'kpis', type: 'text', label: 'KPI prioritaires', placeholder: 'Reach, CTR, conversions...', required: true },
-      { name: 'budget', type: 'select', label: 'Budget', options: ['< 1000€', '1000-5000€', '5000-15000€', '> 15000€'], required: true },
-      { name: 'duration', type: 'select', label: 'Durée', options: ['1 mois', '3 mois', '6 mois', '1 an'], required: true },
-      { name: 'demographics', type: 'text', label: 'Démographie', placeholder: '25-45 ans, urbains, CSP+...', required: true },
-      { name: 'interests', type: 'textarea', label: 'Centres d\'intérêt', placeholder: 'Tech, entrepreneuriat, lifestyle...', required: true },
-      { name: 'behaviors', type: 'text', label: 'Comportements', placeholder: 'Early adopters, actifs le soir...', required: false },
-      { name: 'platforms', type: 'text', label: 'Plateformes', placeholder: 'Instagram, LinkedIn, TikTok...', required: true },
-      { name: 'frequency', type: 'select', label: 'Fréquence', options: ['1 post/jour', '3-5 posts/semaine', '1 post/semaine'], required: true },
-      { name: 'timing', type: 'text', label: 'Créneaux optimaux', placeholder: '9h-11h, 18h-20h...', required: false },
-      { name: 'tone', type: 'select', label: 'Ton', options: ['Professionnel', 'Décontracté', 'Inspirant', 'Humoristique'], required: true },
-      { name: 'visualStyle', type: 'text', label: 'Style visuel', placeholder: 'Minimaliste, coloré, photo/vidéo...', required: false },
-      { name: 'hashtags', type: 'text', label: 'Hashtags clés', placeholder: 'innovation, startup, tech', required: false },
-      { name: 'industry', type: 'text', label: 'Industrie', placeholder: 'SaaS, E-learning, E-commerce...', required: true },
-      { name: 'competitors', type: 'text', label: 'Concurrents', placeholder: 'Competitor1, Competitor2...', required: false }
+      { name: 'organization_name', type: 'text', label: 'Nom organisation', placeholder: 'Mon entreprise, division X...', required: true },
+      { name: 'industry_sector', type: 'select', label: 'Secteur d\'activité', options: ['Technology', 'Manufacturing', 'Services', 'Retail', 'Healthcare', 'Finance', 'Agriculture'], required: true },
+      { name: 'analysis_objective', type: 'select', label: 'Objectif d\'analyse', options: ['Stratégie générale', 'Lancement produit', 'Expansion marché', 'Transformation digitale', 'Optimisation'], required: true },
+      { name: 'time_horizon', type: 'select', label: 'Horizon temporel', options: ['Court terme (1 an)', 'Moyen terme (3 ans)', 'Long terme (5+ ans)'], required: true },
+      { name: 'operational_strengths', type: 'textarea', label: 'Forces opérationnelles', placeholder: 'Processus efficaces, qualité produit, supply chain...', required: true },
+      { name: 'human_resources_strengths', type: 'textarea', label: 'Forces RH', placeholder: 'Équipe experte, culture forte, leadership...', required: true },
+      { name: 'financial_strengths', type: 'textarea', label: 'Forces financières', placeholder: 'Trésorerie solide, rentabilité, accès financement...', required: true },
+      { name: 'tech_strengths', type: 'textarea', label: 'Forces technologiques', placeholder: 'Innovation, R&D, infrastructure IT...', required: true },
+      { name: 'market_position', type: 'text', label: 'Position marché', placeholder: 'Leader, challenger, niche...', required: true },
+      { name: 'market_trends', type: 'textarea', label: 'Tendances de marché', placeholder: 'Croissance secteur, nouveaux besoins, digitalisation...', required: true },
+      { name: 'competitive_threats', type: 'textarea', label: 'Menaces concurrentielles', placeholder: 'Nouveaux entrants, guerre des prix, disruption...', required: true },
+      { name: 'industry_focus', type: 'text', label: 'Focus sectoriel', placeholder: 'Spécificités et enjeux du secteur...', required: false },
+      { name: 'competitive_context', type: 'text', label: 'Contexte concurrentiel', placeholder: 'Intensité concurrence, barrières à l\'entrée...', required: false }
     ],
-    tags: ['Marketing', 'Social Media', 'Campagne', 'Digital'],
-    quality: 4.6,
-    usageCount: 1156
-  },
-  {
-    id: 'sales-proposal-generator',
-    name: 'Proposition Commerciale',
-    category: 'sales-enablement',
-    domain: 'Ventes',
-    description: 'Génère une proposition commerciale personnalisée et convaincante',
-    template: `Tu es un expert en vente B2B. Rédige une proposition commerciale personnalisée pour : "{clientName}".
-
-## 📋 Contexte Client
-**Entreprise :** {clientName}
-**Secteur :** {clientIndustry}
-**Défi principal :** {clientChallenge}
-**Décideur :** {decisionMaker}
-
-## 🎯 Compréhension des Enjeux
-Nous avons identifié que {clientName} fait face à {clientChallenge}. 
-Cela impact votre activité par : {businessImpact}
-
-## 💡 Notre Solution
-**Produit/Service proposé :** {solution}
-
-### Bénéfices clés :
-✅ **Économies estimées :** {savings}
-✅ **Amélioration de productivité :** {productivity}
-✅ **Réduction des risques :** {riskReduction}
-
-## 📊 Proposition de Valeur
-- ROI estimé : {roi} sur {roiTimeframe}
-- Temps de mise en œuvre : {implementationTime}
-- Support inclus : {supportLevel}
-
-## 💰 Investissement
-**Option recommandée :** {pricingTier}
-- Prix : {price}
-- Modalités : {paymentTerms}
-- Garanties : {guarantees}
-
-## 🚀 Prochaines Étapes
-1. **Démonstration personnalisée** - {demoDate}
-2. **Évaluation technique** - 1 semaine
-3. **Déploiement pilote** - {pilotDuration}
-4. **Formation équipes** - Incluse
-
-## 📞 Engagement de Service
-- Point de contact dédié : {accountManager}
-- SLA de support : {sla}
-- Révisions trimestrielles incluses
-
-**Cette proposition est valable jusqu'au {validityDate}**
-
-Références clients similaires : {references}
-Certifications : {certifications}`,
-    variables: [
-      { name: 'clientName', type: 'text', label: 'Nom du client', placeholder: 'Entreprise ABC', required: true },
-      { name: 'clientIndustry', type: 'text', label: 'Secteur client', placeholder: 'Manufacturing, Services...', required: true },
-      { name: 'clientChallenge', type: 'textarea', label: 'Défi client', placeholder: 'Gestion inefficace des stocks...', required: true },
-      { name: 'decisionMaker', type: 'text', label: 'Décideur', placeholder: 'M. Dupont, DSI', required: true },
-      { name: 'businessImpact', type: 'textarea', label: 'Impact business', placeholder: 'Perte de productivité, coûts...', required: true },
-      { name: 'solution', type: 'text', label: 'Solution proposée', placeholder: 'Logiciel de gestion...', required: true },
-      { name: 'savings', type: 'text', label: 'Économies estimées', placeholder: '15% des coûts opérationnels', required: true },
-      { name: 'productivity', type: 'text', label: 'Gain productivité', placeholder: '25% d\'efficacité en plus', required: true },
-      { name: 'riskReduction', type: 'text', label: 'Réduction risques', placeholder: 'Conformité réglementaire', required: false },
-      { name: 'roi', type: 'text', label: 'ROI estimé', placeholder: '200%', required: true },
-      { name: 'roiTimeframe', type: 'select', label: 'Délai ROI', options: ['6 mois', '1 an', '18 mois', '2 ans'], required: true },
-      { name: 'implementationTime', type: 'select', label: 'Temps mise en œuvre', options: ['2 semaines', '1 mois', '3 mois', '6 mois'], required: true },
-      { name: 'supportLevel', type: 'select', label: 'Niveau support', options: ['Standard', 'Premium', '24/7', 'Dédié'], required: true },
-      { name: 'pricingTier', type: 'text', label: 'Option tarifaire', placeholder: 'Licence annuelle', required: true },
-      { name: 'price', type: 'text', label: 'Prix', placeholder: '50 000€/an', required: true },
-      { name: 'paymentTerms', type: 'select', label: 'Modalités paiement', options: ['Annuel', 'Trimestriel', 'Mensuel'], required: true },
-      { name: 'guarantees', type: 'text', label: 'Garanties', placeholder: 'Satisfait ou remboursé 30j', required: false },
-      { name: 'demoDate', type: 'text', label: 'Date démo', placeholder: 'Semaine prochaine', required: false },
-      { name: 'pilotDuration', type: 'select', label: 'Durée pilote', options: ['2 semaines', '1 mois', '3 mois'], required: false },
-      { name: 'accountManager', type: 'text', label: 'Account Manager', placeholder: 'Jean Martin', required: false },
-      { name: 'sla', type: 'text', label: 'SLA', placeholder: '4h en jour ouvré', required: false },
-      { name: 'validityDate', type: 'text', label: 'Validité offre', placeholder: '31/12/2024', required: true },
-      { name: 'references', type: 'text', label: 'Références', placeholder: 'Client X, Client Y...', required: false },
-      { name: 'certifications', type: 'text', label: 'Certifications', placeholder: 'ISO 27001, SOC2...', required: false }
-    ],
-    tags: ['Vente', 'Proposition', 'B2B', 'Commercial'],
+    tags: ['SWOT', 'Analyse stratégique', 'Planning', 'Business'],
     quality: 4.8,
-    usageCount: 743
+    usageCount: 1890
+  },
+  {
+    id: 'marketing-campaign-planner',
+    name: 'Planificateur de Campagne Marketing',
+    category: 'business-marketing',
+    domain: 'Marketing',
+    description: 'Crée des campagnes marketing complètes et efficaces',
+    template: `Tu es un expert en marketing digital et traditionnel. Conçois une campagne marketing complète :
+
+**BRIEF CAMPAGNE :**
+- Marque/Produit : {brand_product}
+- Objectif principal : {campaign_objective}
+- Budget total : {total_budget}
+- Durée : {campaign_duration}
+- Marché cible : {target_market}
+
+**ANALYSE STRATÉGIQUE :**
+- Public cible : {target_audience}
+- Positionnement : {brand_positioning}
+- Message clé : {key_message}
+- Tonalité : {brand_tone}
+
+**MIX MARKETING :**
+
+## 📱 DIGITAL (60% budget)
+### Social Media
+- **Plateformes :** {social_platforms}
+- **Contenu :** {content_strategy}
+- **Influenceurs :** {influencer_strategy}
+
+### Publicité Digitale
+- **Google Ads :** {google_ads_strategy}
+- **Facebook/Meta Ads :** {meta_ads_strategy}
+- **Autres canaux :** {other_digital_channels}
+
+## 📺 TRADITIONNEL (40% budget)
+- **TV/Radio :** {traditional_media}
+- **Print :** {print_strategy}
+- **Outdoor :** {outdoor_strategy}
+
+**CALENDRIER CAMPAGNE :**
+- **Phase 1 - Teasing :** {teasing_phase}
+- **Phase 2 - Lancement :** {launch_phase}
+- **Phase 3 - Amplification :** {amplification_phase}
+- **Phase 4 - Clôture :** {closing_phase}
+
+**MESURE PERFORMANCE :**
+- **KPIs principaux :** {primary_kpis}
+- **Outils de tracking :** {tracking_tools}
+- **Objectifs chiffrés :** {numerical_targets}
+
+**GESTION DES RISQUES :**
+- **Risques identifiés :** {identified_risks}
+- **Plans de contingence :** {contingency_plans}
+
+**RECOMMANDATIONS CRÉATIVES :**
+- **Concept créatif :** {creative_concept}
+- **Assets nécessaires :** {required_assets}
+- **Production timeline :** {production_schedule}`,
+    variables: [
+      { name: 'brand_product', type: 'text', label: 'Marque/Produit', placeholder: 'iPhone 15, Nike Air Max, Startup SaaS...', required: true },
+      { name: 'campaign_objective', type: 'select', label: 'Objectif principal', options: ['Notoriété', 'Génération leads', 'Ventes directes', 'Lancement produit', 'Fidélisation', 'Repositionnement'], required: true },
+      { name: 'total_budget', type: 'select', label: 'Budget total', options: ['< 10K€', '10K-50K€', '50K-100K€', '100K-500K€', '> 500K€'], required: true },
+      { name: 'campaign_duration', type: 'select', label: 'Durée campagne', options: ['1 mois', '3 mois', '6 mois', '1 an'], required: true },
+      { name: 'target_market', type: 'select', label: 'Marché cible', options: ['Local', 'National', 'Européen', 'International'], required: true },
+      { name: 'target_audience', type: 'textarea', label: 'Public cible détaillé', placeholder: 'Femmes 25-40 ans, urbaines, CSP+, intéressées mode...', required: true },
+      { name: 'brand_positioning', type: 'text', label: 'Positionnement', placeholder: 'Premium accessible, innovant, authentique...', required: true },
+      { name: 'key_message', type: 'textarea', label: 'Message clé', placeholder: 'Le message principal à communiquer...', required: true },
+      { name: 'brand_tone', type: 'select', label: 'Tonalité marque', options: ['Professionnel', 'Décontracté', 'Inspirant', 'Humoristique', 'Sophistiqué', 'Authentique'], required: true },
+      { name: 'social_platforms', type: 'text', label: 'Plateformes sociales', placeholder: 'Instagram, TikTok, LinkedIn...', required: true },
+      { name: 'content_strategy', type: 'select', label: 'Stratégie contenu', options: ['UGC focus', 'Brand content', 'Educational', 'Entertainment', 'Mix équilibré'], required: true },
+      { name: 'influencer_strategy', type: 'select', label: 'Stratégie influenceurs', options: ['Macro-influenceurs', 'Micro-influenceurs', 'Nano-influenceurs', 'Mix', 'Pas d\'influenceurs'], required: true },
+      { name: 'google_ads_strategy', type: 'select', label: 'Stratégie Google Ads', options: ['Search only', 'Display', 'Shopping', 'YouTube', 'Mix complet'], required: true },
+      { name: 'meta_ads_strategy', type: 'select', label: 'Stratégie Meta Ads', options: ['Facebook focus', 'Instagram focus', 'Multi-plateformes', 'Remarketing'], required: true },
+      { name: 'other_digital_channels', type: 'text', label: 'Autres canaux digitaux', placeholder: 'LinkedIn, TikTok, programmatique...', required: false },
+      { name: 'traditional_media', type: 'select', label: 'Médias traditionnels', options: ['TV nationale', 'Radio locale', 'Mix TV/Radio', 'Pas de média traditionnel'], required: false },
+      { name: 'print_strategy', type: 'select', label: 'Stratégie print', options: ['Presse nationale', 'Magazines spécialisés', 'Presse locale', 'Pas de print'], required: false },
+      { name: 'outdoor_strategy', type: 'select', label: 'Stratégie outdoor', options: ['Affichage urbain', 'Transport', 'Digital outdoor', 'Pas d\'outdoor'], required: false },
+      { name: 'teasing_phase', type: 'text', label: 'Phase teasing', placeholder: 'Durée et actions de la phase teasing...', required: true },
+      { name: 'launch_phase', type: 'text', label: 'Phase lancement', placeholder: 'Actions de lancement intensif...', required: true },
+      { name: 'amplification_phase', type: 'text', label: 'Phase amplification', placeholder: 'Maintien et amplification du message...', required: true },
+      { name: 'closing_phase', type: 'text', label: 'Phase clôture', placeholder: 'Actions de conclusion et bilan...', required: true },
+      { name: 'primary_kpis', type: 'textarea', label: 'KPIs principaux', placeholder: 'Reach, CTR, conversions, ROAS...', required: true },
+      { name: 'tracking_tools', type: 'text', label: 'Outils de tracking', placeholder: 'Google Analytics, Facebook Pixel, UTM...', required: true },
+      { name: 'numerical_targets', type: 'textarea', label: 'Objectifs chiffrés', placeholder: '1M impressions, 10K leads, ROAS 4:1...', required: true },
+      { name: 'identified_risks', type: 'textarea', label: 'Risques identifiés', placeholder: 'Réaction concurrence, bad buzz, saisonnalité...', required: false },
+      { name: 'contingency_plans', type: 'textarea', label: 'Plans de contingence', placeholder: 'Actions en cas de problème...', required: false },
+      { name: 'creative_concept', type: 'textarea', label: 'Concept créatif', placeholder: 'L\'idée créative centrale de la campagne...', required: true },
+      { name: 'required_assets', type: 'textarea', label: 'Assets nécessaires', placeholder: 'Photos, vidéos, graphiques, textes...', required: true },
+      { name: 'production_schedule', type: 'text', label: 'Planning production', placeholder: 'Timeline de création des contenus...', required: true }
+    ],
+    tags: ['Marketing', 'Campagne', 'Digital', 'Stratégie'],
+    quality: 4.9,
+    usageCount: 1560
+  },
+  {
+    id: 'roi-calculator-business',
+    name: 'Calculateur ROI Business',
+    category: 'business-operations',
+    domain: 'Finance',
+    description: 'Calcule et analyse le ROI de projets business',
+    template: `Tu es un analyste financier expert. Calcule et analyse le ROI de ce projet :
+
+**PROJET À ANALYSER :**
+- Nom du projet : {project_name}
+- Type d'investissement : {investment_type}
+- Montant investissement : {investment_amount}
+- Durée d'analyse : {analysis_period}
+- Secteur : {business_sector}
+
+**COÛTS DÉTAILLÉS :**
+- **Investissement initial :** {initial_investment}
+- **Coûts opérationnels annuels :** {operational_costs}
+- **Coûts de maintenance :** {maintenance_costs}
+- **Autres coûts :** {other_costs}
+
+**BÉNÉFICES ATTENDUS :**
+- **Augmentation revenus :** {revenue_increase}
+- **Réduction coûts :** {cost_savings}
+- **Gains productivité :** {productivity_gains}
+- **Bénéfices intangibles :** {intangible_benefits}
+
+**CALCULS ROI :**
+
+## 📊 MÉTRIQUES FINANCIÈRES
+### ROI Simple
+- **Formule :** (Bénéfices - Investissement) / Investissement × 100
+- **Calcul détaillé**
+- **Résultat :** X% sur {analysis_period}
+
+### ROI Annualisé
+- **ROI moyen par an**
+- **Variation annuelle**
+
+### Autres Métriques
+- **Payback Period :** {payback_calculation}
+- **VAN (NPV) :** Avec taux {discount_rate}%
+- **TRI (IRR) :** Taux de rentabilité interne
+
+## 📈 ANALYSE TEMPORELLE
+- **Année 1 :** Coûts vs Bénéfices
+- **Année 2 :** Évolution
+- **Année 3 :** Maturation
+- **Années suivantes :** Optimisation
+
+## ⚖️ ANALYSE DE SENSIBILITÉ
+### Scénarios
+- **Optimiste :** +20% bénéfices
+- **Réaliste :** Hypothèses de base
+- **Pessimiste :** -20% bénéfices
+
+### Variables critiques
+- **Impact de ±10% sur les revenus**
+- **Impact de ±10% sur les coûts**
+- **Seuil de rentabilité**
+
+## 🎯 RECOMMANDATIONS
+- **Viabilité du projet**
+- **Points d'attention**
+- **Optimisations possibles**
+- **Comparaison alternatives**
+
+**CONTEXTE MARCHÉ :** {market_context}
+**FACTEURS DE RISQUE :** {risk_factors}`,
+    variables: [
+      { name: 'project_name', type: 'text', label: 'Nom du projet', placeholder: 'Transformation digitale, nouveau produit...', required: true },
+      { name: 'investment_type', type: 'select', label: 'Type d\'investissement', options: ['Technologie/IT', 'Marketing/Ventes', 'RH/Formation', 'Infrastructure', 'R&D', 'Expansion'], required: true },
+      { name: 'investment_amount', type: 'text', label: 'Montant investissement', placeholder: '100 000€', required: true },
+      { name: 'analysis_period', type: 'select', label: 'Période d\'analyse', options: ['1 an', '2 ans', '3 ans', '5 ans'], required: true },
+      { name: 'business_sector', type: 'select', label: 'Secteur business', options: ['Technology', 'Manufacturing', 'Services', 'Retail', 'Healthcare', 'Finance'], required: true },
+      { name: 'initial_investment', type: 'text', label: 'Investissement initial', placeholder: 'Détail des coûts initiaux...', required: true },
+      { name: 'operational_costs', type: 'text', label: 'Coûts opérationnels', placeholder: '20 000€/an - licences, maintenance...', required: true },
+      { name: 'maintenance_costs', type: 'text', label: 'Coûts de maintenance', placeholder: '5 000€/an - support, mises à jour...', required: false },
+      { name: 'other_costs', type: 'text', label: 'Autres coûts', placeholder: 'Formation, consulting...', required: false },
+      { name: 'revenue_increase', type: 'text', label: 'Augmentation revenus', placeholder: '50 000€/an - nouveaux clients, prix...', required: true },
+      { name: 'cost_savings', type: 'text', label: 'Réduction coûts', placeholder: '30 000€/an - automatisation, efficacité...', required: true },
+      { name: 'productivity_gains', type: 'text', label: 'Gains productivité', placeholder: 'Équivalent 0.5 ETP économisé...', required: false },
+      { name: 'intangible_benefits', type: 'textarea', label: 'Bénéfices intangibles', placeholder: 'Satisfaction client, image marque, agilité...', required: false },
+      { name: 'payback_calculation', type: 'select', label: 'Méthode payback', options: ['Simple', 'Actualisé', 'Les deux'], required: true },
+      { name: 'discount_rate', type: 'select', label: 'Taux d\'actualisation', options: ['5%', '8%', '10%', '12%'], required: true },
+      { name: 'market_context', type: 'textarea', label: 'Contexte marché', placeholder: 'Tendances, concurrence, opportunités...', required: false },
+      { name: 'risk_factors', type: 'textarea', label: 'Facteurs de risque', placeholder: 'Risques pouvant impacter le ROI...', required: false }
+    ],
+    tags: ['ROI', 'Finance', 'Analyse', 'Investment'],
+    quality: 4.7,
+    usageCount: 1230
+  },
+  {
+    id: 'crisis-communication-plan',
+    name: 'Plan de Communication de Crise',
+    category: 'business-operations',
+    domain: 'Communication',
+    description: 'Crée un plan de gestion de communication de crise',
+    template: `Tu es un expert en communication de crise. Élabore un plan complet de gestion de crise :
+
+**CONTEXTE DE LA CRISE :**
+- Type de crise : {crisis_type}
+- Secteur d'activité : {industry}
+- Taille organisation : {organization_size}
+- Niveau de gravité : {severity_level}
+- Parties prenantes : {stakeholders}
+
+**ANALYSE DE SITUATION :**
+- **Origine de la crise :** {crisis_origin}
+- **Impact potentiel :** {potential_impact}
+- **Urgence temporelle :** {time_urgency}
+- **Ampleur médiatique :** {media_exposure}
+
+**PLAN DE COMMUNICATION :**
+
+## 🚨 PHASE 1 - RÉACTION IMMÉDIATE (0-2h)
+### Actions prioritaires
+- **Activation cellule de crise**
+- **Évaluation situation**
+- **Communication interne**
+- **Veille médiatique**
+
+### Messages clés
+- **Reconnaissance des faits :** {fact_acknowledgment}
+- **Empathie et responsabilité :** {empathy_statement}
+- **Actions immédiates :** {immediate_actions}
+
+## 📢 PHASE 2 - COMMUNICATION ACTIVE (2-24h)
+### Stratégie de communication
+- **Porte-parole désigné :** {spokesperson}
+- **Ton et style :** {communication_tone}
+- **Canaux prioritaires :** {priority_channels}
+
+### Messages par audience
+- **Employés :** {employee_message}
+- **Clients :** {customer_message}
+- **Médias :** {media_message}
+- **Investisseurs :** {investor_message}
+- **Autorités :** {authority_message}
+
+## 🔄 PHASE 3 - SUIVI ET AJUSTEMENT (24h-1 semaine)
+### Monitoring
+- **Veille médiatique continue**
+- **Analyse sentiment réseaux sociaux**
+- **Remontées parties prenantes**
+
+### Ajustements communication
+- **Adaptation messages**
+- **Nouvelles informations**
+- **Réponses critiques**
+
+## 📈 PHASE 4 - RECONSTRUCTION (1 semaine+)
+### Stratégie de sortie de crise
+- **Communication positive :** {positive_messaging}
+- **Preuves d'amélioration**
+- **Témoignages tiers**
+- **Initiatives RSE**
+
+**OUTILS ET RESSOURCES :**
+- **Dark site préparé :** {dark_site_ready}
+- **Templates de communiqués**
+- **Listes de contacts médias**
+- **Processus d'escalade**
+
+**FORMATION ET PRÉPARATION :**
+- **Media training porte-paroles**
+- **Simulations de crise**
+- **Mise à jour procédures**
+
+**MESURE ET ANALYSE :**
+- **KPIs de suivi :** {monitoring_kpis}
+- **Outils de mesure**
+- **Reporting régulier**
+
+Prépare l'organisation à gérer efficacement la crise {crisis_type} dans le secteur {industry}.`,
+    variables: [
+      { name: 'crisis_type', type: 'select', label: 'Type de crise', options: ['Produit défaillant', 'Incident sécurité', 'Scandale RH', 'Cyberattaque', 'Accident industriel', 'Polémique publique', 'Faillite/Difficultés'], required: true },
+      { name: 'industry', type: 'select', label: 'Secteur d\'activité', options: ['Agroalimentaire', 'Automobile', 'Technologie', 'Finance', 'Santé', 'Énergie', 'Transport'], required: true },
+      { name: 'organization_size', type: 'select', label: 'Taille organisation', options: ['Startup (<50)', 'PME (50-250)', 'ETI (250-5000)', 'Grande entreprise (>5000)'], required: true },
+      { name: 'severity_level', type: 'select', label: 'Niveau de gravité', options: ['Mineur', 'Modéré', 'Majeur', 'Critique'], required: true },
+      { name: 'stakeholders', type: 'textarea', label: 'Parties prenantes', placeholder: 'Clients, employés, investisseurs, médias, autorités...', required: true },
+      { name: 'crisis_origin', type: 'textarea', label: 'Origine de la crise', placeholder: 'Cause initiale et facteurs déclencheurs...', required: true },
+      { name: 'potential_impact', type: 'textarea', label: 'Impact potentiel', placeholder: 'Conséquences financières, réputation, opérationnelles...', required: true },
+      { name: 'time_urgency', type: 'select', label: 'Urgence temporelle', options: ['Immédiate', 'Quelques heures', 'Quelques jours', 'Long terme'], required: true },
+      { name: 'media_exposure', type: 'select', label: 'Exposition médiatique', options: ['Locale', 'Nationale', 'Internationale', 'Réseaux sociaux'], required: true },
+      { name: 'fact_acknowledgment', type: 'textarea', label: 'Reconnaissance faits', placeholder: 'Comment reconnaître les faits sans aggraver...', required: true },
+      { name: 'empathy_statement', type: 'textarea', label: 'Déclaration empathie', placeholder: 'Expression d\'empathie et prise de responsabilité...', required: true },
+      { name: 'immediate_actions', type: 'textarea', label: 'Actions immédiates', placeholder: 'Mesures concrètes prises immédiatement...', required: true },
+      { name: 'spokesperson', type: 'select', label: 'Porte-parole', options: ['PDG', 'Directeur Communication', 'Expert technique', 'Porte-parole externe'], required: true },
+      { name: 'communication_tone', type: 'select', label: 'Ton communication', options: ['Empathique et humble', 'Professionnel et factuel', 'Confiant et rassurant', 'Transparent et honnête'], required: true },
+      { name: 'priority_channels', type: 'text', label: 'Canaux prioritaires', placeholder: 'Communiqué presse, réseaux sociaux, site web...', required: true },
+      { name: 'employee_message', type: 'textarea', label: 'Message employés', placeholder: 'Communication interne spécifique...', required: true },
+      { name: 'customer_message', type: 'textarea', label: 'Message clients', placeholder: 'Communication client adaptée...', required: true },
+      { name: 'media_message', type: 'textarea', label: 'Message médias', placeholder: 'Éléments de langage pour la presse...', required: true },
+      { name: 'investor_message', type: 'textarea', label: 'Message investisseurs', placeholder: 'Communication financière...', required: false },
+      { name: 'authority_message', type: 'textarea', label: 'Message autorités', placeholder: 'Communication institutionnelle...', required: false },
+      { name: 'positive_messaging', type: 'textarea', label: 'Messaging positif', placeholder: 'Messages de reconstruction d\'image...', required: true },
+      { name: 'dark_site_ready', type: 'select', label: 'Dark site préparé', options: ['Oui, opérationnel', 'En cours de préparation', 'Non, à créer'], required: true },
+      { name: 'monitoring_kpis', type: 'textarea', label: 'KPIs de suivi', placeholder: 'Mentions médias, sentiment, reach, engagement...', required: true }
+    ],
+    tags: ['Communication', 'Crise', 'Gestion', 'Relations publiques'],
+    quality: 4.8,
+    usageCount: 890
   }
 ];

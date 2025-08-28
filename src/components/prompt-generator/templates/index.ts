@@ -18,7 +18,7 @@ import { technicalTemplates, technicalCategories } from './technicalTemplates';
 import { gamingTemplates, gamingCategories } from './gamingTemplates';
 import { extraTemplates, extraCategories } from './extraTemplates';
 
-// Combinaison de tous les templates (150+ templates)
+// Combinaison de tous les templates spécialisés (150+ templates)
 export const allSpecializedTemplates = [
   ...llmTemplates,
   ...imageTemplates,
@@ -40,7 +40,7 @@ export const allSpecializedTemplates = [
   ...extraTemplates
 ];
 
-// Combinaison de toutes les catégories (15+ catégories)
+// Combinaison de toutes les catégories spécialisées (17 catégories)
 export const allSpecializedCategories = [
   ...llmCategories,
   ...imageCategories,
@@ -62,11 +62,11 @@ export const allSpecializedCategories = [
   ...extraCategories
 ];
 
-// Exports pour compatibilité
+// Exports pour compatibilité avec l'interface
 export const allPromptTemplates = allSpecializedTemplates;
 export const allPromptCategories = allSpecializedCategories;
 
-// Export des statistiques pour vérification
+// Export des statistiques mises à jour
 export const templateStats = {
   totalTemplates: allSpecializedTemplates.length,
   totalCategories: allSpecializedCategories.length,
@@ -76,3 +76,25 @@ export const templateStats = {
     count: allSpecializedTemplates.filter(t => t.category === cat.id).length
   }))
 };
+
+// Validation des templates pour s'assurer qu'ils respectent l'interface PromptTemplate
+export const validateTemplates = () => {
+  const issues = [];
+  
+  allSpecializedTemplates.forEach((template, index) => {
+    if (!template.id || !template.name || !template.category || !template.domain || 
+        !template.description || !template.template || !Array.isArray(template.variables) || 
+        !Array.isArray(template.tags) || typeof template.quality !== 'number' || 
+        typeof template.usageCount !== 'number') {
+      issues.push(`Template ${index}: Missing required properties`);
+    }
+  });
+  
+  return issues;
+};
+
+console.log('📊 Templates Spécialisés chargés:', {
+  totalTemplates: allSpecializedTemplates.length,
+  totalCategories: allSpecializedCategories.length,
+  validationIssues: validateTemplates()
+});
