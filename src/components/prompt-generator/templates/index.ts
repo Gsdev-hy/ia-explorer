@@ -45,27 +45,3 @@ export const allPromptCategories = [
   ...researchCategories,
   ...automationCategories
 ];
-
-// Exports attendus par TemplateSelector (templates spécialisés uniquement)
-export const allSpecializedTemplates = [
-  ...visionTemplates,
-  ...ragTemplates,
-  ...mediaGenerationTemplates,
-  ...audioAnalysisTemplates,
-  ...businessTemplates,
-  ...educationTemplates,
-  ...researchTemplates,
-  ...automationTemplates
-];
-
-export const allSpecializedCategories = [
-  ...visionCategories,
-  ...ragCategories,
-  ...mediaGenerationCategories,
-  ...audioAnalysisCategories,
-  ...businessCategories,
-  ...educationCategories,
-  ...researchCategories,
-  ...automationCategories
-];
-

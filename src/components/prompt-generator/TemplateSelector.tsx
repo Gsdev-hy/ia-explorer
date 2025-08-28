@@ -12,8 +12,8 @@ import {
   enhancedPromptCategories 
 } from './enhancedPromptTemplates';
 import { 
-  allSpecializedTemplates, 
-  allSpecializedCategories 
+  allPromptTemplates, 
+  allPromptCategories 
 } from './templates';
 import TemplateFilters from './TemplateFilters';
 import TemplateCard from './TemplateCard';
@@ -31,20 +31,37 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'quality' | 'usage' | 'name'>('quality');
 
-  // Combiner tous les templates et catégories
+  // Combiner tous les templates et catégories avec validation de type
   const allTemplates = useMemo(() => {
-    return [
+    const validateTemplate = (template: any): template is PromptTemplate => {
+      return template && 
+             typeof template.id === 'string' &&
+             typeof template.name === 'string' &&
+             typeof template.category === 'string' &&
+             typeof template.domain === 'string' &&
+             typeof template.description === 'string' &&
+             typeof template.template === 'string' &&
+             Array.isArray(template.variables) &&
+             Array.isArray(template.tags) &&
+             typeof template.quality === 'number' &&
+             typeof template.usageCount === 'number';
+    };
+
+    const combinedTemplates = [
       ...promptTemplates, 
       ...enhancedPromptTemplates,
-      ...allSpecializedTemplates
+      ...allPromptTemplates
     ];
+
+    // Filtrer seulement les templates valides
+    return combinedTemplates.filter(validateTemplate);
   }, []);
 
   const allCategories = useMemo(() => {
     return [
       ...promptCategories, 
       ...enhancedPromptCategories,
-      ...allSpecializedCategories
+      ...allPromptCategories
     ];
   }, []);
 
@@ -81,7 +98,7 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
   };
 
   const isAdvancedTemplate = (template: PromptTemplate) => {
-    return [...enhancedPromptTemplates, ...allSpecializedTemplates].includes(template);
+    return [...enhancedPromptTemplates, ...allPromptTemplates].some(t => t.id === template.id);
   };
 
   return (
