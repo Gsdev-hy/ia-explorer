@@ -36,7 +36,7 @@ const PromptGeneratorHeader: React.FC = () => {
           <div className="flex items-center gap-3">
             <Target className="h-6 w-6 text-purple-600 dark:text-purple-400" />
             <div className="text-left">
-              <div className="text-2xl font-bold text-purple-700 dark:text-purple-300">150+</div>
+              <div className="text-2xl font-bold text-purple-700 dark:text-purple-300">200+</div>
               <div className="text-sm text-purple-600 dark:text-purple-400 font-medium">Templates Spécialisés</div>
             </div>
           </div>
@@ -46,7 +46,7 @@ const PromptGeneratorHeader: React.FC = () => {
           <div className="flex items-center gap-3">
             <Zap className="h-6 w-6 text-blue-600 dark:text-blue-400" />
             <div className="text-left">
-              <div className="text-2xl font-bold text-blue-700 dark:text-blue-300">12</div>
+              <div className="text-2xl font-bold text-blue-700 dark:text-blue-300">15</div>
               <div className="text-sm text-blue-600 dark:text-blue-400 font-medium">Catégories IA</div>
             </div>
           </div>
@@ -63,7 +63,7 @@ const PromptGeneratorHeader: React.FC = () => {
         </div>
       </div>
 
-      {/* Nouvelles fonctionnalités */}
+      {/* Nouvelles fonctionnalités avec meilleur contraste */}
       <div className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-900/50 border border-gray-200 dark:border-gray-700/50 rounded-xl p-6 max-w-4xl mx-auto">
         <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-3">
           🆕 Nouvelles Fonctionnalités Avancées
@@ -71,12 +71,12 @@ const PromptGeneratorHeader: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <span className="text-purple-600 dark:text-purple-400">🎨</span>
-              <span className="text-gray-700 dark:text-gray-200">Image-to-Image transformation avancée</span>
+              <span className="text-purple-600 dark:text-purple-400">🔬</span>
+              <span className="text-gray-700 dark:text-gray-200">Recherche académique & analyse</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-blue-600 dark:text-blue-400">🎬</span>
-              <span className="text-gray-700 dark:text-gray-200">Génération vidéo cinématographique</span>
+              <span className="text-blue-600 dark:text-blue-400">⚙️</span>
+              <span className="text-gray-700 dark:text-gray-200">Automatisation intelligente</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-green-600 dark:text-green-400">👁️</span>
@@ -89,12 +89,12 @@ const PromptGeneratorHeader: React.FC = () => {
               <span className="text-gray-700 dark:text-gray-200">Composition musicale IA sophistiquée</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-red-600 dark:text-red-400">🔊</span>
-              <span className="text-gray-700 dark:text-gray-200">Analyse audio professionnelle</span>
+              <span className="text-red-600 dark:text-red-400">🎬</span>
+              <span className="text-gray-700 dark:text-gray-200">Génération vidéo cinématographique</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-indigo-600 dark:text-indigo-400">📊</span>
-              <span className="text-gray-700 dark:text-gray-200">OCR et extraction de données</span>
+              <span className="text-indigo-600 dark:text-indigo-400">🤖</span>
+              <span className="text-gray-700 dark:text-gray-200">Intégration IA dans les processus</span>
             </div>
           </div>
         </div>

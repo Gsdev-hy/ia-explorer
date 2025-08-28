@@ -1,52 +1,46 @@
-
-// Templates par catégorie
-export { llmTemplates, llmCategories } from './llmTemplates';
-export { imageTemplates, imageCategories } from './imageTemplates';
-export { audioTemplates, audioCategories } from './audioTemplates';
-export { videoTemplates, videoCategories } from './videoTemplates';
-export { ragTemplates, ragCategories } from './ragTemplates';
-export { businessTemplates, businessCategories } from './businessTemplates';
-export { educationTemplates, educationCategories } from './educationTemplates';
-
-// Nouveaux templates spécialisés
-export { visionTemplates, visionCategories } from './visionTemplates';
-export { mediaGenerationTemplates, mediaGenerationCategories } from './mediaGenerationTemplates';
-export { audioAnalysisTemplates, audioAnalysisCategories } from './audioAnalysisTemplates';
-
-// Export combiné pour faciliter l'utilisation
 import { llmTemplates, llmCategories } from './llmTemplates';
 import { imageTemplates, imageCategories } from './imageTemplates';
-import { audioTemplates, audioCategories } from './audioTemplates';
 import { videoTemplates, videoCategories } from './videoTemplates';
+import { audioTemplates, audioCategories } from './audioTemplates';
+import { visionTemplates, visionCategories } from './visionTemplates';
 import { ragTemplates, ragCategories } from './ragTemplates';
+import { mediaGenerationTemplates, mediaCategories } from './mediaGenerationTemplates';
+import { audioAnalysisTemplates, audioAnalysisCategories } from './audioAnalysisTemplates';
 import { businessTemplates, businessCategories } from './businessTemplates';
 import { educationTemplates, educationCategories } from './educationTemplates';
-import { visionTemplates, visionCategories } from './visionTemplates';
-import { mediaGenerationTemplates, mediaGenerationCategories } from './mediaGenerationTemplates';
-import { audioAnalysisTemplates, audioAnalysisCategories } from './audioAnalysisTemplates';
 
-export const allSpecializedTemplates = [
+// Import des nouveaux templates
+import { researchTemplates, researchCategories } from './researchTemplates';
+import { automationTemplates, automationCategories } from './automationTemplates';
+
+// Combinaison de tous les templates
+export const allPromptTemplates = [
   ...llmTemplates,
   ...imageTemplates,
-  ...audioTemplates,
   ...videoTemplates,
+  ...audioTemplates,
+  ...visionTemplates,
   ...ragTemplates,
+  ...mediaGenerationTemplates,
+  ...audioAnalysisTemplates,
   ...businessTemplates,
   ...educationTemplates,
-  ...visionTemplates,
-  ...mediaGenerationTemplates,
-  ...audioAnalysisTemplates
+  ...researchTemplates,
+  ...automationTemplates
 ];
 
-export const allSpecializedCategories = [
+// Combinaison de toutes les catégories
+export const allPromptCategories = [
   ...llmCategories,
   ...imageCategories,
-  ...audioCategories,
   ...videoCategories,
+  ...audioCategories,
+  ...visionCategories,
   ...ragCategories,
+  ...mediaCategories,
+  ...audioAnalysisCategories,
   ...businessCategories,
   ...educationCategories,
-  ...visionCategories,
-  ...mediaGenerationCategories,
-  ...audioAnalysisCategories
+  ...researchCategories,
+  ...automationCategories
 ];
