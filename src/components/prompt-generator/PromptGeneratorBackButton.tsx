@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, User, ExternalLink, Sparkles } from 'lucide-react';
+import { ArrowLeft, User, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -43,20 +43,11 @@ const PromptGeneratorBackButton: React.FC = () => {
             </div>
           </div>
           
-          <div className="flex items-center gap-3">
+          <div className="flex items-center">
             <Badge variant="secondary" className="flex items-center gap-2">
               <User className="h-3 w-3" />
               Créé par Geoffroy Streit
             </Badge>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleBackToResources}
-              className="flex items-center gap-2 hover:bg-purple-50 dark:hover:bg-purple-900/30"
-            >
-              <ExternalLink className="h-4 w-4" />
-              Plus d'Outils IA
-            </Button>
           </div>
         </div>
         
