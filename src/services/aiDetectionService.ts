@@ -4,6 +4,8 @@ import { AudioDetectionEngine, AudioIndicator } from './detection/audioDetection
 import { DetectionPreset, getPresetById } from './detection/detectionPresets';
 import { ExportService } from './exportService';
 import { EnsembleDetector } from './detection/ensembleDetector';
+import { MetadataAnalyzer } from './detection/metadataAnalyzer';
+import { MLDetector } from './detection/mlDetector';
 
 export interface DetectionResult {
   id: string;
@@ -53,9 +55,12 @@ class AIDetectionService {
     const startTime = performance.now();
     const preset = presetId ? getPresetById(presetId) : undefined;
     
-    // Use ensemble detection for more accurate results
+    // Utiliser la détection ensemble + ML
     const ensembleResult = await this.ensembleDetector.analyzeText(text);
-    let confidence = ensembleResult.finalScore;
+    const mlResult = await MLDetector.detectTextWithML(text);
+    
+    // Combiner les résultats
+    let confidence = ensembleResult.finalScore * 0.7 + mlResult.confidence * 0.3;
     
     if (preset?.settings.thresholds?.text) {
       confidence = confidence * this.getSensitivityMultiplier(preset.settings.sensitivity);
@@ -64,17 +69,27 @@ class AIDetectionService {
     const isAIGenerated = confidence > (preset?.settings.thresholds?.text || 0.7);
     const processingTime = performance.now() - startTime;
 
-    // Enhanced analysis details
-    const analysisDetails = this.buildEnhancedTextAnalysisDetails(text, ensembleResult, confidence);
+    // Détails d'analyse enrichis
+    const analysisDetails = this.buildEnhancedTextAnalysisDetails(
+      text, 
+      ensembleResult, 
+      mlResult, 
+      confidence
+    );
+
+    const combinedReasoning = [
+      ...ensembleResult.reasoning,
+      ...mlResult.reasoning
+    ];
 
     return this.createDetectionResult({
       fileType: 'text',
       fileName: 'text_input.txt',
       isAIGenerated,
       confidence: Math.min(confidence, 0.95),
-      method: 'Analyse Ensemble Multi-Méthodes (Statistique + Patterns + Entropie + Sémantique)',
+      method: `Analyse Hybride Ensemble + ML (${mlResult.modelUsed})`,
       details: analysisDetails,
-      indicators: ensembleResult.reasoning,
+      indicators: combinedReasoning,
       preset: preset?.name,
       processingTime,
       metadata: { fileSize: text.length },
@@ -86,9 +101,23 @@ class AIDetectionService {
     const startTime = performance.now();
     const preset = presetId ? getPresetById(presetId) : undefined;
     
-    // Use ensemble detection
+    // Analyse ensemble
     const ensembleResult = await this.ensembleDetector.analyzeImage(file);
-    let confidence = ensembleResult.finalScore;
+    
+    // Analyse des métadonnées
+    const metadataResult = await MetadataAnalyzer.analyzeImageMetadata(file);
+    const metadataConfidence = MetadataAnalyzer.calculateMetadataConfidence(metadataResult.indicators);
+    
+    // Analyse ML sur les données d'image
+    const imageData = await this.extractImageData(file);
+    const mlResult = await MLDetector.detectImageWithML(imageData);
+    
+    // Combiner tous les résultats
+    let confidence = (
+      ensembleResult.finalScore * 0.4 + 
+      metadataConfidence * 0.35 + 
+      mlResult.confidence * 0.25
+    );
     
     if (preset?.settings.thresholds?.image) {
       confidence = confidence * this.getSensitivityMultiplier(preset.settings.sensitivity);
@@ -98,21 +127,34 @@ class AIDetectionService {
     const processingTime = performance.now() - startTime;
     const dimensions = await this.getImageDimensions(file);
 
-    const analysisDetails = this.buildEnhancedImageAnalysisDetails(ensembleResult, dimensions, file.size);
+    const analysisDetails = this.buildEnhancedImageAnalysisDetails(
+      ensembleResult, 
+      metadataResult,
+      mlResult,
+      dimensions, 
+      file.size
+    );
+
+    const combinedReasoning = [
+      ...ensembleResult.reasoning,
+      ...metadataResult.indicators.map(ind => ind.description),
+      ...mlResult.reasoning
+    ];
 
     return this.createDetectionResult({
       fileType: 'image',
       fileName: file.name,
       isAIGenerated,
       confidence: Math.min(confidence, 0.92),
-      method: 'Analyse Ensemble Multi-Méthodes (EXIF + Features + Métadonnées + Vision Avancée)',
+      method: `Analyse Hybride Multi-Couches (Ensemble + Métadonnées + ${mlResult.modelUsed})`,
       details: analysisDetails,
-      indicators: ensembleResult.reasoning,
+      indicators: combinedReasoning,
       preset: preset?.name,
       processingTime,
       metadata: {
         fileSize: file.size,
         dimensions,
+        metadataAnalysis: metadataResult.metadata
       },
       rawIndicators: ensembleResult.indicators
     });
@@ -122,8 +164,9 @@ class AIDetectionService {
     const startTime = performance.now();
     const preset = presetId ? getPresetById(presetId) : undefined;
     
-    // Use ensemble detection
+    // Analyse ensemble avec techniques avancées
     const ensembleResult = await this.ensembleDetector.analyzeAudio(file);
+    
     let confidence = ensembleResult.finalScore;
     
     if (preset?.settings.thresholds?.audio) {
@@ -134,14 +177,18 @@ class AIDetectionService {
     const processingTime = performance.now() - startTime;
     const duration = await this.getAudioDuration(file);
 
-    const analysisDetails = this.buildEnhancedAudioAnalysisDetails(ensembleResult, duration, file.size);
+    const analysisDetails = this.buildEnhancedAudioAnalysisDetails(
+      ensembleResult, 
+      duration, 
+      file.size
+    );
 
     return this.createDetectionResult({
       fileType: 'audio',
       fileName: file.name,
       isAIGenerated,
       confidence: Math.min(confidence, 0.88),
-      method: 'Analyse Ensemble Multi-Méthodes (Spectrale + Temporelle + Autocorrélation + Métadonnées)',
+      method: 'Analyse Ensemble Multi-Méthodes Avancée (Spectrale + Temporelle + Autocorrélation + Métadonnées)',
       details: analysisDetails,
       indicators: ensembleResult.reasoning,
       preset: preset?.name,
@@ -154,29 +201,66 @@ class AIDetectionService {
     });
   }
 
-  private buildEnhancedTextAnalysisDetails(text: string, ensembleResult: any, confidence: number): string {
+  private buildEnhancedTextAnalysisDetails(
+    text: string, 
+    ensembleResult: any, 
+    mlResult: any, 
+    confidence: number
+  ): string {
     const words = text.match(/\b\w+\b/g) || [];
     const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
     const paragraphs = text.split('\n\n').filter(p => p.trim().length > 0);
     
-    return `Analyse ensemble de ${text.length} caractères, ${words.length} mots, ${sentences.length} phrases, ${paragraphs.length} paragraphes. ` +
-           `Scores par méthode: Statistique=${(ensembleResult.methodScores.statistical * 100).toFixed(1)}%, ` +
+    return `Analyse hybride de ${text.length} caractères, ${words.length} mots, ${sentences.length} phrases, ${paragraphs.length} paragraphes. ` +
+           `Ensemble: Statistique=${(ensembleResult.methodScores.statistical * 100).toFixed(1)}%, ` +
            `Patterns=${(ensembleResult.methodScores.pattern * 100).toFixed(1)}%, ` +
            `Entropie=${(ensembleResult.methodScores.entropy * 100).toFixed(1)}%, ` +
            `Sémantique=${(ensembleResult.methodScores.advanced * 100).toFixed(1)}%. ` +
+           `ML (${mlResult.modelUsed}): ${(mlResult.confidence * 100).toFixed(1)}% en ${mlResult.processingTime.toFixed(0)}ms. ` +
            `Score final combiné: ${(confidence * 100).toFixed(1)}%. ` +
-           `Confiance de l'ensemble: ${(ensembleResult.confidence * 100).toFixed(1)}%.`;
+           `Confiance globale: ${(ensembleResult.confidence * 100).toFixed(1)}%.`;
   }
 
-  private buildEnhancedImageAnalysisDetails(ensembleResult: any, dimensions: { width: number; height: number }, fileSize: number): string {
+  private buildEnhancedImageAnalysisDetails(
+    ensembleResult: any, 
+    metadataResult: any,
+    mlResult: any,
+    dimensions: { width: number; height: number }, 
+    fileSize: number
+  ): string {
     const megapixels = (dimensions.width * dimensions.height / 1000000).toFixed(1);
     const fileSizeMB = (fileSize / (1024 * 1024)).toFixed(2);
     
-    return `Image ${dimensions.width}×${dimensions.height} (${megapixels}MP), taille ${fileSizeMB}MB. ` +
-           `Analyse ensemble multi-méthodes: Standard=${(ensembleResult.methodScores.statistical * 100).toFixed(1)}%, ` +
+    return `Image ${dimensions.width}×${dimensions.height} (${megapixels}MP), ${fileSizeMB}MB. ` +
+           `Ensemble: Standard=${(ensembleResult.methodScores.statistical * 100).toFixed(1)}%, ` +
            `Métadonnées=${(ensembleResult.methodScores.pattern * 100).toFixed(1)}%, ` +
-           `Features avancées=${(ensembleResult.methodScores.entropy * 100).toFixed(1)}%. ` +
-           `Confiance de l'ensemble: ${(ensembleResult.confidence * 100).toFixed(1)}%.`;
+           `Features=${(ensembleResult.methodScores.entropy * 100).toFixed(1)}%. ` +
+           `Métadonnées détaillées: ${metadataResult.indicators.length} indicateurs détectés. ` +
+           `ML (${mlResult.modelUsed}): ${(mlResult.confidence * 100).toFixed(1)}% en ${mlResult.processingTime.toFixed(0)}ms. ` +
+           `Confiance globale: ${(ensembleResult.confidence * 100).toFixed(1)}%.`;
+  }
+
+  private async extractImageData(file: File): Promise<ImageData> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          reject(new Error('Impossible de créer le contexte canvas'));
+          return;
+        }
+        
+        canvas.width = Math.min(img.width, 512);
+        canvas.height = Math.min(img.height, 512);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        resolve(imageData);
+      };
+      img.onerror = () => reject(new Error('Impossible de charger l\'image'));
+      img.src = URL.createObjectURL(file);
+    });
   }
 
   private buildEnhancedAudioAnalysisDetails(ensembleResult: any, duration: number, fileSize: number): string {
