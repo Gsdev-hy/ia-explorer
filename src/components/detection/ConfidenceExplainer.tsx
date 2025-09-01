@@ -187,21 +187,21 @@ export const ConfidenceExplainer: React.FC<ConfidenceExplainerProps> = ({
                 <h4 className="font-medium text-blue-900 mb-1">Contexte Académique</h4>
                 <p className="text-sm text-blue-700">
                   Utilisez le preset "Contrôle Académique" pour une sensibilité élevée. 
-                  Scores > 60% nécessitent une vérification manuelle.
+                  Scores {'>'}60% nécessitent une vérification manuelle.
                 </p>
               </div>
               <div className="p-3 rounded-lg bg-green-50 border border-green-200">
                 <h4 className="font-medium text-green-900 mb-1">Vérification Journalistique</h4>
                 <p className="text-sm text-green-700">
                   Le preset "Journalistique" offre un équilibre. 
-                  Scores > 70% indiquent un contenu suspect.
+                  Scores {'>'}70% indiquent un contenu suspect.
                 </p>
               </div>
               <div className="p-3 rounded-lg bg-orange-50 border border-orange-200">
                 <h4 className="font-medium text-orange-900 mb-1">Usage Juridique</h4>
                 <p className="text-sm text-orange-700">
                   Le preset "Juridique" maximise la précision. 
-                  Tous les scores > 50% doivent être examinés.
+                  Tous les scores {'>'} 50% doivent être examinés.
                 </p>
               </div>
             </CardContent>
