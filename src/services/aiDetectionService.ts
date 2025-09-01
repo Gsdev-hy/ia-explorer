@@ -61,13 +61,16 @@ class AIDetectionService {
     const isAIGenerated = confidence > (preset?.settings.thresholds?.text || 0.7);
     const processingTime = performance.now() - startTime;
 
+    // Construction des détails d'analyse plus riches
+    const analysisDetails = this.buildTextAnalysisDetails(text, indicators, confidence);
+
     return this.createDetectionResult({
       fileType: 'text',
       fileName: 'text_input.txt',
       isAIGenerated,
       confidence: Math.min(confidence, 0.95),
-      method: 'Advanced Statistical Analysis + Pattern Recognition + Linguistic Modeling',
-      details: `Analysé ${text.length} caractères, ${text.split(/\s+/).length} mots avec ${indicators.length} indicateurs détectés`,
+      method: 'Analyse Statistique Avancée + Calcul de Perplexité + Détection de Patterns IA',
+      details: analysisDetails,
       indicators: indicators.map(i => i.description),
       preset: preset?.name,
       processingTime,
@@ -89,20 +92,23 @@ class AIDetectionService {
     
     const isAIGenerated = confidence > (preset?.settings.thresholds?.image || 0.6);
     const processingTime = performance.now() - startTime;
+    const dimensions = await this.getImageDimensions(file);
+
+    const analysisDetails = this.buildImageAnalysisDetails(indicators, dimensions, file.size);
 
     return this.createDetectionResult({
       fileType: 'image',
       fileName: file.name,
       isAIGenerated,
       confidence: Math.min(confidence, 0.92),
-      method: 'Deep Neural Network Analysis + EXIF Inspection + Visual Artifact Detection',
-      details: 'Analyse complète des métadonnées, patterns visuels et signatures de génération IA',
+      method: 'Analyse EXIF + Histogramme Couleurs + Analyse Fréquentielle + Détection d\'Artefacts',
+      details: analysisDetails,
       indicators: indicators.map(i => i.description),
       preset: preset?.name,
       processingTime,
       metadata: {
         fileSize: file.size,
-        dimensions: await this.getImageDimensions(file),
+        dimensions,
       },
       rawIndicators: indicators
     });
@@ -121,23 +127,55 @@ class AIDetectionService {
     
     const isAIGenerated = confidence > (preset?.settings.thresholds?.audio || 0.65);
     const processingTime = performance.now() - startTime;
+    const duration = await this.getAudioDuration(file);
+
+    const analysisDetails = this.buildAudioAnalysisDetails(indicators, duration, file.size);
 
     return this.createDetectionResult({
       fileType: 'audio',
       fileName: file.name,
       isAIGenerated,
       confidence: Math.min(confidence, 0.88),
-      method: 'Advanced Spectral Analysis + Voice Synthesis Detection + Acoustic Modeling',
-      details: 'Analyse spectrale complète, détection de patterns synthétiques et modélisation acoustique',
+      method: 'Analyse Spectrale FFT + Détection Patterns Synthétiques + Analyse Dynamique + Détection Bruit',
+      details: analysisDetails,
       indicators: indicators.map(i => i.description),
       preset: preset?.name,
       processingTime,
       metadata: {
         fileSize: file.size,
-        duration: await this.getAudioDuration(file),
+        duration,
       },
       rawIndicators: indicators
     });
+  }
+
+  private buildTextAnalysisDetails(text: string, indicators: (TextIndicator)[], confidence: number): string {
+    const words = text.match(/\b\w+\b/g) || [];
+    const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+    const paragraphs = text.split('\n\n').filter(p => p.trim().length > 0);
+    
+    return `Analyse de ${text.length} caractères, ${words.length} mots, ${sentences.length} phrases, ${paragraphs.length} paragraphes. ` +
+           `${indicators.length} indicateurs détectés avec un score de confiance de ${(confidence * 100).toFixed(1)}%. ` +
+           `Techniques d'analyse: perplexité, entropie lexicale, patterns IA, complexité syntaxique.`;
+  }
+
+  private buildImageAnalysisDetails(indicators: (ImageIndicator)[], dimensions: { width: number; height: number }, fileSize: number): string {
+    const megapixels = (dimensions.width * dimensions.height / 1000000).toFixed(1);
+    const fileSizeMB = (fileSize / (1024 * 1024)).toFixed(2);
+    
+    return `Image ${dimensions.width}×${dimensions.height} (${megapixels}MP), taille ${fileSizeMB}MB. ` +
+           `${indicators.length} anomalies détectées via analyse EXIF, histogramme couleurs, ` +
+           `compression, fréquences spatiales et niveau de bruit.`;
+  }
+
+  private buildAudioAnalysisDetails(indicators: (AudioIndicator)[], duration: number, fileSize: number): string {
+    const fileSizeMB = (fileSize / (1024 * 1024)).toFixed(2);
+    const durationMin = (duration / 60).toFixed(1);
+    const bitrate = duration > 0 ? ((fileSize * 8) / (duration * 1000)).toFixed(0) : 'N/A';
+    
+    return `Audio ${durationMin}min, ${fileSizeMB}MB, ${bitrate}kbps estimé. ` +
+           `${indicators.length} anomalies détectées via analyse spectrale FFT, ` +
+           `plage dynamique, patterns synthétiques et bruit de fond.`;
   }
 
   private createDetectionResult(params: {
