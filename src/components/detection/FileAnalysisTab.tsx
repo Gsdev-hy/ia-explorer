@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -6,6 +5,8 @@ import { FileUploader } from './FileUploader';
 import { ResultsGrid } from './ResultsGrid';
 import { DetectionResult } from '@/services/aiDetectionService';
 import { Settings } from 'lucide-react';
+import { RealTimeAnalysis } from './RealTimeAnalysis';
+import { useState } from 'react';
 
 interface FileAnalysisTabProps {
   selectedPreset?: string;
@@ -28,6 +29,32 @@ export const FileAnalysisTab: React.FC<FileAnalysisTabProps> = ({
   onViewDetailedAnalysis,
   onExportResult
 }) => {
+  const [showRealTimeAnalysis, setShowRealTimeAnalysis] = useState(false);
+  const [currentFileType, setCurrentFileType] = useState<'text' | 'image' | 'audio'>('text');
+
+  const handleFilesSelected = (files: File[]) => {
+    if (files.length > 0) {
+      const firstFile = files[0];
+      let fileType: 'text' | 'image' | 'audio' = 'text';
+      
+      if (firstFile.type.startsWith('image/')) {
+        fileType = 'image';
+      } else if (firstFile.type.startsWith('audio/')) {
+        fileType = 'audio';
+      }
+      
+      setCurrentFileType(fileType);
+      setShowRealTimeAnalysis(true);
+    }
+    
+    onFilesSelected(files);
+  };
+
+  const handleAnalysisComplete = (results: any) => {
+    console.log('Analyse temps réel terminée:', results);
+    setShowRealTimeAnalysis(false);
+  };
+
   return (
     <div className="space-y-6">
       {selectedPreset && (
@@ -52,7 +79,15 @@ export const FileAnalysisTab: React.FC<FileAnalysisTabProps> = ({
         </Card>
       )}
 
-      <FileUploader onFilesSelected={onFilesSelected} />
+      <FileUploader onFilesSelected={handleFilesSelected} />
+      
+      {showRealTimeAnalysis && (
+        <RealTimeAnalysis
+          isActive={isAnalyzing}
+          fileType={currentFileType}
+          onComplete={handleAnalysisComplete}
+        />
+      )}
       
       <ResultsGrid
         results={results}
