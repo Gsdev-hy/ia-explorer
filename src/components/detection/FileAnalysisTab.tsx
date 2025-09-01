@@ -55,6 +55,13 @@ export const FileAnalysisTab: React.FC<FileAnalysisTabProps> = ({
     onFilesSelected(files);
   };
 
+  const getFileType = (file: File): 'text' | 'image' | 'audio' => {
+    if (file.type.startsWith('text/')) return 'text';
+    if (file.type.startsWith('image/')) return 'image';
+    if (file.type.startsWith('audio/')) return 'audio';
+    return 'text'; // default fallback
+  };
+
   return (
     <div className="space-y-6">
       {selectedPreset && (
@@ -100,13 +107,8 @@ export const FileAnalysisTab: React.FC<FileAnalysisTabProps> = ({
             <CardContent>
               <FileUploader 
                 onFilesSelected={handleFileSelection}
-                isAnalyzing={isAnalyzing}
+                acceptedTypes={['text/*', 'image/*', 'audio/*']}
                 maxFiles={5}
-                acceptedTypes={{
-                  'text/*': ['.txt', '.md', '.doc', '.docx'],
-                  'image/*': ['.jpg', '.jpeg', '.png', '.gif', '.webp'],
-                  'audio/*': ['.mp3', '.wav', '.ogg', '.m4a']
-                }}
               />
             </CardContent>
           </Card>
@@ -122,6 +124,7 @@ export const FileAnalysisTab: React.FC<FileAnalysisTabProps> = ({
               <CardContent>
                 <ResultsGrid
                   results={results}
+                  isAnalyzing={isAnalyzing}
                   onViewDetails={onViewDetails}
                   onViewDetailedAnalysis={onViewDetailedAnalysis}
                   onExportResult={onExportResult}
@@ -133,7 +136,13 @@ export const FileAnalysisTab: React.FC<FileAnalysisTabProps> = ({
 
         <TabsContent value="realtime" className="space-y-6">
           {selectedFile ? (
-            <RealTimeAnalysis file={selectedFile} />
+            <RealTimeAnalysis 
+              isActive={true}
+              fileType={getFileType(selectedFile)}
+              onComplete={(results) => {
+                console.log('Real-time analysis completed:', results);
+              }}
+            />
           ) : (
             <Card>
               <CardContent className="pt-6">
