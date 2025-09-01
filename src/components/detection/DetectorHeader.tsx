@@ -2,16 +2,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, User, Download } from 'lucide-react';
+import { ArrowLeft, User, Download, Zap, HelpCircle } from 'lucide-react';
 
 interface DetectorHeaderProps {
   resultsCount: number;
   onExportAll: () => void;
+  onShowBatchProcessor: () => void;
+  onShowConfidenceExplainer: () => void;
 }
 
 export const DetectorHeader: React.FC<DetectorHeaderProps> = ({
   resultsCount,
-  onExportAll
+  onExportAll,
+  onShowBatchProcessor,
+  onShowConfidenceExplainer
 }) => {
   return (
     <div className="flex items-center justify-between">
@@ -28,17 +32,37 @@ export const DetectorHeader: React.FC<DetectorHeaderProps> = ({
           <User className="h-4 w-4" />
           <span>Créé par Geoffroy Streit</span>
         </div>
-        {resultsCount > 0 && (
+        <div className="flex items-center gap-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onShowConfidenceExplainer}
+            className="flex items-center gap-2"
+          >
+            <HelpCircle className="h-4 w-4" />
+            Aide
+          </Button>
           <Button
             variant="outline"
             size="sm"
-            onClick={onExportAll}
+            onClick={onShowBatchProcessor}
             className="flex items-center gap-2"
           >
-            <Download className="h-4 w-4" />
-            Exporter tout ({resultsCount})
+            <Zap className="h-4 w-4" />
+            Traitement par lots
           </Button>
-        )}
+          {resultsCount > 0 && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={onExportAll}
+              className="flex items-center gap-2"
+            >
+              <Download className="h-4 w-4" />
+              Exporter tout ({resultsCount})
+            </Button>
+          )}
+        </div>
       </div>
     </div>
   );

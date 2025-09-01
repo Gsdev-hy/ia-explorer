@@ -3,17 +3,45 @@ import { useState, useCallback } from 'react';
 import { DetectionResult, aiDetectionService } from '@/services/aiDetectionService';
 import { useToast } from '@/hooks/use-toast';
 
+interface AnalysisProgress {
+  current: number;
+  total: number;
+  currentFile?: string;
+  stage: string;
+  completedFiles: string[];
+}
+
 export const useDetectionAnalysis = () => {
   const [results, setResults] = useState<DetectionResult[]>([]);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [progress, setProgress] = useState<AnalysisProgress | null>(null);
   const { toast } = useToast();
 
   const analyzeFiles = useCallback(async (files: File[], selectedPreset?: string) => {
     setIsAnalyzing(true);
     const newResults: DetectionResult[] = [];
+    const completedFiles: string[] = [];
+
+    // Initialize progress
+    setProgress({
+      current: 0,
+      total: files.length,
+      stage: 'initializing',
+      completedFiles: []
+    });
 
     try {
-      for (const file of files) {
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        
+        // Update progress
+        setProgress(prev => prev ? {
+          ...prev,
+          current: i,
+          currentFile: file.name,
+          stage: file.type.split('/')[0]
+        } : null);
+
         let result: DetectionResult;
 
         if (file.type.startsWith('text/')) {
@@ -35,9 +63,17 @@ export const useDetectionAnalysis = () => {
 
         aiDetectionService.saveAnalysis(result);
         newResults.push(result);
+        completedFiles.push(file.name);
+
+        // Update progress with completed file
+        setProgress(prev => prev ? {
+          ...prev,
+          current: i + 1,
+          completedFiles: [...completedFiles]
+        } : null);
 
         // Simulation d'un délai pour montrer le processus
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 800));
       }
 
       setResults(prev => [...newResults, ...prev]);
@@ -55,6 +91,7 @@ export const useDetectionAnalysis = () => {
       });
     } finally {
       setIsAnalyzing(false);
+      setProgress(null);
     }
   }, [toast]);
 
@@ -94,6 +131,7 @@ export const useDetectionAnalysis = () => {
   return {
     results,
     isAnalyzing,
+    progress,
     analyzeFiles,
     addResult,
     exportResults
