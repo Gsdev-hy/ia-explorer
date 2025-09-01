@@ -3,51 +3,131 @@ import { IAToolResource } from '../resourcesData';
 export const iaTools: IAToolResource[] = [
   {
     name: "Test d'API IA",
-    description: "Outil pour tester différents modèles d'IA via API : LLM, génération d'images, musique et vidéo. Créé par Geoffroy Streit.",
+    description: "Outil pour tester différents modèles d'IA via API : LLM, génération d'images, musique et vidéo. En cours de développement par Geoffroy Streit.",
     link: "/test-api-ia",
     category: "Développement",
     pricing: "Gratuit",
-    features: ["Test API", "LLM", "Images", "Audio", "Vidéo"]
+    features: ["Test API", "LLM", "Images", "Audio", "Vidéo", "En développement"]
   },
   {
     name: "Calculateur de Coûts IA",
-    description: "Estimez et comparez les coûts des différents services d'IA : OpenAI, Anthropic, Google, etc. Optimisez votre budget IA.",
+    description: "Estimez et comparez les coûts des différents services d'IA : OpenAI, Anthropic, Google, etc. En cours de développement par Geoffroy Streit.",
     link: "/calculateur-couts-ia",
     category: "Développement",
     pricing: "Gratuit",
-    features: ["Estimation coûts", "Comparaison", "Budget", "ROI"]
+    features: ["Estimation coûts", "Comparaison", "Budget", "ROI", "En développement"]
   },
   {
     name: "Générateur de Prompts Intelligent",
-    description: "Créez des prompts optimisés pour tous vos cas d'usage avec des templates professionnels et un système d'optimisation automatique.",
+    description: "Créez des prompts optimisés pour tous vos cas d'usage avec des templates professionnels et un système d'optimisation automatique. En cours de développement par Geoffroy Streit.",
     link: "/generateur-prompts",
     category: "Productivité",
     pricing: "Gratuit", 
-    features: ["Templates", "Optimisation", "Test A/B", "Suggestions"]
+    features: ["Templates", "Optimisation", "Test A/B", "Suggestions", "En développement"]
   },
   {
     name: "Simulateur d'Entraînement IA",
-    description: "Simulez et visualisez l'entraînement de modèles d'IA en temps réel. Comprenez les algorithmes d'apprentissage de manière interactive.",
+    description: "Simulez et visualisez l'entraînement de modèles d'IA en temps réel. Comprenez les algorithmes d'apprentissage de manière interactive. En cours de développement par Geoffroy Streit.",
     link: "/simulateur-ia",
     category: "Éducation",
     pricing: "Gratuit",
-    features: ["Simulation", "Visualisation", "Pédagogie", "Algorithmes"]
+    features: ["Simulation", "Visualisation", "Pédagogie", "Algorithmes", "En développement"]
   },
   {
     name: "Détecteur de Contenu IA",
-    description: "Analysez et détectez si un contenu (texte, image, audio) a été généré par une IA. Outil de vérification et d'authentification.",
+    description: "Analysez et détectez si un contenu (texte, image, audio) a été généré par une IA. Outil de vérification et d'authentification. En cours de développement par Geoffroy Streit.",
     link: "/detecteur-contenu-ia",
     category: "Sécurité",
-    pricing: "Freemium",
-    features: ["Détection", "Multi-modal", "Scores", "Rapports"]
+    pricing: "Gratuit",
+    features: ["Détection", "Multi-modal", "Scores", "Rapports", "En développement"]
   },
   {
     name: "Optimiseur de Workflow IA",
-    description: "Créez et optimisez des chaînes de traitement IA complexes avec une interface visuelle. Automatisez vos processus métier avec l'IA.",
+    description: "Créez et optimisez des chaînes de traitement IA complexes avec une interface visuelle. Automatisez vos processus métier avec l'IA. En cours de développement par Geoffroy Streit.",
     link: "/optimiseur-workflow-ia", 
     category: "Automatisation",
+    pricing: "Gratuit",
+    features: ["Drag & Drop", "Pipelines", "Monitoring", "Optimisation", "En développement"]
+  },
+  {
+    name: "Comparateur de Modèles IA",
+    description: "Comparez les performances, coûts et capacités des différents modèles d'IA (GPT, Claude, Gemini, etc.) sur vos cas d'usage spécifiques. En cours de développement par Geoffroy Streit.",
+    link: "/comparateur-modeles-ia",
+    category: "Développement",
+    pricing: "Gratuit",
+    features: ["Benchmarks", "Comparaisons", "Métriques", "Recommandations", "En développement"]
+  },
+  {
+    name: "Analyseur de Dataset IA",
+    description: "Analysez la qualité, les biais et la distribution de vos datasets pour l'entraînement de modèles IA. Obtenez des recommandations d'amélioration. En cours de développement par Geoffroy Streit.",
+    link: "/analyseur-dataset-ia",
+    category: "Data Science",
+    pricing: "Gratuit",
+    features: ["Analyse qualité", "Détection biais", "Visualisations", "Recommandations", "En développement"]
+  },
+  {
+    name: "Générateur de Données Synthétiques",
+    description: "Créez des données synthétiques réalistes pour l'entraînement et les tests, en respectant les contraintes de confidentialité. En cours de développement par Geoffroy Streit.",
+    link: "/generateur-donnees-synthetiques",
+    category: "Data Science",
+    pricing: "Gratuit",
+    features: ["Génération données", "RGPD compliant", "Formats multiples", "Export", "En développement"]
+  },
+  {
+    name: "Moniteur de Performance IA",
+    description: "Surveillez en temps réel les performances, coûts et usage de vos modèles IA en production. Alertes et analytics avancés. En cours de développement par Geoffroy Streit.",
+    link: "/moniteur-performance-ia",
+    category: "Monitoring",
+    pricing: "Gratuit",
+    features: ["Temps réel", "Alertes", "Analytics", "Optimisation", "En développement"]
+  },
+  {
+    name: "Assistant RAG Personnel",
+    description: "Créez votre propre assistant IA avec vos documents personnels ou d'entreprise. Interface simple pour construire un système RAG personnalisé. En cours de développement par Geoffroy Streit.",
+    link: "/assistant-rag-personnel",
+    category: "Assistant IA",
+    pricing: "Gratuit",
+    features: ["Upload documents", "RAG personnalisé", "Chat interface", "Sécurisé", "En développement"]
+  },
+  {
+    name: "Simulateur d'Économie IA",
+    description: "Modélisez l'impact économique de l'implémentation d'IA dans votre organisation. ROI, économies, risques et opportunités. En cours de développement par Geoffroy Streit.",
+    link: "/simulateur-economie-ia",
+    category: "Business",
+    pricing: "Gratuit",
+    features: ["Modélisation ROI", "Impact business", "Scénarios", "Rapports", "En développement"]
+  },
+  {
+    name: "Créateur de Chatbots Sans-Code",
+    description: "Créez et déployez des chatbots IA personnalisés sans programmation. Interface drag-and-drop avec intégrations multiples. En cours de développement par Geoffroy Streit.",
+    link: "/createur-chatbots",
+    category: "No-Code",
     pricing: "Freemium",
-    features: ["Drag & Drop", "Pipelines", "Monitoring", "Optimisation"]
+    features: ["Sans-code", "Drag & Drop", "Intégrations", "Déploiement", "En développement"]
+  },
+  {
+    name: "Auditeur de Biais IA",
+    description: "Auditez vos modèles IA pour détecter les biais discriminatoires et obtenir des recommandations pour une IA plus équitable. En cours de développement par Geoffroy Streit.",
+    link: "/auditeur-biais-ia",
+    category: "Éthique",
+    pricing: "Gratuit",
+    features: ["Détection biais", "Équité", "Recommandations", "Rapports", "En développement"]
+  },
+  {
+    name: "Convertisseur de Formats IA",
+    description: "Convertissez entre différents formats de modèles IA (ONNX, TensorFlow, PyTorch, etc.) avec optimisations automatiques. En cours de développement par Geoffroy Streit.",
+    link: "/convertisseur-formats-ia",
+    category: "Développement",
+    pricing: "Gratuit",
+    features: ["Conversion formats", "Optimisation", "Validation", "Export", "En développement"]
+  },
+  {
+    name: "Planificateur de Projets IA",
+    description: "Planifiez et gérez vos projets d'IA de A à Z avec des templates, jalons et ressources recommandées selon votre domaine. En cours de développement par Geoffroy Streit.",
+    link: "/planificateur-projets-ia",
+    category: "Gestion de projet",
+    pricing: "Gratuit",
+    features: ["Templates projets", "Jalons", "Ressources", "Suivi", "En développement"]
   },
   {
     name: "ChatGPT",
