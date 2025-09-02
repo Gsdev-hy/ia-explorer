@@ -46,6 +46,7 @@ import GenerateurPrompts from '@/pages/GenerateurPrompts';
 import SimulateurIA from '@/pages/SimulateurIA';
 import DetecteurContenuIA from '@/pages/DetecteurContenuIA';
 import OptimiseurWorkflowIA from '@/pages/OptimiseurWorkflowIA';
+import ComparateurModelesIA from '@/pages/ComparateurModelesIA';
 
 const queryClient = new QueryClient();
 
@@ -112,6 +113,7 @@ function App() {
               <Route path="simulateur-ia" element={<SimulateurIA />} />
               <Route path="detecteur-contenu-ia" element={<DetecteurContenuIA />} />
               <Route path="optimiseur-workflow-ia" element={<OptimiseurWorkflowIA />} />
+              <Route path="comparateur-modeles-ia" element={<ComparateurModelesIA />} />
               
               <Route path="*" element={<NotFound />} />
             </Route>

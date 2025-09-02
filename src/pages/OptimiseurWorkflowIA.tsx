@@ -23,7 +23,7 @@ import {
 import WorkflowEditor from '@/components/workflow/WorkflowEditor';
 import WorkflowOptimizer from '@/components/workflow/WorkflowOptimizer';
 import WorkflowCreator from '@/components/workflow/WorkflowCreator';
-import WorkflowStats from '@/components/workflow/WorkflowStats';
+
 import { Node, Edge } from '@xyflow/react';
 
 const OptimiseurWorkflowIA = () => {
@@ -47,8 +47,16 @@ const OptimiseurWorkflowIA = () => {
       />
       
       <section className="section-container">
-        {/* Header avec créateur */}
-        <WorkflowStats />
+        {/* Bouton retour */}
+        <div className="mb-6">
+          <Button 
+            variant="outline" 
+            onClick={() => window.location.href = '/ressources?tab=outils'}
+            className="flex items-center gap-2"
+          >
+            ← Retour aux Outils IA
+          </Button>
+        </div>
         
         <div className="mb-6 flex justify-between items-center">
           <div>
