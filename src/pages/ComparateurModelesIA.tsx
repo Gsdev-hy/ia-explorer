@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { aiProvidersData } from '@/components/cost-calculator/aiProvidersData';
 import { 
   BarChart3, 
   Zap, 
@@ -18,7 +19,10 @@ import {
   TrendingUp,
   Shield,
   Users,
-  CheckCircle2
+  CheckCircle2,
+  Globe,
+  Cpu,
+  Database
 } from 'lucide-react';
 
 const ComparateurModelesIA = () => {
@@ -26,78 +30,88 @@ const ComparateurModelesIA = () => {
   const [filterCategory, setFilterCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
 
-  const models = [
-    {
-      id: 'gpt-4',
-      name: 'GPT-4',
-      provider: 'OpenAI',
-      category: 'LLM',
-      pricing: '$0.03/1K tokens',
-      performance: 95,
-      speed: 75,
-      contextLength: '8K',
-      capabilities: ['Texte', 'Code', 'Analyse'],
-      strengths: ['Raisonnement complexe', 'Créativité', 'Code'],
-      limitations: ['Coût élevé', 'Vitesse modérée']
-    },
-    {
-      id: 'claude-3',
-      name: 'Claude 3 Opus',
-      provider: 'Anthropic',
-      category: 'LLM',
-      pricing: '$0.015/1K tokens',
-      performance: 93,
-      speed: 80,
-      contextLength: '200K',
-      capabilities: ['Texte', 'Analyse', 'Sécurité'],
-      strengths: ['Contexte long', 'Sécurité', 'Précision'],
-      limitations: ['Disponibilité limitée', 'Créativité moindre']
-    },
-    {
-      id: 'gemini-pro',
-      name: 'Gemini Pro',
-      provider: 'Google',
-      category: 'LLM',
-      pricing: '$0.001/1K tokens',
-      performance: 88,
-      speed: 90,
-      contextLength: '32K',
-      capabilities: ['Texte', 'Multimodal', 'Recherche'],
-      strengths: ['Vitesse', 'Prix', 'Intégration Google'],
-      limitations: ['Performance variable', 'Moins créatif']
-    },
-    {
-      id: 'dall-e-3',
-      name: 'DALL-E 3',
-      provider: 'OpenAI',
-      category: 'Image',
-      pricing: '$0.04/image',
-      performance: 92,
-      speed: 70,
-      contextLength: 'N/A',
-      capabilities: ['Génération d\'images', 'Style artistique'],
-      strengths: ['Qualité exceptionnelle', 'Compréhension précise'],
-      limitations: ['Vitesse', 'Coût par image']
-    },
-    {
-      id: 'midjourney',
-      name: 'Midjourney v6',
-      provider: 'Midjourney',
-      category: 'Image',
-      pricing: '$10/mois',
-      performance: 90,
-      speed: 60,
-      contextLength: 'N/A',
-      capabilities: ['Art génératif', 'Styles variés'],
-      strengths: ['Qualité artistique', 'Communauté'],
-      limitations: ['Interface Discord', 'Pas d\'API']
-    }
-  ];
+  // Transform aiProvidersData into models for comparison
+  const models = aiProvidersData.flatMap(provider => 
+    provider.models.map(model => {
+      // Get pricing from first tier if available
+      const firstTier = model.pricing?.[0];
+      const inputPrice = firstTier?.inputPrice || 0;
+      const outputPrice = firstTier?.outputPrice || 0;
+      
+      // Categorize models
+      let category = 'Autre';
+      if (model.type === 'text' || model.name.toLowerCase().includes('gpt') || 
+          model.name.toLowerCase().includes('claude') || model.name.toLowerCase().includes('gemini') ||
+          model.name.toLowerCase().includes('llama') || model.name.toLowerCase().includes('mistral')) {
+        category = 'LLM';
+      } else if (model.type === 'image' || model.name.toLowerCase().includes('dall-e') || 
+                 model.name.toLowerCase().includes('stable') || model.name.toLowerCase().includes('midjourney')) {
+        category = 'Image';
+      } else if (model.type === 'audio' || model.name.toLowerCase().includes('whisper') || 
+                 model.name.toLowerCase().includes('eleven') || model.name.toLowerCase().includes('tts')) {
+        category = 'Audio';
+      } else if (model.type === 'video' || model.name.toLowerCase().includes('runway') || 
+                 model.name.toLowerCase().includes('video')) {
+        category = 'Vidéo';
+      } else if (model.name.toLowerCase().includes('embedding') || model.name.toLowerCase().includes('embed')) {
+        category = 'Embeddings';
+      }
+
+      // Estimate performance based on model characteristics
+      let performance = 70;
+      if (model.name.toLowerCase().includes('gpt-4') || model.name.toLowerCase().includes('opus')) performance = 95;
+      else if (model.name.toLowerCase().includes('gpt-3.5') || model.name.toLowerCase().includes('claude-3')) performance = 90;
+      else if (model.name.toLowerCase().includes('gemini-pro')) performance = 88;
+      else if (model.name.toLowerCase().includes('llama-2-70b')) performance = 85;
+      else if (model.name.toLowerCase().includes('dall-e-3')) performance = 92;
+      else if (model.name.toLowerCase().includes('stable-diffusion')) performance = 87;
+
+      // Convert speed from text to number
+      let speed = 80;
+      if (model.speed === 'très-rapide') speed = 95;
+      else if (model.speed === 'rapide') speed = 85;
+      else if (model.speed === 'modéré') speed = 70;
+      else if (model.speed === 'lent') speed = 60;
+      
+      // Additional speed adjustments based on model name
+      if (model.name.toLowerCase().includes('mini') || model.name.toLowerCase().includes('turbo')) speed = Math.max(speed, 95);
+      else if (model.name.toLowerCase().includes('gpt-4')) speed = Math.min(speed, 70);
+
+      return {
+        id: `${provider.id}-${model.id}`,
+        name: model.name,
+        provider: provider.name,
+        category,
+        pricing: firstTier ? 
+          `$${inputPrice.toFixed(4)}/$${outputPrice.toFixed(4)} par 1M tokens` : 
+          'Variable',
+        performance,
+        speed,
+        contextLength: model.contextLength ? `${model.contextLength.toLocaleString()}` : 'N/A',
+        capabilities: model.features || [],
+        strengths: [], // Not available in data structure
+        limitations: [], // Not available in data structure
+        modelType: model.type,
+        multimodal: model.type === 'multimodal',
+        region: provider.region,
+        apiUrl: provider.apiUrl,
+        website: provider.website,
+        inputPricePerM: inputPrice,
+        outputPricePerM: outputPrice,
+        recommended: model.recommended || false,
+        quality: model.quality || 'standard'
+      };
+    })
+  );
+
+  // Get unique categories for filter
+  const categories = ['all', ...new Set(models.map(m => m.category.toLowerCase()))];
 
   const filteredModels = models.filter(model => {
     const matchesCategory = filterCategory === 'all' || model.category.toLowerCase() === filterCategory;
     const matchesSearch = model.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         model.provider.toLowerCase().includes(searchTerm.toLowerCase());
+                         model.provider.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         model.capabilities.some(cap => cap.toLowerCase().includes(searchTerm.toLowerCase()));
     return matchesCategory && matchesSearch;
   });
 
@@ -185,10 +199,11 @@ const ComparateurModelesIA = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">Toutes catégories</SelectItem>
-                  <SelectItem value="llm">LLM</SelectItem>
-                  <SelectItem value="image">Génération d'images</SelectItem>
-                  <SelectItem value="audio">Audio</SelectItem>
-                  <SelectItem value="video">Vidéo</SelectItem>
+                  {categories.filter(cat => cat !== 'all').map(category => (
+                    <SelectItem key={category} value={category}>
+                      {category.charAt(0).toUpperCase() + category.slice(1)}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
@@ -220,8 +235,16 @@ const ComparateurModelesIA = () => {
                   <CardContent>
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
+                        <span className="text-sm text-muted-foreground">Type</span>
+                        <Badge variant="outline" className="text-xs">{model.modelType}</Badge>
+                      </div>
+                      <div className="flex items-center justify-between">
                         <span className="text-sm text-muted-foreground">Prix</span>
-                        <span className="font-medium">{model.pricing}</span>
+                        <span className="font-medium text-xs">{model.pricing}</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-muted-foreground">Contexte</span>
+                        <span className="text-sm">{model.contextLength}</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="text-sm text-muted-foreground">Performance</span>
@@ -235,6 +258,27 @@ const ComparateurModelesIA = () => {
                           <span className="text-sm">{model.performance}%</span>
                         </div>
                       </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-muted-foreground">Vitesse</span>
+                        <div className="flex items-center gap-2">
+                          <div className="w-16 h-2 bg-muted rounded-full">
+                            <div 
+                              className="h-full bg-green-500 rounded-full" 
+                              style={{ width: `${model.speed}%` }}
+                            />
+                          </div>
+                          <span className="text-sm">{model.speed}%</span>
+                        </div>
+                      </div>
+                      {model.recommended && (
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="h-4 w-4 text-green-500" />
+                          <span className="text-sm text-green-600">Recommandé</span>
+                        </div>
+                      )}
+                      {model.multimodal && (
+                        <Badge variant="secondary" className="text-xs">Multimodal</Badge>
+                      )}
                       <div className="flex flex-wrap gap-1 mt-2">
                         {model.capabilities.slice(0, 3).map((cap) => (
                           <Badge key={cap} variant="outline" className="text-xs">
@@ -289,39 +333,147 @@ const ComparateurModelesIA = () => {
                           <tr className="border-b">
                             <th className="text-left p-2">Critère</th>
                             {selectedModelData.map(model => (
-                              <th key={model.id} className="text-left p-2">{model.name}</th>
+                              <th key={model.id} className="text-left p-2 min-w-32">{model.name}</th>
                             ))}
                           </tr>
                         </thead>
                         <tbody>
                           <tr className="border-b">
-                            <td className="p-2 font-medium">Fournisseur</td>
+                            <td className="p-2 font-medium flex items-center gap-2">
+                              <Globe className="h-4 w-4" />
+                              Fournisseur
+                            </td>
                             {selectedModelData.map(model => (
                               <td key={model.id} className="p-2">{model.provider}</td>
                             ))}
                           </tr>
                           <tr className="border-b">
-                            <td className="p-2 font-medium">Prix</td>
+                            <td className="p-2 font-medium flex items-center gap-2">
+                              <Cpu className="h-4 w-4" />
+                              Type
+                            </td>
                             {selectedModelData.map(model => (
-                              <td key={model.id} className="p-2">{model.pricing}</td>
+                              <td key={model.id} className="p-2">
+                                <Badge variant="outline" className="text-xs">{model.modelType}</Badge>
+                              </td>
                             ))}
                           </tr>
                           <tr className="border-b">
-                            <td className="p-2 font-medium">Performance</td>
+                            <td className="p-2 font-medium flex items-center gap-2">
+                              <DollarSign className="h-4 w-4" />
+                              Prix
+                            </td>
                             {selectedModelData.map(model => (
-                              <td key={model.id} className="p-2">{model.performance}%</td>
+                              <td key={model.id} className="p-2 text-sm">{model.pricing}</td>
                             ))}
                           </tr>
                           <tr className="border-b">
-                            <td className="p-2 font-medium">Vitesse</td>
+                            <td className="p-2 font-medium flex items-center gap-2">
+                              <BarChart3 className="h-4 w-4" />
+                              Performance
+                            </td>
                             {selectedModelData.map(model => (
-                              <td key={model.id} className="p-2">{model.speed}%</td>
+                              <td key={model.id} className="p-2">
+                                <div className="flex items-center gap-2">
+                                  <div className="w-20 h-2 bg-muted rounded-full">
+                                    <div 
+                                      className="h-full bg-primary rounded-full" 
+                                      style={{ width: `${model.performance}%` }}
+                                    />
+                                  </div>
+                                  <span className="text-sm">{model.performance}%</span>
+                                </div>
+                              </td>
                             ))}
                           </tr>
                           <tr className="border-b">
-                            <td className="p-2 font-medium">Contexte</td>
+                            <td className="p-2 font-medium flex items-center gap-2">
+                              <Zap className="h-4 w-4" />
+                              Vitesse
+                            </td>
+                            {selectedModelData.map(model => (
+                              <td key={model.id} className="p-2">
+                                <div className="flex items-center gap-2">
+                                  <div className="w-20 h-2 bg-muted rounded-full">
+                                    <div 
+                                      className="h-full bg-green-500 rounded-full" 
+                                      style={{ width: `${model.speed}%` }}
+                                    />
+                                  </div>
+                                  <span className="text-sm">{model.speed}%</span>
+                                </div>
+                              </td>
+                            ))}
+                          </tr>
+                          <tr className="border-b">
+                            <td className="p-2 font-medium flex items-center gap-2">
+                              <Database className="h-4 w-4" />
+                              Contexte
+                            </td>
                             {selectedModelData.map(model => (
                               <td key={model.id} className="p-2">{model.contextLength}</td>
+                            ))}
+                          </tr>
+                          <tr className="border-b">
+                            <td className="p-2 font-medium">Qualité</td>
+                            {selectedModelData.map(model => (
+                              <td key={model.id} className="p-2">
+                                <Badge 
+                                  variant={model.quality === 'flagship' ? 'default' : 'secondary'} 
+                                  className="text-xs"
+                                >
+                                  {model.quality}
+                                </Badge>
+                              </td>
+                            ))}
+                          </tr>
+                          <tr className="border-b">
+                            <td className="p-2 font-medium">Région</td>
+                            {selectedModelData.map(model => (
+                              <td key={model.id} className="p-2 text-sm">{model.region || 'Global'}</td>
+                            ))}
+                          </tr>
+                          <tr className="border-b">
+                            <td className="p-2 font-medium">Recommandé</td>
+                            {selectedModelData.map(model => (
+                              <td key={model.id} className="p-2">
+                                {model.recommended ? (
+                                  <CheckCircle2 className="h-4 w-4 text-green-500" />
+                                ) : (
+                                  <span className="text-muted-foreground text-sm">-</span>
+                                )}
+                              </td>
+                            ))}
+                          </tr>
+                          <tr className="border-b">
+                            <td className="p-2 font-medium">Multimodal</td>
+                            {selectedModelData.map(model => (
+                              <td key={model.id} className="p-2">
+                                {model.multimodal ? (
+                                  <Badge variant="secondary" className="text-xs">Oui</Badge>
+                                ) : (
+                                  <span className="text-muted-foreground text-sm">Non</span>
+                                )}
+                              </td>
+                            ))}
+                          </tr>
+                          <tr>
+                            <td className="p-2 font-medium">Capacités</td>
+                            {selectedModelData.map(model => (
+                              <td key={model.id} className="p-2">
+                                <div className="flex flex-wrap gap-1">
+                                  {model.capabilities.slice(0, 2).map((cap) => (
+                                    <Badge key={cap} variant="outline" className="text-xs">
+                                      {cap}
+                                    </Badge>
+                                  ))}
+                                  {model.capabilities.length > 2 && (
+                                    <span className="text-xs text-muted-foreground">
+                                      +{model.capabilities.length - 2}
+                                    </span>
+                                  )}
+                                </div>
+                              </td>
                             ))}
                           </tr>
                         </tbody>
