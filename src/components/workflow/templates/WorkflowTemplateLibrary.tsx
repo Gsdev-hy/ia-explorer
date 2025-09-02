@@ -67,8 +67,20 @@ const workflowTemplates: WorkflowTemplate[] = [
     useCase: 'Boutiques en ligne, marketplaces',
     icon: <ShoppingCart className="h-5 w-5" />,
     tags: ['E-commerce', 'Marketing', 'Contenu', 'SEO'],
-    nodes: [],
-    edges: []
+    nodes: [
+      { id: '1', type: 'input', data: { label: 'Sujet produit' }, position: { x: 100, y: 100 } },
+      { id: '2', type: 'default', data: { label: 'Recherche SEO' }, position: { x: 300, y: 50 } },
+      { id: '3', type: 'default', data: { label: 'GPT-4 Description' }, position: { x: 500, y: 100 } },
+      { id: '4', type: 'default', data: { label: 'DALL-E Images' }, position: { x: 700, y: 50 } },
+      { id: '5', type: 'output', data: { label: 'Fiche produit complète' }, position: { x: 900, y: 100 } }
+    ],
+    edges: [
+      { id: 'e1-2', source: '1', target: '2', type: 'smoothstep' },
+      { id: 'e1-3', source: '1', target: '3', type: 'smoothstep' },
+      { id: 'e2-3', source: '2', target: '3', type: 'smoothstep' },
+      { id: 'e3-4', source: '3', target: '4', type: 'smoothstep' },
+      { id: 'e4-5', source: '4', target: '5', type: 'smoothstep' }
+    ]
   },
   {
     id: 'social-media-automation',
@@ -81,8 +93,23 @@ const workflowTemplates: WorkflowTemplate[] = [
     useCase: 'Community managers, PME',
     icon: <Share className="h-5 w-5" />,
     tags: ['Social Media', 'Automatisation', 'Contenu'],
-    nodes: [],
-    edges: []
+    nodes: [
+      { id: '1', type: 'input', data: { label: 'Calendrier contenu' }, position: { x: 100, y: 100 } },
+      { id: '2', type: 'default', data: { label: 'Analyse audience' }, position: { x: 300, y: 50 } },
+      { id: '3', type: 'default', data: { label: 'Génération posts' }, position: { x: 500, y: 100 } },
+      { id: '4', type: 'default', data: { label: 'Adaptation plateformes' }, position: { x: 700, y: 50 } },
+      { id: '5', type: 'default', data: { label: 'Programmation auto' }, position: { x: 700, y: 150 } },
+      { id: '6', type: 'output', data: { label: 'Posts programmés' }, position: { x: 900, y: 100 } }
+    ],
+    edges: [
+      { id: 'e1-2', source: '1', target: '2', type: 'smoothstep' },
+      { id: 'e1-3', source: '1', target: '3', type: 'smoothstep' },
+      { id: 'e2-3', source: '2', target: '3', type: 'smoothstep' },
+      { id: 'e3-4', source: '3', target: '4', type: 'smoothstep' },
+      { id: 'e3-5', source: '3', target: '5', type: 'smoothstep' },
+      { id: 'e4-6', source: '4', target: '6', type: 'smoothstep' },
+      { id: 'e5-6', source: '5', target: '6', type: 'smoothstep' }
+    ]
   },
   {
     id: 'email-marketing-personalized',
@@ -95,8 +122,22 @@ const workflowTemplates: WorkflowTemplate[] = [
     useCase: 'E-commerce, SaaS, services',
     icon: <Mail className="h-5 w-5" />,
     tags: ['Email', 'Personnalisation', 'CRM'],
-    nodes: [],
-    edges: []
+    nodes: [
+      { id: '1', type: 'input', data: { label: 'Base contacts' }, position: { x: 100, y: 100 } },
+      { id: '2', type: 'default', data: { label: 'Segmentation IA' }, position: { x: 300, y: 100 } },
+      { id: '3', type: 'default', data: { label: 'Personnalisation' }, position: { x: 500, y: 50 } },
+      { id: '4', type: 'default', data: { label: 'A/B Testing' }, position: { x: 500, y: 150 } },
+      { id: '5', type: 'default', data: { label: 'Envoi optimisé' }, position: { x: 700, y: 100 } },
+      { id: '6', type: 'output', data: { label: 'Analytics campagne' }, position: { x: 900, y: 100 } }
+    ],
+    edges: [
+      { id: 'e1-2', source: '1', target: '2', type: 'smoothstep' },
+      { id: 'e2-3', source: '2', target: '3', type: 'smoothstep' },
+      { id: 'e2-4', source: '2', target: '4', type: 'smoothstep' },
+      { id: 'e3-5', source: '3', target: '5', type: 'smoothstep' },
+      { id: 'e4-5', source: '4', target: '5', type: 'smoothstep' },
+      { id: 'e5-6', source: '5', target: '6', type: 'smoothstep' }
+    ]
   },
 
   // Templates Service Client & Support
