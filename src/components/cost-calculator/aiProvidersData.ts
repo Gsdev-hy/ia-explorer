@@ -36,15 +36,72 @@ export const aiProvidersData: AIProvider[] = [
     region: 'US',
     models: [
       {
+        id: 'gpt-5',
+        name: 'GPT-5',
+        type: 'multimodal',
+        contextLength: 200000,
+        features: ['Reasoning', 'Coding', 'Agentic Tasks', 'Multimodal'],
+        recommended: true,
+        category: 'Flagship LLM',
+        speed: 'modéré',
+        quality: 'flagship',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 1.25,
+            outputPrice: 10.00,
+            currency: 'USD'
+          }
+        ]
+      },
+      {
+        id: 'gpt-5-mini',
+        name: 'GPT-5 Mini',
+        type: 'multimodal',
+        contextLength: 200000,
+        features: ['Rapide', 'Économique', 'Tâches définies'],
+        recommended: true,
+        category: 'Premium LLM',
+        speed: 'rapide',
+        quality: 'premium',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 0.25,
+            outputPrice: 2.00,
+            currency: 'USD'
+          }
+        ]
+      },
+      {
+        id: 'gpt-5-nano',
+        name: 'GPT-5 Nano',
+        type: 'text',
+        contextLength: 200000,
+        features: ['Très rapide', 'Classification', 'Résumé'],
+        recommended: false,
+        category: 'Économique LLM',
+        speed: 'très-rapide',
+        quality: 'standard',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 0.05,
+            outputPrice: 0.40,
+            currency: 'USD'
+          }
+        ]
+      },
+      {
         id: 'gpt-4o',
         name: 'GPT-4o',
         type: 'multimodal',
         contextLength: 128000,
         features: ['Multimodal', 'Code', 'Vision', 'Audio'],
-        recommended: true,
+        recommended: false,
         category: 'Premium LLM',
         speed: 'rapide',
-        quality: 'flagship',
+        quality: 'premium',
         pricing: [
           {
             name: 'Standard',
@@ -270,15 +327,59 @@ export const aiProvidersData: AIProvider[] = [
     region: 'US',
     models: [
       {
+        id: 'claude-opus-4-1',
+        name: 'Claude Opus 4.1',
+        type: 'multimodal',
+        contextLength: 200000,
+        features: ['Raisonnement avancé', 'Tâches complexes', 'Code expert', 'Vision'],
+        recommended: true,
+        category: 'Flagship LLM',
+        speed: 'modéré',
+        quality: 'flagship',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 15.00,
+            outputPrice: 75.00,
+            currency: 'USD'
+          }
+        ]
+      },
+      {
+        id: 'claude-sonnet-4',
+        name: 'Claude Sonnet 4',
+        type: 'multimodal',
+        contextLength: 1000000,
+        features: ['Équilibre optimal', 'Contexte très long', 'Hybrid reasoning', 'Code'],
+        recommended: true,
+        category: 'Premium LLM',
+        speed: 'rapide',
+        quality: 'flagship',
+        pricing: [
+          {
+            name: 'Standard (≤200k tokens)',
+            inputPrice: 3.00,
+            outputPrice: 15.00,
+            currency: 'USD'
+          },
+          {
+            name: 'Extended (>200k tokens)',
+            inputPrice: 6.00,
+            outputPrice: 15.00,
+            currency: 'USD'
+          }
+        ]
+      },
+      {
         id: 'claude-3-5-sonnet',
         name: 'Claude 3.5 Sonnet',
         type: 'multimodal',
         contextLength: 200000,
         features: ['Analyse longue', 'Raisonnement', 'Code', 'Vision'],
-        recommended: true,
+        recommended: false,
         category: 'Premium LLM',
         speed: 'rapide',
-        quality: 'flagship',
+        quality: 'premium',
         pricing: [
           {
             name: 'Standard',
@@ -354,15 +455,78 @@ export const aiProvidersData: AIProvider[] = [
     region: 'Global',
     models: [
       {
+        id: 'gemini-2-5-pro',
+        name: 'Gemini 2.5 Pro',
+        type: 'multimodal',
+        contextLength: 2000000,
+        features: ['Raisonnement complexe', 'Code expert', 'Multimodal avancé'],
+        recommended: true,
+        category: 'Flagship LLM',
+        speed: 'rapide',
+        quality: 'flagship',
+        pricing: [
+          {
+            name: 'Standard (≤200k tokens)',
+            inputPrice: 1.25,
+            outputPrice: 10.00,
+            currency: 'USD'
+          },
+          {
+            name: 'Extended (>200k tokens)',
+            inputPrice: 2.50,
+            outputPrice: 15.00,
+            currency: 'USD'
+          }
+        ]
+      },
+      {
+        id: 'gemini-2-5-flash',
+        name: 'Gemini 2.5 Flash',
+        type: 'multimodal',
+        contextLength: 1000000,
+        features: ['Hybrid reasoning', 'Thinking budgets', 'Multimodal'],
+        recommended: true,
+        category: 'Premium LLM',
+        speed: 'très-rapide',
+        quality: 'premium',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 0.30,
+            outputPrice: 2.50,
+            currency: 'USD'
+          }
+        ]
+      },
+      {
+        id: 'gemini-2-5-flash-lite',
+        name: 'Gemini 2.5 Flash-Lite',
+        type: 'multimodal',
+        contextLength: 1000000,
+        features: ['Usage à grande échelle', 'Très économique', 'Multimodal'],
+        recommended: true,
+        category: 'Économique LLM',
+        speed: 'très-rapide',
+        quality: 'standard',
+        pricing: [
+          {
+            name: 'Standard',
+            inputPrice: 0.10,
+            outputPrice: 0.40,
+            currency: 'USD'
+          }
+        ]
+      },
+      {
         id: 'gemini-1-5-pro',
         name: 'Gemini 1.5 Pro',
         type: 'multimodal',
         contextLength: 2000000,
         features: ['Contexte très long', 'Multimodal', 'Code', 'Audio'],
-        recommended: true,
+        recommended: false,
         category: 'Premium LLM',
         speed: 'rapide',
-        quality: 'flagship',
+        quality: 'premium',
         pricing: [
           {
             name: 'Standard',
