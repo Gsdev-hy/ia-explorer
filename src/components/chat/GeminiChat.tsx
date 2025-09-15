@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "@/components/ui/card";
-import { Send, Bot, User, Lightbulb } from "lucide-react";
+import { Send, Bot, User, Lightbulb, AlertCircle } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Badge } from "@/components/ui/badge";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import ReactMarkdown from 'react-markdown';
+import { useUsageLimit } from "@/hooks/useUsageLimit";
 
 interface Message {
   role: 'user' | 'assistant';
@@ -37,6 +39,7 @@ const GeminiChat = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const { isLimitReached, getRemainingUsage, incrementUsage } = useUsageLimit();
 
   const suggestionTopics = [
     "Expliquer le machine learning",
@@ -64,7 +67,17 @@ const GeminiChat = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim() || isLoading) return;
+    if (!input.trim() || isLoading || isLimitReached) return;
+
+    // Vérifier et incrémenter l'usage avant la requête
+    if (!incrementUsage()) {
+      toast({
+        title: "Limite atteinte",
+        description: "Vous avez atteint la limite de 5 utilisations de l'assistant IA.",
+        variant: "destructive"
+      });
+      return;
+    }
 
     const userMessage = input.trim();
     setInput('');
@@ -94,13 +107,27 @@ const GeminiChat = () => {
 
   return (
     <Card className="w-full h-full flex flex-col">
-      <div className="flex items-center gap-2 p-4 border-b">
-        <Bot className="h-5 w-5 text-primary" />
-        <h2 className="font-medium">Assistant IA</h2>
+      <div className="flex items-center justify-between gap-2 p-4 border-b">
+        <div className="flex items-center gap-2">
+          <Bot className="h-5 w-5 text-primary" />
+          <h2 className="font-medium">Assistant IA</h2>
+        </div>
+        <Badge variant={isLimitReached ? "destructive" : "secondary"}>
+          {getRemainingUsage()}/5 utilisations
+        </Badge>
       </div>
 
       <ScrollArea ref={scrollAreaRef} className="flex-1 p-4">
         <div className="space-y-4">
+          {isLimitReached && (
+            <Alert>
+              <AlertCircle className="h-4 w-4" />
+              <AlertDescription>
+                Vous avez atteint la limite de 5 utilisations de l'assistant IA. Cette limitation aide à protéger les ressources du service.
+              </AlertDescription>
+            </Alert>
+          )}
+
           {messages.length === 0 && (
             <div className="text-center py-8">
               <Bot className="h-10 w-10 text-primary/30 mx-auto mb-3" />
@@ -164,7 +191,7 @@ const GeminiChat = () => {
           placeholder="Posez votre question sur l'IA..."
           disabled={isLoading}
         />
-        <Button type="submit" disabled={isLoading || !input.trim()}>
+        <Button type="submit" disabled={isLoading || !input.trim() || isLimitReached}>
           <Send className="h-4 w-4" />
         </Button>
       </form>

@@ -22,6 +22,10 @@ serve(async (req) => {
       throw new Error("API key not found");
     }
 
+    // Limitation côté serveur - vérification additionnelle 
+    const clientIp = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'unknown';
+    console.log("Request from IP:", clientIp);
+
     console.log("Sending request to Deepseek API with prompt:", prompt);
     
     const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
