@@ -39,12 +39,12 @@ const Header = () => {
     { text: 'Machine Learning', href: '/machine-learning' },
     { text: 'IA Multimodale', href: '/ia-multimodale' },
     { text: 'Cas d\'usage', href: '/cas-usage' },
-    { text: 'Histoire', href: '/histoire-ia' },
+    { text: 'Histoire', href: '/histoire' },
     { text: 'Éthique', href: '/ethique' },
     { text: 'Glossaire', href: '/glossaire' },
     { text: 'Ressources', href: '/ressources' },
     { text: 'Actualités', href: '/actualites' },
-    { text: 'À propos', href: '/a-propos' }
+    { text: 'À propos', href: '/about' }
   ];
 
   const handleMenuToggle = () => {

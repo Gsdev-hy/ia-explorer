@@ -23,6 +23,8 @@ import Actualites from '@/pages/Actualites';
 import Histoire from '@/pages/Histoire';
 import Glossaire from '@/pages/Glossaire';
 import NotFound from '@/pages/NotFound';
+import NiveauxIA from '@/pages/NiveauxIA';
+import IAMultimodale from '@/pages/IAMultimodale';
 
 // Cours
 import ApprentissageSupervise from '@/pages/cours/ApprentissageSupervise';
@@ -82,7 +84,9 @@ function App() {
               <Route path="about" element={<About />} />
               <Route path="les-bases" element={<LesBases />} />
               <Route path="types-ia" element={<TypesIA />} />
+              <Route path="niveaux-ia" element={<NiveauxIA />} />
               <Route path="machine-learning" element={<MachineLearning />} />
+              <Route path="ia-multimodale" element={<IAMultimodale />} />
               <Route path="deep-learning" element={<DeepLearning />} />
               <Route path="cas-usage" element={<CasUsage />} />
               <Route path="ethique" element={<Ethique />} />
