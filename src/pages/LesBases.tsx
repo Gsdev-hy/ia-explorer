@@ -9,8 +9,20 @@ import ExemplesPratiques from '@/components/basics/ExemplesPratiques';
 import PointsCles from '@/components/basics/PointsCles';
 import { Card, CardContent } from '@/components/ui/card';
 import { Lightbulb, Brain, Users } from 'lucide-react';
+import { useDocumentMeta } from '@/hooks/useDocumentMeta';
+import { getSEOData } from '@/data/seoData';
+import { createArticleSchema } from '@/components/seo/StructuredData';
 
 const LesBases = () => {
+  // SEO dynamique avec données structurées pour article
+  useDocumentMeta({
+    ...getSEOData('/les-bases'),
+    structuredData: createArticleSchema(
+      "Les Bases de l'Intelligence Artificielle",
+      "Guide complet pour comprendre les concepts fondamentaux de l'IA, expliqués simplement avec des analogies et exemples pratiques."
+    )
+  });
+
   return (
     <>
       <Hero

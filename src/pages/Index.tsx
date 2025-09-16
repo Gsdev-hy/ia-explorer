@@ -2,12 +2,17 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import SectionHeading from "@/components/SectionHeading";
 import { ChevronRight, BookOpen, Lightbulb, Sparkles, BarChart3, Brain, Code, Zap, TrendingUp, Users, Shield, Rocket, Globe, Star, GraduationCap, Target, Palette, Clock, Cpu, Database, Calculator, Microscope, FlaskConical, FileText, Settings, Smartphone, Monitor } from "lucide-react";
+import { useDocumentMeta } from "@/hooks/useDocumentMeta";
+import { getSEOData } from "@/data/seoData";
 
 /**
  * Page d'accueil du site AI Avenir
  * @returns {JSX.Element} Le composant de la page d'accueil
  */
 const Index = () => {
+  // SEO dynamique
+  useDocumentMeta(getSEOData('/'));
+
   const keyFeatures = [
     {
       icon: <Brain className="w-12 h-12 text-primary" />,

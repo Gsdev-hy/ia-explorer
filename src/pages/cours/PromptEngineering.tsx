@@ -14,6 +14,9 @@ import BackToResourcesButton from '@/components/courses/BackToResourcesButton';
 import OptimizationStep from '@/components/courses/OptimizationStep';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
+import { useDocumentMeta } from '@/hooks/useDocumentMeta';
+import { getSEOData } from '@/data/seoData';
+import { createCourseSchema } from '@/components/seo/StructuredData';
 import { 
   Brain, 
   Target, 
@@ -48,6 +51,15 @@ import {
 } from 'lucide-react';
 
 const PromptEngineering = () => {
+  // SEO dynamique avec données structurées pour cours
+  useDocumentMeta({
+    ...getSEOData('/cours/prompt-engineering'),
+    structuredData: createCourseSchema(
+      "Formation Prompt Engineering - Maîtriser l'Art du Prompt",
+      "Formation complète en Prompt Engineering pour optimiser vos interactions avec l'IA. Techniques avancées, frameworks et bonnes pratiques pour ChatGPT, Claude, Gemini."
+    )
+  });
+
   const didYouKnowItems = [
     {
       title: "Révolution économique",
