@@ -63,12 +63,21 @@ const Footer = ({ author = "Geoffroy Streit", email = "geoffroy.streit@gmail.com
             © {currentYear} IA Explorer. Tous droits réservés.
             Créé avec passion par {author}.
           </p>
-          <div className="flex space-x-4">
-            <Link to="/mentions-legales" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+          <div className="flex flex-wrap gap-2 text-sm">
+            <Link to="/mentions-legales" className="text-muted-foreground hover:text-primary transition-colors">
               Mentions légales
             </Link>
-            <Link to="/confidentialite" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Politique de confidentialité
+            <span className="text-muted-foreground">•</span>
+            <Link to="/confidentialite" className="text-muted-foreground hover:text-primary transition-colors">
+              Confidentialité
+            </Link>
+            <span className="text-muted-foreground">•</span>
+            <Link to="/cgu" className="text-muted-foreground hover:text-primary transition-colors">
+              CGU
+            </Link>
+            <span className="text-muted-foreground">•</span>
+            <Link to="/gestion-donnees-rgpd" className="text-muted-foreground hover:text-primary transition-colors">
+              Mes données RGPD
             </Link>
           </div>
         </div>

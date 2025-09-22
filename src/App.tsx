@@ -8,6 +8,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingChatButton from '@/components/chat/FloatingChatButton';
 import SkipLink from '@/components/SkipLink';
+import CookieConsent from '@/components/consent/CookieConsent';
 
 // Pages
 import Home from '@/pages/Home';
@@ -25,6 +26,9 @@ import Glossaire from '@/pages/Glossaire';
 import NotFound from '@/pages/NotFound';
 import NiveauxIA from '@/pages/NiveauxIA';
 import IAMultimodale from '@/pages/IAMultimodale';
+import Confidentialite from '@/pages/Confidentialite';
+import CGU from '@/pages/CGU';
+import GestionDonneesRGPD from '@/pages/GestionDonneesRGPD';
 
 // Cours
 import ApprentissageSupervise from '@/pages/cours/ApprentissageSupervise';
@@ -119,10 +123,16 @@ function App() {
               <Route path="optimiseur-workflow-ia" element={<OptimiseurWorkflowIA />} />
               <Route path="comparateur-modeles-ia" element={<ComparateurModelesIA />} />
               
+              {/* Pages RGPD */}
+              <Route path="confidentialite" element={<Confidentialite />} />
+              <Route path="cgu" element={<CGU />} />
+              <Route path="gestion-donnees-rgpd" element={<GestionDonneesRGPD />} />
+              
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
         </Router>
+        <CookieConsent />
         <Toaster />
       </ThemeProvider>
     </QueryClientProvider>

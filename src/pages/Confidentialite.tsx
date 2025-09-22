@@ -32,11 +32,14 @@ const Confidentialite = () => {
               
               <div className="space-y-4 mt-4">
                 <p className="text-muted-foreground">
-                  Chez IA Explorer, nous prenons la protection de vos données personnelles très au sérieux. 
-                  Cette politique de confidentialité détaille les types de données que nous pouvons collecter, comment nous les utilisons et les protégeons.
+                  Chez AI Avenir, nous prenons la protection de vos données personnelles très au sérieux. 
+                  Cette politique de confidentialité détaille les types de données que nous collectons réellement, 
+                  comment nous les utilisons et les protégeons, conformément au RGPD.
                 </p>
                 <p className="text-muted-foreground">
-                  En utilisant notre site, vous acceptez les pratiques décrites dans cette politique.
+                  En utilisant notre site, vous acceptez les pratiques décrites dans cette politique. 
+                  Vous pouvez gérer vos préférences de confidentialité à tout moment via notre 
+                  <a href="/gestion-donnees-rgpd" className="text-primary hover:underline"> centre de gestion des données</a>.
                 </p>
               </div>
             </CardContent>
@@ -50,26 +53,41 @@ const Confidentialite = () => {
               />
               
               <div className="space-y-4 mt-4">
-                <h3 className="text-lg font-medium">Données de navigation</h3>
+                <h3 className="text-lg font-medium">Données stockées localement (localStorage)</h3>
                 <p className="text-muted-foreground">
-                  Lorsque vous visitez notre site, nous pouvons collecter certaines informations automatiquement :
+                  Nous stockons certaines données uniquement sur votre appareil via le localStorage de votre navigateur :
                 </p>
                 <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
-                  <li>Adresse IP</li>
-                  <li>Type de navigateur</li>
-                  <li>Pages visitées et durée de visite</li>
-                  <li>Système d'exploitation</li>
-                  <li>Informations sur l'appareil</li>
+                  <li><strong>Préférences utilisateur :</strong> Thème sombre/clair, paramètres d'affichage</li>
+                  <li><strong>Consentements :</strong> Vos choix de confidentialité et cookies</li>
+                  <li><strong>Usage des outils :</strong> Compteurs d'utilisation (ex: 5 requêtes/jour pour l'assistant IA)</li>
+                  <li><strong>Créations sauvegardées :</strong> Prompts générés, configurations d'outils</li>
                 </ul>
-                
-                <h3 className="text-lg font-medium mt-6">Données fournies volontairement</h3>
+
+                <h3 className="text-lg font-medium mt-6">Données de l'assistant IA</h3>
                 <p className="text-muted-foreground">
-                  Nous collectons également les informations que vous nous fournissez directement :
+                  Lorsque vous utilisez notre assistant IA conversationnel :
                 </p>
                 <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
-                  <li>Informations de contact (email) si vous nous contactez</li>
-                  <li>Commentaires ou questions soumis via les formulaires</li>
-                  <li>Réponses aux questionnaires ou sondages</li>
+                  <li><strong>Messages envoyés :</strong> Vos questions et conversations sont transmises à Deepseek AI</li>
+                  <li><strong>Réponses générées :</strong> Les réponses de l'IA peuvent être temporairement conservées</li>
+                  <li><strong>Métadonnées :</strong> Horodatage et comptage des interactions</li>
+                </ul>
+
+                <div className="bg-amber-50 dark:bg-amber-900/20 p-4 rounded-lg border border-amber-200 dark:border-amber-800 mt-4">
+                  <p className="text-sm text-amber-800 dark:text-amber-200">
+                    <strong>Important :</strong> Ne partagez jamais d'informations personnelles, sensibles ou confidentielles 
+                    avec l'assistant IA. Les conversations sont traitées par des services tiers.
+                  </p>
+                </div>
+
+                <h3 className="text-lg font-medium mt-6">Données de contact volontaires</h3>
+                <p className="text-muted-foreground">
+                  Uniquement si vous nous contactez directement :
+                </p>
+                <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                  <li>Adresse email (pour vous répondre)</li>
+                  <li>Message ou question soumise</li>
                 </ul>
               </div>
             </CardContent>
@@ -84,13 +102,21 @@ const Confidentialite = () => {
               
               <div className="space-y-4 mt-4">
                 <p className="text-muted-foreground">
-                  Nous utilisons les données collectées pour les finalités suivantes :
+                  Nous utilisons les données collectées uniquement pour les finalités suivantes et selon les bases légales du RGPD :
                 </p>
                 <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
-                  <li>Améliorer notre site et son contenu</li>
-                  <li>Comprendre comment les utilisateurs interagissent avec notre site</li>
-                  <li>Répondre à vos demandes et questions</li>
-                  <li>Analyser et suivre l'efficacité de notre contenu</li>
+                  <li><strong>Fonctionnement technique (intérêt légitime) :</strong> Assurer le bon fonctionnement des outils</li>
+                  <li><strong>Préférences utilisateur (consentement) :</strong> Mémoriser vos choix et paramètres</li>
+                  <li><strong>Assistant IA (consentement) :</strong> Fournir des réponses personnalisées via Deepseek</li>
+                  <li><strong>Support utilisateur (intérêt légitime) :</strong> Répondre à vos questions et demandes</li>
+                  <li><strong>Amélioration du service (consentement) :</strong> Analyser l'usage pour améliorer l'expérience</li>
+                </ul>
+
+                <h3 className="text-lg font-medium mt-6">Partage avec des tiers</h3>
+                <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                  <li><strong>Deepseek AI (Chine) :</strong> Pour le fonctionnement de l'assistant IA conversationnel</li>
+                  <li><strong>Supabase (USA) :</strong> Hébergement sécurisé de certaines fonctionnalités</li>
+                  <li><strong>Aucun autre partage :</strong> Nous ne vendons ni ne louons vos données à des tiers</li>
                 </ul>
               </div>
             </CardContent>
@@ -175,10 +201,13 @@ const Confidentialite = () => {
               
               <div className="space-y-4 mt-4">
                 <p className="text-muted-foreground">
-                  Nous pouvons mettre à jour cette politique de confidentialité de temps à autre pour refléter, par exemple, des changements dans nos pratiques ou pour d'autres raisons opérationnelles, légales ou réglementaires.
+                  Nous pouvons mettre à jour cette politique de confidentialité de temps à autre pour refléter 
+                  des changements dans nos pratiques ou pour d'autres raisons opérationnelles, légales ou réglementaires.
+                  Toute modification importante vous sera notifiée via une bannière sur le site.
                 </p>
                 <p className="text-muted-foreground">
-                  La dernière mise à jour de cette politique a été effectuée le 3 avril 2025.
+                  <strong>Dernière mise à jour :</strong> {new Date().toLocaleDateString('fr-FR')} 
+                  (mise en conformité RGPD complète)
                 </p>
               </div>
             </CardContent>
