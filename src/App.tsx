@@ -54,6 +54,8 @@ import SimulateurIA from '@/pages/SimulateurIA';
 import DetecteurContenuIA from '@/pages/DetecteurContenuIA';
 import OptimiseurWorkflowIA from '@/pages/OptimiseurWorkflowIA';
 import ComparateurModelesIA from '@/pages/ComparateurModelesIA';
+import LLMDetails from '@/pages/LLMDetails';
+import EthiqueGouvernance from '@/pages/EthiqueGouvernance';
 
 const queryClient = new QueryClient();
 
@@ -112,6 +114,10 @@ function App() {
               <Route path="cours/ia-ethique" element={<IAEthique />} />
               <Route path="cours/ia-entreprise" element={<IAEntreprise />} />
               <Route path="cours/nlp-comprehension" element={<NLPComprehension />} />
+              
+              {/* Pages spécialisées */}
+              <Route path="types-ia/llm" element={<LLMDetails />} />
+              <Route path="ethique-gouvernance" element={<EthiqueGouvernance />} />
               
               {/* Outils existants */}
               <Route path="test-api-ia" element={<TestAPIIA />} />
