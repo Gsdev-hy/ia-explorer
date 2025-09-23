@@ -29,6 +29,7 @@ import IAMultimodale from '@/pages/IAMultimodale';
 import Confidentialite from '@/pages/Confidentialite';
 import CGU from '@/pages/CGU';
 import GestionDonneesRGPD from '@/pages/GestionDonneesRGPD';
+import RegistreTraitements from '@/pages/RegistreTraitements';
 
 // Cours
 import ApprentissageSupervise from '@/pages/cours/ApprentissageSupervise';
@@ -127,6 +128,7 @@ function App() {
               <Route path="confidentialite" element={<Confidentialite />} />
               <Route path="cgu" element={<CGU />} />
               <Route path="gestion-donnees-rgpd" element={<GestionDonneesRGPD />} />
+              <Route path="registre-traitements" element={<RegistreTraitements />} />
               
               <Route path="*" element={<NotFound />} />
             </Route>

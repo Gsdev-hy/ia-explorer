@@ -79,6 +79,10 @@ const Footer = ({ author = "Geoffroy Streit", email = "geoffroy.streit@gmail.com
             <Link to="/gestion-donnees-rgpd" className="text-muted-foreground hover:text-primary transition-colors">
               Mes données RGPD
             </Link>
+            <span className="text-muted-foreground">•</span>
+            <Link to="/registre-traitements" className="text-muted-foreground hover:text-primary transition-colors">
+              Registre des traitements
+            </Link>
           </div>
         </div>
       </div>
