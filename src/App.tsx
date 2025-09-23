@@ -131,8 +131,8 @@ function App() {
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
+          <CookieConsent />
         </Router>
-        <CookieConsent />
         <Toaster />
       </ThemeProvider>
     </QueryClientProvider>

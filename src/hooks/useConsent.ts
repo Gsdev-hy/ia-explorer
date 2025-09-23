@@ -23,15 +23,20 @@ export const useConsent = () => {
   const [showBanner, setShowBanner] = useState<boolean>(false);
 
   useEffect(() => {
-    const savedConsent = localStorage.getItem(CONSENT_KEY);
-    const consentDate = localStorage.getItem(CONSENT_DATE_KEY);
-    
-    if (savedConsent && consentDate) {
-      const parsedPreferences = JSON.parse(savedConsent);
-      setPreferences(parsedPreferences);
-      setHasConsented(true);
-      setShowBanner(false);
-    } else {
+    try {
+      const savedConsent = localStorage.getItem(CONSENT_KEY);
+      const consentDate = localStorage.getItem(CONSENT_DATE_KEY);
+      
+      if (savedConsent && consentDate) {
+        const parsedPreferences = JSON.parse(savedConsent);
+        setPreferences(parsedPreferences);
+        setHasConsented(true);
+        setShowBanner(false);
+      } else {
+        setShowBanner(true);
+      }
+    } catch (error) {
+      console.warn('Error accessing localStorage for consent:', error);
       setShowBanner(true);
     }
   }, []);
