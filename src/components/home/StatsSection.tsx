@@ -76,6 +76,9 @@ const StatsSection = () => {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Découvrez l'impact de notre plateforme d'apprentissage de l'intelligence artificielle
           </p>
+          <p className="text-sm text-muted-foreground/70 mt-2 italic">
+            * Les statistiques "Apprenants actifs", "Satisfaction", "Mise à jour" et "Croissance" sont des données de démonstration/lancement
+          </p>
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">

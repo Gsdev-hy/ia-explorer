@@ -3,6 +3,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, AlertTriangle, BookOpen, TrendingUp, Users, Brain } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const PointsCles = () => {
   const possibilites = [
@@ -162,21 +163,31 @@ const PointsCles = () => {
             Maintenant que vous maîtrisez les bases, découvrez les applications concrètes de l'IA
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors">
-              🤖 Types d'IA
-            </Badge>
-            <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors">
-              🧠 Machine Learning
-            </Badge>
-            <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors">
-              💼 Cas d'usage
-            </Badge>
-            <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors">
-              📚 Ressources
-            </Badge>
-            <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors">
-              🎯 IA au quotidien
-            </Badge>
+            <Link to="/types-ia">
+              <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors">
+                🤖 Types d'IA
+              </Badge>
+            </Link>
+            <Link to="/machine-learning">
+              <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors">
+                🧠 Machine Learning
+              </Badge>
+            </Link>
+            <Link to="/cas-usage">
+              <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors">
+                💼 Cas d'usage
+              </Badge>
+            </Link>
+            <Link to="/ressources">
+              <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors">
+                📚 Ressources
+              </Badge>
+            </Link>
+            <Link to="/cas-usage">
+              <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors">
+                🎯 IA au quotidien
+              </Badge>
+            </Link>
           </div>
         </CardContent>
       </Card>

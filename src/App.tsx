@@ -30,6 +30,7 @@ import Confidentialite from '@/pages/Confidentialite';
 import CGU from '@/pages/CGU';
 import GestionDonneesRGPD from '@/pages/GestionDonneesRGPD';
 import RegistreTraitements from '@/pages/RegistreTraitements';
+import MentionsLegales from '@/pages/MentionsLegales';
 
 // Cours
 import ApprentissageSupervise from '@/pages/cours/ApprentissageSupervise';
@@ -135,6 +136,7 @@ function App() {
               <Route path="cgu" element={<CGU />} />
               <Route path="gestion-donnees-rgpd" element={<GestionDonneesRGPD />} />
               <Route path="registre-traitements" element={<RegistreTraitements />} />
+              <Route path="mentions-legales" element={<MentionsLegales />} />
               
               <Route path="*" element={<NotFound />} />
             </Route>
