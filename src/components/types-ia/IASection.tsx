@@ -17,6 +17,7 @@ interface IASectionProps {
   isReversed?: boolean;
   detailsCard: ReactNode;
   delay?: number;
+  sectionId?: string;
 }
 
 const IASection: React.FC<IASectionProps> = ({ 
@@ -26,7 +27,8 @@ const IASection: React.FC<IASectionProps> = ({
   benefits, 
   isReversed = false,
   detailsCard,
-  delay = 0
+  delay = 0,
+  sectionId
 }) => {
   const animationClass = isReversed 
     ? "order-1 lg:order-2" 
@@ -160,7 +162,7 @@ const IASection: React.FC<IASectionProps> = ({
   };
     
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+    <div id={sectionId} className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
       <motion.div 
         className={animationClass}
         initial={{ opacity: 0, x: isReversed ? 20 : -20 }}

@@ -322,6 +322,7 @@ const LLMSection = () => {
 
   return (
     <IASection
+      sectionId="llm-section"
       icon={<MessageSquare size={32} className="text-primary" />}
       title="Modèles de Langage (LLM)"
       description="Les Large Language Models (LLM) sont des modèles d'IA entraînés sur d'immenses corpus de texte 

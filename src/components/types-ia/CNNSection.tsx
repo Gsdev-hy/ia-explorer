@@ -147,6 +147,7 @@ const CNNSection = () => {
 
   return (
     <IASection
+      sectionId="cnn-section"
       icon={<Eye size={32} className="text-primary" />}
       title="Réseaux de Neurones Convolutifs (CNN)"
       description="Les CNN sont des architectures de deep learning spécialement conçues pour traiter des données 

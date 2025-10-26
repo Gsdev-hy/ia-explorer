@@ -136,6 +136,7 @@ const RAGSection = () => {
 
   return (
     <IASection
+      sectionId="rag-section"
       icon={<Code size={32} className="text-primary" />}
       title="Retrieval-Augmented Generation (RAG)"
       description="Le RAG est une approche qui améliore les LLM en les connectant à des sources d'information externes, 

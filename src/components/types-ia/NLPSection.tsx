@@ -161,6 +161,7 @@ const NLPSection = () => {
 
   return (
     <IASection
+      sectionId="nlp-section"
       icon={<MessageSquare size={32} className="text-primary" />}
       title="Traitement du Langage Naturel (NLP)"
       description="Le NLP est un domaine de l'IA qui vise à permettre aux machines de comprendre, 

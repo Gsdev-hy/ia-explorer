@@ -36,6 +36,7 @@ const XAISection = () => {
 
   return (
     <IASection
+      sectionId="xai-section"
       icon={<BarChart3 size={32} className="text-primary" />}
       title="IA Explicable (XAI)"
       description="L'IA explicable (XAI) désigne des systèmes d'intelligence artificielle dont les décisions 

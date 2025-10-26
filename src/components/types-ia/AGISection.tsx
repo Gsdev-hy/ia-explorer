@@ -162,6 +162,7 @@ const AGISection = () => {
 
   return (
     <IASection
+      sectionId="agi-section"
       icon={<BrainCircuit size={32} className="text-primary" />}
       title="Intelligence Artificielle Générale (AGI)"
       description="L'AGI fait référence à une intelligence artificielle hypothétique qui pourrait comprendre, 

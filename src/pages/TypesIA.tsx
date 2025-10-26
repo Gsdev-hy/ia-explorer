@@ -1,4 +1,4 @@
-
+import { useScrollToAnchor } from '@/hooks/useScrollToAnchor';
 import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
 import AITypesVisualization from '../components/ml/AITypesVisualization';
@@ -22,6 +22,8 @@ import FutureIntegration from '../components/types-ia/FutureIntegration';
  * @returns {JSX.Element} Le composant de la page des types d'IA
  */
 const TypesIA = () => {
+  useScrollToAnchor();
+  
   return (
     <>
       <Hero

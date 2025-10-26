@@ -25,7 +25,7 @@ const InnovationShowcase = () => {
       icon: <MessageSquare className="w-8 h-8" />,
       color: "from-blue-500 to-cyan-500",
       examples: ["ChatGPT", "Claude", "Gemini"],
-      link: "/types-ia"
+      link: "/types-ia#llm-section"
     },
     {
       title: "Vision par Ordinateur",
@@ -33,7 +33,7 @@ const InnovationShowcase = () => {
       icon: <Eye className="w-8 h-8" />,
       color: "from-green-500 to-emerald-500",
       examples: ["OCR", "Détection d'objets", "Analyse médicale"],
-      link: "/types-ia"
+      link: "/types-ia#cnn-section"
     },
     {
       title: "IA Générative",
@@ -41,7 +41,7 @@ const InnovationShowcase = () => {
       icon: <Palette className="w-8 h-8" />,
       color: "from-purple-500 to-pink-500",
       examples: ["DALL-E", "Midjourney", "Stable Diffusion"],
-      link: "/ia-multimodale"
+      link: "/ia-multimodale#applications-creatives"
     },
     {
       title: "Code Intelligence",
@@ -49,7 +49,7 @@ const InnovationShowcase = () => {
       icon: <Code className="w-8 h-8" />,
       color: "from-orange-500 to-red-500",
       examples: ["GitHub Copilot", "CodeT5", "Tabnine"],
-      link: "/cas-usage"
+      link: "/cas-usage#code-intelligence"
     },
     {
       title: "IA Audio",
@@ -57,7 +57,7 @@ const InnovationShowcase = () => {
       icon: <Music className="w-8 h-8" />,
       color: "from-indigo-500 to-blue-500",
       examples: ["Text-to-Speech", "Music AI", "Podcast AI"],
-      link: "/ia-multimodale"
+      link: "/ia-multimodale#audio-section"
     },
     {
       title: "Recherche Scientifique",
@@ -65,7 +65,7 @@ const InnovationShowcase = () => {
       icon: <Microscope className="w-8 h-8" />,
       color: "from-teal-500 to-green-500",
       examples: ["AlphaFold", "Drug Discovery", "Climate AI"],
-      link: "/cas-usage"
+      link: "/cas-usage#recherche-scientifique"
     }
   ];
 

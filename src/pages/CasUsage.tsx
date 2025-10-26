@@ -1,5 +1,5 @@
-
 import React, { useState } from 'react';
+import { useScrollToAnchor } from '@/hooks/useScrollToAnchor';
 import Hero from '@/components/Hero';
 import SectionHeading from '@/components/SectionHeading';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -17,6 +17,7 @@ import { Users, Leaf, BarChart } from 'lucide-react';
  */
 const CasUsage = () => {
   const [activeTab, setActiveTab] = useState('professionnels');
+  useScrollToAnchor();
 
   return (
     <>
@@ -63,6 +64,7 @@ const CasUsage = () => {
           </Tabs>
           
           <motion.div
+            id="code-intelligence"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -77,7 +79,9 @@ const CasUsage = () => {
             center
           />
           
-          <DetailedExamples />
+          <div id="recherche-scientifique">
+            <DetailedExamples />
+          </div>
           
           <SectionHeading
             pretitle="Ressources"
