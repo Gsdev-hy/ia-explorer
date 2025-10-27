@@ -112,6 +112,16 @@ export const courses: Resource[] = [
     tags: ["NLP", "LLM", "Langage", "Transformers", "Interne"], 
     isInternal: true
   },
+  {
+    title: "Green IT : Impact Environnemental de l'IA et du Numérique",
+    source: "IA Explorer",
+    description: "Comprendre et réduire l'empreinte écologique de l'IA, du cloud, des smartphones et du numérique. Données scientifiques, analogies concrètes et solutions pratiques.",
+    link: "/cours/ia-environnement",
+    type: "cours",
+    year: 2024,
+    tags: ["Green IT", "Environnement", "Développement durable", "IA", "Datacenter", "Interne"],
+    isInternal: true
+  },
 
   // Cours externes existants
   {

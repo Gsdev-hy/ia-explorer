@@ -44,6 +44,7 @@ import DeepLearningPratique from '@/pages/cours/DeepLearningPratique';
 import IAEthique from '@/pages/cours/IAEthique';
 import IAEntreprise from '@/pages/cours/IAEntreprise';
 import NLPComprehension from '@/pages/cours/NLPComprehension';
+import IAEnvironnement from '@/pages/cours/IAEnvironnement';
 
 // Outils existants
 import TestAPIIA from '@/pages/TestAPIIA';
@@ -115,6 +116,7 @@ function App() {
               <Route path="cours/ia-ethique" element={<IAEthique />} />
               <Route path="cours/ia-entreprise" element={<IAEntreprise />} />
               <Route path="cours/nlp-comprehension" element={<NLPComprehension />} />
+              <Route path="cours/ia-environnement" element={<IAEnvironnement />} />
               
               {/* Pages spécialisées */}
               <Route path="types-ia/llm" element={<LLMDetails />} />
