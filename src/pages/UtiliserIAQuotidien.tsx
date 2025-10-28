@@ -47,7 +47,7 @@ const UtiliserIAQuotidien = () => {
               <User className="h-6 w-6 text-primary" />
               <div>
                 <p className="font-medium">Auteur : Geoffroy Streit</p>
-                <p className="text-sm text-muted-foreground">Expert en intelligence artificielle</p>
+                <p className="text-sm text-muted-foreground">Consultant passionné en Intelligence Artificielle</p>
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">

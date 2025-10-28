@@ -29,7 +29,7 @@ const OrganiserServicesIA = () => {
     title: "Comment organiser les différents types de services IA que l'on utilise ?",
     subtitle: "Méthode structurée pour gérer efficacement votre écosystème d'outils IA personnels",
     author: "Geoffroy Streit",
-    authorDescription: "Expert en intelligence artificielle",
+    authorDescription: "Consultant passionné en Intelligence Artificielle",
     duration: "2-3 heures",
     level: "Débutant",
     audience: "Particuliers",

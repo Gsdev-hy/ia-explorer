@@ -29,7 +29,7 @@ const UtiliserIATravail = () => {
     title: "Comment utiliser intelligemment les intelligences artificielles au travail",
     subtitle: "Guide complet pour intégrer efficacement l'IA dans votre environnement professionnel",
     author: "Geoffroy Streit",
-    authorDescription: "Expert en intelligence artificielle",
+    authorDescription: "Consultant passionné en Intelligence Artificielle",
     duration: "3-4 heures",
     level: "Intermédiaire",
     audience: "Professionnels",

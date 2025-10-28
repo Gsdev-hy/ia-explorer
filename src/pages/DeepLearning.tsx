@@ -161,7 +161,7 @@ const DeepLearning = () => {
           title="Deep Learning Pratique"
           subtitle="Un voyage complet dans l'univers des réseaux de neurones profonds"
           author="Dr. Geoffroy Streit"
-          authorDescription="Expert en Intelligence Artificielle et Machine Learning, 15 ans d'expérience en recherche et industrie"
+          authorDescription="Consultant passionné en Intelligence Artificielle"
           duration="10-12 semaines (6-8h/semaine)"
           level="Intermédiaire à Avancé"
           audience="Développeurs, Data Scientists, Ingénieurs IA"

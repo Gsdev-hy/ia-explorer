@@ -55,7 +55,7 @@ const ApprentissageSupervise = () => {
           title="L'Apprentissage Supervisé : De Débutant à Expert"
           subtitle="Votre parcours complet vers la maîtrise du Machine Learning avec simulations interactives"
           author="Geoffroy Streit"
-          authorDescription="Expert en Intelligence Artificielle et Machine Learning, 10+ ans d'expérience"
+          authorDescription="Consultant passionné en Intelligence Artificielle"
           level="Débutant à Intermédiaire"
           duration="8-10 heures"
           audience="Étudiants, professionnels, curieux de tech"

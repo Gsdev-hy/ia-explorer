@@ -41,7 +41,7 @@ const IAEnvironnement = () => {
     title: "Green IT : L'Impact Environnemental de l'IA et du Numérique",
     subtitle: "Comprendre et réduire l'empreinte écologique de nos technologies",
     author: "Geoffroy Streit",
-    authorDescription: "Expert en Intelligence Artificielle",
+    authorDescription: "Consultant passionné en Intelligence Artificielle",
     duration: "3-4 heures",
     level: "Intermédiaire",
     audience: "Développeurs, décideurs IT, citoyens concernés",

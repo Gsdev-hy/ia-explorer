@@ -265,7 +265,7 @@ const OptimiseurWorkflowIA = () => {
                   <div>
                     <h4 className="font-semibold text-lg">Geoffroy Streit</h4>
                     <p className="text-muted-foreground mb-2">
-                      Expert en Intelligence Artificielle et optimisation de workflows
+                      Consultant passionné en Intelligence Artificielle
                     </p>
                     <div className="flex gap-2">
                       <Badge variant="secondary">IA & Machine Learning</Badge>
