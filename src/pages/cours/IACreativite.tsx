@@ -153,7 +153,7 @@ const IACreativite = () => {
           title="IA et Créativité : Révolutionner votre Processus Créatif"
           subtitle="Maîtrisez l'art de la co-création avec l'intelligence artificielle"
           author="Geoffroy Streit"
-          authorDescription="Educateur en IA générative et innovation créative"
+          authorDescription="Passionné en Intelligence Artificielle"
           duration="4-5 heures"
           level="Débutant à Expert"
           audience="Créatifs, designers, marketeurs, entrepreneurs, artistes"

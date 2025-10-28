@@ -89,7 +89,7 @@ const Index = () => {
       icon: <Brain className="w-12 h-12 text-primary" />,
       title: "NLP et LLM",
       description: "Comprenez le traitement du langage naturel et les grands modèles de langage.",
-      link: "/cours/nlp-llm-comprehension",
+      link: "/cours/nlp-comprehension",
       gradient: "from-teal-500 to-cyan-600"
     },
     {
