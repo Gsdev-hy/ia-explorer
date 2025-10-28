@@ -13,7 +13,7 @@ const About = () => {
   const author = {
     name: "Geoffroy Streit",
     role: "Créateur & Développeur",
-    bio: "Passionné d'IA et d'éducation numérique, adepte de technologies innovantes. Ancien ingénieur optronique et commercial en reconversion IT, expert en IA tout en demeurant en recherche de sens et d'humanité. À travers IA Explorer, il souhaite partager sa passion et ses connaissances au plus grand nombre dans un esprit d'accessibilité et de vulgarisation responsable.",
+    bio: "Passionné d'IA et d'éducation numérique, adepte de technologies innovantes. Ancien ingénieur optronique et commercial en reconversion IT, en veille, expérimentation, et autoformation sur les technologies IA tout en demeurant en recherche de sens et d'humanité. À travers IA Explorer, il souhaite partager sa passion et ses connaissances au plus grand nombre dans un esprit d'accessibilité et de vulgarisation responsable.",
     avatar: "https://media.licdn.com/dms/image/v2/D4E35AQH9f-ZzX_KpKA/profile-framedphoto-shrink_200_200/profile-framedphoto-shrink_200_200/0/1676036508605?e=1748595600&v=beta&t=lHIMXq0q3OKW90k25IiFsFLgm80CA4Bz0Lh5_be8Er8",
     initials: "GS",
     links: {
