@@ -106,7 +106,7 @@ export const courses: Resource[] = [
     title: "NLP et LLM : Comprendre le Traitement du Langage",
     source: "IA Explorer",
     description: "Cours approfondi sur le NLP et les LLM. Comprenez le fonctionnement des modèles de langage et leurs applications pratiques.",
-    link: "/cours/nlp-llm-comprehension",
+    link: "/cours/nlp-comprehension",
     type: "cours",
     year: 2024,
     tags: ["NLP", "LLM", "Langage", "Transformers", "Interne"], 

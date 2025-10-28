@@ -82,14 +82,14 @@ const PromptGeneratorHeader = () => {
       </div>
 
       {/* Avantages business */}
-      <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 border">
+      <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/30 dark:to-purple-950/30 rounded-xl p-6 border">
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+            <h3 className="text-xl font-semibold mb-4 flex items-center gap-2 text-foreground">
               <Users className="h-5 w-5 text-primary" />
               Pour les Professionnels
             </h3>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm text-foreground">
               <li className="flex items-center gap-2">
                 <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
                 Gain de temps considérable dans la création de prompts
@@ -105,11 +105,11 @@ const PromptGeneratorHeader = () => {
             </ul>
           </div>
           <div>
-            <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+            <h3 className="text-xl font-semibold mb-4 flex items-center gap-2 text-foreground">
               <TrendingUp className="h-5 w-5 text-primary" />
               Résultats Garantis
             </h3>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm text-foreground">
               <li className="flex items-center gap-2">
                 <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
                 Amélioration de la qualité des réponses IA
