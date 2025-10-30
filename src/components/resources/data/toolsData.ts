@@ -59,11 +59,11 @@ export const iaTools: IAToolResource[] = [
   },
   {
     name: "Analyseur de Dataset IA",
-    description: "Analysez la qualité, les biais et la distribution de vos datasets pour l'entraînement de modèles IA. Obtenez des recommandations d'amélioration. En cours de développement par Geoffroy Streit.",
-    link: "#",
+    description: "Analysez la qualité, les biais et la distribution de vos datasets pour l'entraînement de modèles IA. Obtenez des recommandations d'amélioration. Développé par Geoffroy Streit.",
+    link: "/analyseur-dataset-ia",
     category: "Data Science",
     pricing: "Gratuit",
-    features: ["Analyse qualité", "Détection biais", "Visualisations", "Recommandations", "En développement"]
+    features: ["Analyse qualité", "Détection biais", "Visualisations", "Recommandations"]
   },
   {
     name: "Générateur de Données Synthétiques",

@@ -56,6 +56,7 @@ import SimulateurIA from '@/pages/SimulateurIA';
 import DetecteurContenuIA from '@/pages/DetecteurContenuIA';
 import OptimiseurWorkflowIA from '@/pages/OptimiseurWorkflowIA';
 import ComparateurModelesIA from '@/pages/ComparateurModelesIA';
+import AnalyseurDatasetIA from '@/pages/AnalyseurDatasetIA';
 import LLMDetails from '@/pages/LLMDetails';
 import EthiqueGouvernance from '@/pages/EthiqueGouvernance';
 
@@ -132,6 +133,7 @@ function App() {
               <Route path="detecteur-contenu-ia" element={<DetecteurContenuIA />} />
               <Route path="optimiseur-workflow-ia" element={<OptimiseurWorkflowIA />} />
               <Route path="comparateur-modeles-ia" element={<ComparateurModelesIA />} />
+              <Route path="analyseur-dataset-ia" element={<AnalyseurDatasetIA />} />
               
               {/* Pages RGPD */}
               <Route path="confidentialite" element={<Confidentialite />} />
