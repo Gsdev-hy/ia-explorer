@@ -15,6 +15,14 @@ interface IAToolCardProps {
 
 export const IAToolCard: React.FC<IAToolCardProps> = ({ tool }) => {
   const isInternalTool = tool.link.startsWith('/');
+  const isInDevelopment = tool.link === '#';
+  
+  const handleClick = (e: React.MouseEvent) => {
+    if (isInDevelopment) {
+      e.preventDefault();
+      alert('Cet outil est actuellement en cours de développement et sera bientôt disponible.');
+    }
+  };
   
   return (
     <Card className="overflow-hidden hover:shadow-md transition-shadow h-full">
@@ -24,8 +32,19 @@ export const IAToolCard: React.FC<IAToolCardProps> = ({ tool }) => {
         </div>
         <h3 className="text-lg font-medium mb-2">{tool.name}</h3>
         <p className="text-sm text-muted-foreground mb-4 flex-grow">{tool.description}</p>
-        <Button variant="outline" size="sm" className="w-full gap-2 mt-auto" asChild>
-          {isInternalTool ? (
+        <Button 
+          variant="outline" 
+          size="sm" 
+          className="w-full gap-2 mt-auto" 
+          asChild={!isInDevelopment}
+          onClick={isInDevelopment ? handleClick : undefined}
+        >
+          {isInDevelopment ? (
+            <>
+              <ExternalLink className="h-4 w-4" />
+              En développement
+            </>
+          ) : isInternalTool ? (
             <a href={tool.link}>
               <ExternalLink className="h-4 w-4" />
               Utiliser l'outil

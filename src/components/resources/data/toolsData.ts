@@ -60,7 +60,7 @@ export const iaTools: IAToolResource[] = [
   {
     name: "Analyseur de Dataset IA",
     description: "Analysez la qualité, les biais et la distribution de vos datasets pour l'entraînement de modèles IA. Obtenez des recommandations d'amélioration. En cours de développement par Geoffroy Streit.",
-    link: "/analyseur-dataset-ia",
+    link: "#",
     category: "Data Science",
     pricing: "Gratuit",
     features: ["Analyse qualité", "Détection biais", "Visualisations", "Recommandations", "En développement"]
@@ -68,7 +68,7 @@ export const iaTools: IAToolResource[] = [
   {
     name: "Générateur de Données Synthétiques",
     description: "Créez des données synthétiques réalistes pour l'entraînement et les tests, en respectant les contraintes de confidentialité. En cours de développement par Geoffroy Streit.",
-    link: "/generateur-donnees-synthetiques",
+    link: "#",
     category: "Data Science",
     pricing: "Gratuit",
     features: ["Génération données", "RGPD compliant", "Formats multiples", "Export", "En développement"]
@@ -76,7 +76,7 @@ export const iaTools: IAToolResource[] = [
   {
     name: "Moniteur de Performance IA",
     description: "Surveillez en temps réel les performances, coûts et usage de vos modèles IA en production. Alertes et analytics avancés. En cours de développement par Geoffroy Streit.",
-    link: "/moniteur-performance-ia",
+    link: "#",
     category: "Monitoring",
     pricing: "Gratuit",
     features: ["Temps réel", "Alertes", "Analytics", "Optimisation", "En développement"]
@@ -84,7 +84,7 @@ export const iaTools: IAToolResource[] = [
   {
     name: "Assistant RAG Personnel",
     description: "Créez votre propre assistant IA avec vos documents personnels ou d'entreprise. Interface simple pour construire un système RAG personnalisé. En cours de développement par Geoffroy Streit.",
-    link: "/assistant-rag-personnel",
+    link: "#",
     category: "Assistant IA",
     pricing: "Gratuit",
     features: ["Upload documents", "RAG personnalisé", "Chat interface", "Sécurisé", "En développement"]
@@ -92,7 +92,7 @@ export const iaTools: IAToolResource[] = [
   {
     name: "Simulateur d'Économie IA",
     description: "Modélisez l'impact économique de l'implémentation d'IA dans votre organisation. ROI, économies, risques et opportunités. En cours de développement par Geoffroy Streit.",
-    link: "/simulateur-economie-ia",
+    link: "#",
     category: "Business",
     pricing: "Gratuit",
     features: ["Modélisation ROI", "Impact business", "Scénarios", "Rapports", "En développement"]
@@ -100,7 +100,7 @@ export const iaTools: IAToolResource[] = [
   {
     name: "Créateur de Chatbots Sans-Code",
     description: "Créez et déployez des chatbots IA personnalisés sans programmation. Interface drag-and-drop avec intégrations multiples. En cours de développement par Geoffroy Streit.",
-    link: "/createur-chatbots",
+    link: "#",
     category: "No-Code",
     pricing: "Freemium",
     features: ["Sans-code", "Drag & Drop", "Intégrations", "Déploiement", "En développement"]
@@ -108,7 +108,7 @@ export const iaTools: IAToolResource[] = [
   {
     name: "Auditeur de Biais IA",
     description: "Auditez vos modèles IA pour détecter les biais discriminatoires et obtenir des recommandations pour une IA plus équitable. En cours de développement par Geoffroy Streit.",
-    link: "/auditeur-biais-ia",
+    link: "#",
     category: "Éthique",
     pricing: "Gratuit",
     features: ["Détection biais", "Équité", "Recommandations", "Rapports", "En développement"]
@@ -116,7 +116,7 @@ export const iaTools: IAToolResource[] = [
   {
     name: "Convertisseur de Formats IA",
     description: "Convertissez entre différents formats de modèles IA (ONNX, TensorFlow, PyTorch, etc.) avec optimisations automatiques. En cours de développement par Geoffroy Streit.",
-    link: "/convertisseur-formats-ia",
+    link: "#",
     category: "Développement",
     pricing: "Gratuit",
     features: ["Conversion formats", "Optimisation", "Validation", "Export", "En développement"]
@@ -124,7 +124,7 @@ export const iaTools: IAToolResource[] = [
   {
     name: "Planificateur de Projets IA",
     description: "Planifiez et gérez vos projets d'IA de A à Z avec des templates, jalons et ressources recommandées selon votre domaine. En cours de développement par Geoffroy Streit.",
-    link: "/planificateur-projets-ia",
+    link: "#",
     category: "Gestion de projet",
     pricing: "Gratuit",
     features: ["Templates projets", "Jalons", "Ressources", "Suivi", "En développement"]
