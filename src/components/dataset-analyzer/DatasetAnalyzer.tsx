@@ -129,9 +129,9 @@ const DatasetAnalyzer = () => {
   };
 
   const getQualityColor = (score: number) => {
-    if (score >= 80) return 'text-green-500';
-    if (score >= 60) return 'text-orange-500';
-    return 'text-red-500';
+    if (score >= 80) return 'text-primary';
+    if (score >= 60) return 'text-destructive';
+    return 'text-destructive';
   };
 
   return (
@@ -221,12 +221,12 @@ const DatasetAnalyzer = () => {
                     </div>
                     <div className="space-y-2">
                       <p className="text-sm text-muted-foreground">Valeurs manquantes</p>
-                      <p className="text-2xl font-bold text-orange-500">{stats.missingValues}</p>
+                      <p className="text-2xl font-bold text-destructive">{stats.missingValues}</p>
                       <p className="text-xs text-muted-foreground">({((stats.missingValues / (stats.totalRows * stats.totalColumns)) * 100).toFixed(2)}%)</p>
                     </div>
                     <div className="space-y-2">
                       <p className="text-sm text-muted-foreground">Doublons</p>
-                      <p className="text-2xl font-bold text-red-500">{stats.duplicates}</p>
+                      <p className="text-2xl font-bold text-destructive">{stats.duplicates}</p>
                       <p className="text-xs text-muted-foreground">({((stats.duplicates / stats.totalRows) * 100).toFixed(2)}%)</p>
                     </div>
                   </div>
@@ -283,7 +283,7 @@ const DatasetAnalyzer = () => {
                   <div className="space-y-2">
                     <div className="flex items-center justify-between text-sm">
                       <span>Prêt pour l'entraînement</span>
-                      <Badge variant="outline" className="text-orange-500 border-orange-500">
+                      <Badge variant="outline" className="text-destructive border-destructive">
                         Nettoyage requis
                       </Badge>
                     </div>
@@ -352,7 +352,7 @@ const DatasetAnalyzer = () => {
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
                         <span className="flex items-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-green-500" />
+                          <CheckCircle className="h-4 w-4 text-primary" />
                           Complétude
                         </span>
                         <span className="font-medium">{qualityScore.completeness}%</span>
@@ -366,7 +366,7 @@ const DatasetAnalyzer = () => {
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
                         <span className="flex items-center gap-2">
-                          <TrendingUp className="h-4 w-4 text-blue-500" />
+                          <TrendingUp className="h-4 w-4 text-primary" />
                           Cohérence
                         </span>
                         <span className="font-medium">{qualityScore.consistency}%</span>
@@ -380,7 +380,7 @@ const DatasetAnalyzer = () => {
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
                         <span className="flex items-center gap-2">
-                          <AlertCircle className="h-4 w-4 text-purple-500" />
+                          <AlertCircle className="h-4 w-4 text-accent-foreground" />
                           Unicité
                         </span>
                         <span className="font-medium">{qualityScore.uniqueness}%</span>
@@ -608,7 +608,7 @@ const DatasetAnalyzer = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-3">
-                  <div className="flex gap-3 p-4 border-l-4 border-l-red-500 bg-red-500/5 rounded-lg">
+                  <div className="flex gap-3 p-4 border-l-4 border-l-destructive bg-destructive/5 rounded-lg">
                     <Badge variant="destructive" className="h-6">Priorité 1</Badge>
                     <div className="flex-1">
                       <p className="font-medium text-sm">Traiter les valeurs manquantes (2.5%)</p>
@@ -621,8 +621,8 @@ const DatasetAnalyzer = () => {
                     </div>
                   </div>
 
-                  <div className="flex gap-3 p-4 border-l-4 border-l-orange-500 bg-orange-500/5 rounded-lg">
-                    <Badge className="h-6 bg-orange-500">Priorité 2</Badge>
+                  <div className="flex gap-3 p-4 border-l-4 border-l-primary bg-primary/5 rounded-lg">
+                    <Badge className="h-6 bg-primary text-primary-foreground">Priorité 2</Badge>
                     <div className="flex-1">
                       <p className="font-medium text-sm">Équilibrer les classes (déséquilibre 65/35)</p>
                       <p className="text-sm text-muted-foreground mt-1">
@@ -634,8 +634,8 @@ const DatasetAnalyzer = () => {
                     </div>
                   </div>
 
-                  <div className="flex gap-3 p-4 border-l-4 border-l-orange-500 bg-orange-500/5 rounded-lg">
-                    <Badge className="h-6 bg-orange-500">Priorité 2</Badge>
+                  <div className="flex gap-3 p-4 border-l-4 border-l-primary bg-primary/5 rounded-lg">
+                    <Badge className="h-6 bg-primary text-primary-foreground">Priorité 2</Badge>
                     <div className="flex-1">
                       <p className="font-medium text-sm">Supprimer les doublons (0.45%)</p>
                       <p className="text-sm text-muted-foreground mt-1">
@@ -647,8 +647,8 @@ const DatasetAnalyzer = () => {
                     </div>
                   </div>
 
-                  <div className="flex gap-3 p-4 border-l-4 border-l-blue-500 bg-blue-500/5 rounded-lg">
-                    <Badge className="h-6 bg-blue-500">Priorité 3</Badge>
+                  <div className="flex gap-3 p-4 border-l-4 border-l-secondary bg-secondary/5 rounded-lg">
+                    <Badge className="h-6 bg-secondary text-secondary-foreground">Priorité 3</Badge>
                     <div className="flex-1">
                       <p className="font-medium text-sm">Normaliser les données numériques</p>
                       <p className="text-sm text-muted-foreground mt-1">
@@ -660,8 +660,8 @@ const DatasetAnalyzer = () => {
                     </div>
                   </div>
 
-                  <div className="flex gap-3 p-4 border-l-4 border-l-blue-500 bg-blue-500/5 rounded-lg">
-                    <Badge className="h-6 bg-blue-500">Priorité 3</Badge>
+                  <div className="flex gap-3 p-4 border-l-4 border-l-secondary bg-secondary/5 rounded-lg">
+                    <Badge className="h-6 bg-secondary text-secondary-foreground">Priorité 3</Badge>
                     <div className="flex-1">
                       <p className="font-medium text-sm">Encoder les variables catégorielles</p>
                       <p className="text-sm text-muted-foreground mt-1">
@@ -673,8 +673,8 @@ const DatasetAnalyzer = () => {
                     </div>
                   </div>
 
-                  <div className="flex gap-3 p-4 border-l-4 border-l-green-500 bg-green-500/5 rounded-lg">
-                    <Badge className="h-6 bg-green-500">Bonus</Badge>
+                  <div className="flex gap-3 p-4 border-l-4 border-l-accent bg-accent/5 rounded-lg">
+                    <Badge className="h-6 bg-accent text-accent-foreground">Bonus</Badge>
                     <div className="flex-1">
                       <p className="font-medium text-sm">Feature Engineering avancé</p>
                       <p className="text-sm text-muted-foreground mt-1">
@@ -700,8 +700,8 @@ const DatasetAnalyzer = () => {
                   </Button>
                 </div>
 
-                <Alert className="bg-blue-500/10 border-blue-500/50">
-                  <Activity className="h-4 w-4 text-blue-500" />
+                <Alert className="bg-primary/10 border-primary/50">
+                  <Activity className="h-4 w-4 text-primary" />
                   <AlertDescription className="text-sm text-foreground">
                     <span className="font-semibold">À venir:</span> Génération automatique de scripts Python/R pour appliquer toutes les recommandations
                   </AlertDescription>

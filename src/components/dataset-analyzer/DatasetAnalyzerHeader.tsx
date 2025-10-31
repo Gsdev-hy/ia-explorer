@@ -8,8 +8,8 @@ const DatasetAnalyzerHeader = () => {
   return (
     <div className="space-y-6">
       {/* Dev Notice */}
-      <Alert className="border-orange-500/50 bg-orange-500/10">
-        <Construction className="h-4 w-4 text-orange-500" />
+      <Alert className="border-destructive/50 bg-destructive/10">
+        <Construction className="h-4 w-4 text-destructive" />
         <AlertDescription className="text-foreground">
           <span className="font-semibold">🚧 Outil en développement actif</span> - Nouvelles fonctionnalités en cours d'ajout. 
           Certaines analyses sont simulées à des fins de démonstration.
@@ -23,7 +23,7 @@ const DatasetAnalyzerHeader = () => {
         </div>
         <div className="flex items-center justify-center gap-3">
           <h1 className="text-4xl font-bold">Analyseur de Dataset IA</h1>
-          <Badge variant="outline" className="text-orange-500 border-orange-500">
+          <Badge variant="outline" className="text-destructive border-destructive">
             BETA
           </Badge>
         </div>
@@ -37,7 +37,7 @@ const DatasetAnalyzerHeader = () => {
       <div className="grid md:grid-cols-4 gap-4 mt-8">
         <Card>
           <CardContent className="p-4 text-center">
-            <CheckCircle className="h-8 w-8 text-green-500 mx-auto mb-2" />
+            <CheckCircle className="h-8 w-8 text-primary mx-auto mb-2" />
             <h3 className="font-semibold mb-1">Analyse Qualité</h3>
             <p className="text-sm text-muted-foreground">
               Détection des valeurs manquantes et incohérences
@@ -47,7 +47,7 @@ const DatasetAnalyzerHeader = () => {
         
         <Card>
           <CardContent className="p-4 text-center">
-            <AlertTriangle className="h-8 w-8 text-orange-500 mx-auto mb-2" />
+            <AlertTriangle className="h-8 w-8 text-destructive mx-auto mb-2" />
             <h3 className="font-semibold mb-1">Détection de Biais</h3>
             <p className="text-sm text-muted-foreground">
               Identification des biais dans vos données
@@ -57,7 +57,7 @@ const DatasetAnalyzerHeader = () => {
         
         <Card>
           <CardContent className="p-4 text-center">
-            <TrendingUp className="h-8 w-8 text-blue-500 mx-auto mb-2" />
+            <TrendingUp className="h-8 w-8 text-primary mx-auto mb-2" />
             <h3 className="font-semibold mb-1">Visualisations</h3>
             <p className="text-sm text-muted-foreground">
               Graphiques interactifs de distribution
@@ -67,7 +67,7 @@ const DatasetAnalyzerHeader = () => {
         
         <Card>
           <CardContent className="p-4 text-center">
-            <Database className="h-8 w-8 text-purple-500 mx-auto mb-2" />
+            <Database className="h-8 w-8 text-accent-foreground mx-auto mb-2" />
             <h3 className="font-semibold mb-1">Recommandations</h3>
             <p className="text-sm text-muted-foreground">
               Conseils d'amélioration personnalisés
