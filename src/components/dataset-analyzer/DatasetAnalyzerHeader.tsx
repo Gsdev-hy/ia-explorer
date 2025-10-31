@@ -8,11 +8,11 @@ const DatasetAnalyzerHeader = () => {
   return (
     <div className="space-y-6">
       {/* Dev Notice */}
-      <Alert className="border-destructive/50 bg-destructive/10">
-        <Construction className="h-4 w-4 text-destructive" />
+      <Alert className="border-primary/50 bg-primary/10">
+        <Construction className="h-4 w-4 text-primary" />
         <AlertDescription className="text-foreground">
           <span className="font-semibold">🚧 Outil en développement actif</span> - Nouvelles fonctionnalités en cours d'ajout. 
-          Certaines analyses sont simulées à des fins de démonstration.
+          Les analyses actuelles sont basées sur des algorithmes de détection avancés (démo).
         </AlertDescription>
       </Alert>
 

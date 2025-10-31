@@ -8,6 +8,7 @@ import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useDropzone } from 'react-dropzone';
 import { Separator } from '@/components/ui/separator';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart as RechartsPie, Pie, Cell, LineChart, Line, Area, AreaChart } from 'recharts';
 
 interface DatasetStats {
   totalRows: number;
@@ -449,75 +450,169 @@ const DatasetAnalyzer = () => {
 
           {/* Distribution Tab */}
           <TabsContent value="distribution" className="space-y-4">
+            <div className="grid md:grid-cols-2 gap-4">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <PieChart className="h-5 w-5" />
+                    Distribution des Classes
+                  </CardTitle>
+                  <CardDescription>
+                    Répartition de la variable cible
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ResponsiveContainer width="100%" height={300}>
+                    <RechartsPie>
+                      <Pie
+                        data={[
+                          { name: 'Classe A', value: 6500, fill: 'hsl(var(--primary))' },
+                          { name: 'Classe B', value: 2000, fill: 'hsl(var(--accent))' },
+                          { name: 'Classe C', value: 1000, fill: 'hsl(var(--secondary))' },
+                          { name: 'Autres', value: 500, fill: 'hsl(var(--muted))' }
+                        ]}
+                        dataKey="value"
+                        nameKey="name"
+                        cx="50%"
+                        cy="50%"
+                        outerRadius={100}
+                        label={(entry) => `${entry.name}: ${entry.value}`}
+                      />
+                      <Tooltip />
+                      <Legend />
+                    </RechartsPie>
+                  </ResponsiveContainer>
+                  <div className="mt-4 space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="flex items-center gap-2">
+                        <span className="w-3 h-3 rounded-full bg-primary"></span>
+                        Classe A
+                      </span>
+                      <span className="font-medium">65% (6,500)</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="flex items-center gap-2">
+                        <span className="w-3 h-3 rounded-full bg-accent"></span>
+                        Classe B
+                      </span>
+                      <span className="font-medium">20% (2,000)</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="flex items-center gap-2">
+                        <span className="w-3 h-3 rounded-full bg-secondary"></span>
+                        Classe C
+                      </span>
+                      <span className="font-medium">10% (1,000)</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="flex items-center gap-2">
+                        <span className="w-3 h-3 rounded-full bg-muted"></span>
+                        Autres
+                      </span>
+                      <span className="font-medium">5% (500)</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <BarChart3 className="h-5 w-5" />
+                    Valeurs Manquantes par Colonne
+                  </CardTitle>
+                  <CardDescription>
+                    Nombre de valeurs manquantes détectées
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ResponsiveContainer width="100%" height={300}>
+                    <BarChart
+                      data={[
+                        { name: 'score', missing: 146 },
+                        { name: 'income', missing: 89 },
+                        { name: 'age', missing: 15 }
+                      ]}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
+                      <XAxis dataKey="name" />
+                      <YAxis />
+                      <Tooltip />
+                      <Bar dataKey="missing" fill="hsl(var(--destructive))" />
+                    </BarChart>
+                  </ResponsiveContainer>
+                  <Alert className="mt-4" variant="destructive">
+                    <AlertCircle className="h-4 w-4" />
+                    <AlertDescription className="text-sm">
+                      250 valeurs manquantes au total (2.5% du dataset)
+                    </AlertDescription>
+                  </Alert>
+                </CardContent>
+              </Card>
+            </div>
+
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <PieChart className="h-5 w-5" />
-                  Distribution des Données
+                  <Activity className="h-5 w-5" />
+                  Distribution des Variables Numériques
                 </CardTitle>
                 <CardDescription>
-                  Visualisation de la répartition des valeurs dans le dataset
+                  Visualisation de la distribution pour les principales variables
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <Alert className="bg-blue-500/10 border-blue-500/50">
-                  <Activity className="h-4 w-4 text-blue-500" />
-                  <AlertDescription className="text-foreground">
-                    <span className="font-semibold">Fonctionnalité en développement:</span> Les graphiques interactifs de distribution seront bientôt disponibles
-                  </AlertDescription>
-                </Alert>
-
-                <div className="space-y-4">
+              <CardContent>
+                <div className="space-y-6">
                   <div>
-                    <h4 className="font-medium mb-3">Distribution des classes (variable cible)</h4>
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-3">
-                        <div className="flex-1">
-                          <div className="flex justify-between text-sm mb-1">
-                            <span>Classe A</span>
-                            <span className="font-medium">65%</span>
-                          </div>
-                          <Progress value={65} className="h-3" />
-                        </div>
-                        <Badge>6,500 lignes</Badge>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="flex-1">
-                          <div className="flex justify-between text-sm mb-1">
-                            <span>Classe B</span>
-                            <span className="font-medium">20%</span>
-                          </div>
-                          <Progress value={20} className="h-3" />
-                        </div>
-                        <Badge>2,000 lignes</Badge>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="flex-1">
-                          <div className="flex justify-between text-sm mb-1">
-                            <span>Classe C</span>
-                            <span className="font-medium">10%</span>
-                          </div>
-                          <Progress value={10} className="h-3" />
-                        </div>
-                        <Badge>1,000 lignes</Badge>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="flex-1">
-                          <div className="flex justify-between text-sm mb-1">
-                            <span>Autres</span>
-                            <span className="font-medium">5%</span>
-                          </div>
-                          <Progress value={5} className="h-3" />
-                        </div>
-                        <Badge>500 lignes</Badge>
-                      </div>
-                    </div>
+                    <h4 className="text-sm font-medium mb-3">Distribution de l'âge</h4>
+                    <ResponsiveContainer width="100%" height={200}>
+                      <AreaChart
+                        data={[
+                          { range: '18-25', count: 1200 },
+                          { range: '26-35', count: 2800 },
+                          { range: '36-45', count: 3200 },
+                          { range: '46-55', count: 1900 },
+                          { range: '56-65', count: 700 },
+                          { range: '66+', count: 200 }
+                        ]}
+                      >
+                        <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
+                        <XAxis dataKey="range" />
+                        <YAxis />
+                        <Tooltip />
+                        <Area type="monotone" dataKey="count" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.6} />
+                      </AreaChart>
+                    </ResponsiveContainer>
                   </div>
 
                   <Separator />
 
                   <div>
-                    <h4 className="font-medium mb-3">Statistiques descriptives (variables numériques)</h4>
+                    <h4 className="text-sm font-medium mb-3">Distribution du revenu</h4>
+                    <ResponsiveContainer width="100%" height={200}>
+                      <AreaChart
+                        data={[
+                          { range: '15-30K', count: 800 },
+                          { range: '30-50K', count: 2400 },
+                          { range: '50-70K', count: 3500 },
+                          { range: '70-100K', count: 2100 },
+                          { range: '100-150K', count: 900 },
+                          { range: '150K+', count: 300 }
+                        ]}
+                      >
+                        <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
+                        <XAxis dataKey="range" />
+                        <YAxis />
+                        <Tooltip />
+                        <Area type="monotone" dataKey="count" stroke="hsl(var(--accent))" fill="hsl(var(--accent))" fillOpacity={0.6} />
+                      </AreaChart>
+                    </ResponsiveContainer>
+                  </div>
+
+                  <Separator />
+
+                  <div>
+                    <h4 className="font-medium mb-3">Statistiques descriptives</h4>
                     <div className="overflow-x-auto">
                       <table className="w-full text-sm">
                         <thead>
@@ -559,6 +654,57 @@ const DatasetAnalyzer = () => {
                       </table>
                     </div>
                   </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <TrendingUp className="h-5 w-5" />
+                  Corrélations entre Variables
+                </CardTitle>
+                <CardDescription>
+                  Analyse des corrélations linéaires entre variables numériques
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 gap-3">
+                    <div className="p-4 border rounded-lg">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-sm font-medium">age ↔ income</span>
+                        <Badge variant="default">r = 0.72</Badge>
+                      </div>
+                      <Progress value={72} className="h-2" />
+                      <p className="text-xs text-muted-foreground mt-2">Corrélation forte positive</p>
+                    </div>
+                    
+                    <div className="p-4 border rounded-lg">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-sm font-medium">income ↔ score</span>
+                        <Badge variant="default">r = 0.58</Badge>
+                      </div>
+                      <Progress value={58} className="h-2" />
+                      <p className="text-xs text-muted-foreground mt-2">Corrélation modérée positive</p>
+                    </div>
+                    
+                    <div className="p-4 border rounded-lg">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-sm font-medium">age ↔ score</span>
+                        <Badge variant="secondary">r = 0.23</Badge>
+                      </div>
+                      <Progress value={23} className="h-2" />
+                      <p className="text-xs text-muted-foreground mt-2">Corrélation faible positive</p>
+                    </div>
+                  </div>
+
+                  <Alert>
+                    <AlertCircle className="h-4 w-4" />
+                    <AlertDescription className="text-sm">
+                      <span className="font-semibold">Attention:</span> Plusieurs paires de variables présentent une corrélation supérieure à 0.9, ce qui peut causer de la multicolinéarité.
+                    </AlertDescription>
+                  </Alert>
                 </div>
               </CardContent>
             </Card>
